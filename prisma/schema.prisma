@@ -1,18 +1,14 @@
 // ExamFlow Pro - Complete Prisma Schema
-// MySQL-compatible, production-ready
+// MongoDB-compatible, production-ready
 
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
 }
-
-// ─────────────────────────────────────────
-// ENUMS
-// ─────────────────────────────────────────
 
 enum UserRole {
   SUPER_ADMIN
@@ -66,22 +62,17 @@ enum AnswerCheckStatus {
   CONFIRMED
 }
 
-// ─────────────────────────────────────────
-// CORE USERS & ROLES
-// ─────────────────────────────────────────
-
 model User {
-  id            String    @id @default(cuid()) @db.VarChar(32)
+  id            String    @id @default(cuid()) @map("_id")
   email         String    @unique
   password      String
   name          String
   role          UserRole  @default(STUDENT)
   isActive      Boolean   @default(true)
-  avatarUrl     String?   @db.Text
+  avatarUrl     String?
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 
-  // Relations
   teacherProfile    TeacherProfile?
   studentProfile    StudentProfile?
   notifications     Notification[]
@@ -90,44 +81,36 @@ model User {
   resultReviews     ResultReview[]
 
   @@index([role])
-  @@index([email])
   @@map("users")
 }
 
-// ─────────────────────────────────────────
-// ACADEMIC STRUCTURE
-// ─────────────────────────────────────────
-
 model Department {
-  id          String  @id @default(cuid()) @db.VarChar(32)
-  name        String  @unique
-  code        String  @unique
-  description String? @db.Text
-  isActive    Boolean @default(true)
+  id          String   @id @default(cuid()) @map("_id")
+  name        String   @unique
+  code        String   @unique
+  description String?
+  isActive    Boolean  @default(true)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  adminId     String?
 
-  // Department admin (optional)
-  adminId     String? @db.VarChar(32)
-  admin       User?   @relation("DepartmentAdmin", fields: [adminId], references: [id])
-
-  // Relations
-  subjects          Subject[]
-  teachers          TeacherProfile[]
-  students          StudentProfile[]
-  exams             Exam[]
+  admin              User?                @relation("DepartmentAdmin", fields: [adminId], references: [id])
+  subjects           Subject[]
+  teachers           TeacherProfile[]
+  students           StudentProfile[]
+  exams              Exam[]
   teacherAssignments TeacherAssignment[]
 
   @@map("departments")
 }
 
 model Subject {
-  id           String  @id @default(cuid()) @db.VarChar(32)
+  id           String   @id @default(cuid()) @map("_id")
   name         String
-  code         String  @unique
-  description  String? @db.Text
-  departmentId String  @db.VarChar(32)
-  isActive     Boolean @default(true)
+  code         String   @unique
+  description  String?
+  departmentId String
+  isActive     Boolean  @default(true)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
@@ -142,10 +125,10 @@ model Subject {
 }
 
 model Language {
-  id        String  @id @default(cuid()) @db.VarChar(32)
-  name      String  @unique
-  code      String  @unique
-  isActive  Boolean @default(true)
+  id        String   @id @default(cuid()) @map("_id")
+  name      String   @unique
+  code      String   @unique
+  isActive  Boolean  @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -158,10 +141,10 @@ model Language {
 }
 
 model Group {
-  id        String  @id @default(cuid()) @db.VarChar(32)
+  id        String   @id @default(cuid()) @map("_id")
   name      String
-  code      String  @unique
-  isActive  Boolean @default(true)
+  code      String   @unique
+  isActive  Boolean  @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -174,10 +157,10 @@ model Group {
 }
 
 model AcademicYear {
-  id        String  @id @default(cuid()) @db.VarChar(32)
-  name      String  @unique  // e.g. "2024-2025", "Year 1", "Class 10"
-  year      Int               // Numeric year for ordering
-  isActive  Boolean @default(true)
+  id        String   @id @default(cuid()) @map("_id")
+  name      String   @unique
+  year      Int
+  isActive  Boolean  @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -190,10 +173,10 @@ model AcademicYear {
 }
 
 model Semester {
-  id        String  @id @default(cuid()) @db.VarChar(32)
-  name      String  @unique  // e.g. "Semester 1", "Spring 2026"
+  id        String   @id @default(cuid()) @map("_id")
+  name      String   @unique
   number    Int
-  isActive  Boolean @default(true)
+  isActive  Boolean  @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -205,62 +188,54 @@ model Semester {
   @@map("semesters")
 }
 
-// ─────────────────────────────────────────
-// PROFILES
-// ─────────────────────────────────────────
-
 model TeacherProfile {
-  id           String  @id @default(cuid()) @db.VarChar(32)
-  userId       String  @unique @db.VarChar(32)
-  departmentId String  @db.VarChar(32)
+  id           String   @id @default(cuid()) @map("_id")
+  userId       String   @unique
+  departmentId String
   phone        String?
-  bio          String? @db.Text
+  bio          String?
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
-  user         User        @relation(fields: [userId], references: [id], onDelete: Cascade)
-  department   Department  @relation(fields: [departmentId], references: [id])
-  assignments  TeacherAssignment[]
-  exams        Exam[]
+  user        User                @relation(fields: [userId], references: [id])
+  department  Department          @relation(fields: [departmentId], references: [id])
+  assignments TeacherAssignment[]
+  exams       Exam[]
 
   @@index([departmentId])
   @@map("teacher_profiles")
 }
 
 model StudentProfile {
-  id           String  @id @default(cuid()) @db.VarChar(32)
-  userId       String  @unique @db.VarChar(32)
-  departmentId String  @db.VarChar(32)
+  id           String   @id @default(cuid()) @map("_id")
+  userId       String   @unique
+  departmentId String
   phone        String?
   rollNumber   String?
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
-  user          User           @relation(fields: [userId], references: [id], onDelete: Cascade)
-  department    Department     @relation(fields: [departmentId], references: [id])
-  subjects      StudentSubject[]
-  examAttempts  StudentExamAttempt[]
+  user         User                 @relation(fields: [userId], references: [id])
+  department   Department           @relation(fields: [departmentId], references: [id])
+  subjects     StudentSubject[]
+  examAttempts StudentExamAttempt[]
 
   @@index([departmentId])
   @@map("student_profiles")
 }
 
-// ─────────────────────────────────────────
-// ASSIGNMENTS (Teacher <-> Class)
-// ─────────────────────────────────────────
-
 model TeacherAssignment {
-  id             String  @id @default(cuid()) @db.VarChar(32)
-  teacherId      String  @db.VarChar(32)
-  departmentId   String  @db.VarChar(32)
-  subjectId      String  @db.VarChar(32)
-  languageId     String  @db.VarChar(32)
-  groupId        String  @db.VarChar(32)
-  academicYearId String  @db.VarChar(32)
-  semesterId     String  @db.VarChar(32)
+  id             String   @id @default(cuid()) @map("_id")
+  teacherId      String
+  departmentId   String
+  subjectId      String
+  languageId     String
+  groupId        String
+  academicYearId String
+  semesterId     String
   createdAt      DateTime @default(now())
 
-  teacher      TeacherProfile @relation(fields: [teacherId], references: [id], onDelete: Cascade)
+  teacher      TeacherProfile @relation(fields: [teacherId], references: [id])
   department   Department     @relation(fields: [departmentId], references: [id])
   subject      Subject        @relation(fields: [subjectId], references: [id])
   language     Language       @relation(fields: [languageId], references: [id])
@@ -275,16 +250,16 @@ model TeacherAssignment {
 }
 
 model StudentSubject {
-  id             String  @id @default(cuid()) @db.VarChar(32)
-  studentId      String  @db.VarChar(32)
-  subjectId      String  @db.VarChar(32)
-  languageId     String  @db.VarChar(32)
-  groupId        String  @db.VarChar(32)
-  academicYearId String  @db.VarChar(32)
-  semesterId     String  @db.VarChar(32)
+  id             String   @id @default(cuid()) @map("_id")
+  studentId      String
+  subjectId      String
+  languageId     String
+  groupId        String
+  academicYearId String
+  semesterId     String
   createdAt      DateTime @default(now())
 
-  student      StudentProfile @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  student      StudentProfile @relation(fields: [studentId], references: [id])
   subject      Subject        @relation(fields: [subjectId], references: [id])
   language     Language       @relation(fields: [languageId], references: [id])
   group        Group          @relation(fields: [groupId], references: [id])
@@ -296,51 +271,45 @@ model StudentSubject {
   @@map("student_subjects")
 }
 
-// ─────────────────────────────────────────
-// EXAMS
-// ─────────────────────────────────────────
-
 model Exam {
-  id             String     @id @default(cuid()) @db.VarChar(32)
+  id             String       @id @default(cuid()) @map("_id")
   title          String
-  description    String?    @db.Text
-  teacherId      String     @db.VarChar(32)
-  departmentId   String     @db.VarChar(32)
-  subjectId      String     @db.VarChar(32)
-  languageId     String     @db.VarChar(32)
-  groupId        String     @db.VarChar(32)
-  academicYearId String     @db.VarChar(32)
-  semesterId     String     @db.VarChar(32)
+  description    String?
+  teacherId      String
+  departmentId   String
+  subjectId      String
+  languageId     String
+  groupId        String
+  academicYearId String
+  semesterId     String
   questionType   QuestionType @default(MIXED)
   status         ExamStatus   @default(DRAFT)
   resultMode     ResultMode   @default(AUTO)
   totalMarks     Int
   passingMarks   Int
-  duration       Int          // in minutes
+  duration       Int
   startTime      DateTime
   endTime        DateTime
   autoPublish    Boolean      @default(false)
   allowRetake    Boolean      @default(false)
-  showAnswers    Boolean      @default(false)  // Show correct answers to students after result
+  showAnswers    Boolean      @default(false)
   showMarks      Boolean      @default(true)
-  instructions   String?      @db.Text
+  instructions   String?
   createdAt      DateTime     @default(now())
   updatedAt      DateTime     @updatedAt
 
-  teacher        TeacherProfile @relation(fields: [teacherId], references: [id])
-  department     Department     @relation(fields: [departmentId], references: [id])
-  subject        Subject        @relation(fields: [subjectId], references: [id])
-  language       Language       @relation(fields: [languageId], references: [id])
-  group          Group          @relation(fields: [groupId], references: [id])
-  academicYear   AcademicYear   @relation(fields: [academicYearId], references: [id])
-  semester       Semester       @relation(fields: [semesterId], references: [id])
+  teacher      TeacherProfile      @relation(fields: [teacherId], references: [id])
+  department   Department          @relation(fields: [departmentId], references: [id])
+  subject      Subject             @relation(fields: [subjectId], references: [id])
+  language     Language            @relation(fields: [languageId], references: [id])
+  group        Group               @relation(fields: [groupId], references: [id])
+  academicYear AcademicYear        @relation(fields: [academicYearId], references: [id])
+  semester     Semester            @relation(fields: [semesterId], references: [id])
+  questions    ExamQuestion[]
+  sessions     ExamSession[]
+  attempts     StudentExamAttempt[]
+  results      ExamResult[]
 
-  questions      ExamQuestion[]
-  sessions       ExamSession[]
-  attempts       StudentExamAttempt[]
-  results        ExamResult[]
-
-  // Composite index for exam filtering by student's enrolled subjects
   @@index([departmentId, subjectId, languageId, groupId, academicYearId, semesterId, status])
   @@index([teacherId])
   @@index([status])
@@ -348,38 +317,33 @@ model Exam {
   @@map("exams")
 }
 
-// ─────────────────────────────────────────
-// QUESTIONS
-// ─────────────────────────────────────────
-
 model Question {
-  id             String       @id @default(cuid()) @db.VarChar(32)
-  subjectId      String       @db.VarChar(32)
-  languageId     String       @db.VarChar(32)
-  groupId        String       @db.VarChar(32)
-  academicYearId String       @db.VarChar(32)
-  semesterId     String       @db.VarChar(32)
-  teacherId      String       @db.VarChar(32) // Denormalized for quick ownership check
+  id             String       @id @default(cuid()) @map("_id")
+  subjectId      String
+  languageId     String
+  groupId        String
+  academicYearId String
+  semesterId     String
+  teacherId      String
   type           QuestionType
-  text           String       @db.Text
-  imageUrl       String?      @db.Text
+  text           String
+  imageUrl       String?
   marks          Int          @default(1)
-  difficulty     String?      // easy, medium, hard
-  expectedAnswer String?      @db.Text  // For short answer
-  keywords       String?      @db.Text  // JSON array of keywords for auto-check
-  explanation    String?      @db.Text
+  difficulty     String?
+  expectedAnswer String?
+  keywords       String?
+  explanation    String?
   isActive       Boolean      @default(true)
   createdAt      DateTime     @default(now())
   updatedAt      DateTime     @updatedAt
 
-  subject      Subject      @relation(fields: [subjectId], references: [id])
-  language     Language     @relation(fields: [languageId], references: [id])
-  group        Group        @relation(fields: [groupId], references: [id])
-  academicYear AcademicYear @relation(fields: [academicYearId], references: [id])
-  semester     Semester     @relation(fields: [semesterId], references: [id])
-
-  options      QuestionOption[]
-  examQuestions ExamQuestion[]
+  subject        Subject          @relation(fields: [subjectId], references: [id])
+  language       Language         @relation(fields: [languageId], references: [id])
+  group          Group            @relation(fields: [groupId], references: [id])
+  academicYear   AcademicYear     @relation(fields: [academicYearId], references: [id])
+  semester       Semester         @relation(fields: [semesterId], references: [id])
+  options        QuestionOption[]
+  examQuestions  ExamQuestion[]
   studentAnswers StudentAnswer[]
 
   @@index([subjectId, languageId, groupId, academicYearId, semesterId])
@@ -389,28 +353,28 @@ model Question {
 }
 
 model QuestionOption {
-  id         String   @id @default(cuid()) @db.VarChar(32)
-  questionId String   @db.VarChar(32)
-  text       String   @db.Text
+  id         String   @id @default(cuid()) @map("_id")
+  questionId String
+  text       String
   isCorrect  Boolean  @default(false)
   orderIndex Int      @default(0)
-  imageUrl   String?  @db.Text
+  imageUrl   String?
   createdAt  DateTime @default(now())
 
-  question Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  question Question @relation(fields: [questionId], references: [id])
 
   @@index([questionId])
   @@map("question_options")
 }
 
 model ExamQuestion {
-  id         String @id @default(cuid()) @db.VarChar(32)
-  examId     String @db.VarChar(32)
-  questionId String @db.VarChar(32)
+  id         String @id @default(cuid()) @map("_id")
+  examId     String
+  questionId String
   orderIndex Int    @default(0)
-  marks      Int    // Can override question default marks
+  marks      Int
 
-  exam     Exam     @relation(fields: [examId], references: [id], onDelete: Cascade)
+  exam     Exam     @relation(fields: [examId], references: [id])
   question Question @relation(fields: [questionId], references: [id])
 
   @@unique([examId, questionId])
@@ -418,42 +382,33 @@ model ExamQuestion {
   @@map("exam_questions")
 }
 
-// ─────────────────────────────────────────
-// LIVE EXAM SESSION (Socket tracking)
-// ─────────────────────────────────────────
-
 model ExamSession {
-  id          String   @id @default(cuid()) @db.VarChar(32)
-  examId      String   @unique @db.VarChar(32)
+  id          String   @id @default(cuid()) @map("_id")
+  examId      String   @unique
   startedAt   DateTime?
   endedAt     DateTime?
-  timerOffset Int      @default(0)  // seconds already elapsed when paused
+  timerOffset Int      @default(0)
   isPaused    Boolean  @default(false)
   pausedAt    DateTime?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  exam Exam @relation(fields: [examId], references: [id], onDelete: Cascade)
+  exam Exam @relation(fields: [examId], references: [id])
 
   @@map("exam_sessions")
 }
 
-// ─────────────────────────────────────────
-// STUDENT EXAM ATTEMPTS
-// ─────────────────────────────────────────
-
 model StudentExamAttempt {
-  id             String        @id @default(cuid()) @db.VarChar(32)
-  examId         String        @db.VarChar(32)
-  studentId      String        @db.VarChar(32) // StudentProfile.id
-  socketId       String?       @db.VarChar(128) // Current socket connection
+  id             String        @id @default(cuid()) @map("_id")
+  examId         String
+  studentId      String
+  socketId       String?
   status         AttemptStatus @default(NOT_STARTED)
   startedAt      DateTime?
   submittedAt    DateTime?
-  timeSpent      Int?          // seconds
+  timeSpent      Int?
   ipAddress      String?
-  userAgent      String?       @db.Text
-  // Suspicious activity counters
+  userAgent      String?
   tabSwitchCount Int           @default(0)
   reconnectCount Int           @default(0)
   warningCount   Int           @default(0)
@@ -465,7 +420,7 @@ model StudentExamAttempt {
   answers StudentAnswer[]
   result  ExamResult?
 
-  @@unique([examId, studentId])  // Prevent duplicate attempts unless retake allowed
+  @@unique([examId, studentId])
   @@index([examId])
   @@index([studentId])
   @@index([status])
@@ -473,26 +428,22 @@ model StudentExamAttempt {
 }
 
 model StudentAnswer {
-  id            String            @id @default(cuid()) @db.VarChar(32)
-  attemptId     String            @db.VarChar(32)
-  questionId    String            @db.VarChar(32)
-  // Answer content (varies by question type)
-  selectedOption String?           @db.VarChar(32) // QuestionOption.id for MCQ/T-F
-  answerText    String?            @db.Text  // For short/written answers
-  // Auto-check result
-  checkStatus   AnswerCheckStatus  @default(UNCHECKED)
-  isCorrect     Boolean?
-  marksAwarded  Float?
-  // Teacher/AI review
-  teacherMarks  Float?
-  teacherFeedback String?          @db.Text
-  aiSuggestedMarks Float?
-  aiSuggestedFeedback String?      @db.Text
-  // Timing
-  savedAt       DateTime           @default(now())
-  updatedAt     DateTime           @updatedAt
+  id                  String            @id @default(cuid()) @map("_id")
+  attemptId           String
+  questionId          String
+  selectedOption      String?
+  answerText          String?
+  checkStatus         AnswerCheckStatus @default(UNCHECKED)
+  isCorrect           Boolean?
+  marksAwarded        Float?
+  teacherMarks        Float?
+  teacherFeedback     String?
+  aiSuggestedMarks    Float?
+  aiSuggestedFeedback String?
+  savedAt             DateTime          @default(now())
+  updatedAt           DateTime          @updatedAt
 
-  attempt  StudentExamAttempt @relation(fields: [attemptId], references: [id], onDelete: Cascade)
+  attempt  StudentExamAttempt @relation(fields: [attemptId], references: [id])
   question Question           @relation(fields: [questionId], references: [id])
 
   @@unique([attemptId, questionId])
@@ -500,15 +451,11 @@ model StudentAnswer {
   @@map("student_answers")
 }
 
-// ─────────────────────────────────────────
-// RESULTS
-// ─────────────────────────────────────────
-
 model ExamResult {
-  id            String       @id @default(cuid()) @db.VarChar(32)
-  examId        String       @db.VarChar(32)
-  attemptId     String       @unique @db.VarChar(32)
-  studentId     String       @db.VarChar(32) // StudentProfile.id
+  id            String       @id @default(cuid()) @map("_id")
+  examId        String
+  attemptId     String       @unique
+  studentId     String
   totalMarks    Float        @default(0)
   marksObtained Float        @default(0)
   percentage    Float        @default(0)
@@ -519,9 +466,9 @@ model ExamResult {
   createdAt     DateTime     @default(now())
   updatedAt     DateTime     @updatedAt
 
-  exam    Exam               @relation(fields: [examId], references: [id])
-  attempt StudentExamAttempt @relation(fields: [attemptId], references: [id])
-  reviews ResultReview[]
+  exam     Exam               @relation(fields: [examId], references: [id])
+  attempt  StudentExamAttempt @relation(fields: [attemptId], references: [id])
+  reviews  ResultReview[]
 
   @@index([examId])
   @@index([studentId])
@@ -530,34 +477,30 @@ model ExamResult {
 }
 
 model ResultReview {
-  id         String   @id @default(cuid()) @db.VarChar(32)
-  resultId   String   @db.VarChar(32)
-  reviewerId String   @db.VarChar(32) // Teacher userId
-  notes      String?  @db.Text
+  id         String   @id @default(cuid()) @map("_id")
+  resultId   String
+  reviewerId String
+  notes      String?
   reviewedAt DateTime @default(now())
 
-  result   ExamResult @relation(fields: [resultId], references: [id], onDelete: Cascade)
+  result   ExamResult @relation(fields: [resultId], references: [id])
   reviewer User       @relation(fields: [reviewerId], references: [id])
 
   @@index([resultId])
   @@map("result_reviews")
 }
 
-// ─────────────────────────────────────────
-// NOTIFICATIONS & LOGS
-// ─────────────────────────────────────────
-
 model Notification {
-  id        String   @id @default(cuid()) @db.VarChar(32)
-  userId    String   @db.VarChar(32)
+  id        String   @id @default(cuid()) @map("_id")
+  userId    String
   title     String
-  message   String   @db.Text
-  type      String   @default("info")  // info, success, warning, error
+  message   String
+  type      String   @default("info")
   link      String?
   isRead    Boolean  @default(false)
   createdAt DateTime @default(now())
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id])
 
   @@index([userId, isRead])
   @@index([createdAt])
@@ -565,15 +508,15 @@ model Notification {
 }
 
 model ActivityLog {
-  id        String   @id @default(cuid()) @db.VarChar(32)
-  userId    String   @db.VarChar(32)
-  action    String   // e.g. "TAB_SWITCH", "RECONNECT", "FORCE_SUBMIT"
-  examId    String?  @db.VarChar(32)
-  details   String?  @db.Text  // JSON extra info
+  id        String   @id @default(cuid()) @map("_id")
+  userId    String
+  action    String
+  examId    String?
+  details   String?
   ipAddress String?
   createdAt DateTime @default(now())
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id])
 
   @@index([userId])
   @@index([examId])

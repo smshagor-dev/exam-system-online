@@ -26,10 +26,10 @@ async function getStudentData(userId: string) {
     departmentId: profile.departmentId,
   }))
 
-  const [upcomingExams, liveExams, recentResults] = await Promise.all([
+  const [upcomingExams, availableExams, recentResults] = await Promise.all([
     orConditions.length > 0
       ? prisma.exam.findMany({
-          where: { OR: orConditions, status: 'SCHEDULED', startTime: { gt: now } },
+          where: { OR: orConditions, status: { in: ['SCHEDULED', 'LIVE'] }, startTime: { gt: now } },
           include: { subject: true, _count: { select: { questions: true } } },
           take: 5,
           orderBy: { startTime: 'asc' },
@@ -37,7 +37,12 @@ async function getStudentData(userId: string) {
       : [],
     orConditions.length > 0
       ? prisma.exam.findMany({
-          where: { OR: orConditions, status: 'LIVE' },
+          where: {
+            OR: orConditions,
+            status: { in: ['SCHEDULED', 'LIVE'] },
+            startTime: { lte: now },
+            endTime: { gt: now },
+          },
           include: { subject: true, _count: { select: { questions: true } } },
         })
       : [],
@@ -49,7 +54,7 @@ async function getStudentData(userId: string) {
     }),
   ])
 
-  return { profile, upcomingExams, liveExams, recentResults }
+  return { profile, upcomingExams, availableExams, recentResults }
 }
 
 export default async function StudentDashboard() {
@@ -66,7 +71,7 @@ export default async function StudentDashboard() {
 
   const stats = [
     { label: 'Enrolled Subjects', value: data.profile.subjects.length },
-    { label: 'Live Exams', value: data.liveExams.length },
+    { label: 'Available Exams', value: data.availableExams.length },
     { label: 'Upcoming Exams', value: data.upcomingExams.length },
     { label: 'Published Results', value: data.recentResults.length },
   ]
@@ -89,13 +94,13 @@ export default async function StudentDashboard() {
         ))}
       </div>
 
-      {data.liveExams.length > 0 && (
+      {data.availableExams.length > 0 && (
         <div className="rounded-xl border border-green-200 bg-green-50 p-5">
           <div className="mb-4 flex items-center justify-between">
             <div>
-              <h2 className="font-semibold text-green-900">Live Exams</h2>
+              <h2 className="font-semibold text-green-900">Available Exams</h2>
               <p className="mt-1 text-sm text-green-700">
-                {data.liveExams.length} exam{data.liveExams.length > 1 ? 's are' : ' is'} available right now.
+                {data.availableExams.length} exam{data.availableExams.length > 1 ? 's are' : ' is'} available right now.
               </p>
             </div>
             <Link href="/student/exams" className="text-sm font-medium text-green-700 hover:text-green-800">
@@ -103,7 +108,7 @@ export default async function StudentDashboard() {
             </Link>
           </div>
           <div className="space-y-3">
-            {data.liveExams.map((exam) => (
+            {data.availableExams.map((exam) => (
               <div key={exam.id} className="flex items-center justify-between rounded-lg border border-green-200 bg-white p-4">
                 <div>
                   <p className="font-medium text-gray-900">{exam.title}</p>
@@ -115,7 +120,7 @@ export default async function StudentDashboard() {
                   href={`/student/exams/${exam.id}`}
                   className="rounded-lg bg-green-600 px-4 py-2 text-sm font-semibold text-white hover:bg-green-700"
                 >
-                  Join Now
+                  Start Now
                 </Link>
               </div>
             ))}

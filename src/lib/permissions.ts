@@ -151,8 +151,8 @@ export async function studentCanAccessExam(
     return { allowed: false, reason: 'Department mismatch' }
   }
 
-  // Status check - students can only join live exams
-  if (exam.status !== 'LIVE') {
+  // Students can access scheduled or live exams during the valid exam window
+  if (exam.status !== 'SCHEDULED' && exam.status !== 'LIVE') {
     return { allowed: false, reason: `Exam is ${exam.status.toLowerCase()}` }
   }
 

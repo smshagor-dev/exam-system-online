@@ -1,6 +1,6 @@
 # ExamFlow Pro 🎓
 
-A **production-ready** online exam management system built with Next.js 15, Socket.IO, Prisma (MySQL), and TypeScript.
+A **production-ready** online exam management system built with Next.js 15, Socket.IO, Prisma (MongoDB), and TypeScript.
 
 ---
 
@@ -52,7 +52,7 @@ A **production-ready** online exam management system built with Next.js 15, Sock
 
 ### Prerequisites
 - Node.js 20+
-- MySQL 8.0+
+- MongoDB Atlas or a local MongoDB server
 - npm or yarn
 
 ### 1. Clone & Install
@@ -72,7 +72,7 @@ cp .env.example .env
 Edit `.env` with your values:
 
 ```env
-DATABASE_URL="mysql://root:yourpassword@localhost:3306/examflow_pro"
+DATABASE_URL="mongodb+srv://username:password@cluster0.example.mongodb.net/examflow_pro?retryWrites=true&w=majority&appName=Cluster0"
 NEXTAUTH_SECRET="generate-with-openssl-rand-base64-32"
 NEXTAUTH_URL="http://localhost:3000"
 AI_EVALUATION_ENABLED="false"
@@ -84,8 +84,8 @@ AI_EVALUATION_ENABLED="false"
 # Generate Prisma client
 npx prisma generate
 
-# Run migrations (creates all tables)
-npx prisma migrate dev --name init
+# Push Prisma schema (creates all collections)
+npx prisma db push
 
 # Seed with demo data
 npx ts-node --project tsconfig.seed.json prisma/seed.ts
@@ -246,7 +246,7 @@ npm run dev          # Start dev server (Next.js + Socket.IO)
 npm run build        # Build for production
 npm run start        # Start production server
 npm run db:generate  # Generate Prisma client
-npm run db:migrate   # Run database migrations
+npm run db:migrate   # Push Prisma schema to MongoDB
 npm run db:seed      # Seed demo data
 npm run db:studio    # Open Prisma Studio (DB GUI)
 ```

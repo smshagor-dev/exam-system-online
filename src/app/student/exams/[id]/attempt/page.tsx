@@ -23,6 +23,8 @@ export default function ExamAttemptPage({ params }: Props) {
   const { id: examId } = use(params)
   const socketRef = useRef<any>(null)
   const autoSaveRef = useRef<ReturnType<typeof setInterval> | null>(null)
+  const countdownRef = useRef<ReturnType<typeof setInterval> | null>(null)
+  const warningsRef = useRef<Record<string, boolean>>({})
 
   const [exam, setExam] = useState<any>(null)
   const [questions, setQuestions] = useState<Question[]>([])
@@ -34,6 +36,20 @@ export default function ExamAttemptPage({ params }: Props) {
   const [errorMsg, setErrorMsg] = useState('')
   const [submitting, setSubmitting] = useState(false)
   const [showSubmitConfirm, setShowSubmitConfirm] = useState(false)
+  const [warningInfo, setWarningInfo] = useState<{
+    count: number
+    max: number
+    message: string
+    type: string
+  } | null>(null)
+  const [devtoolsOpen, setDevtoolsOpen] = useState(false)
+
+  useEffect(() => {
+    return () => {
+      if (autoSaveRef.current) clearInterval(autoSaveRef.current)
+      if (countdownRef.current) clearInterval(countdownRef.current)
+    }
+  }, [])
 
   // Load exam data
   useEffect(() => {
@@ -66,11 +82,70 @@ export default function ExamAttemptPage({ params }: Props) {
   useEffect(() => {
     const handleVisibility = () => {
       if (document.hidden && status === 'started' && attemptId) {
-        socketRef.current?.emit('student:tab_switch', { attemptId })
+        socketRef.current?.emit('student:security_violation', { attemptId, type: 'TAB_SWITCH' })
       }
     }
     document.addEventListener('visibilitychange', handleVisibility)
     return () => document.removeEventListener('visibilitychange', handleVisibility)
+  }, [status, attemptId])
+
+  useEffect(() => {
+    if (status !== 'started' || !attemptId) return
+
+    const reportViolation = (type: 'COPY' | 'SCREENSHOT' | 'DEVTOOLS') => {
+      socketRef.current?.emit('student:security_violation', { attemptId, type })
+    }
+
+    const handleCopyLike = (event: ClipboardEvent) => {
+      event.preventDefault()
+      reportViolation('COPY')
+    }
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      const isPrintScreen = event.key === 'PrintScreen'
+      const isScreenshotCombo =
+        (event.ctrlKey && event.shiftKey && (event.key === 'S' || event.key === 's')) ||
+        (event.metaKey && event.shiftKey && ['3', '4', '5', 'S', 's'].includes(event.key))
+
+      if (isPrintScreen || isScreenshotCombo) {
+        reportViolation('SCREENSHOT')
+      }
+    }
+
+    const detectDevtools = () => {
+      const widthGap = window.outerWidth - window.innerWidth
+      const heightGap = window.outerHeight - window.innerHeight
+      const detected = widthGap > 160 || heightGap > 160
+
+      setDevtoolsOpen(detected)
+
+      if (detected && !warningsRef.current.devtoolsOpen) {
+        warningsRef.current.devtoolsOpen = true
+        reportViolation('DEVTOOLS')
+      }
+
+      if (!detected) {
+        warningsRef.current.devtoolsOpen = false
+      }
+    }
+
+    document.addEventListener('copy', handleCopyLike)
+    document.addEventListener('cut', handleCopyLike)
+    document.addEventListener('paste', handleCopyLike)
+    window.addEventListener('keydown', handleKeyDown)
+
+    const interval = setInterval(detectDevtools, 1500)
+    detectDevtools()
+
+    return () => {
+      document.removeEventListener('copy', handleCopyLike)
+      document.removeEventListener('cut', handleCopyLike)
+      document.removeEventListener('paste', handleCopyLike)
+      window.removeEventListener('keydown', handleKeyDown)
+      clearInterval(interval)
+      setDevtoolsOpen(false)
+      warningsRef.current.devtoolsOpen = false
+    }
   }, [status, attemptId])
 
   // Connect socket and start exam
@@ -93,8 +168,10 @@ export default function ExamAttemptPage({ params }: Props) {
 
       socket.on('exam:attempt_started', (data) => {
         setAttemptId(data.attemptId)
+        setRemainingSeconds(data.remainingSeconds)
         setStatus('started')
         startAutoSave(socket, data.attemptId)
+        startLocalCountdown(socket, data.attemptId, data.remainingSeconds)
       })
 
       socket.on('exam:timer_update', (data) => {
@@ -105,6 +182,7 @@ export default function ExamAttemptPage({ params }: Props) {
         if (data.examId === examId) {
           setStatus('submitted')
           clearInterval(autoSaveRef.current!)
+          clearInterval(countdownRef.current!)
         }
       })
 
@@ -112,7 +190,18 @@ export default function ExamAttemptPage({ params }: Props) {
         if (data.examId === examId && status !== 'submitted') {
           setStatus('submitted')
           clearInterval(autoSaveRef.current!)
+          clearInterval(countdownRef.current!)
         }
+      })
+
+      socket.on('exam:warning_issued', (data) => {
+        if (data.examId !== examId) return
+        setWarningInfo({
+          count: data.warningCount,
+          max: data.maxWarnings,
+          message: data.message,
+          type: data.type,
+        })
       })
 
       socket.on('error', (data) => {
@@ -159,6 +248,7 @@ export default function ExamAttemptPage({ params }: Props) {
     if (!attemptId || submitting) return
     setSubmitting(true)
     clearInterval(autoSaveRef.current!)
+    clearInterval(countdownRef.current!)
 
     // Final save of all answers
     Object.entries(answers).forEach(([questionId, answer]) => {
@@ -172,6 +262,21 @@ export default function ExamAttemptPage({ params }: Props) {
     socketRef.current?.emit('student:submit_exam', { attemptId })
     setStatus('submitted')
     setShowSubmitConfirm(false)
+  }
+
+  const startLocalCountdown = (socket: any, aid: string, initialRemainingSeconds: number) => {
+    clearInterval(countdownRef.current!)
+
+    let remaining = initialRemainingSeconds
+    countdownRef.current = setInterval(() => {
+      remaining -= 1
+      setRemainingSeconds(Math.max(0, remaining))
+
+      if (remaining <= 0) {
+        clearInterval(countdownRef.current!)
+        socket.emit('student:submit_exam', { attemptId: aid })
+      }
+    }, 1000)
   }
 
   const formatTime = (seconds: number) => {
@@ -266,6 +371,17 @@ export default function ExamAttemptPage({ params }: Props) {
 
   return (
     <div className="max-w-3xl mx-auto space-y-4">
+      {devtoolsOpen && status === 'started' && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950 text-white p-6 text-center">
+          <div>
+            <h2 className="text-2xl font-bold">Exam Locked</h2>
+            <p className="mt-2 text-sm text-slate-200">
+              Developer tools detected. Close them to continue the exam.
+            </p>
+          </div>
+        </div>
+      )}
+
       {/* Header */}
       <div className="bg-white rounded-xl border border-gray-200 p-4 flex items-center justify-between">
         <div>
@@ -280,6 +396,19 @@ export default function ExamAttemptPage({ params }: Props) {
           {remainingSeconds !== null ? formatTime(remainingSeconds) : '--:--'}
         </div>
       </div>
+
+      {warningInfo && (
+        <div className={`rounded-xl border px-4 py-3 text-sm ${
+          warningInfo.count >= warningInfo.max
+            ? 'border-red-200 bg-red-50 text-red-700'
+            : 'border-orange-200 bg-orange-50 text-orange-700'
+        }`}>
+          <p className="font-semibold">
+            Warning {warningInfo.count}/{warningInfo.max}
+          </p>
+          <p className="mt-1">{warningInfo.message}</p>
+        </div>
+      )}
 
       {/* Progress bar */}
       <div className="h-1.5 bg-gray-200 rounded-full overflow-hidden">
@@ -379,7 +508,7 @@ export default function ExamAttemptPage({ params }: Props) {
         ) : (
           <button onClick={() => setShowSubmitConfirm(true)}
             className="px-4 py-2 bg-green-600 text-white rounded-lg text-sm font-semibold hover:bg-green-700">
-            Submit Exam
+            Stop & Submit
           </button>
         )}
       </div>
@@ -405,7 +534,7 @@ export default function ExamAttemptPage({ params }: Props) {
               </button>
               <button onClick={handleSubmit} disabled={submitting}
                 className="flex-1 px-4 py-2 bg-green-600 text-white rounded-lg text-sm font-semibold hover:bg-green-700 disabled:opacity-50">
-                {submitting ? 'Submitting...' : 'Yes, Submit'}
+                {submitting ? 'Submitting...' : 'Yes, Stop & Submit'}
               </button>
             </div>
           </div>

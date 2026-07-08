@@ -18,6 +18,8 @@ import * as jose from 'jose'
 import { calculateResult } from '../lib/result-engine'
 
 const prisma = new PrismaClient()
+const MAX_SECURITY_WARNINGS = 3
+type SecurityViolationType = 'TAB_SWITCH' | 'COPY' | 'SCREENSHOT' | 'DEVTOOLS'
 
 // In-memory state for active exams (source of truth for timer)
 type ExamTimerState = {
@@ -33,6 +35,7 @@ type ExamTimerState = {
 // Track connected students per exam: examId -> Set<socketId>
 const examStudents = new Map<string, Map<string, { userId: string; studentProfileId: string; submitted: boolean }>>()
 const examTimers = new Map<string, ExamTimerState>()
+const attemptTimeouts = new Map<string, ReturnType<typeof setTimeout>>()
 
 let io: SocketServer
 
@@ -152,6 +155,25 @@ export function initSocketServer(httpServer: HttpServer) {
       } catch (err) {
         console.error('[Socket] teacher:start_exam error:', err)
         socket.emit('error', { message: 'Failed to start exam' })
+      }
+    })
+
+    socket.on('teacher:join_exam_monitor', async (data: { examId: string }) => {
+      try {
+        if (userRole !== 'TEACHER') return socket.emit('error', { message: 'Unauthorized' })
+
+        const exam = await prisma.exam.findUnique({
+          where: { id: data.examId },
+          include: { teacher: true },
+        })
+        if (!exam) return socket.emit('error', { message: 'Exam not found' })
+        if (exam.teacher.userId !== userId) return socket.emit('error', { message: 'Not your exam' })
+
+        socket.join(`exam:${data.examId}`)
+        socket.join(`teacher:${data.examId}`)
+      } catch (err) {
+        console.error('[Socket] teacher:join_exam_monitor error:', err)
+        socket.emit('error', { message: 'Failed to join exam monitor' })
       }
     })
 
@@ -281,13 +303,17 @@ export function initSocketServer(httpServer: HttpServer) {
           },
         })
 
-        if (existingAttempt && existingAttempt.status === 'SUBMITTED' && !exam.allowRetake) {
+        if (
+          existingAttempt &&
+          (existingAttempt.status === 'SUBMITTED' || existingAttempt.status === 'AUTO_SUBMITTED') &&
+          !exam.allowRetake
+        ) {
           return socket.emit('error', { message: 'Already submitted this exam' })
         }
 
         // Update socket ID on attempt (reconnect support)
         if (existingAttempt) {
-          await prisma.studentExamAttempt.update({
+          const reconnectedAttempt = await prisma.studentExamAttempt.update({
             where: { id: existingAttempt.id },
             data: { socketId: socket.id, reconnectCount: { increment: 1 } },
           })
@@ -299,6 +325,14 @@ export function initSocketServer(httpServer: HttpServer) {
               examId: data.examId,
               details: JSON.stringify({ socketId: socket.id }),
             },
+          })
+
+          io.to(`teacher:${data.examId}`).emit('exam:suspicious_activity', {
+            studentId: studentProfile.id,
+            studentName: (socket as any).userName,
+            type: 'RECONNECT',
+            count: reconnectedAttempt.reconnectCount,
+            warningCount: reconnectedAttempt.warningCount,
           })
         }
 
@@ -362,6 +396,59 @@ export function initSocketServer(httpServer: HttpServer) {
         })
         if (!studentProfile) return socket.emit('error', { message: 'Profile not found' })
 
+        const exam = await prisma.exam.findUnique({
+          where: { id: data.examId },
+          select: { id: true, status: true, duration: true, startTime: true, endTime: true, allowRetake: true },
+        })
+        if (!exam) return socket.emit('error', { message: 'Exam not found' })
+
+        const now = new Date()
+        if (now < exam.startTime) return socket.emit('error', { message: 'Exam has not started yet' })
+        if (now > exam.endTime) return socket.emit('error', { message: 'Exam has ended' })
+        if (exam.status !== 'SCHEDULED' && exam.status !== 'LIVE') {
+          return socket.emit('error', { message: `Exam is ${exam.status.toLowerCase()}` })
+        }
+
+        const existingAttempt = await prisma.studentExamAttempt.findUnique({
+          where: {
+            examId_studentId: { examId: data.examId, studentId: studentProfile.id },
+          },
+        })
+        if (existingAttempt && (existingAttempt.status === 'SUBMITTED' || existingAttempt.status === 'AUTO_SUBMITTED')) {
+          if (!exam.allowRetake) {
+            return socket.emit('error', { message: 'Exam already submitted' })
+          }
+        }
+
+        const remainingSecondsBeforeStart = getAttemptRemainingSeconds(
+          exam.startTime,
+          exam.endTime,
+          exam.duration,
+          existingAttempt?.startedAt ?? null
+        )
+        if (remainingSecondsBeforeStart <= 0) {
+          if (existingAttempt) {
+            await submitStudentAttempt(existingAttempt.id, userId, 'AUTO_SUBMITTED')
+            socket.emit('exam:auto_submitted', { examId: data.examId, attemptId: existingAttempt.id })
+          } else {
+            socket.emit('error', { message: 'Exam time is over' })
+          }
+          return
+        }
+
+        if (exam.status === 'SCHEDULED') {
+          await prisma.exam.update({
+            where: { id: data.examId },
+            data: { status: 'LIVE' },
+          })
+
+          io.to(`exam:${data.examId}`).emit('exam:started', {
+            examId: data.examId,
+            startedAt: Date.now(),
+            durationMs: exam.duration * 60 * 1000,
+          })
+        }
+
         const attempt = await prisma.studentExamAttempt.upsert({
           where: {
             examId_studentId: { examId: data.examId, studentId: studentProfile.id },
@@ -378,11 +465,24 @@ export function initSocketServer(httpServer: HttpServer) {
           update: {
             socketId: socket.id,
             status: 'IN_PROGRESS',
-            startedAt: new Date(),
           },
         })
 
-        socket.emit('exam:attempt_started', { attemptId: attempt.id })
+        const remainingSeconds = getAttemptRemainingSeconds(
+          exam.startTime,
+          exam.endTime,
+          exam.duration,
+          attempt.startedAt
+        )
+
+        if (remainingSeconds <= 0) {
+          await submitStudentAttempt(attempt.id, userId, 'AUTO_SUBMITTED')
+          socket.emit('exam:auto_submitted', { examId: data.examId, attemptId: attempt.id })
+          return
+        }
+
+        scheduleAttemptTimeout(attempt.id, userId, data.examId, remainingSeconds)
+        socket.emit('exam:attempt_started', { attemptId: attempt.id, remainingSeconds })
       } catch (err) {
         console.error('[Socket] student:start_attempt error:', err)
       }
@@ -475,33 +575,23 @@ export function initSocketServer(httpServer: HttpServer) {
     // ─── Tab switch detection ─────────────────────────────────────────────
     socket.on('student:tab_switch', async (data: { attemptId: string }) => {
       try {
-        await prisma.studentExamAttempt.update({
-          where: { id: data.attemptId },
-          data: { tabSwitchCount: { increment: 1 }, warningCount: { increment: 1 } },
-        })
-        await prisma.activityLog.create({
-          data: {
-            userId,
-            action: 'TAB_SWITCH',
-            examId: (await prisma.studentExamAttempt.findUnique({ where: { id: data.attemptId } }))
-              ?.examId,
-            details: JSON.stringify({ attemptId: data.attemptId }),
-          },
-        })
-
-        // Notify teacher of suspicious activity
-        const attempt = await prisma.studentExamAttempt.findUnique({ where: { id: data.attemptId } })
-        if (attempt) {
-          io.to(`teacher:${attempt.examId}`).emit('exam:suspicious_activity', {
-            studentId: attempt.studentId,
-            type: 'TAB_SWITCH',
-            count: attempt.tabSwitchCount,
-          })
-        }
+        await registerSecurityViolation(data.attemptId, userId, 'TAB_SWITCH')
       } catch (err) {
         console.error('[Socket] tab_switch error:', err)
       }
     })
+
+    socket.on(
+      'student:security_violation',
+      async (data: { attemptId: string; type: SecurityViolationType }) => {
+        try {
+          if (userRole !== 'STUDENT') return
+          await registerSecurityViolation(data.attemptId, userId, data.type)
+        } catch (err) {
+          console.error('[Socket] security_violation error:', err)
+        }
+      }
+    )
 
     // ─── Disconnect handler ──────────────────────────────────────────────
     socket.on('disconnect', () => {
@@ -541,6 +631,8 @@ async function submitStudentAttempt(
   if (!attempt) return
   if (attempt.status === 'SUBMITTED' || attempt.status === 'AUTO_SUBMITTED') return // idempotent
 
+  clearAttemptTimeout(attemptId)
+
   const timeSpent = attempt.startedAt
     ? Math.floor((Date.now() - attempt.startedAt.getTime()) / 1000)
     : 0
@@ -566,6 +658,14 @@ async function submitStudentAttempt(
       action: status === 'AUTO_SUBMITTED' ? 'AUTO_SUBMIT' : 'MANUAL_SUBMIT',
       examId: attempt.examId,
     },
+  })
+
+  io.to(`teacher:${attempt.examId}`).emit('exam:student_submitted', {
+    examId: attempt.examId,
+    attemptId,
+    studentId: attempt.studentId,
+    userId,
+    status,
   })
 }
 
@@ -614,6 +714,146 @@ async function handleStudentDisconnect(socket: Socket, userId: string, examId: s
       details: JSON.stringify({ socketId: socket.id }),
     },
   })
+}
+
+function clearAttemptTimeout(attemptId: string) {
+  const timeout = attemptTimeouts.get(attemptId)
+  if (timeout) {
+    clearTimeout(timeout)
+    attemptTimeouts.delete(attemptId)
+  }
+}
+
+function scheduleAttemptTimeout(
+  attemptId: string,
+  userId: string,
+  examId: string,
+  remainingSeconds: number
+) {
+  clearAttemptTimeout(attemptId)
+
+  const timeout = setTimeout(async () => {
+    try {
+      await submitStudentAttempt(attemptId, userId, 'AUTO_SUBMITTED')
+      io.to(`student:${userId}`).emit('exam:auto_submitted', {
+        examId,
+        attemptId,
+      })
+    } catch (err) {
+      console.error('[Socket] attempt timeout auto-submit error:', err)
+    }
+  }, remainingSeconds * 1000)
+
+  attemptTimeouts.set(attemptId, timeout)
+}
+
+function getAttemptRemainingSeconds(
+  examStartTime: Date,
+  examEndTime: Date,
+  durationMinutes: number,
+  attemptStartedAt: Date | null
+) {
+  const now = Date.now()
+  const examEndMs = examEndTime.getTime()
+  const durationMs = durationMinutes * 60 * 1000
+  const startedAtMs = attemptStartedAt?.getTime() ?? Math.max(now, examStartTime.getTime())
+  const attemptEndMs = Math.min(startedAtMs + durationMs, examEndMs)
+
+  return Math.max(0, Math.floor((attemptEndMs - now) / 1000))
+}
+
+async function registerSecurityViolation(
+  attemptId: string,
+  userId: string,
+  type: SecurityViolationType
+) {
+  const attempt = await prisma.studentExamAttempt.findUnique({
+    where: { id: attemptId },
+    include: { student: { include: { user: { select: { name: true } } } } },
+  })
+
+  if (!attempt) return
+  if (attempt.student.userId !== userId) return
+  if (attempt.status === 'SUBMITTED' || attempt.status === 'AUTO_SUBMITTED') return
+
+  const updateData: Record<string, any> = {
+    warningCount: { increment: 1 },
+  }
+
+  if (type === 'TAB_SWITCH') {
+    updateData.tabSwitchCount = { increment: 1 }
+  }
+
+  const updatedAttempt = await prisma.studentExamAttempt.update({
+    where: { id: attemptId },
+    data: updateData,
+  })
+
+  const countForType = type === 'TAB_SWITCH' ? updatedAttempt.tabSwitchCount : updatedAttempt.warningCount
+  const warningCount = updatedAttempt.warningCount
+  const remainingWarnings = Math.max(0, MAX_SECURITY_WARNINGS - warningCount)
+
+  await prisma.activityLog.create({
+    data: {
+      userId,
+      action: type,
+      examId: attempt.examId,
+      details: JSON.stringify({
+        attemptId,
+        warningCount,
+        remainingWarnings,
+        typeCount: countForType,
+      }),
+    },
+  })
+
+  io.to(`student:${userId}`).emit('exam:warning_issued', {
+    examId: attempt.examId,
+    attemptId,
+    type,
+    warningCount,
+    maxWarnings: MAX_SECURITY_WARNINGS,
+    message:
+      warningCount >= MAX_SECURITY_WARNINGS
+        ? 'Warning limit reached. Your exam is being auto-submitted.'
+        : `Warning ${warningCount}/${MAX_SECURITY_WARNINGS}: ${formatViolationLabel(type)} detected.`,
+  })
+
+  io.to(`teacher:${attempt.examId}`).emit('exam:suspicious_activity', {
+    studentId: attempt.studentId,
+    studentName: attempt.student.user.name,
+    type,
+    count: countForType,
+    warningCount,
+  })
+
+  if (warningCount >= MAX_SECURITY_WARNINGS) {
+    await prisma.activityLog.create({
+      data: {
+        userId,
+        action: 'AUTO_TERMINATE_WARNINGS',
+        examId: attempt.examId,
+        details: JSON.stringify({
+          attemptId,
+          warningCount,
+          reason: type,
+        }),
+      },
+    })
+
+    await submitStudentAttempt(attemptId, userId, 'AUTO_SUBMITTED')
+    io.to(`student:${userId}`).emit('exam:auto_submitted', {
+      examId: attempt.examId,
+      attemptId,
+    })
+  }
+}
+
+function formatViolationLabel(type: SecurityViolationType) {
+  if (type === 'TAB_SWITCH') return 'tab switch'
+  if (type === 'COPY') return 'copy action'
+  if (type === 'SCREENSHOT') return 'screenshot attempt'
+  return 'developer tools'
 }
 
 export { io }

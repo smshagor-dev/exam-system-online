@@ -13,6 +13,7 @@ type Teacher = {
     department: { name: string }
     assignments: {
       id: string
+      department?: { name: string }
       subject: { name: string }
       language: { name: string }
       group: { name: string }
@@ -53,9 +54,20 @@ export default function TeacherManager({
     name: '', email: '', password: '', departmentId: '', phone: '',
   })
 
-  const [assignForm, setAssignForm] = useState({
-    subjectId: '', languageId: '', groupId: '', academicYearId: '', semesterId: '',
+  const createEmptyAssignment = () => ({
+    departmentId: '',
+    academicYearId: '',
+    groupId: '',
+    languageId: '',
+    semesterId: '',
+    subjectId: '',
   })
+
+  const [assignRows, setAssignRows] = useState([createEmptyAssignment()])
+
+  const resetAssignRows = () => {
+    setAssignRows([createEmptyAssignment()])
+  }
 
   const handleCreateTeacher = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -77,23 +89,91 @@ export default function TeacherManager({
   const handleAssign = async (teacherProfileId: string) => {
     setLoading(true); setError(null)
     try {
-      const teacher = teachers.find((t) => t.teacherProfile?.id === teacherProfileId)
-      if (!teacher?.teacherProfile) return
       const res = await fetch('/api/admin/teachers/assign', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           teacherId: teacherProfileId,
-          departmentId: teacher.teacherProfile ? departments.find(d => d.name === teacher.teacherProfile!.department.name)?.id : '',
-          ...assignForm,
+          assignments: assignRows,
         }),
       })
       if (!res.ok) { const d = await res.json(); throw new Error(d.error || 'Failed') }
       setShowAssignForm(null)
-      setAssignForm({ subjectId: '', languageId: '', groupId: '', academicYearId: '', semesterId: '' })
+      resetAssignRows()
       router.refresh()
     } catch (err: any) { setError(err.message) }
     finally { setLoading(false) }
+  }
+
+  const updateAssignRow = (index: number, key: keyof ReturnType<typeof createEmptyAssignment>, value: string) => {
+    setAssignRows((current) =>
+      current.map((row, rowIndex) => {
+        if (rowIndex !== index) return row
+
+        if (key === 'departmentId') {
+          return {
+            ...row,
+            departmentId: value,
+            subjectId: '',
+            academicYearId: '',
+            groupId: '',
+            languageId: '',
+            semesterId: '',
+          }
+        }
+
+        if (key === 'academicYearId') {
+          return {
+            ...row,
+            academicYearId: value,
+            groupId: '',
+            languageId: '',
+            semesterId: '',
+            subjectId: '',
+          }
+        }
+
+        if (key === 'groupId') {
+          return {
+            ...row,
+            groupId: value,
+            languageId: '',
+            semesterId: '',
+            subjectId: '',
+          }
+        }
+
+        if (key === 'languageId') {
+          return {
+            ...row,
+            languageId: value,
+            semesterId: '',
+            subjectId: '',
+          }
+        }
+
+        if (key === 'semesterId') {
+          return {
+            ...row,
+            semesterId: value,
+            subjectId: '',
+          }
+        }
+
+        return {
+          ...row,
+          [key]: value,
+        }
+      })
+    )
+  }
+
+  const addAssignRow = () => {
+    setAssignRows((current) => [...current, createEmptyAssignment()])
+  }
+
+  const removeAssignRow = (index: number) => {
+    setAssignRows((current) => current.filter((_, rowIndex) => rowIndex !== index))
   }
 
   return (
@@ -181,7 +261,7 @@ export default function TeacherManager({
                   <div className="flex flex-wrap gap-1">
                     {teacher.teacherProfile?.assignments.map((a) => (
                       <span key={a.id} className="text-xs bg-blue-50 text-blue-700 px-2 py-0.5 rounded border border-blue-100">
-                        {a.subject.name} / {a.group.name} / {a.academicYear.name} / {a.semester.name}
+                        {a.department?.name ? `${a.department.name} / ` : ''}{a.subject.name} / {a.group.name} / {a.academicYear.name} / {a.language.name} / {a.semester.name}
                       </span>
                     ))}
                     {(!teacher.teacherProfile?.assignments.length) && (
@@ -208,37 +288,140 @@ export default function TeacherManager({
       {/* Assign Modal */}
       {showAssignForm && (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl p-6 w-full max-w-md shadow-2xl">
-            <h3 className="font-semibold text-gray-900 mb-4">Assign Subject / Group / Year / Semester</h3>
+          <div className="bg-white rounded-2xl p-6 w-full max-w-3xl shadow-2xl max-h-[90vh] overflow-y-auto">
+            <h3 className="font-semibold text-gray-900 mb-2">Assign Multiple Scopes</h3>
+            <p className="text-sm text-gray-500 mb-4">
+              Flow: Department to Year to Group to Language to Semester to Subject. You can add multiple assignment rows for the same teacher.
+            </p>
             {error && <div className="mb-3 text-red-600 text-sm">{error}</div>}
-            <div className="space-y-3">
-              {[
-                { key: 'subjectId', label: 'Subject', items: subjects },
-                { key: 'languageId', label: 'Language', items: languages },
-                { key: 'groupId', label: 'Group', items: groups },
-                { key: 'academicYearId', label: 'Academic Year', items: years },
-                { key: 'semesterId', label: 'Semester', items: semesters },
-              ].map((f) => (
-                <div key={f.key}>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">{f.label}</label>
-                  <select
-                    value={(assignForm as any)[f.key]}
-                    onChange={(e) => setAssignForm({ ...assignForm, [f.key]: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm outline-none focus:border-blue-500"
-                    required
-                  >
-                    <option value="">Select...</option>
-                    {f.items.map((item) => <option key={item.id} value={item.id}>{item.name}</option>)}
-                  </select>
-                </div>
-              ))}
+            <div className="space-y-4">
+              {assignRows.map((row, index) => {
+                const filteredSubjects = subjects.filter((subject) => subject.departmentId === row.departmentId)
+
+                return (
+                  <div key={index} className="rounded-xl border border-gray-200 p-4">
+                    <div className="mb-3 flex items-center justify-between">
+                      <h4 className="font-medium text-gray-900">Assignment {index + 1}</h4>
+                      {assignRows.length > 1 && (
+                        <button
+                          type="button"
+                          onClick={() => removeAssignRow(index)}
+                          className="text-xs font-medium text-red-600 hover:text-red-700"
+                        >
+                          Remove
+                        </button>
+                      )}
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Department *</label>
+                        <select
+                          value={row.departmentId}
+                          onChange={(e) => updateAssignRow(index, 'departmentId', e.target.value)}
+                          className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm outline-none focus:border-blue-500"
+                          required
+                        >
+                          <option value="">Select department...</option>
+                          {departments.map((department) => <option key={department.id} value={department.id}>{department.name}</option>)}
+                        </select>
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Academic Year *</label>
+                        <select
+                          value={row.academicYearId}
+                          onChange={(e) => updateAssignRow(index, 'academicYearId', e.target.value)}
+                          className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm outline-none focus:border-blue-500"
+                          required
+                          disabled={!row.departmentId}
+                        >
+                          <option value="">Select year...</option>
+                          {years.map((year) => <option key={year.id} value={year.id}>{year.name}</option>)}
+                        </select>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Group *</label>
+                        <select
+                          value={row.groupId}
+                          onChange={(e) => updateAssignRow(index, 'groupId', e.target.value)}
+                          className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm outline-none focus:border-blue-500"
+                          required
+                          disabled={!row.academicYearId}
+                        >
+                          <option value="">Select group...</option>
+                          {groups.map((group) => <option key={group.id} value={group.id}>{group.name}</option>)}
+                        </select>
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Language *</label>
+                        <select
+                          value={row.languageId}
+                          onChange={(e) => updateAssignRow(index, 'languageId', e.target.value)}
+                          className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm outline-none focus:border-blue-500"
+                          required
+                          disabled={!row.groupId}
+                        >
+                          <option value="">Select language...</option>
+                          {languages.map((language) => <option key={language.id} value={language.id}>{language.name}</option>)}
+                        </select>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Semester *</label>
+                        <select
+                          value={row.semesterId}
+                          onChange={(e) => updateAssignRow(index, 'semesterId', e.target.value)}
+                          className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm outline-none focus:border-blue-500"
+                          required
+                          disabled={!row.languageId}
+                        >
+                          <option value="">Select semester...</option>
+                          {semesters.map((semester) => <option key={semester.id} value={semester.id}>{semester.name}</option>)}
+                        </select>
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Subject *</label>
+                        <select
+                          value={row.subjectId}
+                          onChange={(e) => updateAssignRow(index, 'subjectId', e.target.value)}
+                          className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm outline-none focus:border-blue-500"
+                          required
+                          disabled={!row.departmentId || !row.semesterId}
+                        >
+                          <option value="">Select subject...</option>
+                          {filteredSubjects.map((subject) => <option key={subject.id} value={subject.id}>{subject.name}</option>)}
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                )
+              })}
             </div>
+
+            <div className="mt-4">
+              <button
+                type="button"
+                onClick={addAssignRow}
+                className="rounded-lg border border-blue-200 bg-blue-50 px-4 py-2 text-sm font-medium text-blue-700 hover:bg-blue-100"
+              >
+                + Add Another Assignment
+              </button>
+            </div>
+
             <div className="flex gap-3 mt-4">
               <button onClick={() => handleAssign(showAssignForm)} disabled={loading}
                 className="flex-1 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 disabled:opacity-50">
-                {loading ? 'Saving...' : 'Assign'}
+                {loading ? 'Saving...' : 'Save Assignments'}
               </button>
-              <button onClick={() => setShowAssignForm(null)}
+              <button onClick={() => { setShowAssignForm(null); resetAssignRows() }}
                 className="flex-1 py-2 border border-gray-300 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-50">
                 Cancel
               </button>

@@ -18,12 +18,20 @@ export async function POST(req: NextRequest) {
   const existing = await prisma.user.findUnique({ where: { email } })
   if (existing) return NextResponse.json({ error: 'Email already registered' }, { status: 409 })
 
-  // Validate department exists
-  const dept = await prisma.department.findUnique({ where: { id: departmentId } })
-  if (!dept) return NextResponse.json({ error: 'Invalid department' }, { status: 400 })
+  const [dept, year, group, language, semester, subject] = await Promise.all([
+    prisma.department.findFirst({ where: { id: departmentId, isActive: true } }),
+    prisma.academicYear.findFirst({ where: { id: academicYearId, isActive: true } }),
+    prisma.group.findFirst({ where: { id: groupId, isActive: true } }),
+    prisma.language.findFirst({ where: { id: languageId, isActive: true } }),
+    prisma.semester.findFirst({ where: { id: semesterId, isActive: true } }),
+    prisma.subject.findFirst({ where: { id: subjectId, departmentId, isActive: true } }),
+  ])
 
-  // Validate subject belongs to department
-  const subject = await prisma.subject.findFirst({ where: { id: subjectId, departmentId } })
+  if (!dept) return NextResponse.json({ error: 'Invalid department' }, { status: 400 })
+  if (!year) return NextResponse.json({ error: 'Invalid academic year' }, { status: 400 })
+  if (!group) return NextResponse.json({ error: 'Invalid group' }, { status: 400 })
+  if (!language) return NextResponse.json({ error: 'Invalid language' }, { status: 400 })
+  if (!semester) return NextResponse.json({ error: 'Invalid semester' }, { status: 400 })
   if (!subject) return NextResponse.json({ error: 'Subject does not belong to this department' }, { status: 400 })
 
   const hashedPwd = await bcrypt.hash(password, 12)

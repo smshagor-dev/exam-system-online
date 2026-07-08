@@ -41,6 +41,7 @@ export default async function AdminExamsPage() {
               <th className="px-5 py-3 text-left">Schedule</th>
               <th className="px-5 py-3 text-left">Status</th>
               <th className="px-5 py-3 text-left">Stats</th>
+              <th className="px-5 py-3 text-left">Actions</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-50">
@@ -67,11 +68,19 @@ export default async function AdminExamsPage() {
                   <p>{exam._count.questions} Q</p>
                   <p>{exam._count.attempts} attempts</p>
                 </td>
+                <td className="px-5 py-4">
+                  <Link
+                    href={`/admin/exams/${exam.id}/logs`}
+                    className="text-xs font-medium text-slate-600 hover:text-slate-700"
+                  >
+                    Logs
+                  </Link>
+                </td>
               </tr>
             ))}
             {exams.length === 0 && (
               <tr>
-                <td colSpan={6} className="px-5 py-10 text-center text-gray-400 text-sm">No exams yet</td>
+                <td colSpan={7} className="px-5 py-10 text-center text-gray-400 text-sm">No exams yet</td>
               </tr>
             )}
           </tbody>

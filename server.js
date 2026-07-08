@@ -18,8 +18,6 @@ const path = require('path')
 const dev = process.env.NODE_ENV !== 'production'
 const hostname = process.env.HOST || 'localhost'
 const port = parseInt(process.env.PORT || '3000', 10)
-const prismaDir = path.join(__dirname, 'prisma')
-const migrationsDir = path.join(prismaDir, 'migrations')
 const prismaCli = path.join(__dirname, 'node_modules', 'prisma', 'build', 'index.js')
 
 function runCommand(command, args) {
@@ -40,15 +38,7 @@ function runDatabaseSetup() {
     return
   }
 
-  console.log('[DB] Checking pending Prisma changes...')
-
-  if (require('fs').existsSync(migrationsDir)) {
-    console.log('[DB] Running prisma migrate deploy')
-    runCommand(process.execPath, [prismaCli, 'migrate', 'deploy'])
-    return
-  }
-
-  console.log('[DB] No prisma/migrations folder found, running prisma db push as fallback')
+  console.log('[DB] Syncing Prisma schema with MongoDB...')
   runCommand(process.execPath, [prismaCli, 'db', 'push'])
 }
 

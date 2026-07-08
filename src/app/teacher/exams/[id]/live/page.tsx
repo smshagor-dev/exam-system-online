@@ -1,9 +1,8 @@
 'use client'
 
-import { use, useEffect, useState, useRef } from 'react'
+import { use, useEffect, useRef, useState } from 'react'
 import { useSession } from 'next-auth/react'
 import { getSocket } from '@/lib/socket'
-import type { Socket } from 'socket.io-client'
 
 type StudentStatus = {
   userId: string
@@ -14,6 +13,8 @@ type StudentStatus = {
   submitted: boolean
   tabSwitches: number
   reconnects: number
+  warnings: number
+  lastViolation?: string
 }
 
 type Props = {
@@ -31,17 +32,16 @@ export default function LiveExamMonitor({ params }: Props) {
   const socketRef = useRef<any>(null)
 
   useEffect(() => {
-    fetch(`/api/exams/${examId}`).then((r) => r.json()).then((d) => {
-      setExam(d)
-      if (d.status === 'LIVE') setExamStatus('live')
+    fetch(`/api/exams/${examId}`).then((r) => r.json()).then((data) => {
+      setExam(data)
+      if (data.status === 'LIVE') setExamStatus('live')
       setLoading(false)
     })
   }, [examId])
 
   useEffect(() => {
     if (!session?.user) return
-    // We need the session JWT token for socket auth
-    // In NextAuth v5, we'd get it from the session or use a dedicated endpoint
+
     fetch('/api/socket/token').then((r) => r.json()).then(({ token }) => {
       const socket = getSocket(token)
       socketRef.current = socket
@@ -49,24 +49,50 @@ export default function LiveExamMonitor({ params }: Props) {
       socket.on('exam:student_joined', (data) => {
         if (data.examId !== examId) return
         setStudents((prev) => {
-          const exists = prev.find((s) => s.userId === data.userId)
-          if (exists) return prev.map((s) => s.userId === data.userId ? { ...s, online: true, socketId: data.socketId } : s)
-          return [...prev, {
-            userId: data.userId,
-            studentId: data.studentId,
-            socketId: data.socketId,
-            name: data.studentName,
-            online: true,
-            submitted: false,
-            tabSwitches: 0,
-            reconnects: data.reconnected ? 1 : 0,
-          }]
+          const exists = prev.find((student) => student.userId === data.userId)
+          if (exists) {
+            return prev.map((student) =>
+              student.userId === data.userId
+                ? { ...student, online: true, socketId: data.socketId }
+                : student
+            )
+          }
+
+          return [
+            ...prev,
+            {
+              userId: data.userId,
+              studentId: data.studentId,
+              socketId: data.socketId,
+              name: data.studentName,
+              online: true,
+              submitted: false,
+              tabSwitches: 0,
+              reconnects: data.reconnected ? 1 : 0,
+              warnings: 0,
+            },
+          ]
         })
       })
 
       socket.on('exam:student_offline', (data) => {
         if (data.examId !== examId) return
-        setStudents((prev) => prev.map((s) => s.socketId === data.socketId ? { ...s, online: false } : s))
+        setStudents((prev) =>
+          prev.map((student) =>
+            student.socketId === data.socketId ? { ...student, online: false } : student
+          )
+        )
+      })
+
+      socket.on('exam:student_submitted', (data) => {
+        if (data.examId !== examId) return
+        setStudents((prev) =>
+          prev.map((student) =>
+            student.studentId === data.studentId
+              ? { ...student, submitted: true, online: data.status === 'AUTO_SUBMITTED' ? false : student.online }
+              : student
+          )
+        )
       })
 
       socket.on('exam:timer_update', (data) => {
@@ -87,22 +113,42 @@ export default function LiveExamMonitor({ params }: Props) {
 
       socket.on('exam:suspicious_activity', (data) => {
         setStudents((prev) =>
-          prev.map((s) => {
-            if (s.studentId === data.studentId) {
-              return data.type === 'TAB_SWITCH'
-                ? { ...s, tabSwitches: data.count }
-                : { ...s, reconnects: data.count }
+          prev.map((student) => {
+            if (student.studentId !== data.studentId) return student
+
+            if (data.type === 'TAB_SWITCH') {
+              return {
+                ...student,
+                tabSwitches: data.count,
+                warnings: data.warningCount ?? student.warnings,
+                lastViolation: data.type,
+              }
             }
-            return s
+
+            if (data.type === 'RECONNECT') {
+              return {
+                ...student,
+                reconnects: data.count,
+                warnings: data.warningCount ?? student.warnings,
+                lastViolation: data.type,
+              }
+            }
+
+            return {
+              ...student,
+              warnings: data.warningCount ?? student.warnings,
+              lastViolation: data.type,
+            }
           })
         )
       })
 
-      // Join teacher room
-      socket.emit('teacher:start_exam' as any, { examId }) // just join the room - or use a separate join event
+      socket.emit('teacher:join_exam_monitor', { examId })
     })
 
-    return () => { socketRef.current?.disconnect() }
+    return () => {
+      socketRef.current?.disconnect()
+    }
   }, [session, examId])
 
   const handleStartExam = () => {
@@ -121,22 +167,25 @@ export default function LiveExamMonitor({ params }: Props) {
   }
 
   const formatTime = (seconds: number) => {
-    const h = Math.floor(seconds / 3600)
-    const m = Math.floor((seconds % 3600) / 60)
-    const s = seconds % 60
-    if (h > 0) return `${h}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`
-    return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`
+    const hours = Math.floor(seconds / 3600)
+    const minutes = Math.floor((seconds % 3600) / 60)
+    const secs = seconds % 60
+
+    if (hours > 0) {
+      return `${hours}:${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`
+    }
+
+    return `${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`
   }
 
-  if (loading) return <div className="text-center py-20 text-gray-400">Loading exam...</div>
+  if (loading) return <div className="py-20 text-center text-gray-400">Loading exam...</div>
 
-  const onlineCount = students.filter((s) => s.online).length
-  const submittedCount = students.filter((s) => s.submitted).length
-  const suspiciousCount = students.filter((s) => s.tabSwitches > 2).length
+  const onlineCount = students.filter((student) => student.online).length
+  const submittedCount = students.filter((student) => student.submitted).length
+  const suspiciousCount = students.filter((student) => student.warnings > 0).length
 
   return (
     <div className="space-y-6">
-      {/* Header */}
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Live Monitoring</h1>
@@ -144,108 +193,144 @@ export default function LiveExamMonitor({ params }: Props) {
         </div>
         <div className="flex gap-3">
           {examStatus === 'idle' && (
-            <button onClick={handleStartExam}
-              className="px-4 py-2 bg-green-600 text-white rounded-lg text-sm font-semibold hover:bg-green-700">
-              ▶ Start Exam
+            <button
+              onClick={handleStartExam}
+              className="rounded-lg bg-green-600 px-4 py-2 text-sm font-semibold text-white hover:bg-green-700"
+            >
+              Start Exam
             </button>
           )}
           {examStatus === 'live' && (
             <>
-              <button onClick={handlePauseExam}
-                className="px-4 py-2 bg-yellow-500 text-white rounded-lg text-sm font-semibold hover:bg-yellow-600">
-                ⏸ Pause
+              <button
+                onClick={handlePauseExam}
+                className="rounded-lg bg-yellow-500 px-4 py-2 text-sm font-semibold text-white hover:bg-yellow-600"
+              >
+                Pause
               </button>
-              <button onClick={handleEndExam}
-                className="px-4 py-2 bg-red-600 text-white rounded-lg text-sm font-semibold hover:bg-red-700">
-                ⏹ End Exam
+              <button
+                onClick={handleEndExam}
+                className="rounded-lg bg-red-600 px-4 py-2 text-sm font-semibold text-white hover:bg-red-700"
+              >
+                End Exam
               </button>
             </>
           )}
           {examStatus === 'paused' && (
-            <button onClick={handleStartExam}
-              className="px-4 py-2 bg-green-600 text-white rounded-lg text-sm font-semibold hover:bg-green-700">
-              ▶ Resume
+            <button
+              onClick={handleStartExam}
+              className="rounded-lg bg-green-600 px-4 py-2 text-sm font-semibold text-white hover:bg-green-700"
+            >
+              Resume
             </button>
           )}
           {examStatus === 'ended' && (
-            <span className="px-4 py-2 bg-gray-100 text-gray-600 rounded-lg text-sm font-medium">Exam Ended</span>
+            <span className="rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-600">
+              Exam Ended
+            </span>
           )}
         </div>
       </div>
 
-      {/* Stats Bar */}
-      <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-        <div className="bg-white rounded-xl border border-gray-200 p-4 text-center">
-          <p className={`text-3xl font-bold ${remainingSeconds !== null && remainingSeconds < 300 ? 'text-red-500 animate-pulse' : 'text-gray-900'}`}>
+      <div className="grid grid-cols-2 gap-4 md:grid-cols-5">
+        <div className="rounded-xl border border-gray-200 bg-white p-4 text-center">
+          <p className={`text-3xl font-bold ${remainingSeconds !== null && remainingSeconds < 300 ? 'animate-pulse text-red-500' : 'text-gray-900'}`}>
             {remainingSeconds !== null ? formatTime(remainingSeconds) : '--:--'}
           </p>
-          <p className="text-xs text-gray-500 mt-1">Time Remaining</p>
+          <p className="mt-1 text-xs text-gray-500">Time Remaining</p>
         </div>
-        <div className="bg-white rounded-xl border border-gray-200 p-4 text-center">
+        <div className="rounded-xl border border-gray-200 bg-white p-4 text-center">
           <p className="text-3xl font-bold text-blue-600">{students.length}</p>
-          <p className="text-xs text-gray-500 mt-1">Total Joined</p>
+          <p className="mt-1 text-xs text-gray-500">Total Joined</p>
         </div>
-        <div className="bg-white rounded-xl border border-gray-200 p-4 text-center">
+        <div className="rounded-xl border border-gray-200 bg-white p-4 text-center">
           <p className="text-3xl font-bold text-green-600">{onlineCount}</p>
-          <p className="text-xs text-gray-500 mt-1">Online</p>
+          <p className="mt-1 text-xs text-gray-500">Online</p>
         </div>
-        <div className="bg-white rounded-xl border border-gray-200 p-4 text-center">
+        <div className="rounded-xl border border-gray-200 bg-white p-4 text-center">
           <p className="text-3xl font-bold text-purple-600">{submittedCount}</p>
-          <p className="text-xs text-gray-500 mt-1">Submitted</p>
+          <p className="mt-1 text-xs text-gray-500">Submitted</p>
         </div>
-        <div className="bg-white rounded-xl border border-gray-200 p-4 text-center">
+        <div className="rounded-xl border border-gray-200 bg-white p-4 text-center">
           <p className="text-3xl font-bold text-orange-600">{suspiciousCount}</p>
-          <p className="text-xs text-gray-500 mt-1">Suspicious</p>
+          <p className="mt-1 text-xs text-gray-500">Suspicious</p>
         </div>
       </div>
 
-      {/* Status badge */}
       <div className="flex items-center gap-2">
-        <div className={`w-2 h-2 rounded-full ${examStatus === 'live' ? 'bg-green-500 animate-pulse' : examStatus === 'paused' ? 'bg-yellow-500' : 'bg-gray-400'}`} />
-        <span className="text-sm font-medium text-gray-700 uppercase tracking-wide">
-          {examStatus === 'live' ? 'Live' : examStatus === 'paused' ? 'Paused' : examStatus === 'ended' ? 'Ended' : 'Not Started'}
+        <div
+          className={`h-2 w-2 rounded-full ${
+            examStatus === 'live'
+              ? 'animate-pulse bg-green-500'
+              : examStatus === 'paused'
+              ? 'bg-yellow-500'
+              : 'bg-gray-400'
+          }`}
+        />
+        <span className="text-sm font-medium uppercase tracking-wide text-gray-700">
+          {examStatus === 'live'
+            ? 'Live'
+            : examStatus === 'paused'
+            ? 'Paused'
+            : examStatus === 'ended'
+            ? 'Ended'
+            : 'Not Started'}
         </span>
       </div>
 
-      {/* Student Grid */}
-      <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
-        <div className="p-4 border-b border-gray-100">
+      <div className="overflow-hidden rounded-xl border border-gray-200 bg-white">
+        <div className="border-b border-gray-100 p-4">
           <h2 className="font-semibold text-gray-900">Student Activity</h2>
         </div>
         {students.length === 0 ? (
           <div className="py-16 text-center text-gray-400">
-            <p className="text-4xl mb-3">👥</p>
+            <p className="mb-3 text-4xl">Users</p>
             <p>No students have joined yet</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 p-4">
+          <div className="grid grid-cols-1 gap-3 p-4 md:grid-cols-2 lg:grid-cols-3">
             {students.map((student) => (
-              <div key={student.userId}
+              <div
+                key={student.userId}
                 className={`rounded-xl border-2 p-4 transition ${
-                  student.submitted ? 'border-green-200 bg-green-50'
-                  : !student.online ? 'border-gray-200 bg-gray-50 opacity-60'
-                  : student.tabSwitches > 2 ? 'border-orange-200 bg-orange-50'
-                  : 'border-gray-200 bg-white'
-                }`}>
+                  student.submitted
+                    ? 'border-green-200 bg-green-50'
+                    : !student.online
+                    ? 'border-gray-200 bg-gray-50 opacity-60'
+                    : student.warnings >= 3
+                    ? 'border-red-200 bg-red-50'
+                    : student.warnings > 0
+                    ? 'border-orange-200 bg-orange-50'
+                    : 'border-gray-200 bg-white'
+                }`}
+              >
                 <div className="flex items-start justify-between">
                   <div className="flex items-center gap-2">
-                    <div className={`w-2 h-2 rounded-full ${student.online ? 'bg-green-500' : 'bg-gray-300'}`} />
-                    <p className="font-medium text-sm text-gray-900">{student.name}</p>
+                    <div className={`h-2 w-2 rounded-full ${student.online ? 'bg-green-500' : 'bg-gray-300'}`} />
+                    <p className="text-sm font-medium text-gray-900">{student.name}</p>
                   </div>
                   {student.submitted && (
-                    <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full font-medium">
+                    <span className="rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-700">
                       Submitted
                     </span>
                   )}
                 </div>
-                <div className="mt-2 flex gap-3 text-xs text-gray-500">
+                <div className="mt-2 flex flex-wrap gap-3 text-xs text-gray-500">
                   {student.tabSwitches > 0 && (
-                    <span className={student.tabSwitches > 2 ? 'text-orange-600 font-medium' : ''}>
-                      ⚠️ {student.tabSwitches} tab switch{student.tabSwitches > 1 ? 'es' : ''}
+                    <span className={student.tabSwitches > 2 ? 'font-medium text-orange-600' : ''}>
+                      Tab switches: {student.tabSwitches}
                     </span>
                   )}
                   {student.reconnects > 0 && (
-                    <span>🔄 {student.reconnects} reconnect{student.reconnects > 1 ? 's' : ''}</span>
+                    <span>Reconnects: {student.reconnects}</span>
+                  )}
+                  {student.warnings > 0 && (
+                    <span className={student.warnings >= 3 ? 'font-semibold text-red-600' : 'font-medium text-orange-600'}>
+                      Warnings: {student.warnings}/3
+                    </span>
+                  )}
+                  {student.lastViolation && student.lastViolation !== 'RECONNECT' && (
+                    <span>Last: {student.lastViolation.replace('_', ' ')}</span>
                   )}
                 </div>
               </div>

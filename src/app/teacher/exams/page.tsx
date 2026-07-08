@@ -110,6 +110,10 @@ export default async function TeacherExamsPage() {
                           </Link>
                         </>
                       )}
+                      <Link href={`/teacher/exams/${exam.id}/logs`}
+                        className="text-xs text-slate-600 font-medium hover:text-slate-700">
+                        Logs
+                      </Link>
                       {exam.status === ExamStatus.DRAFT && (
                         <span className="text-xs text-gray-400">Draft</span>
                       )}

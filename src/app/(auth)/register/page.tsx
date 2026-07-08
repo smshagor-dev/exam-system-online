@@ -63,6 +63,54 @@ export default function RegisterPage() {
     setSubjects(data)
   }
 
+  const updateAcademicField = (key: keyof typeof form, value: string) => {
+    setForm((current) => {
+      if (key === 'departmentId') {
+        return {
+          ...current,
+          departmentId: value,
+          subjectId: '',
+          academicYearId: '',
+          groupId: '',
+          languageId: '',
+          semesterId: '',
+        }
+      }
+
+      if (key === 'academicYearId') {
+        return {
+          ...current,
+          academicYearId: value,
+          groupId: '',
+          languageId: '',
+          semesterId: '',
+        }
+      }
+
+      if (key === 'groupId') {
+        return {
+          ...current,
+          groupId: value,
+          languageId: '',
+          semesterId: '',
+        }
+      }
+
+      if (key === 'languageId') {
+        return {
+          ...current,
+          languageId: value,
+          semesterId: '',
+        }
+      }
+
+      return {
+        ...current,
+        [key]: value,
+      }
+    })
+  }
+
   const handleStep1 = async (e: React.FormEvent) => {
     e.preventDefault()
     if (form.password !== form.confirmPassword) {
@@ -237,7 +285,7 @@ export default function RegisterPage() {
                 <select
                   value={form.departmentId}
                   onChange={(e) => {
-                    setForm({ ...form, departmentId: e.target.value, subjectId: '' })
+                    updateAcademicField('departmentId', e.target.value)
                     loadSubjectsForDepartment(e.target.value)
                   }}
                   className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 outline-none text-gray-900 text-sm"
@@ -248,18 +296,33 @@ export default function RegisterPage() {
                 </select>
               </div>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Subject *</label>
-                <select
-                  value={form.subjectId}
-                  onChange={(e) => setForm({ ...form, subjectId: e.target.value })}
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 outline-none text-gray-900 text-sm"
-                  required
-                  disabled={!form.departmentId}
-                >
-                  <option value="">Select subject...</option>
-                  {subjects.map((s) => <option key={s.id} value={s.id}>{s.name}</option>)}
-                </select>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Academic Year *</label>
+                  <select
+                    value={form.academicYearId}
+                    onChange={(e) => updateAcademicField('academicYearId', e.target.value)}
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 outline-none text-gray-900 text-sm"
+                    required
+                    disabled={!form.departmentId}
+                  >
+                    <option value="">Select year...</option>
+                    {years.map((y) => <option key={y.id} value={y.id}>{y.name}</option>)}
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Group *</label>
+                  <select
+                    value={form.groupId}
+                    onChange={(e) => updateAcademicField('groupId', e.target.value)}
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 outline-none text-gray-900 text-sm"
+                    required
+                    disabled={!form.academicYearId}
+                  >
+                    <option value="">Select group...</option>
+                    {groups.map((g) => <option key={g.id} value={g.id}>{g.name}</option>)}
+                  </select>
+                </div>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
@@ -267,52 +330,53 @@ export default function RegisterPage() {
                   <label className="block text-sm font-medium text-gray-700 mb-1">Language *</label>
                   <select
                     value={form.languageId}
-                    onChange={(e) => setForm({ ...form, languageId: e.target.value })}
+                    onChange={(e) => updateAcademicField('languageId', e.target.value)}
                     className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 outline-none text-gray-900 text-sm"
                     required
+                    disabled={!form.groupId}
                   >
-                    <option value="">Select...</option>
+                    <option value="">Select language...</option>
                     {languages.map((l) => <option key={l.id} value={l.id}>{l.name}</option>)}
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Group *</label>
-                  <select
-                    value={form.groupId}
-                    onChange={(e) => setForm({ ...form, groupId: e.target.value })}
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 outline-none text-gray-900 text-sm"
-                    required
-                  >
-                    <option value="">Select...</option>
-                    {groups.map((g) => <option key={g.id} value={g.id}>{g.name}</option>)}
-                  </select>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Academic Year *</label>
-                <select
-                  value={form.academicYearId}
-                  onChange={(e) => setForm({ ...form, academicYearId: e.target.value })}
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 outline-none text-gray-900 text-sm"
-                  required
-                >
-                  <option value="">Select year...</option>
-                  {years.map((y) => <option key={y.id} value={y.id}>{y.name}</option>)}
-                </select>
-              </div>
-                <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Semester *</label>
                   <select
                     value={form.semesterId}
-                    onChange={(e) => setForm({ ...form, semesterId: e.target.value })}
+                    onChange={(e) => updateAcademicField('semesterId', e.target.value)}
                     className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 outline-none text-gray-900 text-sm"
                     required
+                    disabled={!form.languageId}
                   >
                     <option value="">Select semester...</option>
                     {semesters.map((semester) => <option key={semester.id} value={semester.id}>{semester.name}</option>)}
                   </select>
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Subject *</label>
+                <select
+                  value={form.subjectId}
+                  onChange={(e) => updateAcademicField('subjectId', e.target.value)}
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 outline-none text-gray-900 text-sm"
+                  required
+                  disabled={!form.departmentId || !form.semesterId}
+                >
+                  <option value="">Select subject...</option>
+                  {subjects.map((s) => <option key={s.id} value={s.id}>{s.name}</option>)}
+                </select>
+              </div>
+
+              <div className="rounded-xl border border-blue-100 bg-blue-50 px-4 py-3 text-sm text-blue-800">
+                Student panel exams and results will be filtered from your selected department, academic year, group, language, semester, and subject.
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div>
+                  <p className="text-xs text-gray-500">
+                    Order: Department {'->'} Year {'->'} Group {'->'} Language {'->'} Semester {'->'} Subject
+                  </p>
                 </div>
               </div>
               <div className="flex gap-3">
