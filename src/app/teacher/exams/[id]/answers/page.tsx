@@ -2,6 +2,7 @@
 
 import { use, useEffect, useState } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
+import RichTextContent from '@/components/editor/RichTextContent'
 
 type Answer = {
   id: string
@@ -178,7 +179,7 @@ export default function AnswersReviewPage({ params }: PageProps) {
                   )}
                 </div>
 
-                <p className="font-medium text-gray-900 mb-3">{answer.question.text}</p>
+                <RichTextContent html={answer.question.text} className="rich-text-content mb-3 text-gray-900" />
 
                 {answer.question.expectedAnswer && (
                   <div className="bg-green-50 rounded-lg p-3 mb-3">

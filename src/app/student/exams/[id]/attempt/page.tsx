@@ -4,6 +4,7 @@ import { use, useEffect, useState, useRef, useCallback } from 'react'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { getSocket } from '@/lib/socket'
+import RichTextContent from '@/components/editor/RichTextContent'
 
 type Question = {
   id: string
@@ -430,7 +431,7 @@ export default function ExamAttemptPage({ params }: Props) {
             </span>
           </div>
 
-          <p className="text-gray-900 font-medium mb-5">{currentQuestion.text}</p>
+          <RichTextContent html={currentQuestion.text} className="rich-text-content mb-5 text-gray-900 font-medium" />
 
           {/* MCQ / True-False */}
           {(currentQuestion.type === 'MCQ' || currentQuestion.type === 'TRUE_FALSE') && (

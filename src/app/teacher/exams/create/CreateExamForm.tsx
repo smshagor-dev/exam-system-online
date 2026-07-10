@@ -190,7 +190,7 @@ export default function CreateExamForm({
           <h2 className="font-semibold text-gray-900">Exam Details</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="md:col-span-2">
-              <label className="block text-sm font-medium text-gray-700 mb-1">Assignment (Subject/Group/Year/Semester) *</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Assignment (Subject/Group/Year/Department Language/Semester) *</label>
               <select
                 value={form.assignmentId}
                 onChange={(e) => setForm({ ...form, assignmentId: e.target.value })}
@@ -320,7 +320,14 @@ export default function CreateExamForm({
           {questions.length === 0 ? (
             <div className="py-10 text-center text-gray-400">
               <p>No questions found for this assignment.</p>
-              <a href="/teacher/questions" className="text-blue-600 hover:underline text-sm mt-2 inline-block">
+              <a
+                href={
+                  selectedAssignment
+                    ? `/teacher/questions/${selectedAssignment.academicYearId}/${selectedAssignment.subjectId}/${selectedAssignment.languageId}`
+                    : '/teacher/questions'
+                }
+                className="text-blue-600 hover:underline text-sm mt-2 inline-block"
+              >
                 Create questions first →
               </a>
             </div>

@@ -52,15 +52,15 @@ export async function POST(req: NextRequest) {
           tx.department.findFirst({ where: { id: departmentId, isActive: true }, select: { id: true } }),
           tx.subject.findFirst({ where: { id: subjectId, departmentId, isActive: true }, select: { id: true, departmentId: true } }),
           tx.language.findFirst({ where: { id: languageId, isActive: true }, select: { id: true } }),
-          tx.group.findFirst({ where: { id: groupId, isActive: true }, select: { id: true } }),
+          tx.group.findFirst({ where: { id: groupId, academicYearId, isActive: true }, select: { id: true } }),
           tx.academicYear.findFirst({ where: { id: academicYearId, isActive: true }, select: { id: true } }),
           tx.semester.findFirst({ where: { id: semesterId, isActive: true }, select: { id: true } }),
         ])
 
         if (!department) throw new Error('Invalid department')
         if (!subject) throw new Error('Subject does not belong to this department')
-        if (!language) throw new Error('Invalid language')
-        if (!group) throw new Error('Invalid group')
+        if (!language) throw new Error('Invalid department language')
+        if (!group) throw new Error('Group does not belong to this academic year')
         if (!year) throw new Error('Invalid academic year')
         if (!semester) throw new Error('Invalid semester')
 

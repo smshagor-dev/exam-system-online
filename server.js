@@ -14,6 +14,7 @@ const { parse } = require('url')
 const { spawnSync } = require('child_process')
 const next = require('next')
 const path = require('path')
+const { initStudentPromotionCron } = require('./server/student-promotion-cron')
 
 const dev = process.env.NODE_ENV !== 'production'
 const hostname = process.env.HOST || 'localhost'
@@ -98,6 +99,8 @@ async function startServer() {
 ╚════════════════════════════════════════╝
     `)
   })
+
+  initStudentPromotionCron(console)
 }
 
 startServer().catch((err) => {

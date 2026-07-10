@@ -25,6 +25,8 @@ async function main() {
   await prisma.exam.deleteMany()
   await prisma.teacherAssignment.deleteMany()
   await prisma.studentSubject.deleteMany()
+  await prisma.translationEntry.deleteMany()
+  await prisma.systemLanguage.deleteMany()
   await prisma.studentProfile.deleteMany()
   await prisma.teacherProfile.deleteMany()
   await prisma.subject.deleteMany()
@@ -60,6 +62,13 @@ async function main() {
   console.log('✓ Created languages')
 
   // ─── Groups ─────────────────────────────────────────────────
+  await Promise.all([
+    prisma.systemLanguage.create({ data: { name: 'English', code: 'EN', isDefault: true } }),
+    prisma.systemLanguage.create({ data: { name: 'Bangla', code: 'BN', isDefault: false } }),
+    prisma.systemLanguage.create({ data: { name: 'Arabic', code: 'AR', isDefault: false } }),
+  ])
+  console.log('Created system languages')
+
   const groups = await Promise.all([
     prisma.group.create({ data: { name: 'Group A', code: 'GRP-A' } }),
     prisma.group.create({ data: { name: 'Group B', code: 'GRP-B' } }),
@@ -204,12 +213,11 @@ async function main() {
   )
 
   const studentProfiles = await Promise.all(
-    studentUsers.map((u, i) =>
+    studentUsers.map((u) =>
       prisma.studentProfile.create({
         data: {
           userId: u.id,
           departmentId: deptCSE.id,
-          rollNumber: `CSE-2024-${String(i + 1).padStart(3, '0')}`,
         },
       })
     )

@@ -3,6 +3,34 @@ import { prisma } from '@/lib/prisma'
 import { UserRole } from '@prisma/client'
 import Link from 'next/link'
 
+type ResultGroup = {
+  academicYearId: string
+  academicYearName: string
+  academicYearNumber: number
+  semesters: Array<{
+    semesterId: string
+    semesterName: string
+    semesterNumber: number
+    entries: Array<{
+      id: string
+      examTitle: string
+      subjectName: string
+      marksObtained: number
+      totalMarks: number
+      percentage: number
+      grade: string | null
+      isPassed: boolean
+      publishedAt: Date | null
+    }>
+  }>
+}
+
+function statusClasses(isPassed: boolean) {
+  return isPassed
+    ? 'bg-emerald-100 text-emerald-700'
+    : 'bg-rose-100 text-rose-700'
+}
+
 export default async function StudentResultsPage() {
   const session = await requireRole(UserRole.STUDENT)
 
@@ -17,76 +45,171 @@ export default async function StudentResultsPage() {
   const results = await prisma.examResult.findMany({
     where: { studentId: profile.id, status: 'PUBLISHED' },
     include: {
-      exam: { include: { subject: true, department: true } },
+      exam: {
+        include: {
+          subject: true,
+          academicYear: true,
+          semester: true,
+        },
+      },
     },
-    orderBy: { publishedAt: 'desc' },
+    orderBy: [
+      { exam: { academicYear: { year: 'asc' } } },
+      { exam: { semester: { number: 'asc' } } },
+      { exam: { subject: { name: 'asc' } } },
+      { publishedAt: 'desc' },
+    ],
   })
+
+  const yearMap = new Map<string, ResultGroup>()
+
+  for (const result of results) {
+    const yearKey = result.exam.academicYearId
+    const semesterKey = result.exam.semesterId
+    const existingYear = yearMap.get(yearKey)
+
+    const entry = {
+      id: result.id,
+      examTitle: result.exam.title,
+      subjectName: result.exam.subject.name,
+      marksObtained: result.marksObtained,
+      totalMarks: result.totalMarks,
+      percentage: result.percentage,
+      grade: result.grade,
+      isPassed: result.isPassed,
+      publishedAt: result.publishedAt,
+    }
+
+    if (!existingYear) {
+      yearMap.set(yearKey, {
+        academicYearId: yearKey,
+        academicYearName: result.exam.academicYear.name,
+        academicYearNumber: result.exam.academicYear.year,
+        semesters: [
+          {
+            semesterId: semesterKey,
+            semesterName: result.exam.semester.name,
+            semesterNumber: result.exam.semester.number,
+            entries: [entry],
+          },
+        ],
+      })
+      continue
+    }
+
+    const existingSemester = existingYear.semesters.find((semester) => semester.semesterId === semesterKey)
+    if (existingSemester) {
+      existingSemester.entries.push(entry)
+      continue
+    }
+
+    existingYear.semesters.push({
+      semesterId: semesterKey,
+      semesterName: result.exam.semester.name,
+      semesterNumber: result.exam.semester.number,
+      entries: [entry],
+    })
+  }
+
+  const groupedResults = Array.from(yearMap.values())
+    .sort((a, b) => a.academicYearNumber - b.academicYearNumber)
+    .map((year) => ({
+      ...year,
+      semesters: year.semesters
+        .sort((a, b) => a.semesterNumber - b.semesterNumber)
+        .map((semester) => ({
+          ...semester,
+          entries: semester.entries.sort((a, b) => {
+            const bySubject = a.subjectName.localeCompare(b.subjectName)
+            if (bySubject !== 0) return bySubject
+            const byPublishedAt = (b.publishedAt?.getTime() ?? 0) - (a.publishedAt?.getTime() ?? 0)
+            if (byPublishedAt !== 0) return byPublishedAt
+            return a.examTitle.localeCompare(b.examTitle)
+          }),
+        })),
+    }))
 
   return (
     <div className="space-y-6">
       <div>
         <h1 className="text-2xl font-bold text-gray-900">My Results</h1>
-        <p className="text-gray-500 mt-1">{results.length} published result{results.length !== 1 ? 's' : ''}</p>
       </div>
 
-      {results.length === 0 ? (
-        <div className="bg-white rounded-xl border border-dashed border-gray-300 p-16 text-center">
-          <div className="text-5xl mb-4">📊</div>
-          <h2 className="text-xl font-semibold text-gray-900 mb-2">No Results Yet</h2>
+      {groupedResults.length === 0 ? (
+        <div className="rounded-xl border border-dashed border-gray-300 bg-white p-16 text-center">
+          <div className="mb-4 text-5xl">Results</div>
+          <h2 className="mb-2 text-xl font-semibold text-gray-900">No Results Yet</h2>
           <p className="text-gray-500">Results will appear here once your teacher publishes them.</p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {results.map((result) => (
-            <Link
-              key={result.id}
-              href={`/student/results/${result.id}`}
-              className="bg-white rounded-xl border border-gray-200 p-5 hover:border-blue-300 hover:shadow-sm transition group"
-            >
-              <div className="flex items-start justify-between mb-3">
-                <div className="flex-1 min-w-0">
-                  <h3 className="font-semibold text-gray-900 group-hover:text-blue-600 truncate">
-                    {result.exam.title}
-                  </h3>
-                  <p className="text-sm text-gray-500 mt-0.5">{result.exam.subject.name}</p>
-                </div>
-                <div className={`ml-3 text-lg font-bold px-3 py-1 rounded-xl ${
-                  result.isPassed
-                    ? 'bg-green-100 text-green-700'
-                    : 'bg-red-100 text-red-600'
-                }`}>
-                  {result.grade}
-                </div>
+        <div className="space-y-6">
+          {groupedResults.map((year) => (
+            <section key={year.academicYearId} className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+              <div className="border-b border-slate-200 bg-slate-50 px-6 py-5">
+                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-blue-700">Academic Year</p>
+                <h2 className="mt-2 text-2xl font-bold text-slate-900">{year.academicYearName}</h2>
+                <p className="mt-1 text-sm text-slate-500">
+                  {year.semesters.length} semester{year.semesters.length !== 1 ? 's' : ''} published
+                </p>
               </div>
 
-              <div className="flex items-center gap-4">
-                <div>
-                  <p className="text-2xl font-bold text-gray-900">
-                    {result.marksObtained}<span className="text-base font-normal text-gray-400">/{result.totalMarks}</span>
-                  </p>
-                  <p className="text-xs text-gray-500">{result.percentage.toFixed(1)}%</p>
-                </div>
-                <div className="flex-1" />
-                <div className="text-right">
-                  <span className={`text-sm font-semibold px-2.5 py-1 rounded-full ${
-                    result.isPassed ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-600'
-                  }`}>
-                    {result.isPassed ? 'PASSED' : 'FAILED'}
-                  </span>
-                  <p className="text-xs text-gray-400 mt-1">
-                    {result.publishedAt ? new Date(result.publishedAt).toLocaleDateString() : ''}
-                  </p>
-                </div>
-              </div>
+              <div className="space-y-6 p-6">
+                {year.semesters.map((semester) => (
+                  <div key={semester.semesterId} className="rounded-2xl border border-slate-200">
+                    <div className="flex items-center justify-between border-b border-slate-200 bg-slate-50 px-5 py-4">
+                      <div>
+                        <h3 className="text-lg font-semibold text-slate-900">{semester.semesterName}</h3>
+                        <p className="mt-1 text-sm text-slate-500">
+                          {semester.entries.length} subject result{semester.entries.length !== 1 ? 's' : ''}
+                        </p>
+                      </div>
+                    </div>
 
-              {/* Progress bar */}
-              <div className="mt-3 h-1.5 bg-gray-100 rounded-full overflow-hidden">
-                <div
-                  className={`h-full rounded-full ${result.isPassed ? 'bg-green-500' : 'bg-red-500'}`}
-                  style={{ width: `${Math.min(100, result.percentage)}%` }}
-                />
+                    <div className="overflow-x-auto">
+                      <table className="min-w-full divide-y divide-slate-200">
+                        <thead className="bg-white">
+                          <tr>
+                            <th className="px-5 py-3 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">Subject</th>
+                            <th className="px-5 py-3 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">Exam</th>
+                            <th className="px-5 py-3 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">Mark</th>
+                            <th className="px-5 py-3 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">Grade</th>
+                            <th className="px-5 py-3 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">Status</th>
+                            <th className="px-5 py-3 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">Published</th>
+                          </tr>
+                        </thead>
+                        <tbody className="divide-y divide-slate-100 bg-white">
+                          {semester.entries.map((entry) => (
+                            <tr key={entry.id} className="transition hover:bg-slate-50">
+                              <td className="px-5 py-4 text-sm font-semibold text-slate-900">
+                                <Link href={`/student/results/${entry.id}`} className="transition hover:text-blue-700">
+                                  {entry.subjectName}
+                                </Link>
+                              </td>
+                              <td className="px-5 py-4 text-sm text-slate-600">{entry.examTitle}</td>
+                              <td className="px-5 py-4 text-sm font-semibold text-slate-900">
+                                {entry.marksObtained}/{entry.totalMarks}
+                                <span className="ml-2 text-xs font-medium text-slate-500">
+                                  ({entry.percentage.toFixed(1)}%)
+                                </span>
+                              </td>
+                              <td className="px-5 py-4 text-sm text-slate-600">{entry.grade || '-'}</td>
+                              <td className="px-5 py-4 text-sm">
+                                <span className={`rounded-full px-2.5 py-1 text-xs font-semibold ${statusClasses(entry.isPassed)}`}>
+                                  {entry.isPassed ? 'Passed' : 'Failed'}
+                                </span>
+                              </td>
+                              <td className="px-5 py-4 text-sm text-slate-500">
+                                {entry.publishedAt ? new Date(entry.publishedAt).toLocaleDateString() : '-'}
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                ))}
               </div>
-            </Link>
+            </section>
           ))}
         </div>
       )}

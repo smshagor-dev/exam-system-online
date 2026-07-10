@@ -54,7 +54,25 @@ async function getStudentData(userId: string) {
     }),
   ])
 
-  return { profile, upcomingExams, availableExams, recentResults }
+  const currentAcademicYearNumber = profile.subjects.length > 0
+    ? Math.max(...profile.subjects.map((subject) => subject.academicYear.year))
+    : 0
+
+  const visibleEbookCount = orConditions.length > 0
+    ? await prisma.ebookUpload.count({
+        where: {
+          departmentId: profile.departmentId,
+          OR: orConditions,
+          academicYear: {
+            year: {
+              lte: currentAcademicYearNumber,
+            },
+          },
+        },
+      })
+    : 0
+
+  return { profile, upcomingExams, availableExams, recentResults, visibleEbookCount }
 }
 
 export default async function StudentDashboard() {
@@ -74,6 +92,7 @@ export default async function StudentDashboard() {
     { label: 'Available Exams', value: data.availableExams.length },
     { label: 'Upcoming Exams', value: data.upcomingExams.length },
     { label: 'Published Results', value: data.recentResults.length },
+    { label: 'Visible Ebooks', value: data.visibleEbookCount },
   ]
 
   return (
@@ -85,7 +104,7 @@ export default async function StudentDashboard() {
         </p>
       </div>
 
-      <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+      <div className="grid grid-cols-2 gap-4 lg:grid-cols-5">
         {stats.map((stat) => (
           <div key={stat.label} className="rounded-xl border border-gray-200 bg-white p-5">
             <p className="text-sm text-gray-500">{stat.label}</p>
@@ -128,7 +147,7 @@ export default async function StudentDashboard() {
         </div>
       )}
 
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
         <Link
           href="/student/exams"
           className="rounded-xl border border-gray-200 bg-white p-5 transition hover:border-blue-300 hover:shadow-sm"
@@ -143,6 +162,13 @@ export default async function StudentDashboard() {
           <h2 className="font-semibold text-gray-900">My Results</h2>
           <p className="mt-1 text-sm text-gray-500">Track published marks, grades, and detailed exam performance.</p>
         </Link>
+        <div className="rounded-xl border border-gray-200 bg-white p-5">
+          <h2 className="font-semibold text-gray-900">Ebook Library</h2>
+          <p className="mt-1 text-sm text-gray-500">Open and download visible current and past year PDF ebooks from your teachers.</p>
+          <Link href="/student/ebooks" className="mt-3 inline-block text-sm font-medium text-blue-600 hover:text-blue-700">
+            Open library
+          </Link>
+        </div>
         <div className="rounded-xl border border-gray-200 bg-white p-5">
           <h2 className="font-semibold text-gray-900">Enrollment Scope</h2>
           <p className="mt-1 text-sm text-gray-500">

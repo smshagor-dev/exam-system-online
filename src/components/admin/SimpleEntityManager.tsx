@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { useI18n } from '@/components/i18n/LanguageProvider'
 
 type Column = {
   key: string
@@ -22,9 +23,11 @@ type Props = {
   columns: Column[]
   fields: Field[]
   apiBase: string
+  singularLabel?: string
   canCreate?: boolean
   canEdit?: boolean
   canDelete?: boolean
+  formMode?: 'inline' | 'modal'
 }
 
 export default function SimpleEntityManager({
@@ -33,10 +36,13 @@ export default function SimpleEntityManager({
   columns,
   fields,
   apiBase,
+  singularLabel,
   canCreate = true,
   canEdit = true,
   canDelete = true,
+  formMode = 'inline',
 }: Props) {
+  const { t } = useI18n()
   const router = useRouter()
   const [showForm, setShowForm] = useState(false)
   const [editingId, setEditingId] = useState<string | null>(null)
@@ -60,6 +66,15 @@ export default function SimpleEntityManager({
     setShowForm(true)
   }
 
+  const entityLabel = singularLabel ?? title.replace(/s$/, '')
+  const isModalForm = formMode === 'modal'
+  const formTitle = `${editingId ? t('admin.simple.edit', 'Edit') : t('admin.simple.new', 'New')} ${entityLabel}`
+
+  const closeForm = () => {
+    setShowForm(false)
+    resetForm()
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
@@ -76,11 +91,10 @@ export default function SimpleEntityManager({
 
       if (!res.ok) {
         const data = await res.json()
-        throw new Error(data.error || 'Save failed')
+        throw new Error(data.error || t('admin.simple.save_failed', 'Save failed'))
       }
 
-      resetForm()
-      setShowForm(false)
+      closeForm()
       router.refresh()
     } catch (err: any) {
       setError(err.message)
@@ -90,13 +104,13 @@ export default function SimpleEntityManager({
   }
 
   const handleDelete = async (id: string, name: string) => {
-    if (!confirm(`Delete "${name}"?`)) return
+    if (!confirm(`${t('admin.simple.delete_confirm', 'Delete')} "${name}"?`)) return
 
     try {
       const res = await fetch(`${apiBase}/${id}`, { method: 'DELETE' })
       if (!res.ok) {
         const data = await res.json()
-        throw new Error(data.error || 'Delete failed')
+        throw new Error(data.error || t('admin.simple.delete_failed', 'Delete failed'))
       }
       router.refresh()
     } catch (err: any) {
@@ -110,7 +124,7 @@ export default function SimpleEntityManager({
         <div>
           <h1 className="text-2xl font-bold text-gray-900">{title}</h1>
           <p className="mt-1 text-gray-500">
-            {items.length} item{items.length !== 1 ? 's' : ''}
+            {items.length} {t('admin.simple.items', 'items')}
           </p>
         </div>
         {canCreate && (
@@ -121,79 +135,92 @@ export default function SimpleEntityManager({
             }}
             className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-700"
           >
-            + Add {title.slice(0, -1)}
+            + {t('admin.simple.add', 'Add')} {entityLabel}
           </button>
         )}
       </div>
 
       {showForm && canCreate && (
-        <div className="rounded-xl border border-gray-200 bg-white p-6">
-          <h3 className="mb-4 font-semibold text-gray-900">
-            {editingId ? 'Edit' : 'New'} {title.slice(0, -1)}
-          </h3>
-          {error && (
-            <div className="mb-4 rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-700">
-              {error}
-            </div>
-          )}
-          <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            {fields.map((field) => (
-              <div key={field.key} className={field.type === 'textarea' ? 'md:col-span-2' : ''}>
-                <label className="mb-1 block text-sm font-medium text-gray-700">
-                  {field.label} {field.required && '*'}
-                </label>
-                {field.type === 'select' ? (
-                  <select
-                    value={form[field.key] ?? ''}
-                    onChange={(e) => setForm({ ...form, [field.key]: e.target.value })}
-                    className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm outline-none focus:border-blue-500"
-                    required={field.required}
-                  >
-                    <option value="">Select...</option>
-                    {field.options?.map((opt) => (
-                      <option key={opt.value} value={opt.value}>
-                        {opt.label}
-                      </option>
-                    ))}
-                  </select>
-                ) : field.type === 'textarea' ? (
-                  <textarea
-                    value={form[field.key] ?? ''}
-                    onChange={(e) => setForm({ ...form, [field.key]: e.target.value })}
-                    className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm outline-none focus:border-blue-500"
-                    rows={2}
-                  />
-                ) : (
-                  <input
-                    type={field.type}
-                    value={form[field.key] ?? ''}
-                    onChange={(e) => setForm({ ...form, [field.key]: e.target.value })}
-                    className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm outline-none focus:border-blue-500"
-                    required={field.required}
-                  />
+        <div className={isModalForm ? 'fixed inset-0 z-50 flex items-center justify-center bg-slate-950/45 p-4' : ''}>
+          <div className={isModalForm ? 'max-h-[90vh] w-full max-w-3xl overflow-y-auto rounded-2xl border border-gray-200 bg-white p-6 shadow-2xl' : 'rounded-xl border border-gray-200 bg-white p-6'}>
+            <div className="mb-4 flex items-start justify-between gap-4">
+              <div>
+                <h3 className="font-semibold text-gray-900">{formTitle}</h3>
+                {isModalForm && (
+                  <p className="mt-1 text-sm text-gray-500">Fill in the details and save when you are ready.</p>
                 )}
               </div>
-            ))}
-            <div className="flex gap-3 md:col-span-2">
-              <button
-                type="submit"
-                disabled={loading}
-                className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-50"
-              >
-                {loading ? 'Saving...' : editingId ? 'Update' : 'Create'}
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  setShowForm(false)
-                  resetForm()
-                }}
-                className="rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-              >
-                Cancel
-              </button>
+              {isModalForm && (
+                <button
+                  type="button"
+                  onClick={closeForm}
+                  className="rounded-lg border border-gray-200 px-3 py-1.5 text-sm font-medium text-gray-500 transition hover:bg-gray-50 hover:text-gray-700"
+                >
+                  {t('common.close', 'Close')}
+                </button>
+              )}
             </div>
-          </form>
+            {error && (
+              <div className="mb-4 rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-700">
+                {error}
+              </div>
+            )}
+            <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-4 md:grid-cols-2">
+              {fields.map((field) => (
+                <div key={field.key} className={field.type === 'textarea' ? 'md:col-span-2' : ''}>
+                  <label className="mb-1 block text-sm font-medium text-gray-700">
+                    {field.label} {field.required && '*'}
+                  </label>
+                  {field.type === 'select' ? (
+                    <select
+                      value={form[field.key] ?? ''}
+                      onChange={(e) => setForm({ ...form, [field.key]: e.target.value })}
+                      className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm outline-none focus:border-blue-500"
+                      required={field.required}
+                    >
+                      <option value="">{t('common.select', 'Select...')}</option>
+                      {field.options?.map((opt) => (
+                        <option key={opt.value} value={opt.value}>
+                          {opt.label}
+                        </option>
+                      ))}
+                    </select>
+                  ) : field.type === 'textarea' ? (
+                    <textarea
+                      value={form[field.key] ?? ''}
+                      onChange={(e) => setForm({ ...form, [field.key]: e.target.value })}
+                      className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm outline-none focus:border-blue-500"
+                      rows={2}
+                    />
+                  ) : (
+                    <input
+                      type={field.type}
+                      value={form[field.key] ?? ''}
+                      onChange={(e) => setForm({ ...form, [field.key]: e.target.value })}
+                      className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm outline-none focus:border-blue-500"
+                      required={field.required}
+                    />
+                  )}
+                </div>
+              ))}
+              <div className="flex gap-3 md:col-span-2">
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-50"
+                >
+                  {loading ? t('common.saving', 'Saving...') : editingId ? t('common.update', 'Update') : t('common.create', 'Create')}
+                </button>
+                <button
+                  type="button"
+                  onClick={closeForm}
+                  className="rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+                >
+                  {t('common.cancel', 'Cancel')}
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       )}
 
@@ -207,7 +234,7 @@ export default function SimpleEntityManager({
                 </th>
               ))}
               {(canEdit || canDelete) && (
-                <th className="px-5 py-3 text-left text-xs font-semibold uppercase text-gray-500">Actions</th>
+                <th className="px-5 py-3 text-left text-xs font-semibold uppercase text-gray-500">{t('common.actions', 'Actions')}</th>
               )}
             </tr>
           </thead>
@@ -224,7 +251,7 @@ export default function SimpleEntityManager({
                     <div className="flex gap-3">
                       {canEdit && (
                         <button onClick={() => startEdit(item)} className="text-xs font-medium text-blue-600 hover:text-blue-700">
-                          Edit
+                          {t('common.edit', 'Edit')}
                         </button>
                       )}
                       {canDelete && (
@@ -232,7 +259,7 @@ export default function SimpleEntityManager({
                           onClick={() => handleDelete(item.id, item.name)}
                           className="text-xs font-medium text-red-600 hover:text-red-700"
                         >
-                          Delete
+                          {t('common.delete', 'Delete')}
                         </button>
                       )}
                     </div>
@@ -243,7 +270,7 @@ export default function SimpleEntityManager({
             {items.length === 0 && (
               <tr>
                 <td colSpan={columns.length + (canEdit || canDelete ? 1 : 0)} className="px-5 py-10 text-center text-sm text-gray-400">
-                  No items yet
+                  {t('common.no_items_yet', 'No items yet')}
                 </td>
               </tr>
             )}

@@ -1,5 +1,6 @@
 'use client'
 
+import { useI18n } from '@/components/i18n/LanguageProvider'
 import {
   Bell,
   BookOpen,
@@ -51,20 +52,21 @@ export default function AdminDashboardView({
   recentExams,
   systemStats,
 }: AdminDashboardViewProps) {
+  const { t } = useI18n()
   const maxValue = Math.max(...overviewData.map((item) => item.value), 1)
   const openSidebar = () => window.dispatchEvent(new Event('admin-sidebar-open'))
   const kpiCards = [
-    { label: 'Students', value: kpis.students, icon: GraduationCap, iconBg: 'bg-blue-100', iconText: 'text-blue-700' },
-    { label: 'Teachers', value: kpis.teachers, icon: Users, iconBg: 'bg-sky-100', iconText: 'text-sky-700' },
-    { label: 'Subjects', value: kpis.subjects, icon: BookOpen, iconBg: 'bg-indigo-100', iconText: 'text-indigo-700' },
-    { label: 'Exams', value: kpis.exams, icon: ScrollText, iconBg: 'bg-cyan-100', iconText: 'text-cyan-700' },
-    { label: 'Results', value: kpis.results, icon: TrendingUp, iconBg: 'bg-blue-100', iconText: 'text-blue-700' },
+    { label: t('shell.students', 'Students'), value: kpis.students, icon: GraduationCap, iconBg: 'bg-blue-100', iconText: 'text-blue-700' },
+    { label: t('shell.teachers', 'Teachers'), value: kpis.teachers, icon: Users, iconBg: 'bg-sky-100', iconText: 'text-sky-700' },
+    { label: t('shell.subjects', 'Subjects'), value: kpis.subjects, icon: BookOpen, iconBg: 'bg-indigo-100', iconText: 'text-indigo-700' },
+    { label: t('shell.exams', 'Exams'), value: kpis.exams, icon: ScrollText, iconBg: 'bg-cyan-100', iconText: 'text-cyan-700' },
+    { label: t('shell.results', 'Results'), value: kpis.results, icon: TrendingUp, iconBg: 'bg-blue-100', iconText: 'text-blue-700' },
   ]
   const systemStatCards = [
-    { label: 'Departments', value: systemStats.departments, icon: School2 },
-    { label: 'Subjects', value: systemStats.subjects, icon: BookOpen },
-    { label: 'Groups', value: systemStats.groups, icon: LayoutGrid },
-    { label: 'Academic Years', value: systemStats.academicYears, icon: CalendarDays },
+    { label: t('shell.departments', 'Departments'), value: systemStats.departments, icon: School2 },
+    { label: t('shell.subjects', 'Subjects'), value: systemStats.subjects, icon: BookOpen },
+    { label: t('shell.groups', 'Groups'), value: systemStats.groups, icon: LayoutGrid },
+    { label: t('shell.academic_years', 'Academic Years'), value: systemStats.academicYears, icon: CalendarDays },
   ]
 
   return (
@@ -81,9 +83,9 @@ export default function AdminDashboardView({
               <Menu className="h-5 w-5" />
             </button>
             <div>
-              <h1 className="text-xl font-semibold text-slate-950 sm:text-2xl">Welcome back, Admin!</h1>
+              <h1 className="text-xl font-semibold text-slate-950 sm:text-2xl">{t('admin.dashboard.welcome', 'Welcome back, Admin!')}</h1>
               <p className="mt-1 text-sm text-slate-500">
-                Here&apos;s what&apos;s happening with your exam management system today.
+                {t('admin.dashboard.subtitle', "Here's what's happening with your exam management system today.")}
               </p>
             </div>
           </div>
@@ -103,7 +105,7 @@ export default function AdminDashboardView({
               </div>
               <div>
                 <p className="text-sm font-semibold text-slate-900">{adminName}</p>
-                <p className="text-xs text-slate-500">System Administrator</p>
+                <p className="text-xs text-slate-500">{t('admin.dashboard.system_administrator', 'System Administrator')}</p>
               </div>
             </div>
           </div>
@@ -136,8 +138,8 @@ export default function AdminDashboardView({
         <div className="rounded-[28px] border border-slate-200/80 bg-white p-5 shadow-[0_18px_45px_-32px_rgba(15,23,42,0.22)] sm:p-6">
           <div className="flex items-center justify-between gap-3">
             <div>
-              <h2 className="text-lg font-semibold text-slate-950">Exams Overview</h2>
-              <p className="mt-1 text-sm text-slate-500">Monthly exam activity throughout the year</p>
+              <h2 className="text-lg font-semibold text-slate-950">{t('admin.dashboard.exams_overview', 'Exams Overview')}</h2>
+              <p className="mt-1 text-sm text-slate-500">{t('admin.dashboard.monthly_activity', 'Monthly exam activity throughout the year')}</p>
             </div>
             <div className="rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">
               Jan - Dec
@@ -163,8 +165,8 @@ export default function AdminDashboardView({
 
         <div className="rounded-[28px] border border-slate-200/80 bg-white p-5 shadow-[0_18px_45px_-32px_rgba(15,23,42,0.22)] sm:p-6">
           <div>
-            <h2 className="text-lg font-semibold text-slate-950">System Statistics</h2>
-            <p className="mt-1 text-sm text-slate-500">Core academic structure metrics</p>
+            <h2 className="text-lg font-semibold text-slate-950">{t('admin.dashboard.system_statistics', 'System Statistics')}</h2>
+            <p className="mt-1 text-sm text-slate-500">{t('admin.dashboard.core_metrics', 'Core academic structure metrics')}</p>
           </div>
 
           <div className="mt-6 space-y-4">
@@ -192,11 +194,11 @@ export default function AdminDashboardView({
       <section className="rounded-[28px] border border-slate-200/80 bg-white p-5 shadow-[0_18px_45px_-32px_rgba(15,23,42,0.22)] sm:p-6">
         <div className="flex items-center justify-between gap-3">
           <div>
-            <h2 className="text-lg font-semibold text-slate-950">Recent Exams</h2>
-            <p className="mt-1 text-sm text-slate-500">Latest assessments scheduled inside the system</p>
+            <h2 className="text-lg font-semibold text-slate-950">{t('admin.dashboard.recent_exams', 'Recent Exams')}</h2>
+            <p className="mt-1 text-sm text-slate-500">{t('admin.dashboard.latest_assessments', 'Latest assessments scheduled inside the system')}</p>
           </div>
           <div className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600">
-            {recentExams.length} records
+            {recentExams.length} {t('common.records', 'records')}
           </div>
         </div>
 
@@ -204,7 +206,12 @@ export default function AdminDashboardView({
           <table className="min-w-full border-separate border-spacing-0">
             <thead>
               <tr>
-                {['Exam Name', 'Subject', 'Date', 'Status'].map((heading) => (
+                {[
+                  t('admin.dashboard.exam_name', 'Exam Name'),
+                  t('admin.dashboard.subject', 'Subject'),
+                  t('admin.dashboard.date', 'Date'),
+                  t('admin.dashboard.status', 'Status'),
+                ].map((heading) => (
                   <th
                     key={heading}
                     className="border-b border-slate-200 px-4 py-3 text-left text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500"
@@ -235,7 +242,7 @@ export default function AdminDashboardView({
               ) : (
                 <tr>
                   <td colSpan={4} className="border-b border-slate-100 px-4 py-10 text-center text-sm text-slate-400">
-                    No exams available yet.
+                    {t('admin.dashboard.no_exams', 'No exams available yet.')}
                   </td>
                 </tr>
               )}
@@ -245,8 +252,8 @@ export default function AdminDashboardView({
       </section>
 
       <footer className="flex flex-col gap-2 border-t border-slate-200 px-1 pt-4 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between">
-        <p>© 2024 Exam Management System. All rights reserved.</p>
-        <p>Version 1.0.0</p>
+        <p>{t('admin.dashboard.all_rights', '© 2024 Exam Management System. All rights reserved.')}</p>
+        <p>{t('common.version', 'Version 1.0.0')}</p>
       </footer>
     </div>
   )

@@ -28,7 +28,7 @@ type Props = {
   departments: { id: string; name: string }[]
   subjects: { id: string; name: string; departmentId: string }[]
   languages: { id: string; name: string }[]
-  groups: { id: string; name: string }[]
+  groups: { id: string; name: string; academicYearId?: string | null }[]
   years: { id: string; name: string }[]
   semesters: { id: string; name: string }[]
   canCreateTeacher?: boolean
@@ -291,7 +291,7 @@ export default function TeacherManager({
           <div className="bg-white rounded-2xl p-6 w-full max-w-3xl shadow-2xl max-h-[90vh] overflow-y-auto">
             <h3 className="font-semibold text-gray-900 mb-2">Assign Multiple Scopes</h3>
             <p className="text-sm text-gray-500 mb-4">
-              Flow: Department to Year to Group to Language to Semester to Subject. You can add multiple assignment rows for the same teacher.
+              Flow: Department to Year to Group to Department Language to Semester to Subject. You can add multiple assignment rows for the same teacher.
             </p>
             {error && <div className="mb-3 text-red-600 text-sm">{error}</div>}
             <div className="space-y-4">
@@ -353,12 +353,14 @@ export default function TeacherManager({
                           disabled={!row.academicYearId}
                         >
                           <option value="">Select group...</option>
-                          {groups.map((group) => <option key={group.id} value={group.id}>{group.name}</option>)}
+                          {groups
+                            .filter((group) => !row.academicYearId || group.academicYearId === row.academicYearId)
+                            .map((group) => <option key={group.id} value={group.id}>{group.name}</option>)}
                         </select>
                       </div>
 
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Language *</label>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Department Language *</label>
                         <select
                           value={row.languageId}
                           onChange={(e) => updateAssignRow(index, 'languageId', e.target.value)}
@@ -366,7 +368,7 @@ export default function TeacherManager({
                           required
                           disabled={!row.groupId}
                         >
-                          <option value="">Select language...</option>
+                          <option value="">Select department language...</option>
                           {languages.map((language) => <option key={language.id} value={language.id}>{language.name}</option>)}
                         </select>
                       </div>

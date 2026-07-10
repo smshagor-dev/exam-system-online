@@ -65,7 +65,7 @@ export default async function TeacherAssignmentsPage() {
               </div>
               <div className="mt-4 pt-3 border-t border-gray-100 flex gap-2">
                 <a
-                  href={`/teacher/questions?subjectId=${assignment.subject.id}&groupId=${assignment.group.id}&academicYearId=${assignment.academicYear.id}&semesterId=${assignment.semester.id}`}
+                  href={`/teacher/questions/${assignment.academicYear.id}/${assignment.subject.id}/${assignment.language.id}`}
                   className="flex-1 text-center text-xs py-1.5 bg-blue-50 text-blue-700 rounded-lg hover:bg-blue-100 font-medium transition"
                 >
                   Questions
@@ -86,10 +86,12 @@ export default async function TeacherAssignmentsPage() {
 }
 
 function InfoRow({ icon, label, value }: { icon: string; label: string; value: string }) {
+  const displayLabel = label === 'Language' ? 'Department Language' : label
+
   return (
     <div className="flex items-center gap-2 text-xs text-gray-600">
       <span>{icon}</span>
-      <span className="text-gray-400">{label}:</span>
+      <span className="text-gray-400">{displayLabel}:</span>
       <span className="font-medium">{value}</span>
     </div>
   )

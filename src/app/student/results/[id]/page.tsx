@@ -3,6 +3,7 @@ import { prisma } from '@/lib/prisma'
 import { UserRole } from '@prisma/client'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
+import RichTextContent from '@/components/editor/RichTextContent'
 
 type PageProps = { params: Promise<{ id: string }> }
 
@@ -125,7 +126,7 @@ export default async function StudentResultDetailPage({ params }: PageProps) {
                   )}
                 </div>
 
-                <p className="text-gray-900 font-medium mb-3">{eq.question.text}</p>
+                <RichTextContent html={eq.question.text} className="rich-text-content mb-3 text-gray-900" />
 
                 {/* MCQ options */}
                 {isAutoType && (

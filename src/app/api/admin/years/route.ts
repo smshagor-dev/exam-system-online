@@ -7,7 +7,7 @@ import { UserRole } from '@prisma/client'
 async function requireAdmin() {
   const session = await auth()
   if (!session?.user) return null
-  if (session.user.role !== UserRole.SUPER_ADMIN) return null
+  if (session.user.role !== UserRole.SUPER_ADMIN && session.user.role !== UserRole.DEPARTMENT_ADMIN) return null
   return session
 }
 

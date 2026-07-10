@@ -9,8 +9,10 @@ import Credentials from 'next-auth/providers/credentials'
 import { PrismaAdapter } from '@auth/prisma-adapter'
 import bcrypt from 'bcryptjs'
 import { prisma } from './prisma'
+import { isEmailVerificationRequired } from './system-settings'
 import { UserRole } from '@prisma/client'
 import { z } from 'zod'
+import { getAuthSecret } from './auth-secret'
 
 const loginSchema = z.object({
   email: z.string().email(),
@@ -19,7 +21,9 @@ const loginSchema = z.object({
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: PrismaAdapter(prisma) as any,
+  secret: getAuthSecret(),
   session: { strategy: 'jwt' },
+  trustHost: true,
   pages: {
     signIn: '/login',
     error: '/login',
@@ -36,6 +40,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         if (!parsed.success) return null
 
         const { email, password } = parsed.data
+        const requireVerification = await isEmailVerificationRequired()
 
         const user = await prisma.user.findUnique({
           where: { email },
@@ -46,10 +51,12 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
             password: true,
             role: true,
             isActive: true,
+            isEmailVerified: true,
           },
         })
 
         if (!user || !user.isActive) return null
+        if (requireVerification && !user.isEmailVerified) return null
 
         const valid = await bcrypt.compare(password, user.password)
         if (!valid) return null
@@ -69,12 +76,39 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         if (user.id) token.id = user.id
         if ((user as any).role) token.role = (user as any).role
       }
+      const userId = (token.id as string | undefined) ?? token.sub
+      if (userId) {
+        const dbUser = await prisma.user.findUnique({
+          where: { id: userId },
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            role: true,
+            avatarUrl: true,
+            isActive: true,
+          },
+        })
+
+        if (dbUser) {
+          token.id = dbUser.id
+          token.name = dbUser.name
+          token.email = dbUser.email
+          token.role = dbUser.role
+          token.avatarUrl = dbUser.avatarUrl ?? null
+          token.isActive = dbUser.isActive
+        }
+      }
       return token
     },
     async session({ session, token }) {
       if (token) {
         session.user.id = token.id as string
+        session.user.name = token.name as string
+        session.user.email = token.email as string
         session.user.role = token.role as UserRole
+        session.user.avatarUrl = (token.avatarUrl as string | null | undefined) ?? null
+        session.user.isActive = (token.isActive as boolean | undefined) ?? true
       }
       return session
     },
@@ -92,10 +126,25 @@ export async function requireRole(...roles: UserRole[]) {
   if (!session?.user) {
     throw new Error('UNAUTHORIZED')
   }
-  if (!roles.includes(session.user.role as UserRole)) {
+  const dbUser = await prisma.user.findUnique({
+    where: { id: session.user.id },
+    select: { isActive: true, role: true },
+  })
+
+  if (!dbUser?.isActive) {
+    throw new Error('UNAUTHORIZED')
+  }
+  if (!roles.includes(dbUser.role)) {
     throw new Error('FORBIDDEN')
   }
-  return session
+  return {
+    ...session,
+    user: {
+      ...session.user,
+      role: dbUser.role,
+      isActive: dbUser.isActive,
+    },
+  }
 }
 
 // Extend NextAuth types
@@ -109,6 +158,8 @@ declare module 'next-auth' {
       name: string
       email: string
       role: UserRole
+      isActive: boolean
+      avatarUrl?: string | null
     }
   }
 }
@@ -117,5 +168,7 @@ declare module '@auth/core/jwt' {
   interface JWT {
     id: string
     role: UserRole
+    isActive?: boolean
+    avatarUrl?: string | null
   }
 }

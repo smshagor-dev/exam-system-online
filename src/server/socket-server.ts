@@ -16,6 +16,7 @@ import { Server as SocketServer, Socket } from 'socket.io'
 import { PrismaClient } from '@prisma/client'
 import * as jose from 'jose'
 import { calculateResult } from '../lib/result-engine'
+import { getAuthSecret } from '../lib/auth-secret'
 
 const prisma = new PrismaClient()
 const MAX_SECURITY_WARNINGS = 3
@@ -55,7 +56,7 @@ export function initSocketServer(httpServer: HttpServer) {
       const token = socket.handshake.auth.token
       if (!token) return next(new Error('No auth token'))
 
-      const secret = new TextEncoder().encode(process.env.NEXTAUTH_SECRET!)
+      const secret = new TextEncoder().encode(getAuthSecret())
       const { payload } = await jose.jwtVerify(token, secret)
       
       ;(socket as any).userId = payload.id

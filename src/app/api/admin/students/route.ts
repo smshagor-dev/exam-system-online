@@ -53,7 +53,7 @@ export async function POST(req: NextRequest) {
   if (!session) return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
 
   const body = await req.json()
-  const { name, email, password, departmentId, subjectId, languageId, groupId, academicYearId, semesterId, rollNumber } = body
+  const { name, email, password, departmentId, subjectId, languageId, groupId, academicYearId, semesterId } = body
 
   if (!name || !email || !password || !departmentId) {
     return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
@@ -70,6 +70,16 @@ export async function POST(req: NextRequest) {
   const existing = await prisma.user.findUnique({ where: { email } })
   if (existing) return NextResponse.json({ error: 'Email already registered' }, { status: 409 })
 
+  if (subjectId) {
+    const [year, group] = await Promise.all([
+      prisma.academicYear.findFirst({ where: { id: academicYearId, isActive: true }, select: { id: true } }),
+      prisma.group.findFirst({ where: { id: groupId, academicYearId, isActive: true }, select: { id: true } }),
+    ])
+
+    if (!year) return NextResponse.json({ error: 'Invalid academic year' }, { status: 400 })
+    if (!group) return NextResponse.json({ error: 'Group does not belong to this academic year' }, { status: 400 })
+  }
+
   const hashedPwd = await bcrypt.hash(password, 12)
 
   const user = await prisma.user.create({
@@ -81,7 +91,7 @@ export async function POST(req: NextRequest) {
       studentProfile: {
         create: {
           departmentId,
-          rollNumber: rollNumber || null,
+          customFieldResponses: body.customFieldResponses ?? {},
           subjects: subjectId ? {
             create: { subjectId, languageId, groupId, academicYearId, semesterId },
           } : undefined,

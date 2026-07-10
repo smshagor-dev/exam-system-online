@@ -38,7 +38,7 @@ export default async function TeachersPage() {
       orderBy: { name: 'asc' },
     }),
     prisma.language.findMany({ orderBy: { name: 'asc' } }),
-    prisma.group.findMany({ orderBy: { name: 'asc' } }),
+    prisma.group.findMany({ orderBy: [{ academicYearId: 'asc' }, { name: 'asc' }] }),
     prisma.academicYear.findMany({ orderBy: { year: 'asc' } }),
     prisma.semester.findMany({ orderBy: { number: 'asc' } }),
   ])

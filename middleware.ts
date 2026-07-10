@@ -9,7 +9,7 @@
 import { NextResponse } from 'next/server'
 import { auth } from '@/lib/auth'
 
-const PUBLIC_PATHS = ['/login', '/register']
+const PUBLIC_PATHS = ['/login', '/register', '/forgot-password', '/verify-account']
 
 export default auth((req) => {
   const { nextUrl, auth: session } = req as any
@@ -23,6 +23,10 @@ export default auth((req) => {
     const loginUrl = new URL('/login', req.url)
     loginUrl.searchParams.set('callbackUrl', pathname)
     return NextResponse.redirect(loginUrl)
+  }
+
+  if (session.user.isActive === false) {
+    return NextResponse.redirect(new URL('/login?blocked=1', req.url))
   }
 
   const role = session.user.role

@@ -20,7 +20,7 @@ export async function GET() {
     where: session.user.role === UserRole.SUPER_ADMIN ? undefined : {
       department: { adminId: session.user.id },
     },
-    include: { department: true },
+    include: { department: true, language: true },
     orderBy: { name: 'asc' },
   })
   return NextResponse.json(subjects)

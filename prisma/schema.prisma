@@ -54,12 +54,36 @@ enum ResultStatus {
   PUBLISHED
 }
 
+enum CourseworkSubmissionStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+}
+
+enum CourseworkAccessRequestStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum AiProvider {
+  OPENAI
+  GEMINI
+  CLAUDE
+}
+
 enum AnswerCheckStatus {
   UNCHECKED
   AUTO_CHECKED
   TEACHER_CHECKED
   AI_SUGGESTED
   CONFIRMED
+}
+
+enum RegistrationFieldType {
+  TEXT
+  CHECKBOX
+  SELECT
 }
 
 model User {
@@ -69,6 +93,11 @@ model User {
   name          String
   role          UserRole  @default(STUDENT)
   isActive      Boolean   @default(true)
+  isEmailVerified Boolean @default(true)
+  emailVerificationCode String?
+  emailVerificationExpiresAt DateTime?
+  passwordResetCode String?
+  passwordResetExpiresAt DateTime?
   avatarUrl     String?
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
@@ -100,6 +129,10 @@ model Department {
   students           StudentProfile[]
   exams              Exam[]
   teacherAssignments TeacherAssignment[]
+  registrationFields RegistrationField[]
+  ebookUploads       EbookUpload[]
+  courseworkRules      CourseworkRule[]
+  courseworkAssignments CourseworkAssignment[]
 
   @@map("departments")
 }
@@ -110,17 +143,23 @@ model Subject {
   code         String   @unique
   description  String?
   departmentId String
+  languageId   String?
   isActive     Boolean  @default(true)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
   department         Department          @relation(fields: [departmentId], references: [id])
+  language           Language?           @relation(fields: [languageId], references: [id])
   teacherAssignments TeacherAssignment[]
   studentSubjects    StudentSubject[]
   exams              Exam[]
   questions          Question[]
+  ebookUploads       EbookUpload[]
+  courseworkRules       CourseworkRule[]
+  courseworkAssignments CourseworkAssignment[]
 
   @@index([departmentId])
+  @@index([languageId])
   @@map("subjects")
 }
 
@@ -132,27 +171,81 @@ model Language {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  subjects           Subject[]
   teacherAssignments TeacherAssignment[]
   studentSubjects    StudentSubject[]
   exams              Exam[]
   questions          Question[]
+  ebookUploads       EbookUpload[]
+  courseworkRules       CourseworkRule[]
+  courseworkAssignments CourseworkAssignment[]
 
   @@map("languages")
 }
 
-model Group {
+model SystemLanguage {
   id        String   @id @default(cuid()) @map("_id")
-  name      String
+  name      String   @unique
   code      String   @unique
   isActive  Boolean  @default(true)
+  isDefault Boolean  @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  @@map("system_languages")
+}
+
+model SystemSetting {
+  id                       String   @id @default(cuid()) @map("_id")
+  key                      String   @unique
+  systemName               String   @default("ExamFlow Pro")
+  systemShortName          String   @default("EMS")
+  systemDescription        String?  @default("Professional Online Exam Management System")
+  systemLogoUrl            String?
+  systemIconUrl            String?
+  footerText               String?
+  supportEmail             String?
+  aiEnabled                Boolean  @default(false)
+  aiProvider               AiProvider?
+  aiOpenAiApiKey           String?
+  aiOpenAiModel            String?
+  aiGeminiApiKey           String?
+  aiGeminiModel            String?
+  aiClaudeApiKey           String?
+  aiClaudeModel            String?
+  aiTemperature            Float?   @default(0.2)
+  smtpHost                 String?
+  smtpPort                 Int?
+  smtpSecure               Boolean  @default(false)
+  smtpUser                 String?
+  smtpPass                 String?
+  mailFrom                 String?
+  requireEmailVerification Boolean  @default(true)
+  createdAt                DateTime @default(now())
+  updatedAt                DateTime @updatedAt
+
+  @@map("system_settings")
+}
+
+model Group {
+  id             String   @id @default(cuid()) @map("_id")
+  name           String
+  code           String   @unique
+  academicYearId String?
+  isActive       Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  academicYear       AcademicYear       ? @relation(fields: [academicYearId], references: [id])
   teacherAssignments TeacherAssignment[]
   studentSubjects    StudentSubject[]
   exams              Exam[]
   questions          Question[]
+  ebookUploads       EbookUpload[]
+  courseworkRules       CourseworkRule[]
+  courseworkAssignments CourseworkAssignment[]
 
+  @@index([academicYearId])
   @@map("groups")
 }
 
@@ -164,10 +257,14 @@ model AcademicYear {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  groups             Group[]
   teacherAssignments TeacherAssignment[]
   studentSubjects    StudentSubject[]
   exams              Exam[]
   questions          Question[]
+  ebookUploads       EbookUpload[]
+  courseworkRules       CourseworkRule[]
+  courseworkAssignments CourseworkAssignment[]
 
   @@map("academic_years")
 }
@@ -184,6 +281,9 @@ model Semester {
   studentSubjects    StudentSubject[]
   exams              Exam[]
   questions          Question[]
+  ebookUploads       EbookUpload[]
+  courseworkRules       CourseworkRule[]
+  courseworkAssignments CourseworkAssignment[]
 
   @@map("semesters")
 }
@@ -201,6 +301,9 @@ model TeacherProfile {
   department  Department          @relation(fields: [departmentId], references: [id])
   assignments TeacherAssignment[]
   exams       Exam[]
+  ebookUploads EbookUpload[]
+  courseworkRules CourseworkRule[]
+  courseworkAssignments CourseworkAssignment[]
 
   @@index([departmentId])
   @@map("teacher_profiles")
@@ -211,7 +314,7 @@ model StudentProfile {
   userId       String   @unique
   departmentId String
   phone        String?
-  rollNumber   String?
+  customFieldResponses Json?
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
@@ -219,9 +322,33 @@ model StudentProfile {
   department   Department           @relation(fields: [departmentId], references: [id])
   subjects     StudentSubject[]
   examAttempts StudentExamAttempt[]
+  courseworkAssignments CourseworkAssignment[]
+  courseworkAccessRequests CourseworkAccessRequest[]
+  courseworkSubmissions CourseworkSubmission[]
 
   @@index([departmentId])
   @@map("student_profiles")
+}
+
+model RegistrationField {
+  id           String                @id @default(cuid()) @map("_id")
+  departmentId String
+  label        String
+  key          String
+  type         RegistrationFieldType
+  isRequired   Boolean               @default(false)
+  isActive     Boolean               @default(true)
+  placeholder  String?
+  options      Json?
+  sortOrder    Int                   @default(0)
+  createdAt    DateTime              @default(now())
+  updatedAt    DateTime              @updatedAt
+
+  department Department @relation(fields: [departmentId], references: [id])
+
+  @@unique([departmentId, key])
+  @@index([departmentId, sortOrder])
+  @@map("registration_fields")
 }
 
 model TeacherAssignment {
@@ -247,6 +374,143 @@ model TeacherAssignment {
   @@index([teacherId])
   @@index([departmentId])
   @@map("teacher_assignments")
+}
+
+model EbookUpload {
+  id             String   @id @default(cuid()) @map("_id")
+  teacherId      String
+  departmentId   String
+  subjectId      String
+  languageId     String
+  groupId        String
+  academicYearId String
+  semesterId     String
+  title          String
+  description    String?
+  fileName       String
+  fileUrl        String
+  fileSizeBytes  Int
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  teacher      TeacherProfile @relation(fields: [teacherId], references: [id])
+  department   Department     @relation(fields: [departmentId], references: [id])
+  subject      Subject        @relation(fields: [subjectId], references: [id])
+  language     Language       @relation(fields: [languageId], references: [id])
+  group        Group          @relation(fields: [groupId], references: [id])
+  academicYear AcademicYear   @relation(fields: [academicYearId], references: [id])
+  semester     Semester       @relation(fields: [semesterId], references: [id])
+
+  @@index([teacherId])
+  @@index([departmentId, academicYearId, semesterId])
+  @@index([subjectId, languageId, groupId, academicYearId, semesterId])
+  @@map("ebook_uploads")
+}
+
+model CourseworkAssignment {
+  id             String   @id @default(cuid()) @map("_id")
+  teacherId      String
+  studentId      String
+  ruleId         String?
+  departmentId   String
+  subjectId      String
+  languageId     String
+  groupId        String
+  academicYearId String
+  semesterId     String
+  title          String   @default("Coursework and Report Submission")
+  rules          String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  teacher      TeacherProfile @relation(fields: [teacherId], references: [id])
+  student      StudentProfile @relation(fields: [studentId], references: [id])
+  rule         CourseworkRule? @relation(fields: [ruleId], references: [id])
+  department   Department     @relation(fields: [departmentId], references: [id])
+  subject      Subject        @relation(fields: [subjectId], references: [id])
+  language     Language       @relation(fields: [languageId], references: [id])
+  group        Group          @relation(fields: [groupId], references: [id])
+  academicYear AcademicYear   @relation(fields: [academicYearId], references: [id])
+  semester     Semester       @relation(fields: [semesterId], references: [id])
+  submissions  CourseworkSubmission[]
+  accessRequests CourseworkAccessRequest[]
+
+  @@unique([teacherId, studentId, subjectId, languageId, groupId, academicYearId, semesterId])
+  @@index([teacherId, academicYearId, semesterId])
+  @@index([ruleId])
+  @@index([studentId])
+  @@map("coursework_assignments")
+}
+
+model CourseworkRule {
+  id                 String   @id @default(cuid()) @map("_id")
+  teacherId          String
+  departmentId       String
+  subjectId          String
+  languageId         String
+  groupId            String
+  academicYearId     String
+  semesterId         String
+  rules              String
+  useAiValidation    Boolean  @default(false)
+  submissionDeadline DateTime?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  teacher      TeacherProfile         @relation(fields: [teacherId], references: [id])
+  department   Department             @relation(fields: [departmentId], references: [id])
+  subject      Subject                @relation(fields: [subjectId], references: [id])
+  language     Language               @relation(fields: [languageId], references: [id])
+  group        Group                  @relation(fields: [groupId], references: [id])
+  academicYear AcademicYear           @relation(fields: [academicYearId], references: [id])
+  semester     Semester               @relation(fields: [semesterId], references: [id])
+  assignments  CourseworkAssignment[]
+
+  @@unique([teacherId, subjectId, languageId, groupId, academicYearId, semesterId])
+  @@index([teacherId, academicYearId, semesterId])
+  @@index([departmentId])
+  @@map("coursework_rules")
+}
+
+model CourseworkSubmission {
+  id            String                     @id @default(cuid()) @map("_id")
+  assignmentId  String
+  studentId     String
+  fileName      String
+  fileUrl       String
+  fileSizeBytes Int
+  extractedText String?
+  status        CourseworkSubmissionStatus @default(PENDING)
+  aiFeedback    String?
+  createdAt     DateTime                   @default(now())
+  updatedAt     DateTime                   @updatedAt
+
+  assignment CourseworkAssignment @relation(fields: [assignmentId], references: [id])
+  student    StudentProfile       @relation(fields: [studentId], references: [id])
+
+  @@index([assignmentId, createdAt])
+  @@index([studentId, createdAt])
+  @@map("coursework_submissions")
+}
+
+model CourseworkAccessRequest {
+  id                String                        @id @default(cuid()) @map("_id")
+  assignmentId      String
+  studentId         String
+  message           String?
+  status            CourseworkAccessRequestStatus @default(PENDING)
+  extensionDeadline DateTime?
+  teacherNote       String?
+  reviewedAt        DateTime?
+  createdAt         DateTime                      @default(now())
+  updatedAt         DateTime                      @updatedAt
+
+  assignment CourseworkAssignment @relation(fields: [assignmentId], references: [id])
+  student    StudentProfile       @relation(fields: [studentId], references: [id])
+
+  @@index([assignmentId, createdAt])
+  @@index([studentId, createdAt])
+  @@map("coursework_access_requests")
 }
 
 model StudentSubject {
@@ -522,4 +786,17 @@ model ActivityLog {
   @@index([examId])
   @@index([action])
   @@map("activity_logs")
+}
+
+model TranslationEntry {
+  id        String   @id @default(cuid()) @map("_id")
+  locale    String
+  key       String
+  value     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([locale, key])
+  @@index([locale])
+  @@map("translation_entries")
 }

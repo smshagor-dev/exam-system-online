@@ -10,7 +10,7 @@ async function getTeacherStats(userId: string) {
   })
   if (!profile) return null
 
-  const [totalExams, liveExams, totalQuestions, pendingReviews, recentExams] = await Promise.all([
+  const [totalExams, liveExams, totalQuestions, pendingReviews, totalEbooks, recentExams] = await Promise.all([
     prisma.exam.count({ where: { teacherId: profile.id } }),
     prisma.exam.count({ where: { teacherId: profile.id, status: ExamStatus.LIVE } }),
     prisma.question.count({ where: { teacherId: profile.id } }),
@@ -20,6 +20,7 @@ async function getTeacherStats(userId: string) {
         status: 'PENDING_REVIEW',
       },
     }),
+    prisma.ebookUpload.count({ where: { teacherId: profile.id } }),
     prisma.exam.findMany({
       where: { teacherId: profile.id },
       take: 5,
@@ -34,7 +35,7 @@ async function getTeacherStats(userId: string) {
     }),
   ])
 
-  return { profile, totalExams, liveExams, totalQuestions, pendingReviews, recentExams }
+  return { profile, totalExams, liveExams, totalQuestions, pendingReviews, totalEbooks, recentExams }
 }
 
 export default async function TeacherDashboard() {
@@ -54,6 +55,7 @@ export default async function TeacherDashboard() {
     { label: 'Total Exams', value: data.totalExams },
     { label: 'Live Exams', value: data.liveExams },
     { label: 'Question Bank', value: data.totalQuestions },
+    { label: 'Ebooks', value: data.totalEbooks },
     { label: 'Pending Reviews', value: data.pendingReviews },
   ]
 
@@ -72,7 +74,7 @@ export default async function TeacherDashboard() {
         </Link>
       </div>
 
-      <div className="grid grid-cols-2 gap-4 lg:grid-cols-5">
+      <div className="grid grid-cols-2 gap-4 lg:grid-cols-6">
         {stats.map((stat) => (
           <div key={stat.label} className="rounded-xl border border-gray-200 bg-white p-5">
             <p className="text-sm text-gray-500">{stat.label}</p>
@@ -81,7 +83,7 @@ export default async function TeacherDashboard() {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
         <Link
           href="/teacher/assignments"
           className="rounded-xl border border-gray-200 bg-white p-5 transition hover:border-blue-300 hover:shadow-sm"
@@ -95,6 +97,13 @@ export default async function TeacherDashboard() {
         >
           <h2 className="font-semibold text-gray-900">Question Bank</h2>
           <p className="mt-1 text-sm text-gray-500">Create and manage questions for your assigned classes.</p>
+        </Link>
+        <Link
+          href="/teacher/ebooks"
+          className="rounded-xl border border-gray-200 bg-white p-5 transition hover:border-blue-300 hover:shadow-sm"
+        >
+          <h2 className="font-semibold text-gray-900">Teacher Ebooks</h2>
+          <p className="mt-1 text-sm text-gray-500">Upload and manage PDF ebooks by language, year, semester, and group.</p>
         </Link>
         <Link
           href="/teacher/reviews"

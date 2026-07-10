@@ -75,7 +75,7 @@ export default async function StudentExamDetailPage({ params }: PageProps) {
 
           <div className="mb-6 grid grid-cols-2 gap-4">
             <InfoItem label="Subject" value={exam.subject.name} />
-            <InfoItem label="Language" value={exam.language.name} />
+            <InfoItem label="Department Language" value={exam.language.name} />
             <InfoItem label="Group" value={exam.group.name} />
             <InfoItem label="Academic Year" value={exam.academicYear.name} />
             <InfoItem label="Semester" value={exam.semester.name} />

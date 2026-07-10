@@ -342,7 +342,7 @@ export async function publishResult(
  * Currently logs and returns; OpenAI/other AI can be wired in here.
  */
 async function requestAiEvaluation(attemptId: string): Promise<void> {
-  if (!aiEvaluationService.isEnabled()) {
+  if (!(await aiEvaluationService.isEnabled())) {
     console.log('[AI] AI evaluation disabled, skipping')
     return
   }
