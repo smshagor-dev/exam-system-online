@@ -20,7 +20,7 @@ const loginSchema = z.object({
 })
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
-  adapter: PrismaAdapter(prisma) as any,
+  adapter: PrismaAdapter(prisma),
   secret: getAuthSecret(),
   session: { strategy: 'jwt' },
   trustHost: true,
@@ -74,7 +74,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     async jwt({ token, user }) {
       if (user) {
         if (user.id) token.id = user.id
-        if ((user as any).role) token.role = (user as any).role
+        if (user.role) token.role = user.role
       }
       const userId = (token.id as string | undefined) ?? token.sub
       if (userId) {

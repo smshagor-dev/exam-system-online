@@ -1,0 +1,37 @@
+{
+  "promotion": {
+    "id": "cmrgq3av00035i1uxb4sdxkmk",
+    "studentId": "cmrgq35130017d0dd8c9lz9ql",
+    "fromEnrollmentId": "cmrgq36s0002si1uxhdnblsle",
+    "toEnrollmentId": "cmrgq3aop0033i1uxjm8okql9",
+    "fromAcademicSessionId": "cmrgowg82000dpmlzdld2uohm",
+    "toAcademicSessionId": "cmrgowg82000dpmlzdld2uohm",
+    "fromProgramId": "cmrgowhy9000ppmlzh677ckfa",
+    "toProgramId": "cmrgowhy9000ppmlzh677ckfa",
+    "fromProgramYearId": "cmrgowiy1000xpmlzz64gdgd6",
+    "toProgramYearId": "cmrgowiy1000xpmlzz64gdgd6",
+    "fromSemesterId": "cmrgowdqf0003pmlzzstm2atu",
+    "toSemesterId": "cmrgowdz80004pmlzugoobdpz",
+    "fromProgramSemesterId": "cmrgowk6t0017pmlze2efnm9v",
+    "toProgramSemesterId": "cmrgowkft0019pmlzlkc94vv6",
+    "fromGroupId": "cmrgowm5t001npmlzsqxh0yte",
+    "toGroupId": "cmrgowm5t001npmlzsqxh0yte",
+    "status": "OVERRIDDEN",
+    "manualOverride": true,
+    "overrideReason": "Registrar override for blocked promotion fixture",
+    "curriculumValidated": true,
+    "resultPublishedValidated": true,
+    "promotedAt": "2026-07-11T18:53:35.476Z",
+    "notes": "Phase 3 override coverage",
+    "createdAt": "2026-07-11T18:53:36.060Z"
+  },
+  "audit": {
+    "id": "cmrgq3bka003bi1ux2s08zncd",
+    "userId": "cmrgowtlk0039pmlzr4cvsfxf",
+    "action": "STUDENT_PROMOTION_OVERRIDE",
+    "examId": null,
+    "details": "{\"actorRole\":\"DEPARTMENT_ADMIN\",\"sourceApi\":\"/api/admin/promotions\",\"studentUserId\":\"cmrgq34rq0015d0ddpj97cyn0\",\"operationType\":\"PROMOTION\",\"previousContext\":{\"departmentId\":\"cmrgowf870009pmlzozbfj64d\",\"academicSessionId\":\"cmrgowg82000dpmlzdld2uohm\",\"programId\":\"cmrgowhy9000ppmlzh677ckfa\",\"programYearId\":\"cmrgowiy1000xpmlzz64gdgd6\",\"semesterId\":\"cmrgowdqf0003pmlzzstm2atu\",\"programSemesterId\":\"cmrgowk6t0017pmlze2efnm9v\",\"groupId\":\"cmrgowm5t001npmlzsqxh0yte\",\"academicYearId\":\"cmrgowcza0000pmlzakerzxid\",\"departmentLanguageId\":\"cmrgowgyv000hpmlzvs1rw52h\",\"languageId\":\"cmrgoweh20006pmlzrlak2hwh\"},\"newContext\":{\"departmentId\":\"cmrgowf870009pmlzozbfj64d\",\"academicSessionId\":\"cmrgowg82000dpmlzdld2uohm\",\"programId\":\"cmrgowhy9000ppmlzh677ckfa\",\"programYearId\":\"cmrgowiy1000xpmlzz64gdgd6\",\"semesterId\":\"cmrgowdz80004pmlzugoobdpz\",\"programSemesterId\":\"cmrgowkft0019pmlzlkc94vv6\",\"groupId\":\"cmrgowm5t001npmlzsqxh0yte\",\"academicYearId\":\"cmrgowcza0000pmlzakerzxid\",\"departmentLanguageId\":\"cmrgowgyv000hpmlzvs1rw52h\",\"languageId\":\"cmrgoweh20006pmlzrlak2hwh\"},\"override\":true,\"originalValidationFailures\":[\"Manual override bypassed standard promotion checks\"],\"reason\":\"Registrar override for blocked promotion fixture\",\"promotionId\":\"cmrgq3av00035i1uxb4sdxkmk\",\"timestamp\":\"2026-07-11T18:53:35.476Z\",\"legacySync\":{\"created\":1,\"skipped\":0,\"offeringIds\":[\"cmrgowrgt002vpmlzp7l1gzr5\"]}}",
+    "ipAddress": null,
+    "createdAt": "2026-07-11T18:53:36.970Z"
+  }
+}

@@ -1,0 +1,9 @@
+POST /api/admin/transfers
+
+request={
+  "studentId": "cmrgox35d004ipmlzfafvgp5b"
+}
+
+status=400
+
+body={"error":"Department language is inactive"}

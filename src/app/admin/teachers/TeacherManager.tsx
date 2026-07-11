@@ -34,6 +34,20 @@ type Props = {
   canCreateTeacher?: boolean
 }
 
+type TeacherCreateForm = {
+  name: string
+  email: string
+  password: string
+  departmentId: string
+  phone: string
+}
+
+type TeacherCreateField = {
+  key: keyof TeacherCreateForm
+  label: string
+  type: string
+}
+
 export default function TeacherManager({
   teachers,
   departments,
@@ -50,7 +64,7 @@ export default function TeacherManager({
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<TeacherCreateForm>({
     name: '', email: '', password: '', departmentId: '', phone: '',
   })
 
@@ -82,7 +96,7 @@ export default function TeacherManager({
       setShowForm(false)
       setForm({ name: '', email: '', password: '', departmentId: '', phone: '' })
       router.refresh()
-    } catch (err: any) { setError(err.message) }
+    } catch (error: unknown) { setError(error instanceof Error ? error.message : 'Failed') }
     finally { setLoading(false) }
   }
 
@@ -101,7 +115,7 @@ export default function TeacherManager({
       setShowAssignForm(null)
       resetAssignRows()
       router.refresh()
-    } catch (err: any) { setError(err.message) }
+    } catch (error: unknown) { setError(error instanceof Error ? error.message : 'Failed') }
     finally { setLoading(false) }
   }
 
@@ -200,15 +214,15 @@ export default function TeacherManager({
         <div className="bg-white rounded-xl border border-gray-200 p-6">
           <h3 className="font-semibold text-gray-900 mb-4">New Teacher</h3>
           <form onSubmit={handleCreateTeacher} className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {[
+            {([
               { key: 'name', label: 'Full Name', type: 'text' },
               { key: 'email', label: 'Email', type: 'email' },
               { key: 'password', label: 'Password', type: 'password' },
               { key: 'phone', label: 'Phone (optional)', type: 'text' },
-            ].map((f) => (
+            ] as TeacherCreateField[]).map((f) => (
               <div key={f.key}>
                 <label className="block text-sm font-medium text-gray-700 mb-1">{f.label}</label>
-                <input type={f.type} value={(form as any)[f.key]}
+                <input type={f.type} value={form[f.key]}
                   onChange={(e) => setForm({ ...form, [f.key]: e.target.value })}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:border-blue-500 outline-none"
                   required={f.key !== 'phone'} />

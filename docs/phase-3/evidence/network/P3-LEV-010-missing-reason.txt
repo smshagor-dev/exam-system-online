@@ -1,0 +1,9 @@
+POST /api/admin/leaves
+
+request={
+  "studentId": "cmrgq55qz0023d0ddsk7sxhab"
+}
+
+status=400
+
+body={"error":{"formErrors":[],"fieldErrors":{"reason":["Required"]}}}

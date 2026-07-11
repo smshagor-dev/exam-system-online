@@ -36,10 +36,8 @@ const RESULT_MODES = [
 
 export default function CreateExamForm({
   assignments,
-  teacherId,
 }: {
   assignments: Assignment[]
-  teacherId: string
 }) {
   const router = useRouter()
   const [step, setStep] = useState(1)
@@ -56,7 +54,6 @@ export default function CreateExamForm({
     description: '',
     questionType: 'MIXED',
     resultMode: 'AUTO',
-    totalMarks: 0,
     passingMarks: 0,
     duration: 60,
     startTime: '',
@@ -69,6 +66,7 @@ export default function CreateExamForm({
   })
 
   const selectedAssignment = assignments.find((a) => a.id === form.assignmentId)
+  const totalMarks = selectedQuestions.reduce((sum, sq) => sum + sq.marks, 0)
 
   // Fetch questions when assignment changes
   useEffect(() => {
@@ -79,13 +77,7 @@ export default function CreateExamForm({
       .then((r) => r.json())
       .then(setQuestions)
       .catch(console.error)
-  }, [form.assignmentId])
-
-  // Recalculate total marks when questions change
-  useEffect(() => {
-    const total = selectedQuestions.reduce((sum, sq) => sum + sq.marks, 0)
-    setForm((prev) => ({ ...prev, totalMarks: total }))
-  }, [selectedQuestions])
+  }, [selectedAssignment])
 
   const toggleQuestion = (q: Question) => {
     const exists = selectedQuestions.find((sq) => sq.questionId === q.id)
@@ -125,7 +117,7 @@ export default function CreateExamForm({
       semesterId: selectedAssignment.semesterId,
       questionType: form.questionType,
       resultMode: form.resultMode,
-      totalMarks: form.totalMarks,
+      totalMarks,
       passingMarks: form.passingMarks,
       duration: form.duration,
       startTime: new Date(form.startTime).toISOString(),
@@ -148,10 +140,10 @@ export default function CreateExamForm({
         const data = await res.json()
         throw new Error(data.error || 'Failed to create exam')
       }
-      const exam = await res.json()
+      await res.json()
       router.push(`/teacher/exams`)
-    } catch (err: any) {
-      setError(err.message)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to create exam')
     } finally {
       setLoading(false)
     }
@@ -313,7 +305,7 @@ export default function CreateExamForm({
           <div className="flex items-center justify-between">
             <h2 className="font-semibold text-gray-900">Select Questions</h2>
             <span className="text-sm text-gray-500">
-              {selectedQuestions.length} selected · {form.totalMarks} total marks
+              {selectedQuestions.length} selected · {totalMarks} total marks
             </span>
           </div>
 
@@ -437,7 +429,7 @@ export default function CreateExamForm({
             <div className="grid grid-cols-2 gap-2 text-gray-600">
               <span>Title:</span><span className="font-medium text-gray-900">{form.title}</span>
               <span>Questions:</span><span className="font-medium text-gray-900">{selectedQuestions.length}</span>
-              <span>Total Marks:</span><span className="font-medium text-gray-900">{form.totalMarks}</span>
+              <span>Total Marks:</span><span className="font-medium text-gray-900">{totalMarks}</span>
               <span>Passing Marks:</span><span className="font-medium text-gray-900">{form.passingMarks}</span>
               <span>Duration:</span><span className="font-medium text-gray-900">{form.duration} min</span>
               <span>Result Mode:</span><span className="font-medium text-gray-900">{form.resultMode}</span>

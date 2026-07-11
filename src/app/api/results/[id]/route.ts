@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { auth } from '@/lib/auth'
+import { getErrorMessage } from '@/lib/api-errors'
 import { prisma } from '@/lib/prisma'
 import { UserRole } from '@prisma/client'
 import { recalculateAfterReview, publishResult } from '@/lib/result-engine'
@@ -50,14 +51,20 @@ export async function GET(_req: NextRequest, { params }: RouteContext) {
 
   // Strip correct answers if showAnswers is false
   if (session.user.role === UserRole.STUDENT && !result.exam.showAnswers) {
-    result.attempt.answers = result.attempt.answers.map((a: any) => ({
-      ...a,
-      question: {
-        ...a.question,
-        options: a.question.options.map((o: any) => ({ ...o, isCorrect: undefined })),
-        expectedAnswer: undefined,
+    return NextResponse.json({
+      ...result,
+      attempt: {
+        ...result.attempt,
+        answers: result.attempt.answers.map((answer) => ({
+          ...answer,
+          question: {
+            ...answer.question,
+            options: answer.question.options.map((option) => ({ ...option, isCorrect: undefined })),
+            expectedAnswer: undefined,
+          },
+        })),
       },
-    }))
+    })
   }
 
   return NextResponse.json(result)
@@ -103,7 +110,7 @@ export async function PATCH(req: NextRequest, { params }: RouteContext) {
 
     const updated = await prisma.examResult.findUnique({ where: { id } })
     return NextResponse.json(updated)
-  } catch (err: any) {
-    return NextResponse.json({ error: err.message }, { status: 500 })
+  } catch (error: unknown) {
+    return NextResponse.json({ error: getErrorMessage(error, 'Failed to update result') }, { status: 500 })
   }
 }

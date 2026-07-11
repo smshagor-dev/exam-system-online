@@ -1,0 +1,7 @@
+GET /api/results/cmrgoxyby006ypmlztd6huztm
+
+request=<none>
+
+status=200
+
+body={"id":"cmrgoxyby006ypmlztd6huztm","examId":"cmrgoxasl005npmlzu0zhcdlt","attemptId":"cmrgoxy2p006wpmlziiwbd3ud","studentId":"cmrgowvz3003ipmlzjls44rak","totalMarks":100,"marksObtained":84,"percentage":84,"grade":null,"isPassed":true,"status":"PUBLISHED","publishedAt":"2026-07-11T18:21:26.923Z","createdAt":"2026-07-11T18:21:26.926Z","updatedAt":"2026-07-11T18:21:26.926Z","exam":{"id":"cmrgoxasl005npmlzu0zhcdlt","title":"BSc Semester 1 Exam","description":null,"teacherId":"cmrgowv5t003dpmlzf02tpawb","departmentId":"cmrgowf870009pmlzozbfj64d","subjectId":"cmrgowo3r0023pmlzb73yaw1d","languageId":"c

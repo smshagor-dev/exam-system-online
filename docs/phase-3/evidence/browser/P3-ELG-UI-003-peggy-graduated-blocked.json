@@ -1,0 +1,8 @@
+{
+  "url": "/student/exams",
+  "title": "ExamFlow Pro",
+  "body": "EMS\n\nExamFlow Pro\n\nStudent Portal\n\nSTUDENT MENU\nDashboard\nProgress\nEbooks\nCourse Work & Report\nMy Exams\nResults\nSite Language\nEnglish\nP\n\nPeggy\n\npeggy@student.test\n\nSTUDENT\n\nSTUDENT PANEL\n\nLearning Workspace\nMy Exams\nStudent has graduated. New exam attempts are unavailable in your current lifecycle state.\nUpcoming Exams (0)\nNew exam attempts are currently unavailable\nPast Exams\nBSc Final Exam\n\nCapstone\n\nSubmitted\nChoose your language\n\nSelect the language you want to use on this device. You can change it later from inside the app.\n\nEnglish\nEN",
+  "finalUrl": "http://127.0.0.1:3000/student/exams",
+  "showsGraduatedBanner": true,
+  "showsNoNewAttempts": true
+}

@@ -1,0 +1,19 @@
+POST /api/admin/enrollments
+
+request={
+  "departmentId": "cmrgowf870009pmlzozbfj64d",
+  "academicSessionId": "cmrgowg82000dpmlzdld2uohm",
+  "programId": "cmrgowhy9000ppmlzh677ckfa",
+  "programYearId": "cmrgowiy1000xpmlzz64gdgd6",
+  "semesterId": "cmrgowdqf0003pmlzzstm2atu",
+  "programSemesterId": "cmrgowk6t0017pmlze2efnm9v",
+  "groupId": "cmrgownv70021pmlz3ikzc5vs",
+  "academicYearId": "cmrgowcza0000pmlzakerzxid",
+  "departmentLanguageId": "cmrgowgyv000hpmlzvs1rw52h",
+  "languageId": "cmrgoweh20006pmlzrlak2hwh",
+  "studentId": "cmrgq1up9000kd0ddo8vek2g7"
+}
+
+status=400
+
+body={"error":"Group does not belong to the selected department"}

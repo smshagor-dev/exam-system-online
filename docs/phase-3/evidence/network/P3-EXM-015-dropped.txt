@@ -1,0 +1,7 @@
+GET /api/exams/cmrgoxb1d005ppmlzgvgp882b
+
+request=<none>
+
+status=403
+
+body={"error":"Student enrollment is dropped"}

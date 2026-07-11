@@ -1,0 +1,7 @@
+GET /api/exams/cmrgoxbrj005vpmlzimbk1ns6
+
+request=<none>
+
+status=403
+
+body={"error":"Department mismatch"}

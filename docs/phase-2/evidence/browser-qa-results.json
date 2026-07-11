@@ -1,0 +1,302 @@
+{
+  "results": [
+    {
+      "id": "DL-001",
+      "pageOrApi": "/admin/degree-levels",
+      "role": "SUPER_ADMIN",
+      "precondition": "Server running and super admin authenticated",
+      "steps": "Open degree-level management page",
+      "expected": "Page loads without fatal error",
+      "actual": "Loaded degree-level page",
+      "status": "PASS",
+      "evidence": "D:\\Public\\exam-system-online\\docs\\phase-2\\evidence\\DL-001-degree-levels-list.png"
+    },
+    {
+      "id": "DL-002",
+      "pageOrApi": "/admin/degree-levels",
+      "role": "SUPER_ADMIN",
+      "precondition": "Degree level list open",
+      "steps": "Create Bachelor of Science / BSC",
+      "expected": "Degree level created successfully",
+      "actual": "Degree level created through browser form",
+      "status": "PASS",
+      "evidence": "D:\\Public\\exam-system-online\\docs\\phase-2\\evidence\\DL-002-bsc-created.png"
+    },
+    {
+      "id": "DL-003",
+      "pageOrApi": "/admin/degree-levels",
+      "role": "SUPER_ADMIN",
+      "precondition": "BSC exists",
+      "steps": "Create Master of Science / MSC",
+      "expected": "Degree level created successfully",
+      "actual": "Degree level created through browser form",
+      "status": "PASS",
+      "evidence": "D:\\Public\\exam-system-online\\docs\\phase-2\\evidence\\DL-003-msc-created.png"
+    },
+    {
+      "id": "DL-004",
+      "pageOrApi": "/admin/degree-levels",
+      "role": "SUPER_ADMIN",
+      "precondition": "BSC already exists",
+      "steps": "Attempt to create duplicate BSC code",
+      "expected": "Duplicate code rejected",
+      "actual": "Degree level code already exists",
+      "status": "PASS",
+      "evidence": "D:\\Public\\exam-system-online\\docs\\phase-2\\evidence\\DL-004-duplicate-degree.png"
+    },
+    {
+      "id": "DL-005",
+      "pageOrApi": "/admin/degree-levels",
+      "role": "SUPER_ADMIN",
+      "precondition": "Create form open",
+      "steps": "Attempt to create degree level with negative default years",
+      "expected": "Validation error shown",
+      "actual": "defaultYears: Number must be greater than 0",
+      "status": "PASS",
+      "evidence": "D:\\Public\\exam-system-online\\docs\\phase-2\\evidence\\DL-005-invalid-default-years.png"
+    },
+    {
+      "id": "DLANG-001",
+      "pageOrApi": "/admin/department-languages",
+      "role": "SUPER_ADMIN",
+      "precondition": "Languages include English",
+      "steps": "Attach English to CSE",
+      "expected": "Mapping created",
+      "actual": "Created",
+      "status": "PASS",
+      "evidence": "D:\\Public\\exam-system-online\\docs\\phase-2\\evidence\\DLANG-001-cse-english.png"
+    },
+    {
+      "id": "DLANG-002",
+      "pageOrApi": "/admin/department-languages",
+      "role": "SUPER_ADMIN",
+      "precondition": "Languages include Russian",
+      "steps": "Attach Russian to CSE",
+      "expected": "Mapping created",
+      "actual": "Created",
+      "status": "PASS",
+      "evidence": "D:\\Public\\exam-system-online\\docs\\phase-2\\evidence\\DLANG-002-cse-russian.png"
+    },
+    {
+      "id": "DLANG-003",
+      "pageOrApi": "/admin/department-languages",
+      "role": "SUPER_ADMIN",
+      "precondition": "Languages include Russian",
+      "steps": "Attach Russian to EEE",
+      "expected": "Mapping created",
+      "actual": "Created",
+      "status": "PASS",
+      "evidence": "D:\\Public\\exam-system-online\\docs\\phase-2\\evidence\\DLANG-003-eee-russian.png"
+    },
+    {
+      "id": "SESS-001",
+      "pageOrApi": "/admin/academic-sessions",
+      "role": "SUPER_ADMIN",
+      "precondition": "No current session exists",
+      "steps": "Create current 2026-2027 session",
+      "expected": "Current session created",
+      "actual": "Created",
+      "status": "PASS",
+      "evidence": "D:\\Public\\exam-system-online\\docs\\phase-2\\evidence\\SESS-001-current-session.png"
+    },
+    {
+      "id": "SESS-002",
+      "pageOrApi": "/admin/academic-sessions",
+      "role": "SUPER_ADMIN",
+      "precondition": "Current session exists",
+      "steps": "Create historical 2025-2026 session",
+      "expected": "Historical session created",
+      "actual": "Created",
+      "status": "PASS",
+      "evidence": "D:\\Public\\exam-system-online\\docs\\phase-2\\evidence\\SESS-002-historical-session.png"
+    },
+    {
+      "id": "PROG-001",
+      "pageOrApi": "/admin/programs",
+      "role": "SUPER_ADMIN",
+      "precondition": "Degree levels exist",
+      "steps": "Create BSc program under CSE",
+      "expected": "Program created",
+      "actual": "Created",
+      "status": "PASS",
+      "evidence": "D:\\Public\\exam-system-online\\docs\\phase-2\\evidence\\PROG-001-bsc-cs.png"
+    },
+    {
+      "id": "PROG-002",
+      "pageOrApi": "/admin/programs",
+      "role": "SUPER_ADMIN",
+      "precondition": "Degree levels exist",
+      "steps": "Create MSc program under CSE",
+      "expected": "Program created",
+      "actual": "Created",
+      "status": "PASS",
+      "evidence": "D:\\Public\\exam-system-online\\docs\\phase-2\\evidence\\PROG-002-msc-ai.png"
+    },
+    {
+      "id": "PROG-003",
+      "pageOrApi": "/admin/programs",
+      "role": "SUPER_ADMIN",
+      "precondition": "Degree levels exist",
+      "steps": "Create BSc program under EEE",
+      "expected": "Program created",
+      "actual": "Created",
+      "status": "PASS",
+      "evidence": "D:\\Public\\exam-system-online\\docs\\phase-2\\evidence\\PROG-003-bsc-eee.png"
+    },
+    {
+      "id": "PY-001",
+      "pageOrApi": "/admin/program-years",
+      "role": "SUPER_ADMIN",
+      "precondition": "Programs exist",
+      "steps": "Create required BSc/MSc program years",
+      "expected": "Program years created",
+      "actual": "Created Year 1-4 for BSc and Year 1-2 for MSc",
+      "status": "PASS",
+      "evidence": "D:\\Public\\exam-system-online\\docs\\phase-2\\evidence\\PY-001-program-years.png"
+    },
+    {
+      "id": "PS-001",
+      "pageOrApi": "/admin/program-semesters",
+      "role": "SUPER_ADMIN",
+      "precondition": "Program years exist",
+      "steps": "Create required program-semester mappings",
+      "expected": "Mappings created",
+      "actual": "Created mappings for BSc/MSc/EEE smoke setup",
+      "status": "PASS",
+      "evidence": "D:\\Public\\exam-system-online\\docs\\phase-2\\evidence\\PS-001-program-semesters.png"
+    },
+    {
+      "id": "CUR-001",
+      "pageOrApi": "/admin/curriculum",
+      "role": "SUPER_ADMIN",
+      "precondition": "Program semesters exist",
+      "steps": "Create key curriculum items",
+      "expected": "Curriculum items created",
+      "actual": "Created PF, DSA, ML, and EEE subject mappings",
+      "status": "PASS",
+      "evidence": "D:\\Public\\exam-system-online\\docs\\phase-2\\evidence\\CUR-001-curriculum.png"
+    },
+    {
+      "id": "GRP-001",
+      "pageOrApi": "/admin/groups",
+      "role": "SUPER_ADMIN",
+      "precondition": "Curriculum and department languages exist",
+      "steps": "Create Russian BSc, English BSc, English MSc, and EEE Russian groups",
+      "expected": "Groups created with normalized context",
+      "actual": "Created through browser forms",
+      "status": "PASS",
+      "evidence": "D:\\Public\\exam-system-online\\docs\\phase-2\\evidence\\GRP-001-groups.png"
+    },
+    {
+      "id": "OFF-001",
+      "pageOrApi": "/admin/academic-offerings",
+      "role": "SUPER_ADMIN",
+      "precondition": "Groups and curriculum exist",
+      "steps": "Create Russian BSc, English BSc, and English MSc offerings",
+      "expected": "Offerings created",
+      "actual": "Created through browser forms",
+      "status": "PASS",
+      "evidence": "D:\\Public\\exam-system-online\\docs\\phase-2\\evidence\\OFF-001-offerings.png"
+    },
+    {
+      "id": "AUTH-DA-001",
+      "pageOrApi": "/api/admin/programs",
+      "role": "DEPARTMENT_ADMIN_A",
+      "precondition": "Department Admin A authenticated",
+      "steps": "POST program under Department B ID",
+      "expected": "403 forbidden",
+      "actual": "403 {\"error\":\"Forbidden for this department\"}",
+      "status": "PASS",
+      "evidence": "D:\\Public\\exam-system-online\\docs\\phase-2\\evidence\\auth-dept-admin-a-program.txt"
+    },
+    {
+      "id": "AUTH-DB-001",
+      "pageOrApi": "/api/admin/department-languages",
+      "role": "DEPARTMENT_ADMIN_B",
+      "precondition": "Department Admin B authenticated",
+      "steps": "POST department-language mapping under Department A",
+      "expected": "403 forbidden",
+      "actual": "403 {\"error\":\"Forbidden for this department\"}",
+      "status": "PASS",
+      "evidence": "D:\\Public\\exam-system-online\\docs\\phase-2\\evidence\\auth-dept-admin-b-language.txt"
+    },
+    {
+      "id": "AUTH-T-001",
+      "pageOrApi": "/api/admin/degree-levels",
+      "role": "TEACHER",
+      "precondition": "TEACHER authenticated",
+      "steps": "POST to admin degree-levels endpoint",
+      "expected": "403 forbidden",
+      "actual": "403 {\"error\":\"FORBIDDEN\"}",
+      "status": "PASS",
+      "evidence": "D:\\Public\\exam-system-online\\docs\\phase-2\\evidence\\auth-t-001.txt"
+    },
+    {
+      "id": "AUTH-S-001",
+      "pageOrApi": "/api/admin/degree-levels",
+      "role": "STUDENT",
+      "precondition": "STUDENT authenticated",
+      "steps": "POST to admin degree-levels endpoint",
+      "expected": "403 forbidden",
+      "actual": "403 {\"error\":\"FORBIDDEN\"}",
+      "status": "PASS",
+      "evidence": "D:\\Public\\exam-system-online\\docs\\phase-2\\evidence\\auth-s-001.txt"
+    },
+    {
+      "id": "AUTH-U-001",
+      "pageOrApi": "/api/admin/degree-levels",
+      "role": "UNAUTHENTICATED",
+      "precondition": "No authentication",
+      "steps": "GET admin degree-levels",
+      "expected": "401 unauthorized",
+      "actual": "401 {\"error\":\"UNAUTHORIZED\"}",
+      "status": "PASS",
+      "evidence": "D:\\Public\\exam-system-online\\docs\\phase-2\\evidence\\auth-unauth-degree-levels.txt"
+    },
+    {
+      "id": "COMP-TA-001",
+      "pageOrApi": "/teacher/assignments",
+      "role": "TEACHER",
+      "precondition": "Legacy teacher assignments exist",
+      "steps": "Open teacher assignment page",
+      "expected": "Legacy assignments load",
+      "actual": "Teacher assignments page loaded",
+      "status": "PASS",
+      "evidence": "D:\\Public\\exam-system-online\\docs\\phase-2\\evidence\\COMP-TA-001-teacher-assignments.png"
+    },
+    {
+      "id": "COMP-EX-001",
+      "pageOrApi": "/teacher/exams/create",
+      "role": "TEACHER",
+      "precondition": "Teacher has legacy assignments",
+      "steps": "Open create exam page",
+      "expected": "Teacher exam creation page loads",
+      "actual": "Page loaded",
+      "status": "PASS",
+      "evidence": "D:\\Public\\exam-system-online\\docs\\phase-2\\evidence\\COMP-EX-001-teacher-create-exam.png"
+    },
+    {
+      "id": "COMP-SS-001",
+      "pageOrApi": "/student/exams",
+      "role": "STUDENT",
+      "precondition": "Legacy student-subject records exist",
+      "steps": "Open student exams page",
+      "expected": "Legacy student page loads without crash",
+      "actual": "Student exams page loaded",
+      "status": "PASS",
+      "evidence": "D:\\Public\\exam-system-online\\docs\\phase-2\\evidence\\COMP-SS-001-student-exams.png"
+    },
+    {
+      "id": "COMP-R-001",
+      "pageOrApi": "/student/results",
+      "role": "STUDENT",
+      "precondition": "Student authenticated",
+      "steps": "Open student results page",
+      "expected": "Results page loads without crash",
+      "actual": "Student results page loaded",
+      "status": "PASS",
+      "evidence": "D:\\Public\\exam-system-online\\docs\\phase-2\\evidence\\COMP-R-001-student-results.png"
+    }
+  ],
+  "defects": []
+}

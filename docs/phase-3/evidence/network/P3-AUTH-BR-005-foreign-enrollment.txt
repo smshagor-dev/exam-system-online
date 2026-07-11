@@ -1,0 +1,7 @@
+GET /api/admin/enrollments?departmentId=cmrgowfh6000apmlz718clmq8
+
+request=<none>
+
+status=403
+
+body={"error":"Forbidden for this department"}

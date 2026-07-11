@@ -1,0 +1,7 @@
+{
+  "role": "teacher",
+  "pathname": "/teacher/questions",
+  "actual": "Teacher question page rendered",
+  "finalUrl": "http://127.0.0.1:3103/teacher/questions",
+  "title": "ExamFlow Pro"
+}

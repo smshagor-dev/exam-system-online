@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { auth } from '@/lib/auth'
+import { isPrismaKnownError } from '@/lib/api-errors'
 import { prisma } from '@/lib/prisma'
 import { UserRole } from '@prisma/client'
 import { teacherOwnsQuestion } from '@/lib/permissions'
@@ -35,8 +36,8 @@ export async function DELETE(_req: NextRequest, { params }: RouteContext) {
   try {
     await prisma.question.delete({ where: { id } })
     return NextResponse.json({ success: true })
-  } catch (err: any) {
-    if (err.code === 'P2003') {
+  } catch (error: unknown) {
+    if (isPrismaKnownError(error) && error.code === 'P2003') {
       return NextResponse.json(
         { error: 'Question is used in an exam. Remove it from the exam first.' },
         { status: 409 }

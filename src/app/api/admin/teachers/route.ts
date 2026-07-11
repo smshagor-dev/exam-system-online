@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { auth } from '@/lib/auth'
 import { getAdminScope } from '@/lib/admin-scope'
+import { getErrorMessage } from '@/lib/api-errors'
 import { prisma } from '@/lib/prisma'
 import { registerTeacherSchema } from '@/lib/validators'
 import { UserRole } from '@prisma/client'
@@ -44,29 +45,34 @@ export async function POST(req: NextRequest) {
   }
 
   const body = await req.json()
-  const { name, email, password, departmentId, phone } = body
-
-  if (!name || !email || !password || !departmentId) {
-    return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
+  const parsed = registerTeacherSchema.safeParse(body)
+  if (!parsed.success) {
+    return NextResponse.json({ error: parsed.error.flatten() }, { status: 400 })
   }
+
+  const { name, email, password, departmentId, phone } = parsed.data
 
   const existing = await prisma.user.findUnique({ where: { email } })
   if (existing) return NextResponse.json({ error: 'Email already registered' }, { status: 409 })
 
-  const hashedPwd = await bcrypt.hash(password, 12)
+  try {
+    const hashedPwd = await bcrypt.hash(password, 12)
 
-  const user = await prisma.user.create({
-    data: {
-      email,
-      password: hashedPwd,
-      name,
-      role: UserRole.TEACHER,
-      teacherProfile: {
-        create: { departmentId, phone: phone || null },
+    const user = await prisma.user.create({
+      data: {
+        email,
+        password: hashedPwd,
+        name,
+        role: UserRole.TEACHER,
+        teacherProfile: {
+          create: { departmentId, phone: phone || null },
+        },
       },
-    },
-    select: { id: true, email: true, name: true, role: true },
-  })
+      select: { id: true, email: true, name: true, role: true },
+    })
 
-  return NextResponse.json(user, { status: 201 })
+    return NextResponse.json(user, { status: 201 })
+  } catch (error: unknown) {
+    return NextResponse.json({ error: getErrorMessage(error, 'Failed to create teacher') }, { status: 500 })
+  }
 }

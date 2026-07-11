@@ -1,0 +1,7 @@
+GET /api/admin/enrollments/cmrgox2kn004fpmlzz819gv04/timeline
+
+request=<none>
+
+status=200
+
+body=[{"id":"cmrgozpfg00cmpmlzoz9c2fuf","studentId":"cmrgox2kn004fpmlzz819gv04","enrollmentId":"cmrgozimi00c7pmlz0tx87dzm","actorUserId":"cmrgowtlk0039pmlzr4cvsfxf","eventType":"ACADEMIC_LEAVE","fromDepartmentId":"cmrgowf870009pmlzozbfj64d","toDepartmentId":null,"fromAcademicYearId":"cmrgowcza0000pmlzakerzxid","toAcademicYearId":null,"fromAcademicSessionId":"cmrgowg82000dpmlzdld2uohm","toAcademicSessionId":null,"fromProgramId":"cmrgowhy9000ppmlzh677ckfa","toProgramId":null,"fromProgramYearId":"cmrgowiy1000xpmlzz64gdgd6","toProgramYearId":null,"fromSemesterId":"cmrgowdqf0003pmlzzstm2atu","toSemester

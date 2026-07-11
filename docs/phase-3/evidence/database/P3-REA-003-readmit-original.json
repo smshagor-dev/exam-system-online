@@ -1,0 +1,15 @@
+{
+  "id": "cmrgq5pvo0099i1ux77qihnpd",
+  "studentId": "cmrgq5lek0029d0dde8hkw1up",
+  "enrollmentId": "cmrgq5n27008yi1ux4f8r092s",
+  "leaveType": "MEDICAL",
+  "startsAt": "2026-09-01T00:00:00.000Z",
+  "endsAt": "2026-09-10T00:00:00.000Z",
+  "status": "APPROVED",
+  "reason": "Readmission original fixture",
+  "notes": null,
+  "approvedAt": "2026-07-11T18:55:28.836Z",
+  "readmittedAt": "2026-09-11T00:00:00.000Z",
+  "createdAt": "2026-07-11T18:55:28.836Z",
+  "updatedAt": "2026-07-11T18:55:32.402Z"
+}

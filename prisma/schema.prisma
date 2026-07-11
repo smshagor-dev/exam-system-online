@@ -86,28 +86,80 @@ enum RegistrationFieldType {
   SELECT
 }
 
-model User {
-  id            String    @id @default(cuid()) @map("_id")
-  email         String    @unique
-  password      String
-  name          String
-  role          UserRole  @default(STUDENT)
-  isActive      Boolean   @default(true)
-  isEmailVerified Boolean @default(true)
-  emailVerificationCode String?
-  emailVerificationExpiresAt DateTime?
-  passwordResetCode String?
-  passwordResetExpiresAt DateTime?
-  avatarUrl     String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+enum AcademicOfferingStatus {
+  PLANNED
+  ACTIVE
+  COMPLETED
+  ARCHIVED
+}
 
-  teacherProfile    TeacherProfile?
-  studentProfile    StudentProfile?
-  notifications     Notification[]
-  activityLogs      ActivityLog[]
-  departmentAdminOf Department[]    @relation("DepartmentAdmin")
-  resultReviews     ResultReview[]
+enum StudentEnrollmentStatus {
+  ACTIVE
+  LEAVE
+  TRANSFERRED
+  GRADUATED
+  DROPPED
+  ALUMNI
+}
+
+enum StudentAcademicHistoryEventType {
+  ADMISSION
+  ENROLLMENT
+  PROMOTION
+  GROUP_TRANSFER
+  DEPARTMENT_TRANSFER
+  PROGRAM_TRANSFER
+  ACADEMIC_LEAVE
+  READMISSION
+  GRADUATION
+  ALUMNI
+  STATUS_CHANGE
+  LEGACY_SYNC
+  MANUAL_CORRECTION
+}
+
+enum StudentPromotionStatus {
+  PROMOTED
+  BLOCKED
+  OVERRIDDEN
+}
+
+enum StudentTransferType {
+  GROUP
+  DEPARTMENT
+  PROGRAM
+}
+
+enum StudentLeaveType {
+  MEDICAL
+  ACADEMIC
+  TEMPORARY
+  OTHER
+}
+
+model User {
+  id                         String    @id @default(cuid()) @map("_id")
+  email                      String    @unique
+  password                   String
+  name                       String
+  role                       UserRole  @default(STUDENT)
+  isActive                   Boolean   @default(true)
+  isEmailVerified            Boolean   @default(true)
+  emailVerificationCode      String?
+  emailVerificationExpiresAt DateTime?
+  passwordResetCode          String?
+  passwordResetExpiresAt     DateTime?
+  avatarUrl                  String?
+  createdAt                  DateTime  @default(now())
+  updatedAt                  DateTime  @updatedAt
+
+  teacherProfile         TeacherProfile?
+  studentProfile         StudentProfile?
+  notifications          Notification[]
+  activityLogs           ActivityLog[]
+  departmentAdminOf      Department[]             @relation("DepartmentAdmin")
+  resultReviews          ResultReview[]
+  academicHistoryActions StudentAcademicHistory[]
 
   @@index([role])
   @@map("users")
@@ -123,16 +175,25 @@ model Department {
   updatedAt   DateTime @updatedAt
   adminId     String?
 
-  admin              User?                @relation("DepartmentAdmin", fields: [adminId], references: [id])
-  subjects           Subject[]
-  teachers           TeacherProfile[]
-  students           StudentProfile[]
-  exams              Exam[]
-  teacherAssignments TeacherAssignment[]
-  registrationFields RegistrationField[]
-  ebookUploads       EbookUpload[]
-  courseworkRules      CourseworkRule[]
+  admin                 User?                    @relation("DepartmentAdmin", fields: [adminId], references: [id])
+  subjects              Subject[]
+  teachers              TeacherProfile[]
+  students              StudentProfile[]
+  academicPrograms      AcademicProgram[]
+  departmentLanguages   DepartmentLanguage[]
+  academicGroups        Group[]                  @relation("AcademicGroupDepartment")
+  academicOfferings     AcademicOffering[]
+  exams                 Exam[]
+  teacherAssignments    TeacherAssignment[]
+  registrationFields    RegistrationField[]
+  ebookUploads          EbookUpload[]
+  courseworkRules       CourseworkRule[]
   courseworkAssignments CourseworkAssignment[]
+  enrollments           StudentEnrollment[]
+  historyFromRecords    StudentAcademicHistory[] @relation("HistoryFromDepartment")
+  historyToRecords      StudentAcademicHistory[] @relation("HistoryToDepartment")
+  transferFromRecords   StudentTransfer[]        @relation("TransferFromDepartment")
+  transferToRecords     StudentTransfer[]        @relation("TransferToDepartment")
 
   @@map("departments")
 }
@@ -148,13 +209,15 @@ model Subject {
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
-  department         Department          @relation(fields: [departmentId], references: [id])
-  language           Language?           @relation(fields: [languageId], references: [id])
-  teacherAssignments TeacherAssignment[]
-  studentSubjects    StudentSubject[]
-  exams              Exam[]
-  questions          Question[]
-  ebookUploads       EbookUpload[]
+  department            Department             @relation(fields: [departmentId], references: [id])
+  language              Language?              @relation(fields: [languageId], references: [id])
+  programSubjects       ProgramSubject[]
+  academicOfferings     AcademicOffering[]
+  teacherAssignments    TeacherAssignment[]
+  studentSubjects       StudentSubject[]
+  exams                 Exam[]
+  questions             Question[]
+  ebookUploads          EbookUpload[]
   courseworkRules       CourseworkRule[]
   courseworkAssignments CourseworkAssignment[]
 
@@ -171,14 +234,18 @@ model Language {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  subjects           Subject[]
-  teacherAssignments TeacherAssignment[]
-  studentSubjects    StudentSubject[]
-  exams              Exam[]
-  questions          Question[]
-  ebookUploads       EbookUpload[]
+  subjects              Subject[]
+  departmentLanguages   DepartmentLanguage[]
+  academicGroups        Group[]                @relation("AcademicGroupLanguage")
+  academicOfferings     AcademicOffering[]
+  teacherAssignments    TeacherAssignment[]
+  studentSubjects       StudentSubject[]
+  exams                 Exam[]
+  questions             Question[]
+  ebookUploads          EbookUpload[]
   courseworkRules       CourseworkRule[]
   courseworkAssignments CourseworkAssignment[]
+  enrollments           StudentEnrollment[]
 
   @@map("languages")
 }
@@ -196,16 +263,16 @@ model SystemLanguage {
 }
 
 model SystemSetting {
-  id                       String   @id @default(cuid()) @map("_id")
-  key                      String   @unique
-  systemName               String   @default("ExamFlow Pro")
-  systemShortName          String   @default("EMS")
-  systemDescription        String?  @default("Professional Online Exam Management System")
+  id                       String      @id @default(cuid()) @map("_id")
+  key                      String      @unique
+  systemName               String      @default("ExamFlow Pro")
+  systemShortName          String      @default("EMS")
+  systemDescription        String?     @default("Professional Online Exam Management System")
   systemLogoUrl            String?
   systemIconUrl            String?
   footerText               String?
   supportEmail             String?
-  aiEnabled                Boolean  @default(false)
+  aiEnabled                Boolean     @default(false)
   aiProvider               AiProvider?
   aiOpenAiApiKey           String?
   aiOpenAiModel            String?
@@ -213,39 +280,68 @@ model SystemSetting {
   aiGeminiModel            String?
   aiClaudeApiKey           String?
   aiClaudeModel            String?
-  aiTemperature            Float?   @default(0.2)
+  aiTemperature            Float?      @default(0.2)
   smtpHost                 String?
   smtpPort                 Int?
-  smtpSecure               Boolean  @default(false)
+  smtpSecure               Boolean     @default(false)
   smtpUser                 String?
   smtpPass                 String?
   mailFrom                 String?
-  requireEmailVerification Boolean  @default(true)
-  createdAt                DateTime @default(now())
-  updatedAt                DateTime @updatedAt
+  requireEmailVerification Boolean     @default(true)
+  createdAt                DateTime    @default(now())
+  updatedAt                DateTime    @updatedAt
 
   @@map("system_settings")
 }
 
 model Group {
-  id             String   @id @default(cuid()) @map("_id")
-  name           String
-  code           String   @unique
-  academicYearId String?
-  isActive       Boolean  @default(true)
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  id                       String   @id @default(cuid()) @map("_id")
+  name                     String
+  code                     String   @unique
+  academicYearId           String?
+  departmentId             String?
+  programId                String?
+  languageId               String?
+  departmentLanguageId     String?
+  academicSessionId        String?
+  programYearId            String?
+  currentProgramSemesterId String?
+  isActive                 Boolean  @default(true)
+  createdAt                DateTime @default(now())
+  updatedAt                DateTime @updatedAt
 
-  academicYear       AcademicYear       ? @relation(fields: [academicYearId], references: [id])
-  teacherAssignments TeacherAssignment[]
-  studentSubjects    StudentSubject[]
-  exams              Exam[]
-  questions          Question[]
-  ebookUploads       EbookUpload[]
-  courseworkRules       CourseworkRule[]
-  courseworkAssignments CourseworkAssignment[]
+  academicYear           AcademicYear?            @relation(fields: [academicYearId], references: [id])
+  department             Department?              @relation("AcademicGroupDepartment", fields: [departmentId], references: [id])
+  program                AcademicProgram?         @relation(fields: [programId], references: [id])
+  language               Language?                @relation("AcademicGroupLanguage", fields: [languageId], references: [id])
+  departmentLanguage     DepartmentLanguage?      @relation(fields: [departmentLanguageId], references: [id])
+  academicSession        AcademicSession?         @relation(fields: [academicSessionId], references: [id])
+  programYear            ProgramYear?             @relation(fields: [programYearId], references: [id])
+  currentProgramSemester ProgramSemester?         @relation("ProgramSemesterCurrentGroups", fields: [currentProgramSemesterId], references: [id])
+  academicOfferings      AcademicOffering[]
+  teacherAssignments     TeacherAssignment[]
+  studentSubjects        StudentSubject[]
+  exams                  Exam[]
+  questions              Question[]
+  ebookUploads           EbookUpload[]
+  courseworkRules        CourseworkRule[]
+  courseworkAssignments  CourseworkAssignment[]
+  enrollments            StudentEnrollment[]
+  historyFromRecords     StudentAcademicHistory[] @relation("HistoryFromGroup")
+  historyToRecords       StudentAcademicHistory[] @relation("HistoryToGroup")
+  promotionFromRecords   StudentPromotion[]       @relation("PromotionFromGroup")
+  promotionToRecords     StudentPromotion[]       @relation("PromotionToGroup")
+  transferFromRecords    StudentTransfer[]        @relation("TransferFromGroup")
+  transferToRecords      StudentTransfer[]        @relation("TransferToGroup")
 
   @@index([academicYearId])
+  @@index([departmentId])
+  @@index([programId])
+  @@index([languageId])
+  @@index([departmentLanguageId])
+  @@index([academicSessionId])
+  @@index([programYearId])
+  @@index([currentProgramSemesterId])
   @@map("groups")
 }
 
@@ -257,14 +353,17 @@ model AcademicYear {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  groups             Group[]
-  teacherAssignments TeacherAssignment[]
-  studentSubjects    StudentSubject[]
-  exams              Exam[]
-  questions          Question[]
-  ebookUploads       EbookUpload[]
+  groups                Group[]
+  teacherAssignments    TeacherAssignment[]
+  studentSubjects       StudentSubject[]
+  exams                 Exam[]
+  questions             Question[]
+  ebookUploads          EbookUpload[]
   courseworkRules       CourseworkRule[]
   courseworkAssignments CourseworkAssignment[]
+  enrollments           StudentEnrollment[]
+  historyFromRecords    StudentAcademicHistory[] @relation("HistoryFromAcademicYear")
+  historyToRecords      StudentAcademicHistory[] @relation("HistoryToAcademicYear")
 
   @@map("academic_years")
 }
@@ -277,13 +376,23 @@ model Semester {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  teacherAssignments TeacherAssignment[]
-  studentSubjects    StudentSubject[]
-  exams              Exam[]
-  questions          Question[]
-  ebookUploads       EbookUpload[]
+  teacherAssignments    TeacherAssignment[]
+  studentSubjects       StudentSubject[]
+  programSemesters      ProgramSemester[]
+  programSubjects       ProgramSubject[]
+  academicOfferings     AcademicOffering[]
+  exams                 Exam[]
+  questions             Question[]
+  ebookUploads          EbookUpload[]
   courseworkRules       CourseworkRule[]
   courseworkAssignments CourseworkAssignment[]
+  enrollments           StudentEnrollment[]
+  historyFromRecords    StudentAcademicHistory[] @relation("HistoryFromSemester")
+  historyToRecords      StudentAcademicHistory[] @relation("HistoryToSemester")
+  promotionFromRecords  StudentPromotion[]       @relation("PromotionFromSemester")
+  promotionToRecords    StudentPromotion[]       @relation("PromotionToSemester")
+  transferFromRecords   StudentTransfer[]        @relation("TransferFromSemester")
+  transferToRecords     StudentTransfer[]        @relation("TransferToSemester")
 
   @@map("semesters")
 }
@@ -297,12 +406,12 @@ model TeacherProfile {
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
-  user        User                @relation(fields: [userId], references: [id])
-  department  Department          @relation(fields: [departmentId], references: [id])
-  assignments TeacherAssignment[]
-  exams       Exam[]
-  ebookUploads EbookUpload[]
-  courseworkRules CourseworkRule[]
+  user                  User                   @relation(fields: [userId], references: [id])
+  department            Department             @relation(fields: [departmentId], references: [id])
+  assignments           TeacherAssignment[]
+  exams                 Exam[]
+  ebookUploads          EbookUpload[]
+  courseworkRules       CourseworkRule[]
   courseworkAssignments CourseworkAssignment[]
 
   @@index([departmentId])
@@ -310,24 +419,275 @@ model TeacherProfile {
 }
 
 model StudentProfile {
-  id           String   @id @default(cuid()) @map("_id")
-  userId       String   @unique
-  departmentId String
-  phone        String?
+  id                   String   @id @default(cuid()) @map("_id")
+  userId               String   @unique
+  departmentId         String
+  phone                String?
   customFieldResponses Json?
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
 
-  user         User                 @relation(fields: [userId], references: [id])
-  department   Department           @relation(fields: [departmentId], references: [id])
-  subjects     StudentSubject[]
-  examAttempts StudentExamAttempt[]
-  courseworkAssignments CourseworkAssignment[]
+  user                     User                      @relation(fields: [userId], references: [id])
+  department               Department                @relation(fields: [departmentId], references: [id])
+  subjects                 StudentSubject[]
+  examAttempts             StudentExamAttempt[]
+  courseworkAssignments    CourseworkAssignment[]
   courseworkAccessRequests CourseworkAccessRequest[]
-  courseworkSubmissions CourseworkSubmission[]
+  courseworkSubmissions    CourseworkSubmission[]
+  enrollments              StudentEnrollment[]
+  academicHistory          StudentAcademicHistory[]
+  promotionRecords         StudentPromotion[]
+  transferRecords          StudentTransfer[]
+  leaveRecords             StudentLeave[]
+  graduationRecords        StudentGraduation[]
 
   @@index([departmentId])
   @@map("student_profiles")
+}
+
+model StudentEnrollment {
+  id                   String                  @id @default(cuid()) @map("_id")
+  studentId            String
+  departmentId         String
+  academicYearId       String?
+  academicSessionId    String
+  programId            String
+  programYearId        String
+  semesterId           String
+  programSemesterId    String?
+  groupId              String
+  departmentLanguageId String?
+  languageId           String?
+  status               StudentEnrollmentStatus @default(ACTIVE)
+  enrolledAt           DateTime                @default(now())
+  endedAt              DateTime?
+  graduationDate       DateTime?
+  isActive             Boolean                 @default(true)
+  notes                String?
+  createdAt            DateTime                @default(now())
+  updatedAt            DateTime                @updatedAt
+
+  student            StudentProfile           @relation(fields: [studentId], references: [id])
+  department         Department               @relation(fields: [departmentId], references: [id])
+  academicYear       AcademicYear?            @relation(fields: [academicYearId], references: [id])
+  academicSession    AcademicSession          @relation(fields: [academicSessionId], references: [id])
+  program            AcademicProgram          @relation(fields: [programId], references: [id])
+  programYear        ProgramYear              @relation(fields: [programYearId], references: [id])
+  semester           Semester                 @relation(fields: [semesterId], references: [id])
+  programSemester    ProgramSemester?         @relation(fields: [programSemesterId], references: [id])
+  group              Group                    @relation(fields: [groupId], references: [id])
+  departmentLanguage DepartmentLanguage?      @relation(fields: [departmentLanguageId], references: [id])
+  language           Language?                @relation(fields: [languageId], references: [id])
+  historyEntries     StudentAcademicHistory[]
+  promotionsFrom     StudentPromotion[]       @relation("PromotionFromEnrollment")
+  promotionsTo       StudentPromotion[]       @relation("PromotionToEnrollment")
+  transfersFrom      StudentTransfer[]        @relation("TransferFromEnrollment")
+  transfersTo        StudentTransfer[]        @relation("TransferToEnrollment")
+  leaves             StudentLeave[]
+  graduationRecords  StudentGraduation[]
+
+  @@index([studentId, status, isActive])
+  @@index([departmentId, academicSessionId])
+  @@index([programId, programYearId, semesterId])
+  @@index([groupId])
+  @@map("student_enrollments")
+}
+
+model StudentAcademicHistory {
+  id                    String                          @id @default(cuid()) @map("_id")
+  studentId             String
+  enrollmentId          String?
+  actorUserId           String?
+  eventType             StudentAcademicHistoryEventType
+  fromDepartmentId      String?
+  toDepartmentId        String?
+  fromAcademicYearId    String?
+  toAcademicYearId      String?
+  fromAcademicSessionId String?
+  toAcademicSessionId   String?
+  fromProgramId         String?
+  toProgramId           String?
+  fromProgramYearId     String?
+  toProgramYearId       String?
+  fromSemesterId        String?
+  toSemesterId          String?
+  fromProgramSemesterId String?
+  toProgramSemesterId   String?
+  fromGroupId           String?
+  toGroupId             String?
+  fromStatus            StudentEnrollmentStatus?
+  toStatus              StudentEnrollmentStatus?
+  reason                String?
+  notes                 String?
+  occurredAt            DateTime                        @default(now())
+  createdAt             DateTime                        @default(now())
+
+  student             StudentProfile     @relation(fields: [studentId], references: [id])
+  enrollment          StudentEnrollment? @relation(fields: [enrollmentId], references: [id])
+  actor               User?              @relation(fields: [actorUserId], references: [id])
+  fromDepartment      Department?        @relation("HistoryFromDepartment", fields: [fromDepartmentId], references: [id])
+  toDepartment        Department?        @relation("HistoryToDepartment", fields: [toDepartmentId], references: [id])
+  fromAcademicYear    AcademicYear?      @relation("HistoryFromAcademicYear", fields: [fromAcademicYearId], references: [id])
+  toAcademicYear      AcademicYear?      @relation("HistoryToAcademicYear", fields: [toAcademicYearId], references: [id])
+  fromAcademicSession AcademicSession?   @relation("HistoryFromAcademicSession", fields: [fromAcademicSessionId], references: [id])
+  toAcademicSession   AcademicSession?   @relation("HistoryToAcademicSession", fields: [toAcademicSessionId], references: [id])
+  fromProgram         AcademicProgram?   @relation("HistoryFromProgram", fields: [fromProgramId], references: [id])
+  toProgram           AcademicProgram?   @relation("HistoryToProgram", fields: [toProgramId], references: [id])
+  fromProgramYear     ProgramYear?       @relation("HistoryFromProgramYear", fields: [fromProgramYearId], references: [id])
+  toProgramYear       ProgramYear?       @relation("HistoryToProgramYear", fields: [toProgramYearId], references: [id])
+  fromSemester        Semester?          @relation("HistoryFromSemester", fields: [fromSemesterId], references: [id])
+  toSemester          Semester?          @relation("HistoryToSemester", fields: [toSemesterId], references: [id])
+  fromProgramSemester ProgramSemester?   @relation("HistoryFromProgramSemester", fields: [fromProgramSemesterId], references: [id])
+  toProgramSemester   ProgramSemester?   @relation("HistoryToProgramSemester", fields: [toProgramSemesterId], references: [id])
+  fromGroup           Group?             @relation("HistoryFromGroup", fields: [fromGroupId], references: [id])
+  toGroup             Group?             @relation("HistoryToGroup", fields: [toGroupId], references: [id])
+
+  @@index([studentId, occurredAt])
+  @@index([enrollmentId, occurredAt])
+  @@index([eventType, occurredAt])
+  @@map("student_academic_history")
+}
+
+model StudentPromotion {
+  id                       String                 @id @default(cuid()) @map("_id")
+  studentId                String
+  fromEnrollmentId         String
+  toEnrollmentId           String?
+  fromAcademicSessionId    String
+  toAcademicSessionId      String
+  fromProgramId            String
+  toProgramId              String
+  fromProgramYearId        String
+  toProgramYearId          String
+  fromSemesterId           String
+  toSemesterId             String
+  fromProgramSemesterId    String?
+  toProgramSemesterId      String?
+  fromGroupId              String
+  toGroupId                String
+  status                   StudentPromotionStatus @default(PROMOTED)
+  manualOverride           Boolean                @default(false)
+  overrideReason           String?
+  curriculumValidated      Boolean                @default(false)
+  resultPublishedValidated Boolean                @default(false)
+  promotedAt               DateTime               @default(now())
+  notes                    String?
+  createdAt                DateTime               @default(now())
+
+  student             StudentProfile     @relation(fields: [studentId], references: [id])
+  fromEnrollment      StudentEnrollment  @relation("PromotionFromEnrollment", fields: [fromEnrollmentId], references: [id])
+  toEnrollment        StudentEnrollment? @relation("PromotionToEnrollment", fields: [toEnrollmentId], references: [id])
+  fromAcademicSession AcademicSession    @relation("PromotionFromAcademicSession", fields: [fromAcademicSessionId], references: [id])
+  toAcademicSession   AcademicSession    @relation("PromotionToAcademicSession", fields: [toAcademicSessionId], references: [id])
+  fromProgram         AcademicProgram    @relation("PromotionFromProgram", fields: [fromProgramId], references: [id])
+  toProgram           AcademicProgram    @relation("PromotionToProgram", fields: [toProgramId], references: [id])
+  fromProgramYear     ProgramYear        @relation("PromotionFromProgramYear", fields: [fromProgramYearId], references: [id])
+  toProgramYear       ProgramYear        @relation("PromotionToProgramYear", fields: [toProgramYearId], references: [id])
+  fromSemester        Semester           @relation("PromotionFromSemester", fields: [fromSemesterId], references: [id])
+  toSemester          Semester           @relation("PromotionToSemester", fields: [toSemesterId], references: [id])
+  fromProgramSemester ProgramSemester?   @relation("PromotionFromProgramSemester", fields: [fromProgramSemesterId], references: [id])
+  toProgramSemester   ProgramSemester?   @relation("PromotionToProgramSemester", fields: [toProgramSemesterId], references: [id])
+  fromGroup           Group              @relation("PromotionFromGroup", fields: [fromGroupId], references: [id])
+  toGroup             Group              @relation("PromotionToGroup", fields: [toGroupId], references: [id])
+
+  @@index([studentId, promotedAt])
+  @@index([fromEnrollmentId])
+  @@index([toEnrollmentId])
+  @@map("student_promotions")
+}
+
+model StudentTransfer {
+  id                    String              @id @default(cuid()) @map("_id")
+  studentId             String
+  fromEnrollmentId      String
+  toEnrollmentId        String?
+  transferType          StudentTransferType
+  fromDepartmentId      String
+  toDepartmentId        String
+  fromAcademicSessionId String
+  toAcademicSessionId   String
+  fromProgramId         String
+  toProgramId           String
+  fromProgramYearId     String
+  toProgramYearId       String
+  fromSemesterId        String
+  toSemesterId          String
+  fromProgramSemesterId String?
+  toProgramSemesterId   String?
+  fromGroupId           String
+  toGroupId             String
+  transferredAt         DateTime            @default(now())
+  reason                String?
+  notes                 String?
+  createdAt             DateTime            @default(now())
+
+  student             StudentProfile     @relation(fields: [studentId], references: [id])
+  fromEnrollment      StudentEnrollment  @relation("TransferFromEnrollment", fields: [fromEnrollmentId], references: [id])
+  toEnrollment        StudentEnrollment? @relation("TransferToEnrollment", fields: [toEnrollmentId], references: [id])
+  fromDepartment      Department         @relation("TransferFromDepartment", fields: [fromDepartmentId], references: [id])
+  toDepartment        Department         @relation("TransferToDepartment", fields: [toDepartmentId], references: [id])
+  fromAcademicSession AcademicSession    @relation("TransferFromAcademicSession", fields: [fromAcademicSessionId], references: [id])
+  toAcademicSession   AcademicSession    @relation("TransferToAcademicSession", fields: [toAcademicSessionId], references: [id])
+  fromProgram         AcademicProgram    @relation("TransferFromProgram", fields: [fromProgramId], references: [id])
+  toProgram           AcademicProgram    @relation("TransferToProgram", fields: [toProgramId], references: [id])
+  fromProgramYear     ProgramYear        @relation("TransferFromProgramYear", fields: [fromProgramYearId], references: [id])
+  toProgramYear       ProgramYear        @relation("TransferToProgramYear", fields: [toProgramYearId], references: [id])
+  fromSemester        Semester           @relation("TransferFromSemester", fields: [fromSemesterId], references: [id])
+  toSemester          Semester           @relation("TransferToSemester", fields: [toSemesterId], references: [id])
+  fromProgramSemester ProgramSemester?   @relation("TransferFromProgramSemester", fields: [fromProgramSemesterId], references: [id])
+  toProgramSemester   ProgramSemester?   @relation("TransferToProgramSemester", fields: [toProgramSemesterId], references: [id])
+  fromGroup           Group              @relation("TransferFromGroup", fields: [fromGroupId], references: [id])
+  toGroup             Group              @relation("TransferToGroup", fields: [toGroupId], references: [id])
+
+  @@index([studentId, transferredAt])
+  @@index([transferType, transferredAt])
+  @@map("student_transfers")
+}
+
+model StudentLeave {
+  id           String           @id @default(cuid()) @map("_id")
+  studentId    String
+  enrollmentId String
+  leaveType    StudentLeaveType
+  startsAt     DateTime
+  endsAt       DateTime?
+  status       String           @default("APPROVED")
+  reason       String?
+  notes        String?
+  approvedAt   DateTime         @default(now())
+  readmittedAt DateTime?
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+
+  student    StudentProfile    @relation(fields: [studentId], references: [id])
+  enrollment StudentEnrollment @relation(fields: [enrollmentId], references: [id])
+
+  @@index([studentId, approvedAt])
+  @@index([enrollmentId])
+  @@map("student_leaves")
+}
+
+model StudentGraduation {
+  id                   String    @id @default(cuid()) @map("_id")
+  studentId            String
+  enrollmentId         String
+  graduatedAt          DateTime
+  finalCgpa            Float?
+  degreeClassification String?
+  certificateNumber    String?
+  degreeAwarded        String
+  alumniAt             DateTime?
+  notes                String?
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+
+  student    StudentProfile    @relation(fields: [studentId], references: [id])
+  enrollment StudentEnrollment @relation(fields: [enrollmentId], references: [id])
+
+  @@unique([certificateNumber])
+  @@index([studentId, graduatedAt])
+  @@index([enrollmentId])
+  @@map("student_graduations")
 }
 
 model RegistrationField {
@@ -352,97 +712,6 @@ model RegistrationField {
 }
 
 model TeacherAssignment {
-  id             String   @id @default(cuid()) @map("_id")
-  teacherId      String
-  departmentId   String
-  subjectId      String
-  languageId     String
-  groupId        String
-  academicYearId String
-  semesterId     String
-  createdAt      DateTime @default(now())
-
-  teacher      TeacherProfile @relation(fields: [teacherId], references: [id])
-  department   Department     @relation(fields: [departmentId], references: [id])
-  subject      Subject        @relation(fields: [subjectId], references: [id])
-  language     Language       @relation(fields: [languageId], references: [id])
-  group        Group          @relation(fields: [groupId], references: [id])
-  academicYear AcademicYear   @relation(fields: [academicYearId], references: [id])
-  semester     Semester       @relation(fields: [semesterId], references: [id])
-
-  @@unique([teacherId, subjectId, languageId, groupId, academicYearId, semesterId])
-  @@index([teacherId])
-  @@index([departmentId])
-  @@map("teacher_assignments")
-}
-
-model EbookUpload {
-  id             String   @id @default(cuid()) @map("_id")
-  teacherId      String
-  departmentId   String
-  subjectId      String
-  languageId     String
-  groupId        String
-  academicYearId String
-  semesterId     String
-  title          String
-  description    String?
-  fileName       String
-  fileUrl        String
-  fileSizeBytes  Int
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-
-  teacher      TeacherProfile @relation(fields: [teacherId], references: [id])
-  department   Department     @relation(fields: [departmentId], references: [id])
-  subject      Subject        @relation(fields: [subjectId], references: [id])
-  language     Language       @relation(fields: [languageId], references: [id])
-  group        Group          @relation(fields: [groupId], references: [id])
-  academicYear AcademicYear   @relation(fields: [academicYearId], references: [id])
-  semester     Semester       @relation(fields: [semesterId], references: [id])
-
-  @@index([teacherId])
-  @@index([departmentId, academicYearId, semesterId])
-  @@index([subjectId, languageId, groupId, academicYearId, semesterId])
-  @@map("ebook_uploads")
-}
-
-model CourseworkAssignment {
-  id             String   @id @default(cuid()) @map("_id")
-  teacherId      String
-  studentId      String
-  ruleId         String?
-  departmentId   String
-  subjectId      String
-  languageId     String
-  groupId        String
-  academicYearId String
-  semesterId     String
-  title          String   @default("Coursework and Report Submission")
-  rules          String?
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-
-  teacher      TeacherProfile @relation(fields: [teacherId], references: [id])
-  student      StudentProfile @relation(fields: [studentId], references: [id])
-  rule         CourseworkRule? @relation(fields: [ruleId], references: [id])
-  department   Department     @relation(fields: [departmentId], references: [id])
-  subject      Subject        @relation(fields: [subjectId], references: [id])
-  language     Language       @relation(fields: [languageId], references: [id])
-  group        Group          @relation(fields: [groupId], references: [id])
-  academicYear AcademicYear   @relation(fields: [academicYearId], references: [id])
-  semester     Semester       @relation(fields: [semesterId], references: [id])
-  submissions  CourseworkSubmission[]
-  accessRequests CourseworkAccessRequest[]
-
-  @@unique([teacherId, studentId, subjectId, languageId, groupId, academicYearId, semesterId])
-  @@index([teacherId, academicYearId, semesterId])
-  @@index([ruleId])
-  @@index([studentId])
-  @@map("coursework_assignments")
-}
-
-model CourseworkRule {
   id                 String   @id @default(cuid()) @map("_id")
   teacherId          String
   departmentId       String
@@ -451,24 +720,127 @@ model CourseworkRule {
   groupId            String
   academicYearId     String
   semesterId         String
-  rules              String
-  useAiValidation    Boolean  @default(false)
-  submissionDeadline DateTime?
+  academicOfferingId String?
+  createdAt          DateTime @default(now())
+
+  teacher          TeacherProfile    @relation(fields: [teacherId], references: [id])
+  department       Department        @relation(fields: [departmentId], references: [id])
+  subject          Subject           @relation(fields: [subjectId], references: [id])
+  language         Language          @relation(fields: [languageId], references: [id])
+  group            Group             @relation(fields: [groupId], references: [id])
+  academicYear     AcademicYear      @relation(fields: [academicYearId], references: [id])
+  semester         Semester          @relation(fields: [semesterId], references: [id])
+  academicOffering AcademicOffering? @relation(fields: [academicOfferingId], references: [id])
+
+  @@unique([teacherId, subjectId, languageId, groupId, academicYearId, semesterId])
+  @@index([teacherId])
+  @@index([departmentId])
+  @@index([academicOfferingId])
+  @@map("teacher_assignments")
+}
+
+model EbookUpload {
+  id                 String   @id @default(cuid()) @map("_id")
+  teacherId          String
+  departmentId       String
+  subjectId          String
+  languageId         String
+  groupId            String
+  academicYearId     String
+  semesterId         String
+  academicOfferingId String?
+  title              String
+  description        String?
+  fileName           String
+  fileUrl            String
+  fileSizeBytes      Int
   createdAt          DateTime @default(now())
   updatedAt          DateTime @updatedAt
 
-  teacher      TeacherProfile         @relation(fields: [teacherId], references: [id])
-  department   Department             @relation(fields: [departmentId], references: [id])
-  subject      Subject                @relation(fields: [subjectId], references: [id])
-  language     Language               @relation(fields: [languageId], references: [id])
-  group        Group                  @relation(fields: [groupId], references: [id])
-  academicYear AcademicYear           @relation(fields: [academicYearId], references: [id])
-  semester     Semester               @relation(fields: [semesterId], references: [id])
-  assignments  CourseworkAssignment[]
+  teacher          TeacherProfile    @relation(fields: [teacherId], references: [id])
+  department       Department        @relation(fields: [departmentId], references: [id])
+  subject          Subject           @relation(fields: [subjectId], references: [id])
+  language         Language          @relation(fields: [languageId], references: [id])
+  group            Group             @relation(fields: [groupId], references: [id])
+  academicYear     AcademicYear      @relation(fields: [academicYearId], references: [id])
+  semester         Semester          @relation(fields: [semesterId], references: [id])
+  academicOffering AcademicOffering? @relation(fields: [academicOfferingId], references: [id])
+
+  @@index([teacherId])
+  @@index([departmentId, academicYearId, semesterId])
+  @@index([subjectId, languageId, groupId, academicYearId, semesterId])
+  @@index([academicOfferingId])
+  @@map("ebook_uploads")
+}
+
+model CourseworkAssignment {
+  id                 String   @id @default(cuid()) @map("_id")
+  teacherId          String
+  studentId          String
+  ruleId             String?
+  departmentId       String
+  subjectId          String
+  languageId         String
+  groupId            String
+  academicYearId     String
+  semesterId         String
+  academicOfferingId String?
+  title              String   @default("Coursework and Report Submission")
+  rules              String?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  teacher          TeacherProfile            @relation(fields: [teacherId], references: [id])
+  student          StudentProfile            @relation(fields: [studentId], references: [id])
+  rule             CourseworkRule?           @relation(fields: [ruleId], references: [id])
+  department       Department                @relation(fields: [departmentId], references: [id])
+  subject          Subject                   @relation(fields: [subjectId], references: [id])
+  language         Language                  @relation(fields: [languageId], references: [id])
+  group            Group                     @relation(fields: [groupId], references: [id])
+  academicYear     AcademicYear              @relation(fields: [academicYearId], references: [id])
+  semester         Semester                  @relation(fields: [semesterId], references: [id])
+  academicOffering AcademicOffering?         @relation(fields: [academicOfferingId], references: [id])
+  submissions      CourseworkSubmission[]
+  accessRequests   CourseworkAccessRequest[]
+
+  @@unique([teacherId, studentId, subjectId, languageId, groupId, academicYearId, semesterId])
+  @@index([teacherId, academicYearId, semesterId])
+  @@index([ruleId])
+  @@index([studentId])
+  @@index([academicOfferingId])
+  @@map("coursework_assignments")
+}
+
+model CourseworkRule {
+  id                 String    @id @default(cuid()) @map("_id")
+  teacherId          String
+  departmentId       String
+  subjectId          String
+  languageId         String
+  groupId            String
+  academicYearId     String
+  semesterId         String
+  academicOfferingId String?
+  rules              String
+  useAiValidation    Boolean   @default(false)
+  submissionDeadline DateTime?
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  teacher          TeacherProfile         @relation(fields: [teacherId], references: [id])
+  department       Department             @relation(fields: [departmentId], references: [id])
+  subject          Subject                @relation(fields: [subjectId], references: [id])
+  language         Language               @relation(fields: [languageId], references: [id])
+  group            Group                  @relation(fields: [groupId], references: [id])
+  academicYear     AcademicYear           @relation(fields: [academicYearId], references: [id])
+  semester         Semester               @relation(fields: [semesterId], references: [id])
+  academicOffering AcademicOffering?      @relation(fields: [academicOfferingId], references: [id])
+  assignments      CourseworkAssignment[]
 
   @@unique([teacherId, subjectId, languageId, groupId, academicYearId, semesterId])
   @@index([teacherId, academicYearId, semesterId])
   @@index([departmentId])
+  @@index([academicOfferingId])
   @@map("coursework_rules")
 }
 
@@ -514,106 +886,353 @@ model CourseworkAccessRequest {
 }
 
 model StudentSubject {
-  id             String   @id @default(cuid()) @map("_id")
-  studentId      String
-  subjectId      String
-  languageId     String
-  groupId        String
-  academicYearId String
-  semesterId     String
-  createdAt      DateTime @default(now())
+  id                 String   @id @default(cuid()) @map("_id")
+  studentId          String
+  subjectId          String
+  languageId         String
+  groupId            String
+  academicYearId     String
+  semesterId         String
+  academicOfferingId String?
+  createdAt          DateTime @default(now())
 
-  student      StudentProfile @relation(fields: [studentId], references: [id])
-  subject      Subject        @relation(fields: [subjectId], references: [id])
-  language     Language       @relation(fields: [languageId], references: [id])
-  group        Group          @relation(fields: [groupId], references: [id])
-  academicYear AcademicYear   @relation(fields: [academicYearId], references: [id])
-  semester     Semester       @relation(fields: [semesterId], references: [id])
+  student          StudentProfile    @relation(fields: [studentId], references: [id])
+  subject          Subject           @relation(fields: [subjectId], references: [id])
+  language         Language          @relation(fields: [languageId], references: [id])
+  group            Group             @relation(fields: [groupId], references: [id])
+  academicYear     AcademicYear      @relation(fields: [academicYearId], references: [id])
+  semester         Semester          @relation(fields: [semesterId], references: [id])
+  academicOffering AcademicOffering? @relation(fields: [academicOfferingId], references: [id])
 
   @@unique([studentId, subjectId, languageId, groupId, academicYearId, semesterId])
   @@index([studentId])
+  @@index([academicOfferingId])
   @@map("student_subjects")
 }
 
 model Exam {
-  id             String       @id @default(cuid()) @map("_id")
-  title          String
-  description    String?
-  teacherId      String
-  departmentId   String
-  subjectId      String
-  languageId     String
-  groupId        String
-  academicYearId String
-  semesterId     String
-  questionType   QuestionType @default(MIXED)
-  status         ExamStatus   @default(DRAFT)
-  resultMode     ResultMode   @default(AUTO)
-  totalMarks     Int
-  passingMarks   Int
-  duration       Int
-  startTime      DateTime
-  endTime        DateTime
-  autoPublish    Boolean      @default(false)
-  allowRetake    Boolean      @default(false)
-  showAnswers    Boolean      @default(false)
-  showMarks      Boolean      @default(true)
-  instructions   String?
-  createdAt      DateTime     @default(now())
-  updatedAt      DateTime     @updatedAt
+  id                 String       @id @default(cuid()) @map("_id")
+  title              String
+  description        String?
+  teacherId          String
+  departmentId       String
+  subjectId          String
+  languageId         String
+  groupId            String
+  academicYearId     String
+  semesterId         String
+  academicOfferingId String?
+  questionType       QuestionType @default(MIXED)
+  status             ExamStatus   @default(DRAFT)
+  resultMode         ResultMode   @default(AUTO)
+  totalMarks         Int
+  passingMarks       Int
+  duration           Int
+  startTime          DateTime
+  endTime            DateTime
+  autoPublish        Boolean      @default(false)
+  allowRetake        Boolean      @default(false)
+  showAnswers        Boolean      @default(false)
+  showMarks          Boolean      @default(true)
+  instructions       String?
+  createdAt          DateTime     @default(now())
+  updatedAt          DateTime     @updatedAt
 
-  teacher      TeacherProfile      @relation(fields: [teacherId], references: [id])
-  department   Department          @relation(fields: [departmentId], references: [id])
-  subject      Subject             @relation(fields: [subjectId], references: [id])
-  language     Language            @relation(fields: [languageId], references: [id])
-  group        Group               @relation(fields: [groupId], references: [id])
-  academicYear AcademicYear        @relation(fields: [academicYearId], references: [id])
-  semester     Semester            @relation(fields: [semesterId], references: [id])
-  questions    ExamQuestion[]
-  sessions     ExamSession[]
-  attempts     StudentExamAttempt[]
-  results      ExamResult[]
+  teacher          TeacherProfile       @relation(fields: [teacherId], references: [id])
+  department       Department           @relation(fields: [departmentId], references: [id])
+  subject          Subject              @relation(fields: [subjectId], references: [id])
+  language         Language             @relation(fields: [languageId], references: [id])
+  group            Group                @relation(fields: [groupId], references: [id])
+  academicYear     AcademicYear         @relation(fields: [academicYearId], references: [id])
+  semester         Semester             @relation(fields: [semesterId], references: [id])
+  academicOffering AcademicOffering?    @relation(fields: [academicOfferingId], references: [id])
+  questions        ExamQuestion[]
+  sessions         ExamSession[]
+  attempts         StudentExamAttempt[]
+  results          ExamResult[]
 
   @@index([departmentId, subjectId, languageId, groupId, academicYearId, semesterId, status])
   @@index([teacherId])
   @@index([status])
   @@index([startTime])
+  @@index([academicOfferingId])
   @@map("exams")
 }
 
 model Question {
-  id             String       @id @default(cuid()) @map("_id")
-  subjectId      String
-  languageId     String
-  groupId        String
-  academicYearId String
-  semesterId     String
-  teacherId      String
-  type           QuestionType
-  text           String
-  imageUrl       String?
-  marks          Int          @default(1)
-  difficulty     String?
-  expectedAnswer String?
-  keywords       String?
-  explanation    String?
-  isActive       Boolean      @default(true)
-  createdAt      DateTime     @default(now())
-  updatedAt      DateTime     @updatedAt
+  id                 String       @id @default(cuid()) @map("_id")
+  subjectId          String
+  languageId         String
+  groupId            String
+  academicYearId     String
+  semesterId         String
+  academicOfferingId String?
+  teacherId          String
+  type               QuestionType
+  text               String
+  imageUrl           String?
+  marks              Int          @default(1)
+  difficulty         String?
+  expectedAnswer     String?
+  keywords           String?
+  explanation        String?
+  isActive           Boolean      @default(true)
+  createdAt          DateTime     @default(now())
+  updatedAt          DateTime     @updatedAt
 
-  subject        Subject          @relation(fields: [subjectId], references: [id])
-  language       Language         @relation(fields: [languageId], references: [id])
-  group          Group            @relation(fields: [groupId], references: [id])
-  academicYear   AcademicYear     @relation(fields: [academicYearId], references: [id])
-  semester       Semester         @relation(fields: [semesterId], references: [id])
-  options        QuestionOption[]
-  examQuestions  ExamQuestion[]
-  studentAnswers StudentAnswer[]
+  subject          Subject           @relation(fields: [subjectId], references: [id])
+  language         Language          @relation(fields: [languageId], references: [id])
+  group            Group             @relation(fields: [groupId], references: [id])
+  academicYear     AcademicYear      @relation(fields: [academicYearId], references: [id])
+  semester         Semester          @relation(fields: [semesterId], references: [id])
+  academicOffering AcademicOffering? @relation(fields: [academicOfferingId], references: [id])
+  options          QuestionOption[]
+  examQuestions    ExamQuestion[]
+  studentAnswers   StudentAnswer[]
 
   @@index([subjectId, languageId, groupId, academicYearId, semesterId])
   @@index([teacherId])
   @@index([type])
+  @@index([academicOfferingId])
   @@map("questions")
+}
+
+model DegreeLevel {
+  id           String   @id @default(cuid()) @map("_id")
+  name         String
+  code         String   @unique
+  description  String?
+  defaultYears Int?
+  sortOrder    Int      @default(0)
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  programs AcademicProgram[]
+
+  @@index([isActive, sortOrder])
+  @@map("degree_levels")
+}
+
+model AcademicProgram {
+  id             String   @id @default(cuid()) @map("_id")
+  name           String
+  code           String   @unique
+  degreeLevelId  String
+  departmentId   String
+  durationYears  Int
+  totalSemesters Int
+  description    String?
+  isActive       Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  degreeLevel          DegreeLevel              @relation(fields: [degreeLevelId], references: [id])
+  department           Department               @relation(fields: [departmentId], references: [id])
+  groups               Group[]
+  programYears         ProgramYear[]
+  programSemesters     ProgramSemester[]
+  programSubjects      ProgramSubject[]
+  academicOfferings    AcademicOffering[]
+  enrollments          StudentEnrollment[]
+  historyFromRecords   StudentAcademicHistory[] @relation("HistoryFromProgram")
+  historyToRecords     StudentAcademicHistory[] @relation("HistoryToProgram")
+  promotionFromRecords StudentPromotion[]       @relation("PromotionFromProgram")
+  promotionToRecords   StudentPromotion[]       @relation("PromotionToProgram")
+  transferFromRecords  StudentTransfer[]        @relation("TransferFromProgram")
+  transferToRecords    StudentTransfer[]        @relation("TransferToProgram")
+
+  @@index([degreeLevelId])
+  @@index([departmentId])
+  @@index([isActive, name])
+  @@map("academic_programs")
+}
+
+model DepartmentLanguage {
+  id           String   @id @default(cuid()) @map("_id")
+  departmentId String
+  languageId   String
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  department        Department          @relation(fields: [departmentId], references: [id])
+  language          Language            @relation(fields: [languageId], references: [id])
+  groups            Group[]
+  academicOfferings AcademicOffering[]
+  enrollments       StudentEnrollment[]
+
+  @@unique([departmentId, languageId])
+  @@index([departmentId])
+  @@index([languageId])
+  @@map("department_languages")
+}
+
+model AcademicSession {
+  id                 String    @id @default(cuid()) @map("_id")
+  name               String
+  code               String    @unique
+  startDate          DateTime
+  endDate            DateTime
+  admissionStartDate DateTime?
+  admissionEndDate   DateTime?
+  isCurrent          Boolean   @default(false)
+  isActive           Boolean   @default(true)
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  groups               Group[]
+  academicOfferings    AcademicOffering[]
+  enrollments          StudentEnrollment[]
+  historyFromRecords   StudentAcademicHistory[] @relation("HistoryFromAcademicSession")
+  historyToRecords     StudentAcademicHistory[] @relation("HistoryToAcademicSession")
+  promotionFromRecords StudentPromotion[]       @relation("PromotionFromAcademicSession")
+  promotionToRecords   StudentPromotion[]       @relation("PromotionToAcademicSession")
+  transferFromRecords  StudentTransfer[]        @relation("TransferFromAcademicSession")
+  transferToRecords    StudentTransfer[]        @relation("TransferToAcademicSession")
+
+  @@index([isCurrent])
+  @@index([isActive, startDate])
+  @@map("academic_sessions")
+}
+
+model ProgramYear {
+  id         String   @id @default(cuid()) @map("_id")
+  programId  String
+  yearNumber Int
+  name       String
+  code       String
+  sortOrder  Int      @default(0)
+  isActive   Boolean  @default(true)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  program              AcademicProgram          @relation(fields: [programId], references: [id])
+  groups               Group[]
+  programSemesters     ProgramSemester[]
+  programSubjects      ProgramSubject[]
+  academicOfferings    AcademicOffering[]
+  enrollments          StudentEnrollment[]
+  historyFromRecords   StudentAcademicHistory[] @relation("HistoryFromProgramYear")
+  historyToRecords     StudentAcademicHistory[] @relation("HistoryToProgramYear")
+  promotionFromRecords StudentPromotion[]       @relation("PromotionFromProgramYear")
+  promotionToRecords   StudentPromotion[]       @relation("PromotionToProgramYear")
+  transferFromRecords  StudentTransfer[]        @relation("TransferFromProgramYear")
+  transferToRecords    StudentTransfer[]        @relation("TransferToProgramYear")
+
+  @@unique([programId, yearNumber])
+  @@unique([programId, code])
+  @@index([programId, sortOrder])
+  @@map("program_years")
+}
+
+model ProgramSemester {
+  id             String   @id @default(cuid()) @map("_id")
+  programId      String
+  programYearId  String
+  semesterId     String
+  semesterNumber Int
+  isActive       Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  program              AcademicProgram          @relation(fields: [programId], references: [id])
+  programYear          ProgramYear              @relation(fields: [programYearId], references: [id])
+  semester             Semester                 @relation(fields: [semesterId], references: [id])
+  groups               Group[]                  @relation("ProgramSemesterCurrentGroups")
+  programSubjects      ProgramSubject[]
+  academicOfferings    AcademicOffering[]
+  enrollments          StudentEnrollment[]
+  historyFromRecords   StudentAcademicHistory[] @relation("HistoryFromProgramSemester")
+  historyToRecords     StudentAcademicHistory[] @relation("HistoryToProgramSemester")
+  promotionFromRecords StudentPromotion[]       @relation("PromotionFromProgramSemester")
+  promotionToRecords   StudentPromotion[]       @relation("PromotionToProgramSemester")
+  transferFromRecords  StudentTransfer[]        @relation("TransferFromProgramSemester")
+  transferToRecords    StudentTransfer[]        @relation("TransferToProgramSemester")
+
+  @@unique([programId, semesterId])
+  @@unique([programId, semesterNumber])
+  @@index([programYearId])
+  @@map("program_semesters")
+}
+
+model ProgramSubject {
+  id                String   @id @default(cuid()) @map("_id")
+  programId         String
+  programYearId     String
+  semesterId        String
+  programSemesterId String?
+  subjectId         String
+  creditHours       Float?
+  theoryHours       Float?
+  practicalHours    Float?
+  isElective        Boolean  @default(false)
+  isRequired        Boolean  @default(true)
+  sortOrder         Int      @default(0)
+  isActive          Boolean  @default(true)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  program           AcademicProgram    @relation(fields: [programId], references: [id])
+  programYear       ProgramYear        @relation(fields: [programYearId], references: [id])
+  semester          Semester           @relation(fields: [semesterId], references: [id])
+  programSemester   ProgramSemester?   @relation(fields: [programSemesterId], references: [id])
+  subject           Subject            @relation(fields: [subjectId], references: [id])
+  academicOfferings AcademicOffering[]
+
+  @@unique([programId, programYearId, semesterId, subjectId])
+  @@index([programId, programYearId, semesterId])
+  @@index([subjectId])
+  @@index([programSemesterId])
+  @@map("program_subjects")
+}
+
+model AcademicOffering {
+  id                   String                 @id @default(cuid()) @map("_id")
+  academicSessionId    String
+  programId            String
+  departmentId         String
+  departmentLanguageId String?
+  languageId           String
+  programYearId        String
+  semesterId           String
+  programSemesterId    String?
+  groupId              String
+  subjectId            String
+  programSubjectId     String?
+  status               AcademicOfferingStatus @default(PLANNED)
+  startsAt             DateTime?
+  endsAt               DateTime?
+  isActive             Boolean                @default(true)
+  createdAt            DateTime               @default(now())
+  updatedAt            DateTime               @updatedAt
+
+  academicSession       AcademicSession        @relation(fields: [academicSessionId], references: [id])
+  program               AcademicProgram        @relation(fields: [programId], references: [id])
+  department            Department             @relation(fields: [departmentId], references: [id])
+  departmentLanguage    DepartmentLanguage?    @relation(fields: [departmentLanguageId], references: [id])
+  language              Language               @relation(fields: [languageId], references: [id])
+  programYear           ProgramYear            @relation(fields: [programYearId], references: [id])
+  semester              Semester               @relation(fields: [semesterId], references: [id])
+  programSemester       ProgramSemester?       @relation(fields: [programSemesterId], references: [id])
+  group                 Group                  @relation(fields: [groupId], references: [id])
+  subject               Subject                @relation(fields: [subjectId], references: [id])
+  programSubject        ProgramSubject?        @relation(fields: [programSubjectId], references: [id])
+  teacherAssignments    TeacherAssignment[]
+  studentSubjects       StudentSubject[]
+  exams                 Exam[]
+  questions             Question[]
+  ebookUploads          EbookUpload[]
+  courseworkRules       CourseworkRule[]
+  courseworkAssignments CourseworkAssignment[]
+
+  @@unique([academicSessionId, programId, languageId, programYearId, semesterId, groupId, subjectId])
+  @@index([departmentId, academicSessionId, status])
+  @@index([programId, programYearId, semesterId])
+  @@index([groupId, subjectId])
+  @@index([departmentLanguageId])
+  @@index([programSubjectId])
+  @@map("academic_offerings")
 }
 
 model QuestionOption {
@@ -647,15 +1266,15 @@ model ExamQuestion {
 }
 
 model ExamSession {
-  id          String   @id @default(cuid()) @map("_id")
-  examId      String   @unique
+  id          String    @id @default(cuid()) @map("_id")
+  examId      String    @unique
   startedAt   DateTime?
   endedAt     DateTime?
-  timerOffset Int      @default(0)
-  isPaused    Boolean  @default(false)
+  timerOffset Int       @default(0)
+  isPaused    Boolean   @default(false)
   pausedAt    DateTime?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 
   exam Exam @relation(fields: [examId], references: [id])
 
@@ -679,8 +1298,8 @@ model StudentExamAttempt {
   createdAt      DateTime      @default(now())
   updatedAt      DateTime      @updatedAt
 
-  exam    Exam           @relation(fields: [examId], references: [id])
-  student StudentProfile @relation(fields: [studentId], references: [id])
+  exam    Exam            @relation(fields: [examId], references: [id])
+  student StudentProfile  @relation(fields: [studentId], references: [id])
   answers StudentAnswer[]
   result  ExamResult?
 
@@ -730,9 +1349,9 @@ model ExamResult {
   createdAt     DateTime     @default(now())
   updatedAt     DateTime     @updatedAt
 
-  exam     Exam               @relation(fields: [examId], references: [id])
-  attempt  StudentExamAttempt @relation(fields: [attemptId], references: [id])
-  reviews  ResultReview[]
+  exam    Exam               @relation(fields: [examId], references: [id])
+  attempt StudentExamAttempt @relation(fields: [attemptId], references: [id])
+  reviews ResultReview[]
 
   @@index([examId])
   @@index([studentId])

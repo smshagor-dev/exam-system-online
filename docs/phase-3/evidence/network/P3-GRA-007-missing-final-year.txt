@@ -1,0 +1,9 @@
+POST /api/admin/graduations
+
+request={
+  "studentId": "cmrgowwk1003lpmlzibsf04t7"
+}
+
+status=400
+
+body={"error":"Student cannot graduate before the final semester"}

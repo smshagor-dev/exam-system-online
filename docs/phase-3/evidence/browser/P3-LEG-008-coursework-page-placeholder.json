@@ -1,0 +1,7 @@
+{
+  "role": "teacher",
+  "pathname": "/teacher/coursework",
+  "actual": "Teacher coursework page rendered",
+  "finalUrl": "http://127.0.0.1:3103/teacher/coursework",
+  "title": "ExamFlow Pro"
+}

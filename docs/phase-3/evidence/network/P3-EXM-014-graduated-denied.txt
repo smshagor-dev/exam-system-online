@@ -1,0 +1,7 @@
+GET /api/exams/cmrgp19x100i7pmlz4zg2bl5s
+
+request=<none>
+
+status=403
+
+body={"error":"Student has graduated"}

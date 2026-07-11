@@ -1,0 +1,13 @@
+POST /api/admin/graduations
+
+request={
+  "studentId": "cmrgq6lna002md0ddrbjx141o",
+  "graduatedAt": "2026-12-21T00:00:00.000Z",
+  "finalCgpa": 3.8,
+  "certificateNumber": "P3-MSC-1783796174343",
+  "degreeAwarded": "MSc in Applied AI"
+}
+
+status=201
+
+body={"graduation":{"id":"cmrgq6r5r00bhi1uxejs9pvfc","studentId":"cmrgq6lna002md0ddrbjx141o","enrollmentId":"cmrgq6nbi00b6i1ux6e9y3eq4","graduatedAt":"2026-12-21T00:00:00.000Z","finalCgpa":3.8,"degreeClassification":null,"certificateNumber":"P3-MSC-1783796174343","degreeAwarded":"MSc in Applied AI","alumniAt":null,"notes":null,"createdAt":"2026-07-11T18:56:17.151Z","updatedAt":"2026-07-11T18:56:17.151Z"},"enrollment":{"id":"cmrgq6nbi00b6i1ux6e9y3eq4","studentId":"cmrgq6lna002md0ddrbjx141o","departmentId":"cmrgowf870009pmlzozbfj64d","academicYearId":"cmrgowcza0000pmlzakerzxid","academicSessionId":"c

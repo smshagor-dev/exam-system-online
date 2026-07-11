@@ -1,0 +1,9 @@
+POST /api/admin/leaves
+
+request={
+  "studentId": "cmrgq5b5v0026d0ddqs1h70lb"
+}
+
+status=400
+
+body={"error":{"formErrors":[],"fieldErrors":{"endsAt":["Leave end date must be after the start date"]}}}

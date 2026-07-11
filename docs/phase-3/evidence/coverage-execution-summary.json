@@ -1,0 +1,1885 @@
+{
+  "generatedAt": "2026-07-11T18:59:40.401Z",
+  "baseUrl": "http://127.0.0.1:3103",
+  "totals": {
+    "PASS": 175,
+    "FAIL": 0,
+    "BLOCKED": 0
+  },
+  "note": "Phase 3 grouped coverage execution runner",
+  "results": [
+    {
+      "id": "P3-ENR-001",
+      "category": "Enrollment",
+      "status": "PASS",
+      "actual": "Enrollment admin page rendered",
+      "evidence": [
+        "docs/phase-3/evidence/browser/P3-ENR-001-enrollment-page.png",
+        "docs/phase-3/evidence/console/P3-ENR-001-enrollment-page.txt",
+        "docs/phase-3/evidence/network/P3-ENR-001-enrollment-page.txt",
+        "docs/phase-3/evidence/browser/P3-ENR-001-enrollment-page.json"
+      ],
+      "executedAt": "2026-07-11T18:51:35.495Z"
+    },
+    {
+      "id": "P3-PRO-001",
+      "category": "Promotion",
+      "status": "PASS",
+      "actual": "Promotion admin page rendered",
+      "evidence": [
+        "docs/phase-3/evidence/browser/P3-PRO-001-promotion-page.png",
+        "docs/phase-3/evidence/console/P3-PRO-001-promotion-page.txt",
+        "docs/phase-3/evidence/network/P3-PRO-001-promotion-page.txt",
+        "docs/phase-3/evidence/browser/P3-PRO-001-promotion-page.json"
+      ],
+      "executedAt": "2026-07-11T18:51:38.182Z"
+    },
+    {
+      "id": "P3-TRF-001",
+      "category": "Transfer",
+      "status": "PASS",
+      "actual": "Transfer admin page rendered",
+      "evidence": [
+        "docs/phase-3/evidence/browser/P3-TRF-001-transfer-page.png",
+        "docs/phase-3/evidence/console/P3-TRF-001-transfer-page.txt",
+        "docs/phase-3/evidence/network/P3-TRF-001-transfer-page.txt",
+        "docs/phase-3/evidence/browser/P3-TRF-001-transfer-page.json"
+      ],
+      "executedAt": "2026-07-11T18:51:40.628Z"
+    },
+    {
+      "id": "P3-LEV-001",
+      "category": "Leave",
+      "status": "PASS",
+      "actual": "Leave admin page rendered",
+      "evidence": [
+        "docs/phase-3/evidence/browser/P3-LEV-001-leave-page.png",
+        "docs/phase-3/evidence/console/P3-LEV-001-leave-page.txt",
+        "docs/phase-3/evidence/network/P3-LEV-001-leave-page.txt",
+        "docs/phase-3/evidence/browser/P3-LEV-001-leave-page.json"
+      ],
+      "executedAt": "2026-07-11T18:51:42.640Z"
+    },
+    {
+      "id": "P3-REA-001",
+      "category": "Readmission",
+      "status": "PASS",
+      "actual": "Readmission admin page rendered",
+      "evidence": [
+        "docs/phase-3/evidence/browser/P3-REA-001-readmission-page.png",
+        "docs/phase-3/evidence/console/P3-REA-001-readmission-page.txt",
+        "docs/phase-3/evidence/network/P3-REA-001-readmission-page.txt",
+        "docs/phase-3/evidence/browser/P3-REA-001-readmission-page.json"
+      ],
+      "executedAt": "2026-07-11T18:51:44.898Z"
+    },
+    {
+      "id": "P3-GRA-001",
+      "category": "Graduation",
+      "status": "PASS",
+      "actual": "Graduation admin page rendered",
+      "evidence": [
+        "docs/phase-3/evidence/browser/P3-GRA-001-graduation-page.png",
+        "docs/phase-3/evidence/console/P3-GRA-001-graduation-page.txt",
+        "docs/phase-3/evidence/network/P3-GRA-001-graduation-page.txt",
+        "docs/phase-3/evidence/browser/P3-GRA-001-graduation-page.json"
+      ],
+      "executedAt": "2026-07-11T18:51:47.005Z"
+    },
+    {
+      "id": "P3-AUTH-BR-001",
+      "category": "Auth",
+      "status": "PASS",
+      "actual": "Super admin opened enrollments",
+      "evidence": [
+        "docs/phase-3/evidence/browser/P3-AUTH-BR-001-super-admin-enrollments.png",
+        "docs/phase-3/evidence/console/P3-AUTH-BR-001-super-admin-enrollments.txt",
+        "docs/phase-3/evidence/network/P3-AUTH-BR-001-super-admin-enrollments.txt",
+        "docs/phase-3/evidence/browser/P3-AUTH-BR-001-super-admin-enrollments.json"
+      ],
+      "executedAt": "2026-07-11T18:51:50.063Z"
+    },
+    {
+      "id": "P3-AUTH-BR-003",
+      "category": "Auth",
+      "status": "PASS",
+      "actual": "CSE admin students page rendered",
+      "evidence": [
+        "docs/phase-3/evidence/browser/P3-AUTH-BR-003-admin-students-page.png",
+        "docs/phase-3/evidence/console/P3-AUTH-BR-003-admin-students-page.txt",
+        "docs/phase-3/evidence/network/P3-AUTH-BR-003-admin-students-page.txt",
+        "docs/phase-3/evidence/browser/P3-AUTH-BR-003-admin-students-page.json"
+      ],
+      "executedAt": "2026-07-11T18:51:55.719Z"
+    },
+    {
+      "id": "P3-ENR-002",
+      "category": "Enrollment",
+      "status": "PASS",
+      "actual": "Enrollment search by student name returned Grace",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-ENR-002-search-grace.txt",
+        "docs/phase-3/evidence/database/P3-ENR-002-search-grace.json"
+      ],
+      "executedAt": "2026-07-11T18:51:57.801Z"
+    },
+    {
+      "id": "P3-ENR-003",
+      "category": "Enrollment",
+      "status": "PASS",
+      "actual": "Enrollment search by email returned Grace",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-ENR-003-search-email.txt"
+      ],
+      "executedAt": "2026-07-11T18:51:59.478Z"
+    },
+    {
+      "id": "P3-ENR-004",
+      "category": "Enrollment",
+      "status": "PASS",
+      "actual": "Department enrollment filter only returned CSE records",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-ENR-004-department-filter.txt"
+      ],
+      "executedAt": "2026-07-11T18:52:01.013Z"
+    },
+    {
+      "id": "P3-ENR-005",
+      "category": "Enrollment",
+      "status": "PASS",
+      "actual": "Program filter only returned BSc enrollments",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-ENR-005-program-filter.txt"
+      ],
+      "executedAt": "2026-07-11T18:52:02.579Z"
+    },
+    {
+      "id": "P3-ENR-006",
+      "category": "Enrollment",
+      "status": "PASS",
+      "actual": "Valid BSc enrollment created successfully",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-ENR-006-valid-bsc.txt",
+        "docs/phase-3/evidence/database/P3-ENR-006-valid-bsc.json"
+      ],
+      "executedAt": "2026-07-11T18:52:06.974Z"
+    },
+    {
+      "id": "P3-ENR-017",
+      "category": "History",
+      "status": "PASS",
+      "actual": "Timeline contains ENROLLMENT event for new student",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-ENR-017-timeline-enrollment.txt"
+      ],
+      "executedAt": "2026-07-11T18:52:09.479Z"
+    },
+    {
+      "id": "P3-HIS-001",
+      "category": "History",
+      "status": "PASS",
+      "actual": "Timeline contains ENROLLMENT event for new student",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-ENR-017-timeline-enrollment.txt"
+      ],
+      "executedAt": "2026-07-11T18:52:09.479Z"
+    },
+    {
+      "id": "P3-ENR-007",
+      "category": "Enrollment",
+      "status": "PASS",
+      "actual": "Valid MSc enrollment created successfully",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-ENR-007-valid-msc.txt",
+        "docs/phase-3/evidence/database/P3-ENR-007-valid-msc.json"
+      ],
+      "executedAt": "2026-07-11T18:52:13.922Z"
+    },
+    {
+      "id": "P3-ENR-008",
+      "category": "Enrollment",
+      "status": "PASS",
+      "actual": "Second active enrollment was rejected with 409",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-ENR-008-duplicate-active.txt"
+      ],
+      "executedAt": "2026-07-11T18:52:16.225Z"
+    },
+    {
+      "id": "P3-ENR-009",
+      "category": "Enrollment",
+      "status": "PASS",
+      "actual": "Missing student rejected with 400",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-ENR-009-missing-student.txt"
+      ],
+      "executedAt": "2026-07-11T18:52:16.829Z"
+    },
+    {
+      "id": "P3-ENR-010",
+      "category": "Enrollment",
+      "status": "PASS",
+      "actual": "Invalid program rejected with 400",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-ENR-010-invalid-program.txt"
+      ],
+      "executedAt": "2026-07-11T18:52:19.625Z"
+    },
+    {
+      "id": "P3-ENR-011",
+      "category": "Enrollment",
+      "status": "PASS",
+      "actual": "Inactive program rejected with 400",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-ENR-011-inactive-program.txt"
+      ],
+      "executedAt": "2026-07-11T18:52:22.393Z"
+    },
+    {
+      "id": "P3-ENR-012",
+      "category": "Enrollment",
+      "status": "PASS",
+      "actual": "Inactive session rejected with 400",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-ENR-012-inactive-session.txt"
+      ],
+      "executedAt": "2026-07-11T18:52:25.180Z"
+    },
+    {
+      "id": "P3-ENR-013",
+      "category": "Enrollment",
+      "status": "PASS",
+      "actual": "Unsupported language rejected with 400",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-ENR-013-unsupported-language.txt"
+      ],
+      "executedAt": "2026-07-11T18:52:28.047Z"
+    },
+    {
+      "id": "P3-ENR-014",
+      "category": "Enrollment",
+      "status": "PASS",
+      "actual": "Wrong group rejected with 400",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-ENR-014-wrong-group.txt"
+      ],
+      "executedAt": "2026-07-11T18:52:30.856Z"
+    },
+    {
+      "id": "P3-ENR-015",
+      "category": "Enrollment",
+      "status": "PASS",
+      "actual": "Mismatched semester rejected with 400",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-ENR-015-wrong-semester.txt"
+      ],
+      "executedAt": "2026-07-11T18:52:33.689Z"
+    },
+    {
+      "id": "P3-ENR-016",
+      "category": "Enrollment",
+      "status": "PASS",
+      "actual": "Cross-department enrollment rejected with 400",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-ENR-016-cross-department.txt"
+      ],
+      "executedAt": "2026-07-11T18:52:36.506Z"
+    },
+    {
+      "id": "P3-ENR-019",
+      "category": "Enrollment",
+      "status": "PASS",
+      "actual": "Enrollment note update succeeded safely",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-ENR-019-patch-enrollment.txt",
+        "docs/phase-3/evidence/database/P3-ENR-019-patch-enrollment.json"
+      ],
+      "executedAt": "2026-07-11T18:52:40.390Z"
+    },
+    {
+      "id": "P3-ENR-020",
+      "category": "Enrollment",
+      "status": "PASS",
+      "actual": "Enrollment deactivation safely closed the record",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-ENR-020-deactivate-enrollment.txt",
+        "docs/phase-3/evidence/database/P3-ENR-020-deactivate-enrollment.json"
+      ],
+      "executedAt": "2026-07-11T18:52:42.291Z"
+    },
+    {
+      "id": "P3-ENR-022",
+      "category": "Enrollment",
+      "status": "PASS",
+      "actual": "Malformed enrollment request rejected by schema validation",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-ENR-022-malformed.txt"
+      ],
+      "executedAt": "2026-07-11T18:52:42.674Z"
+    },
+    {
+      "id": "P3-PRO-002",
+      "category": "Promotion",
+      "status": "PASS",
+      "actual": "Promotion preview returned eligible next-context data",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-PRO-002-preview-filtering.txt"
+      ],
+      "executedAt": "2026-07-11T18:52:51.490Z"
+    },
+    {
+      "id": "P3-PRO-003",
+      "category": "Promotion",
+      "status": "PASS",
+      "actual": "Promotion preview returned eligible next-context data",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-PRO-002-preview-filtering.txt"
+      ],
+      "executedAt": "2026-07-11T18:52:51.490Z"
+    },
+    {
+      "id": "P3-PRO-004",
+      "category": "Promotion",
+      "status": "PASS",
+      "actual": "Valid BSc promotion created next active context and history",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-PRO-004-valid-bsc.txt",
+        "docs/phase-3/evidence/database/P3-PRO-004-valid-bsc.json"
+      ],
+      "executedAt": "2026-07-11T18:52:57.618Z"
+    },
+    {
+      "id": "P3-PRO-019",
+      "category": "Promotion",
+      "status": "PASS",
+      "actual": "Valid BSc promotion created next active context and history",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-PRO-004-valid-bsc.txt",
+        "docs/phase-3/evidence/database/P3-PRO-004-valid-bsc.json"
+      ],
+      "executedAt": "2026-07-11T18:52:57.618Z"
+    },
+    {
+      "id": "P3-PRO-020",
+      "category": "Promotion",
+      "status": "PASS",
+      "actual": "Valid BSc promotion created next active context and history",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-PRO-004-valid-bsc.txt",
+        "docs/phase-3/evidence/database/P3-PRO-004-valid-bsc.json"
+      ],
+      "executedAt": "2026-07-11T18:52:57.618Z"
+    },
+    {
+      "id": "P3-PRO-021",
+      "category": "Promotion",
+      "status": "PASS",
+      "actual": "Valid BSc promotion created next active context and history",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-PRO-004-valid-bsc.txt",
+        "docs/phase-3/evidence/database/P3-PRO-004-valid-bsc.json"
+      ],
+      "executedAt": "2026-07-11T18:52:57.618Z"
+    },
+    {
+      "id": "P3-HIS-002",
+      "category": "Promotion",
+      "status": "PASS",
+      "actual": "Valid BSc promotion created next active context and history",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-PRO-004-valid-bsc.txt",
+        "docs/phase-3/evidence/database/P3-PRO-004-valid-bsc.json"
+      ],
+      "executedAt": "2026-07-11T18:52:57.618Z"
+    },
+    {
+      "id": "P3-PRO-005",
+      "category": "Promotion",
+      "status": "PASS",
+      "actual": "Valid MSc promotion succeeded",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-PRO-005-valid-msc.txt"
+      ],
+      "executedAt": "2026-07-11T18:53:08.029Z"
+    },
+    {
+      "id": "P3-PRO-006",
+      "category": "Promotion",
+      "status": "PASS",
+      "actual": "Unpublished result promotion rejected with 400",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-PRO-006-unpublished.txt"
+      ],
+      "executedAt": "2026-07-11T18:53:11.117Z"
+    },
+    {
+      "id": "P3-PRO-007",
+      "category": "Promotion",
+      "status": "PASS",
+      "actual": "Incomplete curriculum promotion rejected with 400",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-PRO-007-no-curriculum.txt"
+      ],
+      "executedAt": "2026-07-11T18:53:14.180Z"
+    },
+    {
+      "id": "P3-PRO-008",
+      "category": "Promotion",
+      "status": "PASS",
+      "actual": "Missing target group rejected with 400",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-PRO-008-invalid-group.txt"
+      ],
+      "executedAt": "2026-07-11T18:53:17.235Z"
+    },
+    {
+      "id": "P3-PRO-009",
+      "category": "Promotion",
+      "status": "PASS",
+      "actual": "Invalid next semester rejected with 400",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-PRO-009-invalid-semester.txt"
+      ],
+      "executedAt": "2026-07-11T18:53:20.316Z"
+    },
+    {
+      "id": "P3-PRO-010",
+      "category": "Promotion",
+      "status": "PASS",
+      "actual": "Invalid or beyond-duration promotion rejected with 400",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-PRO-010-invalid-year.txt"
+      ],
+      "executedAt": "2026-07-11T18:53:23.431Z"
+    },
+    {
+      "id": "P3-PRO-011",
+      "category": "Promotion",
+      "status": "PASS",
+      "actual": "Invalid or beyond-duration promotion rejected with 400",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-PRO-010-invalid-year.txt"
+      ],
+      "executedAt": "2026-07-11T18:53:23.431Z"
+    },
+    {
+      "id": "P3-PRO-012",
+      "category": "Promotion",
+      "status": "PASS",
+      "actual": "Leave-state student promotion rejected with 400",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-PRO-012-leave-student.txt"
+      ],
+      "executedAt": "2026-07-11T18:53:24.050Z"
+    },
+    {
+      "id": "P3-PRO-014",
+      "category": "Promotion",
+      "status": "PASS",
+      "actual": "Graduated student promotion rejected with 400",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-PRO-014-graduated.txt"
+      ],
+      "executedAt": "2026-07-11T18:53:24.653Z"
+    },
+    {
+      "id": "P3-PRO-015",
+      "category": "Promotion",
+      "status": "PASS",
+      "actual": "Duplicate promotion rejected with 400",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-PRO-015-duplicate.txt"
+      ],
+      "executedAt": "2026-07-11T18:53:27.730Z"
+    },
+    {
+      "id": "P3-PRO-016",
+      "category": "Promotion",
+      "status": "PASS",
+      "actual": "Override without reason rejected by validation",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-PRO-016-override-no-reason.txt"
+      ],
+      "executedAt": "2026-07-11T18:53:28.102Z"
+    },
+    {
+      "id": "P3-PRO-017",
+      "category": "Promotion",
+      "status": "PASS",
+      "actual": "Override promotion succeeded and persisted actor/reason evidence",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-PRO-017-override-with-reason.txt",
+        "docs/phase-3/evidence/database/P3-PRO-017-override-with-reason.json"
+      ],
+      "executedAt": "2026-07-11T18:53:37.770Z"
+    },
+    {
+      "id": "P3-PRO-018",
+      "category": "Promotion",
+      "status": "PASS",
+      "actual": "Override promotion succeeded and persisted actor/reason evidence",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-PRO-017-override-with-reason.txt",
+        "docs/phase-3/evidence/database/P3-PRO-017-override-with-reason.json"
+      ],
+      "executedAt": "2026-07-11T18:53:37.770Z"
+    },
+    {
+      "id": "P3-PRO-022",
+      "category": "Promotion",
+      "status": "PASS",
+      "actual": "Bulk preview returned eligible and blocked counts",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-PRO-022-bulk-preview.txt"
+      ],
+      "executedAt": "2026-07-11T18:53:51.140Z"
+    },
+    {
+      "id": "P3-PRO-023",
+      "category": "Promotion",
+      "status": "PASS",
+      "actual": "Bulk promotion ran successfully for selected students",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-PRO-023-bulk-promotion.txt"
+      ],
+      "executedAt": "2026-07-11T18:54:02.175Z"
+    },
+    {
+      "id": "P3-TRF-003",
+      "category": "Transfer",
+      "status": "PASS",
+      "actual": "Valid group transfer closed source enrollment and activated target context",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-TRF-003-valid-group-transfer.txt",
+        "docs/phase-3/evidence/database/P3-TRF-003-valid-group-transfer.json"
+      ],
+      "executedAt": "2026-07-11T18:54:12.423Z"
+    },
+    {
+      "id": "P3-TRF-015",
+      "category": "Transfer",
+      "status": "PASS",
+      "actual": "Valid group transfer closed source enrollment and activated target context",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-TRF-003-valid-group-transfer.txt",
+        "docs/phase-3/evidence/database/P3-TRF-003-valid-group-transfer.json"
+      ],
+      "executedAt": "2026-07-11T18:54:12.423Z"
+    },
+    {
+      "id": "P3-TRF-016",
+      "category": "Transfer",
+      "status": "PASS",
+      "actual": "Valid group transfer closed source enrollment and activated target context",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-TRF-003-valid-group-transfer.txt",
+        "docs/phase-3/evidence/database/P3-TRF-003-valid-group-transfer.json"
+      ],
+      "executedAt": "2026-07-11T18:54:12.423Z"
+    },
+    {
+      "id": "P3-TRF-017",
+      "category": "Transfer",
+      "status": "PASS",
+      "actual": "Valid group transfer closed source enrollment and activated target context",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-TRF-003-valid-group-transfer.txt",
+        "docs/phase-3/evidence/database/P3-TRF-003-valid-group-transfer.json"
+      ],
+      "executedAt": "2026-07-11T18:54:12.423Z"
+    },
+    {
+      "id": "P3-TRF-018",
+      "category": "Transfer",
+      "status": "PASS",
+      "actual": "Valid group transfer closed source enrollment and activated target context",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-TRF-003-valid-group-transfer.txt",
+        "docs/phase-3/evidence/database/P3-TRF-003-valid-group-transfer.json"
+      ],
+      "executedAt": "2026-07-11T18:54:12.423Z"
+    },
+    {
+      "id": "P3-HIS-003",
+      "category": "Transfer",
+      "status": "PASS",
+      "actual": "Valid group transfer closed source enrollment and activated target context",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-TRF-003-valid-group-transfer.txt",
+        "docs/phase-3/evidence/database/P3-TRF-003-valid-group-transfer.json"
+      ],
+      "executedAt": "2026-07-11T18:54:12.423Z"
+    },
+    {
+      "id": "P3-TRF-002",
+      "category": "Transfer",
+      "status": "PASS",
+      "actual": "Active student search for transfer fixtures returned results",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-TRF-002-search-active-transfer.txt"
+      ],
+      "executedAt": "2026-07-11T18:54:14.059Z"
+    },
+    {
+      "id": "P3-TRF-005",
+      "category": "Transfer",
+      "status": "PASS",
+      "actual": "Valid program transfer succeeded",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-TRF-005-program-transfer.txt"
+      ],
+      "executedAt": "2026-07-11T18:54:22.808Z"
+    },
+    {
+      "id": "P3-TRF-006",
+      "category": "Transfer",
+      "status": "PASS",
+      "actual": "Valid department transfer succeeded",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-TRF-006-department-transfer.txt"
+      ],
+      "executedAt": "2026-07-11T18:54:31.511Z"
+    },
+    {
+      "id": "P3-TRF-007",
+      "category": "Transfer",
+      "status": "PASS",
+      "actual": "Same-source transfer rejected with 400",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-TRF-007-same-target.txt"
+      ],
+      "executedAt": "2026-07-11T18:54:38.469Z"
+    },
+    {
+      "id": "P3-TRF-008",
+      "category": "Transfer",
+      "status": "PASS",
+      "actual": "Inactive target program rejected with 400",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-TRF-008-inactive-program.txt"
+      ],
+      "executedAt": "2026-07-11T18:54:41.412Z"
+    },
+    {
+      "id": "P3-TRF-009",
+      "category": "Transfer",
+      "status": "PASS",
+      "actual": "Unsupported target language rejected with 400",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-TRF-009-unsupported-language.txt"
+      ],
+      "executedAt": "2026-07-11T18:54:44.381Z"
+    },
+    {
+      "id": "P3-TRF-010",
+      "category": "Transfer",
+      "status": "PASS",
+      "actual": "Invalid target group rejected with 400",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-TRF-010-invalid-group.txt"
+      ],
+      "executedAt": "2026-07-11T18:54:47.379Z"
+    },
+    {
+      "id": "P3-TRF-011",
+      "category": "Transfer",
+      "status": "PASS",
+      "actual": "Invalid semester context rejected with 400",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-TRF-011-invalid-semester.txt"
+      ],
+      "executedAt": "2026-07-11T18:54:50.348Z"
+    },
+    {
+      "id": "P3-TRF-012",
+      "category": "Transfer",
+      "status": "PASS",
+      "actual": "Invalid session context rejected with 400",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-TRF-012-invalid-session.txt"
+      ],
+      "executedAt": "2026-07-11T18:54:53.366Z"
+    },
+    {
+      "id": "P3-TRF-013",
+      "category": "Transfer",
+      "status": "PASS",
+      "actual": "Graduated student transfer rejected with 400",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-TRF-013-graduated.txt"
+      ],
+      "executedAt": "2026-07-11T18:54:54.030Z"
+    },
+    {
+      "id": "P3-TRF-014",
+      "category": "Transfer",
+      "status": "PASS",
+      "actual": "Dropped student transfer rejected with 400",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-TRF-014-dropped.txt"
+      ],
+      "executedAt": "2026-07-11T18:54:54.711Z"
+    },
+    {
+      "id": "P3-LEV-002",
+      "category": "Leave",
+      "status": "PASS",
+      "actual": "Medical leave created and enrollment moved into leave state",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-LEV-002-medical.txt",
+        "docs/phase-3/evidence/database/P3-LEV-002-medical.json"
+      ],
+      "executedAt": "2026-07-11T18:55:02.270Z"
+    },
+    {
+      "id": "P3-LEV-011",
+      "category": "Leave",
+      "status": "PASS",
+      "actual": "Medical leave created and enrollment moved into leave state",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-LEV-002-medical.txt",
+        "docs/phase-3/evidence/database/P3-LEV-002-medical.json"
+      ],
+      "executedAt": "2026-07-11T18:55:02.270Z"
+    },
+    {
+      "id": "P3-LEV-013",
+      "category": "Leave",
+      "status": "PASS",
+      "actual": "Medical leave created and enrollment moved into leave state",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-LEV-002-medical.txt",
+        "docs/phase-3/evidence/database/P3-LEV-002-medical.json"
+      ],
+      "executedAt": "2026-07-11T18:55:02.270Z"
+    },
+    {
+      "id": "P3-HIS-004",
+      "category": "Leave",
+      "status": "PASS",
+      "actual": "Medical leave created and enrollment moved into leave state",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-LEV-002-medical.txt",
+        "docs/phase-3/evidence/database/P3-LEV-002-medical.json"
+      ],
+      "executedAt": "2026-07-11T18:55:02.270Z"
+    },
+    {
+      "id": "P3-LEV-003",
+      "category": "Leave",
+      "status": "PASS",
+      "actual": "Academic leave succeeded",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-LEV-003-academic.txt"
+      ],
+      "executedAt": "2026-07-11T18:55:09.278Z"
+    },
+    {
+      "id": "P3-LEV-004",
+      "category": "Leave",
+      "status": "PASS",
+      "actual": "Temporary leave succeeded",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-LEV-004-temporary.txt"
+      ],
+      "executedAt": "2026-07-11T18:55:16.205Z"
+    },
+    {
+      "id": "P3-LEV-005",
+      "category": "Leave",
+      "status": "PASS",
+      "actual": "Inactive student leave rejected with 403",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-LEV-005-inactive.txt"
+      ],
+      "executedAt": "2026-07-11T18:55:16.660Z"
+    },
+    {
+      "id": "P3-LEV-006",
+      "category": "Leave",
+      "status": "PASS",
+      "actual": "Graduated student leave rejected with 400",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-LEV-006-graduated.txt"
+      ],
+      "executedAt": "2026-07-11T18:55:17.330Z"
+    },
+    {
+      "id": "P3-LEV-007",
+      "category": "Leave",
+      "status": "PASS",
+      "actual": "Dropped student leave rejected with 400",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-LEV-007-dropped.txt"
+      ],
+      "executedAt": "2026-07-11T18:55:17.994Z"
+    },
+    {
+      "id": "P3-LEV-008",
+      "category": "Leave",
+      "status": "PASS",
+      "actual": "Overlapping leave rejected with 400",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-LEV-008-overlapping.txt"
+      ],
+      "executedAt": "2026-07-11T18:55:18.665Z"
+    },
+    {
+      "id": "P3-LEV-009",
+      "category": "Leave",
+      "status": "PASS",
+      "actual": "Invalid leave date range rejected by schema validation",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-LEV-009-invalid-dates.txt"
+      ],
+      "executedAt": "2026-07-11T18:55:19.025Z"
+    },
+    {
+      "id": "P3-LEV-010",
+      "category": "Leave",
+      "status": "PASS",
+      "actual": "Missing leave reason was rejected by validation",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-LEV-010-missing-reason.txt"
+      ],
+      "executedAt": "2026-07-11T18:55:19.369Z"
+    },
+    {
+      "id": "P3-AUTH-BR-008",
+      "category": "Auth",
+      "status": "PASS",
+      "actual": "Teacher final url /teacher/dashboard",
+      "evidence": [
+        "docs/phase-3/evidence/browser/P3-AUTH-BR-008-teacher-admin-page.png",
+        "docs/phase-3/evidence/console/P3-AUTH-BR-008-teacher-admin-page.txt",
+        "docs/phase-3/evidence/network/P3-AUTH-BR-008-teacher-admin-page.txt",
+        "docs/phase-3/evidence/browser/P3-AUTH-BR-008-teacher-admin-page.json"
+      ],
+      "executedAt": "2026-07-11T18:55:22.618Z"
+    },
+    {
+      "id": "P3-UI-004",
+      "category": "Auth",
+      "status": "PASS",
+      "actual": "Teacher final url /teacher/dashboard",
+      "evidence": [
+        "docs/phase-3/evidence/browser/P3-AUTH-BR-008-teacher-admin-page.png",
+        "docs/phase-3/evidence/console/P3-AUTH-BR-008-teacher-admin-page.txt",
+        "docs/phase-3/evidence/network/P3-AUTH-BR-008-teacher-admin-page.txt",
+        "docs/phase-3/evidence/browser/P3-AUTH-BR-008-teacher-admin-page.json"
+      ],
+      "executedAt": "2026-07-11T18:55:22.618Z"
+    },
+    {
+      "id": "P3-REA-003",
+      "category": "Readmission",
+      "status": "PASS",
+      "actual": "Readmission to original context succeeded and closed leave",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-REA-003-readmit-original.txt",
+        "docs/phase-3/evidence/database/P3-REA-003-readmit-original.json"
+      ],
+      "executedAt": "2026-07-11T18:55:33.594Z"
+    },
+    {
+      "id": "P3-REA-013",
+      "category": "Readmission",
+      "status": "PASS",
+      "actual": "Readmission to original context succeeded and closed leave",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-REA-003-readmit-original.txt",
+        "docs/phase-3/evidence/database/P3-REA-003-readmit-original.json"
+      ],
+      "executedAt": "2026-07-11T18:55:33.594Z"
+    },
+    {
+      "id": "P3-REA-014",
+      "category": "Readmission",
+      "status": "PASS",
+      "actual": "Readmission to original context succeeded and closed leave",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-REA-003-readmit-original.txt",
+        "docs/phase-3/evidence/database/P3-REA-003-readmit-original.json"
+      ],
+      "executedAt": "2026-07-11T18:55:33.594Z"
+    },
+    {
+      "id": "P3-REA-016",
+      "category": "Readmission",
+      "status": "PASS",
+      "actual": "Readmission to original context succeeded and closed leave",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-REA-003-readmit-original.txt",
+        "docs/phase-3/evidence/database/P3-REA-003-readmit-original.json"
+      ],
+      "executedAt": "2026-07-11T18:55:33.594Z"
+    },
+    {
+      "id": "P3-HIS-005",
+      "category": "Readmission",
+      "status": "PASS",
+      "actual": "Readmission to original context succeeded and closed leave",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-REA-003-readmit-original.txt",
+        "docs/phase-3/evidence/database/P3-REA-003-readmit-original.json"
+      ],
+      "executedAt": "2026-07-11T18:55:33.594Z"
+    },
+    {
+      "id": "P3-REA-004",
+      "category": "Readmission",
+      "status": "PASS",
+      "actual": "Readmission to a new valid context succeeded",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-REA-004-readmit-new-context.txt"
+      ],
+      "executedAt": "2026-07-11T18:55:44.727Z"
+    },
+    {
+      "id": "P3-REA-005",
+      "category": "Readmission",
+      "status": "PASS",
+      "actual": "Already-active student readmission rejected with 400",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-REA-005-already-active.txt"
+      ],
+      "executedAt": "2026-07-11T18:55:46.895Z"
+    },
+    {
+      "id": "P3-REA-006",
+      "category": "Readmission",
+      "status": "PASS",
+      "actual": "Readmission without leave rejected with 400",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-REA-006-no-leave.txt"
+      ],
+      "executedAt": "2026-07-11T18:55:48.005Z"
+    },
+    {
+      "id": "P3-REA-007",
+      "category": "Readmission",
+      "status": "PASS",
+      "actual": "Graduated student readmission rejected with 400",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-REA-007-graduated.txt"
+      ],
+      "executedAt": "2026-07-11T18:55:49.193Z"
+    },
+    {
+      "id": "P3-REA-008",
+      "category": "Readmission",
+      "status": "PASS",
+      "actual": "Inactive target program rejected with 400",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-REA-008-inactive-program.txt"
+      ],
+      "executedAt": "2026-07-11T18:55:51.420Z"
+    },
+    {
+      "id": "P3-REA-009",
+      "category": "Readmission",
+      "status": "PASS",
+      "actual": "Invalid session readmission rejected with 400",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-REA-009-invalid-session.txt"
+      ],
+      "executedAt": "2026-07-11T18:55:53.675Z"
+    },
+    {
+      "id": "P3-REA-010",
+      "category": "Readmission",
+      "status": "PASS",
+      "actual": "Invalid year context rejected with 400",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-REA-010-invalid-year.txt"
+      ],
+      "executedAt": "2026-07-11T18:55:55.961Z"
+    },
+    {
+      "id": "P3-REA-011",
+      "category": "Readmission",
+      "status": "PASS",
+      "actual": "Invalid semester readmission rejected with 400",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-REA-011-invalid-semester.txt"
+      ],
+      "executedAt": "2026-07-11T18:55:58.226Z"
+    },
+    {
+      "id": "P3-REA-012",
+      "category": "Readmission",
+      "status": "PASS",
+      "actual": "Invalid group readmission rejected with 400",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-REA-012-invalid-group.txt"
+      ],
+      "executedAt": "2026-07-11T18:56:00.523Z"
+    },
+    {
+      "id": "P3-GRA-003",
+      "category": "Graduation",
+      "status": "PASS",
+      "actual": "Valid BSc graduation closed active enrollment and created history",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-GRA-003-valid-bsc.txt",
+        "docs/phase-3/evidence/database/P3-GRA-003-valid-bsc.json"
+      ],
+      "executedAt": "2026-07-11T18:56:09.558Z"
+    },
+    {
+      "id": "P3-GRA-014",
+      "category": "Graduation",
+      "status": "PASS",
+      "actual": "Valid BSc graduation closed active enrollment and created history",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-GRA-003-valid-bsc.txt",
+        "docs/phase-3/evidence/database/P3-GRA-003-valid-bsc.json"
+      ],
+      "executedAt": "2026-07-11T18:56:09.558Z"
+    },
+    {
+      "id": "P3-GRA-015",
+      "category": "Graduation",
+      "status": "PASS",
+      "actual": "Valid BSc graduation closed active enrollment and created history",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-GRA-003-valid-bsc.txt",
+        "docs/phase-3/evidence/database/P3-GRA-003-valid-bsc.json"
+      ],
+      "executedAt": "2026-07-11T18:56:09.558Z"
+    },
+    {
+      "id": "P3-GRA-016",
+      "category": "Graduation",
+      "status": "PASS",
+      "actual": "Valid BSc graduation closed active enrollment and created history",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-GRA-003-valid-bsc.txt",
+        "docs/phase-3/evidence/database/P3-GRA-003-valid-bsc.json"
+      ],
+      "executedAt": "2026-07-11T18:56:09.558Z"
+    },
+    {
+      "id": "P3-HIS-006",
+      "category": "Graduation",
+      "status": "PASS",
+      "actual": "Valid BSc graduation closed active enrollment and created history",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-GRA-003-valid-bsc.txt",
+        "docs/phase-3/evidence/database/P3-GRA-003-valid-bsc.json"
+      ],
+      "executedAt": "2026-07-11T18:56:09.558Z"
+    },
+    {
+      "id": "P3-GRA-004",
+      "category": "Graduation",
+      "status": "PASS",
+      "actual": "Valid MSc graduation succeeded",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-GRA-004-valid-msc.txt"
+      ],
+      "executedAt": "2026-07-11T18:56:17.905Z"
+    },
+    {
+      "id": "P3-GRA-005",
+      "category": "Graduation",
+      "status": "PASS",
+      "actual": "Incomplete curriculum graduation rejected with 400",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-GRA-005-incomplete-curriculum.txt"
+      ],
+      "executedAt": "2026-07-11T18:56:19.964Z"
+    },
+    {
+      "id": "P3-GRA-006",
+      "category": "Graduation",
+      "status": "PASS",
+      "actual": "Unpublished graduation rejected with 400",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-GRA-006-unpublished.txt"
+      ],
+      "executedAt": "2026-07-11T18:56:22.544Z"
+    },
+    {
+      "id": "P3-GRA-007",
+      "category": "Graduation",
+      "status": "PASS",
+      "actual": "Missing final-year graduation rejected with 400",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-GRA-007-missing-final-year.txt"
+      ],
+      "executedAt": "2026-07-11T18:56:24.541Z"
+    },
+    {
+      "id": "P3-GRA-008",
+      "category": "Graduation",
+      "status": "PASS",
+      "actual": "Leave-state graduation rejected with 400",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-GRA-008-leave-state.txt"
+      ],
+      "executedAt": "2026-07-11T18:56:25.206Z"
+    },
+    {
+      "id": "P3-GRA-009",
+      "category": "Graduation",
+      "status": "PASS",
+      "actual": "Dropped student graduation rejected with 400",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-GRA-009-dropped.txt"
+      ],
+      "executedAt": "2026-07-11T18:56:25.874Z"
+    },
+    {
+      "id": "P3-GRA-010",
+      "category": "Graduation",
+      "status": "PASS",
+      "actual": "Duplicate graduation rejected with 400",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-GRA-010-duplicate.txt"
+      ],
+      "executedAt": "2026-07-11T18:56:26.557Z"
+    },
+    {
+      "id": "P3-GRA-011",
+      "category": "Graduation",
+      "status": "PASS",
+      "actual": "Duplicate certificate rejected with 400",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-GRA-011-duplicate-certificate.txt"
+      ],
+      "executedAt": "2026-07-11T18:56:27.242Z"
+    },
+    {
+      "id": "P3-GRA-012",
+      "category": "Graduation",
+      "status": "PASS",
+      "actual": "Invalid CGPA rejected by schema validation",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-GRA-012-invalid-cgpa.txt"
+      ],
+      "executedAt": "2026-07-11T18:56:27.603Z"
+    },
+    {
+      "id": "P3-GRA-013",
+      "category": "Graduation",
+      "status": "PASS",
+      "actual": "Invalid graduation date rejected by schema validation",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-GRA-013-invalid-date.txt"
+      ],
+      "executedAt": "2026-07-11T18:56:27.953Z"
+    },
+    {
+      "id": "P3-AUTH-BR-004",
+      "category": "Auth",
+      "status": "PASS",
+      "actual": "CSE admin url /admin/enrollments",
+      "evidence": [
+        "docs/phase-3/evidence/browser/P3-AUTH-BR-005-foreign-enrollment-denied.png",
+        "docs/phase-3/evidence/console/P3-AUTH-BR-005-foreign-enrollment-denied.txt",
+        "docs/phase-3/evidence/network/P3-AUTH-BR-005-foreign-enrollment-denied.txt",
+        "docs/phase-3/evidence/browser/P3-AUTH-BR-005-foreign-enrollment-denied.json"
+      ],
+      "executedAt": "2026-07-11T18:56:31.624Z"
+    },
+    {
+      "id": "P3-AUTH-BR-007",
+      "category": "Auth",
+      "status": "PASS",
+      "actual": "EEE department admin was denied access to CSE timeline",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-AUTH-BR-007-eee-foreign-denied.txt"
+      ],
+      "executedAt": "2026-07-11T18:56:32.085Z"
+    },
+    {
+      "id": "P3-AUTH-BR-002",
+      "category": "Auth",
+      "status": "PASS",
+      "actual": "Super admin promotion endpoint returned business response 200",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-AUTH-BR-002-super-admin-promotion-probe.txt"
+      ],
+      "executedAt": "2026-07-11T18:56:33.565Z"
+    },
+    {
+      "id": "P3-AUTH-BR-005",
+      "category": "Auth",
+      "status": "PASS",
+      "actual": "Foreign department enrollment management was denied",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-AUTH-BR-005-foreign-enrollment.txt"
+      ],
+      "executedAt": "2026-07-11T18:56:33.908Z"
+    },
+    {
+      "id": "P3-AUTH-BR-006",
+      "category": "Auth",
+      "status": "PASS",
+      "actual": "Foreign department promotion write was denied",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-AUTH-BR-006-foreign-promotion.txt"
+      ],
+      "executedAt": "2026-07-11T18:56:34.259Z"
+    },
+    {
+      "id": "P3-AUTH-BR-009",
+      "category": "Auth",
+      "status": "PASS",
+      "actual": "Teacher direct admin API access was denied",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-AUTH-BR-009-teacher-api-denied.txt"
+      ],
+      "executedAt": "2026-07-11T18:56:34.501Z"
+    },
+    {
+      "id": "P3-AUTH-BR-010",
+      "category": "Auth",
+      "status": "PASS",
+      "actual": "Student own academic history page rendered successfully",
+      "evidence": [
+        "docs/phase-3/evidence/browser/P3-AUTH-BR-010-own-history-browser.png",
+        "docs/phase-3/evidence/console/P3-AUTH-BR-010-own-history-browser.txt",
+        "docs/phase-3/evidence/network/P3-AUTH-BR-010-own-history-browser.txt",
+        "docs/phase-3/evidence/browser/P3-AUTH-BR-010-own-history-browser.json"
+      ],
+      "executedAt": "2026-07-11T18:56:38.774Z"
+    },
+    {
+      "id": "P3-HIS-010",
+      "category": "History",
+      "status": "PASS",
+      "actual": "Student own academic history API rendered successfully",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-HIS-010-student-own-history.txt"
+      ],
+      "executedAt": "2026-07-11T18:56:40.817Z"
+    },
+    {
+      "id": "P3-AUTH-BR-012",
+      "category": "Auth",
+      "status": "PASS",
+      "actual": "Student admin enrollment access was denied",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-AUTH-BR-012-student-admin-denied.txt"
+      ],
+      "executedAt": "2026-07-11T18:56:41.039Z"
+    },
+    {
+      "id": "P3-AUTH-BR-013",
+      "category": "Auth",
+      "status": "PASS",
+      "actual": "Student promotion write was denied",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-AUTH-BR-013-student-promotion-denied.txt"
+      ],
+      "executedAt": "2026-07-11T18:56:41.269Z"
+    },
+    {
+      "id": "P3-AUTH-BR-011",
+      "category": "Auth",
+      "status": "PASS",
+      "actual": "Student foreign history access was denied",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-AUTH-BR-011-student-foreign-history.txt"
+      ],
+      "executedAt": "2026-07-11T18:56:41.504Z"
+    },
+    {
+      "id": "P3-HIS-011",
+      "category": "Auth",
+      "status": "PASS",
+      "actual": "Student foreign history access was denied",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-AUTH-BR-011-student-foreign-history.txt"
+      ],
+      "executedAt": "2026-07-11T18:56:41.504Z"
+    },
+    {
+      "id": "P3-AUTH-BR-017",
+      "category": "Auth",
+      "status": "PASS",
+      "actual": "Denied browser flow redirected to a safe destination",
+      "evidence": [
+        "docs/phase-3/evidence/browser/P3-AUTH-BR-017-secure-denial.png",
+        "docs/phase-3/evidence/console/P3-AUTH-BR-017-secure-denial.txt",
+        "docs/phase-3/evidence/network/P3-AUTH-BR-017-secure-denial.txt",
+        "docs/phase-3/evidence/browser/P3-AUTH-BR-017-secure-denial.json"
+      ],
+      "executedAt": "2026-07-11T18:56:44.644Z"
+    },
+    {
+      "id": "P3-AUTH-BR-014",
+      "category": "Auth",
+      "status": "PASS",
+      "actual": "Unauthenticated admin API was denied",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-AUTH-BR-014-anon-admin.txt"
+      ],
+      "executedAt": "2026-07-11T18:56:44.663Z"
+    },
+    {
+      "id": "P3-AUTH-BR-015",
+      "category": "Auth",
+      "status": "PASS",
+      "actual": "Unauthenticated history API was denied",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-AUTH-BR-015-anon-history.txt"
+      ],
+      "executedAt": "2026-07-11T18:56:44.681Z"
+    },
+    {
+      "id": "P3-LEG-001",
+      "category": "Legacy",
+      "status": "PASS",
+      "actual": "Legacy-only student profile page rendered",
+      "evidence": [
+        "docs/phase-3/evidence/browser/P3-LEG-001-trent-profile.png",
+        "docs/phase-3/evidence/console/P3-LEG-001-trent-profile.txt",
+        "docs/phase-3/evidence/network/P3-LEG-001-trent-profile.txt",
+        "docs/phase-3/evidence/browser/P3-LEG-001-trent-profile.json"
+      ],
+      "executedAt": "2026-07-11T18:56:47.658Z"
+    },
+    {
+      "id": "P3-LEG-003",
+      "category": "Legacy",
+      "status": "PASS",
+      "actual": "Legacy-only student saw fallback eligible exam list",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-LEG-003-trent-exams.txt",
+        "docs/phase-3/evidence/database/P3-LEG-003-trent-exams.json"
+      ],
+      "executedAt": "2026-07-11T18:56:49.481Z"
+    },
+    {
+      "id": "P3-EXM-002",
+      "category": "Legacy",
+      "status": "PASS",
+      "actual": "Legacy-only student saw fallback eligible exam list",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-LEG-003-trent-exams.txt",
+        "docs/phase-3/evidence/database/P3-LEG-003-trent-exams.json"
+      ],
+      "executedAt": "2026-07-11T18:56:49.481Z"
+    },
+    {
+      "id": "P3-LEG-002",
+      "category": "Legacy",
+      "status": "PASS",
+      "actual": "Legacy StudentSubject remained usable for exam visibility",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-LEG-003-trent-exams.txt",
+        "docs/phase-3/evidence/database/P3-LEG-003-trent-exams.json"
+      ],
+      "executedAt": "2026-07-11T18:56:49.481Z"
+    },
+    {
+      "id": "P3-LEG-006",
+      "category": "Legacy",
+      "status": "PASS",
+      "actual": "Legacy-only student could open legacy-compatible exam detail",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-LEG-006-trent-exam-detail.txt"
+      ],
+      "executedAt": "2026-07-11T18:56:52.068Z"
+    },
+    {
+      "id": "P3-LEG-004",
+      "category": "Legacy",
+      "status": "PASS",
+      "actual": "Teacher assignment page rendered",
+      "evidence": [
+        "docs/phase-3/evidence/browser/P3-LEG-004-teacher-assignment-page.png",
+        "docs/phase-3/evidence/console/P3-LEG-004-teacher-assignment-page.txt",
+        "docs/phase-3/evidence/network/P3-LEG-004-teacher-assignment-page.txt",
+        "docs/phase-3/evidence/browser/P3-LEG-004-teacher-assignment-page.json"
+      ],
+      "executedAt": "2026-07-11T18:56:54.409Z"
+    },
+    {
+      "id": "P3-LEG-005",
+      "category": "Legacy",
+      "status": "PASS",
+      "actual": "Teacher question page rendered",
+      "evidence": [
+        "docs/phase-3/evidence/browser/P3-LEG-005-teacher-questions-page.png",
+        "docs/phase-3/evidence/console/P3-LEG-005-teacher-questions-page.txt",
+        "docs/phase-3/evidence/network/P3-LEG-005-teacher-questions-page.txt",
+        "docs/phase-3/evidence/browser/P3-LEG-005-teacher-questions-page.json"
+      ],
+      "executedAt": "2026-07-11T18:56:56.619Z"
+    },
+    {
+      "id": "P3-LEG-008",
+      "category": "Legacy",
+      "status": "PASS",
+      "actual": "Teacher coursework page rendered",
+      "evidence": [
+        "docs/phase-3/evidence/browser/P3-LEG-008-coursework-page-placeholder.png",
+        "docs/phase-3/evidence/console/P3-LEG-008-coursework-page-placeholder.txt",
+        "docs/phase-3/evidence/network/P3-LEG-008-coursework-page-placeholder.txt",
+        "docs/phase-3/evidence/browser/P3-LEG-008-coursework-page-placeholder.json"
+      ],
+      "executedAt": "2026-07-11T18:57:01.714Z"
+    },
+    {
+      "id": "P3-LEG-012",
+      "category": "Legacy",
+      "status": "PASS",
+      "actual": "Teacher coursework page rendered",
+      "evidence": [
+        "docs/phase-3/evidence/browser/P3-LEG-008-coursework-page-placeholder.png",
+        "docs/phase-3/evidence/console/P3-LEG-008-coursework-page-placeholder.txt",
+        "docs/phase-3/evidence/network/P3-LEG-008-coursework-page-placeholder.txt",
+        "docs/phase-3/evidence/browser/P3-LEG-008-coursework-page-placeholder.json"
+      ],
+      "executedAt": "2026-07-11T18:57:01.714Z"
+    },
+    {
+      "id": "P3-LEG-009",
+      "category": "Legacy",
+      "status": "PASS",
+      "actual": "Legacy student ebook page rendered",
+      "evidence": [
+        "docs/phase-3/evidence/browser/P3-LEG-009-trent-ebooks.png",
+        "docs/phase-3/evidence/console/P3-LEG-009-trent-ebooks.txt",
+        "docs/phase-3/evidence/network/P3-LEG-009-trent-ebooks.txt",
+        "docs/phase-3/evidence/browser/P3-LEG-009-trent-ebooks.json"
+      ],
+      "executedAt": "2026-07-11T18:57:04.230Z"
+    },
+    {
+      "id": "P3-TRF-004",
+      "category": "Transfer",
+      "status": "PASS",
+      "actual": "Language-section transfer succeeded with target language context",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-TRF-004-language-transfer.txt",
+        "docs/phase-3/evidence/database/P3-TRF-004-language-transfer.json"
+      ],
+      "executedAt": "2026-07-11T18:57:13.575Z"
+    },
+    {
+      "id": "P3-LEG-010",
+      "category": "Legacy",
+      "status": "PASS",
+      "actual": "Active enrollment safely overrode conflicting legacy scope",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-LEG-010-uma-active-precedence.txt"
+      ],
+      "executedAt": "2026-07-11T18:57:16.271Z"
+    },
+    {
+      "id": "P3-LEG-011",
+      "category": "Legacy",
+      "status": "PASS",
+      "actual": "Active enrollment safely overrode conflicting legacy scope",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-LEG-010-uma-active-precedence.txt"
+      ],
+      "executedAt": "2026-07-11T18:57:16.271Z"
+    },
+    {
+      "id": "P3-UI-002",
+      "category": "UI",
+      "status": "PASS",
+      "actual": "Teacher ebook page rendered safely",
+      "evidence": [
+        "docs/phase-3/evidence/browser/P3-UI-002-empty-safe.png",
+        "docs/phase-3/evidence/console/P3-UI-002-empty-safe.txt",
+        "docs/phase-3/evidence/network/P3-UI-002-empty-safe.txt",
+        "docs/phase-3/evidence/browser/P3-UI-002-empty-safe.json"
+      ],
+      "executedAt": "2026-07-11T18:57:19.033Z"
+    },
+    {
+      "id": "P3-EXM-001",
+      "category": "Exam",
+      "status": "PASS",
+      "actual": "Matching active enrollment saw expected live exam",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-EXM-001-matching-active.txt"
+      ],
+      "executedAt": "2026-07-11T18:57:21.741Z"
+    },
+    {
+      "id": "P3-EXM-003",
+      "category": "Exam",
+      "status": "PASS",
+      "actual": "Wrong-department exam access was denied",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-EXM-003-wrong-department.txt"
+      ],
+      "executedAt": "2026-07-11T18:57:24.775Z"
+    },
+    {
+      "id": "P3-EXM-004",
+      "category": "Exam",
+      "status": "PASS",
+      "actual": "Wrong-program exam access was denied",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-EXM-004-wrong-program.txt"
+      ],
+      "executedAt": "2026-07-11T18:57:28.099Z"
+    },
+    {
+      "id": "P3-EXM-007",
+      "category": "Exam",
+      "status": "PASS",
+      "actual": "Wrong-semester exam access was denied",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-EXM-007-wrong-semester.txt"
+      ],
+      "executedAt": "2026-07-11T18:57:29.855Z"
+    },
+    {
+      "id": "P3-EXM-006",
+      "category": "Exam",
+      "status": "PASS",
+      "actual": "Wrong-year exam access was denied",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-EXM-006-wrong-year.txt"
+      ],
+      "executedAt": "2026-07-11T18:57:32.926Z"
+    },
+    {
+      "id": "P3-EXM-005",
+      "category": "Exam",
+      "status": "PASS",
+      "actual": "Wrong-language exam access was denied",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-EXM-005-wrong-language.txt"
+      ],
+      "executedAt": "2026-07-11T18:57:36.219Z"
+    },
+    {
+      "id": "P3-EXM-009",
+      "category": "Exam",
+      "status": "PASS",
+      "actual": "Wrong-subject exam access was denied",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-EXM-009-wrong-subject.txt"
+      ],
+      "executedAt": "2026-07-11T18:57:38.291Z"
+    },
+    {
+      "id": "P3-EXM-011",
+      "category": "Exam",
+      "status": "PASS",
+      "actual": "Transferred student only saw target-scope exams",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-EXM-011-victor-list.txt"
+      ],
+      "executedAt": "2026-07-11T18:57:41.036Z"
+    },
+    {
+      "id": "P3-EXM-013",
+      "category": "Exam",
+      "status": "PASS",
+      "actual": "Transferred student only saw target-scope exams",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-EXM-011-victor-list.txt"
+      ],
+      "executedAt": "2026-07-11T18:57:41.036Z"
+    },
+    {
+      "id": "P3-EXM-012",
+      "category": "Exam",
+      "status": "PASS",
+      "actual": "Transferred student old direct URL was denied",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-EXM-012-victor-old-direct.txt"
+      ],
+      "executedAt": "2026-07-11T18:57:42.770Z"
+    },
+    {
+      "id": "P3-EXM-008",
+      "category": "Exam",
+      "status": "PASS",
+      "actual": "Transferred student old direct URL was denied",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-EXM-012-victor-old-direct.txt"
+      ],
+      "executedAt": "2026-07-11T18:57:42.770Z"
+    },
+    {
+      "id": "P3-EXM-014",
+      "category": "Exam",
+      "status": "PASS",
+      "actual": "Graduated student could not access new live exam",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-EXM-014-graduated-denied.txt"
+      ],
+      "executedAt": "2026-07-11T18:57:45.821Z"
+    },
+    {
+      "id": "P3-GRA-018",
+      "category": "Exam",
+      "status": "PASS",
+      "actual": "Graduated student could not access new live exam",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-EXM-014-graduated-denied.txt"
+      ],
+      "executedAt": "2026-07-11T18:57:45.821Z"
+    },
+    {
+      "id": "P3-EXM-020",
+      "category": "Exam",
+      "status": "PASS",
+      "actual": "Graduated student historical published result remained accessible",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-EXM-020-peggy-history-result.txt"
+      ],
+      "executedAt": "2026-07-11T18:57:48.021Z"
+    },
+    {
+      "id": "P3-GRA-019",
+      "category": "Exam",
+      "status": "PASS",
+      "actual": "Graduated student historical published result remained accessible",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-EXM-020-peggy-history-result.txt"
+      ],
+      "executedAt": "2026-07-11T18:57:48.021Z"
+    },
+    {
+      "id": "P3-EXM-010",
+      "category": "Exam",
+      "status": "PASS",
+      "actual": "Student on leave lost exam access",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-EXM-010-leave-denied.txt"
+      ],
+      "executedAt": "2026-07-11T18:57:51.065Z"
+    },
+    {
+      "id": "P3-LEV-012",
+      "category": "Exam",
+      "status": "PASS",
+      "actual": "Student on leave lost exam access",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-EXM-010-leave-denied.txt"
+      ],
+      "executedAt": "2026-07-11T18:57:51.065Z"
+    },
+    {
+      "id": "P3-EXM-015",
+      "category": "Exam",
+      "status": "PASS",
+      "actual": "Dropped or inactive enrollment exam access was denied",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-EXM-015-dropped.txt"
+      ],
+      "executedAt": "2026-07-11T18:57:53.987Z"
+    },
+    {
+      "id": "P3-EXM-016",
+      "category": "Exam",
+      "status": "PASS",
+      "actual": "Dropped or inactive enrollment exam access was denied",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-EXM-015-dropped.txt"
+      ],
+      "executedAt": "2026-07-11T18:57:53.987Z"
+    },
+    {
+      "id": "P3-EXM-017",
+      "category": "Exam",
+      "status": "PASS",
+      "actual": "Foreign result access was denied",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-EXM-017-foreign-result.txt"
+      ],
+      "executedAt": "2026-07-11T18:57:56.453Z"
+    },
+    {
+      "id": "P3-LEG-007",
+      "category": "Legacy",
+      "status": "PASS",
+      "actual": "Published result detail remained accessible to owning student",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-LEG-007-result-detail.txt"
+      ],
+      "executedAt": "2026-07-11T18:57:57.613Z"
+    },
+    {
+      "id": "P3-AUTH-BR-016",
+      "category": "Auth",
+      "status": "PASS",
+      "actual": "Foreign department student was not visible in CSE admin UI",
+      "evidence": [
+        "docs/phase-3/evidence/browser/P3-AUTH-BR-016-cse-admin-scope.png",
+        "docs/phase-3/evidence/console/P3-AUTH-BR-016-cse-admin-scope.txt",
+        "docs/phase-3/evidence/network/P3-AUTH-BR-016-cse-admin-scope.txt",
+        "docs/phase-3/evidence/browser/P3-AUTH-BR-016-cse-admin-scope.json"
+      ],
+      "executedAt": "2026-07-11T18:58:03.902Z"
+    },
+    {
+      "id": "P3-UI-009",
+      "category": "UI",
+      "status": "PASS",
+      "actual": "Refresh retained a safe student history state",
+      "evidence": [
+        "docs/phase-3/evidence/browser/P3-UI-009-refresh-safe.png",
+        "docs/phase-3/evidence/console/P3-UI-009-refresh-safe.txt",
+        "docs/phase-3/evidence/network/P3-UI-009-refresh-safe.txt",
+        "docs/phase-3/evidence/browser/P3-UI-009-refresh-safe.json"
+      ],
+      "executedAt": "2026-07-11T18:58:06.313Z"
+    },
+    {
+      "id": "P3-UI-001",
+      "category": "UI",
+      "status": "PASS",
+      "actual": "Lifecycle form displayed a safe saving state during submit",
+      "evidence": [
+        "docs/phase-3/evidence/browser/P3-UI-001-loading-safe.png",
+        "docs/phase-3/evidence/console/P3-UI-001-loading-safe.txt",
+        "docs/phase-3/evidence/network/P3-UI-001-loading-safe.txt",
+        "docs/phase-3/evidence/browser/P3-UI-001-loading-safe.json"
+      ],
+      "executedAt": "2026-07-11T18:58:08.089Z"
+    },
+    {
+      "id": "P3-UI-003",
+      "category": "UI",
+      "status": "PASS",
+      "actual": "Validation blocked submission with 3 invalid fields",
+      "evidence": [
+        "docs/phase-3/evidence/browser/P3-UI-003-validation.png",
+        "docs/phase-3/evidence/console/P3-UI-003-validation.txt",
+        "docs/phase-3/evidence/network/P3-UI-003-validation.txt",
+        "docs/phase-3/evidence/browser/P3-UI-003-validation.json"
+      ],
+      "executedAt": "2026-07-11T18:58:09.707Z"
+    },
+    {
+      "id": "P3-UI-005",
+      "category": "UI",
+      "status": "PASS",
+      "actual": "Server error was surfaced safely in the form",
+      "evidence": [
+        "docs/phase-3/evidence/browser/P3-UI-005-server-error.png",
+        "docs/phase-3/evidence/console/P3-UI-005-server-error.txt",
+        "docs/phase-3/evidence/network/P3-UI-005-server-error.txt",
+        "docs/phase-3/evidence/browser/P3-UI-005-server-error.json"
+      ],
+      "executedAt": "2026-07-11T18:58:11.465Z"
+    },
+    {
+      "id": "P3-UI-006",
+      "category": "UI",
+      "status": "PASS",
+      "actual": "Duplicate submit was prevented while request was inflight",
+      "evidence": [
+        "docs/phase-3/evidence/browser/P3-UI-006-duplicate-submit.png",
+        "docs/phase-3/evidence/console/P3-UI-006-duplicate-submit.txt",
+        "docs/phase-3/evidence/network/P3-UI-006-duplicate-submit.txt",
+        "docs/phase-3/evidence/browser/P3-UI-006-duplicate-submit.json"
+      ],
+      "executedAt": "2026-07-11T18:59:15.076Z"
+    },
+    {
+      "id": "P3-UI-007",
+      "category": "UI",
+      "status": "PASS",
+      "actual": "Form reopened in a cleared state after successful create",
+      "evidence": [
+        "docs/phase-3/evidence/browser/P3-UI-007-form-reset.png",
+        "docs/phase-3/evidence/console/P3-UI-007-form-reset.txt",
+        "docs/phase-3/evidence/network/P3-UI-007-form-reset.txt",
+        "docs/phase-3/evidence/browser/P3-UI-007-form-reset.json"
+      ],
+      "executedAt": "2026-07-11T18:59:17.435Z"
+    },
+    {
+      "id": "P3-UI-008",
+      "category": "UI",
+      "status": "PASS",
+      "actual": "Dependent select values were cleared after parent scope changed",
+      "evidence": [
+        "docs/phase-3/evidence/browser/P3-UI-008-dependent-cleanup.png",
+        "docs/phase-3/evidence/console/P3-UI-008-dependent-cleanup.txt",
+        "docs/phase-3/evidence/network/P3-UI-008-dependent-cleanup.txt",
+        "docs/phase-3/evidence/browser/P3-UI-008-dependent-cleanup.json"
+      ],
+      "executedAt": "2026-07-11T18:59:20.892Z"
+    },
+    {
+      "id": "P3-UI-010",
+      "category": "UI",
+      "status": "PASS",
+      "actual": "Student page rendered without hydration or console errors",
+      "evidence": [
+        "docs/phase-3/evidence/browser/P3-UI-010-no-hydration.png",
+        "docs/phase-3/evidence/console/P3-UI-010-no-hydration.txt",
+        "docs/phase-3/evidence/network/P3-UI-010-no-hydration.txt",
+        "docs/phase-3/evidence/browser/P3-UI-010-no-hydration.json"
+      ],
+      "executedAt": "2026-07-11T18:59:23.006Z"
+    },
+    {
+      "id": "P3-EXM-018",
+      "category": "Exam",
+      "status": "PASS",
+      "actual": "Socket join was denied for invalid exam scope",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-EXM-018-invalid-socket-join.txt"
+      ],
+      "executedAt": "2026-07-11T18:59:25.493Z"
+    },
+    {
+      "id": "P3-EXM-019",
+      "category": "Exam",
+      "status": "PASS",
+      "actual": "Answer save was denied after the attempt became invalidated",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-EXM-019-answer-save-denied.txt"
+      ],
+      "executedAt": "2026-07-11T18:59:34.753Z"
+    },
+    {
+      "id": "P3-HIS-008",
+      "category": "History",
+      "status": "PASS",
+      "actual": "Timeline events were sorted chronologically with context fields preserved",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-HIS-008-grace-chronology.txt"
+      ],
+      "executedAt": "2026-07-11T18:59:36.622Z"
+    },
+    {
+      "id": "P3-HIS-009",
+      "category": "History",
+      "status": "PASS",
+      "actual": "Timeline events were sorted chronologically with context fields preserved",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-HIS-008-grace-chronology.txt"
+      ],
+      "executedAt": "2026-07-11T18:59:36.622Z"
+    },
+    {
+      "id": "P3-HIS-005",
+      "category": "History",
+      "status": "PASS",
+      "actual": "Readmission timeline event was visible",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-HIS-005-readmission-timeline.txt"
+      ],
+      "executedAt": "2026-07-11T18:59:38.512Z"
+    },
+    {
+      "id": "P3-HIS-012",
+      "category": "History",
+      "status": "PASS",
+      "actual": "No duplicate timeline rows were detected for Liam",
+      "evidence": [
+        "docs/phase-3/evidence/network/P3-HIS-012-liam-no-duplicate.txt"
+      ],
+      "executedAt": "2026-07-11T18:59:40.401Z"
+    }
+  ]
+}

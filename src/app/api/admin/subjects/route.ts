@@ -1,6 +1,7 @@
 // src/app/api/admin/subjects/route.ts
 import { NextRequest, NextResponse } from 'next/server'
 import { auth } from '@/lib/auth'
+import { isPrismaKnownError } from '@/lib/api-errors'
 import { canManageDepartment } from '@/lib/permissions'
 import { prisma } from '@/lib/prisma'
 import { subjectSchema } from '@/lib/validators'
@@ -37,8 +38,8 @@ export async function POST(req: NextRequest) {
   try {
     const subject = await prisma.subject.create({ data: parsed.data })
     return NextResponse.json(subject, { status: 201 })
-  } catch (err: any) {
-    if (err.code === 'P2002') return NextResponse.json({ error: 'Code already exists' }, { status: 409 })
+  } catch (error: unknown) {
+    if (isPrismaKnownError(error) && error.code === 'P2002') return NextResponse.json({ error: 'Code already exists' }, { status: 409 })
     return NextResponse.json({ error: 'Failed' }, { status: 500 })
   }
 }

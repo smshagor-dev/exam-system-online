@@ -1,8 +1,20 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { auth } from '@/lib/auth'
+import { getErrorMessage, isPrismaKnownError } from '@/lib/api-errors'
+import { resolveAcademicOfferingScope } from '@/lib/academic-scope'
 import { canManageDepartment } from '@/lib/permissions'
 import { prisma } from '@/lib/prisma'
 import { UserRole } from '@prisma/client'
+
+type AssignmentInput = {
+  academicOfferingId?: string
+  departmentId?: string
+  subjectId?: string
+  languageId?: string
+  groupId?: string
+  academicYearId?: string
+  semesterId?: string
+}
 
 export async function POST(req: NextRequest) {
   const session = await auth()
@@ -12,7 +24,7 @@ export async function POST(req: NextRequest) {
 
   const body = await req.json()
   const { teacherId } = body
-  const assignments = Array.isArray(body.assignments)
+  const assignments: AssignmentInput[] = Array.isArray(body.assignments)
     ? body.assignments
     : [body]
 
@@ -34,7 +46,7 @@ export async function POST(req: NextRequest) {
       const results = []
 
       for (const assignmentInput of assignments) {
-        const { departmentId, subjectId, languageId, groupId, academicYearId, semesterId } = assignmentInput ?? {}
+        const { academicOfferingId, departmentId, subjectId, languageId, groupId, academicYearId, semesterId } = assignmentInput ?? {}
 
         if (!departmentId || !subjectId || !languageId || !groupId || !academicYearId || !semesterId) {
           throw new Error('Missing required assignment fields')
@@ -64,8 +76,15 @@ export async function POST(req: NextRequest) {
         if (!year) throw new Error('Invalid academic year')
         if (!semester) throw new Error('Invalid semester')
 
+        if (academicOfferingId) {
+          const resolved = await resolveAcademicOfferingScope({ academicOfferingId }, tx)
+          if (resolved.offering && resolved.offering.departmentId !== departmentId) {
+            throw new Error('Academic offering does not belong to the selected department')
+          }
+        }
+
         const created = await tx.teacherAssignment.create({
-          data: { teacherId, departmentId, subjectId, languageId, groupId, academicYearId, semesterId },
+          data: { teacherId, departmentId, subjectId, languageId, groupId, academicYearId, semesterId, academicOfferingId },
           include: { subject: true, language: true, group: true, academicYear: true, semester: true, department: true },
         })
 
@@ -79,19 +98,20 @@ export async function POST(req: NextRequest) {
       { count: createdAssignments.length, assignments: createdAssignments, homeDepartmentId: teacher.departmentId },
       { status: 201 }
     )
-  } catch (err: any) {
-    if (err.code === 'P2002') {
+  } catch (error: unknown) {
+    if (isPrismaKnownError(error) && error.code === 'P2002') {
       return NextResponse.json({ error: 'One or more assignments already exist' }, { status: 409 })
     }
 
-    if (typeof err.message === 'string' && err.message.length > 0) {
+    const message = getErrorMessage(error, 'Failed to create assignment')
+    if (message.length > 0) {
       const status =
-        err.message === 'Forbidden for this department' ? 403 :
-        err.message.startsWith('Missing required') ? 400 :
-        err.message.startsWith('Invalid') || err.message.includes('Subject does not belong') ? 400 :
+        message === 'Forbidden for this department' ? 403 :
+        message.startsWith('Missing required') ? 400 :
+        message.startsWith('Invalid') || message.includes('Subject does not belong') ? 400 :
         500
 
-      return NextResponse.json({ error: err.message }, { status })
+      return NextResponse.json({ error: message }, { status })
     }
 
     return NextResponse.json({ error: 'Failed to create assignment' }, { status: 500 })

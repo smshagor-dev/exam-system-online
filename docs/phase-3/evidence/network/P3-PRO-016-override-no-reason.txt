@@ -1,0 +1,20 @@
+POST /api/admin/promotions
+
+request={
+  "departmentId": "cmrgowf870009pmlzozbfj64d",
+  "academicSessionId": "cmrgowg82000dpmlzdld2uohm",
+  "programId": "cmrgowhy9000ppmlzh677ckfa",
+  "programYearId": "cmrgowj6x000zpmlzp6cgy3la",
+  "semesterId": "cmrgowdz80004pmlzugoobdpz",
+  "programSemesterId": "cmrgowkxv001dpmlzbef3cusu",
+  "groupId": "cmrgowmno001rpmlzdone6f4o",
+  "academicYearId": "cmrgowd8g0001pmlzbmn74h0l",
+  "departmentLanguageId": "cmrgowh7r000jpmlz9aqpisti",
+  "languageId": "cmrgoweq30007pmlz94jny6v0",
+  "studentId": "cmrgox60k004xpmlztxp8kys6",
+  "manualOverride": true
+}
+
+status=400
+
+body={"error":{"formErrors":[],"fieldErrors":{"overrideReason":["Override reason is required when manual override is enabled"]}}}

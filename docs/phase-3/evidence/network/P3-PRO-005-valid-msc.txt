@@ -1,0 +1,19 @@
+POST /api/admin/promotions
+
+request={
+  "departmentId": "cmrgowf870009pmlzozbfj64d",
+  "academicSessionId": "cmrgowg82000dpmlzdld2uohm",
+  "programId": "cmrgowig6000tpmlzxenr20zt",
+  "programYearId": "cmrgowjoy0013pmlzoat444yl",
+  "semesterId": "cmrgowdz80004pmlzugoobdpz",
+  "programSemesterId": "cmrgowlo5001jpmlzskfkfz69",
+  "groupId": "cmrgownmj001zpmlzm1pgkgpg",
+  "academicYearId": "cmrgowcza0000pmlzakerzxid",
+  "departmentLanguageId": "cmrgowgyv000hpmlzvs1rw52h",
+  "languageId": "cmrgoweh20006pmlzrlak2hwh",
+  "studentId": "cmrgq2hk10010d0ddi1nl0qs9"
+}
+
+status=201
+
+body={"promotion":{"id":"cmrgq2o2z0029i1uxepp5cvog","studentId":"cmrgq2hk10010d0ddi1nl0qs9","fromEnrollmentId":"cmrgq2jbm001wi1uxgjlghfyj","toEnrollmentId":"cmrgq2nwr0027i1ux0pggf2a6","fromAcademicSessionId":"cmrgowg82000dpmlzdld2uohm","toAcademicSessionId":"cmrgowg82000dpmlzdld2uohm","fromProgramId":"cmrgowig6000tpmlzxenr20zt","toProgramId":"cmrgowig6000tpmlzxenr20zt","fromProgramYearId":"cmrgowjoy0013pmlzoat444yl","toProgramYearId":"cmrgowjoy0013pmlzoat444yl","fromSemesterId":"cmrgowdqf0003pmlzzstm2atu","toSemesterId":"cmrgowdz80004pmlzugoobdpz","fromProgramSemesterId":"cmrgowlfi001hpmlzsphikx48"

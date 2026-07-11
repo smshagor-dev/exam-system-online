@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   serverExternalPackages: ['bcryptjs'],
+  allowedDevOrigins: ['127.0.0.1'],
   // Custom server handles websockets - disable default server actions if needed
   webpack: (config) => {
     config.externals.push({

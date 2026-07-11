@@ -5,7 +5,24 @@
  */
 
 import { z } from 'zod'
-import { QuestionType, ResultMode, ExamStatus, RegistrationFieldType, AiProvider } from '@prisma/client'
+import {
+  QuestionType,
+  ResultMode,
+  ExamStatus,
+  RegistrationFieldType,
+  AiProvider,
+  AcademicOfferingStatus,
+  StudentEnrollmentStatus,
+  StudentTransferType,
+  StudentLeaveType,
+  UserRole,
+} from '@prisma/client/index'
+
+const optionalCuid = () => z.string().cuid().optional().nullable()
+const normalizedCodeSchema = z.string().trim().min(2).max(30).transform((value) => value.toUpperCase())
+const dateTimeStringSchema = z.string().trim().refine((value) => !Number.isNaN(new Date(value).getTime()), {
+  message: 'Invalid date/time',
+})
 
 // ─── Auth ──────────────────────────────────────────────────────────────────
 
@@ -18,9 +35,7 @@ export const registerStudentSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
   email: z.string().email('Invalid email'),
   password: z.string().min(8, 'Password must be at least 8 characters'),
-  course: z.enum(['BACHELOR_OF_SCIENCE', 'MASTER_OF_SCIENCE'], {
-    message: 'Invalid course',
-  }),
+  course: normalizedCodeSchema,
   departmentId: z.string().cuid('Invalid department'),
   subjectId: z.string().cuid('Invalid subject'),
   languageId: z.string().cuid('Invalid department language'),
@@ -94,7 +109,7 @@ export const subjectSchema = z.object({
   name: z.string().min(2),
   code: z.string().min(2).max(15).toUpperCase(),
   departmentId: z.string().cuid(),
-  languageId: z.string().cuid('Invalid department language'),
+  languageId: optionalCuid(),
   description: z.string().optional(),
 })
 
@@ -197,9 +212,17 @@ export const aiSettingsSchema = z.object({
 })
 
 export const groupSchema = z.object({
-  name: z.string().min(1),
-  code: z.string().min(2).max(15).toUpperCase(),
-  academicYearId: z.string().cuid('Invalid academic year'),
+  name: z.string().trim().min(1, 'Name is required'),
+  code: z.string().trim().min(2, 'Code is required').max(20, 'Code is too long').transform((value) => value.toUpperCase()),
+  academicYearId: z.string().cuid('Academic year is required'),
+  departmentId: z.string().cuid('Department is required'),
+  programId: z.string().cuid('Program is required'),
+  languageId: z.string().cuid('Language is required'),
+  departmentLanguageId: optionalCuid(),
+  academicSessionId: z.string().cuid('Academic session is required'),
+  programYearId: z.string().cuid('Program year is required'),
+  currentProgramSemesterId: optionalCuid(),
+  isActive: z.boolean().default(true),
 })
 
 export const academicYearSchema = z.object({
@@ -210,6 +233,218 @@ export const academicYearSchema = z.object({
 export const semesterSchema = z.object({
   name: z.string().min(1),
   number: z.number().int().min(1).max(20),
+})
+
+export const degreeLevelSchema = z.object({
+  name: z.string().trim().min(2, 'Name is required'),
+  code: normalizedCodeSchema,
+  description: z.string().trim().optional().nullable(),
+  defaultYears: z.number().int().positive().optional().nullable(),
+  sortOrder: z.number().int().min(0).default(0),
+  isActive: z.boolean().default(true),
+})
+
+export const academicProgramSchema = z.object({
+  name: z.string().trim().min(2, 'Name is required'),
+  code: normalizedCodeSchema,
+  degreeLevelId: z.string().cuid('Degree level is required'),
+  departmentId: z.string().cuid('Department is required'),
+  durationYears: z.number().int().positive('Duration must be positive'),
+  totalSemesters: z.number().int().positive('Total semesters must be positive'),
+  description: z.string().trim().optional().nullable(),
+  isActive: z.boolean().default(true),
+})
+
+export const departmentLanguageSchema = z.object({
+  departmentId: z.string().cuid('Department is required'),
+  languageId: z.string().cuid('Language is required'),
+  isActive: z.boolean().default(true),
+})
+
+const academicSessionSchemaBase = z.object({
+  name: z.string().trim().min(2, 'Name is required'),
+  code: normalizedCodeSchema,
+  startDate: dateTimeStringSchema,
+  endDate: dateTimeStringSchema,
+  admissionStartDate: dateTimeStringSchema.optional().nullable(),
+  admissionEndDate: dateTimeStringSchema.optional().nullable(),
+  isCurrent: z.boolean().default(false),
+  isActive: z.boolean().default(true),
+})
+
+export const academicSessionSchema = academicSessionSchemaBase.refine((data) => new Date(data.startDate) < new Date(data.endDate), {
+  path: ['endDate'],
+  message: 'End date must be after start date',
+}).refine((data) => {
+  if (!data.admissionStartDate || !data.admissionEndDate) return true
+  return new Date(data.admissionStartDate) < new Date(data.admissionEndDate)
+}, {
+  path: ['admissionEndDate'],
+  message: 'Admission end date must be after admission start date',
+})
+
+export const updateAcademicSessionSchema = academicSessionSchemaBase.partial()
+
+export const programYearSchema = z.object({
+  programId: z.string().cuid('Program is required'),
+  yearNumber: z.number().int().positive('Year number must be positive'),
+  name: z.string().trim().min(2, 'Name is required'),
+  code: normalizedCodeSchema,
+  sortOrder: z.number().int().min(0).default(0),
+  isActive: z.boolean().default(true),
+})
+
+export const programSemesterSchema = z.object({
+  programId: z.string().cuid('Program is required'),
+  programYearId: z.string().cuid('Program year is required'),
+  semesterId: z.string().cuid('Semester is required'),
+  semesterNumber: z.number().int().positive('Semester number must be positive'),
+  isActive: z.boolean().default(true),
+})
+
+export const programSubjectSchema = z.object({
+  programId: z.string().cuid('Program is required'),
+  programYearId: z.string().cuid('Program year is required'),
+  semesterId: z.string().cuid('Semester is required'),
+  programSemesterId: optionalCuid(),
+  subjectId: z.string().cuid('Subject is required'),
+  creditHours: z.number().positive().optional().nullable(),
+  theoryHours: z.number().positive().optional().nullable(),
+  practicalHours: z.number().positive().optional().nullable(),
+  isElective: z.boolean().default(false),
+  isRequired: z.boolean().default(true),
+  sortOrder: z.number().int().min(0).default(0),
+  isActive: z.boolean().default(true),
+})
+
+const academicOfferingSchemaBase = z.object({
+  academicSessionId: z.string().cuid('Academic session is required'),
+  programId: z.string().cuid('Program is required'),
+  departmentId: z.string().cuid('Department is required'),
+  departmentLanguageId: optionalCuid(),
+  languageId: z.string().cuid('Language is required'),
+  programYearId: z.string().cuid('Program year is required'),
+  semesterId: z.string().cuid('Semester is required'),
+  programSemesterId: optionalCuid(),
+  groupId: z.string().cuid('Group is required'),
+  subjectId: z.string().cuid('Subject is required'),
+  programSubjectId: optionalCuid(),
+  status: z.nativeEnum(AcademicOfferingStatus).default(AcademicOfferingStatus.PLANNED),
+  startsAt: dateTimeStringSchema.optional().nullable(),
+  endsAt: dateTimeStringSchema.optional().nullable(),
+  isActive: z.boolean().default(true),
+})
+
+export const academicOfferingSchema = academicOfferingSchemaBase.refine((data) => {
+  if (!data.startsAt || !data.endsAt) return true
+  return new Date(data.endsAt) > new Date(data.startsAt)
+}, {
+  path: ['endsAt'],
+  message: 'Offering end time must be after start time',
+})
+
+export const updateAcademicOfferingSchema = academicOfferingSchemaBase.partial()
+
+// Student lifecycle
+
+const studentLifecycleContextSchema = z.object({
+  departmentId: z.string().cuid('Department is required'),
+  academicSessionId: z.string().cuid('Academic session is required'),
+  programId: z.string().cuid('Program is required'),
+  programYearId: z.string().cuid('Program year is required'),
+  semesterId: z.string().cuid('Semester is required'),
+  programSemesterId: optionalCuid(),
+  groupId: z.string().cuid('Group is required'),
+  academicYearId: optionalCuid(),
+  departmentLanguageId: optionalCuid(),
+  languageId: optionalCuid(),
+})
+
+export const studentEnrollmentCreateSchema = studentLifecycleContextSchema.extend({
+  studentId: z.string().cuid('Student is required'),
+  status: z.nativeEnum(StudentEnrollmentStatus).default(StudentEnrollmentStatus.ACTIVE),
+  enrolledAt: dateTimeStringSchema.optional(),
+  notes: z.string().trim().max(1000).optional().nullable(),
+})
+
+export const studentEnrollmentUpdateSchema = studentLifecycleContextSchema.partial().extend({
+  status: z.nativeEnum(StudentEnrollmentStatus).optional(),
+  enrolledAt: dateTimeStringSchema.optional(),
+  endedAt: dateTimeStringSchema.optional().nullable(),
+  graduationDate: dateTimeStringSchema.optional().nullable(),
+  isActive: z.boolean().optional(),
+  notes: z.string().trim().max(1000).optional().nullable(),
+})
+
+export const studentPromotionSchema = studentLifecycleContextSchema.extend({
+  studentId: z.string().cuid('Student is required'),
+  manualOverride: z.boolean().default(false),
+  overrideReason: z.string().trim().max(1000).optional().nullable(),
+  notes: z.string().trim().max(1000).optional().nullable(),
+}).superRefine((data, ctx) => {
+  if (data.manualOverride && !data.overrideReason?.trim()) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      path: ['overrideReason'],
+      message: 'Override reason is required when manual override is enabled',
+    })
+  }
+})
+
+export const studentTransferSchema = studentLifecycleContextSchema.extend({
+  studentId: z.string().cuid('Student is required'),
+  transferType: z.nativeEnum(StudentTransferType),
+  effectiveDate: dateTimeStringSchema.optional(),
+  reason: z.string().trim().max(1000).optional().nullable(),
+  approvalNote: z.string().trim().max(1000).optional().nullable(),
+  notes: z.string().trim().max(1000).optional().nullable(),
+})
+
+export const studentLeaveSchema = z.object({
+  studentId: z.string().cuid('Student is required'),
+  leaveType: z.nativeEnum(StudentLeaveType),
+  startsAt: dateTimeStringSchema,
+  endsAt: dateTimeStringSchema.optional().nullable(),
+  status: z.string().trim().min(2).default('APPROVED'),
+  reason: z.string().trim().min(2, 'Reason is required').max(1000),
+  supportingNote: z.string().trim().max(1000).optional().nullable(),
+  notes: z.string().trim().max(1000).optional().nullable(),
+}).refine((data) => {
+  if (!data.endsAt) return true
+  return new Date(data.endsAt) >= new Date(data.startsAt)
+}, {
+  path: ['endsAt'],
+  message: 'Leave end date must be after the start date',
+})
+
+export const studentReadmissionSchema = studentLifecycleContextSchema.extend({
+  studentId: z.string().cuid('Student is required'),
+  readmittedAt: dateTimeStringSchema.optional(),
+  approvalReason: z.string().trim().max(1000).optional().nullable(),
+  notes: z.string().trim().max(1000).optional().nullable(),
+})
+
+export const studentGraduationSchema = z.object({
+  studentId: z.string().cuid('Student is required'),
+  graduatedAt: dateTimeStringSchema,
+  finalCgpa: z.number().min(0).max(4).optional().nullable(),
+  degreeClassification: z.string().trim().max(100).optional().nullable(),
+  certificateNumber: z.string().trim().min(3).max(100).optional().nullable(),
+  degreeAwarded: z.string().trim().min(2, 'Degree awarded is required'),
+  alumniAt: dateTimeStringSchema.optional().nullable(),
+  notes: z.string().trim().max(1000).optional().nullable(),
+})
+
+export const studentAlumniSchema = z.object({
+  studentId: z.string().cuid('Student is required'),
+  alumniAt: dateTimeStringSchema.optional(),
+  notes: z.string().trim().max(1000).optional().nullable(),
+})
+
+export const lifecycleAuditActorSchema = z.object({
+  actorUserId: z.string().cuid(),
+  actorRole: z.nativeEnum(UserRole),
+  sourceApi: z.string().trim().min(1),
 })
 
 // ─── Questions ─────────────────────────────────────────────────────────────
@@ -227,6 +462,7 @@ export const createQuestionSchema = z.object({
   groupId: z.string().cuid(),
   academicYearId: z.string().cuid(),
   semesterId: z.string().cuid(),
+  academicOfferingId: optionalCuid(),
   type: z.nativeEnum(QuestionType),
   text: z.string().min(5, 'Question text must be at least 5 characters'),
   marks: z.number().int().min(1).max(100),
@@ -259,13 +495,14 @@ export const createExamSchema = z.object({
   groupId: z.string().cuid(),
   academicYearId: z.string().cuid(),
   semesterId: z.string().cuid(),
+  academicOfferingId: optionalCuid(),
   questionType: z.nativeEnum(QuestionType).default(QuestionType.MIXED),
   resultMode: z.nativeEnum(ResultMode).default(ResultMode.AUTO),
   totalMarks: z.number().int().min(1),
   passingMarks: z.number().int().min(0),
   duration: z.number().int().min(1).max(480), // max 8 hours
-  startTime: z.string().datetime(),
-  endTime: z.string().datetime(),
+  startTime: dateTimeStringSchema,
+  endTime: dateTimeStringSchema,
   autoPublish: z.boolean().default(false),
   allowRetake: z.boolean().default(false),
   showAnswers: z.boolean().default(false),

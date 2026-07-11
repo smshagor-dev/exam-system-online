@@ -1,0 +1,14 @@
+POST /api/admin/leaves
+
+request={
+  "studentId": "cmrgq55qz0023d0ddsk7sxhab",
+  "leaveType": "ACADEMIC",
+  "startsAt": "2026-10-01T00:00:00.000Z",
+  "endsAt": "2026-10-20T00:00:00.000Z",
+  "status": "APPROVED",
+  "reason": "Phase 3 academic leave"
+}
+
+status=201
+
+body={"leave":{"id":"cmrgq5a800086i1uxz1tp2pdi","studentId":"cmrgq55qz0023d0ddsk7sxhab","enrollmentId":"cmrgq57ei007vi1ux37v43pqa","leaveType":"ACADEMIC","startsAt":"2026-10-01T00:00:00.000Z","endsAt":"2026-10-20T00:00:00.000Z","status":"APPROVED","reason":"Phase 3 academic leave","notes":null,"approvedAt":"2026-07-11T18:55:08.544Z","readmittedAt":null,"createdAt":"2026-07-11T18:55:08.544Z","updatedAt":"2026-07-11T18:55:08.544Z"},"enrollment":{"id":"cmrgq57ei007vi1ux37v43pqa","studentId":"cmrgq55qz0023d0ddsk7sxhab","departmentId":"cmrgowf870009pmlzozbfj64d","academicYearId":"cmrgowcza0000pmlzakerzx

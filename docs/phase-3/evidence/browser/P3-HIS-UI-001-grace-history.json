@@ -1,0 +1,8 @@
+{
+  "url": "/student/academic-history",
+  "title": "ExamFlow Pro",
+  "body": "EMS\n\nExamFlow Pro\n\nStudent Portal\n\nSTUDENT MENU\nDashboard\nProgress\nEbooks\nCourse Work & Report\nMy Exams\nResults\nSite Language\nEnglish\nG\n\nGrace\n\ngrace@student.test\n\nSTUDENT\n\nSTUDENT PANEL\n\nLearning Workspace\nAcademic History\n\nYour full academic lifecycle from admission through promotion, transfer, leave, and graduation milestones.\n\nLEGACY SYNC\n\nLegacy StudentSubject synchronized from academic offerings\n\n2026-07-11\n\nProgram: - -> BSc in Computer Science\n\nGroup: - -> CSE-Y1-A\n\nStatus: - -> ACTIVE\n\nSession: - -> 2026-2027\n\n{\"created\":1,\"skipped\":0,\"offeringIds\":[\"cmrgd4x62002tv9xr8l4824qw\"]}\n\nENROLLMENT\n\nInitial enrollment\n\n2026-07-11\n\nProgram: - -> BSc in Computer Science\n\nGroup: - -> CSE-Y1-A\n\nStatus: - -> ACTIVE\n\nSession: - -> 2026-2027\n\nACADEMIC LEAVE\n\nMedical leave\n\n2026-03-01\n\nProgram: BSc in Computer Science -> -\n\nGroup: CSE-Y1-A -> -\n\nStatus: LEAVE -> LEAVE\n\nSession: 2026-2027 -> -\n\nChoose your language\n\nSelect the language you want to use on this device. You can change it later from inside the app.\n\nEnglish\nEN",
+  "finalUrl": "http://127.0.0.1:3000/student/academic-history",
+  "hasAcademicHistoryHeading": true,
+  "hasReadmissionEvent": false
+}

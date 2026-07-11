@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { auth } from '@/lib/auth'
+import { isPrismaKnownError } from '@/lib/api-errors'
 import { prisma } from '@/lib/prisma'
 import { languageSchema } from '@/lib/validators'
 import { UserRole } from '@prisma/client'
@@ -23,8 +24,8 @@ export async function POST(req: NextRequest) {
   if (!parsed.success) return NextResponse.json({ error: parsed.error.flatten() }, { status: 400 })
   try {
     return NextResponse.json(await prisma.language.create({ data: parsed.data }), { status: 201 })
-  } catch (err: any) {
-    if (err.code === 'P2002') return NextResponse.json({ error: 'Already exists' }, { status: 409 })
+  } catch (error: unknown) {
+    if (isPrismaKnownError(error) && error.code === 'P2002') return NextResponse.json({ error: 'Already exists' }, { status: 409 })
     return NextResponse.json({ error: 'Failed' }, { status: 500 })
   }
 }

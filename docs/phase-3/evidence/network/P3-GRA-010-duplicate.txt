@@ -1,0 +1,14 @@
+POST /api/admin/graduations
+
+request={
+  "studentId": "cmrgq6ep9002fd0ddze5ozf4q",
+  "graduatedAt": "2026-12-20T00:00:00.000Z",
+  "finalCgpa": 3.92,
+  "degreeClassification": "First Class",
+  "certificateNumber": "P3-BSC-1783796165357",
+  "degreeAwarded": "BSc in Computer Science"
+}
+
+status=400
+
+body={"error":"Active enrollment not found"}

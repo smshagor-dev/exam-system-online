@@ -1,0 +1,10 @@
+PATCH /api/admin/enrollments/cmrgq1i60000di1uxzjkmz6f9
+
+request={
+  "isActive": false,
+  "notes": "Phase 3 deactivation"
+}
+
+status=200
+
+body={"id":"cmrgq1i60000di1uxzjkmz6f9","studentId":"cmrgq1gey0005d0ddeal2c6iw","departmentId":"cmrgowf870009pmlzozbfj64d","academicYearId":"cmrgowcza0000pmlzakerzxid","academicSessionId":"cmrgowg82000dpmlzdld2uohm","programId":"cmrgowig6000tpmlzxenr20zt","programYearId":"cmrgowjoy0013pmlzoat444yl","semesterId":"cmrgowdqf0003pmlzzstm2atu","programSemesterId":"cmrgowlfi001hpmlzsphikx48","groupId":"cmrgownmj001zpmlzm1pgkgpg","departmentLanguageId":"cmrgowgyv000hpmlzvs1rw52h","languageId":"cmrgoweh20006pmlzrlak2hwh","status":"DROPPED","enrolledAt":"2026-07-11T18:52:12.209Z","endedAt":"2026-07-11T18:52:

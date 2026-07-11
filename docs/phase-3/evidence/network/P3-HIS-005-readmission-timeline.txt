@@ -1,0 +1,7 @@
+GET /api/admin/enrollments/cmrgq5lek0029d0dde8hkw1up/timeline
+
+request=<none>
+
+status=200
+
+body=[{"id":"cmrgq5n830090i1uxeedu71gv","studentId":"cmrgq5lek0029d0dde8hkw1up","enrollmentId":"cmrgq5n27008yi1ux4f8r092s","actorUserId":"cmrgowtlk0039pmlzr4cvsfxf","eventType":"ENROLLMENT","fromDepartmentId":null,"toDepartmentId":"cmrgowf870009pmlzozbfj64d","fromAcademicYearId":null,"toAcademicYearId":"cmrgowcza0000pmlzakerzxid","fromAcademicSessionId":null,"toAcademicSessionId":"cmrgowg82000dpmlzdld2uohm","fromProgramId":null,"toProgramId":"cmrgowhy9000ppmlzh677ckfa","fromProgramYearId":null,"toProgramYearId":"cmrgowiy1000xpmlzz64gdgd6","fromSemesterId":null,"toSemesterId":"cmrgowdqf0003pmlzzstm2

@@ -62,6 +62,9 @@ export default function RegisterPage() {
     semesterId: '',
   })
 
+  const getErrorMessage = (error: unknown) =>
+    error instanceof Error ? error.message : 'Registration failed'
+
   const loadAcademicOptions = async () => {
     if (optionsLoaded) return
     try {
@@ -233,8 +236,8 @@ export default function RegisterPage() {
       }
 
       router.push(`/login?registered=1&message=${encodeURIComponent(data.message || 'Registration successful.')}`)
-    } catch (err: any) {
-      setError(err.message)
+    } catch (err) {
+      setError(getErrorMessage(err))
     } finally {
       setLoading(false)
     }

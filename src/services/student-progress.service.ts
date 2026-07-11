@@ -53,7 +53,7 @@ export type StudentProgressDetail = StudentDirectoryItem & {
     totalMarks: number
     isPassed: boolean
     status: ResultStatus
-    publishedAt?: string | null
+    publishedAt: string | null
   }>
   attempts: Array<{
     id: string
@@ -74,7 +74,7 @@ export type StudentSelfProgressSubjectAttempt = {
   startedAt?: string | null
   submittedAt?: string | null
   timeSpent?: number | null
-  resultPercentage?: number | null
+  resultPercentage: number | null
 }
 
 export type StudentSelfProgressSubjectResult = {
@@ -85,7 +85,7 @@ export type StudentSelfProgressSubjectResult = {
   totalMarks: number
   isPassed: boolean
   status: ResultStatus
-  publishedAt?: string | null
+  publishedAt: string | null
 }
 
 export type StudentSelfProgressSubjectDetail = {
@@ -134,8 +134,8 @@ export type StudentSelfProgressSubjectPage = {
 }
 
 function getCourseLabel(course?: string | null) {
-  if (course === 'BACHELOR_OF_SCIENCE') return 'Bachelor of Science'
-  if (course === 'MASTER_OF_SCIENCE') return 'Master of Science'
+  if (course === 'BACHELOR_OF_SCIENCE' || course === 'BSC') return 'Bachelor of Science'
+  if (course === 'MASTER_OF_SCIENCE' || course === 'MSC') return 'Master of Science'
   return course ?? null
 }
 

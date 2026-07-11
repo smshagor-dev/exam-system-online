@@ -1,0 +1,7 @@
+GET /api/admin/enrollments
+
+request=<none>
+
+status=403
+
+body={"error":"FORBIDDEN"}

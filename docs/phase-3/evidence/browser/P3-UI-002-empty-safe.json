@@ -1,0 +1,7 @@
+{
+  "role": "teacher",
+  "pathname": "/teacher/ebooks",
+  "actual": "Teacher ebook page rendered safely",
+  "finalUrl": "http://127.0.0.1:3103/teacher/ebooks",
+  "title": "ExamFlow Pro"
+}

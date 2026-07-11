@@ -1,0 +1,7 @@
+GET /api/admin/enrollments/cmrgowzse0040pmlzhrkc3nab/timeline
+
+request=<none>
+
+status=403
+
+body={"error":"Forbidden for this department"}

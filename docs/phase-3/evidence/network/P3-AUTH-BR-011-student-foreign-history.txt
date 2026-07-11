@@ -1,0 +1,7 @@
+GET /api/admin/enrollments/cmrgox4vw004rpmlzmi05jq9n/timeline
+
+request=<none>
+
+status=403
+
+body={"error":"FORBIDDEN"}

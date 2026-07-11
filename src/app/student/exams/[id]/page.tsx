@@ -3,6 +3,7 @@ import { prisma } from '@/lib/prisma'
 import { UserRole } from '@prisma/client'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import { studentCanAccessExam } from '@/lib/permissions'
 
 type PageProps = { params: Promise<{ id: string }> }
 
@@ -14,6 +15,11 @@ export default async function StudentExamDetailPage({ params }: PageProps) {
     where: { userId: session.user.id },
   })
   if (!studentProfile) notFound()
+
+  const access = await studentCanAccessExam(session.user.id, id)
+  if (!access.allowed) {
+    notFound()
+  }
 
   const exam = await prisma.exam.findUnique({
     where: { id },

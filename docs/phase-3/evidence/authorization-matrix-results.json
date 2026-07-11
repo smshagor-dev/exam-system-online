@@ -1,0 +1,561 @@
+[
+  {
+    "id": "AUTH-ENR-GET",
+    "method": "GET",
+    "pathLabel": "/api/admin/enrollments",
+    "roles": {
+      "superAdmin": {
+        "expectedStatus": "Allowed business response (200/201/400/404/409/422)",
+        "actualStatus": 200,
+        "pass": true,
+        "responseSnippet": "{\"items\":[{\"id\":\"cmrgp1vg90004n93kb2blq0s4\",\"studentId\":\"cmrgp1v100002n93k632sbda4\",\"departmentId\":\"cmrgowfh6000apmlz718clmq8\",\"academicYearId\":\"cmrgowcza0000pmlzakerzxid\",\"academicSessionId\":\"cmrgowg82000dpmlzdld2uohm\","
+      },
+      "deptOwn": {
+        "expectedStatus": "Allowed business response (200/201/400/404/409/422)",
+        "actualStatus": 200,
+        "pass": true,
+        "responseSnippet": "{\"items\":[{\"id\":\"cmrgp18ai00hxpmlzfawe9ten\",\"studentId\":\"cmrgox8uo005cpmlzpbikt00w\",\"departmentId\":\"cmrgowf870009pmlzozbfj64d\",\"academicYearId\":\"cmrgowcza0000pmlzakerzxid\",\"academicSessionId\":\"cmrgowg82000dpmlzdld2uohm\","
+      },
+      "deptForeign": {
+        "expectedStatus": "403",
+        "actualStatus": 403,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"Forbidden for this department\"}"
+      },
+      "teacher": {
+        "expectedStatus": "403",
+        "actualStatus": 403,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"FORBIDDEN\"}"
+      },
+      "student": {
+        "expectedStatus": "200 for own history only, otherwise 403",
+        "actualStatus": 403,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"FORBIDDEN\"}"
+      },
+      "anon": {
+        "expectedStatus": "401",
+        "actualStatus": 401,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"UNAUTHORIZED\"}"
+      }
+    }
+  },
+  {
+    "id": "AUTH-ENR-POST",
+    "method": "POST",
+    "pathLabel": "/api/admin/enrollments",
+    "roles": {
+      "superAdmin": {
+        "expectedStatus": "Allowed business response (200/201/400/404/409/422)",
+        "actualStatus": 400,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"Student not found\"}"
+      },
+      "deptOwn": {
+        "expectedStatus": "Allowed business response (200/201/400/404/409/422)",
+        "actualStatus": 400,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"Student not found\"}"
+      },
+      "deptForeign": {
+        "expectedStatus": "403",
+        "actualStatus": 403,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"Forbidden for this department\"}"
+      },
+      "teacher": {
+        "expectedStatus": "403",
+        "actualStatus": 403,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"FORBIDDEN\"}"
+      },
+      "student": {
+        "expectedStatus": "200 for own history only, otherwise 403",
+        "actualStatus": 403,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"FORBIDDEN\"}"
+      },
+      "anon": {
+        "expectedStatus": "401",
+        "actualStatus": 401,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"UNAUTHORIZED\"}"
+      }
+    }
+  },
+  {
+    "id": "AUTH-ENR-PATCH",
+    "method": "PATCH",
+    "pathLabel": "/api/admin/enrollments/cmrgoxdx8005ypmlzl151rkdj",
+    "roles": {
+      "superAdmin": {
+        "expectedStatus": "Allowed business response (200/201/400/404/409/422)",
+        "actualStatus": 200,
+        "pass": true,
+        "responseSnippet": "{\"id\":\"cmrgoxdx8005ypmlzl151rkdj\",\"studentId\":\"cmrgowvz3003ipmlzjls44rak\",\"departmentId\":\"cmrgowf870009pmlzozbfj64d\",\"academicYearId\":\"cmrgowcza0000pmlzakerzxid\",\"academicSessionId\":\"cmrgowg82000dpmlzdld2uohm\",\"programId"
+      },
+      "deptOwn": {
+        "expectedStatus": "Allowed business response (200/201/400/404/409/422)",
+        "actualStatus": 200,
+        "pass": true,
+        "responseSnippet": "{\"id\":\"cmrgoxdx8005ypmlzl151rkdj\",\"studentId\":\"cmrgowvz3003ipmlzjls44rak\",\"departmentId\":\"cmrgowf870009pmlzozbfj64d\",\"academicYearId\":\"cmrgowcza0000pmlzakerzxid\",\"academicSessionId\":\"cmrgowg82000dpmlzdld2uohm\",\"programId"
+      },
+      "deptForeign": {
+        "expectedStatus": "403",
+        "actualStatus": 403,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"Forbidden for this department\"}"
+      },
+      "teacher": {
+        "expectedStatus": "403",
+        "actualStatus": 403,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"FORBIDDEN\"}"
+      },
+      "student": {
+        "expectedStatus": "200 for own history only, otherwise 403",
+        "actualStatus": 403,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"FORBIDDEN\"}"
+      },
+      "anon": {
+        "expectedStatus": "401",
+        "actualStatus": 401,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"UNAUTHORIZED\"}"
+      }
+    }
+  },
+  {
+    "id": "AUTH-TIMELINE-GET",
+    "method": "GET",
+    "pathLabel": "/api/admin/enrollments/cmrgowvz3003ipmlzjls44rak/timeline",
+    "roles": {
+      "superAdmin": {
+        "expectedStatus": "Allowed business response (200/201/400/404/409/422)",
+        "actualStatus": 200,
+        "pass": true,
+        "responseSnippet": "[{\"id\":\"cmrgoxe3b0060pmlztt79z3zj\",\"studentId\":\"cmrgowvz3003ipmlzjls44rak\",\"enrollmentId\":\"cmrgoxdx8005ypmlzl151rkdj\",\"actorUserId\":\"cmrgowtlk0039pmlzr4cvsfxf\",\"eventType\":\"ENROLLMENT\",\"fromDepartmentId\":null,\"toDepartme"
+      },
+      "deptOwn": {
+        "expectedStatus": "Allowed business response (200/201/400/404/409/422)",
+        "actualStatus": 200,
+        "pass": true,
+        "responseSnippet": "[{\"id\":\"cmrgoxe3b0060pmlztt79z3zj\",\"studentId\":\"cmrgowvz3003ipmlzjls44rak\",\"enrollmentId\":\"cmrgoxdx8005ypmlzl151rkdj\",\"actorUserId\":\"cmrgowtlk0039pmlzr4cvsfxf\",\"eventType\":\"ENROLLMENT\",\"fromDepartmentId\":null,\"toDepartme"
+      },
+      "deptForeign": {
+        "expectedStatus": "403",
+        "actualStatus": 403,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"Forbidden for this department\"}"
+      },
+      "teacher": {
+        "expectedStatus": "403",
+        "actualStatus": 403,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"FORBIDDEN\"}"
+      },
+      "student": {
+        "expectedStatus": "200 for own history only, otherwise 403",
+        "actualStatus": 403,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"FORBIDDEN\"}"
+      },
+      "anon": {
+        "expectedStatus": "401",
+        "actualStatus": 401,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"UNAUTHORIZED\"}"
+      }
+    }
+  },
+  {
+    "id": "AUTH-PRO-POST",
+    "method": "POST",
+    "pathLabel": "/api/admin/promotions",
+    "roles": {
+      "superAdmin": {
+        "expectedStatus": "Allowed business response (200/201/400/404/409/422)",
+        "actualStatus": 400,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"Active enrollment not found\"}"
+      },
+      "deptOwn": {
+        "expectedStatus": "Allowed business response (200/201/400/404/409/422)",
+        "actualStatus": 400,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"Active enrollment not found\"}"
+      },
+      "deptForeign": {
+        "expectedStatus": "403",
+        "actualStatus": 403,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"Forbidden for this department\"}"
+      },
+      "teacher": {
+        "expectedStatus": "403",
+        "actualStatus": 403,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"FORBIDDEN\"}"
+      },
+      "student": {
+        "expectedStatus": "200 for own history only, otherwise 403",
+        "actualStatus": 403,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"FORBIDDEN\"}"
+      },
+      "anon": {
+        "expectedStatus": "401",
+        "actualStatus": 401,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"UNAUTHORIZED\"}"
+      }
+    }
+  },
+  {
+    "id": "AUTH-PRO-PREVIEW",
+    "method": "POST",
+    "pathLabel": "/api/admin/promotions/preview",
+    "roles": {
+      "superAdmin": {
+        "expectedStatus": "Allowed business response (200/201/400/404/409/422)",
+        "actualStatus": 200,
+        "pass": true,
+        "responseSnippet": "{\"mode\":\"single\",\"studentId\":\"cmzzzzzzzzzzzzzzzzzzzzzzz\",\"eligible\":false,\"reasons\":[\"Active enrollment not found\"]}"
+      },
+      "deptOwn": {
+        "expectedStatus": "Allowed business response (200/201/400/404/409/422)",
+        "actualStatus": 200,
+        "pass": true,
+        "responseSnippet": "{\"mode\":\"single\",\"studentId\":\"cmzzzzzzzzzzzzzzzzzzzzzzz\",\"eligible\":false,\"reasons\":[\"Active enrollment not found\"]}"
+      },
+      "deptForeign": {
+        "expectedStatus": "403",
+        "actualStatus": 403,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"Forbidden for this department\"}"
+      },
+      "teacher": {
+        "expectedStatus": "403",
+        "actualStatus": 403,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"FORBIDDEN\"}"
+      },
+      "student": {
+        "expectedStatus": "200 for own history only, otherwise 403",
+        "actualStatus": 403,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"FORBIDDEN\"}"
+      },
+      "anon": {
+        "expectedStatus": "401",
+        "actualStatus": 401,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"UNAUTHORIZED\"}"
+      }
+    }
+  },
+  {
+    "id": "AUTH-PRO-BULK",
+    "method": "POST",
+    "pathLabel": "/api/admin/promotions/bulk",
+    "roles": {
+      "superAdmin": {
+        "expectedStatus": "Allowed business response (200/201/400/404/409/422)",
+        "actualStatus": 200,
+        "pass": true,
+        "responseSnippet": "{\"total\":1,\"succeeded\":0,\"failed\":1,\"results\":[{\"studentId\":\"cmzzzzzzzzzzzzzzzzzzzzzzz\",\"success\":false,\"error\":\"Active enrollment not found\"}]}"
+      },
+      "deptOwn": {
+        "expectedStatus": "Allowed business response (200/201/400/404/409/422)",
+        "actualStatus": 200,
+        "pass": true,
+        "responseSnippet": "{\"total\":1,\"succeeded\":0,\"failed\":1,\"results\":[{\"studentId\":\"cmzzzzzzzzzzzzzzzzzzzzzzz\",\"success\":false,\"error\":\"Active enrollment not found\"}]}"
+      },
+      "deptForeign": {
+        "expectedStatus": "403",
+        "actualStatus": 403,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"Forbidden for this department\"}"
+      },
+      "teacher": {
+        "expectedStatus": "403",
+        "actualStatus": 403,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"FORBIDDEN\"}"
+      },
+      "student": {
+        "expectedStatus": "200 for own history only, otherwise 403",
+        "actualStatus": 403,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"FORBIDDEN\"}"
+      },
+      "anon": {
+        "expectedStatus": "401",
+        "actualStatus": 401,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"UNAUTHORIZED\"}"
+      }
+    }
+  },
+  {
+    "id": "AUTH-TRN-POST",
+    "method": "POST",
+    "pathLabel": "/api/admin/transfers",
+    "roles": {
+      "superAdmin": {
+        "expectedStatus": "Allowed business response (200/201/400/404/409/422)",
+        "actualStatus": 404,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"Student not found\"}"
+      },
+      "deptOwn": {
+        "expectedStatus": "Allowed business response (200/201/400/404/409/422)",
+        "actualStatus": 404,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"Student not found\"}"
+      },
+      "deptForeign": {
+        "expectedStatus": "403 or 404 safe denial",
+        "actualStatus": 404,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"Student not found\"}"
+      },
+      "teacher": {
+        "expectedStatus": "403",
+        "actualStatus": 403,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"FORBIDDEN\"}"
+      },
+      "student": {
+        "expectedStatus": "200 for own history only, otherwise 403",
+        "actualStatus": 403,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"FORBIDDEN\"}"
+      },
+      "anon": {
+        "expectedStatus": "401",
+        "actualStatus": 401,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"UNAUTHORIZED\"}"
+      }
+    }
+  },
+  {
+    "id": "AUTH-LEV-POST",
+    "method": "POST",
+    "pathLabel": "/api/admin/leaves",
+    "roles": {
+      "superAdmin": {
+        "expectedStatus": "Allowed business response (200/201/400/404/409/422)",
+        "actualStatus": 201,
+        "pass": true,
+        "responseSnippet": "{\"leave\":{\"id\":\"cmrgp2wa3000k4mvahr76qtni\",\"studentId\":\"cmrgowvz3003ipmlzjls44rak\",\"enrollmentId\":\"cmrgoy1600071pmlzzqydqeo5\",\"leaveType\":\"MEDICAL\",\"startsAt\":\"2026-07-11T18:24:30.140Z\",\"endsAt\":\"2026-07-12T18:24:30.141Z"
+      },
+      "deptOwn": {
+        "expectedStatus": "Allowed business response (200/201/400/404/409/422)",
+        "actualStatus": 400,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"Active enrollment not found\"}"
+      },
+      "deptForeign": {
+        "expectedStatus": "403",
+        "actualStatus": 403,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"Forbidden for this department\"}"
+      },
+      "teacher": {
+        "expectedStatus": "403",
+        "actualStatus": 403,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"FORBIDDEN\"}"
+      },
+      "student": {
+        "expectedStatus": "200 for own history only, otherwise 403",
+        "actualStatus": 403,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"FORBIDDEN\"}"
+      },
+      "anon": {
+        "expectedStatus": "401",
+        "actualStatus": 401,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"UNAUTHORIZED\"}"
+      }
+    }
+  },
+  {
+    "id": "AUTH-REA-POST",
+    "method": "POST",
+    "pathLabel": "/api/admin/readmissions",
+    "roles": {
+      "superAdmin": {
+        "expectedStatus": "Allowed business response (200/201/400/404/409/422)",
+        "actualStatus": 400,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"Student not found\"}"
+      },
+      "deptOwn": {
+        "expectedStatus": "Allowed business response (200/201/400/404/409/422)",
+        "actualStatus": 400,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"Student not found\"}"
+      },
+      "deptForeign": {
+        "expectedStatus": "403",
+        "actualStatus": 403,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"Forbidden for this department\"}"
+      },
+      "teacher": {
+        "expectedStatus": "403",
+        "actualStatus": 403,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"FORBIDDEN\"}"
+      },
+      "student": {
+        "expectedStatus": "200 for own history only, otherwise 403",
+        "actualStatus": 403,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"FORBIDDEN\"}"
+      },
+      "anon": {
+        "expectedStatus": "401",
+        "actualStatus": 401,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"UNAUTHORIZED\"}"
+      }
+    }
+  },
+  {
+    "id": "AUTH-GRD-POST",
+    "method": "POST",
+    "pathLabel": "/api/admin/graduations",
+    "roles": {
+      "superAdmin": {
+        "expectedStatus": "Allowed business response (200/201/400/404/409/422)",
+        "actualStatus": 400,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"Active enrollment not found\"}"
+      },
+      "deptOwn": {
+        "expectedStatus": "Allowed business response (200/201/400/404/409/422)",
+        "actualStatus": 400,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"Active enrollment not found\"}"
+      },
+      "deptForeign": {
+        "expectedStatus": "403",
+        "actualStatus": 403,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"Forbidden for this department\"}"
+      },
+      "teacher": {
+        "expectedStatus": "403",
+        "actualStatus": 403,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"FORBIDDEN\"}"
+      },
+      "student": {
+        "expectedStatus": "200 for own history only, otherwise 403",
+        "actualStatus": 403,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"FORBIDDEN\"}"
+      },
+      "anon": {
+        "expectedStatus": "401",
+        "actualStatus": 401,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"UNAUTHORIZED\"}"
+      }
+    }
+  },
+  {
+    "id": "AUTH-GRD-PATCH",
+    "method": "PATCH",
+    "pathLabel": "/api/admin/graduations",
+    "roles": {
+      "superAdmin": {
+        "expectedStatus": "Allowed business response (200/201/400/404/409/422)",
+        "actualStatus": 400,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"Graduation record not found\"}"
+      },
+      "deptOwn": {
+        "expectedStatus": "Allowed business response (200/201/400/404/409/422)",
+        "actualStatus": 400,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"Graduation record not found\"}"
+      },
+      "deptForeign": {
+        "expectedStatus": "403",
+        "actualStatus": 403,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"Forbidden for this department\"}"
+      },
+      "teacher": {
+        "expectedStatus": "403",
+        "actualStatus": 403,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"FORBIDDEN\"}"
+      },
+      "student": {
+        "expectedStatus": "200 for own history only, otherwise 403",
+        "actualStatus": 403,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"FORBIDDEN\"}"
+      },
+      "anon": {
+        "expectedStatus": "401",
+        "actualStatus": 401,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"UNAUTHORIZED\"}"
+      }
+    }
+  },
+  {
+    "id": "AUTH-STD-HISTORY",
+    "method": "GET",
+    "pathLabel": "/api/account/academic-history",
+    "roles": {
+      "superAdmin": {
+        "expectedStatus": "403",
+        "actualStatus": 403,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"Forbidden\"}"
+      },
+      "deptOwn": {
+        "expectedStatus": "403",
+        "actualStatus": 403,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"Forbidden\"}"
+      },
+      "deptForeign": {
+        "expectedStatus": "403",
+        "actualStatus": 403,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"Forbidden\"}"
+      },
+      "teacher": {
+        "expectedStatus": "403",
+        "actualStatus": 403,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"Forbidden\"}"
+      },
+      "student": {
+        "expectedStatus": "200",
+        "actualStatus": 200,
+        "pass": true,
+        "responseSnippet": "[{\"id\":\"cmrgoxe3b0060pmlztt79z3zj\",\"eventType\":\"ENROLLMENT\",\"reason\":\"Initial enrollment\",\"occurredAt\":\"2026-07-11T18:21:00.691Z\",\"notes\":\"Alice BSc enrollment\",\"fromProgram\":null,\"toProgram\":\"BSc in Computer Science\",\"f"
+      },
+      "anon": {
+        "expectedStatus": "401",
+        "actualStatus": 401,
+        "pass": true,
+        "responseSnippet": "{\"error\":\"Unauthorized\"}"
+      }
+    }
+  }
+]

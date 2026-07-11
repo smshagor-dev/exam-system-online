@@ -95,8 +95,6 @@ export default async function StudentResultDetailPage({ params }: PageProps) {
             const effectiveMarks = answer?.teacherMarks ?? answer?.marksAwarded ?? 0
             const isAutoType = eq.question.type === 'MCQ' || eq.question.type === 'TRUE_FALSE'
             const correct = answer?.isCorrect
-            const selectedOpt = eq.question.options.find((o) => o.id === answer?.selectedOption)
-
             return (
               <div key={eq.id} className={`bg-white rounded-xl border-2 p-5 ${
                 correct === true ? 'border-green-200'

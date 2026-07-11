@@ -1,0 +1,7 @@
+{
+  "role": "cseAdmin",
+  "pathname": "/admin/enrollments",
+  "actual": "Enrollment admin page rendered",
+  "finalUrl": "http://127.0.0.1:3103/admin/enrollments",
+  "title": "ExamFlow Pro"
+}

@@ -1,0 +1,14 @@
+POST /api/admin/leaves
+
+request={
+  "studentId": "cmrgq4zw40020d0dd384xy7hj",
+  "leaveType": "MEDICAL",
+  "startsAt": "2026-09-01T00:00:00.000Z",
+  "endsAt": "2026-09-10T00:00:00.000Z",
+  "status": "APPROVED",
+  "reason": "Phase 3 medical leave"
+}
+
+status=400
+
+body={"error":"Active enrollment not found"}

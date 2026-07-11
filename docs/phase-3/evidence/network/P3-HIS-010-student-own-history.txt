@@ -1,0 +1,7 @@
+GET /api/account/academic-history
+
+request=<none>
+
+status=200
+
+body=[{"id":"cmrgoyrj5009dpmlzlih1tz6o","eventType":"ACADEMIC_LEAVE","reason":"Medical leave","occurredAt":"2026-03-01T00:00:00.000Z","notes":null,"fromProgram":"BSc in Computer Science","toProgram":null,"fromGroup":"CSE-Y1-A","toGroup":null,"fromAcademicSession":"2026-2027","toAcademicSession":null,"fromStatus":"LEAVE","toStatus":"LEAVE"},{"id":"cmrgoyoyi0092pmlznr7re2cu","eventType":"ENROLLMENT","reason":"Initial enrollment","occurredAt":"2026-07-11T18:22:01.430Z","notes":null,"fromProgram":null,"toProgram":"BSc in Computer Science","fromGroup":null,"toGroup":"CSE-Y1-A","fromAcademicSession":null

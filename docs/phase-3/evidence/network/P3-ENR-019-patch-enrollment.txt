@@ -1,0 +1,9 @@
+PATCH /api/admin/enrollments/cmrgq1ctf0002i1uxbojgn857
+
+request={
+  "notes": "Phase 3 enrollment note update"
+}
+
+status=200
+
+body={"id":"cmrgq1ctf0002i1uxbojgn857","studentId":"cmrgq1b1w0002d0ddv8oashhy","departmentId":"cmrgowf870009pmlzozbfj64d","academicYearId":"cmrgowcza0000pmlzakerzxid","academicSessionId":"cmrgowg82000dpmlzdld2uohm","programId":"cmrgowhy9000ppmlzh677ckfa","programYearId":"cmrgowiy1000xpmlzz64gdgd6","semesterId":"cmrgowdqf0003pmlzzstm2atu","programSemesterId":"cmrgowk6t0017pmlze2efnm9v","groupId":"cmrgowm5t001npmlzsqxh0yte","departmentLanguageId":"cmrgowgyv000hpmlzvs1rw52h","languageId":"cmrgoweh20006pmlzrlak2hwh","status":"ACTIVE","enrolledAt":"2026-07-11T18:52:05.277Z","endedAt":null,"graduationDat

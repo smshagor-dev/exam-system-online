@@ -4,7 +4,7 @@
  */
 
 import { prisma } from '@/lib/prisma'
-import { QuestionType } from '@prisma/client'
+import { Prisma, QuestionType } from '@prisma/client'
 
 /**
  * Get questions for a teacher filtered by assignment scope.
@@ -22,7 +22,7 @@ export async function getTeacherQuestions(
   const profile = await prisma.teacherProfile.findUnique({ where: { userId: teacherUserId } })
   if (!profile) return []
 
-  const where: any = { teacherId: profile.id }
+  const where: Prisma.QuestionWhereInput = { teacherId: profile.id }
   if (filters?.subjectId) where.subjectId = filters.subjectId
   if (filters?.groupId) where.groupId = filters.groupId
   if (filters?.academicYearId) where.academicYearId = filters.academicYearId

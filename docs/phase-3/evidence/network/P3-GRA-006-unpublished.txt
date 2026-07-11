@@ -1,0 +1,11 @@
+POST /api/admin/graduations
+
+request={
+  "studentId": "cmrgox60k004xpmlztxp8kys6",
+  "graduatedAt": "2026-12-20T00:00:00.000Z",
+  "degreeAwarded": "BSc in Computer Science"
+}
+
+status=400
+
+body={"error":"Graduation requires all final-context results to be published"}

@@ -1,0 +1,9 @@
+POST /api/admin/enrollments
+
+request={
+  "studentId": "cmrgq1b1w0002d0ddv8oashhy"
+}
+
+status=400
+
+body={"error":{"formErrors":[],"fieldErrors":{"departmentId":["Required"],"academicSessionId":["Required"],"programId":["Required"],"programYearId":["Required"],"semesterId":["Required"],"groupId":["Required"]}}}

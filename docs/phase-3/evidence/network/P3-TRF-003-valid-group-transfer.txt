@@ -1,0 +1,21 @@
+POST /api/admin/transfers
+
+request={
+  "departmentId": "cmrgowf870009pmlzozbfj64d",
+  "academicSessionId": "cmrgowg82000dpmlzdld2uohm",
+  "programId": "cmrgowhy9000ppmlzh677ckfa",
+  "programYearId": "cmrgowiy1000xpmlzz64gdgd6",
+  "semesterId": "cmrgowdqf0003pmlzzstm2atu",
+  "programSemesterId": "cmrgowk6t0017pmlze2efnm9v",
+  "groupId": "cmrgowmej001ppmlzbn1kemkx",
+  "academicYearId": "cmrgowcza0000pmlzakerzxid",
+  "departmentLanguageId": "cmrgowgyv000hpmlzvs1rw52h",
+  "languageId": "cmrgoweh20006pmlzrlak2hwh",
+  "studentId": "cmrgq3vdb001od0ddb262odso",
+  "transferType": "GROUP",
+  "reason": "Phase 3 group transfer"
+}
+
+status=201
+
+body={"transfer":{"id":"cmrgq41ik0057i1uxkis0flue","studentId":"cmrgq3vdb001od0ddb262odso","fromEnrollmentId":"cmrgq3x4o004ui1uxuvp4n4op","toEnrollmentId":"cmrgq41cb0055i1uxpvsnk8ji","transferType":"GROUP","fromDepartmentId":"cmrgowf870009pmlzozbfj64d","toDepartmentId":"cmrgowf870009pmlzozbfj64d","fromAcademicSessionId":"cmrgowg82000dpmlzdld2uohm","toAcademicSessionId":"cmrgowg82000dpmlzdld2uohm","fromProgramId":"cmrgowhy9000ppmlzh677ckfa","toProgramId":"cmrgowhy9000ppmlzh677ckfa","fromProgramYearId":"cmrgowiy1000xpmlzz64gdgd6","toProgramYearId":"cmrgowiy1000xpmlzz64gdgd6","fromSemesterId":"cmrgowd

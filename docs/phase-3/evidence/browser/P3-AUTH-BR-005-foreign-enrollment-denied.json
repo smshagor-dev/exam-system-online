@@ -1,0 +1,7 @@
+{
+  "role": "cseAdmin",
+  "pathname": "/admin/enrollments",
+  "actual": "CSE admin url /admin/enrollments",
+  "finalUrl": "http://127.0.0.1:3103/admin/enrollments",
+  "title": "ExamFlow Pro"
+}

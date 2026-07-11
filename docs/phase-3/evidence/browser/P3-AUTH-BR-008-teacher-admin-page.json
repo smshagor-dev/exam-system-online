@@ -1,0 +1,7 @@
+{
+  "role": "teacher",
+  "pathname": "/admin/enrollments",
+  "actual": "Teacher final url /teacher/dashboard",
+  "finalUrl": "http://127.0.0.1:3103/teacher/dashboard",
+  "title": "ExamFlow Pro"
+}

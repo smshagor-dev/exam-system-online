@@ -1,0 +1,7 @@
+GET /api/results/cmrgp0er700f0pmlz7snm76mg
+
+request=<none>
+
+status=200
+
+body={"id":"cmrgp0er700f0pmlz7snm76mg","examId":"cmrgoxba4005rpmlz7uhmzn3l","attemptId":"cmrgp0ehw00eypmlzf3x8ukga","studentId":"cmrgox4vw004rpmlzmi05jq9n","totalMarks":100,"marksObtained":95,"percentage":95,"grade":null,"isPassed":true,"status":"PUBLISHED","publishedAt":"2026-07-11T18:23:21.521Z","createdAt":"2026-07-11T18:23:21.523Z","updatedAt":"2026-07-11T18:23:21.523Z","exam":{"id":"cmrgoxba4005rpmlz7uhmzn3l","title":"BSc Final Exam","description":null,"teacherId":"cmrgowv5t003dpmlzf02tpawb","departmentId":"cmrgowf870009pmlzozbfj64d","subjectId":"cmrgowokv0027pmlzat1lfwkj","languageId":"cmrgow

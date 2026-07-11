@@ -1,0 +1,7 @@
+{
+  "role": "cseAdmin",
+  "pathname": "/admin/promotions",
+  "actual": "Promotion admin page rendered",
+  "finalUrl": "http://127.0.0.1:3103/admin/promotions",
+  "title": "ExamFlow Pro"
+}

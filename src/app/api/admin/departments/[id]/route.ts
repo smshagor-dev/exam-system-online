@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { auth } from '@/lib/auth'
+import { isPrismaKnownError } from '@/lib/api-errors'
 import { canManageDepartment } from '@/lib/permissions'
 import { prisma } from '@/lib/prisma'
 import { departmentSchema } from '@/lib/validators'
@@ -45,8 +46,8 @@ export async function DELETE(_req: NextRequest, { params }: RouteContext) {
   try {
     await prisma.department.delete({ where: { id } })
     return NextResponse.json({ success: true })
-  } catch (err: any) {
-    if (err.code === 'P2003') {
+  } catch (error: unknown) {
+    if (isPrismaKnownError(error) && error.code === 'P2003') {
       return NextResponse.json(
         { error: 'Cannot delete: department has related data. Remove subjects and users first.' },
         { status: 409 }

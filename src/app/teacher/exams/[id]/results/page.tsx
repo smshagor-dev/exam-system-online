@@ -40,9 +40,6 @@ export default async function TeacherExamResultsPage({ params }: PageProps) {
 
   const published = results.filter((r) => r.status === 'PUBLISHED').length
   const pending = results.filter((r) => r.status === 'PENDING_REVIEW').length
-  const avgScore = results.length
-    ? results.reduce((sum, r) => sum + r.percentage, 0) / results.length
-    : 0
   const passCount = results.filter((r) => r.isPassed).length
 
   return (

@@ -1,0 +1,163 @@
+{
+  "generatedAt": "2026-07-11T03:42:31.237Z",
+  "databaseName": "examflow_pro",
+  "teacherAssignments": [
+    {
+      "id": "cmrc1y7dc000yk2kdpfp6fmwd",
+      "teacherId": "cmrc1y74k000uk2kd8dujfpkd",
+      "departmentId": "cmrc1y4pr000ck2kd4d7vqcwq",
+      "subjectId": "cmrc1y53e000gk2kdudmed81a",
+      "languageId": "cmrc1y4h10006k2kdse7x47oh",
+      "groupId": "cmrc1y4le000ak2kd1o5se1xs",
+      "academicYearId": "cmrc1y4060000k2kdx7dkghyw",
+      "semesterId": "cmrc1y4cm0004k2kddk9xe7q7",
+      "academicOfferingId": null,
+      "createdAt": "2026-07-08T12:26:42.769Z"
+    },
+    {
+      "id": "cmrc1y7hz0010k2kde8t3a8h3",
+      "teacherId": "cmrc1y74k000uk2kd8dujfpkd",
+      "departmentId": "cmrc1y4pr000ck2kd4d7vqcwq",
+      "subjectId": "cmrc1y57t000ik2kdf6fol422",
+      "languageId": "cmrc1y4h10006k2kdse7x47oh",
+      "groupId": "cmrc1y4le000ak2kd1o5se1xs",
+      "academicYearId": "cmrc1y4060000k2kdx7dkghyw",
+      "semesterId": "cmrc1y4cm0004k2kddk9xe7q7",
+      "academicOfferingId": null,
+      "createdAt": "2026-07-08T12:26:42.935Z"
+    },
+    {
+      "id": "cmrc1y7mf0012k2kdbw3gm5rx",
+      "teacherId": "cmrc1y78y000wk2kd157911xr",
+      "departmentId": "cmrc1y4pr000ck2kd4d7vqcwq",
+      "subjectId": "cmrc1y5c9000kk2kde5g3n6nk",
+      "languageId": "cmrc1y4h10006k2kdse7x47oh",
+      "groupId": "cmrc1y4le0009k2kdpo214w8b",
+      "academicYearId": "cmrc1y4060002k2kd52mc7lt0",
+      "semesterId": "cmrc1y4cm0004k2kddk9xe7q7",
+      "academicOfferingId": null,
+      "createdAt": "2026-07-08T12:26:43.096Z"
+    }
+  ],
+  "studentSubjects": [
+    {
+      "id": "cmrc1y8jn001dk2kduoio1c3s",
+      "studentId": "cmrc1y8f7001bk2kdnzbaq7p5",
+      "subjectId": "cmrc1y53e000gk2kdudmed81a",
+      "languageId": "cmrc1y4h10006k2kdse7x47oh",
+      "groupId": "cmrc1y4le000ak2kd1o5se1xs",
+      "academicYearId": "cmrc1y4060000k2kdx7dkghyw",
+      "semesterId": "cmrc1y4cm0004k2kddk9xe7q7",
+      "academicOfferingId": null,
+      "createdAt": "2026-07-08T12:26:44.291Z"
+    },
+    {
+      "id": "cmrc1y8o4001fk2kd0b9ebi5x",
+      "studentId": "cmrc1y8f7001bk2kdnzbaq7p5",
+      "subjectId": "cmrc1y57t000ik2kdf6fol422",
+      "languageId": "cmrc1y4h10006k2kdse7x47oh",
+      "groupId": "cmrc1y4le000ak2kd1o5se1xs",
+      "academicYearId": "cmrc1y4060000k2kdx7dkghyw",
+      "semesterId": "cmrc1y4cm0004k2kddk9xe7q7",
+      "academicOfferingId": null,
+      "createdAt": "2026-07-08T12:26:44.452Z"
+    },
+    {
+      "id": "cmrc1y8sn001hk2kdwxj4mdhs",
+      "studentId": "cmrc1y8f70019k2kdozlcc9al",
+      "subjectId": "cmrc1y53e000gk2kdudmed81a",
+      "languageId": "cmrc1y4h10006k2kdse7x47oh",
+      "groupId": "cmrc1y4le000ak2kd1o5se1xs",
+      "academicYearId": "cmrc1y4060000k2kdx7dkghyw",
+      "semesterId": "cmrc1y4cm0004k2kddk9xe7q7",
+      "academicOfferingId": null,
+      "createdAt": "2026-07-08T12:26:44.615Z"
+    },
+    {
+      "id": "cmrc1y8x4001jk2kdgn3k1fjz",
+      "studentId": "cmrc1y8f70019k2kdozlcc9al",
+      "subjectId": "cmrc1y57t000ik2kdf6fol422",
+      "languageId": "cmrc1y4h10006k2kdse7x47oh",
+      "groupId": "cmrc1y4le000ak2kd1o5se1xs",
+      "academicYearId": "cmrc1y4060000k2kdx7dkghyw",
+      "semesterId": "cmrc1y4cm0004k2kddk9xe7q7",
+      "academicOfferingId": null,
+      "createdAt": "2026-07-08T12:26:44.776Z"
+    },
+    {
+      "id": "cmrc1y91k001lk2kdqlooajwq",
+      "studentId": "cmrc1y8f7001ak2kd2zjvvxeg",
+      "subjectId": "cmrc1y53e000gk2kdudmed81a",
+      "languageId": "cmrc1y4h10006k2kdse7x47oh",
+      "groupId": "cmrc1y4le000ak2kd1o5se1xs",
+      "academicYearId": "cmrc1y4060000k2kdx7dkghyw",
+      "semesterId": "cmrc1y4cm0004k2kddk9xe7q7",
+      "academicOfferingId": null,
+      "createdAt": "2026-07-08T12:26:44.937Z"
+    },
+    {
+      "id": "cmrc1y966001nk2kdeddux4mx",
+      "studentId": "cmrc1y8f7001ak2kd2zjvvxeg",
+      "subjectId": "cmrc1y57t000ik2kdf6fol422",
+      "languageId": "cmrc1y4h10006k2kdse7x47oh",
+      "groupId": "cmrc1y4le000ak2kd1o5se1xs",
+      "academicYearId": "cmrc1y4060000k2kdx7dkghyw",
+      "semesterId": "cmrc1y4cm0004k2kddk9xe7q7",
+      "academicOfferingId": null,
+      "createdAt": "2026-07-08T12:26:45.103Z"
+    }
+  ],
+  "groups": [
+    {
+      "id": "cmrc1y4le0009k2kdpo214w8b",
+      "name": "Group B",
+      "code": "GRP-B",
+      "academicYearId": null,
+      "departmentId": null,
+      "programId": null,
+      "languageId": null,
+      "departmentLanguageId": null,
+      "academicSessionId": null,
+      "programYearId": null,
+      "currentProgramSemesterId": null,
+      "isActive": true,
+      "createdAt": "2026-07-08T12:26:39.170Z",
+      "updatedAt": "2026-07-08T12:26:39.170Z"
+    },
+    {
+      "id": "cmrc1y4le000ak2kd1o5se1xs",
+      "name": "Group A",
+      "code": "GRP-A",
+      "academicYearId": null,
+      "departmentId": null,
+      "programId": null,
+      "languageId": null,
+      "departmentLanguageId": null,
+      "academicSessionId": null,
+      "programYearId": null,
+      "currentProgramSemesterId": null,
+      "isActive": true,
+      "createdAt": "2026-07-08T12:26:39.170Z",
+      "updatedAt": "2026-07-08T12:26:39.170Z"
+    },
+    {
+      "id": "cmrc1y4le000bk2kddgfbl9bh",
+      "name": "Group C",
+      "code": "GRP-C",
+      "academicYearId": null,
+      "departmentId": null,
+      "programId": null,
+      "languageId": null,
+      "departmentLanguageId": null,
+      "academicSessionId": null,
+      "programYearId": null,
+      "currentProgramSemesterId": null,
+      "isActive": true,
+      "createdAt": "2026-07-08T12:26:39.170Z",
+      "updatedAt": "2026-07-08T12:26:39.170Z"
+    }
+  ],
+  "academicPrograms": [],
+  "academicSessions": [],
+  "academicOfferings": []
+}

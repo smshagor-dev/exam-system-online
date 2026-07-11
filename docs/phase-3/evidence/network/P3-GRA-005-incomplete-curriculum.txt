@@ -1,0 +1,11 @@
+POST /api/admin/graduations
+
+request={
+  "studentId": "cmrgowxx9003rpmlz1pel4tyd",
+  "graduatedAt": "2026-12-20T00:00:00.000Z",
+  "degreeAwarded": "MSc Without Curriculum"
+}
+
+status=400
+
+body={"error":"Student cannot graduate before the final semester"}

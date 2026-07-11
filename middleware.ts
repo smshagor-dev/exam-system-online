@@ -7,12 +7,13 @@
  */
 
 import { NextResponse } from 'next/server'
+import type { NextAuthRequest } from 'next-auth'
 import { auth } from '@/lib/auth'
 
 const PUBLIC_PATHS = ['/login', '/register', '/forgot-password', '/verify-account']
 
-export default auth((req) => {
-  const { nextUrl, auth: session } = req as any
+export default auth((req: NextAuthRequest) => {
+  const { nextUrl, auth: session } = req
   const pathname = nextUrl.pathname
 
   if (PUBLIC_PATHS.some((path) => pathname.startsWith(path))) {

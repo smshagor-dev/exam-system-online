@@ -1,0 +1,10 @@
+POST /api/admin/graduations
+
+request={
+  "studentId": "cmrgox4vw004rpmlzmi05jq9n",
+  "graduatedAt": "not-a-date"
+}
+
+status=400
+
+body={"error":{"formErrors":[],"fieldErrors":{"graduatedAt":["Invalid date/time"]}}}

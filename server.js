@@ -14,7 +14,7 @@ const { parse } = require('url')
 const { spawnSync } = require('child_process')
 const next = require('next')
 const path = require('path')
-const { initStudentPromotionCron } = require('./server/student-promotion-cron')
+const { initStudentPromotionCron, stopStudentPromotionCron } = require('./server/student-promotion-cron')
 
 const dev = process.env.NODE_ENV !== 'production'
 const hostname = process.env.HOST || 'localhost'
@@ -34,12 +34,12 @@ function runCommand(command, args) {
 }
 
 function runDatabaseSetup() {
-  if (process.env.SKIP_DB_MIGRATIONS === 'true') {
-    console.log('[DB] Skipping database setup because SKIP_DB_MIGRATIONS=true')
+  if (process.env.AUTO_DB_PUSH !== 'true') {
+    console.log('[DB] Skipping Prisma db push because AUTO_DB_PUSH is not enabled')
     return
   }
 
-  console.log('[DB] Syncing Prisma schema with MongoDB...')
+  console.log('[DB] Syncing Prisma schema with MongoDB via explicit AUTO_DB_PUSH=true')
   runCommand(process.execPath, [prismaCli, 'db', 'push'])
 }
 
@@ -66,6 +66,7 @@ async function startServer() {
 
   // Attach Socket.IO to the HTTP server
   // We use require() with ts-node register in dev, or compiled JS in prod
+  let closeSocketServer = async () => {}
   if (dev) {
     // In dev: register ts-node to handle TypeScript imports
     require('ts-node').register({
@@ -84,7 +85,9 @@ async function startServer() {
       paths: { '@/*': ['src/*'] },
     })
 
-    const { initSocketServer } = require('./src/server/socket-server')
+    const socketServerModule = require('./src/server/socket-server')
+    const { initSocketServer } = socketServerModule
+    closeSocketServer = socketServerModule.closeSocketServer
     initSocketServer(httpServer)
   }
 
@@ -101,6 +104,57 @@ async function startServer() {
   })
 
   initStudentPromotionCron(console)
+
+  let isShuttingDown = false
+  const shutdown = async (signal, exitCode = 0) => {
+    if (isShuttingDown) return
+    isShuttingDown = true
+
+    console.log(`[Server] Received ${signal}. Starting graceful shutdown...`)
+
+    const forceExitTimer = setTimeout(() => {
+      console.error('[Server] Graceful shutdown timed out, forcing exit')
+      process.exit(1)
+    }, 10000)
+    forceExitTimer.unref?.()
+
+    try {
+      await closeSocketServer()
+      await stopStudentPromotionCron()
+      await new Promise((resolve, reject) => {
+        httpServer.close((error) => {
+          if (error) {
+            reject(error)
+            return
+          }
+
+          resolve()
+        })
+      })
+      clearTimeout(forceExitTimer)
+      console.log('[Server] Shutdown complete')
+      process.exit(exitCode)
+    } catch (error) {
+      clearTimeout(forceExitTimer)
+      console.error('[Server] Graceful shutdown failed:', error)
+      process.exit(1)
+    }
+  }
+
+  process.on('SIGINT', () => {
+    void shutdown('SIGINT')
+  })
+  process.on('SIGTERM', () => {
+    void shutdown('SIGTERM')
+  })
+  process.on('uncaughtException', (error) => {
+    console.error('[Server] Uncaught exception:', error)
+    void shutdown('uncaughtException', 1)
+  })
+  process.on('unhandledRejection', (reason) => {
+    console.error('[Server] Unhandled rejection:', reason)
+    void shutdown('unhandledRejection', 1)
+  })
 }
 
 startServer().catch((err) => {

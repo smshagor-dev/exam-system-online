@@ -1,0 +1,7 @@
+{
+  "role": "cseAdmin",
+  "pathname": "/admin/years",
+  "actual": "Server error was surfaced safely in the form",
+  "finalUrl": "http://127.0.0.1:3103/admin/years",
+  "title": "ExamFlow Pro"
+}

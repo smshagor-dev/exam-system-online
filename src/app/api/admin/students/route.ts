@@ -3,7 +3,7 @@ import { auth } from '@/lib/auth'
 import { getAdminScope } from '@/lib/admin-scope'
 import { canManageDepartment } from '@/lib/permissions'
 import { prisma } from '@/lib/prisma'
-import { UserRole } from '@prisma/client'
+import { Prisma, UserRole } from '@prisma/client'
 import bcrypt from 'bcryptjs'
 
 async function requireAdmin() {
@@ -20,7 +20,7 @@ export async function GET(req: NextRequest) {
 
   const { searchParams } = new URL(req.url)
   const departmentId = searchParams.get('departmentId')
-  const where: any = { role: UserRole.STUDENT }
+  const where: Prisma.UserWhereInput = { role: UserRole.STUDENT }
 
   if (scope.isSuperAdmin && departmentId) {
     where.studentProfile = { departmentId }

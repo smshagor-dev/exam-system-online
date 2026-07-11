@@ -1,0 +1,9 @@
+POST /api/admin/transfers
+
+request={
+  "studentId": "cmrgox4vw004rpmlzmi05jq9n"
+}
+
+status=400
+
+body={"error":"Active enrollment not found"}

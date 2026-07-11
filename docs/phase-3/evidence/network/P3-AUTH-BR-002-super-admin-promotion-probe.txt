@@ -1,0 +1,19 @@
+POST /api/admin/promotions/preview
+
+request={
+  "departmentId": "cmrgowf870009pmlzozbfj64d",
+  "academicSessionId": "cmrgowg82000dpmlzdld2uohm",
+  "programId": "cmrgowhy9000ppmlzh677ckfa",
+  "programYearId": "cmrgowiy1000xpmlzz64gdgd6",
+  "semesterId": "cmrgowdz80004pmlzugoobdpz",
+  "programSemesterId": "cmrgowkft0019pmlzlkc94vv6",
+  "groupId": "cmrgowm5t001npmlzsqxh0yte",
+  "academicYearId": "cmrgowcza0000pmlzakerzxid",
+  "departmentLanguageId": "cmrgowgyv000hpmlzvs1rw52h",
+  "languageId": "cmrgoweh20006pmlzrlak2hwh",
+  "studentId": "cmzzzzzzzzzzzzzzzzzzzzzzz"
+}
+
+status=200
+
+body={"mode":"single","studentId":"cmzzzzzzzzzzzzzzzzzzzzzzz","eligible":false,"reasons":["Active enrollment not found"]}

@@ -1,0 +1,14 @@
+POST /api/admin/leaves
+
+request={
+  "studentId": "cmrgq4zw40020d0dd384xy7hj",
+  "leaveType": "MEDICAL",
+  "startsAt": "2026-09-01T00:00:00.000Z",
+  "endsAt": "2026-09-10T00:00:00.000Z",
+  "status": "APPROVED",
+  "reason": "Phase 3 medical leave"
+}
+
+status=201
+
+body={"leave":{"id":"cmrgq54nh007oi1uxmf4m56k1","studentId":"cmrgq4zw40020d0dd384xy7hj","enrollmentId":"cmrgq51jd007di1ux8bgg7rnz","leaveType":"MEDICAL","startsAt":"2026-09-01T00:00:00.000Z","endsAt":"2026-09-10T00:00:00.000Z","status":"APPROVED","reason":"Phase 3 medical leave","notes":null,"approvedAt":"2026-07-11T18:55:01.325Z","readmittedAt":null,"createdAt":"2026-07-11T18:55:01.325Z","updatedAt":"2026-07-11T18:55:01.325Z"},"enrollment":{"id":"cmrgq51jd007di1ux8bgg7rnz","studentId":"cmrgq4zw40020d0dd384xy7hj","departmentId":"cmrgowf870009pmlzozbfj64d","academicYearId":"cmrgowcza0000pmlzakerzxid

@@ -1,0 +1,9 @@
+POST /api/admin/readmissions
+
+request={
+  "studentId": "cmrgowzse0040pmlzhrkc3nab"
+}
+
+status=400
+
+body={"error":"Program semester does not belong to the selected semester"}

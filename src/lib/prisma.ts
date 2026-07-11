@@ -3,7 +3,7 @@
  * Prisma Client singleton - prevents hot-reload from creating too many connections
  */
 
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient } from '@prisma/client/index'
 
 const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined

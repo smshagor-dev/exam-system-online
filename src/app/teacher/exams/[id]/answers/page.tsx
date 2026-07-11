@@ -125,10 +125,6 @@ export default function AnswersReviewPage({ params }: PageProps) {
   const manualAnswers = result.attempt.answers.filter(
     (a) => a.question.type === 'SHORT_ANSWER' || a.question.type === 'WRITTEN_ANSWER'
   )
-  const autoChecked = result.attempt.answers.filter(
-    (a) => a.checkStatus === 'AUTO_CHECKED' || a.question.type === 'MCQ' || a.question.type === 'TRUE_FALSE'
-  )
-
   return (
     <div className="space-y-6 max-w-4xl mx-auto">
       {/* Header */}

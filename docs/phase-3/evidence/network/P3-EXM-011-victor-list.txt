@@ -1,0 +1,7 @@
+GET /api/exams
+
+request=<none>
+
+status=200
+
+body=[{"id":"cmrgp1b7n00i9pmlzfmopw0v8","title":"Victor Target Scope Exam","description":null,"teacherId":"cmrgowv5t003dpmlzf02tpawb","departmentId":"cmrgowf870009pmlzozbfj64d","subjectId":"cmrgowo3r0023pmlzb73yaw1d","languageId":"cmrgoweh20006pmlzrlak2hwh","groupId":"cmrgowmej001ppmlzbn1kemkx","academicYearId":"cmrgowcza0000pmlzakerzxid","semesterId":"cmrgowdqf0003pmlzzstm2atu","academicOfferingId":"cmrgowrpj002xpmlzktwpfibs","questionType":"MCQ","status":"LIVE","resultMode":"AUTO","totalMarks":50,"passingMarks":20,"duration":30,"startTime":"2026-07-11T18:23:03.576Z","endTime":"2026-07-11T19:24:03

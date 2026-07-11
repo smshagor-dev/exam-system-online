@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import type { ComponentType, ReactNode } from 'react'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import SignOutButton from '@/components/auth/SignOutButton'
 import BrandBadge from '@/components/branding/BrandBadge'
 import LanguageSwitcher from '@/components/i18n/LanguageSwitcher'
@@ -63,6 +63,14 @@ export default function AdminShell({ children, user, branding }: AdminShellProps
   const navItems: NavItem[] = [
     { href: '/admin/dashboard', label: t('shell.dashboard', 'Dashboard'), icon: BarChart3 },
     { href: '/admin/departments', label: t('shell.departments', 'Departments'), icon: School2 },
+    { href: '/admin/degree-levels', label: 'Degree Levels', icon: GraduationCap },
+    { href: '/admin/programs', label: 'Programs', icon: School2 },
+    { href: '/admin/department-languages', label: 'Department Languages', icon: Languages },
+    { href: '/admin/academic-sessions', label: 'Academic Sessions', icon: CalendarRange },
+    { href: '/admin/program-years', label: 'Program Years', icon: CalendarRange },
+    { href: '/admin/program-semesters', label: 'Program Semesters', icon: CalendarDays },
+    { href: '/admin/curriculum', label: 'Curriculum', icon: BookOpen },
+    { href: '/admin/academic-offerings', label: 'Academic Offerings', icon: Layers3 },
     { href: '/admin/subjects', label: t('shell.subjects', 'Subjects'), icon: BookOpen },
     { href: '/admin/groups', label: t('shell.groups', 'Groups'), icon: Layers3 },
     { href: '/admin/years', label: t('shell.academic_years', 'Academic Years'), icon: CalendarRange },
@@ -96,26 +104,7 @@ export default function AdminShell({ children, user, branding }: AdminShellProps
     systemSettings.items.some((item) => pathname === item.href)
   )
 
-  useEffect(() => {
-    setSidebarOpen(false)
-  }, [pathname])
-
-  useEffect(() => {
-    setProfileOpen(false)
-  }, [pathname])
-
-  useEffect(() => {
-    if (systemSettings.items.some((item) => pathname === item.href)) {
-      setSettingsOpen(true)
-    }
-  }, [pathname, systemSettings.items])
-
-  useEffect(() => {
-    const openSidebar = () => setSidebarOpen(true)
-    window.addEventListener('admin-sidebar-open', openSidebar)
-
-    return () => window.removeEventListener('admin-sidebar-open', openSidebar)
-  }, [])
+  const isSystemSettingsRoute = systemSettings.items.some((item) => pathname === item.href)
 
   return (
     <div className="h-screen overflow-hidden bg-[#f4f7fb]">
@@ -173,6 +162,10 @@ export default function AdminShell({ children, user, branding }: AdminShellProps
                   <Link
                     key={item.href}
                     href={item.href}
+                    onClick={() => {
+                      setSidebarOpen(false)
+                      setProfileOpen(false)
+                    }}
                     className={`flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium transition-all ${
                       isActive
                         ? 'bg-[#1d4ed8] text-white shadow-lg shadow-blue-950/20'
@@ -191,7 +184,7 @@ export default function AdminShell({ children, user, branding }: AdminShellProps
                     type="button"
                     onClick={() => setSettingsOpen((current) => !current)}
                     className={`flex w-full items-center justify-between rounded-2xl px-4 py-3 text-sm font-medium transition-all ${
-                      systemSettings.items.some((item) => pathname === item.href)
+                      isSystemSettingsRoute
                         ? 'bg-white/10 text-white'
                         : 'text-slate-300 hover:bg-white/8 hover:text-white'
                     }`}
@@ -203,7 +196,7 @@ export default function AdminShell({ children, user, branding }: AdminShellProps
                     <ChevronDown className={`h-4 w-4 transition-transform ${settingsOpen ? 'rotate-180' : ''}`} />
                   </button>
 
-                  {settingsOpen && (
+                  {(settingsOpen || isSystemSettingsRoute) && (
                     <div className="mt-2 space-y-1 rounded-2xl border border-white/10 bg-white/5 p-2">
                       {systemSettings.items.map((item) => {
                         const Icon = item.icon
@@ -213,6 +206,10 @@ export default function AdminShell({ children, user, branding }: AdminShellProps
                           <Link
                             key={item.href}
                             href={item.href}
+                            onClick={() => {
+                              setSidebarOpen(false)
+                              setProfileOpen(false)
+                            }}
                             className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm transition ${
                               isActive
                                 ? 'bg-[#1d4ed8] text-white shadow-lg shadow-blue-950/20'
@@ -262,12 +259,14 @@ export default function AdminShell({ children, user, branding }: AdminShellProps
                 <div className="mt-3 rounded-xl border border-white/10 bg-white/5 p-2">
                   <Link
                     href="/admin/profile"
+                    onClick={() => setProfileOpen(false)}
                     className="block w-full rounded-lg px-3 py-2 text-left text-sm text-slate-200 transition hover:bg-white/10"
                   >
                     {t('common.profile', 'Profile')}
                   </Link>
                   <Link
                     href="/admin/change-password"
+                    onClick={() => setProfileOpen(false)}
                     className="block w-full rounded-lg px-3 py-2 text-left text-sm text-slate-200 transition hover:bg-white/10"
                   >
                     {t('common.change_password', 'Change Password')}

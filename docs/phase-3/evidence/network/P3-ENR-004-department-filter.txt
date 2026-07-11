@@ -1,0 +1,7 @@
+GET /api/admin/enrollments?departmentId=cmrgowf870009pmlzozbfj64d
+
+request=<none>
+
+status=200
+
+body={"items":[{"id":"cmrgpvtc800a5gqwrvjy2goyp","studentId":"cmrgpvmml002c38hpqy2ty102","departmentId":"cmrgowf870009pmlzozbfj64d","academicYearId":"cmrgowd8g0001pmlzbmn74h0l","academicSessionId":"cmrgowg82000dpmlzdld2uohm","programId":"cmrgowhy9000ppmlzh677ckfa","programYearId":"cmrgowj6x000zpmlzp6cgy3la","semesterId":"cmrgowdqf0003pmlzzstm2atu","programSemesterId":"cmrgowkoz001bpmlzqnpv1mn4","groupId":"cmrgowmno001rpmlzdone6f4o","departmentLanguageId":"cmrgowh7r000jpmlz9aqpisti","languageId":"cmrgoweq30007pmlz94jny6v0","status":"ACTIVE","enrolledAt":"2026-10-11T00:00:00.000Z","endedAt":null,"gra

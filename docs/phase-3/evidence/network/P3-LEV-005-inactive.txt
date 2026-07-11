@@ -1,0 +1,9 @@
+POST /api/admin/leaves
+
+request={
+  "studentId": "cmrgox9f4005fpmlz10f36ofn"
+}
+
+status=403
+
+body={"error":"Forbidden for this department"}

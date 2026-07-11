@@ -1,0 +1,22 @@
+POST /api/admin/promotions/preview
+
+request={
+  "departmentId": "cmrgowf870009pmlzozbfj64d",
+  "academicSessionId": "cmrgowg82000dpmlzdld2uohm",
+  "programId": "cmrgowhy9000ppmlzh677ckfa",
+  "programYearId": "cmrgowiy1000xpmlzz64gdgd6",
+  "semesterId": "cmrgowdz80004pmlzugoobdpz",
+  "programSemesterId": "cmrgowkft0019pmlzlkc94vv6",
+  "groupId": "cmrgowm5t001npmlzsqxh0yte",
+  "academicYearId": "cmrgowcza0000pmlzakerzxid",
+  "departmentLanguageId": "cmrgowgyv000hpmlzvs1rw52h",
+  "languageId": "cmrgoweh20006pmlzrlak2hwh",
+  "studentIds": [
+    "cmrgq3ciq001ad0ddhm7nllmr",
+    "cmrgowxx9003rpmlz1pel4tyd"
+  ]
+}
+
+status=200
+
+body={"mode":"bulk","total":2,"eligible":1,"blocked":1,"results":[{"studentId":"cmrgq3ciq001ad0ddhm7nllmr","eligible":true,"reasons":[]},{"studentId":"cmrgowxx9003rpmlz1pel4tyd","eligible":false,"reasons":["Program transfer must use the transfer module, not promotion"]}]}

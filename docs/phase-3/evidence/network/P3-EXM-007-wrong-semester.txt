@@ -1,0 +1,7 @@
+GET /api/exams/cmrgoxbis005tpmlzv86fbfmo
+
+request=<none>
+
+status=403
+
+body={"error":"Exam is completed"}

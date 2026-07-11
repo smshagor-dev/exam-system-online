@@ -1,0 +1,7 @@
+GET /api/exams/cmrgq8g68002zd0dd2903lceg
+
+request=<none>
+
+status=403
+
+body={"error":"No legacy subject enrollment or offering was found for this active enrollment"}

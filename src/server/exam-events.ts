@@ -20,7 +20,7 @@ type ExamEvent =
 
 interface ExamEventPayload {
   examId: string
-  data?: Record<string, any>
+  data?: Record<string, string | number | boolean | null | undefined>
 }
 
 class ExamEventBus extends EventEmitter {
@@ -51,7 +51,10 @@ export function emitExamEnded(examId: string) {
   examEventBus.emit('exam_ended', { examId })
 }
 
-export function emitStudentJoined(examId: string, studentData: Record<string, any>) {
+export function emitStudentJoined(
+  examId: string,
+  studentData: Record<string, string | number | boolean | null | undefined>
+) {
   examEventBus.emit('student_joined', { examId, data: studentData })
 }
 

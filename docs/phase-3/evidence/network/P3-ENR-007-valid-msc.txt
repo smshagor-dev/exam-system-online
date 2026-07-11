@@ -1,0 +1,20 @@
+POST /api/admin/enrollments
+
+request={
+  "departmentId": "cmrgowf870009pmlzozbfj64d",
+  "academicSessionId": "cmrgowg82000dpmlzdld2uohm",
+  "programId": "cmrgowig6000tpmlzxenr20zt",
+  "programYearId": "cmrgowjoy0013pmlzoat444yl",
+  "semesterId": "cmrgowdqf0003pmlzzstm2atu",
+  "programSemesterId": "cmrgowlfi001hpmlzsphikx48",
+  "groupId": "cmrgownmj001zpmlzm1pgkgpg",
+  "academicYearId": "cmrgowcza0000pmlzakerzxid",
+  "departmentLanguageId": "cmrgowgyv000hpmlzvs1rw52h",
+  "languageId": "cmrgoweh20006pmlzrlak2hwh",
+  "studentId": "cmrgq1gey0005d0ddeal2c6iw",
+  "notes": "Phase 3 MSc enrollment"
+}
+
+status=201
+
+body={"enrollment":{"id":"cmrgq1i60000di1uxzjkmz6f9","studentId":"cmrgq1gey0005d0ddeal2c6iw","departmentId":"cmrgowf870009pmlzozbfj64d","academicYearId":"cmrgowcza0000pmlzakerzxid","academicSessionId":"cmrgowg82000dpmlzdld2uohm","programId":"cmrgowig6000tpmlzxenr20zt","programYearId":"cmrgowjoy0013pmlzoat444yl","semesterId":"cmrgowdqf0003pmlzzstm2atu","programSemesterId":"cmrgowlfi001hpmlzsphikx48","groupId":"cmrgownmj001zpmlzm1pgkgpg","departmentLanguageId":"cmrgowgyv000hpmlzvs1rw52h","languageId":"cmrgoweh20006pmlzrlak2hwh","status":"ACTIVE","enrolledAt":"2026-07-11T18:52:12.209Z","endedAt":null,

@@ -2,8 +2,8 @@ import { NextRequest, NextResponse } from 'next/server'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 import { createExamSchema } from '@/lib/validators'
-import { UserRole } from '@prisma/client'
-import { teacherCanAccessAssignment } from '@/lib/permissions'
+import { ExamStatus, Prisma, UserRole } from '@prisma/client'
+import { getStudentExamQueryScope, teacherCanAccessAssignment } from '@/lib/permissions'
 
 export async function GET(req: NextRequest) {
   const session = await auth()
@@ -11,41 +11,29 @@ export async function GET(req: NextRequest) {
 
   const { searchParams } = new URL(req.url)
   const status = searchParams.get('status')
+  const validStatus = status && Object.values(ExamStatus).includes(status as ExamStatus)
+    ? (status as ExamStatus)
+    : null
 
-  let where: any = {}
+  let where: Prisma.ExamWhereInput = {}
 
   if (session.user.role === UserRole.TEACHER) {
     const profile = await prisma.teacherProfile.findUnique({ where: { userId: session.user.id } })
     if (!profile) return NextResponse.json({ error: 'Profile not found' }, { status: 404 })
     where.teacherId = profile.id
   } else if (session.user.role === UserRole.STUDENT) {
-    // Students see only their matching exams
-    const studentProfile = await prisma.studentProfile.findUnique({
-      where: { userId: session.user.id },
-      include: { subjects: true },
-    })
-    if (!studentProfile) return NextResponse.json({ error: 'Profile not found' }, { status: 404 })
-
-    // Build OR query for each enrolled subject combo
-    const orConditions = studentProfile.subjects.map((s) => ({
-      subjectId: s.subjectId,
-      languageId: s.languageId,
-      groupId: s.groupId,
-      academicYearId: s.academicYearId,
-      semesterId: s.semesterId,
-      departmentId: studentProfile.departmentId,
-    }))
-
-    if (orConditions.length === 0) return NextResponse.json([])
+    const scope = await getStudentExamQueryScope(session.user.id)
+    if (!scope.profile) return NextResponse.json({ error: 'Profile not found' }, { status: 404 })
+    if (scope.examWhereClauses.length === 0) return NextResponse.json([])
 
     where = {
-      OR: orConditions,
-      status: status ? { in: [status] } : { in: ['SCHEDULED', 'LIVE'] },
+      OR: scope.examWhereClauses,
+      status: validStatus ? { in: [validStatus] } : { in: [ExamStatus.SCHEDULED, ExamStatus.LIVE] },
     }
   }
 
-  if (status && session.user.role !== UserRole.STUDENT) {
-    where.status = status
+  if (validStatus && session.user.role !== UserRole.STUDENT) {
+    where.status = validStatus
   }
 
   const exams = await prisma.exam.findMany({
@@ -79,6 +67,7 @@ export async function POST(req: NextRequest) {
 
   const ctx = { userId: session.user.id, role: session.user.role }
   const canAccess = await teacherCanAccessAssignment(ctx, {
+    academicOfferingId: parsed.data.academicOfferingId,
     subjectId: parsed.data.subjectId,
     languageId: parsed.data.languageId,
     groupId: parsed.data.groupId,
@@ -100,6 +89,7 @@ export async function POST(req: NextRequest) {
       startTime: new Date(examData.startTime),
       endTime: new Date(examData.endTime),
       teacherId: profile.id,
+      academicOfferingId: parsed.data.academicOfferingId ?? null,
       status: 'SCHEDULED',
       questions: {
         create: questionIds.map((q) => ({

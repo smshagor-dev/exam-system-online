@@ -1,0 +1,14 @@
+POST /api/admin/graduations
+
+request={
+  "studentId": "cmrgq6ep9002fd0ddze5ozf4q",
+  "graduatedAt": "2026-12-20T00:00:00.000Z",
+  "finalCgpa": 3.92,
+  "degreeClassification": "First Class",
+  "certificateNumber": "P3-BSC-1783796165357",
+  "degreeAwarded": "BSc in Computer Science"
+}
+
+status=201
+
+body={"graduation":{"id":"cmrgq6kk000azi1uxeb00xq1y","studentId":"cmrgq6ep9002fd0ddze5ozf4q","enrollmentId":"cmrgq6gdw00aoi1uxrl0yfu4s","graduatedAt":"2026-12-20T00:00:00.000Z","finalCgpa":3.92,"degreeClassification":"First Class","certificateNumber":"P3-BSC-1783796165357","degreeAwarded":"BSc in Computer Science","alumniAt":null,"notes":null,"createdAt":"2026-07-11T18:56:08.593Z","updatedAt":"2026-07-11T18:56:08.593Z"},"enrollment":{"id":"cmrgq6gdw00aoi1uxrl0yfu4s","studentId":"cmrgq6ep9002fd0ddze5ozf4q","departmentId":"cmrgowf870009pmlzozbfj64d","academicYearId":"cmrgowd8g0001pmlzbmn74h0l","acade

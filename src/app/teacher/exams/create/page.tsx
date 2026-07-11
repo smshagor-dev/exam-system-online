@@ -40,7 +40,7 @@ export default async function CreateExamPage() {
         <h1 className="text-2xl font-bold text-gray-900">Create New Exam</h1>
         <p className="text-gray-500 mt-1">Configure your exam and select questions from your question bank</p>
       </div>
-      <CreateExamForm assignments={profile.assignments} teacherId={profile.id} />
+      <CreateExamForm assignments={profile.assignments} />
     </div>
   )
 }

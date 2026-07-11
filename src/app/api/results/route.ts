@@ -1,8 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
-import { UserRole } from '@prisma/client'
-import { recalculateAfterReview, publishResult } from '@/lib/result-engine'
+import { Prisma, UserRole } from '@prisma/client'
 
 export async function GET(req: NextRequest) {
   const session = await auth()
@@ -11,7 +10,7 @@ export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url)
   const examId = searchParams.get('examId')
 
-  let where: any = {}
+  let where: Prisma.ExamResultWhereInput = {}
 
   if (session.user.role === UserRole.STUDENT) {
     const profile = await prisma.studentProfile.findUnique({ where: { userId: session.user.id } })

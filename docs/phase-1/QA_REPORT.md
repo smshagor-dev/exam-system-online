@@ -1,0 +1,91 @@
+# QA Report
+
+## Automated validation
+- `node --version`
+  - PASS
+  - `v24.14.0`
+- `npm --version`
+  - PASS
+  - `11.6.2`
+- `npm outdated`
+  - PASS
+  - informational only
+- `npx prisma format`
+  - PASS
+- `npx prisma validate`
+  - PASS
+- `npx prisma generate`
+  - BLOCKED
+  - Windows Prisma engine file lock (`EPERM`) while dev Node processes were active
+- `npm run typecheck`
+  - PASS
+- `npm run build`
+  - PASS
+- `npm run lint`
+  - BLOCKED
+  - `46` errors, `15` warnings remain
+- `npm audit --omit=dev`
+  - PASS WITH FINDINGS
+  - `10` vulnerabilities reported (`5` high, `5` moderate)
+
+## Smoke testing
+- Login
+  - NOT TESTED
+  - build/typecheck coverage only
+- Registration
+  - NOT TESTED
+- Account verification
+  - NOT TESTED
+- Forgot password
+  - NOT TESTED
+- Admin dashboard
+  - NOT TESTED
+- Department CRUD
+  - NOT TESTED
+- Language CRUD
+  - NOT TESTED
+- Year CRUD
+  - NOT TESTED
+- Semester CRUD
+  - NOT TESTED
+- Group CRUD
+  - NOT TESTED
+- Subject CRUD
+  - NOT TESTED
+- Teacher assignment
+  - NOT TESTED
+- Question bank
+  - NOT TESTED
+- Exam creation
+  - NOT TESTED
+- Student exam listing
+  - NOT TESTED
+- Student exam eligibility
+  - NOT TESTED
+- Student exam join
+  - NOT TESTED
+- Answer auto-save
+  - NOT TESTED
+- Manual submission
+  - NOT TESTED
+- Automatic submission
+  - NOT TESTED
+- Teacher live monitoring
+  - NOT TESTED
+- Manual grading
+  - NOT TESTED
+- Result publication
+  - NOT TESTED
+- Student result view
+  - NOT TESTED
+- Coursework
+  - NOT TESTED
+- Ebooks
+  - NOT TESTED
+- Notifications
+  - NOT TESTED
+- Socket reconnection
+  - NOT TESTED
+
+## QA conclusion
+Automated build and source typecheck gates are green. Phase 1 remains blocked by repo-wide lint and incomplete local Prisma generate verification.

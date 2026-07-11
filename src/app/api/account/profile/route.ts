@@ -160,7 +160,7 @@ export async function PATCH(request: Request) {
           ) as Record<string, string | boolean>
         : {}
 
-    if (!['BACHELOR_OF_SCIENCE', 'MASTER_OF_SCIENCE'].includes(course)) {
+    if (!course.trim()) {
       return NextResponse.json({ error: 'Invalid course' }, { status: 400 })
     }
 

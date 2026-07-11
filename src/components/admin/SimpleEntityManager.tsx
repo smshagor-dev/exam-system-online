@@ -1,25 +1,18 @@
 'use client'
 
-import { useState } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useI18n } from '@/components/i18n/LanguageProvider'
+import { getFilteredFieldOptions, reconcileDependentSelections, type SimpleEntityField as Field } from './simple-entity-form'
 
 type Column = {
   key: string
   label: string
 }
 
-type Field = {
-  key: string
-  label: string
-  type: 'text' | 'textarea' | 'select' | 'number'
-  required?: boolean
-  options?: { value: string; label: string }[]
-}
-
 type Props = {
   title: string
-  items: any[]
+  items: Array<Record<string, unknown> & { id: string; name?: string | null }>
   columns: Column[]
   fields: Field[]
   apiBase: string
@@ -28,6 +21,41 @@ type Props = {
   canEdit?: boolean
   canDelete?: boolean
   formMode?: 'inline' | 'modal'
+}
+
+function formatApiError(error: unknown, fallback: string) {
+  if (typeof error === 'string' && error.trim()) return error
+
+  if (error && typeof error === 'object') {
+    const candidate = error as {
+      formErrors?: unknown
+      fieldErrors?: Record<string, unknown>
+    }
+
+    const messages: string[] = []
+
+    if (Array.isArray(candidate.formErrors)) {
+      messages.push(...candidate.formErrors.filter((item): item is string => typeof item === 'string' && item.trim().length > 0))
+    }
+
+    if (candidate.fieldErrors && typeof candidate.fieldErrors === 'object') {
+      for (const [field, value] of Object.entries(candidate.fieldErrors)) {
+        if (Array.isArray(value)) {
+          for (const message of value) {
+            if (typeof message === 'string' && message.trim()) {
+              messages.push(`${field}: ${message}`)
+            }
+          }
+        }
+      }
+    }
+
+    if (messages.length > 0) {
+      return messages.join(', ')
+    }
+  }
+
+  return fallback
 }
 
 export default function SimpleEntityManager({
@@ -49,19 +77,35 @@ export default function SimpleEntityManager({
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [form, setForm] = useState<Record<string, string>>({})
+  const [formInstanceKey, setFormInstanceKey] = useState(0)
+  const [search, setSearch] = useState('')
+  const [statusFilter, setStatusFilter] = useState<'all' | 'active' | 'inactive'>('all')
+  const submitLockRef = useRef(false)
 
   const resetForm = () => {
     setForm({})
     setEditingId(null)
     setError(null)
+    setFormInstanceKey((current) => current + 1)
   }
 
-  const startEdit = (item: any) => {
+  const updateForm = (nextForm: Record<string, string>) => {
+    setForm(reconcileDependentSelections(fields, nextForm))
+  }
+
+  const startEdit = (item: Props['items'][number]) => {
     const init: Record<string, string> = {}
     fields.forEach((field) => {
-      init[field.key] = item[field.key] ?? ''
+      const value = item[field.key]
+      init[field.key] = typeof value === 'boolean'
+        ? String(value)
+        : typeof value === 'string'
+          ? value
+          : value == null
+            ? ''
+            : String(value)
     })
-    setForm(init)
+    updateForm(init)
     setEditingId(item.id)
     setShowForm(true)
   }
@@ -77,6 +121,9 @@ export default function SimpleEntityManager({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    if (submitLockRef.current) return
+
+    submitLockRef.current = true
     setLoading(true)
     setError(null)
 
@@ -86,20 +133,25 @@ export default function SimpleEntityManager({
       const res = await fetch(url, {
         method,
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify(
+          Object.fromEntries(
+            Object.entries(form).map(([key, value]) => [key, value === 'true' ? true : value === 'false' ? false : value])
+          )
+        ),
       })
 
       if (!res.ok) {
         const data = await res.json()
-        throw new Error(data.error || t('admin.simple.save_failed', 'Save failed'))
+        throw new Error(formatApiError(data.error, t('admin.simple.save_failed', 'Save failed')))
       }
 
       closeForm()
       router.refresh()
-    } catch (err: any) {
-      setError(err.message)
+    } catch (error: unknown) {
+      setError(error instanceof Error ? error.message : t('admin.simple.save_failed', 'Save failed'))
     } finally {
       setLoading(false)
+      submitLockRef.current = false
     }
   }
 
@@ -113,10 +165,25 @@ export default function SimpleEntityManager({
         throw new Error(data.error || t('admin.simple.delete_failed', 'Delete failed'))
       }
       router.refresh()
-    } catch (err: any) {
-      alert(err.message)
+    } catch (error: unknown) {
+      alert(error instanceof Error ? error.message : t('admin.simple.delete_failed', 'Delete failed'))
     }
   }
+
+  const filteredItems = useMemo(() => {
+    const searchValue = search.trim().toLowerCase()
+
+    return items.filter((item) => {
+      if (statusFilter !== 'all' && typeof item.isActive === 'boolean') {
+        if (statusFilter === 'active' && !item.isActive) return false
+        if (statusFilter === 'inactive' && item.isActive) return false
+      }
+
+      if (!searchValue) return true
+
+      return columns.some((column) => String(item[column.key] ?? '').toLowerCase().includes(searchValue))
+    })
+  }, [columns, items, search, statusFilter])
 
   return (
     <div className="space-y-6">
@@ -124,20 +191,39 @@ export default function SimpleEntityManager({
         <div>
           <h1 className="text-2xl font-bold text-gray-900">{title}</h1>
           <p className="mt-1 text-gray-500">
-            {items.length} {t('admin.simple.items', 'items')}
+            {filteredItems.length} {t('admin.simple.items', 'items')}
           </p>
         </div>
-        {canCreate && (
-          <button
-            onClick={() => {
-              resetForm()
-              setShowForm(true)
-            }}
-            className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-700"
-          >
-            + {t('admin.simple.add', 'Add')} {entityLabel}
-          </button>
-        )}
+        <div className="flex items-center gap-3">
+          <input
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder={t('common.search', 'Search')}
+            className="rounded-lg border border-gray-300 px-3 py-2 text-sm outline-none focus:border-blue-500"
+          />
+          {items.some((item) => typeof item.isActive === 'boolean') && (
+            <select
+              value={statusFilter}
+              onChange={(e) => setStatusFilter(e.target.value as 'all' | 'active' | 'inactive')}
+              className="rounded-lg border border-gray-300 px-3 py-2 text-sm outline-none focus:border-blue-500"
+            >
+              <option value="all">All</option>
+              <option value="active">Active</option>
+              <option value="inactive">Inactive</option>
+            </select>
+          )}
+          {canCreate && (
+            <button
+              onClick={() => {
+                resetForm()
+                setShowForm(true)
+              }}
+              className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-700"
+            >
+              + {t('admin.simple.add', 'Add')} {entityLabel}
+            </button>
+          )}
+        </div>
       </div>
 
       {showForm && canCreate && (
@@ -165,30 +251,48 @@ export default function SimpleEntityManager({
                 {error}
               </div>
             )}
-            <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-4 md:grid-cols-2">
+            <form key={formInstanceKey} onSubmit={handleSubmit} className="grid grid-cols-1 gap-4 md:grid-cols-2" autoComplete="off">
               {fields.map((field) => (
                 <div key={field.key} className={field.type === 'textarea' ? 'md:col-span-2' : ''}>
                   <label className="mb-1 block text-sm font-medium text-gray-700">
                     {field.label} {field.required && '*'}
                   </label>
                   {field.type === 'select' ? (
-                    <select
-                      value={form[field.key] ?? ''}
-                      onChange={(e) => setForm({ ...form, [field.key]: e.target.value })}
-                      className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm outline-none focus:border-blue-500"
-                      required={field.required}
-                    >
-                      <option value="">{t('common.select', 'Select...')}</option>
-                      {field.options?.map((opt) => (
-                        <option key={opt.value} value={opt.value}>
-                          {opt.label}
-                        </option>
-                      ))}
-                    </select>
+                    (() => {
+                      const availableOptions = getFilteredFieldOptions(field, form)
+                      const dependsOn = field.dependsOn ?? []
+                      const isBlocked = dependsOn.length > 0 && dependsOn.some((dependencyKey) => !form[dependencyKey])
+
+                      return (
+                        <select
+                          value={form[field.key] ?? ''}
+                          onChange={(e) => updateForm({ ...form, [field.key]: e.target.value })}
+                          className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm outline-none focus:border-blue-500"
+                          required={field.required}
+                          disabled={isBlocked}
+                        >
+                          <option value="">{t('common.select', 'Select...')}</option>
+                          {availableOptions.map((opt, index) => (
+                            <option key={`${opt.value}:${index}`} value={opt.value}>
+                              {opt.label}
+                            </option>
+                          ))}
+                        </select>
+                      )
+                    })()
+                  ) : field.type === 'checkbox' ? (
+                    <label className="flex items-center gap-3 rounded-lg border border-gray-300 px-3 py-2 text-sm">
+                      <input
+                        type="checkbox"
+                        checked={form[field.key] === 'true'}
+                        onChange={(e) => updateForm({ ...form, [field.key]: String(e.target.checked) })}
+                      />
+                      <span>{field.label}</span>
+                    </label>
                   ) : field.type === 'textarea' ? (
                     <textarea
                       value={form[field.key] ?? ''}
-                      onChange={(e) => setForm({ ...form, [field.key]: e.target.value })}
+                      onChange={(e) => updateForm({ ...form, [field.key]: e.target.value })}
                       className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm outline-none focus:border-blue-500"
                       rows={2}
                     />
@@ -196,7 +300,7 @@ export default function SimpleEntityManager({
                     <input
                       type={field.type}
                       value={form[field.key] ?? ''}
-                      onChange={(e) => setForm({ ...form, [field.key]: e.target.value })}
+                      onChange={(e) => updateForm({ ...form, [field.key]: e.target.value })}
                       className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm outline-none focus:border-blue-500"
                       required={field.required}
                     />
@@ -239,11 +343,14 @@ export default function SimpleEntityManager({
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-50">
-            {items.map((item) => (
+            {filteredItems.map((item) => (
               <tr key={item.id} className="hover:bg-gray-50">
                 {columns.map((col) => (
                   <td key={col.key} className="px-5 py-4 text-sm text-gray-700">
-                    {item[col.key] ?? '—'}
+                    {(() => {
+                      const value = item[col.key]
+                      return typeof value === 'object' ? '—' : String(value ?? '—')
+                    })()}
                   </td>
                 ))}
                 {(canEdit || canDelete) && (
@@ -256,7 +363,7 @@ export default function SimpleEntityManager({
                       )}
                       {canDelete && (
                         <button
-                          onClick={() => handleDelete(item.id, item.name)}
+                          onClick={() => handleDelete(item.id, item.name ?? item.id)}
                           className="text-xs font-medium text-red-600 hover:text-red-700"
                         >
                           {t('common.delete', 'Delete')}
@@ -267,7 +374,7 @@ export default function SimpleEntityManager({
                 )}
               </tr>
             ))}
-            {items.length === 0 && (
+            {filteredItems.length === 0 && (
               <tr>
                 <td colSpan={columns.length + (canEdit || canDelete ? 1 : 0)} className="px-5 py-10 text-center text-sm text-gray-400">
                   {t('common.no_items_yet', 'No items yet')}

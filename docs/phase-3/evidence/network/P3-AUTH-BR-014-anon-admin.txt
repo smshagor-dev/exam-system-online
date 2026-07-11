@@ -1,0 +1,7 @@
+GET /api/admin/enrollments
+
+request=<none>
+
+status=401
+
+body={"error":"UNAUTHORIZED"}

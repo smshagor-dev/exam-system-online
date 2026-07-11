@@ -1,6 +1,6 @@
 # ExamFlow Pro 🎓
 
-A **production-ready** online exam management system built with Next.js 15, Socket.IO, Prisma (MongoDB), and TypeScript.
+A **production-ready** online exam management system built with Next.js 16, Socket.IO, Prisma (MongoDB), and TypeScript.
 
 ---
 
@@ -46,6 +46,11 @@ A **production-ready** online exam management system built with Next.js 15, Sock
 - Zod validation on all inputs
 - bcrypt password hashing
 
+### Academic Architecture (Phase 2)
+- Degree levels, academic programs, department-language mappings, and academic sessions
+- Program years, program-semester mappings, and curriculum records
+- Reusable `AcademicOffering` scope with backward-compatible legacy fallbacks
+
 ---
 
 ## 🚀 Quick Setup
@@ -89,6 +94,12 @@ npx prisma db push
 
 # Seed with demo data
 npx ts-node --project tsconfig.seed.json prisma/seed.ts
+
+# Phase 2 dry-run backfill
+npm run phase2:backfill:dry
+
+# Phase 2 integrity verification
+npm run phase2:verify
 ```
 
 ### 4. Start Development Server
@@ -228,11 +239,11 @@ return JSON.parse(completion.choices[0].message.content!)
 npm run build
 
 # Start production server
-NODE_ENV=production node server.js
+npm run start
 ```
 
 ### Recommended Stack
-- **Database**: PlanetScale / AWS RDS MySQL 8
+- **Database**: MongoDB Atlas or self-hosted MongoDB
 - **App**: PM2 on a VPS, or Railway/Render
 - **File Storage**: AWS S3 (for question image attachments)
 - **SSL**: Nginx reverse proxy with Let's Encrypt
@@ -245,7 +256,11 @@ NODE_ENV=production node server.js
 npm run dev          # Start dev server (Next.js + Socket.IO)
 npm run build        # Build for production
 npm run start        # Start production server
+npm run typecheck    # Generate Next route types and run TypeScript checks
+npm run lint         # Run ESLint
+npm run qa           # Run typecheck, lint, and build
 npm run db:generate  # Generate Prisma client
+npm run db:validate  # Validate Prisma schema
 npm run db:migrate   # Push Prisma schema to MongoDB
 npm run db:seed      # Seed demo data
 npm run db:studio    # Open Prisma Studio (DB GUI)
@@ -257,9 +272,9 @@ npm run db:studio    # Open Prisma Studio (DB GUI)
 
 | Layer | Technology |
 |---|---|
-| Framework | Next.js 15 (App Router) |
+| Framework | Next.js 16.2.10 (App Router) |
 | Language | TypeScript |
-| Database | MySQL 8 via Prisma ORM |
+| Database | MongoDB via Prisma ORM |
 | Real-time | Socket.IO 4 |
 | Auth | NextAuth v5 (JWT strategy) |
 | Styling | Tailwind CSS |

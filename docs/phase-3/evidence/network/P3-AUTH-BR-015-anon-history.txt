@@ -1,0 +1,7 @@
+GET /api/account/academic-history
+
+request=<none>
+
+status=401
+
+body={"error":"Unauthorized"}

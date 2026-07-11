@@ -1,0 +1,9 @@
+POST /api/admin/promotions
+
+request={
+  "studentId": "cmrgowzse0040pmlzhrkc3nab"
+}
+
+status=403
+
+body={"error":"FORBIDDEN"}

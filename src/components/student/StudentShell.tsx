@@ -7,7 +7,7 @@ import { useI18n } from '@/components/i18n/LanguageProvider'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import type { ComponentType, ReactNode } from 'react'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { BarChart3, BookMarked, BookText, ChevronsUpDown, FileBadge2, FileChartColumn, Menu, ScrollText, X } from 'lucide-react'
 
 type StudentShellProps = {
@@ -44,14 +44,6 @@ export default function StudentShell({ children, user, branding }: StudentShellP
     { href: '/student/exams', label: t('shell.my_exams', 'My Exams'), icon: ScrollText },
     { href: '/student/results', label: t('shell.results', 'Results'), icon: FileChartColumn },
   ]
-
-  useEffect(() => {
-    setSidebarOpen(false)
-  }, [pathname])
-
-  useEffect(() => {
-    setProfileOpen(false)
-  }, [pathname])
 
   return (
     <div className="h-screen overflow-hidden bg-[#f4f7fb]">

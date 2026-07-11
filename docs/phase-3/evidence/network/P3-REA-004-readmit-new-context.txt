@@ -1,0 +1,21 @@
+POST /api/admin/readmissions
+
+request={
+  "departmentId": "cmrgowf870009pmlzozbfj64d",
+  "academicSessionId": "cmrgowg82000dpmlzdld2uohm",
+  "programId": "cmrgowhy9000ppmlzh677ckfa",
+  "programYearId": "cmrgowj6x000zpmlzp6cgy3la",
+  "semesterId": "cmrgowdqf0003pmlzzstm2atu",
+  "programSemesterId": "cmrgowkoz001bpmlzqnpv1mn4",
+  "groupId": "cmrgowmno001rpmlzdone6f4o",
+  "academicYearId": "cmrgowd8g0001pmlzbmn74h0l",
+  "departmentLanguageId": "cmrgowh7r000jpmlz9aqpisti",
+  "languageId": "cmrgoweq30007pmlz94jny6v0",
+  "studentId": "cmrgq5tw2002cd0ddj99de2op",
+  "readmittedAt": "2026-10-11T00:00:00.000Z",
+  "approvalReason": "Advanced standing return"
+}
+
+status=201
+
+body={"enrollment":{"id":"cmrgq60sn00a5i1uxka8o97o1","studentId":"cmrgq5tw2002cd0ddj99de2op","departmentId":"cmrgowf870009pmlzozbfj64d","academicYearId":"cmrgowd8g0001pmlzbmn74h0l","academicSessionId":"cmrgowg82000dpmlzdld2uohm","programId":"cmrgowhy9000ppmlzh677ckfa","programYearId":"cmrgowj6x000zpmlzp6cgy3la","semesterId":"cmrgowdqf0003pmlzzstm2atu","programSemesterId":"cmrgowkoz001bpmlzqnpv1mn4","groupId":"cmrgowmno001rpmlzdone6f4o","departmentLanguageId":"cmrgowh7r000jpmlz9aqpisti","languageId":"cmrgoweq30007pmlz94jny6v0","status":"ACTIVE","enrolledAt":"2026-10-11T00:00:00.000Z","endedAt":null,

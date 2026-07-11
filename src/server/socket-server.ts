@@ -13,10 +13,11 @@
 
 import { Server as HttpServer } from 'http'
 import { Server as SocketServer, Socket } from 'socket.io'
-import { PrismaClient } from '@prisma/client'
+import { Prisma, PrismaClient } from '@prisma/client'
 import * as jose from 'jose'
 import { calculateResult } from '../lib/result-engine'
 import { getAuthSecret } from '../lib/auth-secret'
+import type { ClientToServerEvents, ServerToClientEvents } from '../types/socket'
 
 const prisma = new PrismaClient()
 const MAX_SECURITY_WARNINGS = 3
@@ -38,9 +39,25 @@ const examStudents = new Map<string, Map<string, { userId: string; studentProfil
 const examTimers = new Map<string, ExamTimerState>()
 const attemptTimeouts = new Map<string, ReturnType<typeof setTimeout>>()
 
-let io: SocketServer
+let io: SocketServer<ClientToServerEvents, ServerToClientEvents, object, AuthenticatedSocketData>
+
+type AuthenticatedSocketData = {
+  userId: string
+  userRole: string
+  userName: string
+}
+
+type AuthenticatedSocket = Socket<ClientToServerEvents, ServerToClientEvents, object, AuthenticatedSocketData>
+
+function getSocketAuth(socket: AuthenticatedSocket): AuthenticatedSocketData {
+  return socket.data
+}
 
 export function initSocketServer(httpServer: HttpServer) {
+  if (io) {
+    return io
+  }
+
   io = new SocketServer(httpServer, {
     cors: {
       origin: process.env.NEXTAUTH_URL || 'http://localhost:3000',
@@ -51,7 +68,7 @@ export function initSocketServer(httpServer: HttpServer) {
   })
 
   // ─── Auth middleware ─────────────────────────────────────────────────────
-  io.use(async (socket, next) => {
+  io.use(async (socket: AuthenticatedSocket, next) => {
     try {
       const token = socket.handshake.auth.token
       if (!token) return next(new Error('No auth token'))
@@ -59,9 +76,9 @@ export function initSocketServer(httpServer: HttpServer) {
       const secret = new TextEncoder().encode(getAuthSecret())
       const { payload } = await jose.jwtVerify(token, secret)
       
-      ;(socket as any).userId = payload.id
-      ;(socket as any).userRole = payload.role
-      ;(socket as any).userName = payload.name
+      socket.data.userId = typeof payload.id === 'string' ? payload.id : ''
+      socket.data.userRole = typeof payload.role === 'string' ? payload.role : ''
+      socket.data.userName = typeof payload.name === 'string' ? payload.name : 'Unknown User'
 
       next()
     } catch {
@@ -69,9 +86,8 @@ export function initSocketServer(httpServer: HttpServer) {
     }
   })
 
-  io.on('connection', (socket: Socket) => {
-    const userId: string = (socket as any).userId
-    const userRole: string = (socket as any).userRole
+  io.on('connection', (socket: AuthenticatedSocket) => {
+    const { userId, userRole, userName } = getSocketAuth(socket)
 
     console.log(`[Socket] Connected: ${userId} (${userRole}) - ${socket.id}`)
 
@@ -330,7 +346,7 @@ export function initSocketServer(httpServer: HttpServer) {
 
           io.to(`teacher:${data.examId}`).emit('exam:suspicious_activity', {
             studentId: studentProfile.id,
-            studentName: (socket as any).userName,
+            studentName: userName,
             type: 'RECONNECT',
             count: reconnectedAttempt.reconnectCount,
             warningCount: reconnectedAttempt.warningCount,
@@ -355,7 +371,7 @@ export function initSocketServer(httpServer: HttpServer) {
           studentId: studentProfile.id,
           userId,
           socketId: socket.id,
-          studentName: (socket as any).userName,
+          studentName: userName,
           reconnected: !!existingAttempt,
         })
 
@@ -615,6 +631,37 @@ export function initSocketServer(httpServer: HttpServer) {
   return io
 }
 
+export async function closeSocketServer() {
+  for (const timer of examTimers.values()) {
+    if (timer.timerInterval) {
+      clearInterval(timer.timerInterval)
+    }
+  }
+
+  for (const timeout of attemptTimeouts.values()) {
+    clearTimeout(timeout)
+  }
+
+  examTimers.clear()
+  attemptTimeouts.clear()
+  examStudents.clear()
+
+  if (io) {
+    await new Promise<void>((resolve, reject) => {
+      io.close((error) => {
+        if (error) {
+          reject(error)
+          return
+        }
+
+        resolve()
+      })
+    })
+  }
+
+  await prisma.$disconnect().catch(() => {})
+}
+
 // ─── Shared helpers ────────────────────────────────────────────────────────────
 
 /**
@@ -706,7 +753,7 @@ async function autoEndExam(examId: string) {
   console.log(`[Socket] Exam ended: ${examId}, auto-submitted ${pendingAttempts.length} attempts`)
 }
 
-async function handleStudentDisconnect(socket: Socket, userId: string, examId: string) {
+async function handleStudentDisconnect(socket: AuthenticatedSocket, userId: string, examId: string) {
   await prisma.activityLog.create({
     data: {
       userId,
@@ -777,7 +824,7 @@ async function registerSecurityViolation(
   if (attempt.student.userId !== userId) return
   if (attempt.status === 'SUBMITTED' || attempt.status === 'AUTO_SUBMITTED') return
 
-  const updateData: Record<string, any> = {
+  const updateData: Prisma.StudentExamAttemptUpdateInput = {
     warningCount: { increment: 1 },
   }
 

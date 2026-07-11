@@ -1,0 +1,7 @@
+{
+  "role": "cseAdmin",
+  "pathname": "/admin/graduation",
+  "actual": "Graduation admin page rendered",
+  "finalUrl": "http://127.0.0.1:3103/admin/graduation",
+  "title": "ExamFlow Pro"
+}

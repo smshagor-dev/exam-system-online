@@ -1,0 +1,7 @@
+{
+  "role": "superAdmin",
+  "pathname": "/admin/enrollments",
+  "actual": "Super admin opened enrollments",
+  "finalUrl": "http://127.0.0.1:3103/admin/enrollments",
+  "title": "ExamFlow Pro"
+}

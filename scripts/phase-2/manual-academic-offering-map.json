@@ -1,0 +1,93 @@
+{
+  "teacherAssignments": {
+    "map": {},
+    "accept": {
+      "cmrc1y7dc000yk2kdpfp6fmwd": {
+        "classification": "MISSING_GROUP_CONTEXT",
+        "reason": "The legacy assignment has no normalized group, program, session, or offering context in the current database, and there are no academic offerings to validate against.",
+        "safeBecause": "Teacher assignment authorization still works through the unchanged legacy tuple fields.",
+        "legacyBehavior": "Teacher assignment, question, and exam permission checks continue to use the legacy subject/language/group/year/semester tuple.",
+        "futurePhase": "Phase 3 historical enrollment cleanup or a dedicated data-reconstruction task must rebuild missing normalized group/program context before mapping.",
+        "approvedBy": "Phase 2 completion pass on 2026-07-11",
+        "recommendedAction": "Leave the record legacy-only until historical program and group context can be reconstructed from source records."
+      },
+      "cmrc1y7hz0010k2kde8t3a8h3": {
+        "classification": "MISSING_GROUP_CONTEXT",
+        "reason": "The legacy assignment has no normalized group, program, session, or offering context in the current database, and there are no academic offerings to validate against.",
+        "safeBecause": "Teacher assignment authorization still works through the unchanged legacy tuple fields.",
+        "legacyBehavior": "Teacher assignment, question, and exam permission checks continue to use the legacy subject/language/group/year/semester tuple.",
+        "futurePhase": "Phase 3 historical enrollment cleanup or a dedicated data-reconstruction task must rebuild missing normalized group/program context before mapping.",
+        "approvedBy": "Phase 2 completion pass on 2026-07-11",
+        "recommendedAction": "Leave the record legacy-only until historical program and group context can be reconstructed from source records."
+      },
+      "cmrc1y7mf0012k2kdbw3gm5rx": {
+        "classification": "MISSING_GROUP_CONTEXT",
+        "reason": "The legacy assignment has no normalized group, program, session, or offering context in the current database, and there are no academic offerings to validate against.",
+        "safeBecause": "Teacher assignment authorization still works through the unchanged legacy tuple fields.",
+        "legacyBehavior": "Teacher assignment, question, and exam permission checks continue to use the legacy subject/language/group/year/semester tuple.",
+        "futurePhase": "Phase 3 historical enrollment cleanup or a dedicated data-reconstruction task must rebuild missing normalized group/program context before mapping.",
+        "approvedBy": "Phase 2 completion pass on 2026-07-11",
+        "recommendedAction": "Leave the record legacy-only until historical program and group context can be reconstructed from source records."
+      }
+    }
+  },
+  "studentSubjects": {
+    "map": {},
+    "accept": {
+      "cmrc1y8jn001dk2kduoio1c3s": {
+        "classification": "MISSING_GROUP_CONTEXT",
+        "reason": "The student subject record has no normalized group, program, session, or offering context in the current database, and there are no academic offerings to validate against.",
+        "safeBecause": "Student exam eligibility still works through the unchanged legacy tuple fields and department checks.",
+        "legacyBehavior": "Student subject enrollment fallback continues to authorize legacy exam access by subject/language/group/year/semester.",
+        "futurePhase": "Phase 3 historical enrollment cleanup or a dedicated data-reconstruction task must rebuild missing normalized group/program context before mapping.",
+        "approvedBy": "Phase 2 completion pass on 2026-07-11",
+        "recommendedAction": "Leave the record legacy-only until historical program and group context can be reconstructed from source records."
+      },
+      "cmrc1y8o4001fk2kd0b9ebi5x": {
+        "classification": "MISSING_GROUP_CONTEXT",
+        "reason": "The student subject record has no normalized group, program, session, or offering context in the current database, and there are no academic offerings to validate against.",
+        "safeBecause": "Student exam eligibility still works through the unchanged legacy tuple fields and department checks.",
+        "legacyBehavior": "Student subject enrollment fallback continues to authorize legacy exam access by subject/language/group/year/semester.",
+        "futurePhase": "Phase 3 historical enrollment cleanup or a dedicated data-reconstruction task must rebuild missing normalized group/program context before mapping.",
+        "approvedBy": "Phase 2 completion pass on 2026-07-11",
+        "recommendedAction": "Leave the record legacy-only until historical program and group context can be reconstructed from source records."
+      },
+      "cmrc1y8sn001hk2kdwxj4mdhs": {
+        "classification": "MISSING_GROUP_CONTEXT",
+        "reason": "The student subject record has no normalized group, program, session, or offering context in the current database, and there are no academic offerings to validate against.",
+        "safeBecause": "Student exam eligibility still works through the unchanged legacy tuple fields and department checks.",
+        "legacyBehavior": "Student subject enrollment fallback continues to authorize legacy exam access by subject/language/group/year/semester.",
+        "futurePhase": "Phase 3 historical enrollment cleanup or a dedicated data-reconstruction task must rebuild missing normalized group/program context before mapping.",
+        "approvedBy": "Phase 2 completion pass on 2026-07-11",
+        "recommendedAction": "Leave the record legacy-only until historical program and group context can be reconstructed from source records."
+      },
+      "cmrc1y8x4001jk2kdgn3k1fjz": {
+        "classification": "MISSING_GROUP_CONTEXT",
+        "reason": "The student subject record has no normalized group, program, session, or offering context in the current database, and there are no academic offerings to validate against.",
+        "safeBecause": "Student exam eligibility still works through the unchanged legacy tuple fields and department checks.",
+        "legacyBehavior": "Student subject enrollment fallback continues to authorize legacy exam access by subject/language/group/year/semester.",
+        "futurePhase": "Phase 3 historical enrollment cleanup or a dedicated data-reconstruction task must rebuild missing normalized group/program context before mapping.",
+        "approvedBy": "Phase 2 completion pass on 2026-07-11",
+        "recommendedAction": "Leave the record legacy-only until historical program and group context can be reconstructed from source records."
+      },
+      "cmrc1y91k001lk2kdqlooajwq": {
+        "classification": "MISSING_GROUP_CONTEXT",
+        "reason": "The student subject record has no normalized group, program, session, or offering context in the current database, and there are no academic offerings to validate against.",
+        "safeBecause": "Student exam eligibility still works through the unchanged legacy tuple fields and department checks.",
+        "legacyBehavior": "Student subject enrollment fallback continues to authorize legacy exam access by subject/language/group/year/semester.",
+        "futurePhase": "Phase 3 historical enrollment cleanup or a dedicated data-reconstruction task must rebuild missing normalized group/program context before mapping.",
+        "approvedBy": "Phase 2 completion pass on 2026-07-11",
+        "recommendedAction": "Leave the record legacy-only until historical program and group context can be reconstructed from source records."
+      },
+      "cmrc1y966001nk2kdeddux4mx": {
+        "classification": "MISSING_GROUP_CONTEXT",
+        "reason": "The student subject record has no normalized group, program, session, or offering context in the current database, and there are no academic offerings to validate against.",
+        "safeBecause": "Student exam eligibility still works through the unchanged legacy tuple fields and department checks.",
+        "legacyBehavior": "Student subject enrollment fallback continues to authorize legacy exam access by subject/language/group/year/semester.",
+        "futurePhase": "Phase 3 historical enrollment cleanup or a dedicated data-reconstruction task must rebuild missing normalized group/program context before mapping.",
+        "approvedBy": "Phase 2 completion pass on 2026-07-11",
+        "recommendedAction": "Leave the record legacy-only until historical program and group context can be reconstructed from source records."
+      }
+    }
+  }
+}

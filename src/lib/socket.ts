@@ -9,6 +9,7 @@ import { io, Socket } from 'socket.io-client'
 import type { ServerToClientEvents, ClientToServerEvents } from '@/types/socket'
 
 type AppSocket = Socket<ServerToClientEvents, ClientToServerEvents>
+export type { AppSocket }
 
 let socket: AppSocket | null = null
 

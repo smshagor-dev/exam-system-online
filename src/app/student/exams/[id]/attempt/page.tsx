@@ -1,9 +1,9 @@
 'use client'
 
-import { use, useEffect, useState, useRef, useCallback } from 'react'
+import { use, useCallback, useEffect, useRef, useState } from 'react'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
-import { getSocket } from '@/lib/socket'
+import { getSocket, type AppSocket } from '@/lib/socket'
 import RichTextContent from '@/components/editor/RichTextContent'
 
 type Question = {
@@ -16,24 +16,48 @@ type Question = {
   orderIndex: number
 }
 
+type ExamQuestionPayload = {
+  id: string
+  marks: number
+  orderIndex: number
+  question: {
+    id: string
+    text: string
+    type: string
+    options: { id: string; text: string }[]
+  }
+}
+
+type ExamData = {
+  title: string
+  duration: number
+  totalMarks: number
+  instructions?: string | null
+  subject?: { name: string } | null
+  questions: ExamQuestionPayload[]
+}
+
+type AnswerState = Record<string, { selectedOption?: string; answerText?: string }>
+type AttemptStatus = 'loading' | 'ready' | 'started' | 'submitted' | 'error'
+type WarningType = 'TAB_SWITCH' | 'COPY' | 'SCREENSHOT' | 'DEVTOOLS'
 type Props = { params: Promise<{ id: string }> }
 
 export default function ExamAttemptPage({ params }: Props) {
   const { data: session } = useSession()
   const router = useRouter()
   const { id: examId } = use(params)
-  const socketRef = useRef<any>(null)
+  const socketRef = useRef<AppSocket | null>(null)
   const autoSaveRef = useRef<ReturnType<typeof setInterval> | null>(null)
   const countdownRef = useRef<ReturnType<typeof setInterval> | null>(null)
-  const warningsRef = useRef<Record<string, boolean>>({})
+  const warningsRef = useRef({ devtoolsOpen: false })
 
-  const [exam, setExam] = useState<any>(null)
+  const [exam, setExam] = useState<ExamData | null>(null)
   const [questions, setQuestions] = useState<Question[]>([])
   const [attemptId, setAttemptId] = useState<string | null>(null)
-  const [answers, setAnswers] = useState<Record<string, { selectedOption?: string; answerText?: string }>>({})
+  const [answers, setAnswers] = useState<AnswerState>({})
   const [currentIndex, setCurrentIndex] = useState(0)
   const [remainingSeconds, setRemainingSeconds] = useState<number | null>(null)
-  const [status, setStatus] = useState<'loading' | 'ready' | 'started' | 'submitted' | 'error'>('loading')
+  const [status, setStatus] = useState<AttemptStatus>('loading')
   const [errorMsg, setErrorMsg] = useState('')
   const [submitting, setSubmitting] = useState(false)
   const [showSubmitConfirm, setShowSubmitConfirm] = useState(false)
@@ -45,55 +69,75 @@ export default function ExamAttemptPage({ params }: Props) {
   } | null>(null)
   const [devtoolsOpen, setDevtoolsOpen] = useState(false)
 
-  useEffect(() => {
-    return () => {
-      if (autoSaveRef.current) clearInterval(autoSaveRef.current)
-      if (countdownRef.current) clearInterval(countdownRef.current)
+  const clearExamIntervals = useCallback(() => {
+    if (autoSaveRef.current) {
+      clearInterval(autoSaveRef.current)
+      autoSaveRef.current = null
+    }
+
+    if (countdownRef.current) {
+      clearInterval(countdownRef.current)
+      countdownRef.current = null
     }
   }, [])
 
-  // Load exam data
+  useEffect(() => {
+    return () => {
+      clearExamIntervals()
+      socketRef.current?.disconnect()
+    }
+  }, [clearExamIntervals])
+
   useEffect(() => {
     fetch(`/api/exams/${examId}?withQuestions=true`)
-      .then((r) => {
-        if (!r.ok) throw new Error('Exam not found')
-        return r.json()
+      .then(async (response) => {
+        if (!response.ok) {
+          throw new Error('Exam not found')
+        }
+
+        return (await response.json()) as ExamData
       })
       .then((data) => {
         setExam(data)
         setQuestions(
           data.questions
-            .sort((a: any, b: any) => a.orderIndex - b.orderIndex)
-            .map((eq: any) => ({
-              id: eq.question.id,
-              examQuestionId: eq.id,
-              text: eq.question.text,
-              type: eq.question.type,
-              marks: eq.marks,
-              options: eq.question.options,
-              orderIndex: eq.orderIndex,
+            .sort((left, right) => left.orderIndex - right.orderIndex)
+            .map((entry) => ({
+              id: entry.question.id,
+              examQuestionId: entry.id,
+              text: entry.question.text,
+              type: entry.question.type,
+              marks: entry.marks,
+              options: entry.question.options,
+              orderIndex: entry.orderIndex,
             }))
         )
         setStatus('ready')
       })
-      .catch((err) => { setStatus('error'); setErrorMsg(err.message) })
+      .catch((error: unknown) => {
+        setStatus('error')
+        setErrorMsg(error instanceof Error ? error.message : 'Failed to load exam')
+      })
   }, [examId])
 
-  // Detect tab switch
   useEffect(() => {
     const handleVisibility = () => {
       if (document.hidden && status === 'started' && attemptId) {
-        socketRef.current?.emit('student:security_violation', { attemptId, type: 'TAB_SWITCH' })
+        socketRef.current?.emit('student:security_violation', {
+          attemptId,
+          type: 'TAB_SWITCH',
+        })
       }
     }
+
     document.addEventListener('visibilitychange', handleVisibility)
     return () => document.removeEventListener('visibilitychange', handleVisibility)
-  }, [status, attemptId])
+  }, [attemptId, status])
 
   useEffect(() => {
     if (status !== 'started' || !attemptId) return
 
-    const reportViolation = (type: 'COPY' | 'SCREENSHOT' | 'DEVTOOLS') => {
+    const reportViolation = (type: WarningType) => {
       socketRef.current?.emit('student:security_violation', { attemptId, type })
     }
 
@@ -137,6 +181,7 @@ export default function ExamAttemptPage({ params }: Props) {
 
     const interval = setInterval(detectDevtools, 1500)
     detectDevtools()
+    const warningState = warningsRef.current
 
     return () => {
       document.removeEventListener('copy', handleCopyLike)
@@ -145,25 +190,65 @@ export default function ExamAttemptPage({ params }: Props) {
       window.removeEventListener('keydown', handleKeyDown)
       clearInterval(interval)
       setDevtoolsOpen(false)
-      warningsRef.current.devtoolsOpen = false
+      warningState.devtoolsOpen = false
     }
-  }, [status, attemptId])
+  }, [attemptId, status])
 
-  // Connect socket and start exam
+  const startAutoSave = useCallback((socket: AppSocket, activeAttemptId: string) => {
+    if (autoSaveRef.current) {
+      clearInterval(autoSaveRef.current)
+    }
+
+    autoSaveRef.current = setInterval(() => {
+      Object.entries(answers).forEach(([questionId, answer]) => {
+        socket.emit('student:save_answer', {
+          attemptId: activeAttemptId,
+          questionId,
+          selectedOption: answer.selectedOption,
+          answerText: answer.answerText,
+        })
+      })
+    }, 5000)
+  }, [answers])
+
+  const startLocalCountdown = useCallback(
+    (socket: AppSocket, activeAttemptId: string, initialRemainingSeconds: number) => {
+      if (countdownRef.current) {
+        clearInterval(countdownRef.current)
+      }
+
+      let remaining = initialRemainingSeconds
+      countdownRef.current = setInterval(() => {
+        remaining -= 1
+        setRemainingSeconds(Math.max(0, remaining))
+
+        if (remaining <= 0) {
+          if (countdownRef.current) {
+            clearInterval(countdownRef.current)
+            countdownRef.current = null
+          }
+
+          socket.emit('student:submit_exam', { attemptId: activeAttemptId })
+        }
+      }, 1000)
+    },
+    []
+  )
+
   const startExam = useCallback(async () => {
     if (!session?.user) return
 
     try {
-      const tokenRes = await fetch('/api/socket/token')
-      const { token } = await tokenRes.json()
+      const tokenResponse = await fetch('/api/socket/token')
+      const { token } = (await tokenResponse.json()) as { token: string }
       const socket = getSocket(token)
-      socketRef.current = socket
 
-      // Join exam room
+      socketRef.current = socket
+      socket.removeAllListeners()
+
       socket.emit('student:join_exam', { examId })
 
-      socket.on('exam:joined', (data) => {
-        // Now start the attempt
+      socket.on('exam:joined', () => {
         socket.emit('student:start_attempt', { examId })
       })
 
@@ -176,23 +261,21 @@ export default function ExamAttemptPage({ params }: Props) {
       })
 
       socket.on('exam:timer_update', (data) => {
-        if (data.examId === examId) setRemainingSeconds(data.remaining)
+        if (data.examId === examId) {
+          setRemainingSeconds(data.remaining)
+        }
       })
 
       socket.on('exam:auto_submitted', (data) => {
-        if (data.examId === examId) {
-          setStatus('submitted')
-          clearInterval(autoSaveRef.current!)
-          clearInterval(countdownRef.current!)
-        }
+        if (data.examId !== examId) return
+        clearExamIntervals()
+        setStatus('submitted')
       })
 
       socket.on('exam:ended', (data) => {
-        if (data.examId === examId && status !== 'submitted') {
-          setStatus('submitted')
-          clearInterval(autoSaveRef.current!)
-          clearInterval(countdownRef.current!)
-        }
+        if (data.examId !== examId) return
+        clearExamIntervals()
+        setStatus('submitted')
       })
 
       socket.on('exam:warning_issued', (data) => {
@@ -206,34 +289,19 @@ export default function ExamAttemptPage({ params }: Props) {
       })
 
       socket.on('error', (data) => {
+        clearExamIntervals()
         setStatus('error')
         setErrorMsg(data.message)
       })
-    } catch (err: any) {
+    } catch {
       setStatus('error')
       setErrorMsg('Failed to connect to exam server')
     }
-  }, [session, examId])
+  }, [clearExamIntervals, examId, session?.user, startAutoSave, startLocalCountdown])
 
-  // Auto-save every 5 seconds
-  const startAutoSave = (socket: any, aid: string) => {
-    autoSaveRef.current = setInterval(() => {
-      const currentAnswers = Object.entries(answers)
-      currentAnswers.forEach(([questionId, answer]) => {
-        socket.emit('student:save_answer', {
-          attemptId: aid,
-          questionId,
-          selectedOption: answer.selectedOption,
-          answerText: answer.answerText,
-        })
-      })
-    }, 5000)
-  }
-
-  // Save individual answer immediately on change
   const saveAnswer = useCallback(
     (questionId: string, data: { selectedOption?: string; answerText?: string }) => {
-      setAnswers((prev) => ({ ...prev, [questionId]: data }))
+      setAnswers((current) => ({ ...current, [questionId]: data }))
       if (attemptId && socketRef.current) {
         socketRef.current.emit('student:save_answer', {
           attemptId,
@@ -247,11 +315,10 @@ export default function ExamAttemptPage({ params }: Props) {
 
   const handleSubmit = async () => {
     if (!attemptId || submitting) return
-    setSubmitting(true)
-    clearInterval(autoSaveRef.current!)
-    clearInterval(countdownRef.current!)
 
-    // Final save of all answers
+    setSubmitting(true)
+    clearExamIntervals()
+
     Object.entries(answers).forEach(([questionId, answer]) => {
       socketRef.current?.emit('student:save_answer', {
         attemptId,
@@ -265,39 +332,28 @@ export default function ExamAttemptPage({ params }: Props) {
     setShowSubmitConfirm(false)
   }
 
-  const startLocalCountdown = (socket: any, aid: string, initialRemainingSeconds: number) => {
-    clearInterval(countdownRef.current!)
-
-    let remaining = initialRemainingSeconds
-    countdownRef.current = setInterval(() => {
-      remaining -= 1
-      setRemainingSeconds(Math.max(0, remaining))
-
-      if (remaining <= 0) {
-        clearInterval(countdownRef.current!)
-        socket.emit('student:submit_exam', { attemptId: aid })
-      }
-    }, 1000)
-  }
-
   const formatTime = (seconds: number) => {
-    const h = Math.floor(seconds / 3600)
-    const m = Math.floor((seconds % 3600) / 60)
-    const s = seconds % 60
-    if (h > 0) return `${h}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`
-    return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`
+    const hours = Math.floor(seconds / 3600)
+    const minutes = Math.floor((seconds % 3600) / 60)
+    const remaining = seconds % 60
+
+    if (hours > 0) {
+      return `${hours}:${String(minutes).padStart(2, '0')}:${String(remaining).padStart(2, '0')}`
+    }
+
+    return `${String(minutes).padStart(2, '0')}:${String(remaining).padStart(2, '0')}`
   }
 
   const isWarning = remainingSeconds !== null && remainingSeconds < 300
   const isCritical = remainingSeconds !== null && remainingSeconds < 60
-
   const answeredCount = Object.keys(answers).length
+  const currentQuestion = questions[currentIndex]
 
   if (status === 'loading') {
     return (
-      <div className="flex items-center justify-center min-h-screen">
+      <div className="flex min-h-screen items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin w-10 h-10 border-4 border-blue-600 border-t-transparent rounded-full mx-auto mb-4" />
+          <div className="mx-auto mb-4 h-10 w-10 animate-spin rounded-full border-4 border-blue-600 border-t-transparent" />
           <p className="text-gray-500">Loading exam...</p>
         </div>
       </div>
@@ -306,12 +362,14 @@ export default function ExamAttemptPage({ params }: Props) {
 
   if (status === 'error') {
     return (
-      <div className="max-w-md mx-auto mt-20 text-center">
-        <div className="text-5xl mb-4">❌</div>
-        <h2 className="text-xl font-bold text-gray-900 mb-2">Cannot Access Exam</h2>
-        <p className="text-gray-500 mb-6">{errorMsg}</p>
-        <button onClick={() => router.push('/student/exams')}
-          className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700">
+      <div className="mx-auto mt-20 max-w-md text-center">
+        <div className="mb-4 text-5xl">X</div>
+        <h2 className="mb-2 text-xl font-bold text-gray-900">Cannot Access Exam</h2>
+        <p className="mb-6 text-gray-500">{errorMsg}</p>
+        <button
+          onClick={() => router.push('/student/exams')}
+          className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
+        >
           Back to Exams
         </button>
       </div>
@@ -320,13 +378,15 @@ export default function ExamAttemptPage({ params }: Props) {
 
   if (status === 'submitted') {
     return (
-      <div className="max-w-md mx-auto mt-20 text-center">
-        <div className="text-6xl mb-4">✅</div>
-        <h2 className="text-2xl font-bold text-gray-900 mb-2">Exam Submitted!</h2>
-        <p className="text-gray-500 mb-2">Your answers have been saved and submitted successfully.</p>
-        <p className="text-sm text-gray-400 mb-6">You'll be notified when results are published.</p>
-        <button onClick={() => router.push('/student/dashboard')}
-          className="px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700">
+      <div className="mx-auto mt-20 max-w-md text-center">
+        <div className="mb-4 text-6xl">OK</div>
+        <h2 className="mb-2 text-2xl font-bold text-gray-900">Exam Submitted!</h2>
+        <p className="mb-2 text-gray-500">Your answers have been saved and submitted successfully.</p>
+        <p className="mb-6 text-sm text-gray-400">You&apos;ll be notified when results are published.</p>
+        <button
+          onClick={() => router.push('/student/dashboard')}
+          className="rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white hover:bg-blue-700"
+        >
           Back to Dashboard
         </button>
       </div>
@@ -335,32 +395,34 @@ export default function ExamAttemptPage({ params }: Props) {
 
   if (status === 'ready') {
     return (
-      <div className="max-w-2xl mx-auto space-y-6">
-        <div className="bg-white rounded-2xl border border-gray-200 p-8 text-center">
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">{exam?.title}</h1>
-          <p className="text-gray-500 mb-6">{exam?.subject?.name}</p>
-          <div className="grid grid-cols-3 gap-4 mb-6">
-            <div className="bg-gray-50 rounded-xl p-4">
+      <div className="mx-auto max-w-2xl space-y-6">
+        <div className="rounded-2xl border border-gray-200 bg-white p-8 text-center">
+          <h1 className="mb-2 text-2xl font-bold text-gray-900">{exam?.title}</h1>
+          <p className="mb-6 text-gray-500">{exam?.subject?.name}</p>
+          <div className="mb-6 grid grid-cols-3 gap-4">
+            <div className="rounded-xl bg-gray-50 p-4">
               <p className="text-xl font-bold text-gray-900">{exam?.duration}</p>
               <p className="text-xs text-gray-500">Minutes</p>
             </div>
-            <div className="bg-gray-50 rounded-xl p-4">
+            <div className="rounded-xl bg-gray-50 p-4">
               <p className="text-xl font-bold text-gray-900">{questions.length}</p>
               <p className="text-xs text-gray-500">Questions</p>
             </div>
-            <div className="bg-gray-50 rounded-xl p-4">
+            <div className="rounded-xl bg-gray-50 p-4">
               <p className="text-xl font-bold text-gray-900">{exam?.totalMarks}</p>
               <p className="text-xs text-gray-500">Total Marks</p>
             </div>
           </div>
           {exam?.instructions && (
-            <div className="bg-blue-50 rounded-xl p-4 text-left mb-6">
-              <p className="text-sm font-semibold text-blue-900 mb-1">Instructions:</p>
+            <div className="mb-6 rounded-xl bg-blue-50 p-4 text-left">
+              <p className="mb-1 text-sm font-semibold text-blue-900">Instructions:</p>
               <p className="text-sm text-blue-800">{exam.instructions}</p>
             </div>
           )}
-          <button onClick={startExam}
-            className="w-full py-3 bg-green-600 text-white rounded-xl text-lg font-semibold hover:bg-green-700 transition">
+          <button
+            onClick={startExam}
+            className="w-full rounded-xl bg-green-600 py-3 text-lg font-semibold text-white transition hover:bg-green-700"
+          >
             Start Exam
           </button>
         </div>
@@ -368,12 +430,10 @@ export default function ExamAttemptPage({ params }: Props) {
     )
   }
 
-  const currentQuestion = questions[currentIndex]
-
   return (
-    <div className="max-w-3xl mx-auto space-y-4">
+    <div className="mx-auto max-w-3xl space-y-4">
       {devtoolsOpen && status === 'started' && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950 text-white p-6 text-center">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950 p-6 text-center text-white">
           <div>
             <h2 className="text-2xl font-bold">Exam Locked</h2>
             <p className="mt-2 text-sm text-slate-200">
@@ -383,27 +443,34 @@ export default function ExamAttemptPage({ params }: Props) {
         </div>
       )}
 
-      {/* Header */}
-      <div className="bg-white rounded-xl border border-gray-200 p-4 flex items-center justify-between">
+      <div className="flex items-center justify-between rounded-xl border border-gray-200 bg-white p-4">
         <div>
-          <p className="font-semibold text-gray-900 text-sm">{exam?.title}</p>
-          <p className="text-xs text-gray-400">{answeredCount}/{questions.length} answered</p>
+          <p className="text-sm font-semibold text-gray-900">{exam?.title}</p>
+          <p className="text-xs text-gray-400">
+            {answeredCount}/{questions.length} answered
+          </p>
         </div>
-        <div className={`text-xl font-mono font-bold px-4 py-2 rounded-xl ${
-          isCritical ? 'bg-red-100 text-red-600 animate-pulse'
-          : isWarning ? 'bg-orange-100 text-orange-600'
-          : 'bg-gray-100 text-gray-900'
-        }`}>
+        <div
+          className={`rounded-xl px-4 py-2 font-mono text-xl font-bold ${
+            isCritical
+              ? 'animate-pulse bg-red-100 text-red-600'
+              : isWarning
+                ? 'bg-orange-100 text-orange-600'
+                : 'bg-gray-100 text-gray-900'
+          }`}
+        >
           {remainingSeconds !== null ? formatTime(remainingSeconds) : '--:--'}
         </div>
       </div>
 
       {warningInfo && (
-        <div className={`rounded-xl border px-4 py-3 text-sm ${
-          warningInfo.count >= warningInfo.max
-            ? 'border-red-200 bg-red-50 text-red-700'
-            : 'border-orange-200 bg-orange-50 text-orange-700'
-        }`}>
+        <div
+          className={`rounded-xl border px-4 py-3 text-sm ${
+            warningInfo.count >= warningInfo.max
+              ? 'border-red-200 bg-red-50 text-red-700'
+              : 'border-orange-200 bg-orange-50 text-orange-700'
+          }`}
+        >
           <p className="font-semibold">
             Warning {warningInfo.count}/{warningInfo.max}
           </p>
@@ -411,67 +478,76 @@ export default function ExamAttemptPage({ params }: Props) {
         </div>
       )}
 
-      {/* Progress bar */}
-      <div className="h-1.5 bg-gray-200 rounded-full overflow-hidden">
+      <div className="h-1.5 overflow-hidden rounded-full bg-gray-200">
         <div
           className="h-full bg-blue-600 transition-all duration-300"
           style={{ width: `${(answeredCount / questions.length) * 100}%` }}
         />
       </div>
 
-      {/* Question Card */}
       {currentQuestion && (
-        <div className="bg-white rounded-xl border border-gray-200 p-6">
-          <div className="flex items-center justify-between mb-4">
+        <div className="rounded-xl border border-gray-200 bg-white p-6">
+          <div className="mb-4 flex items-center justify-between">
             <span className="text-sm font-medium text-gray-500">
               Question {currentIndex + 1} of {questions.length}
             </span>
-            <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full font-medium">
+            <span className="rounded-full bg-blue-100 px-2 py-1 text-xs font-medium text-blue-700">
               {currentQuestion.marks} mark{currentQuestion.marks > 1 ? 's' : ''}
             </span>
           </div>
 
-          <RichTextContent html={currentQuestion.text} className="rich-text-content mb-5 text-gray-900 font-medium" />
+          <RichTextContent
+            html={currentQuestion.text}
+            className="rich-text-content mb-5 font-medium text-gray-900"
+          />
 
-          {/* MCQ / True-False */}
           {(currentQuestion.type === 'MCQ' || currentQuestion.type === 'TRUE_FALSE') && (
             <div className="space-y-3">
-              {currentQuestion.options.map((opt) => {
-                const isSelected = answers[currentQuestion.id]?.selectedOption === opt.id
+              {currentQuestion.options.map((option) => {
+                const isSelected = answers[currentQuestion.id]?.selectedOption === option.id
+
                 return (
-                  <label key={opt.id}
-                    className={`flex items-center gap-3 p-4 rounded-xl border-2 cursor-pointer transition ${
-                      isSelected ? 'border-blue-500 bg-blue-50' : 'border-gray-200 hover:border-gray-300'
-                    }`}>
-                    <input type="radio" name={`q-${currentQuestion.id}`}
+                  <label
+                    key={option.id}
+                    className={`flex cursor-pointer items-center gap-3 rounded-xl border-2 p-4 transition ${
+                      isSelected
+                        ? 'border-blue-500 bg-blue-50'
+                        : 'border-gray-200 hover:border-gray-300'
+                    }`}
+                  >
+                    <input
+                      type="radio"
+                      name={`q-${currentQuestion.id}`}
                       checked={isSelected}
-                      onChange={() => saveAnswer(currentQuestion.id, { selectedOption: opt.id })}
-                      className="w-4 h-4 text-blue-600"
+                      onChange={() => saveAnswer(currentQuestion.id, { selectedOption: option.id })}
+                      className="h-4 w-4 text-blue-600"
                     />
-                    <span className="text-sm text-gray-900">{opt.text}</span>
+                    <span className="text-sm text-gray-900">{option.text}</span>
                   </label>
                 )
               })}
             </div>
           )}
 
-          {/* Short Answer */}
           {currentQuestion.type === 'SHORT_ANSWER' && (
             <input
               type="text"
               value={answers[currentQuestion.id]?.answerText ?? ''}
-              onChange={(e) => saveAnswer(currentQuestion.id, { answerText: e.target.value })}
-              className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl text-sm outline-none focus:border-blue-500 transition"
+              onChange={(event) =>
+                saveAnswer(currentQuestion.id, { answerText: event.target.value })
+              }
+              className="w-full rounded-xl border-2 border-gray-200 px-4 py-3 text-sm text-gray-900 outline-none transition focus:border-blue-500"
               placeholder="Type your answer here..."
             />
           )}
 
-          {/* Written Answer */}
           {currentQuestion.type === 'WRITTEN_ANSWER' && (
             <textarea
               value={answers[currentQuestion.id]?.answerText ?? ''}
-              onChange={(e) => saveAnswer(currentQuestion.id, { answerText: e.target.value })}
-              className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl text-sm outline-none focus:border-blue-500 transition resize-none"
+              onChange={(event) =>
+                saveAnswer(currentQuestion.id, { answerText: event.target.value })
+              }
+              className="w-full resize-none rounded-xl border-2 border-gray-200 px-4 py-3 text-sm text-gray-900 outline-none transition focus:border-blue-500"
               rows={8}
               placeholder="Write your detailed answer here..."
             />
@@ -479,63 +555,77 @@ export default function ExamAttemptPage({ params }: Props) {
         </div>
       )}
 
-      {/* Navigation */}
       <div className="flex items-center justify-between">
-        <button onClick={() => setCurrentIndex((i) => Math.max(0, i - 1))}
+        <button
+          onClick={() => setCurrentIndex((index) => Math.max(0, index - 1))}
           disabled={currentIndex === 0}
-          className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-50 disabled:opacity-40">
-          ← Previous
+          className="rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-40"
+        >
+          Previous
         </button>
 
-        <div className="flex gap-1.5 flex-wrap justify-center max-w-xs">
-          {questions.map((q, i) => (
-            <button key={q.id}
-              onClick={() => setCurrentIndex(i)}
-              className={`w-7 h-7 rounded text-xs font-medium transition ${
-                i === currentIndex ? 'bg-blue-600 text-white'
-                : answers[q.id] ? 'bg-green-500 text-white'
-                : 'bg-gray-200 text-gray-600 hover:bg-gray-300'
-              }`}>
-              {i + 1}
+        <div className="flex max-w-xs flex-wrap justify-center gap-1.5">
+          {questions.map((question, index) => (
+            <button
+              key={question.id}
+              onClick={() => setCurrentIndex(index)}
+              className={`h-7 w-7 rounded text-xs font-medium transition ${
+                index === currentIndex
+                  ? 'bg-blue-600 text-white'
+                  : answers[question.id]
+                    ? 'bg-green-500 text-white'
+                    : 'bg-gray-200 text-gray-600 hover:bg-gray-300'
+              }`}
+            >
+              {index + 1}
             </button>
           ))}
         </div>
 
         {currentIndex < questions.length - 1 ? (
-          <button onClick={() => setCurrentIndex((i) => Math.min(questions.length - 1, i + 1))}
-            className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700">
-            Next →
+          <button
+            onClick={() => setCurrentIndex((index) => Math.min(questions.length - 1, index + 1))}
+            className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
+          >
+            Next
           </button>
         ) : (
-          <button onClick={() => setShowSubmitConfirm(true)}
-            className="px-4 py-2 bg-green-600 text-white rounded-lg text-sm font-semibold hover:bg-green-700">
-            Stop & Submit
+          <button
+            onClick={() => setShowSubmitConfirm(true)}
+            className="rounded-lg bg-green-600 px-4 py-2 text-sm font-semibold text-white hover:bg-green-700"
+          >
+            Stop and Submit
           </button>
         )}
       </div>
 
-      {/* Submit Confirm Modal */}
       {showSubmitConfirm && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl p-6 max-w-sm w-full shadow-2xl">
-            <h3 className="text-lg font-bold text-gray-900 mb-2">Submit Exam?</h3>
-            <p className="text-gray-500 text-sm mb-2">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+          <div className="w-full max-w-sm rounded-2xl bg-white p-6 shadow-2xl">
+            <h3 className="mb-2 text-lg font-bold text-gray-900">Submit Exam?</h3>
+            <p className="mb-2 text-sm text-gray-500">
               You have answered {answeredCount} of {questions.length} questions.
             </p>
             {answeredCount < questions.length && (
-              <p className="text-orange-600 text-sm mb-4">
-                ⚠️ {questions.length - answeredCount} question{questions.length - answeredCount > 1 ? 's' : ''} unanswered.
+              <p className="mb-4 text-sm text-orange-600">
+                {questions.length - answeredCount} question
+                {questions.length - answeredCount > 1 ? 's' : ''} unanswered.
               </p>
             )}
-            <p className="text-gray-500 text-sm mb-6">This action cannot be undone.</p>
+            <p className="mb-6 text-sm text-gray-500">This action cannot be undone.</p>
             <div className="flex gap-3">
-              <button onClick={() => setShowSubmitConfirm(false)}
-                className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-50">
+              <button
+                onClick={() => setShowSubmitConfirm(false)}
+                className="flex-1 rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+              >
                 Review Answers
               </button>
-              <button onClick={handleSubmit} disabled={submitting}
-                className="flex-1 px-4 py-2 bg-green-600 text-white rounded-lg text-sm font-semibold hover:bg-green-700 disabled:opacity-50">
-                {submitting ? 'Submitting...' : 'Yes, Stop & Submit'}
+              <button
+                onClick={handleSubmit}
+                disabled={submitting}
+                className="flex-1 rounded-lg bg-green-600 px-4 py-2 text-sm font-semibold text-white hover:bg-green-700 disabled:opacity-50"
+              >
+                {submitting ? 'Submitting...' : 'Yes, Stop and Submit'}
               </button>
             </div>
           </div>

@@ -64,8 +64,8 @@ export default function DepartmentManager({
       resetForm()
       setShowForm(false)
       router.refresh()
-    } catch (err: any) {
-      setError(err.message)
+    } catch (error: unknown) {
+      setError(error instanceof Error ? error.message : 'Failed to save department')
     } finally {
       setLoading(false)
     }
@@ -81,8 +81,8 @@ export default function DepartmentManager({
         throw new Error(data.error || 'Failed to delete')
       }
       router.refresh()
-    } catch (err: any) {
-      alert(err.message)
+    } catch (error: unknown) {
+      alert(error instanceof Error ? error.message : 'Failed to delete')
     }
   }
 

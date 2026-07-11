@@ -1,0 +1,7 @@
+{
+  "role": "trent",
+  "pathname": "/student/profile",
+  "actual": "Legacy-only student profile page rendered",
+  "finalUrl": "http://127.0.0.1:3103/student/profile",
+  "title": "ExamFlow Pro"
+}

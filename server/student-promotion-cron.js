@@ -1,16 +1,17 @@
-/* eslint-disable @typescript-eslint/no-require-imports */
 const { PrismaClient } = require('@prisma/client')
 
 const prisma = new PrismaClient()
 
 const PROMOTION_JOB_KEY = 'student-academic-promotion-job'
 const CHECK_INTERVAL_MS = 6 * 60 * 60 * 1000
+const ACADEMIC_ARCHITECTURE_V2_ENABLED = process.env.ACADEMIC_ARCHITECTURE_V2 === 'true'
 const COURSE_DURATIONS = {
   BACHELOR_OF_SCIENCE: 4,
   MASTER_OF_SCIENCE: 2,
 }
 
 let schedulerStarted = false
+let schedulerInterval = null
 
 function getPromotionTimeZone() {
   return process.env.ACADEMIC_PROMOTION_TIMEZONE || Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC'
@@ -187,6 +188,10 @@ async function blockStudentAccess(student, duration, stats) {
 }
 
 async function runStudentPromotionIfDue(logger = console) {
+  if (ACADEMIC_ARCHITECTURE_V2_ENABLED) {
+    logger.warn('[Academic Promotion] Academic architecture v2 flag is enabled, but legacy promotion remains active until Phase 3 enrollment migration is complete.')
+  }
+
   const now = new Date()
   const timeZone = getPromotionTimeZone()
   const { year, month } = getDatePartsInTimeZone(now, timeZone)
@@ -284,14 +289,25 @@ function initStudentPromotionCron(logger = console) {
     logger.error('[Academic Promotion] Initial run failed:', error)
   })
 
-  setInterval(() => {
+  schedulerInterval = setInterval(() => {
     runStudentPromotionIfDue(logger).catch((error) => {
       logger.error('[Academic Promotion] Scheduled run failed:', error)
     })
   }, CHECK_INTERVAL_MS)
 }
 
+async function stopStudentPromotionCron() {
+  if (schedulerInterval) {
+    clearInterval(schedulerInterval)
+    schedulerInterval = null
+  }
+
+  schedulerStarted = false
+  await prisma.$disconnect().catch(() => {})
+}
+
 module.exports = {
   initStudentPromotionCron,
   runStudentPromotionIfDue,
+  stopStudentPromotionCron,
 }

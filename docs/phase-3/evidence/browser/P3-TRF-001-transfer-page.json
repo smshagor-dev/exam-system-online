@@ -1,0 +1,7 @@
+{
+  "role": "cseAdmin",
+  "pathname": "/admin/transfers",
+  "actual": "Transfer admin page rendered",
+  "finalUrl": "http://127.0.0.1:3103/admin/transfers",
+  "title": "ExamFlow Pro"
+}

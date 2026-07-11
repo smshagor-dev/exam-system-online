@@ -2,7 +2,8 @@
 
 import { use, useEffect, useRef, useState } from 'react'
 import { useSession } from 'next-auth/react'
-import { getSocket } from '@/lib/socket'
+import { getSocket, type AppSocket } from '@/lib/socket'
+import type { ServerToClientEvents } from '@/types/socket'
 
 type StudentStatus = {
   userId: string
@@ -21,15 +22,29 @@ type Props = {
   params: Promise<{ id: string }>
 }
 
+type ExamDetails = {
+  title: string
+  status: 'SCHEDULED' | 'LIVE' | 'PAUSED' | 'COMPLETED'
+}
+
+type StudentJoinedEvent = Parameters<ServerToClientEvents['exam:student_joined']>[0]
+type StudentOfflineEvent = Parameters<ServerToClientEvents['exam:student_offline']>[0]
+type StudentSubmittedEvent = Parameters<ServerToClientEvents['exam:student_submitted']>[0]
+type TimerUpdateEvent = Parameters<ServerToClientEvents['exam:timer_update']>[0]
+type ExamStartedEvent = Parameters<ServerToClientEvents['exam:started']>[0]
+type ExamPausedEvent = Parameters<ServerToClientEvents['exam:paused']>[0]
+type ExamEndedEvent = Parameters<ServerToClientEvents['exam:ended']>[0]
+type SuspiciousActivityEvent = Parameters<ServerToClientEvents['exam:suspicious_activity']>[0]
+
 export default function LiveExamMonitor({ params }: Props) {
   const { data: session } = useSession()
   const { id: examId } = use(params)
   const [students, setStudents] = useState<StudentStatus[]>([])
   const [remainingSeconds, setRemainingSeconds] = useState<number | null>(null)
   const [examStatus, setExamStatus] = useState<'idle' | 'live' | 'paused' | 'ended'>('idle')
-  const [exam, setExam] = useState<any>(null)
+  const [exam, setExam] = useState<ExamDetails | null>(null)
   const [loading, setLoading] = useState(true)
-  const socketRef = useRef<any>(null)
+  const socketRef = useRef<AppSocket | null>(null)
 
   useEffect(() => {
     fetch(`/api/exams/${examId}`).then((r) => r.json()).then((data) => {
@@ -46,7 +61,7 @@ export default function LiveExamMonitor({ params }: Props) {
       const socket = getSocket(token)
       socketRef.current = socket
 
-      socket.on('exam:student_joined', (data) => {
+      socket.on('exam:student_joined', (data: StudentJoinedEvent) => {
         if (data.examId !== examId) return
         setStudents((prev) => {
           const exists = prev.find((student) => student.userId === data.userId)
@@ -75,7 +90,7 @@ export default function LiveExamMonitor({ params }: Props) {
         })
       })
 
-      socket.on('exam:student_offline', (data) => {
+      socket.on('exam:student_offline', (data: StudentOfflineEvent) => {
         if (data.examId !== examId) return
         setStudents((prev) =>
           prev.map((student) =>
@@ -84,7 +99,7 @@ export default function LiveExamMonitor({ params }: Props) {
         )
       })
 
-      socket.on('exam:student_submitted', (data) => {
+      socket.on('exam:student_submitted', (data: StudentSubmittedEvent) => {
         if (data.examId !== examId) return
         setStudents((prev) =>
           prev.map((student) =>
@@ -95,23 +110,23 @@ export default function LiveExamMonitor({ params }: Props) {
         )
       })
 
-      socket.on('exam:timer_update', (data) => {
+      socket.on('exam:timer_update', (data: TimerUpdateEvent) => {
         if (data.examId === examId) setRemainingSeconds(data.remaining)
       })
 
-      socket.on('exam:started', (data) => {
+      socket.on('exam:started', (data: ExamStartedEvent) => {
         if (data.examId === examId) setExamStatus('live')
       })
 
-      socket.on('exam:paused', (data) => {
+      socket.on('exam:paused', (data: ExamPausedEvent) => {
         if (data.examId === examId) setExamStatus('paused')
       })
 
-      socket.on('exam:ended', (data) => {
+      socket.on('exam:ended', (data: ExamEndedEvent) => {
         if (data.examId === examId) setExamStatus('ended')
       })
 
-      socket.on('exam:suspicious_activity', (data) => {
+      socket.on('exam:suspicious_activity', (data: SuspiciousActivityEvent) => {
         setStudents((prev) =>
           prev.map((student) => {
             if (student.studentId !== data.studentId) return student

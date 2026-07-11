@@ -2,21 +2,18 @@ import { requireRole } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 import { UserRole } from '@prisma/client'
 import Link from 'next/link'
+import { getStudentExamCatalogScope } from '@/lib/permissions'
 
 export default async function StudentExamsPage() {
   const session = await requireRole(UserRole.STUDENT)
-
-  const profile = await prisma.studentProfile.findUnique({
-    where: { userId: session.user.id },
-    include: { subjects: true },
-  })
+  const { profile, blockedReason, subjectScopes } = await getStudentExamCatalogScope(session.user.id)
 
   if (!profile) {
     return <div className="py-20 text-center text-gray-500">Student profile not found.</div>
   }
 
   const now = new Date()
-  const orConditions = profile.subjects.map((subject) => ({
+  const orConditions = subjectScopes.map((subject) => ({
     subjectId: subject.subjectId,
     languageId: subject.languageId,
     groupId: subject.groupId,
@@ -25,12 +22,16 @@ export default async function StudentExamsPage() {
     departmentId: profile.departmentId,
   }))
 
+  const canAccessNewAttempts = !blockedReason
+
   if (orConditions.length === 0) {
     return (
       <div className="space-y-6">
         <h1 className="text-2xl font-bold text-gray-900">My Exams</h1>
-        <div className="rounded-xl border border-yellow-200 bg-yellow-50 p-6 text-sm text-yellow-800">
-          You are not enrolled in any subjects yet. Contact your department admin.
+        <div className={`rounded-xl border p-6 text-sm ${blockedReason ? 'border-amber-200 bg-amber-50 text-amber-800' : 'border-yellow-200 bg-yellow-50 text-yellow-800'}`}>
+          {blockedReason
+            ? `${blockedReason}. New exam attempts are unavailable.`
+            : 'You are not enrolled in any subjects yet. Contact your department admin.'}
         </div>
       </div>
     )
@@ -101,7 +102,13 @@ export default async function StudentExamsPage() {
     <div className="space-y-8">
       <h1 className="text-2xl font-bold text-gray-900">My Exams</h1>
 
-      {activeWindowExams.length > 0 && (
+      {blockedReason && (
+        <div className="rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-800">
+          {blockedReason}. New exam attempts are unavailable in your current lifecycle state.
+        </div>
+      )}
+
+      {canAccessNewAttempts && activeWindowExams.length > 0 && (
         <section>
           <div className="mb-3 flex items-center gap-2">
             <div className="h-2.5 w-2.5 animate-pulse rounded-full bg-green-500" />
@@ -147,10 +154,10 @@ export default async function StudentExamsPage() {
       )}
 
       <section>
-        <h2 className="mb-3 font-semibold text-gray-900">Upcoming Exams ({upcomingExams.length})</h2>
-        {upcomingExams.length === 0 ? (
+        <h2 className="mb-3 font-semibold text-gray-900">Upcoming Exams ({canAccessNewAttempts ? upcomingExams.length : 0})</h2>
+        {!canAccessNewAttempts || upcomingExams.length === 0 ? (
           <div className="rounded-xl border border-dashed border-gray-300 bg-white p-8 text-center text-sm text-gray-400">
-            No upcoming exams
+            {canAccessNewAttempts ? 'No upcoming exams' : 'New exam attempts are currently unavailable'}
           </div>
         ) : (
           <div className="space-y-3">

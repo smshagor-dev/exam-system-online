@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { auth } from '@/lib/auth'
+import { isPrismaKnownError } from '@/lib/api-errors'
 import { prisma } from '@/lib/prisma'
 import { UserRole } from '@prisma/client'
 
@@ -29,8 +30,8 @@ export async function DELETE(_: NextRequest, { params }: RouteContext) {
   try {
     await prisma.semester.delete({ where: { id } })
     return NextResponse.json({ success: true })
-  } catch (err: any) {
-    if (err.code === 'P2003') return NextResponse.json({ error: 'Has related data' }, { status: 409 })
+  } catch (error: unknown) {
+    if (isPrismaKnownError(error) && error.code === 'P2003') return NextResponse.json({ error: 'Has related data' }, { status: 409 })
     return NextResponse.json({ error: 'Delete failed' }, { status: 500 })
   }
 }

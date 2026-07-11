@@ -1,0 +1,7 @@
+GET /api/exams/cmrgoxasl005npmlzu0zhcdlt
+
+request=<none>
+
+status=403
+
+body={"error":"Student is on active leave"}

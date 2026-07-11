@@ -1,0 +1,19 @@
+POST /api/admin/promotions
+
+request={
+  "departmentId": "cmrgowf870009pmlzozbfj64d",
+  "academicSessionId": "cmrgowg82000dpmlzdld2uohm",
+  "programId": "cmrgoy90p007ppmlzvhnep97b",
+  "programYearId": "cmrgoy9a3007rpmlz0ttuzpmx",
+  "semesterId": "cmrgowdz80004pmlzugoobdpz",
+  "programSemesterId": "cmrgowlo5001jpmlzskfkfz69",
+  "groupId": "cmrgoya2b007xpmlz7orvuuuv",
+  "academicYearId": "cmrgowcza0000pmlzakerzxid",
+  "departmentLanguageId": "cmrgowgyv000hpmlzvs1rw52h",
+  "languageId": "cmrgoweh20006pmlzrlak2hwh",
+  "studentId": "cmrgowxx9003rpmlz1pel4tyd"
+}
+
+status=400
+
+body={"error":"Program semester does not belong to the selected program"}

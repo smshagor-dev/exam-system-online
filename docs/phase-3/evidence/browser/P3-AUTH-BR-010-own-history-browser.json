@@ -1,0 +1,7 @@
+{
+  "role": "grace",
+  "pathname": "/student/academic-history",
+  "actual": "Student own academic history page rendered successfully",
+  "finalUrl": "http://127.0.0.1:3103/student/academic-history",
+  "title": "ExamFlow Pro"
+}

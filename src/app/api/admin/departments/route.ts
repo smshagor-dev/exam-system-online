@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { auth } from '@/lib/auth'
+import { isPrismaKnownError } from '@/lib/api-errors'
 import { prisma } from '@/lib/prisma'
 import { departmentSchema } from '@/lib/validators'
 import { UserRole } from '@prisma/client'
@@ -35,8 +36,8 @@ export async function POST(req: NextRequest) {
   try {
     const dept = await prisma.department.create({ data: parsed.data })
     return NextResponse.json(dept, { status: 201 })
-  } catch (err: any) {
-    if (err.code === 'P2002') {
+  } catch (error: unknown) {
+    if (isPrismaKnownError(error) && error.code === 'P2002') {
       return NextResponse.json({ error: 'Department name or code already exists' }, { status: 409 })
     }
     return NextResponse.json({ error: 'Failed to create department' }, { status: 500 })

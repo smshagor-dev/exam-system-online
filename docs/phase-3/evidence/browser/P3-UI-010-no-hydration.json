@@ -1,0 +1,7 @@
+{
+  "role": "trent",
+  "pathname": "/student/exams",
+  "actual": "Student exams page rendered for console scan",
+  "finalUrl": "http://127.0.0.1:3103/student/exams",
+  "title": "ExamFlow Pro"
+}

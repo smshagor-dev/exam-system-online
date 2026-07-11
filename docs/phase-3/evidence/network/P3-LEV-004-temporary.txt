@@ -1,0 +1,14 @@
+POST /api/admin/leaves
+
+request={
+  "studentId": "cmrgq5b5v0026d0ddqs1h70lb",
+  "leaveType": "TEMPORARY",
+  "startsAt": "2026-11-01T00:00:00.000Z",
+  "endsAt": "2026-11-08T00:00:00.000Z",
+  "status": "APPROVED",
+  "reason": "Phase 3 temporary leave"
+}
+
+status=201
+
+body={"leave":{"id":"cmrgq5fkh008oi1uxgltnm3pm","studentId":"cmrgq5b5v0026d0ddqs1h70lb","enrollmentId":"cmrgq5ct4008di1ux88w363ay","leaveType":"TEMPORARY","startsAt":"2026-11-01T00:00:00.000Z","endsAt":"2026-11-08T00:00:00.000Z","status":"APPROVED","reason":"Phase 3 temporary leave","notes":null,"approvedAt":"2026-07-11T18:55:15.474Z","readmittedAt":null,"createdAt":"2026-07-11T18:55:15.474Z","updatedAt":"2026-07-11T18:55:15.474Z"},"enrollment":{"id":"cmrgq5ct4008di1ux88w363ay","studentId":"cmrgq5b5v0026d0ddqs1h70lb","departmentId":"cmrgowf870009pmlzozbfj64d","academicYearId":"cmrgowcza0000pmlzaker

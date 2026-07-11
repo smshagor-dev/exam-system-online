@@ -1,0 +1,7 @@
+{
+  "role": "cseAdmin",
+  "pathname": "/admin/enrollments",
+  "actual": "Foreign email visible=false",
+  "finalUrl": "http://127.0.0.1:3103/admin/enrollments",
+  "title": "ExamFlow Pro"
+}

@@ -1,0 +1,7 @@
+GET /api/exams/cmrgq8dmr002xd0dd5c76u6jg
+
+request=<none>
+
+status=403
+
+body={"error":"Active enrollment does not match this exam context"}

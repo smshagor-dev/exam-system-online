@@ -1,0 +1,9 @@
+POST /api/admin/graduations
+
+request={
+  "studentId": "cmrgq1gey0005d0ddeal2c6iw"
+}
+
+status=400
+
+body={"error":"Active enrollment not found"}

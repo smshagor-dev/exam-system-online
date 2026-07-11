@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 import { createQuestionSchema } from '@/lib/validators'
-import { UserRole } from '@prisma/client'
+import { Prisma, UserRole } from '@prisma/client'
 import { teacherCanAccessAssignment } from '@/lib/permissions'
 
 export async function GET(req: NextRequest) {
@@ -18,7 +18,7 @@ export async function GET(req: NextRequest) {
   const profile = await prisma.teacherProfile.findUnique({ where: { userId: session.user.id } })
   if (!profile) return NextResponse.json({ error: 'Profile not found' }, { status: 404 })
 
-  const where: any = { teacherId: profile.id }
+  const where: Prisma.QuestionWhereInput = { teacherId: profile.id }
   if (subjectId) where.subjectId = subjectId
   if (groupId) where.groupId = groupId
   if (academicYearId) where.academicYearId = academicYearId
@@ -48,6 +48,7 @@ export async function POST(req: NextRequest) {
 
   const ctx = { userId: session.user.id, role: session.user.role }
   const canAccess = await teacherCanAccessAssignment(ctx, {
+    academicOfferingId: parsed.data.academicOfferingId,
     subjectId: parsed.data.subjectId,
     languageId: parsed.data.languageId,
     groupId: parsed.data.groupId,
@@ -69,6 +70,7 @@ export async function POST(req: NextRequest) {
       ...questionData,
       teacherId: profile.id,
       keywords: keywords ? JSON.stringify(keywords) : null,
+      academicOfferingId: parsed.data.academicOfferingId ?? null,
       options: options?.length
         ? {
             create: options.map((opt, i) => ({

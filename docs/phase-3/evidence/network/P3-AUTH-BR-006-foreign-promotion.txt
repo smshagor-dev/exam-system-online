@@ -1,0 +1,9 @@
+POST /api/admin/promotions
+
+request={
+  "studentId": "cmrgp1v100002n93k632sbda4"
+}
+
+status=403
+
+body={"error":"Forbidden for this department"}

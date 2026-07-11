@@ -1,0 +1,7 @@
+{
+  "role": "cseAdmin",
+  "pathname": "/admin/years",
+  "actual": "Lifecycle form displayed a safe saving state during submit",
+  "finalUrl": "http://127.0.0.1:3103/admin/years",
+  "title": "ExamFlow Pro"
+}

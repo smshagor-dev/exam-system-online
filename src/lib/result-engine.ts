@@ -313,9 +313,12 @@ export async function recalculateAfterReview(attemptId: string): Promise<void> {
  */
 export async function publishResult(
   attemptId: string,
-  examId: string,
-  studentId: string
+  _examId: string,
+  _studentId: string
 ): Promise<void> {
+  void _examId
+  void _studentId
+
   const result = await prisma.examResult.update({
     where: { attemptId },
     data: {

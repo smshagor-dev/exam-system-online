@@ -14,6 +14,11 @@ async function main() {
   // ─── Clean slate ────────────────────────────────────────────
   await prisma.activityLog.deleteMany()
   await prisma.notification.deleteMany()
+  await prisma.courseworkSubmission.deleteMany()
+  await prisma.courseworkAccessRequest.deleteMany()
+  await prisma.courseworkAssignment.deleteMany()
+  await prisma.courseworkRule.deleteMany()
+  await prisma.ebookUpload.deleteMany()
   await prisma.resultReview.deleteMany()
   await prisma.examResult.deleteMany()
   await prisma.studentAnswer.deleteMany()
@@ -25,6 +30,14 @@ async function main() {
   await prisma.exam.deleteMany()
   await prisma.teacherAssignment.deleteMany()
   await prisma.studentSubject.deleteMany()
+  await prisma.academicOffering.deleteMany()
+  await prisma.programSubject.deleteMany()
+  await prisma.programSemester.deleteMany()
+  await prisma.programYear.deleteMany()
+  await prisma.academicSession.deleteMany()
+  await prisma.departmentLanguage.deleteMany()
+  await prisma.academicProgram.deleteMany()
+  await prisma.degreeLevel.deleteMany()
   await prisma.translationEntry.deleteMany()
   await prisma.systemLanguage.deleteMany()
   await prisma.studentProfile.deleteMany()
@@ -104,7 +117,239 @@ async function main() {
   const subjectMgmt = await prisma.subject.create({
     data: { name: 'Principles of Management', code: 'BBA-101', departmentId: deptBBA.id },
   })
+  void subjectCircuits
+  void subjectMgmt
   console.log('✓ Created subjects')
+
+  const [degreeLevelBsc, degreeLevelMsc] = await Promise.all([
+    prisma.degreeLevel.create({
+      data: { name: 'Bachelor of Science', code: 'BSC', defaultYears: 4, sortOrder: 1 },
+    }),
+    prisma.degreeLevel.create({
+      data: { name: 'Master of Science', code: 'MSC', defaultYears: 2, sortOrder: 2 },
+    }),
+  ])
+
+  const academicSession = await prisma.academicSession.create({
+    data: {
+      name: '2026-2027',
+      code: '2026-2027',
+      startDate: new Date('2026-09-01T00:00:00.000Z'),
+      endDate: new Date('2027-08-31T23:59:59.999Z'),
+      admissionStartDate: new Date('2026-06-01T00:00:00.000Z'),
+      admissionEndDate: new Date('2026-08-15T23:59:59.999Z'),
+      isCurrent: true,
+    },
+  })
+
+  const [cseEnglish, cseBangla] = await Promise.all([
+    prisma.departmentLanguage.create({
+      data: { departmentId: deptCSE.id, languageId: langs[0].id },
+    }),
+    prisma.departmentLanguage.create({
+      data: { departmentId: deptCSE.id, languageId: langs[1].id },
+    }),
+  ])
+
+  const [programBscCs, programMscAi] = await Promise.all([
+    prisma.academicProgram.create({
+      data: {
+        name: 'BSc in Computer Science',
+        code: 'BSC-CS',
+        degreeLevelId: degreeLevelBsc.id,
+        departmentId: deptCSE.id,
+        durationYears: 4,
+        totalSemesters: 8,
+      },
+    }),
+    prisma.academicProgram.create({
+      data: {
+        name: 'MSc in Artificial Intelligence',
+        code: 'MSC-AI',
+        degreeLevelId: degreeLevelMsc.id,
+        departmentId: deptCSE.id,
+        durationYears: 2,
+        totalSemesters: 4,
+      },
+    }),
+  ])
+
+  const bscProgramYears = await Promise.all(
+    [1, 2, 3, 4].map((yearNumber) =>
+      prisma.programYear.create({
+        data: {
+          programId: programBscCs.id,
+          yearNumber,
+          name: `BSc Year ${yearNumber}`,
+          code: `BSC-Y${yearNumber}`,
+          sortOrder: yearNumber,
+        },
+      })
+    )
+  )
+  const mscProgramYears = await Promise.all(
+    [1, 2].map((yearNumber) =>
+      prisma.programYear.create({
+        data: {
+          programId: programMscAi.id,
+          yearNumber,
+          name: `MSc Year ${yearNumber}`,
+          code: `MSC-Y${yearNumber}`,
+          sortOrder: yearNumber,
+        },
+      })
+    )
+  )
+
+  const [bscSemester1, , bscSemester3, , mscSemester1] = await Promise.all([
+    prisma.programSemester.create({
+      data: { programId: programBscCs.id, programYearId: bscProgramYears[0].id, semesterId: semesters[0].id, semesterNumber: 1 },
+    }),
+    prisma.programSemester.create({
+      data: { programId: programBscCs.id, programYearId: bscProgramYears[0].id, semesterId: semesters[1].id, semesterNumber: 2 },
+    }),
+    prisma.programSemester.create({
+      data: { programId: programBscCs.id, programYearId: bscProgramYears[1].id, semesterId: semesters[0].id, semesterNumber: 3 },
+    }),
+    prisma.programSemester.create({
+      data: { programId: programBscCs.id, programYearId: bscProgramYears[1].id, semesterId: semesters[1].id, semesterNumber: 4 },
+    }),
+    prisma.programSemester.create({
+      data: { programId: programMscAi.id, programYearId: mscProgramYears[0].id, semesterId: semesters[0].id, semesterNumber: 1 },
+    }),
+  ])
+
+  const [programSubjectProgramming, programSubjectDataStructures, programSubjectMachineLearning] = await Promise.all([
+    prisma.programSubject.create({
+      data: {
+        programId: programBscCs.id,
+        programYearId: bscProgramYears[0].id,
+        semesterId: semesters[0].id,
+        programSemesterId: bscSemester1.id,
+        subjectId: subjectWD.id,
+        creditHours: 3,
+      },
+    }),
+    prisma.programSubject.create({
+      data: {
+        programId: programBscCs.id,
+        programYearId: bscProgramYears[1].id,
+        semesterId: semesters[0].id,
+        programSemesterId: bscSemester3.id,
+        subjectId: subjectDS.id,
+        creditHours: 4,
+      },
+    }),
+    prisma.programSubject.create({
+      data: {
+        programId: programMscAi.id,
+        programYearId: mscProgramYears[0].id,
+        semesterId: semesters[0].id,
+        programSemesterId: mscSemester1.id,
+        subjectId: subjectDB.id,
+        creditHours: 4,
+      },
+    }),
+  ])
+
+  const groupsWithContext = await Promise.all([
+    prisma.group.update({
+      where: { id: groups[0].id },
+      data: {
+        name: 'BSC-CS-21E',
+        code: 'BSC-CS-21E',
+        academicYearId: years[1].id,
+        departmentId: deptCSE.id,
+        programId: programBscCs.id,
+        languageId: langs[0].id,
+        departmentLanguageId: cseEnglish.id,
+        academicSessionId: academicSession.id,
+        programYearId: bscProgramYears[1].id,
+        currentProgramSemesterId: bscSemester3.id,
+      },
+    }),
+    prisma.group.update({
+      where: { id: groups[1].id },
+      data: {
+        name: 'BSC-CS-11B',
+        code: 'BSC-CS-11B',
+        academicYearId: years[0].id,
+        departmentId: deptCSE.id,
+        programId: programBscCs.id,
+        languageId: langs[1].id,
+        departmentLanguageId: cseBangla.id,
+        academicSessionId: academicSession.id,
+        programYearId: bscProgramYears[0].id,
+        currentProgramSemesterId: bscSemester1.id,
+      },
+    }),
+    prisma.group.update({
+      where: { id: groups[2].id },
+      data: {
+        name: 'MSC-AI-11E',
+        code: 'MSC-AI-11E',
+        academicYearId: years[0].id,
+        departmentId: deptCSE.id,
+        programId: programMscAi.id,
+        languageId: langs[0].id,
+        departmentLanguageId: cseEnglish.id,
+        academicSessionId: academicSession.id,
+        programYearId: mscProgramYears[0].id,
+        currentProgramSemesterId: mscSemester1.id,
+      },
+    }),
+  ])
+
+  const [offeringBscEnglish, offeringBscBangla, offeringMscEnglish] = await Promise.all([
+    prisma.academicOffering.create({
+      data: {
+        academicSessionId: academicSession.id,
+        programId: programBscCs.id,
+        departmentId: deptCSE.id,
+        departmentLanguageId: cseEnglish.id,
+        languageId: langs[0].id,
+        programYearId: bscProgramYears[1].id,
+        semesterId: semesters[0].id,
+        programSemesterId: bscSemester3.id,
+        groupId: groupsWithContext[0].id,
+        subjectId: subjectDS.id,
+        programSubjectId: programSubjectDataStructures.id,
+        status: 'ACTIVE',
+      },
+    }),
+    prisma.academicOffering.create({
+      data: {
+        academicSessionId: academicSession.id,
+        programId: programBscCs.id,
+        departmentId: deptCSE.id,
+        departmentLanguageId: cseBangla.id,
+        languageId: langs[1].id,
+        programYearId: bscProgramYears[0].id,
+        semesterId: semesters[0].id,
+        programSemesterId: bscSemester1.id,
+        groupId: groupsWithContext[1].id,
+        subjectId: subjectWD.id,
+        programSubjectId: programSubjectProgramming.id,
+        status: 'ACTIVE',
+      },
+    }),
+    prisma.academicOffering.create({
+      data: {
+        academicSessionId: academicSession.id,
+        programId: programMscAi.id,
+        departmentId: deptCSE.id,
+        departmentLanguageId: cseEnglish.id,
+        languageId: langs[0].id,
+        programYearId: mscProgramYears[0].id,
+        semesterId: semesters[0].id,
+        programSemesterId: mscSemester1.id,
+        groupId: groupsWithContext[2].id,
+        subjectId: subjectDB.id,
+        programSubjectId: programSubjectMachineLearning.id,
+        status: 'ACTIVE',
+      },
+    }),
+  ])
 
   // ─── Users (hash passwords) ───────────────────────────────────
   const hash = (pwd: string) => bcrypt.hashSync(pwd, 12)
@@ -118,6 +363,7 @@ async function main() {
       role: UserRole.SUPER_ADMIN,
     },
   })
+  void superAdmin
 
   // Department Admin (CSE)
   const deptAdmin = await prisma.user.create({
@@ -165,9 +411,10 @@ async function main() {
       departmentId: deptCSE.id,
       subjectId: subjectDS.id,
       languageId: langs[0].id,
-      groupId: groups[0].id,
+      groupId: groupsWithContext[0].id,
       academicYearId: years[1].id,
       semesterId: semesters[0].id,
+      academicOfferingId: offeringBscEnglish.id,
     },
   })
   await prisma.teacherAssignment.create({
@@ -176,9 +423,10 @@ async function main() {
       departmentId: deptCSE.id,
       subjectId: subjectDB.id,
       languageId: langs[0].id,
-      groupId: groups[0].id,
-      academicYearId: years[1].id,
+      groupId: groupsWithContext[2].id,
+      academicYearId: years[0].id,
       semesterId: semesters[0].id,
+      academicOfferingId: offeringMscEnglish.id,
     },
   })
   await prisma.teacherAssignment.create({
@@ -186,10 +434,11 @@ async function main() {
       teacherId: teacher2.id,
       departmentId: deptCSE.id,
       subjectId: subjectWD.id,
-      languageId: langs[0].id,
-      groupId: groups[1].id,
-      academicYearId: years[2].id,
+      languageId: langs[1].id,
+      groupId: groupsWithContext[1].id,
+      academicYearId: years[0].id,
       semesterId: semesters[0].id,
+      academicOfferingId: offeringBscBangla.id,
     },
   })
   console.log('✓ Created teachers and assignments')
@@ -230,19 +479,21 @@ async function main() {
         studentId: sp.id,
         subjectId: subjectDS.id,
         languageId: langs[0].id,
-        groupId: groups[0].id,
+        groupId: groupsWithContext[0].id,
         academicYearId: years[1].id,
         semesterId: semesters[0].id,
+        academicOfferingId: offeringBscEnglish.id,
       },
     })
     await prisma.studentSubject.create({
       data: {
         studentId: sp.id,
-        subjectId: subjectDB.id,
-        languageId: langs[0].id,
-        groupId: groups[0].id,
-        academicYearId: years[1].id,
+        subjectId: subjectWD.id,
+        languageId: langs[1].id,
+        groupId: groupsWithContext[1].id,
+        academicYearId: years[0].id,
         semesterId: semesters[0].id,
+        academicOfferingId: offeringBscBangla.id,
       },
     })
   }
@@ -254,9 +505,10 @@ async function main() {
     data: {
       subjectId: subjectDS.id,
       languageId: langs[0].id,
-      groupId: groups[0].id,
+      groupId: groupsWithContext[0].id,
       academicYearId: years[1].id,
       semesterId: semesters[0].id,
+      academicOfferingId: offeringBscEnglish.id,
       teacherId: teacher1.id,
       type: QuestionType.MCQ,
       text: 'What is the time complexity of binary search?',
@@ -277,9 +529,10 @@ async function main() {
     data: {
       subjectId: subjectDS.id,
       languageId: langs[0].id,
-      groupId: groups[0].id,
+      groupId: groupsWithContext[0].id,
       academicYearId: years[1].id,
       semesterId: semesters[0].id,
+      academicOfferingId: offeringBscEnglish.id,
       teacherId: teacher1.id,
       type: QuestionType.MCQ,
       text: 'Which data structure uses LIFO (Last In First Out) principle?',
@@ -300,9 +553,10 @@ async function main() {
     data: {
       subjectId: subjectDS.id,
       languageId: langs[0].id,
-      groupId: groups[0].id,
+      groupId: groupsWithContext[0].id,
       academicYearId: years[1].id,
       semesterId: semesters[0].id,
+      academicOfferingId: offeringBscEnglish.id,
       teacherId: teacher1.id,
       type: QuestionType.TRUE_FALSE,
       text: 'A binary tree can have at most 2 children per node.',
@@ -321,9 +575,10 @@ async function main() {
     data: {
       subjectId: subjectDS.id,
       languageId: langs[0].id,
-      groupId: groups[0].id,
+      groupId: groupsWithContext[0].id,
       academicYearId: years[1].id,
       semesterId: semesters[0].id,
+      academicOfferingId: offeringBscEnglish.id,
       teacherId: teacher1.id,
       type: QuestionType.SHORT_ANSWER,
       text: 'What does FIFO stand for?',
@@ -338,9 +593,10 @@ async function main() {
     data: {
       subjectId: subjectDS.id,
       languageId: langs[0].id,
-      groupId: groups[0].id,
+      groupId: groupsWithContext[0].id,
       academicYearId: years[1].id,
       semesterId: semesters[0].id,
+      academicOfferingId: offeringBscEnglish.id,
       teacherId: teacher1.id,
       type: QuestionType.WRITTEN_ANSWER,
       text: 'Explain the difference between BFS and DFS traversal algorithms. Include examples and use cases for each.',
@@ -354,7 +610,7 @@ async function main() {
   const futureStart = new Date(Date.now() + 2 * 60 * 60 * 1000) // 2 hours from now
   const futureEnd = new Date(Date.now() + 3 * 60 * 60 * 1000)   // 3 hours from now
 
-  const exam = await prisma.exam.create({
+  await prisma.exam.create({
     data: {
       title: 'Data Structures Mid-term Exam',
       description: 'This exam covers arrays, linked lists, stacks, queues, and basic tree concepts.',
@@ -362,9 +618,10 @@ async function main() {
       departmentId: deptCSE.id,
       subjectId: subjectDS.id,
       languageId: langs[0].id,
-      groupId: groups[0].id,
+      groupId: groupsWithContext[0].id,
       academicYearId: years[1].id,
       semesterId: semesters[0].id,
+      academicOfferingId: offeringBscEnglish.id,
       questionType: QuestionType.MIXED,
       status: ExamStatus.SCHEDULED,
       resultMode: ResultMode.TEACHER_REVIEW,

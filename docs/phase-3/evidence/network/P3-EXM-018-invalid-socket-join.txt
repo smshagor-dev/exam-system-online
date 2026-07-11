@@ -1,0 +1,2 @@
+student:join_exam examId=cmrgoxbrj005vpmlzimbk1ns6
+error={"message":"Department mismatch"}
