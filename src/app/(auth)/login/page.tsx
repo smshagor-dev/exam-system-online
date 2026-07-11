@@ -1,8 +1,8 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useSyncExternalStore } from 'react'
 import { signIn } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { loginSchema } from '@/lib/validators'
@@ -13,10 +13,13 @@ import { useI18n } from '@/components/i18n/LanguageProvider'
 
 type LoginForm = z.infer<typeof loginSchema>
 const REMEMBERED_EMAIL_KEY = 'examflow.rememberedEmail'
+const emptySubscribe = () => () => {}
 
 export default function LoginPage() {
   const { t } = useI18n()
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const params = searchParams ?? new URLSearchParams()
   const [branding, setBranding] = useState({
     name: 'ExamFlow Pro',
     description: 'Professional Online Exam Management System',
@@ -25,17 +28,35 @@ export default function LoginPage() {
   })
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
-  const [rememberMe, setRememberMe] = useState(false)
-  const [successMessage, setSuccessMessage] = useState<string | null>(null)
+  const rememberedEmail = useSyncExternalStore(
+    emptySubscribe,
+    () => window.localStorage.getItem(REMEMBERED_EMAIL_KEY) ?? '',
+    () => ''
+  )
+  const [rememberMeOverride, setRememberMeOverride] = useState<boolean | null>(null)
+  const rememberMe = rememberMeOverride ?? Boolean(rememberedEmail)
 
   const {
     register,
     handleSubmit,
-    setValue,
     formState: { errors },
   } = useForm<LoginForm>({
     resolver: zodResolver(loginSchema),
+    defaultValues: {
+      email: '',
+    },
   })
+
+  const successMessage = params.get('verified') === '1'
+    ? t('auth.login.success_verified', 'Account verified successfully. You can sign in now.')
+    : params.get('registered') === '1'
+      ? params.get('message') || 'Registration successful. You can sign in now.'
+      : params.get('reset') === '1'
+        ? t('auth.login.success_reset', 'Password reset successful. Sign in with your new password.')
+        : null
+  const blockedMessage = params.get('blocked') === '1'
+    ? t('auth.login.blocked', 'Your student access has ended. Please contact your department.')
+    : null
 
   useEffect(() => {
     fetch('/api/public/system-settings')
@@ -49,33 +70,7 @@ export default function LoginPage() {
         })
       })
       .catch(() => {})
-
-    const rememberedEmail = window.localStorage.getItem(REMEMBERED_EMAIL_KEY)
-    if (rememberedEmail) {
-      setValue('email', rememberedEmail)
-      setRememberMe(true)
-    }
-
-    const params = new URLSearchParams(window.location.search)
-    if (params.get('verified') === '1') {
-      setSuccessMessage(t('auth.login.success_verified', 'Account verified successfully. You can sign in now.'))
-      return
-    }
-
-    if (params.get('registered') === '1') {
-      setSuccessMessage(params.get('message') || 'Registration successful. You can sign in now.')
-      return
-    }
-
-    if (params.get('reset') === '1') {
-      setSuccessMessage(t('auth.login.success_reset', 'Password reset successful. Sign in with your new password.'))
-      return
-    }
-
-    if (params.get('blocked') === '1') {
-      setError(t('auth.login.blocked', 'Your student access has ended. Please contact your department.'))
-    }
-  }, [setValue, t])
+  }, [])
 
   const onSubmit = async (data: LoginForm) => {
     setLoading(true)
@@ -140,9 +135,9 @@ export default function LoginPage() {
             </div>
           )}
 
-          {error && (
+          {(error || blockedMessage) && (
             <div className="mb-4 p-3 rounded-lg bg-red-50 border border-red-200 text-red-700 text-sm">
-              {error}
+              {error ?? blockedMessage}
             </div>
           )}
 
@@ -177,7 +172,7 @@ export default function LoginPage() {
                 <input
                   type="checkbox"
                   checked={rememberMe}
-                  onChange={(event) => setRememberMe(event.target.checked)}
+                  onChange={(event) => setRememberMeOverride(event.target.checked)}
                   className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                 />
                 {t('auth.login.remember_me', 'Remember me')}

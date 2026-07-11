@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, createContext, useContext, useCallback } from 'react'
+import { createContext, useCallback, useContext, useState } from 'react'
 
 type Toast = {
   id: string
@@ -44,14 +44,16 @@ export function Toaster() {
         {toasts.map((t) => (
           <div
             key={t.id}
-            className={`flex items-center gap-3 px-4 py-3 rounded-xl text-white text-sm font-medium shadow-lg max-w-xs ${colorMap[t.type]} animate-in slide-in-from-bottom-2`}
+            className={`animate-in slide-in-from-bottom-2 flex max-w-xs items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-white shadow-lg ${colorMap[t.type]}`}
           >
             <span className="flex-1">{t.message}</span>
             <button
+              type="button"
               onClick={() => removeToast(t.id)}
-              className="text-white/70 hover:text-white ml-1"
+              className="ml-1 text-white/70 hover:text-white"
+              aria-label="Dismiss notification"
             >
-              ✕
+              x
             </button>
           </div>
         ))}

@@ -1,30 +1,36 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useSyncExternalStore } from 'react'
 import { LOCALE_COOKIE_NAME } from '@/lib/i18n/messages'
 import { LOCALE_STORAGE_KEY, useI18n } from './LanguageProvider'
 
+const emptySubscribe = () => () => {}
+
+function setLocaleCookie(nextLocale: string) {
+  document.cookie = `${LOCALE_COOKIE_NAME}=${nextLocale}; path=/; max-age=31536000; samesite=lax`
+}
+
 export default function LanguagePreferenceModal() {
   const { locale, locales, t } = useI18n()
-  const [show, setShow] = useState(false)
+  const savedLocale = useSyncExternalStore(
+    emptySubscribe,
+    () => window.localStorage.getItem(LOCALE_STORAGE_KEY),
+    () => null
+  )
+  const show = !savedLocale || !locales.some((item) => item.code === savedLocale)
 
   useEffect(() => {
-    const savedLocale = window.localStorage.getItem(LOCALE_STORAGE_KEY)
-
     if (savedLocale && locales.some((item) => item.code === savedLocale)) {
       if (savedLocale !== locale) {
-        document.cookie = `${LOCALE_COOKIE_NAME}=${savedLocale}; path=/; max-age=31536000; samesite=lax`
+        setLocaleCookie(savedLocale)
         window.location.reload()
       }
-      return
     }
-
-    setShow(true)
-  }, [locale, locales])
+  }, [locale, locales, savedLocale])
 
   const handleChoose = (nextLocale: string) => {
     window.localStorage.setItem(LOCALE_STORAGE_KEY, nextLocale)
-    document.cookie = `${LOCALE_COOKIE_NAME}=${nextLocale}; path=/; max-age=31536000; samesite=lax`
+    setLocaleCookie(nextLocale)
     window.location.reload()
   }
 

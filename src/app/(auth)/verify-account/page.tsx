@@ -1,25 +1,40 @@
 'use client'
 
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useEffect, useState, useSyncExternalStore } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
 import LanguageSwitcher from '@/components/i18n/LanguageSwitcher'
 import { useI18n } from '@/components/i18n/LanguageProvider'
+
+const emptySubscribe = () => () => {}
 
 export default function VerifyAccountPage() {
   const { t } = useI18n()
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const params = searchParams ?? new URLSearchParams()
+  const emailFromParams = params.get('email') ?? ''
   const [branding, setBranding] = useState({
     name: 'ExamFlow Pro',
     description: 'Professional Online Exam Management System',
     logoUrl: '',
   })
-  const [email, setEmail] = useState('')
+  const [email, setEmail] = useState(emailFromParams)
   const [code, setCode] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
-  const [message, setMessage] = useState<string | null>(null)
-  const [debugCode, setDebugCode] = useState<string | null>(null)
+  const [message, setMessage] = useState<string | null>(() => (
+    params.get('registered') === '1'
+      ? t('auth.verify.registered_message', 'Your account was created. Enter the 6-digit code to verify it.')
+      : null
+  ))
+  const storedDebugCode = useSyncExternalStore(
+    emptySubscribe,
+    () => (emailFromParams ? window.sessionStorage.getItem(`verify-code:${emailFromParams}`) : null),
+    () => null
+  )
+  const [debugCodeOverride, setDebugCodeOverride] = useState<string | null>(null)
+  const debugCode = debugCodeOverride ?? storedDebugCode
 
   useEffect(() => {
     fetch('/api/public/system-settings')
@@ -32,22 +47,7 @@ export default function VerifyAccountPage() {
         })
       })
       .catch(() => {})
-
-    const params = new URLSearchParams(window.location.search)
-    const currentEmail = params.get('email') ?? ''
-
-    setEmail(currentEmail)
-    if (params.get('registered') === '1') {
-      setMessage(t('auth.verify.registered_message', 'Your account was created. Enter the 6-digit code to verify it.'))
-    }
-
-    if (!currentEmail) return
-
-    const storedCode = window.sessionStorage.getItem(`verify-code:${currentEmail}`)
-    if (storedCode) {
-      setDebugCode(storedCode)
-    }
-  }, [t])
+  }, [])
 
   const handleVerify = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -97,7 +97,7 @@ export default function VerifyAccountPage() {
       }
 
       setMessage(data.message)
-      setDebugCode(data.debugCode ?? null)
+      setDebugCodeOverride(data.debugCode ?? null)
       if (data.debugCode) {
         window.sessionStorage.setItem(`verify-code:${email}`, data.debugCode)
       }
