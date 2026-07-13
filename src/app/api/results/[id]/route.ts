@@ -1,10 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { auth } from '@/lib/auth'
+import {
+  resolveExamTranslation,
+  resolveQuestionOptionTranslation,
+  resolveQuestionTranslation,
+} from '@/lib/academic-content'
 import { getErrorMessage } from '@/lib/api-errors'
 import { prisma } from '@/lib/prisma'
 import { UserRole } from '@prisma/client'
 import { recalculateAfterReview, publishResult } from '@/lib/result-engine'
 import { reviewAnswerSchema } from '@/lib/validators'
+import { teacherOwnsExam } from '@/lib/permissions'
 
 type RouteContext = { params: Promise<{ id: string }> }
 
@@ -18,11 +24,18 @@ export async function GET(_req: NextRequest, { params }: RouteContext) {
     include: {
       exam: {
         include: {
+          translations: true,
           subject: true,
           questions: {
             include: {
               question: {
-                include: { options: { orderBy: { orderIndex: 'asc' } } },
+                include: {
+                  translations: true,
+                  options: {
+                    include: { translations: true },
+                    orderBy: { orderIndex: 'asc' },
+                  },
+                },
               },
             },
             orderBy: { orderIndex: 'asc' },
@@ -33,7 +46,16 @@ export async function GET(_req: NextRequest, { params }: RouteContext) {
         include: {
           student: { include: { user: { select: { name: true, email: true } } } },
           answers: {
-            include: { question: { include: { options: true } } },
+            include: {
+              question: {
+                include: {
+                  translations: true,
+                  options: {
+                    include: { translations: true },
+                  },
+                },
+              },
+            },
           },
         },
       },
@@ -49,25 +71,50 @@ export async function GET(_req: NextRequest, { params }: RouteContext) {
     if (result.studentId !== profile?.id) return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
   }
 
-  // Strip correct answers if showAnswers is false
-  if (session.user.role === UserRole.STUDENT && !result.exam.showAnswers) {
-    return NextResponse.json({
-      ...result,
-      attempt: {
-        ...result.attempt,
-        answers: result.attempt.answers.map((answer) => ({
+  const resolvedExam = resolveExamTranslation(result.exam, result.exam.languageId)
+
+  return NextResponse.json({
+    ...result,
+    exam: {
+      ...resolvedExam,
+      questions: result.exam.questions.map((entry) => {
+        const resolvedQuestion = resolveQuestionTranslation(entry.question, result.exam.languageId)
+        return {
+          ...entry,
+          question: {
+            ...resolvedQuestion,
+            options: entry.question.options.map((option) =>
+              resolveQuestionOptionTranslation(option, result.exam.languageId)
+            ),
+          },
+        }
+      }),
+    },
+    attempt: {
+      ...result.attempt,
+      answers: result.attempt.answers.map((answer) => {
+        const resolvedQuestion = resolveQuestionTranslation(answer.question, result.exam.languageId)
+        const resolvedOptions = answer.question.options.map((option) =>
+          resolveQuestionOptionTranslation(option, result.exam.languageId)
+        )
+
+        return {
           ...answer,
           question: {
-            ...answer.question,
-            options: answer.question.options.map((option) => ({ ...option, isCorrect: undefined })),
-            expectedAnswer: undefined,
+            ...resolvedQuestion,
+            options:
+              session.user.role === UserRole.STUDENT && !resolvedExam.showAnswers
+                ? resolvedOptions.map((option) => ({ ...option, isCorrect: undefined }))
+                : resolvedOptions,
+            expectedAnswer:
+              session.user.role === UserRole.STUDENT && !resolvedExam.showAnswers
+                ? undefined
+                : resolvedQuestion.expectedAnswer,
           },
-        })),
-      },
-    })
-  }
-
-  return NextResponse.json(result)
+        }
+      }),
+    },
+  })
 }
 
 // Teacher reviews/publishes result
@@ -84,9 +131,16 @@ export async function PATCH(req: NextRequest, { params }: RouteContext) {
 
   const result = await prisma.examResult.findUnique({
     where: { id },
-    include: { attempt: true },
+    include: { attempt: true, exam: true },
   })
   if (!result) return NextResponse.json({ error: 'Not found' }, { status: 404 })
+
+  if (session.user.role === UserRole.TEACHER) {
+    const allowed = await teacherOwnsExam({ userId: session.user.id, role: session.user.role }, result.examId)
+    if (!allowed) {
+      return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
+    }
+  }
 
   try {
     if (action === 'review_answer' && answerId) {

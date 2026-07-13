@@ -1,4 +1,5 @@
 import { auth } from '@/lib/auth'
+import { dedupeTranslations } from '@/lib/academic-content'
 import { prisma } from '@/lib/prisma'
 import { UserRole } from '@prisma/client'
 import { NextResponse } from 'next/server'
@@ -26,6 +27,9 @@ export async function POST(request: Request) {
   const academicYearId = String(body.academicYearId || '').trim()
   const semesterId = String(body.semesterId || '').trim()
   const title = String(body.title || '').trim()
+  const translations = Array.isArray(body.translations)
+    ? (body.translations as Array<{ languageId?: string; title?: string; rules?: string }>)
+    : []
 
   if (!studentId || !subjectId || !languageId || !groupId || !academicYearId || !semesterId) {
     return NextResponse.json({ error: 'Missing coursework scope fields' }, { status: 400 })
@@ -100,36 +104,75 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Save the shared rules first before assigning student titles' }, { status: 400 })
   }
 
-  const assignment = await prisma.courseworkAssignment.upsert({
-    where: {
-      teacherId_studentId_subjectId_languageId_groupId_academicYearId_semesterId: {
+  const assignment = await prisma.$transaction(async (tx) => {
+    const savedAssignment = await tx.courseworkAssignment.upsert({
+      where: {
+        teacherId_studentId_subjectId_languageId_groupId_academicYearId_semesterId: {
+          teacherId: profile.id,
+          studentId,
+          subjectId,
+          languageId,
+          groupId,
+          academicYearId,
+          semesterId,
+        },
+      },
+      update: {
+        ruleId: rule.id,
+        title,
+        rules: rule.rules,
+      },
+      create: {
         teacherId: profile.id,
         studentId,
+        ruleId: rule.id,
+        departmentId: teacherAssignment.departmentId,
         subjectId,
         languageId,
         groupId,
         academicYearId,
         semesterId,
+        title,
+        rules: rule.rules,
       },
-    },
-    update: {
-      ruleId: rule.id,
-      title,
-      rules: rule.rules,
-    },
-    create: {
-      teacherId: profile.id,
-      studentId,
-      ruleId: rule.id,
-      departmentId: teacherAssignment.departmentId,
-      subjectId,
-      languageId,
-      groupId,
-      academicYearId,
-      semesterId,
-      title,
-      rules: rule.rules,
-    },
+    })
+
+    const mergedTranslations = dedupeTranslations([
+      { languageId, title, rules: rule.rules },
+      ...translations
+        .filter((translation) => translation && typeof translation.languageId === 'string' && typeof translation.title === 'string')
+        .map((translation) => ({
+          languageId: String(translation.languageId),
+          title: String(translation.title),
+          rules:
+            typeof translation.rules === 'string'
+              ? String(translation.rules)
+              : rule.rules,
+        })),
+    ])
+
+    for (const translation of mergedTranslations) {
+      await tx.courseworkAssignmentTranslation.upsert({
+        where: {
+          assignmentId_languageId: {
+            assignmentId: savedAssignment.id,
+            languageId: translation.languageId,
+          },
+        },
+        update: {
+          title: translation.title,
+          rules: translation.rules,
+        },
+        create: {
+          assignmentId: savedAssignment.id,
+          languageId: translation.languageId,
+          title: translation.title,
+          rules: translation.rules,
+        },
+      })
+    }
+
+    return savedAssignment
   })
 
   return NextResponse.json(assignment)

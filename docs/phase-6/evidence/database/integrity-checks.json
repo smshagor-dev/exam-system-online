@@ -1,0 +1,21 @@
+{
+  "executedAt": "2026-07-12T10:26:17.649Z",
+  "checks": {
+    "noDuplicateActiveAttempt": true,
+    "noDuplicateSnapshot": true,
+    "noDuplicateAnswer": true,
+    "submittedAttemptImmutable": true,
+    "snapshotOwnershipValid": true,
+    "noStaleRedisLocks": true,
+    "noOrphanRuntimeState": true,
+    "dbRuntimeSubmissionStateMatches": true,
+    "noDuplicateTimerProcess": true
+  },
+  "details": {
+    "activeAttemptDupes": [],
+    "snapshotDupes": [],
+    "answerDupes": [],
+    "staleRedisLocks": [],
+    "orphanRuntimeState": []
+  }
+}

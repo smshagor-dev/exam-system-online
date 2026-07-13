@@ -1,0 +1,76 @@
+{
+  "campus": {
+    "id": "cmrjdbw0u00051jok1bk9fsuh",
+    "departmentId": "cmrc1y4pr000ck2kd4d7vqcwq",
+    "name": "Phase 8 Browser Campus 1783955979210",
+    "code": "P8C79210",
+    "description": "Phase 8 browser fixture campus",
+    "isActive": true,
+    "createdAt": "2026-07-13T15:19:40.254Z",
+    "updatedAt": "2026-07-13T15:19:40.254Z"
+  },
+  "building": {
+    "id": "cmrjdbx5z00071jokt1kel7ef",
+    "campusId": "cmrjdbw0u00051jok1bk9fsuh",
+    "name": "Phase 8 Browser Building",
+    "code": "P8B80583",
+    "floors": 4,
+    "isActive": true,
+    "createdAt": "2026-07-13T15:19:41.736Z",
+    "updatedAt": "2026-07-13T15:19:41.736Z"
+  },
+  "room": {
+    "id": "cmrjdbyc500091jok0anrm87w",
+    "campusId": "cmrjdbw0u00051jok1bk9fsuh",
+    "buildingId": "cmrjdbx5z00071jokt1kel7ef",
+    "name": "Phase 8 Hall A",
+    "code": "P8R82061",
+    "floorNumber": 2,
+    "capacity": 120,
+    "seatLayoutJson": {
+      "rows": 12,
+      "columns": 10
+    },
+    "equipmentJson": {
+      "projector": true,
+      "internet": true
+    },
+    "isAccessible": true,
+    "isComputerLab": false,
+    "isPracticalLab": false,
+    "hasProjector": true,
+    "hasInternet": true,
+    "isMaintenance": false,
+    "maintenanceNotes": null,
+    "isActive": true,
+    "createdAt": "2026-07-13T15:19:43.253Z",
+    "updatedAt": "2026-07-13T15:19:43.253Z"
+  },
+  "roomPatch": {
+    "id": "cmrjdbyc500091jok0anrm87w",
+    "campusId": "cmrjdbw0u00051jok1bk9fsuh",
+    "buildingId": "cmrjdbx5z00071jokt1kel7ef",
+    "name": "Phase 8 Hall A",
+    "code": "P8R82061",
+    "floorNumber": 2,
+    "capacity": 110,
+    "seatLayoutJson": {
+      "rows": 12,
+      "columns": 10
+    },
+    "equipmentJson": {
+      "projector": true,
+      "internet": true
+    },
+    "isAccessible": true,
+    "isComputerLab": false,
+    "isPracticalLab": false,
+    "hasProjector": true,
+    "hasInternet": true,
+    "isMaintenance": false,
+    "maintenanceNotes": "Ready for allocation",
+    "isActive": true,
+    "createdAt": "2026-07-13T15:19:43.253Z",
+    "updatedAt": "2026-07-13T15:19:46.455Z"
+  }
+}

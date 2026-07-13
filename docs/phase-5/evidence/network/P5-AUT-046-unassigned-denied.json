@@ -1,0 +1,9 @@
+{
+  "method": "GET",
+  "url": "/api/teacher/translations/questions/cmrhfhg8v0011z6zfr8ijuhq5?languageId=cmrc1y4h10006k2kdse7x47oh",
+  "status": 403,
+  "json": {
+    "error": "Forbidden"
+  },
+  "text": "{\"error\":\"Forbidden\"}"
+}

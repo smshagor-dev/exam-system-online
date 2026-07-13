@@ -1,0 +1,215 @@
+{
+  "ownCard": {
+    "id": "cmrjdcp1j00141jokivr432b6",
+    "schedulingSessionId": "cmrjdc67a000j1jokt9hfo7tv",
+    "studentId": "cmrhdzsao000bwhz5n1waw7db",
+    "token": "ADMIT-hfo7tv-waw7db",
+    "issuedAt": "2026-07-13T15:20:17.864Z",
+    "revokedAt": null,
+    "lastDownloadedAt": null,
+    "createdAt": "2026-07-13T15:20:17.864Z",
+    "updatedAt": "2026-07-13T15:20:27.968Z",
+    "schedulingSession": {
+      "id": "cmrjdc67a000j1jokt9hfo7tv",
+      "academicSessionId": "cmrfvc6kk0050wqliy7jsvc0r",
+      "departmentId": "cmrc1y4pr000ck2kd4d7vqcwq",
+      "programId": "cmrfvc9gk0053wqli5omnqitt",
+      "semesterId": "cmrc1y4cm0004k2kddk9xe7q7",
+      "campusId": "cmrjdbw0u00051jok1bk9fsuh",
+      "name": "Phase 8 Browser Final Session",
+      "type": "FINAL",
+      "status": "PUBLISHED",
+      "publishedAt": "2026-07-13T15:20:24.486Z",
+      "lockedAt": null,
+      "createdAt": "2026-07-13T15:19:53.446Z",
+      "updatedAt": "2026-07-13T15:20:24.491Z",
+      "items": [
+        {
+          "id": "cmrjdcih8000s1joksasgpy3g",
+          "schedulingSessionId": "cmrjdc67a000j1jokt9hfo7tv",
+          "examId": "cmrjdao5d003tfc4vruw9ygsz",
+          "academicOfferingId": "cmrfve242006fwqliz6dmghl7",
+          "departmentId": "cmrc1y4pr000ck2kd4d7vqcwq",
+          "programId": "cmrfvc9gk0053wqli5omnqitt",
+          "subjectId": "cmrfudk7t00021387u895s14h",
+          "languageId": "cmrfudipt00001387aijb5mgh",
+          "groupId": "cmrfvdjp80067wqli6zjyifgw",
+          "academicYearId": "cmrfvcdti0059wqlij5fqmj0g",
+          "semesterId": "cmrc1y4cm0004k2kddk9xe7q7",
+          "campusId": "cmrjdbw0u00051jok1bk9fsuh",
+          "roomId": "cmrjdbyc500091jok0anrm87w",
+          "status": "PUBLISHED",
+          "scheduledStart": "2026-04-20T09:00:00.000Z",
+          "scheduledEnd": "2026-04-20T11:00:00.000Z",
+          "durationMinutes": 120,
+          "studentCount": 10,
+          "manualOverride": true,
+          "conflictFlagsJson": [
+            "student_conflict"
+          ],
+          "seatPlanGeneratedAt": null,
+          "createdAt": "2026-07-13T15:20:09.356Z",
+          "updatedAt": "2026-07-13T15:20:24.820Z",
+          "subject": {
+            "id": "cmrfudk7t00021387u895s14h",
+            "name": "Programming Fundamentals",
+            "code": "CSE-101",
+            "description": null,
+            "departmentId": "cmrc1y4pr000ck2kd4d7vqcwq",
+            "languageId": null,
+            "isActive": true,
+            "createdAt": "2026-07-11T04:05:47.033Z",
+            "updatedAt": "2026-07-11T04:05:47.033Z"
+          },
+          "room": {
+            "id": "cmrjdbyc500091jok0anrm87w",
+            "campusId": "cmrjdbw0u00051jok1bk9fsuh",
+            "buildingId": "cmrjdbx5z00071jokt1kel7ef",
+            "name": "Phase 8 Hall A",
+            "code": "P8R82061",
+            "floorNumber": 2,
+            "capacity": 110,
+            "seatLayoutJson": {
+              "rows": 12,
+              "columns": 10
+            },
+            "equipmentJson": {
+              "projector": true,
+              "internet": true
+            },
+            "isAccessible": true,
+            "isComputerLab": false,
+            "isPracticalLab": false,
+            "hasProjector": true,
+            "hasInternet": true,
+            "isMaintenance": false,
+            "maintenanceNotes": "Ready for allocation",
+            "isActive": true,
+            "createdAt": "2026-07-13T15:19:43.253Z",
+            "updatedAt": "2026-07-13T15:19:46.455Z"
+          },
+          "seatPlan": null
+        },
+        {
+          "id": "cmrjdcg8h000o1jokl9zxnt1g",
+          "schedulingSessionId": "cmrjdc67a000j1jokt9hfo7tv",
+          "examId": "cmrgsoojx003z8ouzj3l0jg2r",
+          "academicOfferingId": "cmrfve242006fwqliz6dmghl7",
+          "departmentId": "cmrc1y4pr000ck2kd4d7vqcwq",
+          "programId": "cmrfvc9gk0053wqli5omnqitt",
+          "subjectId": "cmrfudk7t00021387u895s14h",
+          "languageId": "cmrfudipt00001387aijb5mgh",
+          "groupId": "cmrfvdjp80067wqli6zjyifgw",
+          "academicYearId": "cmrfvcdti0059wqlij5fqmj0g",
+          "semesterId": "cmrc1y4cm0004k2kddk9xe7q7",
+          "campusId": "cmrjdbw0u00051jok1bk9fsuh",
+          "roomId": "cmrjdbyc500091jok0anrm87w",
+          "status": "PUBLISHED",
+          "scheduledStart": "2026-04-21T06:00:00.000Z",
+          "scheduledEnd": "2026-04-21T07:00:00.000Z",
+          "durationMinutes": 60,
+          "studentCount": 2,
+          "manualOverride": false,
+          "conflictFlagsJson": null,
+          "seatPlanGeneratedAt": "2026-07-13T15:20:15.377Z",
+          "createdAt": "2026-07-13T15:20:06.450Z",
+          "updatedAt": "2026-07-13T15:20:24.820Z",
+          "subject": {
+            "id": "cmrfudk7t00021387u895s14h",
+            "name": "Programming Fundamentals",
+            "code": "CSE-101",
+            "description": null,
+            "departmentId": "cmrc1y4pr000ck2kd4d7vqcwq",
+            "languageId": null,
+            "isActive": true,
+            "createdAt": "2026-07-11T04:05:47.033Z",
+            "updatedAt": "2026-07-11T04:05:47.033Z"
+          },
+          "room": {
+            "id": "cmrjdbyc500091jok0anrm87w",
+            "campusId": "cmrjdbw0u00051jok1bk9fsuh",
+            "buildingId": "cmrjdbx5z00071jokt1kel7ef",
+            "name": "Phase 8 Hall A",
+            "code": "P8R82061",
+            "floorNumber": 2,
+            "capacity": 110,
+            "seatLayoutJson": {
+              "rows": 12,
+              "columns": 10
+            },
+            "equipmentJson": {
+              "projector": true,
+              "internet": true
+            },
+            "isAccessible": true,
+            "isComputerLab": false,
+            "isPracticalLab": false,
+            "hasProjector": true,
+            "hasInternet": true,
+            "isMaintenance": false,
+            "maintenanceNotes": "Ready for allocation",
+            "isActive": true,
+            "createdAt": "2026-07-13T15:19:43.253Z",
+            "updatedAt": "2026-07-13T15:19:46.455Z"
+          },
+          "seatPlan": {
+            "id": "cmrjdcmk0000v1jokzih06kh9",
+            "scheduleItemId": "cmrjdcg8h000o1jokl9zxnt1g",
+            "spacingPolicy": 1,
+            "generatedByUserId": "cmrc1y67t000qk2kdsntvvukr",
+            "generatedAt": "2026-07-13T15:20:14.640Z",
+            "notes": "Phase 8 browser seat plan",
+            "createdAt": "2026-07-13T15:20:14.640Z",
+            "updatedAt": "2026-07-13T15:20:14.640Z",
+            "seatAssignments": [
+              {
+                "id": "cmrjdcmt0000x1jokjlgx06o3",
+                "seatPlanId": "cmrjdcmk0000v1jokzih06kh9",
+                "roomId": "cmrjdbyc500091jok0anrm87w",
+                "studentId": "cmrhdzsao000bwhz5n1waw7db",
+                "seatNumber": "A1",
+                "rowLabel": "A",
+                "columnNumber": 1,
+                "barcode": "BAR-zxnt1g-waw7db-1",
+                "qrCode": "QR-zxnt1g-waw7db-1",
+                "isAccessibilitySeat": false,
+                "isManualOverride": false,
+                "createdAt": "2026-07-13T15:20:14.964Z",
+                "updatedAt": "2026-07-13T15:20:14.964Z"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "downloadUrl": "/api/student/admit-cards/cmrjdcp1j00141jokivr432b6"
+  },
+  "headers": {
+    "vary": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+    "cache-control": "private, no-store",
+    "content-disposition": "attachment; filename=\"admit-card-cmrjdcp1j00141jokivr432b6.pdf\"",
+    "content-type": "application/pdf",
+    "date": "Mon, 13 Jul 2026 15:20:35 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5",
+    "transfer-encoding": "chunked"
+  },
+  "foreignAccess": {
+    "ok": false,
+    "status": 403,
+    "json": {
+      "error": "Admit card does not belong to this student"
+    },
+    "text": "{\"error\":\"Admit card does not belong to this student\"}"
+  },
+  "regenerate": {
+    "ok": true,
+    "status": 200,
+    "json": {
+      "ok": true,
+      "admitCardId": "cmrjdcp1j00141jokivr432b6",
+      "storedPath": "D:\\Public\\exam-system-online\\.generated\\phase-8\\admit-cards\\cmrjdcp1j00141jokivr432b6.pdf"
+    },
+    "text": "{\"ok\":true,\"admitCardId\":\"cmrjdcp1j00141jokivr432b6\",\"storedPath\":\"D:\\\\Public\\\\exam-system-online\\\\.generated\\\\phase-8\\\\admit-cards\\\\cmrjdcp1j00141jokivr432b6.pdf\"}"
+  }
+}

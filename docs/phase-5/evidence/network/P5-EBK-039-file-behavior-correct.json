@@ -1,0 +1,140 @@
+{
+  "method": "GET",
+  "url": "/api/teacher/translations/ebooks/cmrhfhk3k002rz6zf8hsq2vsw?languageId=cmrc1y4h10006k2kdse7x47oh",
+  "status": 200,
+  "json": {
+    "entity": "ebooks",
+    "parentId": "cmrhfhk3k002rz6zf8hsq2vsw",
+    "baseLanguageId": "cmrfudipt00001387aijb5mgh",
+    "languageId": "cmrc1y4h10006k2kdse7x47oh",
+    "translation": {
+      "id": "cmrhfl4990012mg7rcwh34ams",
+      "ebookUploadId": "cmrhfhk3k002rz6zf8hsq2vsw",
+      "languageId": "cmrc1y4h10006k2kdse7x47oh",
+      "title": "P5 Evidence EN Ebook Translation Edited",
+      "description": "P5 Evidence EN ebook translated description edited",
+      "author": "P5 Evidence EN Author Translation Edited",
+      "category": "P5 Evidence EN Category Translation Edited",
+      "status": "COMPLETE",
+      "completedAt": "2026-07-12T06:47:21.602Z",
+      "archivedAt": null,
+      "createdAt": "2026-07-12T06:47:17.709Z",
+      "updatedAt": "2026-07-12T06:47:21.606Z"
+    },
+    "completeness": {
+      "entity": "ebooks",
+      "languageId": "cmrc1y4h10006k2kdse7x47oh",
+      "isComplete": true,
+      "missingFields": []
+    },
+    "preview": {
+      "id": "cmrhfhk3k002rz6zf8hsq2vsw",
+      "teacherId": "cmrc1y74k000uk2kd8dujfpkd",
+      "departmentId": "cmrc1y4pr000ck2kd4d7vqcwq",
+      "subjectId": "cmrfudk7t00021387u895s14h",
+      "languageId": "cmrfudipt00001387aijb5mgh",
+      "groupId": "cmrfvdjp80067wqli6zjyifgw",
+      "academicYearId": "cmrc1y4060003k2kd2m0dhf10",
+      "semesterId": "cmrc1y4cm0004k2kddk9xe7q7",
+      "academicOfferingId": "cmrfve242006fwqliz6dmghl7",
+      "title": "P5 Evidence EN Ebook Translation Edited",
+      "description": "P5 Evidence EN ebook translated description edited",
+      "author": "P5 Evidence Author RU",
+      "category": "P5 Evidence Category RU",
+      "fileName": "p5-evidence-ru.pdf",
+      "fileUrl": "/uploads/ebooks/p5-evidence-ru.pdf",
+      "fileSizeBytes": 460,
+      "createdAt": "2026-07-12T06:44:31.616Z",
+      "updatedAt": "2026-07-12T06:44:31.616Z",
+      "translations": [
+        {
+          "id": "cmrhfhkcb002tz6zf0a618sxy",
+          "ebookUploadId": "cmrhfhk3k002rz6zf8hsq2vsw",
+          "languageId": "cmrfudipt00001387aijb5mgh",
+          "title": "P5 Evidence RU Ebook",
+          "description": "P5 Evidence RU ebook description",
+          "author": "P5 Evidence Author RU",
+          "category": "P5 Evidence Category RU",
+          "status": "COMPLETE",
+          "completedAt": "2026-07-12T06:44:31.930Z",
+          "archivedAt": null,
+          "createdAt": "2026-07-12T06:44:31.932Z",
+          "updatedAt": "2026-07-12T06:44:31.932Z"
+        },
+        {
+          "id": "cmrhfl4990012mg7rcwh34ams",
+          "ebookUploadId": "cmrhfhk3k002rz6zf8hsq2vsw",
+          "languageId": "cmrc1y4h10006k2kdse7x47oh",
+          "title": "P5 Evidence EN Ebook Translation Edited",
+          "description": "P5 Evidence EN ebook translated description edited",
+          "author": "P5 Evidence EN Author Translation Edited",
+          "category": "P5 Evidence EN Category Translation Edited",
+          "status": "COMPLETE",
+          "completedAt": "2026-07-12T06:47:21.602Z",
+          "archivedAt": null,
+          "createdAt": "2026-07-12T06:47:17.709Z",
+          "updatedAt": "2026-07-12T06:47:21.606Z"
+        }
+      ],
+      "subject": {
+        "id": "cmrfudk7t00021387u895s14h",
+        "name": "Programming Fundamentals",
+        "code": "CSE-101",
+        "description": null,
+        "departmentId": "cmrc1y4pr000ck2kd4d7vqcwq",
+        "languageId": null,
+        "isActive": true,
+        "createdAt": "2026-07-11T04:05:47.033Z",
+        "updatedAt": "2026-07-11T04:05:47.033Z"
+      },
+      "language": {
+        "id": "cmrfudipt00001387aijb5mgh",
+        "name": "Russian",
+        "code": "RU",
+        "isActive": true,
+        "createdAt": "2026-07-11T04:05:45.089Z",
+        "updatedAt": "2026-07-11T04:05:45.089Z"
+      },
+      "group": {
+        "id": "cmrfvdjp80067wqli6zjyifgw",
+        "name": "BSC-CS-11R",
+        "code": "BSC-CS-11R",
+        "academicYearId": "cmrc1y4060003k2kd2m0dhf10",
+        "departmentId": "cmrc1y4pr000ck2kd4d7vqcwq",
+        "programId": "cmrfvc9gk0053wqli5omnqitt",
+        "languageId": "cmrfudipt00001387aijb5mgh",
+        "departmentLanguageId": "cmrfvc3kg004xwqli8kpib47u",
+        "academicSessionId": "cmrfvc6kk0050wqliy7jsvc0r",
+        "programYearId": "cmrfvcdti0059wqlij5fqmj0g",
+        "currentProgramSemesterId": "cmrfvcvjd005nwqlinyw6zg68",
+        "isActive": true,
+        "createdAt": "2026-07-11T04:33:45.980Z",
+        "updatedAt": "2026-07-11T04:33:45.980Z"
+      },
+      "academicYear": {
+        "id": "cmrc1y4060003k2kd2m0dhf10",
+        "name": "Year 1",
+        "year": 1,
+        "isActive": true,
+        "createdAt": "2026-07-08T12:26:38.406Z",
+        "updatedAt": "2026-07-08T12:26:38.406Z"
+      },
+      "semester": {
+        "id": "cmrc1y4cm0004k2kddk9xe7q7",
+        "name": "Semester 1",
+        "number": 1,
+        "isActive": true,
+        "createdAt": "2026-07-08T12:26:38.854Z",
+        "updatedAt": "2026-07-08T12:26:38.854Z"
+      }
+    },
+    "source": {
+      "title": "P5 Evidence RU Ebook",
+      "description": "P5 Evidence RU ebook description",
+      "author": "P5 Evidence Author RU",
+      "category": "P5 Evidence Category RU",
+      "fileUrl": "/uploads/ebooks/p5-evidence-ru.pdf"
+    }
+  },
+  "text": "{\"entity\":\"ebooks\",\"parentId\":\"cmrhfhk3k002rz6zf8hsq2vsw\",\"baseLanguageId\":\"cmrfudipt00001387aijb5mgh\",\"languageId\":\"cmrc1y4h10006k2kdse7x47oh\",\"translation\":{\"id\":\"cmrhfl4990012mg7rcwh34ams\",\"ebookUploadId\":\"cmrhfhk3k002rz6zf8hsq2vsw\",\"languageId\":\"cmrc1y4h10006k2kdse7x47oh\",\"title\":\"P5 Evidence EN Ebook Translation Edited\",\"description\":\"P5 Evidence EN ebook translated description edited\",\"author\":\"P5 Evidence EN Author Translation Edited\",\"category\":\"P5 Evidence EN Category Translation Edited\",\"status\":\"COMPLETE\",\"completedAt\":\"2026-07-12T06:47:21.602Z\",\"archivedAt\":null,\"createdAt\":\"2026-07-12T06:47:17.709Z\",\"updatedAt\":\"2026-07-12T06:47:21.606Z\"},\"completeness\":{\"entity\":\"ebooks\",\"languageId\":\"cmrc1y4h10006k2kdse7x47oh\",\"isComplete\":true,\"missingFields\":[]},\"preview\":{\"id\":\"cmrhfhk3k002rz6zf8hsq2vsw\",\"teacherId\":\"cmrc1y74k000uk2kd8dujfpkd\",\"departmentId\":\"cmrc1y4pr000ck2kd4d7vqcwq\",\"subjectId\":\"cmrfudk7t00021387u895s14h\",\"languageId\":\"cmrfudipt00001387aijb5mgh\",\"groupId\":\"cmrfvdjp80067wqli6zjyifgw\",\"academicYearId\":\"cmrc1y4060003k2kd2m0dhf10\",\"semesterId\":\"cmrc1y4cm0004k2kddk9xe7q7\",\"academicOfferingId\":\"cmrfve242006fwqliz6dmghl7\",\"title\":\"P5 Evidence EN Ebook Translation Edited\",\"description\":\"P5 Evidence EN ebook translated description edited\",\"author\":\"P5 Evidence Author RU\",\"category\":\"P5 Evidence Category RU\",\"fileName\":\"p5-evidence-ru.pdf\",\"fileUrl\":\"/uploads/ebooks/p5-evidence-ru.pdf\",\"fileSizeBytes\":460,\"createdAt\":\"2026-07-12T06:44:31.616Z\",\"updatedAt\":\"2026-07-12T06:44:31.616Z\",\"translations\":[{\"id\":\"cmrhfhkcb002tz6zf0a618sxy\",\"ebookUploadId\":\"cmrhfhk3k002rz6zf8hsq2vsw\",\"languageId\":\"cmrfudipt00001387aijb5mgh\",\"title\":\"P5 Evidence RU Ebook\",\"description\":\"P5 Evidence RU ebook description\",\"author\":\"P5 Evidence Author RU\",\"category\":\"P5 Evidence Category RU\",\"status\":\"COMPLETE\",\"completedAt\":\"2026-07-12T06:44:31.930Z\",\"archivedAt\":null,\"createdAt\":\"2026-07-12T06:44:31.932Z\",\"updatedAt\":\"2026-07-12T06:44:31.932Z\"},{\"id\":\"cmrhfl4990012mg7rcwh34ams\",\"ebookUploadId\":\"cmrhfhk3k002rz6zf8hsq2vsw\",\"languageId\":\"cmrc1y4h10006k2kdse7x47oh\",\"title\":\"P5 Evidence EN Ebook Translation Edited\",\"description\":\"P5 Evidence EN ebook translated description edited\",\"author\":\"P5 Evidence EN Author Translation Edited\",\"category\":\"P5 Evidence EN Category Translation Edited\",\"status\":\"COMPLETE\",\"completedAt\":\"2026-07-12T06:47:21.602Z\",\"archivedAt\":null,\"createdAt\":\"2026-07-12T06:47:17.709Z\",\"updatedAt\":\"2026-07-12T06:47:21.606Z\"}],\"subject\":{\"id\":\"cmrfudk7t00021387u895s14h\",\"name\":\"Programming Fundamentals\",\"code\":\"CSE-101\",\"description\":null,\"departmentId\":\"cmrc1y4pr000ck2kd4d7vqcwq\",\"languageId\":null,\"isActive\":true,\"createdAt\":\"2026-07-11T04:05:47.033Z\",\"updatedAt\":\"2026-07-11T04:05:47.033Z\"},\"language\":{\"id\":\"cmrfudipt00001387aijb5mgh\",\"name\":\"Russian\",\"code\":\"RU\",\"isActive\":true,\"createdAt\":\"2026-07-11T04:05:45.089Z\",\"updatedAt\":\"2026-07-11T04:05:45.089Z\"},\"group\":{\"id\":\"cmrfvdjp80067wqli6zjyifgw\",\"name\":\"BSC-CS-11R\",\"code\":\"BSC-CS-11R\",\"academicYearId\":\"cmrc1y4060003k2kd2m0dhf10\",\"departmentId\":\"cmrc1y4pr000ck2kd4d7vqcwq\",\"programId\":\"cmrfvc9gk0053wqli5omnqitt\",\"languageId\":\"cmrfudipt00001387aijb5mgh\",\"departmentLanguageId\":\"cmrfvc3kg004xwqli8kpib47u\",\"academicSessionId\":\"cmrfvc6kk0050wqliy7jsvc0r\",\"programYearId\":\"cmrfvcdti0059wqlij5fqmj0g\",\"currentProgramSemesterId\":\"cmrfvcvjd005nwqlinyw6zg68\",\"isActive\":true,\"createdAt\":\"2026-07-11T04:33:45.980Z\",\"updatedAt\":\"2026-07-11T04:33:45.980Z\"},\"academicYear\":{\"id\":\"cmrc1y4060003k2kd2m0dhf10\",\"name\":\"Year 1\",\"year\":1,\"isActive\":true,\"createdAt\":\"2026-07-08T12:26:38.406Z\",\"updatedAt\":\"2026-07-08T12:26:38.406Z\"},\"semester\":{\"id\":\"cmrc1y4cm0004k2kddk9xe7q7\",\"name\":\"Semester 1\",\"number\":1,\"isActive\":true,\"createdAt\":\"2026-07-08T12:26:38.854Z\",\"updatedAt\":\"2026-07-08T12:26:38.854Z\"}},\"source\":{\"title\":\"P5 Evidence RU Ebook\",\"description\":\"P5 Evidence RU ebook description\",\"author\":\"P5 Evidence Author RU\",\"category\":\"P5 Evidence Category RU\",\"fileUrl\":\"/uploads/ebooks/p5-evidence-ru.pdf\"}}"
+}

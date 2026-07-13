@@ -1,0 +1,40 @@
+log: [Fast Refresh] rebuilding
+log: [Fast Refresh] done in 1102ms
+log: [Fast Refresh] rebuilding
+log: [Fast Refresh] done in 174ms
+log: [Fast Refresh] rebuilding
+log: [Fast Refresh] done in 806ms
+log: [Fast Refresh] rebuilding
+log: [Fast Refresh] done in 804ms
+log: [Fast Refresh] rebuilding
+log: [Fast Refresh] done in 794ms
+log: [Fast Refresh] rebuilding
+log: [Fast Refresh] done in 930ms
+log: [Fast Refresh] rebuilding
+log: [Fast Refresh] done in 839ms
+log: [Fast Refresh] rebuilding
+log: [Fast Refresh] done in 883ms
+log: [Fast Refresh] rebuilding
+log: [Fast Refresh] done in 213ms
+log: [Fast Refresh] rebuilding
+log: [Fast Refresh] done in 1055ms
+log: [Fast Refresh] rebuilding
+log: [Fast Refresh] done in 1255ms
+log: [Fast Refresh] rebuilding
+log: [Fast Refresh] done in 1134ms
+log: [Fast Refresh] rebuilding
+log: [Fast Refresh] done in 140ms
+log: [Fast Refresh] rebuilding
+log: [Fast Refresh] done in 1204ms
+log: [Fast Refresh] rebuilding
+log: [Fast Refresh] done in 230ms
+log: [Fast Refresh] rebuilding
+log: [Fast Refresh] done in 930ms
+log: [Fast Refresh] rebuilding
+log: [Fast Refresh] done in 951ms
+log: [Fast Refresh] rebuilding
+log: [Fast Refresh] done in 1075ms
+log: [Fast Refresh] rebuilding
+log: [Fast Refresh] done in 987ms
+log: [Fast Refresh] rebuilding
+log: [Fast Refresh] done in 916ms

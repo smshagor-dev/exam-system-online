@@ -1,0 +1,20 @@
+{
+  "questionId": "cmrhfhg8v000vz6zfu3b41b9d",
+  "options": [
+    {
+      "id": "cmrhfhg8v000yz6zfrof5yu62",
+      "text": "P5 EN Option A",
+      "isCorrect": true
+    },
+    {
+      "id": "cmrhfhg8v000zz6zfrcbff1xy",
+      "text": "P5 EN Option B",
+      "isCorrect": false
+    },
+    {
+      "id": "cmrhfhg8v0010z6zf331kfv3y",
+      "text": "P5 EN Option C",
+      "isCorrect": false
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "executedAt": "2026-07-12T18:22:58.461Z",
+  "status": "BLOCKED",
+  "summary": "The rewritten staged load harness now completes and writes artifacts, but the real load pass still fails at the bulk student join stage.",
+  "details": {
+    "server": "http://127.0.0.1:3220",
+    "latestFailure": "The July 12, 2026 controlled run completed with 100% socket connection success, but both the 100-user and 500-user runs timed out waiting for `exam:joined` for every client.",
+    "observedBottleneck": "The active bottleneck is bulk `student:join_exam` fan-in under load. Downstream phases never started because joins did not complete within the controlled window.",
+    "loadSummary": {
+      "run100": {
+        "attemptedClients": 100,
+        "connectedClients": 100,
+        "successfulJoins": 0,
+        "connectLatencyMs": {
+          "p50": 148,
+          "p95": 155,
+          "p99": 158
+        }
+      },
+      "run500": {
+        "attemptedClients": 500,
+        "connectedClients": 500,
+        "successfulJoins": 0,
+        "connectLatencyMs": {
+          "p50": 195,
+          "p95": 263,
+          "p99": 273
+        }
+      }
+    },
+    "notes": [
+      "The harness was rewritten into setup/connect/join/start/save/heartbeat/submit/cleanup phases.",
+      "Fixtures were made idempotent and 100/500 user datasets were separated.",
+      "Socket authentication fan-in was reduced by direct JWT signing.",
+      "Redis startup was healthy in strict redis-only mode during the load pass.",
+      "A single-client probe still completes `student:join_exam`, so the blocker is load-path fan-in rather than basic socket auth.",
+      "No trustworthy readiness claim is made for 100 or 500 concurrent students."
+    ],
+    "evidenceLogs": [
+      "docs/phase-6/evidence/network/load-tests.json",
+      "docs/phase-6/evidence/database/load-tests-db.json",
+      "docs/phase-6/evidence/console/phase6-load-server.out.log",
+      "docs/phase-6/evidence/console/phase6-load-server.err.log"
+    ]
+  }
+}

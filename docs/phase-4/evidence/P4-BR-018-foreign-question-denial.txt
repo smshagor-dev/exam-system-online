@@ -1,0 +1,1 @@
+{"error":"You are not assigned to this subject/group/year/semester"}

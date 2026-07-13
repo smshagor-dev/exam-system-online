@@ -1,0 +1,7 @@
+{
+  "superAdminCanManageSchedule": true,
+  "teacherSchedulePermission": true,
+  "teacherIncidentPermission": true,
+  "studentRole": "STUDENT",
+  "generatedAt": "2026-07-13T15:18:23.135Z"
+}

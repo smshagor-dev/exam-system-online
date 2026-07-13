@@ -1,0 +1,36 @@
+log: [Fast Refresh] rebuilding
+log: [Fast Refresh] done in 1100ms
+log: [Fast Refresh] rebuilding
+log: [Fast Refresh] done in 174ms
+info: %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+log: [HMR] connected
+log: [Fast Refresh] rebuilding
+log: [Fast Refresh] done in 807ms
+log: [Fast Refresh] rebuilding
+log: [Fast Refresh] done in 806ms
+log: [Fast Refresh] rebuilding
+log: [Fast Refresh] done in 794ms
+log: [Fast Refresh] rebuilding
+log: [Fast Refresh] done in 929ms
+log: [Fast Refresh] rebuilding
+log: [Fast Refresh] done in 838ms
+log: [Fast Refresh] rebuilding
+log: [Fast Refresh] done in 882ms
+log: [Fast Refresh] rebuilding
+log: [Fast Refresh] done in 215ms
+info: %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+log: [HMR] connected
+log: [Fast Refresh] rebuilding
+log: [Fast Refresh] done in 1055ms
+log: [Fast Refresh] rebuilding
+log: [Fast Refresh] done in 1255ms
+log: [Fast Refresh] rebuilding
+log: [Fast Refresh] done in 1134ms
+log: [Fast Refresh] rebuilding
+log: [Fast Refresh] done in 141ms
+log: [Fast Refresh] rebuilding
+log: [Fast Refresh] done in 1204ms
+log: [Fast Refresh] rebuilding
+log: [Fast Refresh] done in 228ms
+info: %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+log: [HMR] connected

@@ -1,0 +1,34 @@
+=production : The term '=production' is not recognized as the name of a cmdlet, function, script file, or operable 
+program. Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+At line:1 char:1
++ ='production'; Set-Location 'D:\Public\exam-system-online'; node serv ...
++ ~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (=production:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+(node:13740) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+⨯ Error [PrismaClientUnknownRequestError]: 
+Invalid `{imported module ./src/lib/prisma.ts}["prisma"].exam.findMany()` invocation in
+D:\Public\exam-system-online\.next\dev\server\chunks\[root-of-the-server]__16zygss._.js:1835:159
+
+  1832 if (validStatus && session.user.role !== {imported module [externals]/@prisma/client}["UserRole"].STUDENT) {
+  1833     where.status = validStatus;
+  1834 }
+→ 1835 const exams = await {imported module ./src/lib/prisma.ts}["prisma"].exam.findMany(
+Inconsistent query result: Field academicYear is required to return data, got `null` instead.
+    at <unknown> (file:\D:\Public\exam-system-online\src\app\api\exams\route.ts:47:35)
+    at async GET (file:\D:\Public\exam-system-online\src\app\api\exams\route.ts:47:17)
+    at async AppRouteRouteModule.do (webpack://next/./src/server/route-modules/app-route/module.ts:632:15)
+    at async AppRouteRouteModule.handle (webpack://next/./src/server/route-modules/app-route/module.ts:768:31)
+    at async AppRouteRouteModule.handleResponse (webpack://next/./src/server/route-modules/route-module.ts:1095:24)
+    at async Server.<anonymous> (D:\Public\exam-system-online\server.js:59:7)
+  45 |   }
+  46 |
+> 47 |   const exams = await prisma.exam.findMany({
+     |                                   ^
+  48 |     where,
+  49 |     include: {
+  50 |       subject: true, {
+  clientVersion: '5.22.0'
+}

@@ -1,0 +1,32 @@
+{
+  "id": "cmrizwycd0003avkywxlcob3t",
+  "examId": "cmrizvx6k003u8a0mnmujhyp7",
+  "studentId": "cmrhdzrxv0009whz5oa9zfcgk",
+  "socketId": "3KOSBt12AFhJ0_GzAAAF",
+  "status": "IN_PROGRESS",
+  "startedAt": "2026-07-13T09:04:08.417Z",
+  "submittedAt": null,
+  "timeSpent": null,
+  "ipAddress": "::ffff:127.0.0.1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.7827.55 Safari/537.36",
+  "tabSwitchCount": 0,
+  "reconnectCount": 0,
+  "warningCount": 0,
+  "createdAt": "2026-07-13T09:04:08.414Z",
+  "updatedAt": "2026-07-13T09:04:08.414Z",
+  "snapshot": {
+    "id": "cmrizwzjh0009avkyuau64mrg",
+    "attemptId": "cmrizwycd0003avkywxlcob3t",
+    "examId": "cmrizvx6k003u8a0mnmujhyp7",
+    "studentId": "cmrhdzrxv0009whz5oa9zfcgk",
+    "languageId": "cmrc1y4h10006k2kdse7x47oh",
+    "examTitle": "P6 Evidence Manual Exam",
+    "examDescription": null,
+    "examInstructions": "P6 manual reconnect and submit exam",
+    "duration": 20,
+    "totalMarks": 5,
+    "passingMarks": 3,
+    "subjectName": "Data Structures & Algorithms",
+    "createdAt": "2026-07-13T09:04:09.966Z"
+  }
+}

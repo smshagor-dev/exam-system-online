@@ -1,0 +1,198 @@
+{
+  "generatedAt": "2026-07-13T09:04:45.778Z",
+  "baseUrl": "http://127.0.0.1:3216",
+  "results": [
+    {
+      "testId": "P6-BR-001",
+      "role": "Teacher",
+      "steps": "Teacher opens live monitoring page and starts the manual exam.",
+      "expected": "Live page renders and runtime starts in Redis mode.",
+      "actual": "Teacher live page rendered with Redis runtime.",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-6/evidence/browser/P6-BR-001-teacher-live.png",
+        "docs/phase-6/evidence/console/P6-BR-001-teacher-live.txt",
+        "docs/phase-6/evidence/network/P6-BR-001-teacher-live.txt"
+      ]
+    },
+    {
+      "testId": "P6-BR-002",
+      "role": "Student",
+      "steps": "Student opens attempt page and starts the manual exam.",
+      "expected": "Student joins the exam and a single in-progress attempt starts.",
+      "actual": "Attempt cmrizwycd0003avkywxlcob3t started with status IN_PROGRESS.",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-6/evidence/browser/P6-BR-002-student-start.png",
+        "docs/phase-6/evidence/console/P6-BR-002-student-start.txt",
+        "docs/phase-6/evidence/network/P6-BR-002-student-start.txt",
+        "docs/phase-6/evidence/database/P6-BR-002-attempt.json"
+      ]
+    },
+    {
+      "testId": "P6-BR-003",
+      "role": "Teacher monitor",
+      "steps": "Teacher monitor receives join state for the student attempt.",
+      "expected": "Teacher sees the student online in monitor state.",
+      "actual": "online=true",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-6/evidence/network/P6-BR-003-monitor-joined.json"
+      ]
+    },
+    {
+      "testId": "P6-BR-004",
+      "role": "Student socket",
+      "steps": "Duplicate student start event is emitted after the browser already started the attempt.",
+      "expected": "Attempt start remains idempotent and does not create a second attempt.",
+      "actual": "Returned attempt=cmrizwycd0003avkywxlcob3t; attempts in DB=1",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-6/evidence/network/P6-BR-004-duplicate-start.json"
+      ]
+    },
+    {
+      "testId": "P6-BR-005",
+      "role": "Student",
+      "steps": "Student selects an answer and lets autosave persist it.",
+      "expected": "Answer autosave writes the selected option.",
+      "actual": "Saved option=cmrizvvvz00348a0mf7r1tftu",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-6/evidence/browser/P6-BR-005-autosave.png",
+        "docs/phase-6/evidence/console/P6-BR-005-autosave.txt",
+        "docs/phase-6/evidence/network/P6-BR-005-autosave.txt",
+        "docs/phase-6/evidence/database/P6-BR-005-answer.json"
+      ]
+    },
+    {
+      "testId": "P6-BR-006",
+      "role": "Student socket",
+      "steps": "The same answer save payload is replayed twice.",
+      "expected": "Duplicate save creates no duplicate answer row.",
+      "actual": "Answer row count=1",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-6/evidence/database/P6-BR-006-duplicate-save.json"
+      ]
+    },
+    {
+      "testId": "P6-BR-007",
+      "role": "Student",
+      "steps": "Student goes offline and changes the selected answer.",
+      "expected": "Offline answers queue locally in the browser.",
+      "actual": "Offline queue or recovery banner visible.",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-6/evidence/browser/P6-BR-007-offline-queue.png",
+        "docs/phase-6/evidence/console/P6-BR-007-offline-queue.txt",
+        "docs/phase-6/evidence/network/P6-BR-007-offline-queue.txt"
+      ]
+    },
+    {
+      "testId": "P6-BR-008",
+      "role": "Student",
+      "steps": "Student reconnects and refreshes the browser after an offline answer update.",
+      "expected": "Reconnect replays queued answers, restores the same attempt, and restores the remaining timer.",
+      "actual": "attempt=cmrizwycd0003avkywxlcob3t; answer=cmrizvvvz00358a0mk580cayz; checked=true; timer=1184s expected=1184s",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-6/evidence/browser/P6-BR-008-refresh-recover.png",
+        "docs/phase-6/evidence/console/P6-BR-008-refresh-recover.txt",
+        "docs/phase-6/evidence/network/P6-BR-008-refresh-recover.txt",
+        "docs/phase-6/evidence/database/P6-BR-008-refresh.json"
+      ]
+    },
+    {
+      "testId": "P6-BR-009",
+      "role": "Student socket",
+      "steps": "Heartbeat is replayed with an invalid reconnect token.",
+      "expected": "Invalid reconnect token is denied.",
+      "actual": "Reconnect token mismatch",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-6/evidence/network/P6-BR-009-invalid-reconnect-token.json"
+      ]
+    },
+    {
+      "testId": "P6-BR-010",
+      "role": "Student socket",
+      "steps": "A different student attempts to save an answer to the active attempt.",
+      "expected": "Wrong attempt ownership is denied.",
+      "actual": "Not your attempt",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-6/evidence/network/P6-BR-010-wrong-ownership.json"
+      ]
+    },
+    {
+      "testId": "P6-BR-011",
+      "role": "Anonymous socket",
+      "steps": "A socket attempts to connect with an invalid auth token.",
+      "expected": "Unauthorized socket join is denied.",
+      "actual": "Invalid token",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-6/evidence/network/P6-BR-011-unauthorized-join.json"
+      ]
+    },
+    {
+      "testId": "P6-BR-012",
+      "role": "Russian student",
+      "steps": "A Russian-scope student directly requests the English exam detail page.",
+      "expected": "Wrong-language delivery is denied.",
+      "actual": "Not Found rendered.",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-6/evidence/browser/P6-BR-012-wrong-language-denied.png",
+        "docs/phase-6/evidence/console/P6-BR-012-wrong-language-denied.txt",
+        "docs/phase-6/evidence/network/P6-BR-012-wrong-language-denied.txt"
+      ]
+    },
+    {
+      "testId": "P6-BR-013",
+      "role": "Student",
+      "steps": "A second browser tab opens the same active attempt.",
+      "expected": "Two-tab duplicate behavior is handled safely with the same attempt id and no duplicate attempt rows.",
+      "actual": "attempts=1; reconnects=0",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-6/evidence/browser/P6-BR-013-two-tab-safe.png",
+        "docs/phase-6/evidence/console/P6-BR-013-two-tab-safe.txt",
+        "docs/phase-6/evidence/network/P6-BR-013-two-tab-safe.txt",
+        "docs/phase-6/evidence/database/P6-BR-013-two-tab.json"
+      ]
+    },
+    {
+      "testId": "P6-BR-014",
+      "role": "Student",
+      "steps": "Student manually submits the active attempt and then replays submit.",
+      "expected": "Manual submit works, duplicate submit is ignored, and teacher sees the submitted state.",
+      "actual": "status=SUBMITTED; manualSubmitLogs=1->1; submitted=true",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-6/evidence/browser/P6-BR-014-manual-submit.png",
+        "docs/phase-6/evidence/console/P6-BR-014-manual-submit.txt",
+        "docs/phase-6/evidence/network/P6-BR-014-manual-submit.txt",
+        "docs/phase-6/evidence/browser/P6-BR-014-teacher-submitted.png",
+        "docs/phase-6/evidence/console/P6-BR-014-teacher-submitted.txt",
+        "docs/phase-6/evidence/network/P6-BR-014-teacher-submitted.txt",
+        "docs/phase-6/evidence/database/P6-BR-014-submit.json"
+      ]
+    },
+    {
+      "testId": "P6-BR-015",
+      "role": "Student",
+      "steps": "Student starts the short auto-submit exam and waits for timer expiry.",
+      "expected": "Auto-submit works at the end of the exam window.",
+      "actual": "attempt=cmrizxkxy004b8a0mk4apac24; status=AUTO_SUBMITTED; browserSubmitted=true",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-6/evidence/browser/P6-BR-015-auto-submit.png",
+        "docs/phase-6/evidence/console/P6-BR-015-auto-submit.txt",
+        "docs/phase-6/evidence/network/P6-BR-015-auto-submit.txt",
+        "docs/phase-6/evidence/database/P6-BR-015-auto-submit.json"
+      ]
+    }
+  ]
+}

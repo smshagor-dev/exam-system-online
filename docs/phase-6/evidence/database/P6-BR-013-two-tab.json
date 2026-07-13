@@ -1,0 +1,29 @@
+{
+  "attemptCount": 1,
+  "monitor": {
+    "examId": "cmrizvx6k003u8a0mnmujhyp7",
+    "students": [
+      {
+        "userId": "cmrhdzq7d0002whz58rqdkwy3",
+        "studentId": "cmrhdzrxv0009whz5oa9zfcgk",
+        "socketId": "ZcEsnleL3OUkyimhAAAR",
+        "studentName": "P5 English Student",
+        "online": true,
+        "submitted": false,
+        "submittedAtMs": null,
+        "attemptStatus": "NOT_STARTED",
+        "warnings": 0,
+        "tabSwitches": 0,
+        "reconnects": 0,
+        "lastViolation": null,
+        "lastHeartbeatAtMs": 1783933471662
+      }
+    ],
+    "runtime": {
+      "mode": "redis",
+      "leader": true,
+      "status": "live",
+      "remainingSeconds": 828
+    }
+  }
+}

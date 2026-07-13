@@ -1,7 +1,6 @@
 'use client'
 
 import { use, useEffect, useRef, useState } from 'react'
-import { useSession } from 'next-auth/react'
 import { getSocket, type AppSocket } from '@/lib/socket'
 import type { ServerToClientEvents } from '@/types/socket'
 
@@ -12,6 +11,8 @@ type StudentStatus = {
   name: string
   online: boolean
   submitted: boolean
+  submittedAtMs: number | null
+  attemptStatus: 'NOT_STARTED' | 'IN_PROGRESS' | 'SUBMITTED' | 'AUTO_SUBMITTED' | 'TIMED_OUT' | null
   tabSwitches: number
   reconnects: number
   warnings: number
@@ -35,15 +36,16 @@ type ExamStartedEvent = Parameters<ServerToClientEvents['exam:started']>[0]
 type ExamPausedEvent = Parameters<ServerToClientEvents['exam:paused']>[0]
 type ExamEndedEvent = Parameters<ServerToClientEvents['exam:ended']>[0]
 type SuspiciousActivityEvent = Parameters<ServerToClientEvents['exam:suspicious_activity']>[0]
+type MonitorSnapshotEvent = Parameters<ServerToClientEvents['exam:monitor_snapshot']>[0]
 
 export default function LiveExamMonitor({ params }: Props) {
-  const { data: session } = useSession()
   const { id: examId } = use(params)
   const [students, setStudents] = useState<StudentStatus[]>([])
   const [remainingSeconds, setRemainingSeconds] = useState<number | null>(null)
   const [examStatus, setExamStatus] = useState<'idle' | 'live' | 'paused' | 'ended'>('idle')
   const [exam, setExam] = useState<ExamDetails | null>(null)
   const [loading, setLoading] = useState(true)
+  const [runtimeMode, setRuntimeMode] = useState<'memory' | 'redis'>('memory')
   const socketRef = useRef<AppSocket | null>(null)
 
   useEffect(() => {
@@ -55,8 +57,6 @@ export default function LiveExamMonitor({ params }: Props) {
   }, [examId])
 
   useEffect(() => {
-    if (!session?.user) return
-
     fetch('/api/socket/token').then((r) => r.json()).then(({ token }) => {
       const socket = getSocket(token)
       socketRef.current = socket
@@ -82,6 +82,8 @@ export default function LiveExamMonitor({ params }: Props) {
               name: data.studentName,
               online: true,
               submitted: false,
+              submittedAtMs: null,
+              attemptStatus: 'IN_PROGRESS',
               tabSwitches: 0,
               reconnects: data.reconnected ? 1 : 0,
               warnings: 0,
@@ -104,7 +106,13 @@ export default function LiveExamMonitor({ params }: Props) {
         setStudents((prev) =>
           prev.map((student) =>
             student.studentId === data.studentId
-              ? { ...student, submitted: true, online: data.status === 'AUTO_SUBMITTED' ? false : student.online }
+              ? {
+                  ...student,
+                  submitted: true,
+                  submittedAtMs: Date.now(),
+                  attemptStatus: data.status,
+                  online: data.status === 'AUTO_SUBMITTED' ? false : student.online,
+                }
               : student
           )
         )
@@ -158,13 +166,40 @@ export default function LiveExamMonitor({ params }: Props) {
         )
       })
 
+      socket.on('exam:monitor_snapshot', (data: MonitorSnapshotEvent) => {
+        if (data.examId !== examId) return
+        setRuntimeMode(data.runtime.mode)
+        if (data.runtime.status === 'live') setExamStatus('live')
+        if (data.runtime.status === 'paused') setExamStatus('paused')
+        if (data.runtime.status === 'ended') setExamStatus('ended')
+        if (typeof data.runtime.remainingSeconds === 'number') {
+          setRemainingSeconds(data.runtime.remainingSeconds)
+        }
+        setStudents(
+          data.students.map((student) => ({
+            userId: student.userId,
+            studentId: student.studentId,
+            socketId: student.socketId ?? '',
+            name: student.studentName,
+            online: student.online,
+            submitted: student.submitted,
+            submittedAtMs: student.submittedAtMs,
+            attemptStatus: student.attemptStatus,
+            tabSwitches: student.tabSwitches,
+            reconnects: student.reconnects,
+            warnings: student.warnings,
+            lastViolation: student.lastViolation ?? undefined,
+          }))
+        )
+      })
+
       socket.emit('teacher:join_exam_monitor', { examId })
     })
 
     return () => {
       socketRef.current?.disconnect()
     }
-  }, [session, examId])
+  }, [examId])
 
   const handleStartExam = () => {
     socketRef.current?.emit('teacher:start_exam', { examId })
@@ -291,6 +326,9 @@ export default function LiveExamMonitor({ params }: Props) {
             ? 'Ended'
             : 'Not Started'}
         </span>
+        <span className="rounded-full bg-gray-100 px-2 py-1 text-xs font-medium text-gray-600">
+          Runtime: {runtimeMode}
+        </span>
       </div>
 
       <div className="overflow-hidden rounded-xl border border-gray-200 bg-white">
@@ -331,6 +369,12 @@ export default function LiveExamMonitor({ params }: Props) {
                   )}
                 </div>
                 <div className="mt-2 flex flex-wrap gap-3 text-xs text-gray-500">
+                  {student.attemptStatus && (
+                    <span>Status: {student.attemptStatus.replaceAll('_', ' ')}</span>
+                  )}
+                  {student.submittedAtMs && (
+                    <span>Submitted: {new Date(student.submittedAtMs).toLocaleTimeString()}</span>
+                  )}
                   {student.tabSwitches > 0 && (
                     <span className={student.tabSwitches > 2 ? 'font-medium text-orange-600' : ''}>
                       Tab switches: {student.tabSwitches}

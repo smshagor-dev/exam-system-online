@@ -1,0 +1,19 @@
+log: [Fast Refresh] rebuilding
+log: [Fast Refresh] done in 661ms
+log: [Fast Refresh] rebuilding
+log: [Fast Refresh] done in 563ms
+log: [Fast Refresh] rebuilding
+log: [Fast Refresh] done in 673ms
+log: [Fast Refresh] rebuilding
+log: [Fast Refresh] done in 582ms
+log: [Fast Refresh] rebuilding
+log: [Fast Refresh] done in 501ms
+log: [Fast Refresh] rebuilding
+log: [Fast Refresh] done in 342ms
+log: [Fast Refresh] rebuilding
+log: [Fast Refresh] done in 582ms
+log: [Fast Refresh] rebuilding
+log: [Fast Refresh] done in 587ms
+log: [HMR] connected
+log: [Fast Refresh] rebuilding
+log: [Fast Refresh] done in 621ms

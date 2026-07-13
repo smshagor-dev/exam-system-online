@@ -456,6 +456,21 @@ export const questionOptionSchema = z.object({
   imageUrl: z.string().url().optional().nullable(),
 })
 
+export const questionOptionTranslationSchema = z.object({
+  languageId: z.string().cuid(),
+  orderIndex: z.number().int().min(0),
+  text: z.string().min(1, 'Translated option text is required'),
+})
+
+export const questionTranslationSchema = z.object({
+  languageId: z.string().cuid(),
+  text: z.string().min(5, 'Question text must be at least 5 characters'),
+  expectedAnswer: z.string().optional().nullable(),
+  explanation: z.string().optional().nullable(),
+  keywords: z.array(z.string()).optional(),
+  options: z.array(questionOptionTranslationSchema).optional(),
+})
+
 export const createQuestionSchema = z.object({
   subjectId: z.string().cuid(),
   languageId: z.string().cuid(),
@@ -472,6 +487,7 @@ export const createQuestionSchema = z.object({
   explanation: z.string().optional().nullable(),
   imageUrl: z.string().url().optional().nullable(),
   options: z.array(questionOptionSchema).optional(),
+  translations: z.array(questionTranslationSchema).optional(),
 }).refine((data) => {
   // MCQ must have options
   if (data.type === QuestionType.MCQ) {
@@ -508,6 +524,12 @@ export const createExamSchema = z.object({
   showAnswers: z.boolean().default(false),
   showMarks: z.boolean().default(true),
   instructions: z.string().optional(),
+  translations: z.array(z.object({
+    languageId: z.string().cuid(),
+    title: z.string().min(3, 'Translated title must be at least 3 characters'),
+    description: z.string().optional().nullable(),
+    instructions: z.string().optional().nullable(),
+  })).optional(),
   questionIds: z.array(z.object({
     questionId: z.string().cuid(),
     orderIndex: z.number().int().min(0),

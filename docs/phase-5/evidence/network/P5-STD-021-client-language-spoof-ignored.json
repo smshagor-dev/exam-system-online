@@ -1,0 +1,202 @@
+{
+  "method": "GET",
+  "url": "/api/exams/cmrhfhhoe001uz6zfvg07g6rv?withQuestions=true&languageId=cmrc1y4h10006k2kdse7x47oh",
+  "status": 200,
+  "json": {
+    "id": "cmrhfhhoe001uz6zfvg07g6rv",
+    "title": "P5 Evidence RU Exam",
+    "description": null,
+    "teacherId": "cmrc1y74k000uk2kd8dujfpkd",
+    "departmentId": "cmrc1y4pr000ck2kd4d7vqcwq",
+    "subjectId": "cmrfudk7t00021387u895s14h",
+    "languageId": "cmrfudipt00001387aijb5mgh",
+    "groupId": "cmrfvdjp80067wqli6zjyifgw",
+    "academicYearId": "cmrc1y4060003k2kd2m0dhf10",
+    "semesterId": "cmrc1y4cm0004k2kddk9xe7q7",
+    "academicOfferingId": "cmrfve242006fwqliz6dmghl7",
+    "questionType": "MCQ",
+    "status": "SCHEDULED",
+    "resultMode": "AUTO",
+    "totalMarks": 5,
+    "passingMarks": 3,
+    "duration": 45,
+    "startTime": "2026-07-12T06:14:28.475Z",
+    "endTime": "2026-07-12T09:44:28.475Z",
+    "autoPublish": false,
+    "allowRetake": false,
+    "showAnswers": false,
+    "showMarks": true,
+    "instructions": "P5 Evidence RU instructions",
+    "createdAt": "2026-07-12T06:44:28.478Z",
+    "updatedAt": "2026-07-12T06:46:32.086Z",
+    "translations": [
+      {
+        "id": "cmrhfhi030027z6zfgwagcg03",
+        "examId": "cmrhfhhoe001uz6zfvg07g6rv",
+        "languageId": "cmrfudipt00001387aijb5mgh",
+        "title": "P5 Evidence RU Exam",
+        "description": null,
+        "instructions": "P5 Evidence RU instructions",
+        "status": "COMPLETE",
+        "completedAt": "2026-07-12T06:44:28.896Z",
+        "archivedAt": null,
+        "createdAt": "2026-07-12T06:44:28.899Z",
+        "updatedAt": "2026-07-12T06:44:28.899Z"
+      },
+      {
+        "id": "cmrhfjtqn000umg7rcqdaj63t",
+        "examId": "cmrhfhhoe001uz6zfvg07g6rv",
+        "languageId": "cmrc1y4h10006k2kdse7x47oh",
+        "title": "P5 Evidence EN Exam Translation",
+        "description": "P5 Evidence EN exam description",
+        "instructions": "P5 Evidence EN translated instructions",
+        "status": "COMPLETE",
+        "completedAt": "2026-07-12T06:46:17.419Z",
+        "archivedAt": null,
+        "createdAt": "2026-07-12T06:46:17.424Z",
+        "updatedAt": "2026-07-12T06:46:17.424Z"
+      }
+    ],
+    "subject": {
+      "id": "cmrfudk7t00021387u895s14h",
+      "name": "Programming Fundamentals",
+      "code": "CSE-101",
+      "description": null,
+      "departmentId": "cmrc1y4pr000ck2kd4d7vqcwq",
+      "languageId": null,
+      "isActive": true,
+      "createdAt": "2026-07-11T04:05:47.033Z",
+      "updatedAt": "2026-07-11T04:05:47.033Z"
+    },
+    "language": {
+      "id": "cmrfudipt00001387aijb5mgh",
+      "name": "Russian",
+      "code": "RU",
+      "isActive": true,
+      "createdAt": "2026-07-11T04:05:45.089Z",
+      "updatedAt": "2026-07-11T04:05:45.089Z"
+    },
+    "group": {
+      "id": "cmrfvdjp80067wqli6zjyifgw",
+      "name": "BSC-CS-11R",
+      "code": "BSC-CS-11R",
+      "academicYearId": "cmrc1y4060003k2kd2m0dhf10",
+      "departmentId": "cmrc1y4pr000ck2kd4d7vqcwq",
+      "programId": "cmrfvc9gk0053wqli5omnqitt",
+      "languageId": "cmrfudipt00001387aijb5mgh",
+      "departmentLanguageId": "cmrfvc3kg004xwqli8kpib47u",
+      "academicSessionId": "cmrfvc6kk0050wqliy7jsvc0r",
+      "programYearId": "cmrfvcdti0059wqlij5fqmj0g",
+      "currentProgramSemesterId": "cmrfvcvjd005nwqlinyw6zg68",
+      "isActive": true,
+      "createdAt": "2026-07-11T04:33:45.980Z",
+      "updatedAt": "2026-07-11T04:33:45.980Z"
+    },
+    "academicYear": {
+      "id": "cmrc1y4060003k2kd2m0dhf10",
+      "name": "Year 1",
+      "year": 1,
+      "isActive": true,
+      "createdAt": "2026-07-08T12:26:38.406Z",
+      "updatedAt": "2026-07-08T12:26:38.406Z"
+    },
+    "semester": {
+      "id": "cmrc1y4cm0004k2kddk9xe7q7",
+      "name": "Semester 1",
+      "number": 1,
+      "isActive": true,
+      "createdAt": "2026-07-08T12:26:38.854Z",
+      "updatedAt": "2026-07-08T12:26:38.854Z"
+    },
+    "teacher": {
+      "id": "cmrc1y74k000uk2kd8dujfpkd",
+      "userId": "cmrc1y6pb000rk2kdns7tepny",
+      "departmentId": "cmrc1y4pr000ck2kd4d7vqcwq",
+      "phone": null,
+      "bio": null,
+      "createdAt": "2026-07-08T12:26:42.452Z",
+      "updatedAt": "2026-07-08T12:26:42.452Z",
+      "user": {
+        "name": "John Smith"
+      }
+    },
+    "questions": [
+      {
+        "id": "cmrhfhhoe0020z6zfm961qmvy",
+        "examId": "cmrhfhhoe001uz6zfvg07g6rv",
+        "questionId": "cmrhfhg8v0011z6zfr8ijuhq5",
+        "orderIndex": 0,
+        "marks": 5,
+        "question": {
+          "id": "cmrhfhg8v0011z6zfr8ijuhq5",
+          "subjectId": "cmrfudk7t00021387u895s14h",
+          "languageId": "cmrfudipt00001387aijb5mgh",
+          "groupId": "cmrfvdjp80067wqli6zjyifgw",
+          "academicYearId": "cmrc1y4060003k2kd2m0dhf10",
+          "semesterId": "cmrc1y4cm0004k2kddk9xe7q7",
+          "academicOfferingId": "cmrfve242006fwqliz6dmghl7",
+          "teacherId": "cmrc1y74k000uk2kd8dujfpkd",
+          "type": "MCQ",
+          "text": "P5 Evidence RU Question",
+          "imageUrl": null,
+          "marks": 5,
+          "difficulty": "medium",
+          "expectedAnswer": null,
+          "keywords": null,
+          "explanation": "P5 Evidence RU Question explanation",
+          "isActive": false,
+          "createdAt": "2026-07-12T06:44:26.623Z",
+          "updatedAt": "2026-07-12T06:44:26.623Z",
+          "translations": [
+            {
+              "id": "cmrhfhgne001cz6zfkcxfuqoy",
+              "questionId": "cmrhfhg8v0011z6zfr8ijuhq5",
+              "languageId": "cmrfudipt00001387aijb5mgh",
+              "text": "P5 Evidence RU Question",
+              "expectedAnswer": null,
+              "explanation": "P5 Evidence RU Question explanation",
+              "keywords": null,
+              "status": "COMPLETE",
+              "completedAt": "2026-07-12T06:44:27.145Z",
+              "archivedAt": null,
+              "createdAt": "2026-07-12T06:44:27.147Z",
+              "updatedAt": "2026-07-12T06:44:27.147Z"
+            },
+            {
+              "id": "cmrhfj2k2000bmg7rymw7hw6k",
+              "questionId": "cmrhfhg8v0011z6zfr8ijuhq5",
+              "languageId": "cmrc1y4h10006k2kdse7x47oh",
+              "text": "P5 Evidence EN Question Translation Edited",
+              "expectedAnswer": "",
+              "explanation": "P5 Evidence EN Question Translation Edited explanation",
+              "keywords": "[\"p5\",\"evidence\"]",
+              "status": "DRAFT",
+              "completedAt": null,
+              "archivedAt": null,
+              "createdAt": "2026-07-12T06:45:42.194Z",
+              "updatedAt": "2026-07-12T06:45:47.342Z"
+            }
+          ],
+          "options": [
+            {
+              "id": "cmrhfhg8v0013z6zfr3k2ewbw",
+              "text": "P5 RU Option A",
+              "orderIndex": 0
+            },
+            {
+              "id": "cmrhfhg8v0014z6zfiup76ia5",
+              "text": "P5 RU Option B",
+              "orderIndex": 1
+            },
+            {
+              "id": "cmrhfhg8v0016z6zf3dmus5hs",
+              "text": "P5 RU Option C",
+              "orderIndex": 2
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "text": "{\"id\":\"cmrhfhhoe001uz6zfvg07g6rv\",\"title\":\"P5 Evidence RU Exam\",\"description\":null,\"teacherId\":\"cmrc1y74k000uk2kd8dujfpkd\",\"departmentId\":\"cmrc1y4pr000ck2kd4d7vqcwq\",\"subjectId\":\"cmrfudk7t00021387u895s14h\",\"languageId\":\"cmrfudipt00001387aijb5mgh\",\"groupId\":\"cmrfvdjp80067wqli6zjyifgw\",\"academicYearId\":\"cmrc1y4060003k2kd2m0dhf10\",\"semesterId\":\"cmrc1y4cm0004k2kddk9xe7q7\",\"academicOfferingId\":\"cmrfve242006fwqliz6dmghl7\",\"questionType\":\"MCQ\",\"status\":\"SCHEDULED\",\"resultMode\":\"AUTO\",\"totalMarks\":5,\"passingMarks\":3,\"duration\":45,\"startTime\":\"2026-07-12T06:14:28.475Z\",\"endTime\":\"2026-07-12T09:44:28.475Z\",\"autoPublish\":false,\"allowRetake\":false,\"showAnswers\":false,\"showMarks\":true,\"instructions\":\"P5 Evidence RU instructions\",\"createdAt\":\"2026-07-12T06:44:28.478Z\",\"updatedAt\":\"2026-07-12T06:46:32.086Z\",\"translations\":[{\"id\":\"cmrhfhi030027z6zfgwagcg03\",\"examId\":\"cmrhfhhoe001uz6zfvg07g6rv\",\"languageId\":\"cmrfudipt00001387aijb5mgh\",\"title\":\"P5 Evidence RU Exam\",\"description\":null,\"instructions\":\"P5 Evidence RU instructions\",\"status\":\"COMPLETE\",\"completedAt\":\"2026-07-12T06:44:28.896Z\",\"archivedAt\":null,\"createdAt\":\"2026-07-12T06:44:28.899Z\",\"updatedAt\":\"2026-07-12T06:44:28.899Z\"},{\"id\":\"cmrhfjtqn000umg7rcqdaj63t\",\"examId\":\"cmrhfhhoe001uz6zfvg07g6rv\",\"languageId\":\"cmrc1y4h10006k2kdse7x47oh\",\"title\":\"P5 Evidence EN Exam Translation\",\"description\":\"P5 Evidence EN exam description\",\"instructions\":\"P5 Evidence EN translated instructions\",\"status\":\"COMPLETE\",\"completedAt\":\"2026-07-12T06:46:17.419Z\",\"archivedAt\":null,\"createdAt\":\"2026-07-12T06:46:17.424Z\",\"updatedAt\":\"2026-07-12T06:46:17.424Z\"}],\"subject\":{\"id\":\"cmrfudk7t00021387u895s14h\",\"name\":\"Programming Fundamentals\",\"code\":\"CSE-101\",\"description\":null,\"departmentId\":\"cmrc1y4pr000ck2kd4d7vqcwq\",\"languageId\":null,\"isActive\":true,\"createdAt\":\"2026-07-11T04:05:47.033Z\",\"updatedAt\":\"2026-07-11T04:05:47.033Z\"},\"language\":{\"id\":\"cmrfudipt00001387aijb5mgh\",\"name\":\"Russian\",\"code\":\"RU\",\"isActive\":true,\"createdAt\":\"2026-07-11T04:05:45.089Z\",\"updatedAt\":\"2026-07-11T04:05:45.089Z\"},\"group\":{\"id\":\"cmrfvdjp80067wqli6zjyifgw\",\"name\":\"BSC-CS-11R\",\"code\":\"BSC-CS-11R\",\"academicYearId\":\"cmrc1y4060003k2kd2m0dhf10\",\"departmentId\":\"cmrc1y4pr000ck2kd4d7vqcwq\",\"programId\":\"cmrfvc9gk0053wqli5omnqitt\",\"languageId\":\"cmrfudipt00001387aijb5mgh\",\"departmentLanguageId\":\"cmrfvc3kg004xwqli8kpib47u\",\"academicSessionId\":\"cmrfvc6kk0050wqliy7jsvc0r\",\"programYearId\":\"cmrfvcdti0059wqlij5fqmj0g\",\"currentProgramSemesterId\":\"cmrfvcvjd005nwqlinyw6zg68\",\"isActive\":true,\"createdAt\":\"2026-07-11T04:33:45.980Z\",\"updatedAt\":\"2026-07-11T04:33:45.980Z\"},\"academicYear\":{\"id\":\"cmrc1y4060003k2kd2m0dhf10\",\"name\":\"Year 1\",\"year\":1,\"isActive\":true,\"createdAt\":\"2026-07-08T12:26:38.406Z\",\"updatedAt\":\"2026-07-08T12:26:38.406Z\"},\"semester\":{\"id\":\"cmrc1y4cm0004k2kddk9xe7q7\",\"name\":\"Semester 1\",\"number\":1,\"isActive\":true,\"createdAt\":\"2026-07-08T12:26:38.854Z\",\"updatedAt\":\"2026-07-08T12:26:38.854Z\"},\"teacher\":{\"id\":\"cmrc1y74k000uk2kd8dujfpkd\",\"userId\":\"cmrc1y6pb000rk2kdns7tepny\",\"departmentId\":\"cmrc1y4pr000ck2kd4d7vqcwq\",\"phone\":null,\"bio\":null,\"createdAt\":\"2026-07-08T12:26:42.452Z\",\"updatedAt\":\"2026-07-08T12:26:42.452Z\",\"user\":{\"name\":\"John Smith\"}},\"questions\":[{\"id\":\"cmrhfhhoe0020z6zfm961qmvy\",\"examId\":\"cmrhfhhoe001uz6zfvg07g6rv\",\"questionId\":\"cmrhfhg8v0011z6zfr8ijuhq5\",\"orderIndex\":0,\"marks\":5,\"question\":{\"id\":\"cmrhfhg8v0011z6zfr8ijuhq5\",\"subjectId\":\"cmrfudk7t00021387u895s14h\",\"languageId\":\"cmrfudipt00001387aijb5mgh\",\"groupId\":\"cmrfvdjp80067wqli6zjyifgw\",\"academicYearId\":\"cmrc1y4060003k2kd2m0dhf10\",\"semesterId\":\"cmrc1y4cm0004k2kddk9xe7q7\",\"academicOfferingId\":\"cmrfve242006fwqliz6dmghl7\",\"teacherId\":\"cmrc1y74k000uk2kd8dujfpkd\",\"type\":\"MCQ\",\"text\":\"P5 Evidence RU Question\",\"imageUrl\":null,\"marks\":5,\"difficulty\":\"medium\",\"expectedAnswer\":null,\"keywords\":null,\"explanation\":\"P5 Evidence RU Question explanation\",\"isActive\":false,\"createdAt\":\"2026-07-12T06:44:26.623Z\",\"updatedAt\":\"2026-07-12T06:44:26.623Z\",\"translations\":[{\"id\":\"cmrhfhgne001cz6zfkcxfuqoy\",\"questionId\":\"cmrhfhg8v0011z6zfr8ijuhq5\",\"languageId\":\"cmrfudipt00001387aijb5mgh\",\"text\":\"P5 Evidence RU Question\",\"expectedAnswer\":null,\"explanation\":\"P5 Evidence RU Question explanation\",\"keywords\":null,\"status\":\"COMPLETE\",\"completedAt\":\"2026-07-12T06:44:27.145Z\",\"archivedAt\":null,\"createdAt\":\"2026-07-12T06:44:27.147Z\",\"updatedAt\":\"2026-07-12T06:44:27.147Z\"},{\"id\":\"cmrhfj2k2000bmg7rymw7hw6k\",\"questionId\":\"cmrhfhg8v0011z6zfr8ijuhq5\",\"languageId\":\"cmrc1y4h10006k2kdse7x47oh\",\"text\":\"P5 Evidence EN Question Translation Edited\",\"expectedAnswer\":\"\",\"explanation\":\"P5 Evidence EN Question Translation Edited explanation\",\"keywords\":\"[\\\"p5\\\",\\\"evidence\\\"]\",\"status\":\"DRAFT\",\"completedAt\":null,\"archivedAt\":null,\"createdAt\":\"2026-07-12T06:45:42.194Z\",\"updatedAt\":\"2026-07-12T06:45:47.342Z\"}],\"options\":[{\"id\":\"cmrhfhg8v0013z6zfr3k2ewbw\",\"text\":\"P5 RU Option A\",\"orderIndex\":0},{\"id\":\"cmrhfhg8v0014z6zfiup76ia5\",\"text\":\"P5 RU Option B\",\"orderIndex\":1},{\"id\":\"cmrhfhg8v0016z6zf3dmus5hs\",\"text\":\"P5 RU Option C\",\"orderIndex\":2}]}}]}"
+}

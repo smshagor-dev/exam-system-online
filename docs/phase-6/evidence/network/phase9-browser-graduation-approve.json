@@ -1,0 +1,22 @@
+{
+  "method": "POST",
+  "url": "/api/admin/results-enterprise/students/cmrhdzsao000bwhz5n1waw7db/graduation",
+  "status": 200,
+  "json": {
+    "id": "cmrjfklil000zodlbx6xlnoqx",
+    "studentId": "cmrhdzsao000bwhz5n1waw7db",
+    "departmentId": "cmrc1y4pr000ck2kd4d7vqcwq",
+    "enrollmentId": "cmrjf46zb0001nbasi1pxrmqz",
+    "degreeAuditId": "cmrjfkl3c000xodlb20gh2g6k",
+    "graduationId": null,
+    "status": "APPROVED",
+    "approvedByUserId": "cmrc1y67t000qk2kdsntvvukr",
+    "certifiedByUserId": null,
+    "approvedAt": "2026-07-13T16:22:27.566Z",
+    "certifiedAt": null,
+    "notes": "Browser smoke approved",
+    "createdAt": "2026-07-13T16:22:25.773Z",
+    "updatedAt": "2026-07-13T16:22:27.573Z"
+  },
+  "text": "{\"id\":\"cmrjfklil000zodlbx6xlnoqx\",\"studentId\":\"cmrhdzsao000bwhz5n1waw7db\",\"departmentId\":\"cmrc1y4pr000ck2kd4d7vqcwq\",\"enrollmentId\":\"cmrjf46zb0001nbasi1pxrmqz\",\"degreeAuditId\":\"cmrjfkl3c000xodlb20gh2g6k\",\"graduationId\":null,\"status\":\"APPROVED\",\"approvedByUserId\":\"cmrc1y67t000qk2kdsntvvukr\",\"certifiedByUserId\":null,\"approvedAt\":\"2026-07-13T16:22:27.566Z\",\"certifiedAt\":null,\"notes\":\"Browser smoke approved\",\"createdAt\":\"2026-07-13T16:22:25.773Z\",\"updatedAt\":\"2026-07-13T16:22:27.573Z\"}"
+}

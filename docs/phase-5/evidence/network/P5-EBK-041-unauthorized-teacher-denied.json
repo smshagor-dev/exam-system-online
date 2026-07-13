@@ -1,0 +1,9 @@
+{
+  "method": "GET",
+  "url": "/api/teacher/translations/ebooks/cmrhfhk3k002rz6zf8hsq2vsw?languageId=cmrc1y4h10006k2kdse7x47oh",
+  "status": 403,
+  "json": {
+    "error": "Forbidden"
+  },
+  "text": "{\"error\":\"Forbidden\"}"
+}

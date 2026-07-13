@@ -11,6 +11,10 @@
 
 import { prisma } from './prisma'
 import {
+  resolveQuestionOptionTranslation,
+  resolveQuestionTranslation,
+} from './academic-content'
+import {
   QuestionType,
   ResultMode,
   ResultStatus,
@@ -18,6 +22,7 @@ import {
   AttemptStatus,
 } from '@prisma/client'
 import { aiEvaluationService } from '@/services/ai-evaluation.service'
+import { loadAttemptSnapshot } from '@/server/exam-attempt-snapshot'
 
 // Grade boundaries
 const GRADE_BANDS = [
@@ -160,7 +165,12 @@ export async function calculateResult(attemptId: string): Promise<void> {
           questions: {
             include: {
               question: {
-                include: { options: true },
+                include: {
+                  translations: true,
+                  options: {
+                    include: { translations: true },
+                  },
+                },
               },
             },
           },
@@ -177,6 +187,7 @@ export async function calculateResult(attemptId: string): Promise<void> {
 
   const { exam } = attempt
   const resultMode = exam.resultMode
+  const snapshot = await loadAttemptSnapshot(attemptId)
 
   let totalMarksAwarded = 0
   let pendingAnswers = 0
@@ -185,6 +196,9 @@ export async function calculateResult(attemptId: string): Promise<void> {
   for (const answer of attempt.answers) {
     const examQuestion = exam.questions.find((eq) => eq.questionId === answer.questionId)
     if (!examQuestion) continue
+    const snapshotQuestion = snapshot?.questions.find(
+      (entry: (typeof snapshot.questions)[number]) => entry.id === answer.questionId
+    )
 
     const result = await processAnswer(
       {
@@ -193,25 +207,57 @@ export async function calculateResult(attemptId: string): Promise<void> {
         selectedOption: answer.selectedOption,
         answerText: answer.answerText,
       },
-      {
-        type: examQuestion.question.type,
-        expectedAnswer: examQuestion.question.expectedAnswer,
-        keywords: examQuestion.question.keywords,
-        marks: examQuestion.question.marks,
-        options: examQuestion.question.options,
-      },
+      snapshot
+        ? {
+            type: (snapshotQuestion?.question.type ?? examQuestion.question.type) as QuestionType,
+            expectedAnswer: snapshotQuestion?.question.expectedAnswer ?? null,
+            keywords: snapshotQuestion?.question.keywords ?? null,
+            marks: examQuestion.question.marks,
+            options:
+              snapshotQuestion?.question.options ??
+              examQuestion.question.options.map((option) =>
+                resolveQuestionOptionTranslation(option, exam.languageId)
+              ),
+          }
+        : {
+            type: examQuestion.question.type,
+            expectedAnswer: resolveQuestionTranslation(
+              examQuestion.question,
+              exam.languageId
+            ).expectedAnswer,
+            keywords: resolveQuestionTranslation(
+              examQuestion.question,
+              exam.languageId
+            ).keywords,
+            marks: examQuestion.question.marks,
+            options: examQuestion.question.options.map((option) =>
+              resolveQuestionOptionTranslation(option, exam.languageId)
+            ),
+          },
       examQuestion.marks,
       resultMode
     )
 
-    await prisma.studentAnswer.update({
-      where: { id: answer.id },
-      data: {
-        checkStatus: result.checkStatus,
-        isCorrect: result.isCorrect,
-        marksAwarded: result.marksAwarded,
-      },
-    })
+    try {
+      await prisma.studentAnswer.update({
+        where: { id: answer.id },
+        data: {
+          checkStatus: result.checkStatus,
+          isCorrect: result.isCorrect,
+          marksAwarded: result.marksAwarded,
+        },
+      })
+    } catch (error) {
+      if (
+        typeof error === 'object' &&
+        error !== null &&
+        'code' in error &&
+        error.code === 'P2025'
+      ) {
+        return
+      }
+      throw error
+    }
 
     totalMarksAwarded += result.marksAwarded
     if (result.checkStatus === AnswerCheckStatus.UNCHECKED) {
@@ -319,6 +365,33 @@ export async function publishResult(
   void _examId
   void _studentId
 
+  const existing = await prisma.examResult.findUnique({
+    where: { attemptId },
+    select: {
+      id: true,
+      publishedAt: true,
+      isPassed: true,
+      percentage: true,
+      attempt: {
+        select: {
+          student: {
+            select: {
+              userId: true,
+            },
+          },
+        },
+      },
+    },
+  })
+
+  if (!existing) {
+    throw new Error('Result not found')
+  }
+
+  if (existing.publishedAt) {
+    return
+  }
+
   const result = await prisma.examResult.update({
     where: { attemptId },
     data: {
@@ -329,15 +402,26 @@ export async function publishResult(
   })
 
   // Create notification for student
-  await prisma.notification.create({
-    data: {
+  const existingNotification = await prisma.notification.findFirst({
+    where: {
       userId: result.attempt.student.userId,
-      title: 'Exam Result Published',
-      message: `Your result for the exam is now available. You ${result.isPassed ? 'passed' : 'did not pass'} with ${result.percentage.toFixed(1)}% (${result.grade}).`,
-      type: result.isPassed ? 'success' : 'warning',
       link: `/student/results/${result.id}`,
+      title: 'Exam Result Published',
     },
+    select: { id: true },
   })
+
+  if (!existingNotification) {
+    await prisma.notification.create({
+      data: {
+        userId: result.attempt.student.userId,
+        title: 'Exam Result Published',
+        message: `Your result for the exam is now available. You ${result.isPassed ? 'passed' : 'did not pass'} with ${result.percentage.toFixed(1)}% (${result.grade}).`,
+        type: result.isPassed ? 'success' : 'warning',
+        link: `/student/results/${result.id}`,
+      },
+    })
+  }
 }
 
 /**

@@ -17,6 +17,8 @@ type EbookItem = {
   id: string
   title: string
   description: string | null
+  author: string | null
+  category: string | null
   fileUrl: string
   fileSizeBytes: number
   createdAt: string
@@ -37,6 +39,8 @@ export default function TeacherEbookManager({ assignments, initialUploads }: Pro
   const [assignmentId, setAssignmentId] = useState(assignments[0]?.id ?? '')
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
+  const [author, setAuthor] = useState('')
+  const [category, setCategory] = useState('')
   const [file, setFile] = useState<File | null>(null)
   const [submitting, setSubmitting] = useState(false)
   const [deletingId, setDeletingId] = useState<string | null>(null)
@@ -54,6 +58,8 @@ export default function TeacherEbookManager({ assignments, initialUploads }: Pro
       formData.append('assignmentId', assignmentId)
       formData.append('title', title)
       formData.append('description', description)
+      formData.append('author', author)
+      formData.append('category', category)
       if (file) {
         formData.append('file', file)
       }
@@ -69,6 +75,8 @@ export default function TeacherEbookManager({ assignments, initialUploads }: Pro
 
       setTitle('')
       setDescription('')
+      setAuthor('')
+      setCategory('')
       setFile(null)
       setSuccess('Ebook uploaded successfully')
       router.refresh()
@@ -157,6 +165,30 @@ export default function TeacherEbookManager({ assignments, initialUploads }: Pro
               </label>
             </div>
 
+            <div className="grid gap-5 md:grid-cols-2">
+              <label className="block text-sm font-medium text-slate-700">
+                Author
+                <input
+                  type="text"
+                  value={author}
+                  onChange={(event) => setAuthor(event.target.value)}
+                  className="mt-2 w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-sky-500"
+                  placeholder="Optional author metadata"
+                />
+              </label>
+
+              <label className="block text-sm font-medium text-slate-700">
+                Category
+                <input
+                  type="text"
+                  value={category}
+                  onChange={(event) => setCategory(event.target.value)}
+                  className="mt-2 w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-sky-500"
+                  placeholder="Optional category metadata"
+                />
+              </label>
+            </div>
+
             <label className="block text-sm font-medium text-slate-700">
               Description
               <textarea
@@ -204,6 +236,11 @@ export default function TeacherEbookManager({ assignments, initialUploads }: Pro
                     {ebook.subjectName} · {ebook.languageName} · {ebook.academicYearName} · {ebook.semesterName} · {ebook.groupName}
                   </p>
                   {ebook.description ? <p className="mt-2 text-sm text-slate-600">{ebook.description}</p> : null}
+                  {(ebook.author || ebook.category) ? (
+                    <p className="mt-2 text-xs text-slate-500">
+                      {[ebook.author, ebook.category].filter(Boolean).join(' · ')}
+                    </p>
+                  ) : null}
                   <p className="mt-2 text-xs text-slate-400">
                     Uploaded on {new Date(ebook.createdAt).toLocaleDateString()} · {formatBytes(ebook.fileSizeBytes)}
                   </p>

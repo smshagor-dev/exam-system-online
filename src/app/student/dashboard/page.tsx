@@ -144,6 +144,13 @@ export default async function StudentDashboard() {
               </div>
             ))}
           </div>
+        <Link
+          href="/student/admit-cards"
+          className="rounded-xl border border-gray-200 bg-white p-5 transition hover:border-blue-300 hover:shadow-sm"
+        >
+          <h2 className="font-semibold text-gray-900">Admit Cards</h2>
+          <p className="mt-1 text-sm text-gray-500">Open published examination seat, room, barcode, and QR admit card details.</p>
+        </Link>
         </div>
       )}
 

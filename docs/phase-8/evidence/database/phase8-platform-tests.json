@@ -1,0 +1,32 @@
+{
+  "status": "PASS",
+  "createdAt": "2026-07-13T15:18:17.684Z",
+  "calendarId": "cmrjd9u8g0007wwgazrhvrh4w",
+  "schedulingSessionId": "cmrjd9uzy000dwwgapgiyey0e",
+  "generatedSchedule": {
+    "createdCount": 1,
+    "createdIds": [
+      "cmrjd9z1q000fwwgaullf78m4"
+    ]
+  },
+  "seatPlan": {
+    "seatPlanId": "cmrjda02q000iwwgalvxdgix5",
+    "assignedCount": 2
+  },
+  "attendanceId": "cmrjda1dv000rwwga5w1lkan8",
+  "incidentId": "cmrjda1w9000vwwgazilf8ql4",
+  "admitCards": {
+    "issuedCount": 2
+  },
+  "dashboardSummary": {
+    "runningCount": 0,
+    "items": 0
+  },
+  "reportTotals": {
+    "scheduleItems": 1,
+    "incidents": 1,
+    "attendanceMarks": 1,
+    "absentees": 0,
+    "clashes": 0
+  }
+}

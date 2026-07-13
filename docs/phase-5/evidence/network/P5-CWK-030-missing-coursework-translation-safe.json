@@ -1,0 +1,20 @@
+{
+  "method": "PATCH",
+  "url": "/api/teacher/translations/coursework-rules/cmrhfhj94002ez6zfjo94vnx3",
+  "status": 409,
+  "json": {
+    "error": "Translation is incomplete",
+    "completeness": {
+      "entity": "coursework-rules",
+      "languageId": "cmrfudipt00001387aijb5mgh",
+      "isComplete": false,
+      "missingFields": [
+        {
+          "field": "rules",
+          "message": "Coursework instructions are required."
+        }
+      ]
+    }
+  },
+  "text": "{\"error\":\"Translation is incomplete\",\"completeness\":{\"entity\":\"coursework-rules\",\"languageId\":\"cmrfudipt00001387aijb5mgh\",\"isComplete\":false,\"missingFields\":[{\"field\":\"rules\",\"message\":\"Coursework instructions are required.\"}]}}"
+}

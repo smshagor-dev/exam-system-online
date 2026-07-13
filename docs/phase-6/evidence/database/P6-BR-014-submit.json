@@ -1,0 +1,47 @@
+{
+  "submittedAttempt": {
+    "id": "cmrizwycd0003avkywxlcob3t",
+    "examId": "cmrizvx6k003u8a0mnmujhyp7",
+    "studentId": "cmrhdzrxv0009whz5oa9zfcgk",
+    "socketId": "ZcEsnleL3OUkyimhAAAR",
+    "status": "SUBMITTED",
+    "startedAt": "2026-07-13T09:04:08.417Z",
+    "submittedAt": "2026-07-13T09:04:32.451Z",
+    "timeSpent": 24,
+    "ipAddress": "::ffff:127.0.0.1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.7827.55 Safari/537.36",
+    "tabSwitchCount": 1,
+    "reconnectCount": 0,
+    "warningCount": 1,
+    "createdAt": "2026-07-13T09:04:08.414Z",
+    "updatedAt": "2026-07-13T09:04:32.451Z"
+  },
+  "beforeDuplicateManualLogs": 1,
+  "afterDuplicateManualLogs": 1,
+  "monitor": {
+    "examId": "cmrizvx6k003u8a0mnmujhyp7",
+    "students": [
+      {
+        "userId": "cmrhdzq7d0002whz58rqdkwy3",
+        "studentId": "cmrhdzrxv0009whz5oa9zfcgk",
+        "socketId": "ZcEsnleL3OUkyimhAAAR",
+        "studentName": "P5 English Student",
+        "online": false,
+        "submitted": true,
+        "submittedAtMs": 1783933472451,
+        "attemptStatus": "SUBMITTED",
+        "warnings": 1,
+        "tabSwitches": 1,
+        "reconnects": 0,
+        "lastViolation": null,
+        "lastHeartbeatAtMs": null
+      }
+    ],
+    "runtime": {
+      "mode": "redis",
+      "leader": true,
+      "status": "live",
+      "remainingSeconds": 827
+    }
+  }
+}

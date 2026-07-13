@@ -1,0 +1,10 @@
+{
+  "examId": "cmrjdao5d003tfc4vruw9ygsz",
+  "students": [],
+  "runtime": {
+    "mode": "redis",
+    "leader": true,
+    "status": "idle",
+    "remainingSeconds": null
+  }
+}

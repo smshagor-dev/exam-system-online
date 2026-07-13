@@ -1,0 +1,2727 @@
+[
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/login",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Broot-of-the-server%5D__164viu6._.css",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1xx01vv._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/media/83afe278b6a6bb3c-s.p.2bn3s6zvc0dyp.woff2",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_1amofcm._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_164kp-6._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/_1anvha4._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_%40swc_helpers_cjs_1r9vbqw._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/turbopack-_01_ro95._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_layout_tsx_007e4b2._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_12krwfk._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_1nyev3z._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_(auth)_login_page_tsx_0rxu8o2._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_next-devtools_index_090k2jm.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_client_components_builtin_global-error_0rxu8o2.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_client_0r5nbpw._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_000yk3b._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_0qcefa3._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1xch-cm._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1mojsay._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/api/public/system-settings",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/__nextjs_font/geist-latin.woff2",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/api/auth/providers",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/api/auth/csrf",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/api/auth/callback/credentials?",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/?_rsc=qYT2Wy2QR8kXuUU6",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/?_rsc=q3mOO9BClNZHexY7",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/teacher/dashboard?_rsc=2Md0sTUZcnjCijMr",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/teacher/dashboard?_rsc=2Md0sTUZcnjCijMr",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_teacher_layout_tsx_0rxu8o2._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/_20oepuk._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_teacher_dashboard_page_tsx_1s6oe37._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/_20oepuk._.js",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_teacher_layout_tsx_0rxu8o2._.js",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_teacher_dashboard_page_tsx_1s6oe37._.js",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/teacher/coursework",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/media/83afe278b6a6bb3c-s.p.2bn3s6zvc0dyp.woff2",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Broot-of-the-server%5D__164viu6._.css",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1xx01vv._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_164kp-6._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/_1anvha4._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_1amofcm._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_%40swc_helpers_cjs_1r9vbqw._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_client_components_builtin_global-error_0rxu8o2.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/turbopack-_01_ro95._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_layout_tsx_007e4b2._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/_20oepuk._.js",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_teacher_layout_tsx_0rxu8o2._.js",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_12krwfk._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_teacher_coursework_page_tsx_1s6oe37._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_1nyev3z._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/_08do_ht._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_next-devtools_index_090k2jm.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_client_0r5nbpw._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/__nextjs_font/geist-latin.woff2",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1xch-cm._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1mojsay._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/api/teacher/coursework/templates",
+    "status": 201
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/teacher/coursework/templates",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/media/83afe278b6a6bb3c-s.p.2bn3s6zvc0dyp.woff2",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Broot-of-the-server%5D__164viu6._.css",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1xx01vv._.js",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_next-devtools_index_090k2jm.js",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_1amofcm._.js",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_164kp-6._.js",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_client_0r5nbpw._.js",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/_1anvha4._.js",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_%40swc_helpers_cjs_1r9vbqw._.js",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/turbopack-_01_ro95._.js",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_1nyev3z._.js",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_12krwfk._.js",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_layout_tsx_007e4b2._.js",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_client_components_builtin_global-error_0rxu8o2.js",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/_20oepuk._.js",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_teacher_layout_tsx_0rxu8o2._.js",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_teacher_coursework_templates_page_tsx_1s6oe37._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_components_teacher_00c84vd._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/__nextjs_font/geist-latin.woff2",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1mojsay._.js",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1xch-cm._.js",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/api/teacher/coursework/publications",
+    "status": 201
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/api/teacher/coursework/publications/cmrj9ud5n000bz8uw7buefjks",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/api/teacher/coursework/publications/cmrj9ud5n000bz8uw7buefjks",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/teacher/coursework/assignments",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/media/83afe278b6a6bb3c-s.p.2bn3s6zvc0dyp.woff2",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Broot-of-the-server%5D__164viu6._.css",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1xx01vv._.js",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_next-devtools_index_090k2jm.js",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_164kp-6._.js",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_1amofcm._.js",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_client_0r5nbpw._.js",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/_1anvha4._.js",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_%40swc_helpers_cjs_1r9vbqw._.js",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/turbopack-_01_ro95._.js",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_1nyev3z._.js",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_12krwfk._.js",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_layout_tsx_007e4b2._.js",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_client_components_builtin_global-error_0rxu8o2.js",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/_20oepuk._.js",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_teacher_layout_tsx_0rxu8o2._.js",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_teacher_coursework_assignments_page_tsx_1s6oe37._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_components_teacher_0imc__g._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/__nextjs_font/geist-latin.woff2",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1xch-cm._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1mojsay._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/api/teacher/coursework/publications/cmrj9ud5n000bz8uw7buefjks",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/api/teacher/coursework/publications/cmrj9ud5n000bz8uw7buefjks",
+    "status": 400
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/api/teacher/coursework/publications/cmrj9ud5n000bz8uw7buefjks",
+    "status": 400
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/login",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Broot-of-the-server%5D__164viu6._.css",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1xx01vv._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/media/83afe278b6a6bb3c-s.p.2bn3s6zvc0dyp.woff2",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_164kp-6._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_1amofcm._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/_1anvha4._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_%40swc_helpers_cjs_1r9vbqw._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/turbopack-_01_ro95._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_layout_tsx_007e4b2._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_12krwfk._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_1nyev3z._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_(auth)_login_page_tsx_0rxu8o2._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_next-devtools_index_090k2jm.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_client_components_builtin_global-error_0rxu8o2.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_000yk3b._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_client_0r5nbpw._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_0qcefa3._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1xch-cm._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1mojsay._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/api/public/system-settings",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/api/auth/providers",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/api/auth/csrf",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/api/auth/callback/credentials?",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/?_rsc=qYT2Wy2QR8kXuUU6",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/?_rsc=q3mOO9BClNZHexY7",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/student/dashboard?_rsc=2Md0sTUZcnjCijMr",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/__nextjs_font/geist-latin.woff2",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/student/dashboard?_rsc=2Md0sTUZcnjCijMr",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_student_layout_tsx_0rxu8o2._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/_1refy7w._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/api/student/coursework/publications",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_student_dashboard_page_tsx_04a1zgn._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/_1refy7w._.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_student_layout_tsx_0rxu8o2._.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_student_dashboard_page_tsx_04a1zgn._.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/student/coursework/cmrj9ud5n000bz8uw7buefjks/submit",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/media/83afe278b6a6bb3c-s.p.2bn3s6zvc0dyp.woff2",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Broot-of-the-server%5D__164viu6._.css",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1xx01vv._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_164kp-6._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_1amofcm._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/_1anvha4._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_%40swc_helpers_cjs_1r9vbqw._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_12krwfk._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/turbopack-_01_ro95._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_layout_tsx_007e4b2._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_client_components_builtin_global-error_0rxu8o2.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_1nyev3z._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/_1refy7w._.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_student_layout_tsx_0rxu8o2._.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_student_coursework_%5Bid%5D_submit_page_tsx_04a1zgn._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_components_student_StudentCourseworkSubmitForm_tsx_1r2-cwm._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_client_0r5nbpw._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_next-devtools_index_090k2jm.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1mojsay._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1xch-cm._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/__nextjs_font/geist-latin.woff2",
+    "status": 200
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/login",
+    "status": 200
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Broot-of-the-server%5D__164viu6._.css",
+    "status": 200
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1xx01vv._.js",
+    "status": 200
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/_next/static/media/83afe278b6a6bb3c-s.p.2bn3s6zvc0dyp.woff2",
+    "status": 200
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_164kp-6._.js",
+    "status": 200
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_1amofcm._.js",
+    "status": 200
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_%40swc_helpers_cjs_1r9vbqw._.js",
+    "status": 200
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/_1anvha4._.js",
+    "status": 200
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js",
+    "status": 200
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/turbopack-_01_ro95._.js",
+    "status": 200
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_12krwfk._.js",
+    "status": 200
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_layout_tsx_007e4b2._.js",
+    "status": 200
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_1nyev3z._.js",
+    "status": 200
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_000yk3b._.js",
+    "status": 200
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_(auth)_login_page_tsx_0rxu8o2._.js",
+    "status": 200
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_client_components_builtin_global-error_0rxu8o2.js",
+    "status": 200
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_next-devtools_index_090k2jm.js",
+    "status": 200
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js",
+    "status": 200
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_client_0r5nbpw._.js",
+    "status": 200
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_0qcefa3._.js",
+    "status": 200
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1xch-cm._.js",
+    "status": 200
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1mojsay._.js",
+    "status": 200
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/api/public/system-settings",
+    "status": 200
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/api/auth/providers",
+    "status": 200
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/api/auth/csrf",
+    "status": 200
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/api/auth/callback/credentials?",
+    "status": 200
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/?_rsc=qYT2Wy2QR8kXuUU6",
+    "status": 200
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/?_rsc=q3mOO9BClNZHexY7",
+    "status": 200
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/student/dashboard?_rsc=2Md0sTUZcnjCijMr",
+    "status": 200
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/student/dashboard?_rsc=2Md0sTUZcnjCijMr",
+    "status": 200
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/__nextjs_font/geist-latin.woff2",
+    "status": 200
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_student_layout_tsx_0rxu8o2._.js",
+    "status": 200
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/_1refy7w._.js",
+    "status": 200
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/api/student/coursework/publications",
+    "status": 200
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_student_dashboard_page_tsx_04a1zgn._.js",
+    "status": 200
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/_1refy7w._.js",
+    "status": 304
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_student_layout_tsx_0rxu8o2._.js",
+    "status": 304
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_student_dashboard_page_tsx_04a1zgn._.js",
+    "status": 304
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/api/student/coursework/publications/cmrj9ud5n000bz8uw7buefjks/attempts",
+    "status": 403
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/student/coursework",
+    "status": 200
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/_next/static/media/83afe278b6a6bb3c-s.p.2bn3s6zvc0dyp.woff2",
+    "status": 200
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Broot-of-the-server%5D__164viu6._.css",
+    "status": 200
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1xx01vv._.js",
+    "status": 200
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_164kp-6._.js",
+    "status": 200
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_%40swc_helpers_cjs_1r9vbqw._.js",
+    "status": 200
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_1amofcm._.js",
+    "status": 200
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/_1anvha4._.js",
+    "status": 200
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js",
+    "status": 200
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/turbopack-_01_ro95._.js",
+    "status": 200
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_client_0r5nbpw._.js",
+    "status": 200
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/_1refy7w._.js",
+    "status": 304
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_layout_tsx_007e4b2._.js",
+    "status": 200
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_client_components_builtin_global-error_0rxu8o2.js",
+    "status": 200
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_12krwfk._.js",
+    "status": 200
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js",
+    "status": 200
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_1nyev3z._.js",
+    "status": 200
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_student_layout_tsx_0rxu8o2._.js",
+    "status": 304
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_student_coursework_page_tsx_04a1zgn._.js",
+    "status": 200
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_next-devtools_index_090k2jm.js",
+    "status": 200
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/_0vyxk1v._.js",
+    "status": 200
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1mojsay._.js",
+    "status": 200
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1xch-cm._.js",
+    "status": 200
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/__nextjs_font/geist-latin.woff2",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/student/coursework/cmrj9ud5n000bz8uw7buefjks/submit",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/media/83afe278b6a6bb3c-s.p.2bn3s6zvc0dyp.woff2",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Broot-of-the-server%5D__164viu6._.css",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1xx01vv._.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_next-devtools_index_090k2jm.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_164kp-6._.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_1amofcm._.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_client_0r5nbpw._.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/turbopack-_01_ro95._.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/_1anvha4._.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_%40swc_helpers_cjs_1r9vbqw._.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_1nyev3z._.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_12krwfk._.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_layout_tsx_007e4b2._.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_client_components_builtin_global-error_0rxu8o2.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/_1refy7w._.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_student_layout_tsx_0rxu8o2._.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_components_student_StudentCourseworkSubmitForm_tsx_1r2-cwm._.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_student_coursework_%5Bid%5D_submit_page_tsx_04a1zgn._.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1mojsay._.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1xch-cm._.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/__nextjs_font/geist-latin.woff2",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/api/student/coursework/publications/cmrj9ud5n000bz8uw7buefjks/attempts",
+    "status": 201
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/student/coursework/cmrj9ud5n000bz8uw7buefjks/submit",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/media/83afe278b6a6bb3c-s.p.2bn3s6zvc0dyp.woff2",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Broot-of-the-server%5D__164viu6._.css",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1xx01vv._.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_next-devtools_index_090k2jm.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_164kp-6._.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_1amofcm._.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_client_0r5nbpw._.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/_1anvha4._.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_%40swc_helpers_cjs_1r9vbqw._.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/turbopack-_01_ro95._.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_1nyev3z._.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_12krwfk._.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_layout_tsx_007e4b2._.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_client_components_builtin_global-error_0rxu8o2.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/_1refy7w._.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_student_layout_tsx_0rxu8o2._.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_components_student_StudentCourseworkSubmitForm_tsx_1r2-cwm._.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_student_coursework_%5Bid%5D_submit_page_tsx_04a1zgn._.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/__nextjs_font/geist-latin.woff2",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1mojsay._.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1xch-cm._.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/api/student/coursework/publications/cmrj9ud5n000bz8uw7buefjks/attempts",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/api/teacher/coursework/attempts/cmrj9v2zz000pz8uweq3s8qg7",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/api/student/coursework/publications/cmrj9ud5n000bz8uw7buefjks/attempts",
+    "status": 201
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/student/coursework/cmrj9ud5n000bz8uw7buefjks/history",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/media/83afe278b6a6bb3c-s.p.2bn3s6zvc0dyp.woff2",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Broot-of-the-server%5D__164viu6._.css",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1xx01vv._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_164kp-6._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_1amofcm._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/_1anvha4._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_%40swc_helpers_cjs_1r9vbqw._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/turbopack-_01_ro95._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_layout_tsx_007e4b2._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_12krwfk._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_client_0r5nbpw._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_next-devtools_index_090k2jm.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_client_components_builtin_global-error_0rxu8o2.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_1nyev3z._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/_1refy7w._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_student_layout_tsx_0rxu8o2._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_student_coursework_%5Bid%5D_history_page_tsx_04a1zgn._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_components_student_StudentCourseworkHistoryView_tsx_173yrss._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/__nextjs_font/geist-latin.woff2",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1mojsay._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1xch-cm._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/api/student/coursework/publications/cmrj9ud5n000bz8uw7buefjks/attempts",
+    "status": 400
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/api/coursework/attachments/cmrj9vcqn0016z8uwir1ex3bm",
+    "status": 200
+  },
+  {
+    "role": "foreign-student",
+    "url": "http://127.0.0.1:3010/api/coursework/attachments/cmrj9vcqn0016z8uwir1ex3bm",
+    "status": 403
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/student/coursework/cmrj9ud5n000bz8uw7buefjks/submit",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/media/83afe278b6a6bb3c-s.p.2bn3s6zvc0dyp.woff2",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Broot-of-the-server%5D__164viu6._.css",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1xx01vv._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_164kp-6._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_%40swc_helpers_cjs_1r9vbqw._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/_1anvha4._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_1amofcm._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/turbopack-_01_ro95._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_1nyev3z._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_client_0r5nbpw._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_12krwfk._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_layout_tsx_007e4b2._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_client_components_builtin_global-error_0rxu8o2.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_next-devtools_index_090k2jm.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_student_layout_tsx_0rxu8o2._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/_1refy7w._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_components_student_StudentCourseworkSubmitForm_tsx_1r2-cwm._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_student_coursework_%5Bid%5D_submit_page_tsx_04a1zgn._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/__nextjs_font/geist-latin.woff2",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1mojsay._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1xch-cm._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/api/student/coursework/publications/cmrj9ud5n000bz8uw7buefjks/extensions",
+    "status": 201
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/student/coursework/cmrj9ud5n000bz8uw7buefjks/submit",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/media/83afe278b6a6bb3c-s.p.2bn3s6zvc0dyp.woff2",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Broot-of-the-server%5D__164viu6._.css",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1xx01vv._.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_next-devtools_index_090k2jm.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_164kp-6._.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_1amofcm._.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_client_0r5nbpw._.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_%40swc_helpers_cjs_1r9vbqw._.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/_1anvha4._.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/turbopack-_01_ro95._.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_1nyev3z._.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_12krwfk._.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_layout_tsx_007e4b2._.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_client_components_builtin_global-error_0rxu8o2.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/_1refy7w._.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_student_layout_tsx_0rxu8o2._.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_components_student_StudentCourseworkSubmitForm_tsx_1r2-cwm._.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_student_coursework_%5Bid%5D_submit_page_tsx_04a1zgn._.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1mojsay._.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1xch-cm._.js",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/__nextjs_font/geist-latin.woff2",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/api/teacher/coursework/publications/cmrj9ud5n000bz8uw7buefjks/extensions/cmrj9vmst001cz8uwt3y0lciz",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/teacher/coursework/extensions",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/media/83afe278b6a6bb3c-s.p.2bn3s6zvc0dyp.woff2",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Broot-of-the-server%5D__164viu6._.css",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1xx01vv._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_164kp-6._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_1amofcm._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/_1anvha4._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_%40swc_helpers_cjs_1r9vbqw._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_layout_tsx_007e4b2._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_client_components_builtin_global-error_0rxu8o2.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/turbopack-_01_ro95._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_teacher_layout_tsx_0rxu8o2._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_12krwfk._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_teacher_coursework_extensions_page_tsx_1s6oe37._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/_20oepuk._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_components_teacher_1ycnx63._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_1nyev3z._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_client_0r5nbpw._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_next-devtools_index_090k2jm.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1xch-cm._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1mojsay._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/__nextjs_font/geist-latin.woff2",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/api/teacher/coursework/publications",
+    "status": 201
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/api/student/coursework/publications/cmrj9vw6x001lz8uwpslemt2i/attempts",
+    "status": 400
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/api/student/coursework/publications/cmrj9vw6x001lz8uwpslemt2i/attempts",
+    "status": 201
+  },
+  {
+    "role": "assistant-teacher",
+    "url": "http://127.0.0.1:3010/login",
+    "status": 200
+  },
+  {
+    "role": "assistant-teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Broot-of-the-server%5D__164viu6._.css",
+    "status": 200
+  },
+  {
+    "role": "assistant-teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1xx01vv._.js",
+    "status": 200
+  },
+  {
+    "role": "assistant-teacher",
+    "url": "http://127.0.0.1:3010/_next/static/media/83afe278b6a6bb3c-s.p.2bn3s6zvc0dyp.woff2",
+    "status": 200
+  },
+  {
+    "role": "assistant-teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_164kp-6._.js",
+    "status": 200
+  },
+  {
+    "role": "assistant-teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_1amofcm._.js",
+    "status": 200
+  },
+  {
+    "role": "assistant-teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/_1anvha4._.js",
+    "status": 200
+  },
+  {
+    "role": "assistant-teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_%40swc_helpers_cjs_1r9vbqw._.js",
+    "status": 200
+  },
+  {
+    "role": "assistant-teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js",
+    "status": 200
+  },
+  {
+    "role": "assistant-teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/turbopack-_01_ro95._.js",
+    "status": 200
+  },
+  {
+    "role": "assistant-teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_12krwfk._.js",
+    "status": 200
+  },
+  {
+    "role": "assistant-teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_layout_tsx_007e4b2._.js",
+    "status": 200
+  },
+  {
+    "role": "assistant-teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_1nyev3z._.js",
+    "status": 200
+  },
+  {
+    "role": "assistant-teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_(auth)_login_page_tsx_0rxu8o2._.js",
+    "status": 200
+  },
+  {
+    "role": "assistant-teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_000yk3b._.js",
+    "status": 200
+  },
+  {
+    "role": "assistant-teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_client_components_builtin_global-error_0rxu8o2.js",
+    "status": 200
+  },
+  {
+    "role": "assistant-teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_next-devtools_index_090k2jm.js",
+    "status": 200
+  },
+  {
+    "role": "assistant-teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_client_0r5nbpw._.js",
+    "status": 200
+  },
+  {
+    "role": "assistant-teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js",
+    "status": 200
+  },
+  {
+    "role": "assistant-teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_0qcefa3._.js",
+    "status": 200
+  },
+  {
+    "role": "assistant-teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1xch-cm._.js",
+    "status": 200
+  },
+  {
+    "role": "assistant-teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1mojsay._.js",
+    "status": 200
+  },
+  {
+    "role": "assistant-teacher",
+    "url": "http://127.0.0.1:3010/api/public/system-settings",
+    "status": 200
+  },
+  {
+    "role": "assistant-teacher",
+    "url": "http://127.0.0.1:3010/api/auth/providers",
+    "status": 200
+  },
+  {
+    "role": "assistant-teacher",
+    "url": "http://127.0.0.1:3010/api/auth/csrf",
+    "status": 200
+  },
+  {
+    "role": "assistant-teacher",
+    "url": "http://127.0.0.1:3010/api/auth/callback/credentials?",
+    "status": 200
+  },
+  {
+    "role": "assistant-teacher",
+    "url": "http://127.0.0.1:3010/?_rsc=qYT2Wy2QR8kXuUU6",
+    "status": 200
+  },
+  {
+    "role": "assistant-teacher",
+    "url": "http://127.0.0.1:3010/?_rsc=q3mOO9BClNZHexY7",
+    "status": 200
+  },
+  {
+    "role": "assistant-teacher",
+    "url": "http://127.0.0.1:3010/teacher/dashboard?_rsc=2Md0sTUZcnjCijMr",
+    "status": 200
+  },
+  {
+    "role": "assistant-teacher",
+    "url": "http://127.0.0.1:3010/teacher/dashboard?_rsc=2Md0sTUZcnjCijMr",
+    "status": 200
+  },
+  {
+    "role": "assistant-teacher",
+    "url": "http://127.0.0.1:3010/__nextjs_font/geist-latin.woff2",
+    "status": 200
+  },
+  {
+    "role": "assistant-teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_teacher_layout_tsx_0rxu8o2._.js",
+    "status": 200
+  },
+  {
+    "role": "assistant-teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/_20oepuk._.js",
+    "status": 200
+  },
+  {
+    "role": "assistant-teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_teacher_dashboard_page_tsx_1s6oe37._.js",
+    "status": 200
+  },
+  {
+    "role": "assistant-teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/_20oepuk._.js",
+    "status": 304
+  },
+  {
+    "role": "assistant-teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_teacher_layout_tsx_0rxu8o2._.js",
+    "status": 304
+  },
+  {
+    "role": "assistant-teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_teacher_dashboard_page_tsx_1s6oe37._.js",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/api/teacher/coursework/publications/cmrj9ud5n000bz8uw7buefjks/grades",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/api/student/coursework/publications/cmrj9ud5n000bz8uw7buefjks/attempts",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/api/teacher/coursework/publications/cmrj9ud5n000bz8uw7buefjks/grades",
+    "status": 200
+  },
+  {
+    "role": "assistant-teacher",
+    "url": "http://127.0.0.1:3010/api/teacher/coursework/publications/cmrj9ud5n000bz8uw7buefjks/grades",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/api/teacher/coursework/publications/cmrj9ud5n000bz8uw7buefjks/grades",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/api/teacher/coursework/publications/cmrj9ud5n000bz8uw7buefjks/grades",
+    "status": 400
+  },
+  {
+    "role": "assistant-teacher",
+    "url": "http://127.0.0.1:3010/api/teacher/coursework/publications/cmrj9ud5n000bz8uw7buefjks/grades",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/api/teacher/coursework/publications/cmrj9ud5n000bz8uw7buefjks/grades",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/api/teacher/coursework/publications/cmrj9ud5n000bz8uw7buefjks/grades",
+    "status": 400
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/teacher/coursework/grading",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/media/83afe278b6a6bb3c-s.p.2bn3s6zvc0dyp.woff2",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Broot-of-the-server%5D__164viu6._.css",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1xx01vv._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_164kp-6._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_1amofcm._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_client_0r5nbpw._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_next-devtools_index_090k2jm.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/_1anvha4._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_%40swc_helpers_cjs_1r9vbqw._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/turbopack-_01_ro95._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_12krwfk._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_layout_tsx_007e4b2._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_1nyev3z._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_client_components_builtin_global-error_0rxu8o2.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_teacher_layout_tsx_0rxu8o2._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_teacher_coursework_grading_page_tsx_1s6oe37._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/_20oepuk._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_components_teacher_19km126._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1mojsay._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1xch-cm._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/__nextjs_font/geist-latin.woff2",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/api/student/coursework/grades/cmrj9w8fe0024z8uwxu5edibm/review",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/student/coursework/cmrj9ud5n000bz8uw7buefjks/history",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/media/83afe278b6a6bb3c-s.p.2bn3s6zvc0dyp.woff2",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Broot-of-the-server%5D__164viu6._.css",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1xx01vv._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_164kp-6._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_1amofcm._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/_1anvha4._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_%40swc_helpers_cjs_1r9vbqw._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_layout_tsx_007e4b2._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_12krwfk._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/turbopack-_01_ro95._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_client_components_builtin_global-error_0rxu8o2.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_student_layout_tsx_0rxu8o2._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_components_student_StudentCourseworkHistoryView_tsx_173yrss._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_next-devtools_index_090k2jm.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_student_coursework_%5Bid%5D_history_page_tsx_04a1zgn._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_1nyev3z._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/_1refy7w._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_client_0r5nbpw._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1mojsay._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1xch-cm._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/__nextjs_font/geist-latin.woff2",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/api/teacher/coursework/reports?publicationId=cmrj9ud5n000bz8uw7buefjks",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/api/teacher/coursework/reports?publicationId=cmrj9ud5n000bz8uw7buefjks&format=csv&type=grades",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/teacher/coursework/reports",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/media/83afe278b6a6bb3c-s.p.2bn3s6zvc0dyp.woff2",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Broot-of-the-server%5D__164viu6._.css",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1xx01vv._.js",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_164kp-6._.js",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_next-devtools_index_090k2jm.js",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_1amofcm._.js",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_client_0r5nbpw._.js",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/_1anvha4._.js",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_%40swc_helpers_cjs_1r9vbqw._.js",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/turbopack-_01_ro95._.js",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_1nyev3z._.js",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_12krwfk._.js",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_layout_tsx_007e4b2._.js",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_client_components_builtin_global-error_0rxu8o2.js",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/_20oepuk._.js",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_teacher_layout_tsx_0rxu8o2._.js",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_teacher_coursework_reports_page_tsx_1s6oe37._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_components_teacher_15n9i87._.js",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1mojsay._.js",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1xch-cm._.js",
+    "status": 304
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/__nextjs_font/geist-latin.woff2",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/api/teacher/coursework/reports",
+    "status": 200
+  },
+  {
+    "role": "teacher",
+    "url": "http://127.0.0.1:3010/api/teacher/coursework/publications/cmrj9ud5n000bz8uw7buefjks",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/student/coursework/cmrj9ud5n000bz8uw7buefjks/submit",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/media/83afe278b6a6bb3c-s.p.2bn3s6zvc0dyp.woff2",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Broot-of-the-server%5D__164viu6._.css",
+    "status": 304
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1xx01vv._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_164kp-6._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_1amofcm._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/_1anvha4._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_%40swc_helpers_cjs_1r9vbqw._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/turbopack-_01_ro95._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_1nyev3z._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_12krwfk._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_client_0r5nbpw._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_layout_tsx_007e4b2._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_client_components_builtin_global-error_0rxu8o2.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_next-devtools_index_090k2jm.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_student_layout_tsx_0rxu8o2._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_student_coursework_%5Bid%5D_submit_page_tsx_04a1zgn._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_components_student_StudentCourseworkSubmitForm_tsx_1r2-cwm._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/_1refy7w._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1mojsay._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1xch-cm._.js",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/__nextjs_font/geist-latin.woff2",
+    "status": 200
+  },
+  {
+    "role": "student",
+    "url": "http://127.0.0.1:3010/api/student/coursework/publications/cmrj9ud5n000bz8uw7buefjks/attempts",
+    "status": 400
+  }
+]

@@ -3,7 +3,16 @@
  * Run: npx ts-node --project tsconfig.seed.json prisma/seed.ts
  */
 
-import { PrismaClient, UserRole, QuestionType, ExamStatus, ResultMode } from '@prisma/client'
+import {
+  PrismaClient,
+  UserRole,
+  QuestionType,
+  ExamStatus,
+  ResultMode,
+  TeacherSubstitutionStatus,
+  TeachingAssignmentRoleType,
+  TeachingAssignmentStatus,
+} from '@prisma/client/index'
 import bcrypt from 'bcryptjs'
 
 const prisma = new PrismaClient()
@@ -14,19 +23,47 @@ async function main() {
   // ─── Clean slate ────────────────────────────────────────────
   await prisma.activityLog.deleteMany()
   await prisma.notification.deleteMany()
+  await prisma.courseworkModerationDecision.deleteMany()
+  await prisma.courseworkFeedbackAttachment.deleteMany()
+  await prisma.courseworkGradeCriterionScore.deleteMany()
+  await prisma.courseworkGrade.deleteMany()
+  await prisma.courseworkAttemptAttachment.deleteMany()
+  await prisma.courseworkAttempt.deleteMany()
+  await prisma.courseworkPublicationTarget.deleteMany()
+  await prisma.courseworkExtensionRequest.deleteMany()
+  await prisma.courseworkPublication.deleteMany()
+  await prisma.courseworkRubricLevel.deleteMany()
+  await prisma.courseworkRubricCriterion.deleteMany()
+  await prisma.courseworkRubric.deleteMany()
+  await prisma.courseworkTemplateVersion.deleteMany()
+  await prisma.courseworkTemplate.deleteMany()
   await prisma.courseworkSubmission.deleteMany()
   await prisma.courseworkAccessRequest.deleteMany()
+  await prisma.courseworkAssignmentTranslation.deleteMany()
   await prisma.courseworkAssignment.deleteMany()
+  await prisma.courseworkRuleTranslation.deleteMany()
   await prisma.courseworkRule.deleteMany()
+  await prisma.ebookUploadTranslation.deleteMany()
   await prisma.ebookUpload.deleteMany()
+  await prisma.teacherAssignmentAuditLog.deleteMany()
+  await prisma.teachingAssignmentApproval.deleteMany()
+  await prisma.teacherSubstitution.deleteMany()
+  await prisma.teacherWorkloadEntry.deleteMany()
+  await prisma.teacherWorkloadPolicy.deleteMany()
+  await prisma.teachingAssignmentRole.deleteMany()
+  await prisma.teachingAssignment.deleteMany()
+  await prisma.teacherDepartmentMembership.deleteMany()
   await prisma.resultReview.deleteMany()
   await prisma.examResult.deleteMany()
   await prisma.studentAnswer.deleteMany()
   await prisma.studentExamAttempt.deleteMany()
   await prisma.examSession.deleteMany()
   await prisma.examQuestion.deleteMany()
+  await prisma.questionOptionTranslation.deleteMany()
   await prisma.questionOption.deleteMany()
+  await prisma.questionTranslation.deleteMany()
   await prisma.question.deleteMany()
+  await prisma.examTranslation.deleteMany()
   await prisma.exam.deleteMany()
   await prisma.teacherAssignment.deleteMany()
   await prisma.studentSubject.deleteMany()
@@ -396,12 +433,23 @@ async function main() {
       role: UserRole.TEACHER,
     },
   })
+  const teacherUser3 = await prisma.user.create({
+    data: {
+      email: 'teacher.anna@examflow.pro',
+      password: hash('Teacher@123'),
+      name: 'Anna Petrova',
+      role: UserRole.TEACHER,
+    },
+  })
 
   const teacher1 = await prisma.teacherProfile.create({
     data: { userId: teacherUser1.id, departmentId: deptCSE.id },
   })
   const teacher2 = await prisma.teacherProfile.create({
     data: { userId: teacherUser2.id, departmentId: deptCSE.id },
+  })
+  const teacher3 = await prisma.teacherProfile.create({
+    data: { userId: teacherUser3.id, departmentId: deptCSE.id },
   })
 
   // Teacher Assignments
@@ -439,6 +487,115 @@ async function main() {
       academicYearId: years[0].id,
       semesterId: semesters[0].id,
       academicOfferingId: offeringBscBangla.id,
+    },
+  })
+  await prisma.teacherDepartmentMembership.createMany({
+    data: [
+      { teacherId: teacher1.id, departmentId: deptCSE.id, isPrimary: true, isActive: true },
+      { teacherId: teacher2.id, departmentId: deptCSE.id, isPrimary: true, isActive: true },
+      { teacherId: teacher3.id, departmentId: deptCSE.id, isPrimary: true, isActive: true },
+    ],
+  })
+
+  const teacher1Membership = await prisma.teacherDepartmentMembership.findUniqueOrThrow({
+    where: { teacherId_departmentId: { teacherId: teacher1.id, departmentId: deptCSE.id } },
+  })
+  const teacher2Membership = await prisma.teacherDepartmentMembership.findUniqueOrThrow({
+    where: { teacherId_departmentId: { teacherId: teacher2.id, departmentId: deptCSE.id } },
+  })
+
+  const normalizedAssignment1 = await prisma.teachingAssignment.create({
+    data: {
+      teacherId: teacher1.id,
+      membershipId: teacher1Membership.id,
+      departmentId: deptCSE.id,
+      academicOfferingId: offeringBscEnglish.id,
+      status: TeachingAssignmentStatus.ACTIVE,
+      weeklyHours: 8,
+      lectureHours: 3,
+      labHours: 2,
+      consultationHours: 1,
+      assessmentHours: 2,
+      isPrimary: true,
+      roles: {
+        create: [
+          { role: TeachingAssignmentRoleType.LEAD_TEACHER, isPrimary: true },
+          { role: TeachingAssignmentRoleType.EXAMINER, isPrimary: false },
+        ],
+      },
+      approvals: {
+        create: {
+          action: TeachingAssignmentStatus.ACTIVE,
+          statusTo: TeachingAssignmentStatus.ACTIVE,
+          notes: 'Seeded Phase 4 lead teacher assignment',
+        },
+      },
+    },
+  })
+
+  await prisma.teachingAssignment.create({
+    data: {
+      teacherId: teacher2.id,
+      membershipId: teacher2Membership.id,
+      departmentId: deptCSE.id,
+      academicOfferingId: offeringBscBangla.id,
+      status: TeachingAssignmentStatus.ACTIVE,
+      weeklyHours: 6,
+      lectureHours: 2,
+      labHours: 2,
+      consultationHours: 1,
+      assessmentHours: 1,
+      isPrimary: true,
+      roles: {
+        create: [
+          { role: TeachingAssignmentRoleType.ASSISTANT_TEACHER, isPrimary: true },
+          { role: TeachingAssignmentRoleType.REVIEWER, isPrimary: false },
+        ],
+      },
+      approvals: {
+        create: {
+          action: TeachingAssignmentStatus.ACTIVE,
+          statusTo: TeachingAssignmentStatus.ACTIVE,
+          notes: 'Seeded Phase 4 assistant teacher assignment',
+        },
+      },
+    },
+  })
+
+  await prisma.teacherWorkloadPolicy.create({
+    data: {
+      departmentId: deptCSE.id,
+      programId: programBscCs.id,
+      academicSessionId: academicSession.id,
+      maxWeeklyHours: 18,
+      maxSemesterHours: 220,
+      defaultLectureWeight: 1,
+      defaultLabWeight: 1.25,
+      defaultAssessmentWeight: 1,
+    },
+  })
+
+  await prisma.teacherWorkloadEntry.create({
+    data: {
+      teacherId: teacher1.id,
+      teachingAssignmentId: normalizedAssignment1.id,
+      category: 'ADMINISTRATION',
+      hours: 2,
+      isApproved: true,
+      notes: 'Seeded departmental coordination hours',
+    },
+  })
+
+  await prisma.teacherSubstitution.create({
+    data: {
+      originalTeacherId: teacher1.id,
+      substituteTeacherId: teacher3.id,
+      teachingAssignmentId: normalizedAssignment1.id,
+      startsAt: new Date('2026-08-01T00:00:00.000Z'),
+      endsAt: new Date('2026-08-14T23:59:59.000Z'),
+      reason: 'Conference travel coverage',
+      status: TeacherSubstitutionStatus.APPROVED,
+      approvedAt: new Date(),
     },
   })
   console.log('✓ Created teachers and assignments')
@@ -523,6 +680,11 @@ async function main() {
         ],
       },
     },
+    include: {
+      options: {
+        orderBy: { orderIndex: 'asc' },
+      },
+    },
   })
 
   const q2 = await prisma.question.create({
@@ -547,6 +709,11 @@ async function main() {
         ],
       },
     },
+    include: {
+      options: {
+        orderBy: { orderIndex: 'asc' },
+      },
+    },
   })
 
   const q3 = await prisma.question.create({
@@ -567,6 +734,11 @@ async function main() {
           { text: 'True', isCorrect: true, orderIndex: 0 },
           { text: 'False', isCorrect: false, orderIndex: 1 },
         ],
+      },
+    },
+    include: {
+      options: {
+        orderBy: { orderIndex: 'asc' },
       },
     },
   })
@@ -607,10 +779,47 @@ async function main() {
   console.log('✓ Created question bank')
 
   // ─── Sample Exam ──────────────────────────────────────────────
+  await prisma.questionTranslation.createMany({
+    data: [
+      { questionId: q1.id, languageId: langs[0].id, text: q1.text },
+      { questionId: q2.id, languageId: langs[0].id, text: q2.text },
+      { questionId: q3.id, languageId: langs[0].id, text: q3.text },
+      {
+        questionId: q4.id,
+        languageId: langs[0].id,
+        text: q4.text,
+        expectedAnswer: q4.expectedAnswer,
+        keywords: q4.keywords,
+      },
+      { questionId: q5.id, languageId: langs[0].id, text: q5.text },
+    ],
+  })
+
+  await prisma.questionOptionTranslation.createMany({
+    data: [
+      ...q1.options.map((option) => ({
+        questionOptionId: option.id,
+        languageId: langs[0].id,
+        text: option.text,
+      })),
+      ...q2.options.map((option) => ({
+        questionOptionId: option.id,
+        languageId: langs[0].id,
+        text: option.text,
+      })),
+      ...q3.options.map((option) => ({
+        questionOptionId: option.id,
+        languageId: langs[0].id,
+        text: option.text,
+      })),
+    ],
+  })
+  console.log('Created question bank translations')
+
   const futureStart = new Date(Date.now() + 2 * 60 * 60 * 1000) // 2 hours from now
   const futureEnd = new Date(Date.now() + 3 * 60 * 60 * 1000)   // 3 hours from now
 
-  await prisma.exam.create({
+  const seededExam = await prisma.exam.create({
     data: {
       title: 'Data Structures Mid-term Exam',
       description: 'This exam covers arrays, linked lists, stacks, queues, and basic tree concepts.',
@@ -648,6 +857,16 @@ async function main() {
   console.log('✓ Created sample exam')
 
   // ─── Welcome Notifications ────────────────────────────────────
+  await prisma.examTranslation.create({
+    data: {
+      examId: seededExam.id,
+      languageId: langs[0].id,
+      title: seededExam.title,
+      description: seededExam.description,
+      instructions: seededExam.instructions,
+    },
+  })
+
   await prisma.notification.createMany({
     data: [
       {

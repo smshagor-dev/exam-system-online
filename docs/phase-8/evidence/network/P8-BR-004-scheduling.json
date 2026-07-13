@@ -1,0 +1,79 @@
+{
+  "invalidTransition": {
+    "ok": false,
+    "status": 409,
+    "json": {
+      "error": "Invalid lifecycle transition from DRAFT to PUBLISHED"
+    },
+    "text": "{\"error\":\"Invalid lifecycle transition from DRAFT to PUBLISHED\"}"
+  },
+  "scheduledTransition": {
+    "ok": true,
+    "status": 200,
+    "json": {
+      "id": "cmrjdc67a000j1jokt9hfo7tv",
+      "academicSessionId": "cmrfvc6kk0050wqliy7jsvc0r",
+      "departmentId": "cmrc1y4pr000ck2kd4d7vqcwq",
+      "programId": "cmrfvc9gk0053wqli5omnqitt",
+      "semesterId": "cmrc1y4cm0004k2kddk9xe7q7",
+      "campusId": "cmrjdbw0u00051jok1bk9fsuh",
+      "name": "Phase 8 Browser Final Session",
+      "type": "FINAL",
+      "status": "SCHEDULED",
+      "publishedAt": null,
+      "lockedAt": null,
+      "createdAt": "2026-07-13T15:19:53.446Z",
+      "updatedAt": "2026-07-13T15:19:56.680Z"
+    },
+    "text": "{\"id\":\"cmrjdc67a000j1jokt9hfo7tv\",\"academicSessionId\":\"cmrfvc6kk0050wqliy7jsvc0r\",\"departmentId\":\"cmrc1y4pr000ck2kd4d7vqcwq\",\"programId\":\"cmrfvc9gk0053wqli5omnqitt\",\"semesterId\":\"cmrc1y4cm0004k2kddk9xe7q7\",\"campusId\":\"cmrjdbw0u00051jok1bk9fsuh\",\"name\":\"Phase 8 Browser Final Session\",\"type\":\"FINAL\",\"status\":\"SCHEDULED\",\"publishedAt\":null,\"lockedAt\":null,\"createdAt\":\"2026-07-13T15:19:53.446Z\",\"updatedAt\":\"2026-07-13T15:19:56.680Z\"}"
+  },
+  "overCapacityGenerate": {
+    "ok": false,
+    "status": 500,
+    "json": null,
+    "text": ""
+  },
+  "generateResponse": {
+    "ok": true,
+    "status": 200,
+    "json": {
+      "createdCount": 1,
+      "createdIds": [
+        "cmrjdcg8h000o1jokl9zxnt1g"
+      ]
+    },
+    "text": "{\"createdCount\":1,\"createdIds\":[\"cmrjdcg8h000o1jokl9zxnt1g\"]}"
+  },
+  "conflictItem": {
+    "ok": true,
+    "status": 201,
+    "json": {
+      "id": "cmrjdcih8000s1joksasgpy3g",
+      "schedulingSessionId": "cmrjdc67a000j1jokt9hfo7tv",
+      "examId": "cmrjdao5d003tfc4vruw9ygsz",
+      "academicOfferingId": "cmrfve242006fwqliz6dmghl7",
+      "departmentId": "cmrc1y4pr000ck2kd4d7vqcwq",
+      "programId": "cmrfvc9gk0053wqli5omnqitt",
+      "subjectId": "cmrfudk7t00021387u895s14h",
+      "languageId": "cmrfudipt00001387aijb5mgh",
+      "groupId": "cmrfvdjp80067wqli6zjyifgw",
+      "academicYearId": "cmrfvcdti0059wqlij5fqmj0g",
+      "semesterId": "cmrc1y4cm0004k2kddk9xe7q7",
+      "campusId": "cmrjdbw0u00051jok1bk9fsuh",
+      "roomId": "cmrjdbyc500091jok0anrm87w",
+      "status": "SCHEDULED",
+      "scheduledStart": "2026-04-20T09:00:00.000Z",
+      "scheduledEnd": "2026-04-20T11:00:00.000Z",
+      "durationMinutes": 120,
+      "studentCount": 10,
+      "manualOverride": true,
+      "conflictFlagsJson": [
+        "student_conflict"
+      ],
+      "seatPlanGeneratedAt": null,
+      "createdAt": "2026-07-13T15:20:09.356Z",
+      "updatedAt": "2026-07-13T15:20:09.356Z"
+    },
+    "text": "{\"id\":\"cmrjdcih8000s1joksasgpy3g\",\"schedulingSessionId\":\"cmrjdc67a000j1jokt9hfo7tv\",\"examId\":\"cmrjdao5d003tfc4vruw9ygsz\",\"academicOfferingId\":\"cmrfve242006fwqliz6dmghl7\",\"departmentId\":\"cmrc1y4pr000ck2kd4d7vqcwq\",\"programId\":\"cmrfvc9gk0053wqli5omnqitt\",\"subjectId\":\"cmrfudk7t00021387u895s14h\",\"languageId\":\"cmrfudipt00001387aijb5mgh\",\"groupId\":\"cmrfvdjp80067wqli6zjyifgw\",\"academicYearId\":\"cmrfvcdti0059wqlij5fqmj0g\",\"semesterId\":\"cmrc1y4cm0004k2kddk9xe7q7\",\"campusId\":\"cmrjdbw0u00051jok1bk9fsuh\",\"roomId\":\"cmrjdbyc500091jok0anrm87w\",\"status\":\"SCHEDULED\",\"scheduledStart\":\"2026-04-20T09:00:00.000Z\",\"scheduledEnd\":\"2026-04-20T11:00:00.000Z\",\"durationMinutes\":120,\"studentCount\":10,\"manualOverride\":true,\"conflictFlagsJson\":[\"student_conflict\"],\"seatPlanGeneratedAt\":null,\"createdAt\":\"2026-07-13T15:20:09.356Z\",\"updatedAt\":\"2026-07-13T15:20:09.356Z\"}"
+  }
+}

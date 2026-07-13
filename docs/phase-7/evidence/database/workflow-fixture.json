@@ -1,0 +1,23 @@
+{
+  "createdIds": {
+    "templateId": "cmrj9u8d30002z8uw1o5pqjef",
+    "versionId": "cmrj9u8s50008z8uwrdouhgvx",
+    "publicationId": "cmrj9ud5n000bz8uw7buefjks",
+    "attemptId": "cmrj9v2zz000pz8uweq3s8qg7",
+    "attemptIds": [
+      "cmrj9v2zz000pz8uweq3s8qg7",
+      "cmrj9vck80014z8uwo1ikrph9"
+    ],
+    "extensionRequestIds": [
+      "cmrj9vmst001cz8uwt3y0lciz",
+      "cmrj9vyeg0001ijeivy6ki11e"
+    ],
+    "gradeId": "cmrj9w8fe0024z8uwxu5edibm"
+  },
+  "fixtures": {
+    "teacher": "teacher.john@examflow.pro",
+    "assistantTeacher": "teacher.sarah@examflow.pro",
+    "eligibleStudent": "p5.russian.student@examflow.pro",
+    "foreignStudent": "bob@student.examflow.pro"
+  }
+}

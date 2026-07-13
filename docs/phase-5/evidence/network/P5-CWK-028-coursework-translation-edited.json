@@ -1,0 +1,162 @@
+{
+  "method": "PATCH",
+  "url": "/api/teacher/translations/coursework-assignments/cmrhfhjo9002lz6zf62uosi0o",
+  "status": 200,
+  "json": {
+    "success": true,
+    "completeness": {
+      "entity": "coursework-assignments",
+      "languageId": "cmrc1y4h10006k2kdse7x47oh",
+      "isComplete": true,
+      "missingFields": []
+    },
+    "preview": {
+      "id": "cmrhfhjo9002lz6zf62uosi0o",
+      "teacherId": "cmrc1y74k000uk2kd8dujfpkd",
+      "studentId": "cmrhdzsao000bwhz5n1waw7db",
+      "ruleId": "cmrhfhj94002fz6zfq95at050",
+      "departmentId": "cmrc1y4pr000ck2kd4d7vqcwq",
+      "subjectId": "cmrfudk7t00021387u895s14h",
+      "languageId": "cmrfudipt00001387aijb5mgh",
+      "groupId": "cmrfvdjp80067wqli6zjyifgw",
+      "academicYearId": "cmrc1y4060003k2kd2m0dhf10",
+      "semesterId": "cmrc1y4cm0004k2kddk9xe7q7",
+      "academicOfferingId": "cmrfve242006fwqliz6dmghl7",
+      "title": "P5 Evidence EN Coursework Translation Edited",
+      "rules": "P5 Evidence EN translated coursework assignment rules edited",
+      "createdAt": "2026-07-12T06:44:31.065Z",
+      "updatedAt": "2026-07-12T06:44:31.065Z",
+      "translations": [
+        {
+          "id": "cmrhfhjxi002nz6zf0bdttpve",
+          "assignmentId": "cmrhfhjo9002lz6zf62uosi0o",
+          "languageId": "cmrfudipt00001387aijb5mgh",
+          "title": "P5 Evidence RU Coursework",
+          "rules": "P5 Evidence RU coursework rules",
+          "status": "COMPLETE",
+          "completedAt": "2026-07-12T06:44:31.397Z",
+          "archivedAt": null,
+          "createdAt": "2026-07-12T06:44:31.399Z",
+          "updatedAt": "2026-07-12T06:44:31.399Z"
+        },
+        {
+          "id": "cmrhfkp0h000ymg7rdnkdeud5",
+          "assignmentId": "cmrhfhjo9002lz6zf62uosi0o",
+          "languageId": "cmrc1y4h10006k2kdse7x47oh",
+          "title": "P5 Evidence EN Coursework Translation Edited",
+          "rules": "P5 Evidence EN translated coursework assignment rules edited",
+          "status": "COMPLETE",
+          "completedAt": "2026-07-12T06:47:02.769Z",
+          "archivedAt": null,
+          "createdAt": "2026-07-12T06:46:57.953Z",
+          "updatedAt": "2026-07-12T06:47:02.771Z"
+        }
+      ],
+      "rule": {
+        "id": "cmrhfhj94002fz6zfq95at050",
+        "teacherId": "cmrc1y74k000uk2kd8dujfpkd",
+        "departmentId": "cmrc1y4pr000ck2kd4d7vqcwq",
+        "subjectId": "cmrfudk7t00021387u895s14h",
+        "languageId": "cmrfudipt00001387aijb5mgh",
+        "groupId": "cmrfvdjp80067wqli6zjyifgw",
+        "academicYearId": "cmrc1y4060003k2kd2m0dhf10",
+        "semesterId": "cmrc1y4cm0004k2kddk9xe7q7",
+        "academicOfferingId": "cmrfve242006fwqliz6dmghl7",
+        "rules": "P5 Evidence RU coursework rules",
+        "useAiValidation": false,
+        "submissionDeadline": null,
+        "createdAt": "2026-07-12T06:44:30.520Z",
+        "updatedAt": "2026-07-12T06:44:30.520Z",
+        "translations": [
+          {
+            "id": "cmrhfhjhx002hz6zf6gtsmegn",
+            "ruleId": "cmrhfhj94002fz6zfq95at050",
+            "languageId": "cmrfudipt00001387aijb5mgh",
+            "rules": "P5 Evidence RU coursework rules",
+            "status": "COMPLETE",
+            "completedAt": "2026-07-12T06:44:30.835Z",
+            "archivedAt": null,
+            "createdAt": "2026-07-12T06:44:30.837Z",
+            "updatedAt": "2026-07-12T06:44:30.837Z"
+          },
+          {
+            "id": "cmrhfklb1000wmg7rhke0zna8",
+            "ruleId": "cmrhfhj94002fz6zfq95at050",
+            "languageId": "cmrc1y4h10006k2kdse7x47oh",
+            "rules": "P5 Evidence EN translated coursework rules",
+            "status": "DRAFT",
+            "completedAt": null,
+            "archivedAt": null,
+            "createdAt": "2026-07-12T06:46:53.150Z",
+            "updatedAt": "2026-07-12T06:46:53.150Z"
+          }
+        ]
+      },
+      "student": {
+        "id": "cmrhdzsao000bwhz5n1waw7db",
+        "userId": "cmrhdzqx00003whz5ryga8cli",
+        "departmentId": "cmrc1y4pr000ck2kd4d7vqcwq",
+        "phone": null,
+        "customFieldResponses": null,
+        "createdAt": "2026-07-12T06:02:42.816Z",
+        "updatedAt": "2026-07-12T06:44:21.380Z",
+        "user": {
+          "name": "P5 Russian Student",
+          "email": "p5.russian.student@examflow.pro"
+        }
+      },
+      "subject": {
+        "id": "cmrfudk7t00021387u895s14h",
+        "name": "Programming Fundamentals",
+        "code": "CSE-101",
+        "description": null,
+        "departmentId": "cmrc1y4pr000ck2kd4d7vqcwq",
+        "languageId": null,
+        "isActive": true,
+        "createdAt": "2026-07-11T04:05:47.033Z",
+        "updatedAt": "2026-07-11T04:05:47.033Z"
+      },
+      "language": {
+        "id": "cmrfudipt00001387aijb5mgh",
+        "name": "Russian",
+        "code": "RU",
+        "isActive": true,
+        "createdAt": "2026-07-11T04:05:45.089Z",
+        "updatedAt": "2026-07-11T04:05:45.089Z"
+      },
+      "group": {
+        "id": "cmrfvdjp80067wqli6zjyifgw",
+        "name": "BSC-CS-11R",
+        "code": "BSC-CS-11R",
+        "academicYearId": "cmrc1y4060003k2kd2m0dhf10",
+        "departmentId": "cmrc1y4pr000ck2kd4d7vqcwq",
+        "programId": "cmrfvc9gk0053wqli5omnqitt",
+        "languageId": "cmrfudipt00001387aijb5mgh",
+        "departmentLanguageId": "cmrfvc3kg004xwqli8kpib47u",
+        "academicSessionId": "cmrfvc6kk0050wqliy7jsvc0r",
+        "programYearId": "cmrfvcdti0059wqlij5fqmj0g",
+        "currentProgramSemesterId": "cmrfvcvjd005nwqlinyw6zg68",
+        "isActive": true,
+        "createdAt": "2026-07-11T04:33:45.980Z",
+        "updatedAt": "2026-07-11T04:33:45.980Z"
+      },
+      "academicYear": {
+        "id": "cmrc1y4060003k2kd2m0dhf10",
+        "name": "Year 1",
+        "year": 1,
+        "isActive": true,
+        "createdAt": "2026-07-08T12:26:38.406Z",
+        "updatedAt": "2026-07-08T12:26:38.406Z"
+      },
+      "semester": {
+        "id": "cmrc1y4cm0004k2kddk9xe7q7",
+        "name": "Semester 1",
+        "number": 1,
+        "isActive": true,
+        "createdAt": "2026-07-08T12:26:38.854Z",
+        "updatedAt": "2026-07-08T12:26:38.854Z"
+      }
+    }
+  },
+  "text": "{\"success\":true,\"completeness\":{\"entity\":\"coursework-assignments\",\"languageId\":\"cmrc1y4h10006k2kdse7x47oh\",\"isComplete\":true,\"missingFields\":[]},\"preview\":{\"id\":\"cmrhfhjo9002lz6zf62uosi0o\",\"teacherId\":\"cmrc1y74k000uk2kd8dujfpkd\",\"studentId\":\"cmrhdzsao000bwhz5n1waw7db\",\"ruleId\":\"cmrhfhj94002fz6zfq95at050\",\"departmentId\":\"cmrc1y4pr000ck2kd4d7vqcwq\",\"subjectId\":\"cmrfudk7t00021387u895s14h\",\"languageId\":\"cmrfudipt00001387aijb5mgh\",\"groupId\":\"cmrfvdjp80067wqli6zjyifgw\",\"academicYearId\":\"cmrc1y4060003k2kd2m0dhf10\",\"semesterId\":\"cmrc1y4cm0004k2kddk9xe7q7\",\"academicOfferingId\":\"cmrfve242006fwqliz6dmghl7\",\"title\":\"P5 Evidence EN Coursework Translation Edited\",\"rules\":\"P5 Evidence EN translated coursework assignment rules edited\",\"createdAt\":\"2026-07-12T06:44:31.065Z\",\"updatedAt\":\"2026-07-12T06:44:31.065Z\",\"translations\":[{\"id\":\"cmrhfhjxi002nz6zf0bdttpve\",\"assignmentId\":\"cmrhfhjo9002lz6zf62uosi0o\",\"languageId\":\"cmrfudipt00001387aijb5mgh\",\"title\":\"P5 Evidence RU Coursework\",\"rules\":\"P5 Evidence RU coursework rules\",\"status\":\"COMPLETE\",\"completedAt\":\"2026-07-12T06:44:31.397Z\",\"archivedAt\":null,\"createdAt\":\"2026-07-12T06:44:31.399Z\",\"updatedAt\":\"2026-07-12T06:44:31.399Z\"},{\"id\":\"cmrhfkp0h000ymg7rdnkdeud5\",\"assignmentId\":\"cmrhfhjo9002lz6zf62uosi0o\",\"languageId\":\"cmrc1y4h10006k2kdse7x47oh\",\"title\":\"P5 Evidence EN Coursework Translation Edited\",\"rules\":\"P5 Evidence EN translated coursework assignment rules edited\",\"status\":\"COMPLETE\",\"completedAt\":\"2026-07-12T06:47:02.769Z\",\"archivedAt\":null,\"createdAt\":\"2026-07-12T06:46:57.953Z\",\"updatedAt\":\"2026-07-12T06:47:02.771Z\"}],\"rule\":{\"id\":\"cmrhfhj94002fz6zfq95at050\",\"teacherId\":\"cmrc1y74k000uk2kd8dujfpkd\",\"departmentId\":\"cmrc1y4pr000ck2kd4d7vqcwq\",\"subjectId\":\"cmrfudk7t00021387u895s14h\",\"languageId\":\"cmrfudipt00001387aijb5mgh\",\"groupId\":\"cmrfvdjp80067wqli6zjyifgw\",\"academicYearId\":\"cmrc1y4060003k2kd2m0dhf10\",\"semesterId\":\"cmrc1y4cm0004k2kddk9xe7q7\",\"academicOfferingId\":\"cmrfve242006fwqliz6dmghl7\",\"rules\":\"P5 Evidence RU coursework rules\",\"useAiValidation\":false,\"submissionDeadline\":null,\"createdAt\":\"2026-07-12T06:44:30.520Z\",\"updatedAt\":\"2026-07-12T06:44:30.520Z\",\"translations\":[{\"id\":\"cmrhfhjhx002hz6zf6gtsmegn\",\"ruleId\":\"cmrhfhj94002fz6zfq95at050\",\"languageId\":\"cmrfudipt00001387aijb5mgh\",\"rules\":\"P5 Evidence RU coursework rules\",\"status\":\"COMPLETE\",\"completedAt\":\"2026-07-12T06:44:30.835Z\",\"archivedAt\":null,\"createdAt\":\"2026-07-12T06:44:30.837Z\",\"updatedAt\":\"2026-07-12T06:44:30.837Z\"},{\"id\":\"cmrhfklb1000wmg7rhke0zna8\",\"ruleId\":\"cmrhfhj94002fz6zfq95at050\",\"languageId\":\"cmrc1y4h10006k2kdse7x47oh\",\"rules\":\"P5 Evidence EN translated coursework rules\",\"status\":\"DRAFT\",\"completedAt\":null,\"archivedAt\":null,\"createdAt\":\"2026-07-12T06:46:53.150Z\",\"updatedAt\":\"2026-07-12T06:46:53.150Z\"}]},\"student\":{\"id\":\"cmrhdzsao000bwhz5n1waw7db\",\"userId\":\"cmrhdzqx00003whz5ryga8cli\",\"departmentId\":\"cmrc1y4pr000ck2kd4d7vqcwq\",\"phone\":null,\"customFieldResponses\":null,\"createdAt\":\"2026-07-12T06:02:42.816Z\",\"updatedAt\":\"2026-07-12T06:44:21.380Z\",\"user\":{\"name\":\"P5 Russian Student\",\"email\":\"p5.russian.student@examflow.pro\"}},\"subject\":{\"id\":\"cmrfudk7t00021387u895s14h\",\"name\":\"Programming Fundamentals\",\"code\":\"CSE-101\",\"description\":null,\"departmentId\":\"cmrc1y4pr000ck2kd4d7vqcwq\",\"languageId\":null,\"isActive\":true,\"createdAt\":\"2026-07-11T04:05:47.033Z\",\"updatedAt\":\"2026-07-11T04:05:47.033Z\"},\"language\":{\"id\":\"cmrfudipt00001387aijb5mgh\",\"name\":\"Russian\",\"code\":\"RU\",\"isActive\":true,\"createdAt\":\"2026-07-11T04:05:45.089Z\",\"updatedAt\":\"2026-07-11T04:05:45.089Z\"},\"group\":{\"id\":\"cmrfvdjp80067wqli6zjyifgw\",\"name\":\"BSC-CS-11R\",\"code\":\"BSC-CS-11R\",\"academicYearId\":\"cmrc1y4060003k2kd2m0dhf10\",\"departmentId\":\"cmrc1y4pr000ck2kd4d7vqcwq\",\"programId\":\"cmrfvc9gk0053wqli5omnqitt\",\"languageId\":\"cmrfudipt00001387aijb5mgh\",\"departmentLanguageId\":\"cmrfvc3kg004xwqli8kpib47u\",\"academicSessionId\":\"cmrfvc6kk0050wqliy7jsvc0r\",\"programYearId\":\"cmrfvcdti0059wqlij5fqmj0g\",\"currentProgramSemesterId\":\"cmrfvcvjd005nwqlinyw6zg68\",\"isActive\":true,\"createdAt\":\"2026-07-11T04:33:45.980Z\",\"updatedAt\":\"2026-07-11T04:33:45.980Z\"},\"academicYear\":{\"id\":\"cmrc1y4060003k2kd2m0dhf10\",\"name\":\"Year 1\",\"year\":1,\"isActive\":true,\"createdAt\":\"2026-07-08T12:26:38.406Z\",\"updatedAt\":\"2026-07-08T12:26:38.406Z\"},\"semester\":{\"id\":\"cmrc1y4cm0004k2kddk9xe7q7\",\"name\":\"Semester 1\",\"number\":1,\"isActive\":true,\"createdAt\":\"2026-07-08T12:26:38.854Z\",\"updatedAt\":\"2026-07-08T12:26:38.854Z\"}}}"
+}

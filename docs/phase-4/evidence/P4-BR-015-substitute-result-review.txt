@@ -1,0 +1,1 @@
+{"id":"cmrgsoptm000d107xwmuph4jl","examId":"cmrgsoojx003z8ouzj3l0jg2r","attemptId":"cmrgsop4u0009107x8eps05wz","studentId":"cmrc1y8f7001bk2kdnzbaq7p5","totalMarks":10,"marksObtained":8,"percentage":80,"grade":"A","isPassed":true,"status":"REVIEWED","publishedAt":null,"createdAt":"2026-07-11T20:06:14.458Z","updatedAt":"2026-07-11T20:06:21.790Z"}

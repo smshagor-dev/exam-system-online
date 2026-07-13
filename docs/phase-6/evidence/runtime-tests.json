@@ -1,0 +1,35 @@
+{
+  "executedAt": "2026-07-13T08:28:03.532Z",
+  "results": [
+    {
+      "name": "redis-store-enabled",
+      "pass": true,
+      "details": "Runtime store mode: redis"
+    },
+    {
+      "name": "exam-state-roundtrip",
+      "pass": true,
+      "details": "{\"examId\":\"exam-1\",\"status\":\"live\",\"startedAtMs\":1000,\"pausedAtMs\":null,\"timerOffsetMs\":0,\"durationMs\":60000,\"updatedAtMs\":1783931283350}"
+    },
+    {
+      "name": "attempt-state-roundtrip",
+      "pass": true,
+      "details": "{\"attemptId\":\"attempt-1\",\"examId\":\"exam-1\",\"userId\":\"user-1\",\"studentId\":\"student-1\",\"status\":\"IN_PROGRESS\",\"socketId\":\"socket-1\",\"joinedAtMs\":1783931283351,\"updatedAtMs\":1783931283351,\"lastHeartbeatAtMs\":1783931283351,\"lastSavedAtMs\":null,\"reconnectToken\":\"token-1\"}"
+    },
+    {
+      "name": "presence-roundtrip",
+      "pass": true,
+      "details": "[{\"examId\":\"exam-1\",\"userId\":\"user-1\",\"studentId\":\"student-1\",\"studentName\":\"Student One\",\"socketId\":\"socket-1\",\"online\":true,\"submitted\":false,\"submittedAtMs\":null,\"attemptStatus\":\"IN_PROGRESS\",\"warnings\":0,\"tabSwitches\":0,\"reconnects\":0,\"lastViolation\":null,\"lastHeartbeatAtMs\":1783931283352,\"updatedAtMs\":1783931283352}]"
+    },
+    {
+      "name": "answer-cache-roundtrip",
+      "pass": true,
+      "details": "[{\"attemptId\":\"attempt-1\",\"questionId\":\"question-1\",\"selectedOption\":\"option-1\",\"answerText\":null,\"clientSavedAtMs\":100,\"serverSavedAtMs\":200,\"requestId\":\"req-1\"}]"
+    },
+    {
+      "name": "lock-protection",
+      "pass": true,
+      "details": "first=true; second=true; owner-renew supported"
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "calendar": {
+    "id": "cmrjdc2ae000f1jok2c0i8ctl",
+    "academicSessionId": "cmrfvc6kk0050wqliy7jsvc0r",
+    "departmentId": "cmrc1y4pr000ck2kd4d7vqcwq",
+    "semesterId": "cmrc1y4cm0005k2kdkfnd4qir",
+    "campusId": "cmrjdbw0u00051jok1bk9fsuh",
+    "name": "Phase 8 Browser Calendar",
+    "status": "PUBLISHED",
+    "teachingStartsAt": "2026-01-01T09:00:00.000Z",
+    "teachingEndsAt": "2026-03-01T09:00:00.000Z",
+    "registrationStartsAt": "2025-12-01T09:00:00.000Z",
+    "registrationEndsAt": "2025-12-15T09:00:00.000Z",
+    "courseworkStartsAt": "2026-01-02T09:00:00.000Z",
+    "courseworkEndsAt": "2026-04-10T09:00:00.000Z",
+    "examinationStartsAt": "2026-04-11T09:00:00.000Z",
+    "examinationEndsAt": "2026-05-11T09:00:00.000Z",
+    "makeupStartsAt": "2026-05-20T09:00:00.000Z",
+    "makeupEndsAt": "2026-05-25T09:00:00.000Z",
+    "publishedAt": "2026-07-13T15:19:47.296Z",
+    "createdAt": "2026-07-13T15:19:48.375Z",
+    "updatedAt": "2026-07-13T15:19:48.375Z"
+  },
+  "holiday": {
+    "id": "cmrjdc3hq000h1jokzurf190k",
+    "calendarId": "cmrjdc2ae000f1jok2c0i8ctl",
+    "departmentId": "cmrc1y4pr000ck2kd4d7vqcwq",
+    "campusId": "cmrjdbw0u00051jok1bk9fsuh",
+    "scopeType": "CAMPUS",
+    "name": "Phase 8 Holiday Block",
+    "startsAt": "2026-04-21T09:00:00.000Z",
+    "endsAt": "2026-04-21T12:00:00.000Z",
+    "isRecurringAnnual": false,
+    "emergencyClosure": false,
+    "notes": null,
+    "createdAt": "2026-07-13T15:19:49.935Z",
+    "updatedAt": "2026-07-13T15:19:49.935Z"
+  }
+}

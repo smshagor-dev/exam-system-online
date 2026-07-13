@@ -1,7 +1,6 @@
 'use client'
 
 import { use, useCallback, useEffect, useRef, useState } from 'react'
-import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { getSocket, type AppSocket } from '@/lib/socket'
 import RichTextContent from '@/components/editor/RichTextContent'
@@ -33,7 +32,11 @@ type ExamData = {
   duration: number
   totalMarks: number
   instructions?: string | null
-  subject?: { name: string } | null
+  subject?: { name: string | null } | null
+  attemptSummary?: {
+    status: 'NOT_STARTED' | 'IN_PROGRESS' | 'SUBMITTED' | 'AUTO_SUBMITTED' | 'TIMED_OUT'
+    submittedAt: string | null
+  } | null
   questions: ExamQuestionPayload[]
 }
 
@@ -41,20 +44,65 @@ type AnswerState = Record<string, { selectedOption?: string; answerText?: string
 type AttemptStatus = 'loading' | 'ready' | 'started' | 'submitted' | 'error'
 type WarningType = 'TAB_SWITCH' | 'COPY' | 'SCREENSHOT' | 'DEVTOOLS'
 type Props = { params: Promise<{ id: string }> }
+type QueuedAnswer = {
+  questionId: string
+  selectedOption?: string
+  answerText?: string
+  requestId: string
+  clientSavedAtMs: number
+}
+
+function getAttemptQueueStorageKey(examId: string) {
+  return `exam-attempt-queue:${examId}`
+}
+
+function readPersistedAttemptQueue(examId: string): QueuedAnswer[] {
+  if (typeof window === 'undefined') {
+    return []
+  }
+
+  try {
+    const raw = window.sessionStorage.getItem(getAttemptQueueStorageKey(examId))
+    if (!raw) {
+      return []
+    }
+
+    const restoredQueue = JSON.parse(raw) as QueuedAnswer[]
+    return Array.isArray(restoredQueue) ? restoredQueue : []
+  } catch {
+    window.sessionStorage.removeItem(getAttemptQueueStorageKey(examId))
+    return []
+  }
+}
+
+function buildQueuedAnswerState(queued: QueuedAnswer[]): AnswerState {
+  return queued.reduce<AnswerState>((result, entry) => {
+    result[entry.questionId] = {
+      selectedOption: entry.selectedOption,
+      answerText: entry.answerText,
+    }
+    return result
+  }, {})
+}
 
 export default function ExamAttemptPage({ params }: Props) {
-  const { data: session } = useSession()
   const router = useRouter()
   const { id: examId } = use(params)
+  const restoredQueue = readPersistedAttemptQueue(examId)
   const socketRef = useRef<AppSocket | null>(null)
   const autoSaveRef = useRef<ReturnType<typeof setInterval> | null>(null)
   const countdownRef = useRef<ReturnType<typeof setInterval> | null>(null)
+  const heartbeatRef = useRef<ReturnType<typeof setInterval> | null>(null)
   const warningsRef = useRef({ devtoolsOpen: false })
+  const answersRef = useRef<AnswerState>({})
+  const queueRef = useRef<QueuedAnswer[]>(restoredQueue)
+  const attemptIdRef = useRef<string | null>(null)
+  const reconnectTokenRef = useRef<string | null>(null)
 
   const [exam, setExam] = useState<ExamData | null>(null)
   const [questions, setQuestions] = useState<Question[]>([])
   const [attemptId, setAttemptId] = useState<string | null>(null)
-  const [answers, setAnswers] = useState<AnswerState>({})
+  const [answers, setAnswers] = useState<AnswerState>(() => buildQueuedAnswerState(restoredQueue))
   const [currentIndex, setCurrentIndex] = useState(0)
   const [remainingSeconds, setRemainingSeconds] = useState<number | null>(null)
   const [status, setStatus] = useState<AttemptStatus>('loading')
@@ -68,6 +116,25 @@ export default function ExamAttemptPage({ params }: Props) {
     type: string
   } | null>(null)
   const [devtoolsOpen, setDevtoolsOpen] = useState(false)
+  const [connectionState, setConnectionState] = useState<'online' | 'reconnecting' | 'offline'>('online')
+  const [pendingQueueSize, setPendingQueueSize] = useState(restoredQueue.length)
+  const [attemptSummary, setAttemptSummary] = useState<ExamData['attemptSummary']>(null)
+
+  const persistQueue = useCallback(
+    (queued: QueuedAnswer[]) => {
+      if (typeof window === 'undefined') {
+        return
+      }
+
+      if (queued.length === 0) {
+        window.sessionStorage.removeItem(getAttemptQueueStorageKey(examId))
+        return
+      }
+
+      window.sessionStorage.setItem(getAttemptQueueStorageKey(examId), JSON.stringify(queued))
+    },
+    [examId]
+  )
 
   const clearExamIntervals = useCallback(() => {
     if (autoSaveRef.current) {
@@ -79,7 +146,20 @@ export default function ExamAttemptPage({ params }: Props) {
       clearInterval(countdownRef.current)
       countdownRef.current = null
     }
+
+    if (heartbeatRef.current) {
+      clearInterval(heartbeatRef.current)
+      heartbeatRef.current = null
+    }
   }, [])
+
+  useEffect(() => {
+    answersRef.current = answers
+  }, [answers])
+
+  useEffect(() => {
+    attemptIdRef.current = attemptId
+  }, [attemptId])
 
   useEffect(() => {
     return () => {
@@ -99,6 +179,7 @@ export default function ExamAttemptPage({ params }: Props) {
       })
       .then((data) => {
         setExam(data)
+        setAttemptSummary(data.attemptSummary ?? null)
         setQuestions(
           data.questions
             .sort((left, right) => left.orderIndex - right.orderIndex)
@@ -112,7 +193,12 @@ export default function ExamAttemptPage({ params }: Props) {
               orderIndex: entry.orderIndex,
             }))
         )
-        setStatus('ready')
+        setStatus(
+          data.attemptSummary?.status === 'SUBMITTED' ||
+            data.attemptSummary?.status === 'AUTO_SUBMITTED'
+            ? 'submitted'
+            : 'ready'
+        )
       })
       .catch((error: unknown) => {
         setStatus('error')
@@ -194,22 +280,59 @@ export default function ExamAttemptPage({ params }: Props) {
     }
   }, [attemptId, status])
 
+  const flushQueue = useCallback(() => {
+    const socket = socketRef.current
+    const activeAttemptId = attemptIdRef.current
+
+    if (!socket || !socket.connected || !activeAttemptId || queueRef.current.length === 0) {
+      return
+    }
+
+    const queued = [...queueRef.current]
+    queueRef.current = []
+    persistQueue(queueRef.current)
+    setPendingQueueSize(0)
+
+    queued.forEach((item) => {
+      socket.emit('student:save_answer', {
+        attemptId: activeAttemptId,
+        questionId: item.questionId,
+        selectedOption: item.selectedOption,
+        answerText: item.answerText,
+        requestId: item.requestId,
+        clientSavedAtMs: item.clientSavedAtMs,
+      })
+    })
+  }, [persistQueue])
+
+  const queueAnswer = useCallback((questionId: string, data: { selectedOption?: string; answerText?: string }) => {
+    queueRef.current = [
+      ...queueRef.current.filter((item) => item.questionId !== questionId),
+      {
+        questionId,
+        selectedOption: data.selectedOption,
+        answerText: data.answerText,
+        requestId: crypto.randomUUID(),
+        clientSavedAtMs: Date.now(),
+      },
+    ]
+    persistQueue(queueRef.current)
+    setPendingQueueSize(queueRef.current.length)
+  }, [persistQueue])
+
   const startAutoSave = useCallback((socket: AppSocket, activeAttemptId: string) => {
     if (autoSaveRef.current) {
       clearInterval(autoSaveRef.current)
     }
 
     autoSaveRef.current = setInterval(() => {
-      Object.entries(answers).forEach(([questionId, answer]) => {
-        socket.emit('student:save_answer', {
-          attemptId: activeAttemptId,
-          questionId,
-          selectedOption: answer.selectedOption,
-          answerText: answer.answerText,
-        })
+      Object.entries(answersRef.current).forEach(([questionId, answer]) => {
+        queueAnswer(questionId, answer)
       })
+      void activeAttemptId
+      flushQueue()
     }, 5000)
-  }, [answers])
+  }, [flushQueue, queueAnswer])
 
   const startLocalCountdown = useCallback(
     (socket: AppSocket, activeAttemptId: string, initialRemainingSeconds: number) => {
@@ -235,9 +358,134 @@ export default function ExamAttemptPage({ params }: Props) {
     []
   )
 
-  const startExam = useCallback(async () => {
-    if (!session?.user) return
+  const startHeartbeat = useCallback((socket: AppSocket, activeAttemptId: string) => {
+    if (heartbeatRef.current) {
+      clearInterval(heartbeatRef.current)
+    }
 
+    heartbeatRef.current = setInterval(() => {
+      if (!socket.connected) {
+        return
+      }
+
+      socket.emit('student:heartbeat', {
+        examId,
+        attemptId: activeAttemptId,
+        pendingQueueSize: queueRef.current.length,
+        reconnectToken: reconnectTokenRef.current ?? undefined,
+      })
+      flushQueue()
+    }, 10000)
+  }, [examId, flushQueue])
+
+  const applyRecoveredAttempt = useCallback((payload: {
+    attemptId: string | null
+    status: 'NOT_STARTED' | 'IN_PROGRESS' | 'SUBMITTED' | 'AUTO_SUBMITTED' | 'TIMED_OUT'
+    remainingSeconds: number | null
+    reconnectToken?: string
+    snapshot?: {
+      exam: {
+        title: string
+        instructions: string | null
+        duration: number
+        totalMarks: number
+        subject: { name: string | null } | null
+      }
+      questions: Array<{
+        id: string
+        examQuestionId: string
+        orderIndex: number
+        marks: number
+        question: {
+          id: string
+          type: string
+          text: string
+          options: Array<{ id: string; text: string; orderIndex: number }>
+        }
+      }>
+    }
+    answers?: Array<{
+      questionId: string
+      selectedOption: string | null
+      answerText: string | null
+      savedAtMs: number
+    }>
+  }) => {
+    if (payload.snapshot) {
+      const snapshot = payload.snapshot
+      setExam((current) =>
+        current
+          ? {
+              ...current,
+              title: snapshot.exam.title,
+              duration: snapshot.exam.duration,
+              totalMarks: snapshot.exam.totalMarks,
+              instructions: snapshot.exam.instructions,
+              subject: snapshot.exam.subject,
+            }
+          : {
+              title: snapshot.exam.title,
+              duration: snapshot.exam.duration,
+              totalMarks: snapshot.exam.totalMarks,
+              instructions: snapshot.exam.instructions,
+              subject: snapshot.exam.subject,
+              questions: [],
+            }
+      )
+
+      setQuestions(
+        snapshot.questions
+          .slice()
+          .sort((left, right) => left.orderIndex - right.orderIndex)
+          .map((entry) => ({
+            id: entry.id,
+            examQuestionId: entry.examQuestionId,
+            text: entry.question.text,
+            type: entry.question.type,
+            marks: entry.marks,
+            options: entry.question.options.map((option) => ({
+              id: option.id,
+              text: option.text,
+            })),
+            orderIndex: entry.orderIndex,
+          }))
+      )
+    }
+
+    const answerMap = Object.fromEntries(
+      (payload.answers ?? []).map((entry) => [
+        entry.questionId,
+        {
+          selectedOption: entry.selectedOption ?? undefined,
+          answerText: entry.answerText ?? undefined,
+        },
+      ])
+    )
+    setAnswers(answerMap)
+    if (payload.attemptId) {
+      attemptIdRef.current = payload.attemptId
+      setAttemptId(payload.attemptId)
+    }
+    reconnectTokenRef.current = payload.reconnectToken ?? reconnectTokenRef.current
+
+    if (payload.status === 'IN_PROGRESS' && payload.attemptId && payload.remainingSeconds !== null) {
+      setRemainingSeconds(payload.remainingSeconds)
+      setStatus('started')
+      if (socketRef.current) {
+        startAutoSave(socketRef.current, payload.attemptId)
+        startLocalCountdown(socketRef.current, payload.attemptId, payload.remainingSeconds)
+        startHeartbeat(socketRef.current, payload.attemptId)
+        setTimeout(() => {
+          flushQueue()
+        }, 0)
+      }
+    } else if (payload.status === 'SUBMITTED' || payload.status === 'AUTO_SUBMITTED') {
+      clearExamIntervals()
+      setStatus('submitted')
+    }
+  }, [clearExamIntervals, flushQueue, startAutoSave, startHeartbeat, startLocalCountdown])
+
+  const startExam = useCallback(async () => {
     try {
       const tokenResponse = await fetch('/api/socket/token')
       const { token } = (await tokenResponse.json()) as { token: string }
@@ -245,24 +493,54 @@ export default function ExamAttemptPage({ params }: Props) {
 
       socketRef.current = socket
       socket.removeAllListeners()
+      setConnectionState(socket.connected ? 'online' : 'reconnecting')
+
+      socket.on('connect', () => {
+        setConnectionState('online')
+        socket.emit('student:join_exam', { examId })
+        setTimeout(() => {
+          flushQueue()
+        }, 0)
+      })
+
+      socket.on('disconnect', () => {
+        setConnectionState('reconnecting')
+      })
+
+      socket.on('connect_error', () => {
+        setConnectionState('offline')
+      })
 
       socket.emit('student:join_exam', { examId })
 
-      socket.on('exam:joined', () => {
-        socket.emit('student:start_attempt', { examId })
+      socket.on('exam:joined', (data) => {
+        if (!data.attemptId) {
+          socket.emit('student:start_attempt', { examId })
+        }
       })
 
       socket.on('exam:attempt_started', (data) => {
-        setAttemptId(data.attemptId)
-        setRemainingSeconds(data.remainingSeconds)
-        setStatus('started')
-        startAutoSave(socket, data.attemptId)
-        startLocalCountdown(socket, data.attemptId, data.remainingSeconds)
+        applyRecoveredAttempt({
+          attemptId: data.attemptId,
+          status: 'IN_PROGRESS',
+          remainingSeconds: data.remainingSeconds,
+          reconnectToken: data.reconnectToken,
+          snapshot: data.snapshot,
+          answers: data.answers,
+        })
+      })
+
+      socket.on('exam:attempt_state', (data) => {
+        applyRecoveredAttempt(data)
       })
 
       socket.on('exam:timer_update', (data) => {
-        if (data.examId === examId) {
+        if (data.examId === examId && attemptIdRef.current) {
           setRemainingSeconds(data.remaining)
+          if (countdownRef.current) {
+            clearInterval(countdownRef.current)
+            countdownRef.current = null
+          }
         }
       })
 
@@ -288,6 +566,11 @@ export default function ExamAttemptPage({ params }: Props) {
         })
       })
 
+      socket.on('exam:heartbeat_ack', () => {
+        setConnectionState('online')
+        flushQueue()
+      })
+
       socket.on('error', (data) => {
         clearExamIntervals()
         setStatus('error')
@@ -297,20 +580,31 @@ export default function ExamAttemptPage({ params }: Props) {
       setStatus('error')
       setErrorMsg('Failed to connect to exam server')
     }
-  }, [clearExamIntervals, examId, session?.user, startAutoSave, startLocalCountdown])
+  }, [applyRecoveredAttempt, clearExamIntervals, examId, flushQueue])
+
+  useEffect(() => {
+    if (status !== 'ready') return
+
+    if (attemptSummary?.status === 'IN_PROGRESS') {
+      const timer = window.setTimeout(() => {
+        void startExam()
+      }, 0)
+
+      return () => {
+        window.clearTimeout(timer)
+      }
+    }
+  }, [attemptSummary, startExam, status])
 
   const saveAnswer = useCallback(
     (questionId: string, data: { selectedOption?: string; answerText?: string }) => {
       setAnswers((current) => ({ ...current, [questionId]: data }))
-      if (attemptId && socketRef.current) {
-        socketRef.current.emit('student:save_answer', {
-          attemptId,
-          questionId,
-          ...data,
-        })
+      queueAnswer(questionId, data)
+      if (attemptIdRef.current && socketRef.current?.connected) {
+        flushQueue()
       }
     },
-    [attemptId]
+    [flushQueue, queueAnswer]
   )
 
   const handleSubmit = async () => {
@@ -319,14 +613,10 @@ export default function ExamAttemptPage({ params }: Props) {
     setSubmitting(true)
     clearExamIntervals()
 
-    Object.entries(answers).forEach(([questionId, answer]) => {
-      socketRef.current?.emit('student:save_answer', {
-        attemptId,
-        questionId,
-        ...answer,
-      })
+    Object.entries(answersRef.current).forEach(([questionId, answer]) => {
+      queueAnswer(questionId, answer)
     })
-
+    flushQueue()
     socketRef.current?.emit('student:submit_exam', { attemptId })
     setStatus('submitted')
     setShowSubmitConfirm(false)
@@ -449,6 +739,15 @@ export default function ExamAttemptPage({ params }: Props) {
           <p className="text-xs text-gray-400">
             {answeredCount}/{questions.length} answered
           </p>
+          {(connectionState !== 'online' || pendingQueueSize > 0) && (
+            <p className="mt-1 text-xs text-orange-600">
+              {connectionState === 'online'
+                ? `${pendingQueueSize} answer update${pendingQueueSize === 1 ? '' : 's'} syncing`
+                : connectionState === 'reconnecting'
+                ? 'Connection lost, trying to recover your attempt'
+                : 'Offline mode active, changes will replay after reconnect'}
+            </p>
+          )}
         </div>
         <div
           className={`rounded-xl px-4 py-2 font-mono text-xl font-bold ${

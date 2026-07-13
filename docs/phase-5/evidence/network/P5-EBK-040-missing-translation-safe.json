@@ -1,0 +1,32 @@
+{
+  "method": "PATCH",
+  "url": "/api/teacher/translations/ebooks/cmrhfhk3k002qz6zf1o01lh0a",
+  "status": 409,
+  "json": {
+    "error": "Translation is incomplete",
+    "completeness": {
+      "entity": "ebooks",
+      "languageId": "cmrfudipt00001387aijb5mgh",
+      "isComplete": false,
+      "missingFields": [
+        {
+          "field": "title",
+          "message": "Ebook title is required."
+        },
+        {
+          "field": "description",
+          "message": "Ebook description is required."
+        },
+        {
+          "field": "author",
+          "message": "Ebook author metadata is required."
+        },
+        {
+          "field": "category",
+          "message": "Ebook category metadata is required."
+        }
+      ]
+    }
+  },
+  "text": "{\"error\":\"Translation is incomplete\",\"completeness\":{\"entity\":\"ebooks\",\"languageId\":\"cmrfudipt00001387aijb5mgh\",\"isComplete\":false,\"missingFields\":[{\"field\":\"title\",\"message\":\"Ebook title is required.\"},{\"field\":\"description\",\"message\":\"Ebook description is required.\"},{\"field\":\"author\",\"message\":\"Ebook author metadata is required.\"},{\"field\":\"category\",\"message\":\"Ebook category metadata is required.\"}]}}"
+}

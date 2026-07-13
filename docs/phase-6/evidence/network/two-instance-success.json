@@ -1,0 +1,369 @@
+{
+  "executedAt": "2026-07-13T08:38:26.329Z",
+  "checks": {
+    "studentConnectedToA": true,
+    "runtimeModeAIsRedis": true,
+    "runtimeModeBIsRedis": true,
+    "teacherConnectedToB": true,
+    "crossInstanceEventsWork": true,
+    "sharedPresenceWorks": true,
+    "heartbeatShared": true,
+    "sharedTimerWorks": true,
+    "answerSaveStateShared": true,
+    "submissionAppearsOnBothInstances": true,
+    "restartingOneInstanceDoesNotLoseState": true,
+    "reconnectThroughBPreservesState": true,
+    "noDuplicateTimerBroadcasts": true,
+    "noDuplicateSubmissionSideEffects": true,
+    "noSplitBrainAttemptState": true
+  },
+  "startedEvent": {
+    "examId": "cmriyyo95003ung8lsigb5y4r",
+    "startedAt": 1783931549027,
+    "durationMs": 1200000
+  },
+  "attemptStarted": {
+    "attemptId": "cmriyzgw80001rnl7aat61da8",
+    "remainingSeconds": 1199,
+    "snapshot": {
+      "exam": {
+        "title": "P6 Evidence Manual Exam",
+        "instructions": "P6 manual reconnect and submit exam",
+        "duration": 20,
+        "totalMarks": 5,
+        "subject": {
+          "name": "Data Structures & Algorithms"
+        }
+      },
+      "questions": [
+        {
+          "id": "cmriyymz10031ng8lxphz1lsu",
+          "examQuestionId": "cmriyyo95003zng8lg0f6z7xw",
+          "orderIndex": 0,
+          "marks": 5,
+          "question": {
+            "id": "cmriyymz10031ng8lxphz1lsu",
+            "type": "MCQ",
+            "text": "P6 Evidence Manual Question",
+            "options": [
+              {
+                "id": "cmriyymz10034ng8ln5v5cuom",
+                "text": "P6 Evidence Manual Question Option A",
+                "orderIndex": 0
+              },
+              {
+                "id": "cmriyymz10036ng8ldsf8xbcw",
+                "text": "P6 Evidence Manual Question Option B",
+                "orderIndex": 1
+              },
+              {
+                "id": "cmriyymz10038ng8lb6owxpbt",
+                "text": "P6 Evidence Manual Question Option C",
+                "orderIndex": 2
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "answers": [],
+    "reconnectToken": "288da1a6-93dd-472d-933e-8fc45b6d033b",
+    "resumed": false
+  },
+  "heartbeatAck": {
+    "examId": "cmriyyo95003ung8lsigb5y4r",
+    "attemptId": "cmriyzgw80001rnl7aat61da8",
+    "serverTimeMs": 1783931891163,
+    "pendingQueueSize": 0
+  },
+  "heartbeatMonitor": {
+    "examId": "cmriyyo95003ung8lsigb5y4r",
+    "students": [
+      {
+        "userId": "cmrhdzq7d0002whz58rqdkwy3",
+        "studentId": "cmrhdzrxv0009whz5oa9zfcgk",
+        "socketId": "oX--sgou3XUM3hRlAAAD",
+        "studentName": "P5 English Student",
+        "online": true,
+        "submitted": false,
+        "submittedAtMs": null,
+        "attemptStatus": "IN_PROGRESS",
+        "warnings": 0,
+        "tabSwitches": 0,
+        "reconnects": 0,
+        "lastViolation": null,
+        "lastHeartbeatAtMs": 1783931891163
+      }
+    ],
+    "runtime": {
+      "mode": "redis",
+      "leader": false,
+      "status": "live",
+      "remainingSeconds": 857
+    }
+  },
+  "restoredState": {
+    "examId": "cmriyyo95003ung8lsigb5y4r",
+    "attemptId": "cmriyzgw80001rnl7aat61da8",
+    "status": "IN_PROGRESS",
+    "remainingSeconds": 1184,
+    "reconnectToken": "288da1a6-93dd-472d-933e-8fc45b6d033b",
+    "snapshot": {
+      "exam": {
+        "title": "P6 Evidence Manual Exam",
+        "instructions": "P6 manual reconnect and submit exam",
+        "duration": 20,
+        "totalMarks": 5,
+        "subject": {
+          "name": "Data Structures & Algorithms"
+        }
+      },
+      "questions": [
+        {
+          "id": "cmriyymz10031ng8lxphz1lsu",
+          "examQuestionId": "cmriyyo95003zng8lg0f6z7xw",
+          "orderIndex": 0,
+          "marks": 5,
+          "question": {
+            "id": "cmriyymz10031ng8lxphz1lsu",
+            "type": "MCQ",
+            "text": "P6 Evidence Manual Question",
+            "options": [
+              {
+                "id": "cmriyymz10034ng8ln5v5cuom",
+                "text": "P6 Evidence Manual Question Option A",
+                "orderIndex": 0
+              },
+              {
+                "id": "cmriyymz10036ng8ldsf8xbcw",
+                "text": "P6 Evidence Manual Question Option B",
+                "orderIndex": 1
+              },
+              {
+                "id": "cmriyymz10038ng8lb6owxpbt",
+                "text": "P6 Evidence Manual Question Option C",
+                "orderIndex": 2
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "answers": [
+      {
+        "questionId": "cmriyymz10031ng8lxphz1lsu",
+        "selectedOption": "cmriyymz10034ng8ln5v5cuom",
+        "answerText": null,
+        "savedAtMs": 1783931893835
+      }
+    ],
+    "warningCount": 0
+  },
+  "timerUpdates": [
+    {
+      "examId": "cmriyyo95003ung8lsigb5y4r",
+      "remaining": 863,
+      "elapsed": 336,
+      "receivedAtMs": 1783931885550
+    },
+    {
+      "examId": "cmriyyo95003ung8lsigb5y4r",
+      "remaining": 862,
+      "elapsed": 337,
+      "receivedAtMs": 1783931886550
+    },
+    {
+      "examId": "cmriyyo95003ung8lsigb5y4r",
+      "remaining": 861,
+      "elapsed": 338,
+      "receivedAtMs": 1783931887558
+    },
+    {
+      "examId": "cmriyyo95003ung8lsigb5y4r",
+      "remaining": 860,
+      "elapsed": 339,
+      "receivedAtMs": 1783931888564
+    },
+    {
+      "examId": "cmriyyo95003ung8lsigb5y4r",
+      "remaining": 859,
+      "elapsed": 340,
+      "receivedAtMs": 1783931889579
+    },
+    {
+      "examId": "cmriyyo95003ung8lsigb5y4r",
+      "remaining": 858,
+      "elapsed": 341,
+      "receivedAtMs": 1783931890584
+    },
+    {
+      "examId": "cmriyyo95003ung8lsigb5y4r",
+      "remaining": 857,
+      "elapsed": 342,
+      "receivedAtMs": 1783931891581
+    },
+    {
+      "examId": "cmriyyo95003ung8lsigb5y4r",
+      "remaining": 856,
+      "elapsed": 343,
+      "receivedAtMs": 1783931892598
+    },
+    {
+      "examId": "cmriyyo95003ung8lsigb5y4r",
+      "remaining": 855,
+      "elapsed": 344,
+      "receivedAtMs": 1783931893593
+    },
+    {
+      "examId": "cmriyyo95003ung8lsigb5y4r",
+      "remaining": 854,
+      "elapsed": 345,
+      "receivedAtMs": 1783931894608
+    },
+    {
+      "examId": "cmriyyo95003ung8lsigb5y4r",
+      "remaining": 853,
+      "elapsed": 346,
+      "receivedAtMs": 1783931895614
+    },
+    {
+      "examId": "cmriyyo95003ung8lsigb5y4r",
+      "remaining": 852,
+      "elapsed": 347,
+      "receivedAtMs": 1783931896614
+    },
+    {
+      "examId": "cmriyyo95003ung8lsigb5y4r",
+      "remaining": 851,
+      "elapsed": 348,
+      "receivedAtMs": 1783931897629
+    },
+    {
+      "examId": "cmriyyo95003ung8lsigb5y4r",
+      "remaining": 850,
+      "elapsed": 349,
+      "receivedAtMs": 1783931898641
+    },
+    {
+      "examId": "cmriyyo95003ung8lsigb5y4r",
+      "remaining": 849,
+      "elapsed": 350,
+      "receivedAtMs": 1783931899641
+    },
+    {
+      "examId": "cmriyyo95003ung8lsigb5y4r",
+      "remaining": 848,
+      "elapsed": 351,
+      "receivedAtMs": 1783931900645
+    },
+    {
+      "examId": "cmriyyo95003ung8lsigb5y4r",
+      "remaining": 847,
+      "elapsed": 352,
+      "receivedAtMs": 1783931901657
+    },
+    {
+      "examId": "cmriyyo95003ung8lsigb5y4r",
+      "remaining": 846,
+      "elapsed": 353,
+      "receivedAtMs": 1783931902637
+    },
+    {
+      "examId": "cmriyyo95003ung8lsigb5y4r",
+      "remaining": 845,
+      "elapsed": 354,
+      "receivedAtMs": 1783931903650
+    },
+    {
+      "examId": "cmriyyo95003ung8lsigb5y4r",
+      "remaining": 844,
+      "elapsed": 355,
+      "receivedAtMs": 1783931904654
+    },
+    {
+      "examId": "cmriyyo95003ung8lsigb5y4r",
+      "remaining": 843,
+      "elapsed": 356,
+      "receivedAtMs": 1783931905664
+    }
+  ],
+  "duplicateTimerFrames": 0,
+  "monotonicTimer": true,
+  "initialMonitor": {
+    "examId": "cmriyyo95003ung8lsigb5y4r",
+    "students": [],
+    "runtime": {
+      "mode": "redis",
+      "leader": false,
+      "status": "idle",
+      "remainingSeconds": null
+    }
+  },
+  "initialMonitorA": {
+    "examId": "cmriyyo95003ung8lsigb5y4r",
+    "students": [],
+    "runtime": {
+      "mode": "redis",
+      "leader": true,
+      "status": "idle",
+      "remainingSeconds": null
+    }
+  },
+  "crossInstanceJoin": {
+    "examId": "cmriyyo95003ung8lsigb5y4r",
+    "students": [
+      {
+        "userId": "cmrhdzq7d0002whz58rqdkwy3",
+        "studentId": "cmrhdzrxv0009whz5oa9zfcgk",
+        "socketId": "oX--sgou3XUM3hRlAAAD",
+        "studentName": "P5 English Student",
+        "online": true,
+        "submitted": false,
+        "submittedAtMs": null,
+        "attemptStatus": "IN_PROGRESS",
+        "warnings": 0,
+        "tabSwitches": 0,
+        "reconnects": 0,
+        "lastViolation": null,
+        "lastHeartbeatAtMs": 1783931888812
+      }
+    ],
+    "runtime": {
+      "mode": "redis",
+      "leader": false,
+      "status": "live",
+      "remainingSeconds": 860
+    }
+  },
+  "submitMonitor": {
+    "examId": "cmriyyo95003ung8lsigb5y4r",
+    "students": [
+      {
+        "userId": "cmrhdzq7d0002whz58rqdkwy3",
+        "studentId": "cmrhdzrxv0009whz5oa9zfcgk",
+        "socketId": "QhzyATHhilPY5894AAAD",
+        "studentName": "P5 English Student",
+        "online": false,
+        "submitted": true,
+        "submittedAtMs": 1783931902656,
+        "attemptStatus": "SUBMITTED",
+        "warnings": 0,
+        "tabSwitches": 0,
+        "reconnects": 1,
+        "lastViolation": null,
+        "lastHeartbeatAtMs": null
+      }
+    ],
+    "runtime": {
+      "mode": "redis",
+      "leader": true,
+      "status": "live",
+      "remainingSeconds": 845
+    }
+  },
+  "submitLogCounts": {
+    "beforeDuplicateSubmitLogs": 0,
+    "afterFirstSubmitLogs": 1,
+    "afterDuplicateSubmitLogs": 1
+  }
+}

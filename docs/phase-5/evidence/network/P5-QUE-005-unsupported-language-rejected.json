@@ -1,0 +1,9 @@
+{
+  "method": "POST",
+  "url": "/api/teacher/translations/questions/cmrhfhg8v000vz6zfu3b41b9d",
+  "status": 400,
+  "json": {
+    "error": "Unsupported language"
+  },
+  "text": "{\"error\":\"Unsupported language\"}"
+}

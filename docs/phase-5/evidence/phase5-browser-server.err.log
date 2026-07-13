@@ -1,0 +1,72 @@
+(node:14252) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+TypeError: controller[kState].transformAlgorithm is not a function
+    at ignore-listed frames
+TypeError: controller[kState].transformAlgorithm is not a function
+    at ignore-listed frames
+TypeError: controller[kState].transformAlgorithm is not a function
+    at ignore-listed frames
+TypeError: controller[kState].transformAlgorithm is not a function
+    at ignore-listed frames
+⨯ Error [PrismaClientUnknownRequestError]: 
+Invalid `{imported module ./src/lib/prisma.ts}["prisma"].exam.findMany()` invocation in
+D:\Public\exam-system-online\.next\dev\server\chunks\ssr\[root-of-the-server]__0n5xnsa._.js:65:141
+
+  62         teacherId: profile.id
+  63     }
+  64 }),
+→ 65 {imported module ./src/lib/prisma.ts}["prisma"].exam.findMany(
+Inconsistent query result: Field academicYear is required to return data, got `null` instead.
+    at <unknown> (file:\D:\Public\exam-system-online\src\app\teacher\dashboard\page.tsx:24:17)
+    at async getTeacherStats (file:\D:\Public\exam-system-online\src\app\teacher\dashboard\page.tsx:11:24)
+    at async TeacherDashboard (file:\D:\Public\exam-system-online\src\app\teacher\dashboard\page.tsx:42:19)
+  22 |     }),
+  23 |     prisma.ebookUpload.count({ where: { teacherId: profile.id } }),
+> 24 |     prisma.exam.findMany({
+     |                 ^
+  25 |       where: { teacherId: profile.id },
+  26 |       take: 5,
+  27 |       orderBy: { createdAt: 'desc' }, {
+  clientVersion: '5.22.0',
+  digest: '761250024'
+}
+⨯ Error [PrismaClientUnknownRequestError]: 
+Invalid `{imported module ./src/lib/prisma.ts}["prisma"].exam.findMany()` invocation in
+D:\Public\exam-system-online\.next\dev\server\chunks\ssr\[root-of-the-server]__0n5xnsa._.js:65:141
+
+  62         teacherId: profile.id
+  63     }
+  64 }),
+→ 65 {imported module ./src/lib/prisma.ts}["prisma"].exam.findMany(
+Inconsistent query result: Field academicYear is required to return data, got `null` instead.
+    at <unknown> (file:\D:\Public\exam-system-online\src\app\teacher\dashboard\page.tsx:24:17)
+    at async getTeacherStats (file:\D:\Public\exam-system-online\src\app\teacher\dashboard\page.tsx:11:24)
+    at async TeacherDashboard (file:\D:\Public\exam-system-online\src\app\teacher\dashboard\page.tsx:42:19)
+  22 |     }),
+  23 |     prisma.ebookUpload.count({ where: { teacherId: profile.id } }),
+> 24 |     prisma.exam.findMany({
+     |                 ^
+  25 |       where: { teacherId: profile.id },
+  26 |       take: 5,
+  27 |       orderBy: { createdAt: 'desc' }, {
+  clientVersion: '5.22.0',
+  digest: '761250024'
+}
+TypeError: controller[kState].transformAlgorithm is not a function
+    at ignore-listed frames
+TypeError: controller[kState].transformAlgorithm is not a function
+    at ignore-listed frames
+TypeError: controller[kState].transformAlgorithm is not a function
+    at ignore-listed frames
+TypeError: controller[kState].transformAlgorithm is not a function
+    at ignore-listed frames
+TypeError: controller[kState].transformAlgorithm is not a function
+    at ignore-listed frames
+[Socket] student:join_exam error: Error [MissingAcademicTranslationError]: Missing question option translation for language cmrc1y4h10006k2kdse7x47oh
+    at requireTranslation (D:\Public\exam-system-online\src\lib\academic-content.ts:97:11)
+    at assertStudentExamTranslations (D:\Public\exam-system-online\src\server\socket-server.ts:119:25)
+    at async Socket.<anonymous> (D:\Public\exam-system-online\src\server\socket-server.ts:436:9)
+[Socket] student:start_attempt error: Error [MissingAcademicTranslationError]: Missing question option translation for language cmrc1y4h10006k2kdse7x47oh
+    at requireTranslation (D:\Public\exam-system-online\src\lib\academic-content.ts:97:11)
+    at assertStudentExamTranslations (D:\Public\exam-system-online\src\server\socket-server.ts:119:25)
+    at async Socket.<anonymous> (D:\Public\exam-system-online\src\server\socket-server.ts:542:9)

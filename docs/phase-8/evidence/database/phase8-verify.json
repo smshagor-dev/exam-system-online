@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "counts": {
+    "calendarCount": 14,
+    "campusCount": 14,
+    "roomCount": 23,
+    "sessionCount": 14,
+    "itemCount": 14,
+    "seatPlanCount": 5,
+    "dutyCount": 23
+  },
+  "generatedAt": "2026-07-13T15:18:20.337Z"
+}

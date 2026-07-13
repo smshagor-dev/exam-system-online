@@ -1,5 +1,7 @@
 import { auth } from '@/lib/auth'
+import { dedupeTranslations } from '@/lib/academic-content'
 import { EBOOK_DIR, MAX_EBOOK_SIZE, sanitizeEbookFileName } from '@/lib/ebooks'
+import { validateTeacherOfferingAccess, getTeacherProfileByUserId } from '@/lib/teacher-assignment'
 import { prisma } from '@/lib/prisma'
 import { UserRole } from '@prisma/client'
 import { mkdir, writeFile } from 'fs/promises'
@@ -12,10 +14,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Only teachers can upload ebooks' }, { status: 403 })
   }
 
-  const profile = await prisma.teacherProfile.findUnique({
-    where: { userId: session.user.id },
-    select: { id: true },
-  })
+  const profile = await getTeacherProfileByUserId(session.user.id)
 
   if (!profile) {
     return NextResponse.json({ error: 'Teacher profile not found' }, { status: 404 })
@@ -24,7 +23,10 @@ export async function POST(request: Request) {
   const formData = await request.formData()
   const title = String(formData.get('title') || '').trim()
   const description = String(formData.get('description') || '').trim()
+  const author = String(formData.get('author') || '').trim()
+  const category = String(formData.get('category') || '').trim()
   const assignmentId = String(formData.get('assignmentId') || '').trim()
+  const translationsRaw = String(formData.get('translations') || '').trim()
   const file = formData.get('file')
 
   if (title.length < 2) {
@@ -52,7 +54,6 @@ export async function POST(request: Request) {
   const assignment = await prisma.teacherAssignment.findFirst({
     where: {
       id: assignmentId,
-      teacherId: profile.id,
     },
     select: {
       teacherId: true,
@@ -62,10 +63,29 @@ export async function POST(request: Request) {
       groupId: true,
       academicYearId: true,
       semesterId: true,
+      academicOfferingId: true,
     },
   })
 
   if (!assignment) {
+    return NextResponse.json({ error: 'Assignment not found or not allowed' }, { status: 404 })
+  }
+
+  const access = await validateTeacherOfferingAccess({
+    teacherProfileId: profile.id,
+    academicOfferingId: assignment.academicOfferingId,
+    scope: {
+      departmentId: assignment.departmentId,
+      subjectId: assignment.subjectId,
+      languageId: assignment.languageId,
+      groupId: assignment.groupId,
+      academicYearId: assignment.academicYearId,
+      semesterId: assignment.semesterId,
+      academicOfferingId: assignment.academicOfferingId,
+    },
+  })
+
+  if (!access.allowed || (assignment.teacherId !== profile.id && !access.assignment)) {
     return NextResponse.json({ error: 'Assignment not found or not allowed' }, { status: 404 })
   }
 
@@ -79,28 +99,100 @@ export async function POST(request: Request) {
 
   await writeFile(filePath, buffer)
 
-  const ebook = await prisma.ebookUpload.create({
-    data: {
-      teacherId: assignment.teacherId,
-      departmentId: assignment.departmentId,
-      subjectId: assignment.subjectId,
-      languageId: assignment.languageId,
-      groupId: assignment.groupId,
-      academicYearId: assignment.academicYearId,
-      semesterId: assignment.semesterId,
-      title,
-      description: description || null,
-      fileName,
-      fileUrl,
-      fileSizeBytes: file.size,
-    },
-    include: {
-      subject: true,
-      language: true,
-      group: true,
-      academicYear: true,
-      semester: true,
-    },
+  let extraTranslations: Array<{
+    languageId: string
+    title: string
+    description?: string | null
+    author?: string | null
+    category?: string | null
+  }> = []
+  if (translationsRaw) {
+    try {
+      const parsed = JSON.parse(translationsRaw)
+      if (Array.isArray(parsed)) {
+        extraTranslations = parsed
+          .filter((translation) => translation && typeof translation.languageId === 'string' && typeof translation.title === 'string')
+          .map((translation) => ({
+            languageId: String(translation.languageId),
+            title: String(translation.title),
+            description:
+              typeof translation.description === 'string' ? String(translation.description) : null,
+            author: typeof translation.author === 'string' ? String(translation.author) : null,
+            category: typeof translation.category === 'string' ? String(translation.category) : null,
+          }))
+      }
+    } catch {
+      return NextResponse.json({ error: 'Invalid ebook translations payload' }, { status: 400 })
+    }
+  }
+
+  const ebook = await prisma.$transaction(async (tx) => {
+    const savedEbook = await tx.ebookUpload.create({
+      data: {
+        teacherId: assignment.teacherId,
+        departmentId: assignment.departmentId,
+        subjectId: assignment.subjectId,
+        languageId: assignment.languageId,
+        groupId: assignment.groupId,
+        academicYearId: assignment.academicYearId,
+        semesterId: assignment.semesterId,
+        title,
+        description: description || null,
+        author: author || null,
+        category: category || null,
+        fileName,
+        fileUrl,
+        fileSizeBytes: file.size,
+      },
+    })
+
+    const mergedTranslations = dedupeTranslations([
+      {
+        languageId: assignment.languageId,
+        title,
+        description: description || null,
+        author: author || null,
+        category: category || null,
+      },
+      ...extraTranslations,
+    ])
+
+    for (const translation of mergedTranslations) {
+      await tx.ebookUploadTranslation.upsert({
+        where: {
+          ebookUploadId_languageId: {
+            ebookUploadId: savedEbook.id,
+            languageId: translation.languageId,
+          },
+        },
+        update: {
+          title: translation.title,
+          description: translation.description ?? null,
+          author: translation.author ?? null,
+          category: translation.category ?? null,
+        },
+        create: {
+          ebookUploadId: savedEbook.id,
+          languageId: translation.languageId,
+          title: translation.title,
+          description: translation.description ?? null,
+          author: translation.author ?? null,
+          category: translation.category ?? null,
+        },
+      })
+    }
+
+    return tx.ebookUpload.findUniqueOrThrow({
+      where: { id: savedEbook.id },
+      include: {
+        subject: true,
+        language: true,
+        group: true,
+        academicYear: true,
+        semester: true,
+        translations: true,
+      },
+    })
   })
 
   return NextResponse.json(ebook, { status: 201 })

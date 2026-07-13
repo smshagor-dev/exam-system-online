@@ -1,0 +1,39 @@
+{
+  "method": "POST",
+  "url": "/api/admin/results-enterprise/results/cmrjfjxno0009odlb1nndbfne/transition",
+  "status": 200,
+  "json": {
+    "id": "cmrjfjxno0009odlb1nndbfne",
+    "gradebookId": "cmrjfjt460001odlbpate7fc0",
+    "studentId": "cmrhdzsao000bwhz5n1waw7db",
+    "departmentId": "cmrc1y4pr000ck2kd4d7vqcwq",
+    "academicSessionId": "cmrfvc6kk0050wqliy7jsvc0r",
+    "programId": "cmrfvc9gk0053wqli5omnqitt",
+    "semesterId": "cmrc1y4cm0004k2kddk9xe7q7",
+    "groupId": "cmrfvdjp80067wqli6zjyifgw",
+    "attemptedCredits": 0,
+    "earnedCredits": 0,
+    "transferCredits": 0,
+    "totalMarks": 100,
+    "marksObtained": 25.57,
+    "percentage": 25.57,
+    "letterGrade": "F",
+    "gradePoint": 0,
+    "semesterGpa": 0,
+    "cumulativeCgpa": 0,
+    "failedCourseCount": 1,
+    "standing": "SUSPENDED",
+    "status": "APPROVED",
+    "publishedAt": null,
+    "lockedAt": null,
+    "isRepeatReplacement": false,
+    "isImprovementReplacement": false,
+    "metadata": {
+      "studentName": "P5 Russian Student",
+      "studentEmail": "p5.russian.student@examflow.pro"
+    },
+    "createdAt": "2026-07-13T16:21:54.851Z",
+    "updatedAt": "2026-07-13T16:22:05.721Z"
+  },
+  "text": "{\"id\":\"cmrjfjxno0009odlb1nndbfne\",\"gradebookId\":\"cmrjfjt460001odlbpate7fc0\",\"studentId\":\"cmrhdzsao000bwhz5n1waw7db\",\"departmentId\":\"cmrc1y4pr000ck2kd4d7vqcwq\",\"academicSessionId\":\"cmrfvc6kk0050wqliy7jsvc0r\",\"programId\":\"cmrfvc9gk0053wqli5omnqitt\",\"semesterId\":\"cmrc1y4cm0004k2kddk9xe7q7\",\"groupId\":\"cmrfvdjp80067wqli6zjyifgw\",\"attemptedCredits\":0,\"earnedCredits\":0,\"transferCredits\":0,\"totalMarks\":100,\"marksObtained\":25.57,\"percentage\":25.57,\"letterGrade\":\"F\",\"gradePoint\":0,\"semesterGpa\":0,\"cumulativeCgpa\":0,\"failedCourseCount\":1,\"standing\":\"SUSPENDED\",\"status\":\"APPROVED\",\"publishedAt\":null,\"lockedAt\":null,\"isRepeatReplacement\":false,\"isImprovementReplacement\":false,\"metadata\":{\"studentName\":\"P5 Russian Student\",\"studentEmail\":\"p5.russian.student@examflow.pro\"},\"createdAt\":\"2026-07-13T16:21:54.851Z\",\"updatedAt\":\"2026-07-13T16:22:05.721Z\"}"
+}

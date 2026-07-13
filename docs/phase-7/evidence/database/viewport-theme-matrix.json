@@ -1,0 +1,62 @@
+[
+  {
+    "combo": "light-desktop",
+    "role": "teacher",
+    "status": "PASS"
+  },
+  {
+    "combo": "light-desktop",
+    "role": "student",
+    "status": "PASS"
+  },
+  {
+    "combo": "dark-desktop",
+    "role": "teacher",
+    "status": "PASS"
+  },
+  {
+    "combo": "dark-desktop",
+    "role": "student",
+    "status": "PASS"
+  },
+  {
+    "combo": "light-tablet",
+    "role": "teacher",
+    "status": "PASS"
+  },
+  {
+    "combo": "light-tablet",
+    "role": "student",
+    "status": "PASS"
+  },
+  {
+    "combo": "dark-tablet",
+    "role": "teacher",
+    "status": "PASS"
+  },
+  {
+    "combo": "dark-tablet",
+    "role": "student",
+    "status": "PASS"
+  },
+  {
+    "combo": "light-mobile",
+    "role": "teacher",
+    "status": "PASS"
+  },
+  {
+    "combo": "light-mobile",
+    "role": "student",
+    "status": "PASS"
+  },
+  {
+    "combo": "dark-mobile",
+    "role": "teacher",
+    "status": "PASS"
+  },
+  {
+    "combo": "dark-mobile",
+    "role": "student",
+    "status": "PASS"
+  }
+]

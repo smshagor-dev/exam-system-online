@@ -1,0 +1,431 @@
+[
+  {
+    "testId": "P5-QUE-001",
+    "status": "PASS",
+    "evidencePaths": [
+      "docs/phase-5/evidence/network/P5-QUE-001-russian-translation-created.json"
+    ]
+  },
+  {
+    "testId": "P5-QUE-002",
+    "status": "PASS",
+    "evidencePaths": [
+      "docs/phase-5/evidence/network/P5-QUE-002-english-translation-created.json"
+    ]
+  },
+  {
+    "testId": "P5-QUE-003",
+    "status": "PASS",
+    "evidencePaths": [
+      "docs/phase-5/evidence/network/P5-QUE-003-translation-edited.json"
+    ]
+  },
+  {
+    "testId": "P5-QUE-004",
+    "status": "PASS",
+    "evidencePaths": [
+      "docs/phase-5/evidence/network/P5-QUE-004-duplicate-language-rejected.json"
+    ]
+  },
+  {
+    "testId": "P5-QUE-005",
+    "status": "PASS",
+    "evidencePaths": [
+      "docs/phase-5/evidence/network/P5-QUE-005-unsupported-language-rejected.json"
+    ]
+  },
+  {
+    "testId": "P5-QUE-006",
+    "status": "PASS",
+    "evidencePaths": [
+      "docs/phase-5/evidence/network/P5-QUE-001-russian-translation-created.json"
+    ]
+  },
+  {
+    "testId": "P5-QUE-007",
+    "status": "PASS",
+    "evidencePaths": [
+      "docs/phase-5/evidence/database/P5-QUE-007-correct-option-stable.json"
+    ]
+  },
+  {
+    "testId": "P5-QUE-008",
+    "status": "PASS",
+    "evidencePaths": [
+      "docs/phase-5/evidence/browser/P5-QUE-008-russian-preview.png",
+      "docs/phase-5/evidence/console/P5-QUE-008-russian-preview.txt",
+      "docs/phase-5/evidence/network/P5-QUE-008-russian-preview.txt",
+      "docs/phase-5/evidence/browser/P5-QUE-008-russian-preview-after.png"
+    ]
+  },
+  {
+    "testId": "P5-QUE-009",
+    "status": "PASS",
+    "evidencePaths": [
+      "docs/phase-5/evidence/browser/P5-QUE-009-english-preview.png",
+      "docs/phase-5/evidence/console/P5-QUE-009-english-preview.txt",
+      "docs/phase-5/evidence/network/P5-QUE-009-english-preview.txt"
+    ]
+  },
+  {
+    "testId": "P5-QUE-010",
+    "status": "PASS",
+    "evidencePaths": [
+      "docs/phase-5/evidence/network/P5-QUE-010-incomplete-question-publication-blocked.json"
+    ]
+  },
+  {
+    "testId": "P5-QUE-011",
+    "status": "PASS",
+    "evidencePaths": [
+      "docs/phase-5/evidence/network/P5-QUE-011-complete-question-published.json"
+    ]
+  },
+  {
+    "testId": "P5-EXM-012",
+    "status": "PASS",
+    "evidencePaths": [
+      "docs/phase-5/evidence/network/P5-EXM-012-russian-exam-translation.json"
+    ]
+  },
+  {
+    "testId": "P5-EXM-013",
+    "status": "PASS",
+    "evidencePaths": [
+      "docs/phase-5/evidence/network/P5-EXM-013-english-exam-translation.json"
+    ]
+  },
+  {
+    "testId": "P5-EXM-014",
+    "status": "PASS",
+    "evidencePaths": [
+      "docs/phase-5/evidence/network/P5-EXM-014-russian-preview.json",
+      "docs/phase-5/evidence/network/P5-EXM-014-english-preview.json"
+    ]
+  },
+  {
+    "testId": "P5-EXM-015",
+    "status": "PASS",
+    "evidencePaths": [
+      "docs/phase-5/evidence/network/P5-EXM-015-incomplete-exam-publication-blocked.json"
+    ]
+  },
+  {
+    "testId": "P5-EXM-016",
+    "status": "PASS",
+    "evidencePaths": [
+      "docs/phase-5/evidence/network/P5-EXM-016-complete-exam-published.json"
+    ]
+  },
+  {
+    "testId": "P5-STD-019",
+    "status": "PASS",
+    "evidencePaths": [
+      "docs/phase-5/evidence/browser/P5-STD-019-english-exam-page.png",
+      "docs/phase-5/evidence/console/P5-STD-019-english-exam-page.txt",
+      "docs/phase-5/evidence/network/P5-STD-019-english-exam-page.txt"
+    ]
+  },
+  {
+    "testId": "P5-STD-018",
+    "status": "PASS",
+    "evidencePaths": [
+      "docs/phase-5/evidence/browser/P5-STD-018-russian-exam-page.png",
+      "docs/phase-5/evidence/console/P5-STD-018-russian-exam-page.txt",
+      "docs/phase-5/evidence/network/P5-STD-018-russian-exam-page.txt"
+    ]
+  },
+  {
+    "testId": "P5-STD-020",
+    "status": "PASS",
+    "evidencePaths": [
+      "docs/phase-5/evidence/browser/P5-STD-020-browser-locale-ignored.png",
+      "docs/phase-5/evidence/console/P5-STD-020-browser-locale-ignored.txt",
+      "docs/phase-5/evidence/network/P5-STD-020-browser-locale-ignored.txt"
+    ]
+  },
+  {
+    "testId": "P5-STD-021",
+    "status": "PASS",
+    "evidencePaths": [
+      "docs/phase-5/evidence/network/P5-STD-021-client-language-spoof-ignored.json"
+    ]
+  },
+  {
+    "testId": "P5-STD-023",
+    "status": "PASS",
+    "evidencePaths": [
+      "docs/phase-5/evidence/browser/P5-STD-023-direct-wrong-language-access-denied.png",
+      "docs/phase-5/evidence/console/P5-STD-023-direct-wrong-language-access-denied.txt",
+      "docs/phase-5/evidence/network/P5-STD-023-direct-wrong-language-access-denied.txt"
+    ]
+  },
+  {
+    "testId": "P5-STD-024",
+    "status": "PASS",
+    "evidencePaths": [
+      "docs/phase-5/evidence/network/P5-STD-024-socket-token.json",
+      "docs/phase-5/evidence/network/P5-STD-024-socket-join-error.json"
+    ]
+  },
+  {
+    "testId": "P5-STD-025",
+    "status": "PASS",
+    "evidencePaths": [
+      "docs/phase-5/evidence/network/P5-STD-025-socket-start-error.json"
+    ]
+  },
+  {
+    "testId": "P5-STD-022",
+    "status": "PASS",
+    "evidencePaths": [
+      "docs/phase-5/evidence/network/P5-STD-024-socket-join-error.json"
+    ]
+  },
+  {
+    "testId": "P5-CWK-026",
+    "status": "PASS",
+    "evidencePaths": [
+      "docs/phase-5/evidence/network/P5-CWK-026-coursework-rule-translation-created.json"
+    ]
+  },
+  {
+    "testId": "P5-CWK-027",
+    "status": "PASS",
+    "evidencePaths": [
+      "docs/phase-5/evidence/network/P5-CWK-027-coursework-assignment-translation-created.json"
+    ]
+  },
+  {
+    "testId": "P5-CWK-028",
+    "status": "PASS",
+    "evidencePaths": [
+      "docs/phase-5/evidence/network/P5-CWK-028-coursework-translation-edited.json"
+    ]
+  },
+  {
+    "testId": "P5-CWK-029",
+    "status": "PASS",
+    "evidencePaths": [
+      "docs/phase-5/evidence/browser/P5-CWK-029-student-russian-coursework.png",
+      "docs/phase-5/evidence/console/P5-CWK-029-student-russian-coursework.txt",
+      "docs/phase-5/evidence/network/P5-CWK-029-student-russian-coursework.txt"
+    ]
+  },
+  {
+    "testId": "P5-CWK-030",
+    "status": "PASS",
+    "evidencePaths": [
+      "docs/phase-5/evidence/network/P5-CWK-030-missing-coursework-translation-safe.json"
+    ]
+  },
+  {
+    "testId": "P5-CWK-031",
+    "status": "PASS",
+    "evidencePaths": [
+      "docs/phase-5/evidence/network/P5-AUT-044-assistant-allowed.json"
+    ]
+  },
+  {
+    "testId": "P5-CWK-032",
+    "status": "PASS",
+    "evidencePaths": [
+      "docs/phase-5/evidence/network/P5-CWK-032-cross-department-denied.json"
+    ]
+  },
+  {
+    "testId": "P5-CWK-033",
+    "status": "PASS",
+    "evidencePaths": [
+      "docs/phase-5/evidence/browser/P5-CWK-033-legacy-coursework-readable.png",
+      "docs/phase-5/evidence/console/P5-CWK-033-legacy-coursework-readable.txt",
+      "docs/phase-5/evidence/network/P5-CWK-033-legacy-coursework-readable.txt"
+    ]
+  },
+  {
+    "testId": "P5-EBK-034",
+    "status": "PASS",
+    "evidencePaths": [
+      "docs/phase-5/evidence/network/P5-EBK-034-ebook-translation-created.json"
+    ]
+  },
+  {
+    "testId": "P5-EBK-035",
+    "status": "PASS",
+    "evidencePaths": [
+      "docs/phase-5/evidence/network/P5-EBK-034-ebook-translation-created.json"
+    ]
+  },
+  {
+    "testId": "P5-EBK-036",
+    "status": "PASS",
+    "evidencePaths": [
+      "docs/phase-5/evidence/network/P5-EBK-034-ebook-translation-created.json"
+    ]
+  },
+  {
+    "testId": "P5-EBK-037",
+    "status": "PASS",
+    "evidencePaths": [
+      "docs/phase-5/evidence/network/P5-EBK-037-ebook-translation-edited.json"
+    ]
+  },
+  {
+    "testId": "P5-EBK-038",
+    "status": "PASS",
+    "evidencePaths": [
+      "docs/phase-5/evidence/browser/P5-EBK-038-student-russian-ebook.png",
+      "docs/phase-5/evidence/console/P5-EBK-038-student-russian-ebook.txt",
+      "docs/phase-5/evidence/network/P5-EBK-038-student-russian-ebook.txt"
+    ]
+  },
+  {
+    "testId": "P5-EBK-039",
+    "status": "PASS",
+    "evidencePaths": [
+      "docs/phase-5/evidence/network/P5-EBK-039-file-behavior-correct.json"
+    ]
+  },
+  {
+    "testId": "P5-EBK-040",
+    "status": "PASS",
+    "evidencePaths": [
+      "docs/phase-5/evidence/network/P5-EBK-040-missing-translation-safe.json"
+    ]
+  },
+  {
+    "testId": "P5-EBK-041",
+    "status": "PASS",
+    "evidencePaths": [
+      "docs/phase-5/evidence/network/P5-EBK-041-unauthorized-teacher-denied.json"
+    ]
+  },
+  {
+    "testId": "P5-EBK-042",
+    "status": "PASS",
+    "evidencePaths": [
+      "docs/phase-5/evidence/browser/P5-EBK-042-legacy-ebook-readable.png",
+      "docs/phase-5/evidence/console/P5-EBK-042-legacy-ebook-readable.txt",
+      "docs/phase-5/evidence/network/P5-EBK-042-legacy-ebook-readable.txt"
+    ]
+  },
+  {
+    "testId": "P5-AUT-043",
+    "status": "PASS",
+    "evidencePaths": [
+      "docs/phase-5/evidence/network/P5-AUT-043-lead-manage.json"
+    ]
+  },
+  {
+    "testId": "P5-AUT-045",
+    "status": "PASS",
+    "evidencePaths": [
+      "docs/phase-5/evidence/network/P5-AUT-045-examiner-policy.json"
+    ]
+  },
+  {
+    "testId": "P5-AUT-046",
+    "status": "PASS",
+    "evidencePaths": [
+      "docs/phase-5/evidence/network/P5-AUT-046-unassigned-denied.json"
+    ]
+  },
+  {
+    "testId": "P5-AUT-047",
+    "status": "PASS",
+    "evidencePaths": [
+      "docs/phase-5/evidence/network/P5-AUT-047-own-department-admin.json"
+    ]
+  },
+  {
+    "testId": "P5-AUT-049",
+    "status": "PASS",
+    "evidencePaths": [
+      "docs/phase-5/evidence/network/P5-AUT-049-student-read-only.json"
+    ]
+  },
+  {
+    "testId": "P5-AUT-050",
+    "status": "PASS",
+    "evidencePaths": [
+      "docs/phase-5/evidence/network/P5-AUT-050-unauthenticated-denied.json"
+    ]
+  },
+  {
+    "testId": "P5-UI-051",
+    "status": "PASS",
+    "evidencePaths": [
+      "docs/phase-5/evidence/browser/P5-UI-051-language-tabs.png",
+      "docs/phase-5/evidence/console/P5-UI-051-language-tabs.txt",
+      "docs/phase-5/evidence/network/P5-UI-051-language-tabs.txt"
+    ]
+  },
+  {
+    "testId": "P5-UI-052",
+    "status": "PASS",
+    "evidencePaths": [
+      "docs/phase-5/evidence/browser/P5-UI-051-language-tabs.png",
+      "docs/phase-5/evidence/console/P5-UI-051-language-tabs.txt",
+      "docs/phase-5/evidence/network/P5-UI-051-language-tabs.txt"
+    ]
+  },
+  {
+    "testId": "P5-UI-053",
+    "status": "PASS",
+    "evidencePaths": [
+      "docs/phase-5/evidence/network/P5-UI-053-missing-field-warning.json"
+    ]
+  },
+  {
+    "testId": "P5-UI-054",
+    "status": "PASS",
+    "evidencePaths": [
+      "docs/phase-5/evidence/browser/P5-UI-051-language-tabs.png",
+      "docs/phase-5/evidence/console/P5-UI-051-language-tabs.txt",
+      "docs/phase-5/evidence/network/P5-UI-051-language-tabs.txt",
+      "docs/phase-5/evidence/network/P5-UI-054-save-draft.json"
+    ]
+  },
+  {
+    "testId": "P5-UI-055",
+    "status": "PASS",
+    "evidencePaths": [
+      "docs/phase-5/evidence/browser/P5-UI-051-language-tabs.png",
+      "docs/phase-5/evidence/console/P5-UI-051-language-tabs.txt",
+      "docs/phase-5/evidence/network/P5-UI-051-language-tabs.txt",
+      "docs/phase-5/evidence/network/P5-UI-055-mark-complete.json"
+    ]
+  },
+  {
+    "testId": "P5-UI-056",
+    "status": "PASS",
+    "evidencePaths": [
+      "docs/phase-5/evidence/browser/P5-UI-051-language-tabs.png",
+      "docs/phase-5/evidence/console/P5-UI-051-language-tabs.txt",
+      "docs/phase-5/evidence/network/P5-UI-051-language-tabs.txt"
+    ]
+  },
+  {
+    "testId": "P5-UI-057",
+    "status": "PASS",
+    "evidencePaths": [
+      "docs/phase-5/evidence/browser/P5-UI-051-language-tabs.png",
+      "docs/phase-5/evidence/console/P5-UI-051-language-tabs.txt",
+      "docs/phase-5/evidence/network/P5-UI-051-language-tabs.txt"
+    ]
+  },
+  {
+    "testId": "P5-UI-058",
+    "status": "PASS",
+    "evidencePaths": [
+      "docs/phase-5/evidence/console/P5-UI-058-console-audit.txt"
+    ]
+  },
+  {
+    "testId": "P5-UI-059",
+    "status": "PASS",
+    "evidencePaths": [
+      "docs/phase-5/evidence/console/P5-UI-058-console-audit.txt"
+    ]
+  }
+]

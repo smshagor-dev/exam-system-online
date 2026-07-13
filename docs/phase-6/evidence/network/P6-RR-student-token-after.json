@@ -1,0 +1,6 @@
+{
+  "status": 200,
+  "body": {
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImNtcmhkenE3ZDAwMDJ3aHo1OHJxZGt3eTMiLCJyb2xlIjoiU1RVREVOVCIsIm5hbWUiOiJQNSBFbmdsaXNoIFN0dWRlbnQiLCJlbWFpbCI6InA1LmVuZ2xpc2guc3R1ZGVudEBleGFtZmxvdy5wcm8iLCJleHAiOjE3ODM5NzQ4NjN9.EoYcQW21mXC3eUmn8ruy8GZMauqLOBs7K6kJERG0HHs"
+  }
+}

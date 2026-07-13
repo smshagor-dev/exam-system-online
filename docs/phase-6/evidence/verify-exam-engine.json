@@ -1,0 +1,50 @@
+{
+  "executedAt": "2026-07-13T08:29:42.694Z",
+  "checks": [
+    {
+      "name": "legacy-snapshot-backfill",
+      "pass": true,
+      "details": "Backfilled 3 active/submitted attempts that were missing dedicated snapshots."
+    },
+    {
+      "name": "snapshot-created",
+      "pass": true,
+      "details": "Snapshot storage=dedicated; questions=1"
+    },
+    {
+      "name": "snapshot-idempotent",
+      "pass": true,
+      "details": "Repeated snapshot request returned the same immutable record."
+    },
+    {
+      "name": "snapshot-integrity",
+      "pass": true,
+      "details": "activeAttempts=5; snapshots=5"
+    },
+    {
+      "name": "single-active-attempt",
+      "pass": true,
+      "details": "Active attempts for fixture student/exam: 1"
+    },
+    {
+      "name": "duplicate-answer-records",
+      "pass": true,
+      "details": "No duplicate answer rows found."
+    },
+    {
+      "name": "timer-session-shape",
+      "pass": true,
+      "details": "No live exam session present for fixture exam."
+    },
+    {
+      "name": "runtime-state-readable",
+      "pass": true,
+      "details": "No runtime attempt present."
+    },
+    {
+      "name": "reconnect-token-shape",
+      "pass": true,
+      "details": "Reconnect token absent because no active runtime state is present."
+    }
+  ]
+}

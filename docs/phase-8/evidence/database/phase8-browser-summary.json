@@ -1,0 +1,179 @@
+{
+  "generatedAt": "2026-07-13T15:21:15.898Z",
+  "status": "PASS",
+  "total": 12,
+  "passed": 12,
+  "failed": 0,
+  "results": [
+    {
+      "testId": "P8-BR-001",
+      "role": "Department Admin",
+      "precondition": "CSE department admin is authenticated.",
+      "steps": "Open the exam venue administration page in the browser.",
+      "expected": "Venue management page loads without critical console or network errors.",
+      "actual": "Venue page rendered.",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-8/evidence/browser/P8-BR-001-venues-page.png",
+        "docs/phase-8/evidence/console/P8-BR-001-venues-page.txt",
+        "docs/phase-8/evidence/network/P8-BR-001-venues-page.txt"
+      ]
+    },
+    {
+      "testId": "P8-BR-002",
+      "role": "Department Admin",
+      "precondition": "Venue scope exists for the CSE department.",
+      "steps": "Create campus, building, and room. Edit the room capacity and maintenance fields.",
+      "expected": "Room workflow supports create and edit operations in department scope.",
+      "actual": "Campus, building, and room created; room capacity updated to 110.",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-8/evidence/network/P8-BR-002-room-workflow.json",
+        "docs/phase-8/evidence/browser/P8-BR-002-room-workflow.png",
+        "docs/phase-8/evidence/console/P8-BR-002-room-workflow.txt",
+        "docs/phase-8/evidence/network/P8-BR-002-room-workflow.txt"
+      ]
+    },
+    {
+      "testId": "P8-BR-003",
+      "role": "Department Admin",
+      "precondition": "Calendar dependencies are available.",
+      "steps": "Create an exam academic calendar and a campus holiday.",
+      "expected": "Calendar and holiday records are created in department scope.",
+      "actual": "Calendar page rendered with the new calendar workflow present.",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-8/evidence/network/P8-BR-003-calendar-workflow.json",
+        "docs/phase-8/evidence/browser/P8-BR-003-calendar-workflow.png",
+        "docs/phase-8/evidence/console/P8-BR-003-calendar-workflow.txt",
+        "docs/phase-8/evidence/network/P8-BR-003-calendar-workflow.txt"
+      ]
+    },
+    {
+      "testId": "P8-BR-004",
+      "role": "Department Admin",
+      "precondition": "Scheduling session exists in DRAFT state.",
+      "steps": "Attempt invalid DRAFT -> PUBLISHED transition, then transition DRAFT -> SCHEDULED and generate timetable.",
+      "expected": "Invalid transition is rejected, capacity shortage is rejected, and generation succeeds with schedule evidence.",
+      "actual": "invalid=409; scheduled=200; overCapacity=500; generated=1; conflictFlags=[\"student_conflict\"]",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-8/evidence/network/P8-BR-004-scheduling.json",
+        "docs/phase-8/evidence/browser/P8-BR-004-scheduling.png",
+        "docs/phase-8/evidence/console/P8-BR-004-scheduling.txt",
+        "docs/phase-8/evidence/network/P8-BR-004-scheduling.txt"
+      ]
+    },
+    {
+      "testId": "P8-BR-005",
+      "role": "Department Admin",
+      "precondition": "A generated schedule item exists with enrolled students.",
+      "steps": "Generate the seat plan and verify uniqueness and room-capacity alignment.",
+      "expected": "Seat plan generation produces one unique seat per student without exceeding capacity.",
+      "actual": "assigned=2; uniqueSeats=2; uniqueStudents=2",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-8/evidence/database/P8-BR-005-seat-plan.json"
+      ]
+    },
+    {
+      "testId": "P8-BR-006",
+      "role": "Department Admin",
+      "precondition": "Schedule item exists with a seat plan.",
+      "steps": "Assign a primary invigilator and a replacement teacher for the same duty.",
+      "expected": "Invigilator assignment persists with replacement history on the duty record.",
+      "actual": "assignment=cmrjdcs8600181jok1js2b5ba; replacement=cmrc1y78y000wk2kd157911xr",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-8/evidence/network/P8-BR-006-invigilator.json"
+      ]
+    },
+    {
+      "testId": "P8-BR-007",
+      "role": "Student / Department Admin",
+      "precondition": "Scheduling session is published and admit cards have been issued.",
+      "steps": "Student lists and downloads their own admit card PDF. Foreign student attempts access. Admin regenerates the card.",
+      "expected": "Own admit-card PDF downloads, foreign access is denied, and admin regeneration is audited.",
+      "actual": "studentPdf=200; foreign=403; regenerate=200",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-8/evidence/pdf/P8-BR-007-cmrjdcp1j00141jokivr432b6.pdf",
+        "docs/phase-8/evidence/network/P8-BR-007-admit-card.json",
+        "docs/phase-8/evidence/browser/P8-BR-007-student-admit-card.png",
+        "docs/phase-8/evidence/console/P8-BR-007-student-admit-card.txt",
+        "docs/phase-8/evidence/network/P8-BR-007-student-admit-card.txt",
+        "docs/phase-8/evidence/browser/P8-BR-007-foreign-denied.png",
+        "docs/phase-8/evidence/console/P8-BR-007-foreign-denied.txt",
+        "docs/phase-8/evidence/network/P8-BR-007-foreign-denied.txt"
+      ]
+    },
+    {
+      "testId": "P8-BR-008",
+      "role": "Teacher / Invigilator",
+      "precondition": "Published seat plan and admit-card artifacts exist.",
+      "steps": "Verify the student QR token, reject an invalid token, record attendance, and then correct the attendance with a reason.",
+      "expected": "QR verification succeeds, invalid token is denied, attendance is idempotent, and corrections require audit context.",
+      "actual": "verifyQr=200; verifyBad=404; attendance=200; correction=200",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-8/evidence/network/P8-BR-008-attendance.json"
+      ]
+    },
+    {
+      "testId": "P8-BR-009",
+      "role": "Teacher / Invigilator",
+      "precondition": "Invigilator has incident permissions for the running hall.",
+      "steps": "Create, acknowledge, and resolve an incident for the scheduled exam item.",
+      "expected": "Incident workflow persists and transitions are recorded without duplicate acknowledgement side effects.",
+      "actual": "create=201; acknowledge=200; resolve=200",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-8/evidence/network/P8-BR-009-incident.json"
+      ]
+    },
+    {
+      "testId": "P8-BR-010",
+      "role": "Department Admin",
+      "precondition": "Phase 8 reporting data exists for the generated session.",
+      "steps": "Generate a CSV room-utilization export and a PDF attendance export.",
+      "expected": "CSV and PDF exports download successfully with server-side access control.",
+      "actual": "csv=200; pdf=200",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-8/evidence/csv/P8-BR-010-room-utilization.csv",
+        "docs/phase-8/evidence/pdf/P8-BR-010-attendance.pdf",
+        "docs/phase-8/evidence/network/P8-BR-010-exports.json"
+      ]
+    },
+    {
+      "testId": "P8-BR-011",
+      "role": "Department Admin B / Unauthenticated",
+      "precondition": "Department-scoped Phase 8 data exists for CSE.",
+      "steps": "Department Admin B requests CSE scheduling sessions directly. Anonymous user requests admin reports.",
+      "expected": "Cross-department list leakage is blocked and unauthenticated report access is denied.",
+      "actual": "eeeRows=0; anonymousReports=403",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-8/evidence/network/P8-BR-011-isolation.json"
+      ]
+    },
+    {
+      "testId": "P8-BR-012",
+      "role": "Teacher / Student",
+      "precondition": "Phase 6 Redis runtime is active and the Phase 8 schedule item is RUNNING.",
+      "steps": "Teacher joins live exam monitoring, student starts the linked exam attempt, then teacher opens the Phase 8 invigilation dashboard.",
+      "expected": "Phase 6 live monitoring works for the linked exam and the Phase 8 dashboard shows the running invigilation item.",
+      "actual": "monitorStudents=0; attemptStatus=IN_PROGRESS; dashboardRunning=true",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-8/evidence/network/P8-BR-012-live-monitor.json",
+        "docs/phase-8/evidence/browser/P8-BR-012-teacher-invigilation.png",
+        "docs/phase-8/evidence/console/P8-BR-012-teacher-invigilation.txt",
+        "docs/phase-8/evidence/network/P8-BR-012-teacher-invigilation.txt",
+        "docs/phase-8/evidence/browser/P8-BR-012-student-runtime.png",
+        "docs/phase-8/evidence/console/P8-BR-012-student-runtime.txt",
+        "docs/phase-8/evidence/network/P8-BR-012-student-runtime.txt"
+      ]
+    }
+  ]
+}

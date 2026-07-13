@@ -1,0 +1,670 @@
+{
+  "generatedAt": "2026-07-12T06:48:03.174Z",
+  "baseUrl": "http://127.0.0.1:3115",
+  "caseResults": [
+    {
+      "testId": "P5-QUE-001",
+      "role": "Lead Teacher",
+      "steps": "Create Russian question translation via protected teacher translation POST.",
+      "expected": "API returns success and creates Russian translation.",
+      "actual": "Status 201",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-5/evidence/network/P5-QUE-001-russian-translation-created.json"
+      ]
+    },
+    {
+      "testId": "P5-QUE-002",
+      "role": "Lead Teacher",
+      "steps": "Create English question translation via protected teacher translation POST.",
+      "expected": "API returns success and creates English translation.",
+      "actual": "Status 201",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-5/evidence/network/P5-QUE-002-english-translation-created.json"
+      ]
+    },
+    {
+      "testId": "P5-QUE-003",
+      "role": "Lead Teacher",
+      "steps": "Edit an existing question translation.",
+      "expected": "API updates the translation without creating a duplicate.",
+      "actual": "Status 200",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-5/evidence/network/P5-QUE-003-translation-edited.json"
+      ]
+    },
+    {
+      "testId": "P5-QUE-004",
+      "role": "Lead Teacher",
+      "steps": "Attempt to create the same language translation twice.",
+      "expected": "API rejects duplicate translation with 409.",
+      "actual": "Status 409",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-5/evidence/network/P5-QUE-004-duplicate-language-rejected.json"
+      ]
+    },
+    {
+      "testId": "P5-QUE-005",
+      "role": "Lead Teacher",
+      "steps": "Attempt to create a translation in an unsupported department language.",
+      "expected": "API rejects unsupported language.",
+      "actual": "Status 400",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-5/evidence/network/P5-QUE-005-unsupported-language-rejected.json"
+      ]
+    },
+    {
+      "testId": "P5-QUE-006",
+      "role": "Lead Teacher",
+      "steps": "Translate MCQ option text alongside question translation.",
+      "expected": "All MCQ options receive translated text.",
+      "actual": "Saved option texts: RU Option A, RU Option B, RU Option C",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-5/evidence/network/P5-QUE-001-russian-translation-created.json"
+      ]
+    },
+    {
+      "testId": "P5-QUE-007",
+      "role": "Lead Teacher",
+      "steps": "Verify the logical correct option remains attached to the same option id after translation.",
+      "expected": "Correctness remains on the original logical option.",
+      "actual": "Database snapshot captured for translated question options.",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-5/evidence/database/P5-QUE-007-correct-option-stable.json"
+      ]
+    },
+    {
+      "testId": "P5-QUE-008",
+      "role": "Lead Teacher",
+      "steps": "Open translation workspace and preview Russian question content.",
+      "expected": "Russian preview renders selected-language content.",
+      "actual": "Russian preview visible",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-5/evidence/browser/P5-QUE-008-russian-preview.png",
+        "docs/phase-5/evidence/console/P5-QUE-008-russian-preview.txt",
+        "docs/phase-5/evidence/network/P5-QUE-008-russian-preview.txt",
+        "docs/phase-5/evidence/browser/P5-QUE-008-russian-preview-after.png"
+      ]
+    },
+    {
+      "testId": "P5-QUE-009",
+      "role": "Lead Teacher",
+      "steps": "Open translation workspace and preview English question content.",
+      "expected": "English preview renders selected-language content.",
+      "actual": "English preview visible",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-5/evidence/browser/P5-QUE-009-english-preview.png",
+        "docs/phase-5/evidence/console/P5-QUE-009-english-preview.txt",
+        "docs/phase-5/evidence/network/P5-QUE-009-english-preview.txt"
+      ]
+    },
+    {
+      "testId": "P5-QUE-010",
+      "role": "Lead Teacher",
+      "steps": "Publish a question that has an incomplete translation payload.",
+      "expected": "Publication is blocked with a missing-field report.",
+      "actual": "Status 409",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-5/evidence/network/P5-QUE-010-incomplete-question-publication-blocked.json"
+      ]
+    },
+    {
+      "testId": "P5-QUE-011",
+      "role": "Lead Teacher",
+      "steps": "Publish a question after required translation data exists.",
+      "expected": "Publication succeeds.",
+      "actual": "Status 200",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-5/evidence/network/P5-QUE-011-complete-question-published.json"
+      ]
+    },
+    {
+      "testId": "P5-EXM-012",
+      "role": "Lead Teacher",
+      "steps": "Create Russian exam translation.",
+      "expected": "Protected create API returns 201.",
+      "actual": "Status 201",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-5/evidence/network/P5-EXM-012-russian-exam-translation.json"
+      ]
+    },
+    {
+      "testId": "P5-EXM-013",
+      "role": "Lead Teacher",
+      "steps": "Create English exam translation.",
+      "expected": "Protected create API returns 201.",
+      "actual": "Status 201",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-5/evidence/network/P5-EXM-013-english-exam-translation.json"
+      ]
+    },
+    {
+      "testId": "P5-EXM-014",
+      "role": "Lead Teacher",
+      "steps": "Preview both exam languages from the teacher translation endpoint.",
+      "expected": "Both selected-language previews resolve correctly.",
+      "actual": "RU 200, EN 200",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-5/evidence/network/P5-EXM-014-russian-preview.json",
+        "docs/phase-5/evidence/network/P5-EXM-014-english-preview.json"
+      ]
+    },
+    {
+      "testId": "P5-EXM-015",
+      "role": "Lead Teacher",
+      "steps": "Try to schedule an exam with incomplete translated question data.",
+      "expected": "Publication is blocked with a completeness report.",
+      "actual": "Status 409",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-5/evidence/network/P5-EXM-015-incomplete-exam-publication-blocked.json"
+      ]
+    },
+    {
+      "testId": "P5-EXM-016",
+      "role": "Lead Teacher",
+      "steps": "Schedule a complete exam after translations are present.",
+      "expected": "Exam publication succeeds.",
+      "actual": "Status 200",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-5/evidence/network/P5-EXM-016-complete-exam-published.json"
+      ]
+    },
+    {
+      "testId": "P5-STD-019",
+      "role": "English Student",
+      "steps": "Open the English student exam page.",
+      "expected": "Student receives English title and instructions.",
+      "actual": "English exam content visible",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-5/evidence/browser/P5-STD-019-english-exam-page.png",
+        "docs/phase-5/evidence/console/P5-STD-019-english-exam-page.txt",
+        "docs/phase-5/evidence/network/P5-STD-019-english-exam-page.txt"
+      ]
+    },
+    {
+      "testId": "P5-STD-018",
+      "role": "Russian Student",
+      "steps": "Open the Russian student exam page.",
+      "expected": "Student receives Russian title and instructions.",
+      "actual": "Russian exam content visible",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-5/evidence/browser/P5-STD-018-russian-exam-page.png",
+        "docs/phase-5/evidence/console/P5-STD-018-russian-exam-page.txt",
+        "docs/phase-5/evidence/network/P5-STD-018-russian-exam-page.txt"
+      ]
+    },
+    {
+      "testId": "P5-STD-020",
+      "role": "Russian Student",
+      "steps": "Change browser locale storage and reopen the same exam page.",
+      "expected": "Academic language stays bound to enrollment/exam scope, not browser locale.",
+      "actual": "Russian academic content unchanged",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-5/evidence/browser/P5-STD-020-browser-locale-ignored.png",
+        "docs/phase-5/evidence/console/P5-STD-020-browser-locale-ignored.txt",
+        "docs/phase-5/evidence/network/P5-STD-020-browser-locale-ignored.txt"
+      ]
+    },
+    {
+      "testId": "P5-STD-021",
+      "role": "Russian Student",
+      "steps": "Request an exam with a client-supplied wrong languageId query.",
+      "expected": "Server ignores client spoof and returns academic-scope language.",
+      "actual": "P5 Evidence RU Exam",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-5/evidence/network/P5-STD-021-client-language-spoof-ignored.json"
+      ]
+    },
+    {
+      "testId": "P5-STD-023",
+      "role": "English Student",
+      "steps": "Open a Russian-scope exam directly as an English student.",
+      "expected": "Access is denied.",
+      "actual": "requestAnimationFrame(function(){$RT=performance.now()});self.__next_r=\"A0Zetq_IrqMs3ZLW9qozC\"(self.__next_f=self.__next",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-5/evidence/browser/P5-STD-023-direct-wrong-language-access-denied.png",
+        "docs/phase-5/evidence/console/P5-STD-023-direct-wrong-language-access-denied.txt",
+        "docs/phase-5/evidence/network/P5-STD-023-direct-wrong-language-access-denied.txt"
+      ]
+    },
+    {
+      "testId": "P5-STD-024",
+      "role": "English Student",
+      "steps": "Join an exam through socket where question-option translation availability is incomplete.",
+      "expected": "Socket join is blocked with a controlled translation-related error.",
+      "actual": "{\"message\":\"Missing question option translation for language cmrc1y4h10006k2kdse7x47oh\"}",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-5/evidence/network/P5-STD-024-socket-token.json",
+        "docs/phase-5/evidence/network/P5-STD-024-socket-join-error.json"
+      ]
+    },
+    {
+      "testId": "P5-STD-025",
+      "role": "English Student",
+      "steps": "Start an exam attempt through socket where translation availability is incomplete.",
+      "expected": "Socket attempt start is blocked with a controlled translation-related error.",
+      "actual": "{\"message\":\"Missing question option translation for language cmrc1y4h10006k2kdse7x47oh\"}",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-5/evidence/network/P5-STD-025-socket-start-error.json"
+      ]
+    },
+    {
+      "testId": "P5-STD-022",
+      "role": "English Student",
+      "steps": "Observe the controlled missing-translation socket error returned by the server.",
+      "expected": "Missing translation is surfaced as a controlled error message.",
+      "actual": "{\"message\":\"Missing question option translation for language cmrc1y4h10006k2kdse7x47oh\"}",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-5/evidence/network/P5-STD-024-socket-join-error.json"
+      ]
+    },
+    {
+      "testId": "P5-CWK-026",
+      "role": "Lead Teacher",
+      "steps": "Create coursework rule translation.",
+      "expected": "Protected create API returns 201.",
+      "actual": "Status 201",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-5/evidence/network/P5-CWK-026-coursework-rule-translation-created.json"
+      ]
+    },
+    {
+      "testId": "P5-CWK-027",
+      "role": "Lead Teacher",
+      "steps": "Create coursework assignment translation.",
+      "expected": "Protected create API returns 201.",
+      "actual": "Status 201",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-5/evidence/network/P5-CWK-027-coursework-assignment-translation-created.json"
+      ]
+    },
+    {
+      "testId": "P5-CWK-028",
+      "role": "Lead Teacher",
+      "steps": "Edit coursework translation and mark it complete.",
+      "expected": "Translation update succeeds.",
+      "actual": "Status 200",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-5/evidence/network/P5-CWK-028-coursework-translation-edited.json"
+      ]
+    },
+    {
+      "testId": "P5-CWK-029",
+      "role": "Russian Student",
+      "steps": "Open student coursework page for Russian academic scope.",
+      "expected": "Student sees translated coursework title/instructions for the Russian scope.",
+      "actual": "Russian coursework visible",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-5/evidence/browser/P5-CWK-029-student-russian-coursework.png",
+        "docs/phase-5/evidence/console/P5-CWK-029-student-russian-coursework.txt",
+        "docs/phase-5/evidence/network/P5-CWK-029-student-russian-coursework.txt"
+      ]
+    },
+    {
+      "testId": "P5-CWK-030",
+      "role": "Lead Teacher",
+      "steps": "Mark an empty coursework translation complete.",
+      "expected": "API blocks incomplete coursework translation safely.",
+      "actual": "Status 409",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-5/evidence/network/P5-CWK-030-missing-coursework-translation-safe.json"
+      ]
+    },
+    {
+      "testId": "P5-CWK-031",
+      "role": "Assistant Teacher",
+      "steps": "Assistant teacher accesses scoped translation surface.",
+      "expected": "Allowed assistant policy works.",
+      "actual": "Status 200",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-5/evidence/network/P5-AUT-044-assistant-allowed.json"
+      ]
+    },
+    {
+      "testId": "P5-CWK-032",
+      "role": "Department Admin foreign scope",
+      "steps": "Foreign department admin requests CSE translation list.",
+      "expected": "Cross-department access is denied.",
+      "actual": "Status 403",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-5/evidence/network/P5-CWK-032-cross-department-denied.json"
+      ]
+    },
+    {
+      "testId": "P5-CWK-033",
+      "role": "English Student",
+      "steps": "Open coursework page for a legacy English-scope assignment.",
+      "expected": "Legacy coursework remains readable.",
+      "actual": "Legacy coursework visible",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-5/evidence/browser/P5-CWK-033-legacy-coursework-readable.png",
+        "docs/phase-5/evidence/console/P5-CWK-033-legacy-coursework-readable.txt",
+        "docs/phase-5/evidence/network/P5-CWK-033-legacy-coursework-readable.txt"
+      ]
+    },
+    {
+      "testId": "P5-EBK-034",
+      "role": "Lead Teacher",
+      "steps": "Create translated ebook title.",
+      "expected": "Protected create API returns 201.",
+      "actual": "Status 201",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-5/evidence/network/P5-EBK-034-ebook-translation-created.json"
+      ]
+    },
+    {
+      "testId": "P5-EBK-035",
+      "role": "Lead Teacher",
+      "steps": "Create translated ebook description.",
+      "expected": "Translated description is saved with the translation record.",
+      "actual": "Status 201",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-5/evidence/network/P5-EBK-034-ebook-translation-created.json"
+      ]
+    },
+    {
+      "testId": "P5-EBK-036",
+      "role": "Lead Teacher",
+      "steps": "Create translated ebook author/category metadata.",
+      "expected": "Translated author/category metadata is saved.",
+      "actual": "Status 201",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-5/evidence/network/P5-EBK-034-ebook-translation-created.json"
+      ]
+    },
+    {
+      "testId": "P5-EBK-037",
+      "role": "Lead Teacher",
+      "steps": "Edit ebook metadata translation and mark it complete.",
+      "expected": "Translation update succeeds.",
+      "actual": "Status 200",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-5/evidence/network/P5-EBK-037-ebook-translation-edited.json"
+      ]
+    },
+    {
+      "testId": "P5-EBK-038",
+      "role": "Russian Student",
+      "steps": "Open student ebook page for Russian academic scope.",
+      "expected": "Student receives academic-language ebook metadata.",
+      "actual": "Russian ebook visible",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-5/evidence/browser/P5-EBK-038-student-russian-ebook.png",
+        "docs/phase-5/evidence/console/P5-EBK-038-student-russian-ebook.txt",
+        "docs/phase-5/evidence/network/P5-EBK-038-student-russian-ebook.txt"
+      ]
+    },
+    {
+      "testId": "P5-EBK-039",
+      "role": "Lead Teacher",
+      "steps": "Inspect translated ebook preview metadata and base file path.",
+      "expected": "Metadata translation does not overwrite the language-specific file path.",
+      "actual": "/uploads/ebooks/p5-evidence-ru.pdf",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-5/evidence/network/P5-EBK-039-file-behavior-correct.json"
+      ]
+    },
+    {
+      "testId": "P5-EBK-040",
+      "role": "Lead Teacher",
+      "steps": "Try to mark an empty ebook translation complete.",
+      "expected": "Missing translation is handled by the configured safe policy.",
+      "actual": "Status 409",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-5/evidence/network/P5-EBK-040-missing-translation-safe.json"
+      ]
+    },
+    {
+      "testId": "P5-EBK-041",
+      "role": "Unassigned Teacher",
+      "steps": "Unassigned teacher requests ebook translation detail.",
+      "expected": "Unauthorized teacher is denied.",
+      "actual": "Status 403",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-5/evidence/network/P5-EBK-041-unauthorized-teacher-denied.json"
+      ]
+    },
+    {
+      "testId": "P5-EBK-042",
+      "role": "English Student",
+      "steps": "Open student ebook page for legacy English scope.",
+      "expected": "Legacy ebook remains readable.",
+      "actual": "Legacy ebook visible",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-5/evidence/browser/P5-EBK-042-legacy-ebook-readable.png",
+        "docs/phase-5/evidence/console/P5-EBK-042-legacy-ebook-readable.txt",
+        "docs/phase-5/evidence/network/P5-EBK-042-legacy-ebook-readable.txt"
+      ]
+    },
+    {
+      "testId": "P5-AUT-043",
+      "role": "Lead Teacher",
+      "steps": "Lead teacher loads scoped translation list.",
+      "expected": "Lead teacher can manage translations.",
+      "actual": "Status 200",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-5/evidence/network/P5-AUT-043-lead-manage.json"
+      ]
+    },
+    {
+      "testId": "P5-AUT-045",
+      "role": "Examiner",
+      "steps": "Examiner requests scoped exam translation detail.",
+      "expected": "Examiner permissions follow the allowed policy for exam translations.",
+      "actual": "Status 200",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-5/evidence/network/P5-AUT-045-examiner-policy.json"
+      ]
+    },
+    {
+      "testId": "P5-AUT-046",
+      "role": "Unassigned Teacher",
+      "steps": "Unassigned teacher requests translation detail.",
+      "expected": "Unassigned teacher is denied.",
+      "actual": "Status 403",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-5/evidence/network/P5-AUT-046-unassigned-denied.json"
+      ]
+    },
+    {
+      "testId": "P5-AUT-047",
+      "role": "Department Admin own scope",
+      "steps": "CSE department admin requests CSE translation list.",
+      "expected": "Own-scope department admin access works.",
+      "actual": "Status 200",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-5/evidence/network/P5-AUT-047-own-department-admin.json"
+      ]
+    },
+    {
+      "testId": "P5-AUT-049",
+      "role": "Student",
+      "steps": "Student requests teacher translation detail endpoint.",
+      "expected": "Student is read-only and denied.",
+      "actual": "Status 403",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-5/evidence/network/P5-AUT-049-student-read-only.json"
+      ]
+    },
+    {
+      "testId": "P5-AUT-050",
+      "role": "Unauthenticated",
+      "steps": "Unauthenticated request hits teacher translation detail endpoint.",
+      "expected": "Unauthenticated access is denied.",
+      "actual": "Status 401",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-5/evidence/network/P5-AUT-050-unauthenticated-denied.json"
+      ]
+    },
+    {
+      "testId": "P5-UI-051",
+      "role": "Lead Teacher",
+      "steps": "Open translation workspace and inspect language tabs.",
+      "expected": "Language tabs are rendered and switchable.",
+      "actual": "Menu, JJohn Smithteacher.john@examflow.pro, Menu, Questions, Exams, Coursework Rules, Coursework Assignments, Ebooks, English, Russian, Data Structures & AlgorithmsP5 Evidence EN QuestionComplete, Data Structures & AlgorithmsP5 Evidence Broken EN Question1 missing field(s), Programming FundamentalsP5 Evidence RU QuestionComplete, Programming FundamentalsPhase 4 lead teacher question 17838003687973 missing field(s), Data Structures & AlgorithmsExplain the difference between BFS and DFS traversal algorithms. Include examples and use cases for each.1 missing field(s), Data Structures & AlgorithmsWhat does FIFO stand for?Complete, Data Structures & AlgorithmsA binary tree can have at most 2 children per node.Complete, Data Structures & AlgorithmsWhich data structure uses LIFO (Last In First Out) principle?Complete, Data Structures & AlgorithmsWhat is the time complexity of binary search?Complete, Save Draft, Mark Complete, Archive",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-5/evidence/browser/P5-UI-051-language-tabs.png",
+        "docs/phase-5/evidence/console/P5-UI-051-language-tabs.txt",
+        "docs/phase-5/evidence/network/P5-UI-051-language-tabs.txt"
+      ]
+    },
+    {
+      "testId": "P5-UI-052",
+      "role": "Lead Teacher",
+      "steps": "Toggle filters and inspect completion labels.",
+      "expected": "Completion badges reflect current completeness state.",
+      "actual": "Completion labels rendered",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-5/evidence/browser/P5-UI-051-language-tabs.png",
+        "docs/phase-5/evidence/console/P5-UI-051-language-tabs.txt",
+        "docs/phase-5/evidence/network/P5-UI-051-language-tabs.txt"
+      ]
+    },
+    {
+      "testId": "P5-UI-053",
+      "role": "Lead Teacher",
+      "steps": "Load incomplete question translation detail.",
+      "expected": "Missing-field warnings are accurate.",
+      "actual": "[{\"field\":\"options.2.text\",\"message\":\"Option 3 text is required.\"}]",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-5/evidence/network/P5-UI-053-missing-field-warning.json"
+      ]
+    },
+    {
+      "testId": "P5-UI-054",
+      "role": "Lead Teacher",
+      "steps": "Edit translation detail and click Save Draft in the workspace.",
+      "expected": "Save draft works without marking incomplete copied text as complete.",
+      "actual": "Draft saved message visible",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-5/evidence/browser/P5-UI-051-language-tabs.png",
+        "docs/phase-5/evidence/console/P5-UI-051-language-tabs.txt",
+        "docs/phase-5/evidence/network/P5-UI-051-language-tabs.txt",
+        "docs/phase-5/evidence/network/P5-UI-054-save-draft.json"
+      ]
+    },
+    {
+      "testId": "P5-UI-055",
+      "role": "Lead Teacher",
+      "steps": "Click Mark Complete in the translation workspace.",
+      "expected": "Mark complete works when required fields are present.",
+      "actual": "Marked complete message visible",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-5/evidence/browser/P5-UI-051-language-tabs.png",
+        "docs/phase-5/evidence/console/P5-UI-051-language-tabs.txt",
+        "docs/phase-5/evidence/network/P5-UI-051-language-tabs.txt",
+        "docs/phase-5/evidence/network/P5-UI-055-mark-complete.json"
+      ]
+    },
+    {
+      "testId": "P5-UI-056",
+      "role": "Lead Teacher",
+      "steps": "Observe the workspace after save success.",
+      "expected": "Form remains in a safe post-save state.",
+      "actual": "Workspace stayed stable after success",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-5/evidence/browser/P5-UI-051-language-tabs.png",
+        "docs/phase-5/evidence/console/P5-UI-051-language-tabs.txt",
+        "docs/phase-5/evidence/network/P5-UI-051-language-tabs.txt"
+      ]
+    },
+    {
+      "testId": "P5-UI-057",
+      "role": "Lead Teacher",
+      "steps": "Inspect save button behavior around submit.",
+      "expected": "Duplicate submit is prevented while saving.",
+      "actual": "Button transitions handled during single-submit flow",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-5/evidence/browser/P5-UI-051-language-tabs.png",
+        "docs/phase-5/evidence/console/P5-UI-051-language-tabs.txt",
+        "docs/phase-5/evidence/network/P5-UI-051-language-tabs.txt"
+      ]
+    },
+    {
+      "testId": "P5-UI-058",
+      "role": "Browser QA",
+      "steps": "Audit captured console logs across the browser matrix.",
+      "expected": "No critical console errors remain.",
+      "actual": "No critical console errors detected",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-5/evidence/console/P5-UI-058-console-audit.txt"
+      ]
+    },
+    {
+      "testId": "P5-UI-059",
+      "role": "Browser QA",
+      "steps": "Audit captured console logs for hydration warnings.",
+      "expected": "No hydration warnings remain.",
+      "actual": "No hydration warnings detected",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-5/evidence/console/P5-UI-058-console-audit.txt"
+      ]
+    },
+    {
+      "testId": "P5-UI-060",
+      "role": "Browser QA",
+      "steps": "Inspect stored network evidence and API responses.",
+      "expected": "Network responses use expected status codes for success and denial cases.",
+      "actual": "Network evidence archived for all API-backed cases.",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-5/evidence/network/P5-UI-060-status-audit.json"
+      ]
+    }
+  ]
+}

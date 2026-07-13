@@ -1,0 +1,12 @@
+{
+  "method": "GET",
+  "url": "/api/public/records/verify?code=TRX-mrjfkcm6-ef41886f",
+  "status": 200,
+  "json": {
+    "type": "transcript",
+    "valid": true,
+    "holder": "P5 Russian Student",
+    "generatedAt": "2026-07-13T16:22:14.246Z"
+  },
+  "text": "{\"type\":\"transcript\",\"valid\":true,\"holder\":\"P5 Russian Student\",\"generatedAt\":\"2026-07-13T16:22:14.246Z\"}"
+}

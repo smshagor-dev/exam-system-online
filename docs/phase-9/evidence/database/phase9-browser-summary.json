@@ -1,0 +1,217 @@
+{
+  "generatedAt": "2026-07-13T16:22:44.657Z",
+  "status": "PASS",
+  "total": 16,
+  "passed": 16,
+  "failed": 0,
+  "results": [
+    {
+      "testId": "P9-BR-001",
+      "role": "Department Admin",
+      "precondition": "Authenticated department admin session exists.",
+      "steps": "Open the Phase 9 admin dashboard on desktop light mode.",
+      "expected": "The Enterprise Results Platform page renders without critical UI failures.",
+      "actual": "Dashboard rendered.",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-9/evidence/browser/phase9-admin-dashboard.png",
+        "docs/phase-9/evidence/console/phase9-admin-dashboard.txt",
+        "docs/phase-9/evidence/network/phase9-admin-dashboard.txt"
+      ]
+    },
+    {
+      "testId": "P9-BR-002",
+      "role": "Department Admin",
+      "precondition": "A valid academic offering and teacher fixture exist.",
+      "steps": "Create a Phase 9 gradebook through the admin API.",
+      "expected": "Gradebook creation succeeds with weighted components.",
+      "actual": "status=201; components=4",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-6/evidence/network/phase9-browser-gradebook-create.json"
+      ]
+    },
+    {
+      "testId": "P9-BR-003",
+      "role": "Department Admin",
+      "precondition": "A Phase 9 gradebook exists.",
+      "steps": "Submit internal marks for the scoped student.",
+      "expected": "Grade entry persists successfully.",
+      "actual": "status=200; rows=1",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-6/evidence/network/phase9-browser-grade-entry.json"
+      ]
+    },
+    {
+      "testId": "P9-BR-004",
+      "role": "Department Admin",
+      "precondition": "Grade entry exists for the gradebook.",
+      "steps": "Calculate the gradebook results and GPA.",
+      "expected": "A result record is produced with semester GPA and CGPA fields.",
+      "actual": "status=200; resultRecord=cmrjfjxno0009odlb1nndbfne; gpa=0; cgpa=0",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-6/evidence/network/phase9-browser-calculate.json"
+      ]
+    },
+    {
+      "testId": "P9-BR-005",
+      "role": "Department Admin",
+      "precondition": "A calculated Phase 9 result record exists.",
+      "steps": "Verify, moderate, approve, and publish the result workflow.",
+      "expected": "Every lifecycle transition succeeds and the result becomes published.",
+      "actual": "statuses=200,200,200,200",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-9/evidence/network/phase9-browser-transition-verified.json",
+        "docs/phase-9/evidence/network/phase9-browser-transition-moderated.json",
+        "docs/phase-9/evidence/network/phase9-browser-transition-approved.json",
+        "docs/phase-9/evidence/network/phase9-browser-transition-published.json"
+      ]
+    },
+    {
+      "testId": "P9-BR-006",
+      "role": "Student",
+      "precondition": "A result has been published for the logged-in student.",
+      "steps": "Fetch student result records from the student API.",
+      "expected": "Published result records are visible to the student.",
+      "actual": "status=200; records=7",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-6/evidence/network/phase9-browser-student-results.json"
+      ]
+    },
+    {
+      "testId": "P9-BR-007",
+      "role": "Department Admin / Student",
+      "precondition": "The student has a published result.",
+      "steps": "Generate a transcript PDF and open the student transcript page on tablet dark mode.",
+      "expected": "Transcript PDF is generated and the student transcript page lists issued documents.",
+      "actual": "status=200; pageHasTranscript=true",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-9/evidence/pdf/P9-BR-007-transcript.pdf",
+        "docs/phase-9/evidence/browser/phase9-student-transcripts-tablet.png",
+        "docs/phase-9/evidence/console/phase9-student-transcripts-tablet.txt",
+        "docs/phase-9/evidence/network/phase9-student-transcripts-tablet.txt"
+      ]
+    },
+    {
+      "testId": "P9-BR-008",
+      "role": "Department Admin / Public",
+      "precondition": "Transcript generation has completed.",
+      "steps": "Verify the transcript code publicly and generate a consolidated marksheet PDF.",
+      "expected": "Verification returns a valid document and marksheet PDF downloads successfully.",
+      "actual": "verify=200; marksheet=200",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-6/evidence/network/phase9-browser-verify-transcript.json",
+        "docs/phase-9/evidence/pdf/P9-BR-008-marksheet.pdf"
+      ]
+    },
+    {
+      "testId": "P9-BR-009",
+      "role": "Student",
+      "precondition": "The student can see a published result.",
+      "steps": "Submit a result appeal from the student API.",
+      "expected": "Appeal is created in submitted status.",
+      "actual": "status=201; appealId=cmrjfkhet000vodlb6plpcpuc",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-6/evidence/network/phase9-browser-appeal-submit.json"
+      ]
+    },
+    {
+      "testId": "P9-BR-010",
+      "role": "Department Admin",
+      "precondition": "A submitted Phase 9 appeal exists.",
+      "steps": "Resolve the appeal through the admin API.",
+      "expected": "Appeal transitions to resolved status with audit details.",
+      "actual": "status=200; resolved=RESOLVED",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-6/evidence/network/phase9-browser-appeal-resolve.json"
+      ]
+    },
+    {
+      "testId": "P9-BR-011",
+      "role": "Department Admin",
+      "precondition": "A degree audit can be generated for the student.",
+      "steps": "Create the graduation candidate, approve it, and certify it.",
+      "expected": "Graduation workflow reaches certified status.",
+      "actual": "create=201; approve=200; certify=200",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-6/evidence/network/phase9-browser-graduation-create.json",
+        "docs/phase-6/evidence/network/phase9-browser-graduation-approve.json",
+        "docs/phase-6/evidence/network/phase9-browser-graduation-certify.json"
+      ]
+    },
+    {
+      "testId": "P9-BR-012",
+      "role": "Department Admin / Student",
+      "precondition": "Graduation workflow is certified.",
+      "steps": "Generate a graduation certificate PDF and open the student certificate page on mobile dark mode.",
+      "expected": "Certificate PDF is generated and student certificate page loads successfully.",
+      "actual": "status=200; pageHasCertificates=true",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-9/evidence/pdf/P9-BR-012-certificate.pdf",
+        "docs/phase-9/evidence/browser/phase9-student-certificates-mobile.png",
+        "docs/phase-9/evidence/console/phase9-student-certificates-mobile.txt",
+        "docs/phase-9/evidence/network/phase9-student-certificates-mobile.txt"
+      ]
+    },
+    {
+      "testId": "P9-BR-013",
+      "role": "Student / Public",
+      "precondition": "Transcript and certificate records have been issued.",
+      "steps": "Download student transcript and certificate PDFs, then verify the certificate code publicly.",
+      "expected": "Student downloads succeed and public verification returns a valid certificate record.",
+      "actual": "studentTranscript=200; studentCertificate=200; verify=200",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-6/evidence/network/phase9-browser-verify-certificate.json"
+      ]
+    },
+    {
+      "testId": "P9-BR-014",
+      "role": "Department Admin",
+      "precondition": "Phase 9 results, graduation, and documents exist.",
+      "steps": "Download JSON, CSV, and PDF analytics exports.",
+      "expected": "All analytics formats are generated successfully.",
+      "actual": "json=200; csv=200; pdf=200",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-6/evidence/network/phase9-browser-analytics-json.json",
+        "docs/phase-9/evidence/csv/P9-BR-014-analytics.csv",
+        "docs/phase-9/evidence/pdf/P9-BR-014-analytics.pdf"
+      ]
+    },
+    {
+      "testId": "P9-BR-015",
+      "role": "Foreign Department Admin",
+      "precondition": "CSE Phase 9 data exists and EEE admin is authenticated.",
+      "steps": "Attempt to read CSE analytics using EEE department admin credentials.",
+      "expected": "Cross-department analytics access is denied.",
+      "actual": "status=403",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-6/evidence/network/phase9-browser-tenant-isolation.json"
+      ]
+    },
+    {
+      "testId": "P9-BR-016",
+      "role": "Department Admin",
+      "precondition": "Published results exist for the student.",
+      "steps": "Request the degree audit report for the student.",
+      "expected": "Degree audit returns missing/completed requirement details.",
+      "actual": "status=201; eligible=false",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-6/evidence/network/phase9-browser-degree-audit.json"
+      ]
+    }
+  ]
+}

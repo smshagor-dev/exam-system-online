@@ -1,4 +1,5 @@
 import { requireRole } from '@/lib/auth'
+import { resolveExamTranslation } from '@/lib/academic-content'
 import { prisma } from '@/lib/prisma'
 import { UserRole } from '@prisma/client'
 import Link from 'next/link'
@@ -46,6 +47,7 @@ export default async function StudentExamsPage() {
         endTime: { gt: now },
       },
       include: {
+        translations: true,
         subject: true,
         _count: { select: { questions: true } },
       },
@@ -57,7 +59,7 @@ export default async function StudentExamsPage() {
         status: { in: ['SCHEDULED', 'LIVE'] },
         startTime: { gt: now },
       },
-      include: { subject: true, _count: { select: { questions: true } } },
+      include: { translations: true, subject: true, _count: { select: { questions: true } } },
       orderBy: { startTime: 'asc' },
     }),
     prisma.exam.findMany({
@@ -73,6 +75,7 @@ export default async function StudentExamsPage() {
         ],
       },
       include: {
+        translations: true,
         subject: true,
         attempts: {
           where: { studentId: profile.id },
@@ -98,6 +101,16 @@ export default async function StudentExamsPage() {
     ).map((attempt) => [attempt.examId, attempt.status])
   )
 
+  const resolvedActiveWindowExams = activeWindowExams.map((exam) =>
+    resolveExamTranslation(exam, exam.languageId)
+  )
+  const resolvedUpcomingExams = upcomingExams.map((exam) =>
+    resolveExamTranslation(exam, exam.languageId)
+  )
+  const resolvedCompletedExams = completedExams.map((exam) =>
+    resolveExamTranslation(exam, exam.languageId)
+  )
+
   return (
     <div className="space-y-8">
       <h1 className="text-2xl font-bold text-gray-900">My Exams</h1>
@@ -108,16 +121,16 @@ export default async function StudentExamsPage() {
         </div>
       )}
 
-      {canAccessNewAttempts && activeWindowExams.length > 0 && (
+      {canAccessNewAttempts && resolvedActiveWindowExams.length > 0 && (
         <section>
           <div className="mb-3 flex items-center gap-2">
             <div className="h-2.5 w-2.5 animate-pulse rounded-full bg-green-500" />
             <h2 className="font-semibold text-gray-900">
-              Available Now ({activeWindowExams.length})
+              Available Now ({resolvedActiveWindowExams.length})
             </h2>
           </div>
           <div className="space-y-3">
-            {activeWindowExams.map((exam) => (
+            {resolvedActiveWindowExams.map((exam) => (
               <div
                 key={exam.id}
                 className="flex items-center justify-between rounded-xl border-2 border-green-300 bg-white p-5"
@@ -154,14 +167,14 @@ export default async function StudentExamsPage() {
       )}
 
       <section>
-        <h2 className="mb-3 font-semibold text-gray-900">Upcoming Exams ({canAccessNewAttempts ? upcomingExams.length : 0})</h2>
-        {!canAccessNewAttempts || upcomingExams.length === 0 ? (
+        <h2 className="mb-3 font-semibold text-gray-900">Upcoming Exams ({canAccessNewAttempts ? resolvedUpcomingExams.length : 0})</h2>
+        {!canAccessNewAttempts || resolvedUpcomingExams.length === 0 ? (
           <div className="rounded-xl border border-dashed border-gray-300 bg-white p-8 text-center text-sm text-gray-400">
             {canAccessNewAttempts ? 'No upcoming exams' : 'New exam attempts are currently unavailable'}
           </div>
         ) : (
           <div className="space-y-3">
-            {upcomingExams.map((exam) => (
+            {resolvedUpcomingExams.map((exam) => (
               <div key={exam.id} className="rounded-xl border border-gray-200 bg-white p-5">
                 <div className="flex items-start justify-between">
                   <div>
@@ -186,11 +199,11 @@ export default async function StudentExamsPage() {
         )}
       </section>
 
-      {completedExams.length > 0 && (
+      {resolvedCompletedExams.length > 0 && (
         <section>
           <h2 className="mb-3 font-semibold text-gray-900">Past Exams</h2>
           <div className="space-y-3">
-            {completedExams.map((exam) => {
+            {resolvedCompletedExams.map((exam) => {
               const attemptStatus = attemptMap[exam.id]
               return (
                 <div key={exam.id} className="rounded-xl border border-gray-200 bg-white p-5 opacity-80">

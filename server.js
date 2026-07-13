@@ -48,6 +48,63 @@ function runDatabaseSetup() {
 async function startServer() {
   runDatabaseSetup()
 
+  require('ts-node').register({
+    project: path.join(__dirname, 'tsconfig.json'),
+    transpileOnly: true,
+    compilerOptions: {
+      module: 'commonjs',
+      moduleResolution: 'node',
+    },
+  })
+
+  const tsConfigPaths = require('tsconfig-paths')
+  tsConfigPaths.register({
+    baseUrl: __dirname,
+    paths: { '@/*': ['src/*'] },
+  })
+
+  const { prisma } = require('./src/lib/prisma')
+  const socketServerModule = require('./src/server/socket-server')
+  const { initSocketServer } = socketServerModule
+  let closeSocketServer = socketServerModule.closeSocketServer
+
+  async function writeReadyResponse(res) {
+    try {
+      await prisma.exam.count()
+      const socketHealth = await socketServerModule.getSocketServerHealth()
+      const payload = {
+        ready:
+          socketHealth.socketReady &&
+          socketHealth.runtimeAvailable &&
+          socketHealth.runtimeMode !== null,
+        appReady: true,
+        databaseReady: true,
+        redisReady: socketHealth.runtimeAvailable,
+        socketReady: socketHealth.socketReady,
+        runtimeMode: socketHealth.runtimeMode,
+        checkedAt: new Date().toISOString(),
+      }
+      res.statusCode = payload.ready ? 200 : 503
+      res.setHeader('Content-Type', 'application/json')
+      res.end(JSON.stringify(payload))
+    } catch (error) {
+      res.statusCode = 503
+      res.setHeader('Content-Type', 'application/json')
+      res.end(
+        JSON.stringify({
+          ready: false,
+          appReady: true,
+          databaseReady: false,
+          redisReady: false,
+          socketReady: false,
+          runtimeMode: null,
+          checkedAt: new Date().toISOString(),
+          error: error instanceof Error ? error.message : String(error),
+        })
+      )
+    }
+  }
+
   const app = next({ dev, hostname, port })
   const handle = app.getRequestHandler()
 
@@ -56,6 +113,10 @@ async function startServer() {
   const httpServer = createServer(async (req, res) => {
     try {
       const parsedUrl = parse(req.url, true)
+      if (parsedUrl.pathname === '/api/health/ready') {
+        await writeReadyResponse(res)
+        return
+      }
       await handle(req, res, parsedUrl)
     } catch (err) {
       console.error('Error occurred handling', req.url, err)
@@ -64,32 +125,7 @@ async function startServer() {
     }
   })
 
-  // Attach Socket.IO to the HTTP server
-  // We use require() with ts-node register in dev, or compiled JS in prod
-  let closeSocketServer = async () => {}
-  if (dev) {
-    // In dev: register ts-node to handle TypeScript imports
-    require('ts-node').register({
-      project: path.join(__dirname, 'tsconfig.json'),
-      transpileOnly: true,
-      compilerOptions: {
-        module: 'commonjs',
-        moduleResolution: 'node',
-      },
-    })
-
-    // Set up module path alias @/* -> src/*
-    const tsConfigPaths = require('tsconfig-paths')
-    tsConfigPaths.register({
-      baseUrl: __dirname,
-      paths: { '@/*': ['src/*'] },
-    })
-
-    const socketServerModule = require('./src/server/socket-server')
-    const { initSocketServer } = socketServerModule
-    closeSocketServer = socketServerModule.closeSocketServer
-    initSocketServer(httpServer)
-  }
+  await initSocketServer(httpServer)
 
   httpServer.listen(port, () => {
     console.log(`

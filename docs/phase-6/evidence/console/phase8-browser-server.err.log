@@ -1,0 +1,27 @@
+(node:5024) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+TypeError: controller[kState].transformAlgorithm is not a function
+    at ignore-listed frames
+TypeError: controller[kState].transformAlgorithm is not a function
+    at ignore-listed frames
+TypeError: controller[kState].transformAlgorithm is not a function
+    at ignore-listed frames
+TypeError: controller[kState].transformAlgorithm is not a function
+    at ignore-listed frames
+TypeError: controller[kState].transformAlgorithm is not a function
+    at ignore-listed frames
+TypeError: controller[kState].transformAlgorithm is not a function
+    at ignore-listed frames
+TypeError: controller[kState].transformAlgorithm is not a function
+    at ignore-listed frames
+⨯ Error: No room can accommodate Programming Fundamentals (2 students)
+    at generateScheduleForSession (file:\D:\Public\exam-system-online\src\lib\phase8-scheduling.ts:250:5)
+    at async POST (file:\D:\Public\exam-system-online\src\app\api\admin\exam-scheduling-sessions\%5Bid%5D\generate\route.ts:33:24)
+    at async Server.<anonymous> (D:\Public\exam-system-online\server.js:120:7)
+  248 |     if (!room) {
+  249 |       throw new Error(`No room can accommodate ${offering.subject.name} (${studentCount} ...
+> 250 |     }
+      |     ^
+  251 |
+  252 |     let scheduledStart = new Date(slotStart)
+  253 |     let scheduledEnd = new Date(slotStart.getTime() + durationMinutes * 60_000)

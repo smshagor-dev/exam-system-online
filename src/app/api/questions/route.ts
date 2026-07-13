@@ -1,9 +1,19 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
+import {
+  dedupeTranslations,
+  resolveQuestionOptionTranslation,
+  resolveQuestionTranslation,
+  serializeKeywords,
+} from '@/lib/academic-content'
 import { createQuestionSchema } from '@/lib/validators'
 import { Prisma, UserRole } from '@prisma/client'
 import { teacherCanAccessAssignment } from '@/lib/permissions'
+import {
+  buildAccessibleTeachingScopeFilters,
+  getTeacherOfferingAssignments,
+} from '@/lib/teacher-assignment'
 
 export async function GET(req: NextRequest) {
   const session = await auth()
@@ -18,7 +28,11 @@ export async function GET(req: NextRequest) {
   const profile = await prisma.teacherProfile.findUnique({ where: { userId: session.user.id } })
   if (!profile) return NextResponse.json({ error: 'Profile not found' }, { status: 404 })
 
-  const where: Prisma.QuestionWhereInput = { teacherId: profile.id }
+  const assignments = await getTeacherOfferingAssignments({ teacherProfileId: profile.id })
+  const scopeFilters = buildAccessibleTeachingScopeFilters(assignments) as Prisma.QuestionWhereInput[]
+  const where: Prisma.QuestionWhereInput = scopeFilters.length > 0
+    ? { OR: [...scopeFilters, { teacherId: profile.id }] }
+    : { teacherId: profile.id }
   if (subjectId) where.subjectId = subjectId
   if (groupId) where.groupId = groupId
   if (academicYearId) where.academicYearId = academicYearId
@@ -26,11 +40,28 @@ export async function GET(req: NextRequest) {
 
   const questions = await prisma.question.findMany({
     where,
-    include: { options: { orderBy: { orderIndex: 'asc' } } },
+    include: {
+      translations: true,
+      options: {
+        include: { translations: true },
+        orderBy: { orderIndex: 'asc' },
+      },
+    },
     orderBy: { createdAt: 'desc' },
   })
 
-  return NextResponse.json(questions)
+  return NextResponse.json(
+    questions.map((question) => {
+      const resolvedQuestion = resolveQuestionTranslation(question, question.languageId)
+
+      return {
+        ...resolvedQuestion,
+        options: question.options.map((option) =>
+          resolveQuestionOptionTranslation(option, question.languageId)
+        ),
+      }
+    })
+  )
 }
 
 export async function POST(req: NextRequest) {
@@ -63,26 +94,115 @@ export async function POST(req: NextRequest) {
   const profile = await prisma.teacherProfile.findUnique({ where: { userId: session.user.id } })
   if (!profile) return NextResponse.json({ error: 'Profile not found' }, { status: 404 })
 
-  const { options, keywords, ...questionData } = parsed.data
+  const { options, keywords, translations, ...questionData } = parsed.data
 
-  const question = await prisma.question.create({
-    data: {
-      ...questionData,
-      teacherId: profile.id,
-      keywords: keywords ? JSON.stringify(keywords) : null,
-      academicOfferingId: parsed.data.academicOfferingId ?? null,
-      options: options?.length
-        ? {
-            create: options.map((opt, i) => ({
-              text: opt.text,
-              isCorrect: opt.isCorrect,
-              orderIndex: opt.orderIndex ?? i,
-            })),
-          }
-        : undefined,
-    },
-    include: { options: true },
+  const question = await prisma.$transaction(async (tx) => {
+    const createdQuestion = await tx.question.create({
+      data: {
+        ...questionData,
+        teacherId: profile.id,
+        isActive: false,
+        keywords: serializeKeywords(keywords),
+        academicOfferingId: parsed.data.academicOfferingId ?? null,
+        options: options?.length
+          ? {
+              create: options.map((opt, i) => ({
+                text: opt.text,
+                isCorrect: opt.isCorrect,
+                orderIndex: opt.orderIndex ?? i,
+              })),
+            }
+          : undefined,
+      },
+      include: {
+        options: {
+          orderBy: { orderIndex: 'asc' },
+        },
+      },
+    })
+
+    const mergedTranslations = dedupeTranslations([
+      {
+        languageId: parsed.data.languageId,
+        text: parsed.data.text,
+        expectedAnswer: parsed.data.expectedAnswer ?? null,
+        explanation: parsed.data.explanation ?? null,
+        keywords: serializeKeywords(parsed.data.keywords),
+        options:
+          options?.map((option) => ({
+            languageId: parsed.data.languageId,
+            orderIndex: option.orderIndex,
+            text: option.text,
+          })) ?? [],
+      },
+      ...(translations ?? []).map((translation) => ({
+        languageId: translation.languageId,
+        text: translation.text,
+        expectedAnswer: translation.expectedAnswer ?? null,
+        explanation: translation.explanation ?? null,
+        keywords: serializeKeywords(translation.keywords),
+        options: translation.options ?? [],
+      })),
+    ])
+
+    if (mergedTranslations.length > 0) {
+      await tx.questionTranslation.createMany({
+        data: mergedTranslations.map((translation) => ({
+          questionId: createdQuestion.id,
+          languageId: translation.languageId,
+          text: translation.text,
+          expectedAnswer: translation.expectedAnswer ?? null,
+          explanation: translation.explanation ?? null,
+          keywords: translation.keywords ?? null,
+        })),
+      })
+    }
+
+    for (const option of createdQuestion.options) {
+      const optionTranslations = mergedTranslations
+        .map((translation) => {
+          const matchedOption = translation.options?.find(
+            (entry) => entry.orderIndex === option.orderIndex
+          )
+
+          return matchedOption
+            ? {
+                questionOptionId: option.id,
+                languageId: translation.languageId,
+                text: matchedOption.text,
+              }
+            : null
+        })
+        .filter((value): value is { questionOptionId: string; languageId: string; text: string } => Boolean(value))
+
+      if (optionTranslations.length > 0) {
+        await tx.questionOptionTranslation.createMany({
+          data: optionTranslations,
+        })
+      }
+    }
+
+    return tx.question.findUniqueOrThrow({
+      where: { id: createdQuestion.id },
+      include: {
+        translations: true,
+        options: {
+          include: { translations: true },
+          orderBy: { orderIndex: 'asc' },
+        },
+      },
+    })
   })
 
-  return NextResponse.json(question, { status: 201 })
+  const resolvedQuestion = resolveQuestionTranslation(question, question.languageId)
+
+  return NextResponse.json(
+    {
+      ...resolvedQuestion,
+      options: question.options.map((option) =>
+        resolveQuestionOptionTranslation(option, question.languageId)
+      ),
+    },
+    { status: 201 }
+  )
 }

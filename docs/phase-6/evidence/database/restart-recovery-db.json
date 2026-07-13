@@ -1,0 +1,192 @@
+{
+  "beforeRestart": {
+    "id": "cmriyu9lp0003jq1fa5ay0q1e",
+    "examId": "cmriytwm6003vrkm8i9f5d0km",
+    "studentId": "cmrhdzrxv0009whz5oa9zfcgk",
+    "socketId": "VLvsP2PWo17v9rA-AAAD",
+    "status": "IN_PROGRESS",
+    "startedAt": "2026-07-13T08:34:03.420Z",
+    "submittedAt": null,
+    "timeSpent": null,
+    "ipAddress": "::ffff:127.0.0.1",
+    "userAgent": null,
+    "tabSwitchCount": 0,
+    "reconnectCount": 0,
+    "warningCount": 0,
+    "createdAt": "2026-07-13T08:34:03.422Z",
+    "updatedAt": "2026-07-13T08:34:03.422Z",
+    "snapshot": {
+      "id": "cmriyuasy0005jq1fgl2rsnbi",
+      "attemptId": "cmriyu9lp0003jq1fa5ay0q1e",
+      "examId": "cmriytwm6003vrkm8i9f5d0km",
+      "studentId": "cmrhdzrxv0009whz5oa9zfcgk",
+      "languageId": "cmrc1y4h10006k2kdse7x47oh",
+      "examTitle": "P6 Evidence Manual Exam",
+      "examDescription": null,
+      "examInstructions": "P6 manual reconnect and submit exam",
+      "duration": 20,
+      "totalMarks": 5,
+      "passingMarks": 3,
+      "subjectName": "Data Structures & Algorithms",
+      "createdAt": "2026-07-13T08:34:04.978Z",
+      "questions": [
+        {
+          "id": "cmriyuasy0006jq1ff9hnne1j",
+          "attemptSnapshotId": "cmriyuasy0005jq1fgl2rsnbi",
+          "sourceQuestionId": "cmriytvbi002zrkm8qcv9oo2o",
+          "examQuestionId": "cmriytwm70040rkm8o7j1drae",
+          "orderIndex": 0,
+          "marks": 5,
+          "type": "MCQ",
+          "text": "P6 Evidence Manual Question",
+          "expectedAnswer": null,
+          "explanation": null,
+          "keywords": null,
+          "createdAt": "2026-07-13T08:34:04.978Z",
+          "options": [
+            {
+              "id": "cmriyuasy0007jq1fao4jcz6t",
+              "examQuestionSnapshotId": "cmriyuasy0006jq1ff9hnne1j",
+              "sourceOptionId": "cmriytvbi0033rkm80gbvfj8a",
+              "text": "P6 Evidence Manual Question Option A",
+              "orderIndex": 0,
+              "isCorrect": true,
+              "createdAt": "2026-07-13T08:34:04.978Z"
+            },
+            {
+              "id": "cmriyuasy0008jq1f7yq0hp5x",
+              "examQuestionSnapshotId": "cmriyuasy0006jq1ff9hnne1j",
+              "sourceOptionId": "cmriytvbi0034rkm88qactaqv",
+              "text": "P6 Evidence Manual Question Option B",
+              "orderIndex": 1,
+              "isCorrect": false,
+              "createdAt": "2026-07-13T08:34:04.978Z"
+            },
+            {
+              "id": "cmriyuasy0009jq1f45c4qsfw",
+              "examQuestionSnapshotId": "cmriyuasy0006jq1ff9hnne1j",
+              "sourceOptionId": "cmriytvbi0035rkm8deuc867m",
+              "text": "P6 Evidence Manual Question Option C",
+              "orderIndex": 2,
+              "isCorrect": false,
+              "createdAt": "2026-07-13T08:34:04.978Z"
+            }
+          ]
+        }
+      ]
+    },
+    "answers": [
+      {
+        "id": "cmriyud6t000djq1fa4z6oxds",
+        "attemptId": "cmriyu9lp0003jq1fa5ay0q1e",
+        "questionId": "cmriytvbi002zrkm8qcv9oo2o",
+        "selectedOption": "cmriytvbi0033rkm80gbvfj8a",
+        "answerText": null,
+        "checkStatus": "UNCHECKED",
+        "isCorrect": null,
+        "marksAwarded": null,
+        "teacherMarks": null,
+        "teacherFeedback": null,
+        "aiSuggestedMarks": null,
+        "aiSuggestedFeedback": null,
+        "savedAt": "2026-07-13T08:34:10.271Z",
+        "updatedAt": "2026-07-13T08:34:10.273Z"
+      }
+    ]
+  },
+  "afterRestart": {
+    "id": "cmriyu9lp0003jq1fa5ay0q1e",
+    "examId": "cmriytwm6003vrkm8i9f5d0km",
+    "studentId": "cmrhdzrxv0009whz5oa9zfcgk",
+    "socketId": "DuioQok1wxNG4MTzAAAD",
+    "status": "SUBMITTED",
+    "startedAt": "2026-07-13T08:34:03.420Z",
+    "submittedAt": "2026-07-13T08:34:25.984Z",
+    "timeSpent": 22,
+    "ipAddress": "::ffff:127.0.0.1",
+    "userAgent": null,
+    "tabSwitchCount": 0,
+    "reconnectCount": 1,
+    "warningCount": 0,
+    "createdAt": "2026-07-13T08:34:03.422Z",
+    "updatedAt": "2026-07-13T08:34:25.986Z",
+    "snapshot": {
+      "id": "cmriyuasy0005jq1fgl2rsnbi",
+      "attemptId": "cmriyu9lp0003jq1fa5ay0q1e",
+      "examId": "cmriytwm6003vrkm8i9f5d0km",
+      "studentId": "cmrhdzrxv0009whz5oa9zfcgk",
+      "languageId": "cmrc1y4h10006k2kdse7x47oh",
+      "examTitle": "P6 Evidence Manual Exam",
+      "examDescription": null,
+      "examInstructions": "P6 manual reconnect and submit exam",
+      "duration": 20,
+      "totalMarks": 5,
+      "passingMarks": 3,
+      "subjectName": "Data Structures & Algorithms",
+      "createdAt": "2026-07-13T08:34:04.978Z",
+      "questions": [
+        {
+          "id": "cmriyuasy0006jq1ff9hnne1j",
+          "attemptSnapshotId": "cmriyuasy0005jq1fgl2rsnbi",
+          "sourceQuestionId": "cmriytvbi002zrkm8qcv9oo2o",
+          "examQuestionId": "cmriytwm70040rkm8o7j1drae",
+          "orderIndex": 0,
+          "marks": 5,
+          "type": "MCQ",
+          "text": "P6 Evidence Manual Question",
+          "expectedAnswer": null,
+          "explanation": null,
+          "keywords": null,
+          "createdAt": "2026-07-13T08:34:04.978Z",
+          "options": [
+            {
+              "id": "cmriyuasy0007jq1fao4jcz6t",
+              "examQuestionSnapshotId": "cmriyuasy0006jq1ff9hnne1j",
+              "sourceOptionId": "cmriytvbi0033rkm80gbvfj8a",
+              "text": "P6 Evidence Manual Question Option A",
+              "orderIndex": 0,
+              "isCorrect": true,
+              "createdAt": "2026-07-13T08:34:04.978Z"
+            },
+            {
+              "id": "cmriyuasy0008jq1f7yq0hp5x",
+              "examQuestionSnapshotId": "cmriyuasy0006jq1ff9hnne1j",
+              "sourceOptionId": "cmriytvbi0034rkm88qactaqv",
+              "text": "P6 Evidence Manual Question Option B",
+              "orderIndex": 1,
+              "isCorrect": false,
+              "createdAt": "2026-07-13T08:34:04.978Z"
+            },
+            {
+              "id": "cmriyuasy0009jq1f45c4qsfw",
+              "examQuestionSnapshotId": "cmriyuasy0006jq1ff9hnne1j",
+              "sourceOptionId": "cmriytvbi0035rkm8deuc867m",
+              "text": "P6 Evidence Manual Question Option C",
+              "orderIndex": 2,
+              "isCorrect": false,
+              "createdAt": "2026-07-13T08:34:04.978Z"
+            }
+          ]
+        }
+      ]
+    },
+    "answers": [
+      {
+        "id": "cmriyud6t000djq1fa4z6oxds",
+        "attemptId": "cmriyu9lp0003jq1fa5ay0q1e",
+        "questionId": "cmriytvbi002zrkm8qcv9oo2o",
+        "selectedOption": "cmriytvbi0033rkm80gbvfj8a",
+        "answerText": null,
+        "checkStatus": "UNCHECKED",
+        "isCorrect": null,
+        "marksAwarded": null,
+        "teacherMarks": null,
+        "teacherFeedback": null,
+        "aiSuggestedMarks": null,
+        "aiSuggestedFeedback": null,
+        "savedAt": "2026-07-13T08:34:10.271Z",
+        "updatedAt": "2026-07-13T08:34:10.273Z"
+      }
+    ]
+  }
+}

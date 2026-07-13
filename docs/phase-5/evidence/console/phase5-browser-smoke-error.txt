@@ -1,0 +1,5 @@
+locator.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for getByRole('button', { name: /P5 Evidence RU Question/i }).first()[22m
+
+    at run (D:\Public\exam-system-online\scripts\phase-5\browser-smoke.mjs:1087:94)

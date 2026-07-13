@@ -1,0 +1,3 @@
+assignmentId,teacherName,departmentName,offeringLabel,roles,status,weeklyHours,lectureHours,labHours,consultationHours,assessmentHours
+cmrgsnoi000358ouz41mtfhwf,"Sarah Johnson","Computer Science & Engineering","Programming Fundamentals / BSC-CS-11E / English","ASSISTANT_TEACHER|REVIEWER",COMPLETED,6,2,2,1,1
+cmrgsn7hi002p8ouzgd85i7et,"John Smith","Computer Science & Engineering","Programming Fundamentals / BSC-CS-11R / Russian","LEAD_TEACHER|EXAMINER",ACTIVE,8,3,2,1,2

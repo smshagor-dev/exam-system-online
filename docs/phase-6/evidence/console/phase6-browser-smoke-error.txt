@@ -1,0 +1,5 @@
+locator.waitFor: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for getByText('Exam Submitted!') to be visible[22m
+
+    at main (D:\Public\exam-system-online\scripts\phase-6\browser-smoke.mjs:698:49)

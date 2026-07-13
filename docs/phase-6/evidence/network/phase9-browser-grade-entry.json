@@ -1,0 +1,22 @@
+{
+  "method": "PATCH",
+  "url": "/api/admin/results-enterprise/gradebooks/cmrjfjt460001odlbpate7fc0",
+  "status": 200,
+  "json": [
+    {
+      "id": "cmrjfjuut0007odlbucnp7ubi",
+      "componentId": "cmrjfjt460002odlbph0ecot3",
+      "studentId": "cmrhdzsao000bwhz5n1waw7db",
+      "enteredByUserId": "cmrc1y67t000qk2kdsntvvukr",
+      "verifiedByUserId": null,
+      "rawMarks": 22,
+      "moderatedMarks": null,
+      "finalMarks": 22,
+      "notes": null,
+      "metadata": null,
+      "createdAt": "2026-07-13T16:21:51.221Z",
+      "updatedAt": "2026-07-13T16:21:51.221Z"
+    }
+  ],
+  "text": "[{\"id\":\"cmrjfjuut0007odlbucnp7ubi\",\"componentId\":\"cmrjfjt460002odlbph0ecot3\",\"studentId\":\"cmrhdzsao000bwhz5n1waw7db\",\"enteredByUserId\":\"cmrc1y67t000qk2kdsntvvukr\",\"verifiedByUserId\":null,\"rawMarks\":22,\"moderatedMarks\":null,\"finalMarks\":22,\"notes\":null,\"metadata\":null,\"createdAt\":\"2026-07-13T16:21:51.221Z\",\"updatedAt\":\"2026-07-13T16:21:51.221Z\"}]"
+}

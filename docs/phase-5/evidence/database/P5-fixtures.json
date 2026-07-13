@@ -1,0 +1,70 @@
+{
+  "ids": {
+    "department": {
+      "cse": "cmrc1y4pr000ck2kd4d7vqcwq",
+      "eee": "cmrc1y4uk000dk2kdqc6m8jp6"
+    },
+    "language": {
+      "english": "cmrc1y4h10006k2kdse7x47oh",
+      "russian": "cmrfudipt00001387aijb5mgh",
+      "arabic": "cmrc1y4h10008k2kdhp4cyedo"
+    },
+    "teacher": {
+      "johnUserId": "cmrc1y6pb000rk2kdns7tepny",
+      "johnProfileId": "cmrc1y74k000uk2kd8dujfpkd",
+      "sarahUserId": "cmrc1y705000sk2kdige0fatw",
+      "sarahProfileId": "cmrc1y78y000wk2kd157911xr",
+      "examinerUserId": "cmrhdzoqy0000whz51bpab2ir",
+      "examinerProfileId": "cmrhdzr960005whz5enb535ax",
+      "unassignedUserId": "cmrhdzph80001whz5gcygrafc"
+    },
+    "student": {
+      "englishUserId": "cmrhdzq7d0002whz58rqdkwy3",
+      "englishProfileId": "cmrhdzrxv0009whz5oa9zfcgk",
+      "russianUserId": "cmrhdzqx00003whz5ryga8cli",
+      "russianProfileId": "cmrhdzsao000bwhz5n1waw7db"
+    },
+    "scope": {
+      "englishLegacyAssignmentId": "cmrc1y7dc000yk2kdpfp6fmwd",
+      "russianLegacyAssignmentId": "cmrhdzull000jwhz52ddn11vv",
+      "russianOfferingId": "cmrfve242006fwqliz6dmghl7"
+    },
+    "question": {
+      "english": "cmrhfhg8v000vz6zfu3b41b9d",
+      "russian": "cmrhfhg8v0011z6zfr8ijuhq5",
+      "broken": "cmrhfhg8v0012z6zfrm06i9s9"
+    },
+    "exam": {
+      "english": "cmrhfhhoe001pz6zfmuafh7ul",
+      "russian": "cmrhfhhoe001uz6zfvg07g6rv",
+      "broken": "cmrhfhhoe001wz6zf59fziqr0",
+      "socketBroken": "cmrhfhhoe001xz6zfarpwzst5"
+    },
+    "coursework": {
+      "ruleEnglish": "cmrhfhj94002ez6zfjo94vnx3",
+      "ruleRussian": "cmrhfhj94002fz6zfq95at050",
+      "assignmentEnglish": "cmrhfhjo9002jz6zfrag7a2kj",
+      "assignmentRussian": "cmrhfhjo9002lz6zf62uosi0o"
+    },
+    "ebook": {
+      "english": "cmrhfhk3k002qz6zf1o01lh0a",
+      "russian": "cmrhfhk3k002rz6zf8hsq2vsw"
+    }
+  },
+  "emails": {
+    "superAdmin": "admin@examflow.pro",
+    "cseAdmin": "cse.admin@examflow.pro",
+    "eeeAdmin": "eee.admin@examflow.pro",
+    "leadTeacher": "teacher.john@examflow.pro",
+    "assistantTeacher": "teacher.sarah@examflow.pro",
+    "examiner": "teacher.examiner@examflow.pro",
+    "unassignedTeacher": "teacher.unassigned@examflow.pro",
+    "englishStudent": "p5.english.student@examflow.pro",
+    "russianStudent": "p5.russian.student@examflow.pro"
+  },
+  "passwords": {
+    "admin": "Admin@123",
+    "teacher": "Teacher@123",
+    "student": "Student@123"
+  }
+}

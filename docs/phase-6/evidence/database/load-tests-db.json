@@ -1,0 +1,365 @@
+{
+  "duplicateRecords": {
+    "answerGroups": 0,
+    "attemptGroups": 0
+  },
+  "scenarios": {
+    "run10": {
+      "label": "run10",
+      "attemptedClients": 10,
+      "connectedClients": 10,
+      "successfulJoins": 10,
+      "successfulStarts": 10,
+      "successfulSaves": 10,
+      "successfulHeartbeats": 10,
+      "successfulSubmits": 10,
+      "connectionSuccessRate": 100,
+      "joinSuccessRate": 100,
+      "saveSuccessRate": 100,
+      "submitSuccessRate": 100,
+      "errorCountByStage": {},
+      "errorCountByCode": {},
+      "joinFailureByCode": {},
+      "submitFailureByCode": {},
+      "errorRate": 0,
+      "latencyMs": {
+        "connect": {
+          "count": 10,
+          "p50": 31,
+          "p95": 32,
+          "p99": 32
+        },
+        "join": {
+          "count": 10,
+          "p50": 774,
+          "p95": 774,
+          "p99": 774
+        },
+        "start": {
+          "count": 10,
+          "p50": 4269,
+          "p95": 4801,
+          "p99": 4801
+        },
+        "save": {
+          "count": 10,
+          "p50": 1131,
+          "p95": 1230,
+          "p99": 1230
+        },
+        "heartbeat": {
+          "count": 10,
+          "p50": 343,
+          "p95": 426,
+          "p99": 426
+        },
+        "submit": {
+          "count": 10,
+          "p50": 1057,
+          "p95": 1074,
+          "p99": 1074
+        }
+      },
+      "eventLoopLagMs": {
+        "p50": 32.65,
+        "p95": 35.06,
+        "p99": 35.65,
+        "max": 36.14
+      },
+      "incompleteMetrics": false,
+      "sampleErrors": []
+    },
+    "run25": {
+      "label": "run25",
+      "attemptedClients": 25,
+      "connectedClients": 25,
+      "successfulJoins": 25,
+      "successfulStarts": 25,
+      "successfulSaves": 25,
+      "successfulHeartbeats": 25,
+      "successfulSubmits": 25,
+      "connectionSuccessRate": 100,
+      "joinSuccessRate": 100,
+      "saveSuccessRate": 100,
+      "submitSuccessRate": 100,
+      "errorCountByStage": {},
+      "errorCountByCode": {},
+      "joinFailureByCode": {},
+      "submitFailureByCode": {},
+      "errorRate": 0,
+      "latencyMs": {
+        "connect": {
+          "count": 25,
+          "p50": 49,
+          "p95": 51,
+          "p99": 52
+        },
+        "join": {
+          "count": 25,
+          "p50": 928,
+          "p95": 1048,
+          "p99": 1057
+        },
+        "start": {
+          "count": 25,
+          "p50": 3383,
+          "p95": 3795,
+          "p99": 3832
+        },
+        "save": {
+          "count": 25,
+          "p50": 2319,
+          "p95": 2429,
+          "p99": 2429
+        },
+        "heartbeat": {
+          "count": 25,
+          "p50": 568,
+          "p95": 719,
+          "p99": 757
+        },
+        "submit": {
+          "count": 25,
+          "p50": 1700,
+          "p95": 2624,
+          "p99": 2725
+        }
+      },
+      "eventLoopLagMs": {
+        "p50": 32.62,
+        "p95": 34.77,
+        "p99": 35.36,
+        "max": 35.91
+      },
+      "incompleteMetrics": false,
+      "sampleErrors": []
+    },
+    "run100": {
+      "label": "run100",
+      "attemptedClients": 100,
+      "connectedClients": 100,
+      "successfulJoins": 100,
+      "successfulStarts": 100,
+      "successfulSaves": 100,
+      "successfulHeartbeats": 100,
+      "successfulSubmits": 100,
+      "connectionSuccessRate": 100,
+      "joinSuccessRate": 100,
+      "saveSuccessRate": 100,
+      "submitSuccessRate": 100,
+      "errorCountByStage": {},
+      "errorCountByCode": {},
+      "joinFailureByCode": {},
+      "submitFailureByCode": {},
+      "errorRate": 0,
+      "latencyMs": {
+        "connect": {
+          "count": 100,
+          "p50": 70,
+          "p95": 74,
+          "p99": 74
+        },
+        "join": {
+          "count": 100,
+          "p50": 1580,
+          "p95": 1773,
+          "p99": 1784
+        },
+        "start": {
+          "count": 100,
+          "p50": 3284,
+          "p95": 3945,
+          "p99": 4071
+        },
+        "save": {
+          "count": 100,
+          "p50": 2246,
+          "p95": 2447,
+          "p99": 2466
+        },
+        "heartbeat": {
+          "count": 100,
+          "p50": 674,
+          "p95": 787,
+          "p99": 850
+        },
+        "submit": {
+          "count": 100,
+          "p50": 5766,
+          "p95": 6051,
+          "p99": 6094
+        }
+      },
+      "eventLoopLagMs": {
+        "p50": 32.57,
+        "p95": 34.77,
+        "p99": 35.65,
+        "max": 58.29
+      },
+      "incompleteMetrics": false,
+      "sampleErrors": []
+    },
+    "run250": {
+      "label": "run250",
+      "attemptedClients": 250,
+      "connectedClients": 250,
+      "successfulJoins": 250,
+      "successfulStarts": 250,
+      "successfulSaves": 250,
+      "successfulHeartbeats": 250,
+      "successfulSubmits": 250,
+      "connectionSuccessRate": 100,
+      "joinSuccessRate": 100,
+      "saveSuccessRate": 100,
+      "submitSuccessRate": 100,
+      "errorCountByStage": {},
+      "errorCountByCode": {},
+      "joinFailureByCode": {},
+      "submitFailureByCode": {},
+      "errorRate": 0,
+      "latencyMs": {
+        "connect": {
+          "count": 250,
+          "p50": 68,
+          "p95": 81,
+          "p99": 88
+        },
+        "join": {
+          "count": 250,
+          "p50": 1697,
+          "p95": 6391,
+          "p99": 6391
+        },
+        "start": {
+          "count": 250,
+          "p50": 3349,
+          "p95": 3559,
+          "p99": 4029
+        },
+        "save": {
+          "count": 250,
+          "p50": 2315,
+          "p95": 2466,
+          "p99": 2475
+        },
+        "heartbeat": {
+          "count": 250,
+          "p50": 717,
+          "p95": 850,
+          "p99": 868
+        },
+        "submit": {
+          "count": 250,
+          "p50": 6206,
+          "p95": 6508,
+          "p99": 6587
+        }
+      },
+      "eventLoopLagMs": {
+        "p50": 32.57,
+        "p95": 34.73,
+        "p99": 35.62,
+        "max": 62.91
+      },
+      "incompleteMetrics": false,
+      "sampleErrors": []
+    },
+    "run500": {
+      "label": "run500",
+      "attemptedClients": 500,
+      "connectedClients": 500,
+      "successfulJoins": 500,
+      "successfulStarts": 500,
+      "successfulSaves": 500,
+      "successfulHeartbeats": 500,
+      "successfulSubmits": 500,
+      "connectionSuccessRate": 100,
+      "joinSuccessRate": 100,
+      "saveSuccessRate": 100,
+      "submitSuccessRate": 100,
+      "errorCountByStage": {},
+      "errorCountByCode": {},
+      "joinFailureByCode": {},
+      "submitFailureByCode": {},
+      "errorRate": 0,
+      "latencyMs": {
+        "connect": {
+          "count": 500,
+          "p50": 47,
+          "p95": 81,
+          "p99": 86
+        },
+        "join": {
+          "count": 500,
+          "p50": 1677,
+          "p95": 2094,
+          "p99": 6149
+        },
+        "start": {
+          "count": 500,
+          "p50": 3365,
+          "p95": 3981,
+          "p99": 4257
+        },
+        "save": {
+          "count": 500,
+          "p50": 2328,
+          "p95": 2484,
+          "p99": 2552
+        },
+        "heartbeat": {
+          "count": 500,
+          "p50": 749,
+          "p95": 866,
+          "p99": 908
+        },
+        "submit": {
+          "count": 500,
+          "p50": 6119,
+          "p95": 6720,
+          "p99": 6832
+        }
+      },
+      "eventLoopLagMs": {
+        "p50": 32.44,
+        "p95": 34.73,
+        "p99": 35.62,
+        "max": 69.27
+      },
+      "incompleteMetrics": false,
+      "sampleErrors": []
+    },
+    "reconnectStorm": {
+      "attemptedClients": 25,
+      "reconnectCycles": 3,
+      "successfulReconnects": 75,
+      "errorCountByStage": {},
+      "errorCountByCode": {},
+      "sampleErrors": []
+    },
+    "duplicateSaveStorm": {
+      "attemptedClients": 40,
+      "duplicateAnswerGroups": 0,
+      "errorCountByStage": {},
+      "errorCountByCode": {}
+    },
+    "duplicateSubmitStorm": {
+      "attemptedClients": 40,
+      "beforeDuplicateLogs": 40,
+      "afterDuplicateLogs": 40,
+      "noDuplicateSubmitSideEffects": true,
+      "errorCountByStage": {},
+      "errorCountByCode": {}
+    },
+    "heartbeatLoad": {
+      "attemptedClients": 60,
+      "successfulHeartbeats": 60,
+      "errorCountByStage": {},
+      "errorCountByCode": {}
+    },
+    "teacherMonitorFanOut": {
+      "attemptedMonitorSockets": 5,
+      "initialMonitorReceipts": 5
+    }
+  }
+}

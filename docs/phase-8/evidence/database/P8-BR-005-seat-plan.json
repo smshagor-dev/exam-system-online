@@ -1,0 +1,93 @@
+{
+  "seatPlanResponse": {
+    "ok": true,
+    "status": 200,
+    "json": {
+      "seatPlanId": "cmrjdcmk0000v1jokzih06kh9",
+      "assignedCount": 2
+    },
+    "text": "{\"seatPlanId\":\"cmrjdcmk0000v1jokzih06kh9\",\"assignedCount\":2}"
+  },
+  "seatAssignments": [
+    {
+      "id": "cmrjdcmt0000x1jokjlgx06o3",
+      "seatPlanId": "cmrjdcmk0000v1jokzih06kh9",
+      "roomId": "cmrjdbyc500091jok0anrm87w",
+      "studentId": "cmrhdzsao000bwhz5n1waw7db",
+      "seatNumber": "A1",
+      "rowLabel": "A",
+      "columnNumber": 1,
+      "barcode": "BAR-zxnt1g-waw7db-1",
+      "qrCode": "QR-zxnt1g-waw7db-1",
+      "isAccessibilitySeat": false,
+      "isManualOverride": false,
+      "createdAt": "2026-07-13T15:20:14.964Z",
+      "updatedAt": "2026-07-13T15:20:14.964Z",
+      "student": {
+        "id": "cmrhdzsao000bwhz5n1waw7db",
+        "userId": "cmrhdzqx00003whz5ryga8cli",
+        "departmentId": "cmrc1y4pr000ck2kd4d7vqcwq",
+        "phone": null,
+        "customFieldResponses": null,
+        "createdAt": "2026-07-12T06:02:42.816Z",
+        "updatedAt": "2026-07-13T15:18:20.190Z",
+        "user": {
+          "id": "cmrhdzqx00003whz5ryga8cli",
+          "email": "p5.russian.student@examflow.pro",
+          "password": "$2a$12$SFCPnKQNGXpXVhTEoPc00Oq1BpfyoLtnrbJzuvZ2YgvtZN.wMre/u",
+          "name": "P5 Russian Student",
+          "role": "STUDENT",
+          "isActive": true,
+          "isEmailVerified": true,
+          "emailVerificationCode": null,
+          "emailVerificationExpiresAt": null,
+          "passwordResetCode": null,
+          "passwordResetExpiresAt": null,
+          "avatarUrl": null,
+          "createdAt": "2026-07-12T06:02:41.028Z",
+          "updatedAt": "2026-07-13T15:18:18.323Z"
+        }
+      }
+    },
+    {
+      "id": "cmrjdcmys000z1jokoyn8w265",
+      "seatPlanId": "cmrjdcmk0000v1jokzih06kh9",
+      "roomId": "cmrjdbyc500091jok0anrm87w",
+      "studentId": "cmrjd54360004ecckzthdydc6",
+      "seatNumber": "A2",
+      "rowLabel": "A",
+      "columnNumber": 2,
+      "barcode": "BAR-zxnt1g-hdydc6-2",
+      "qrCode": "QR-zxnt1g-hdydc6-2",
+      "isAccessibilitySeat": false,
+      "isManualOverride": false,
+      "createdAt": "2026-07-13T15:20:15.172Z",
+      "updatedAt": "2026-07-13T15:20:15.172Z",
+      "student": {
+        "id": "cmrjd54360004ecckzthdydc6",
+        "userId": "cmrjd53tv0002eccknfydz6y4",
+        "departmentId": "cmrc1y4pr000ck2kd4d7vqcwq",
+        "phone": null,
+        "customFieldResponses": null,
+        "createdAt": "2026-07-13T15:14:24.115Z",
+        "updatedAt": "2026-07-13T15:14:24.115Z",
+        "user": {
+          "id": "cmrjd53tv0002eccknfydz6y4",
+          "email": "phase8.capacity.663771@examflow.pro",
+          "password": "$2a$12$/otfuCxgSZqFbZ3sM6VcW.9CHGsmNftLGOf5j2tW7w6zidNFrDm3W",
+          "name": "Phase 8 Capacity 663771",
+          "role": "STUDENT",
+          "isActive": true,
+          "isEmailVerified": true,
+          "emailVerificationCode": null,
+          "emailVerificationExpiresAt": null,
+          "passwordResetCode": null,
+          "passwordResetExpiresAt": null,
+          "avatarUrl": null,
+          "createdAt": "2026-07-13T15:14:23.779Z",
+          "updatedAt": "2026-07-13T15:14:23.779Z"
+        }
+      }
+    }
+  ]
+}

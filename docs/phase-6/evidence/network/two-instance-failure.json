@@ -1,0 +1,29 @@
+{
+  "executedAt": "2026-07-12T15:14:33.555Z",
+  "status": "BLOCKED",
+  "summary": "Two-instance Redis proof executed end-to-end but failed because both app instances fell back to in-memory runtime state.",
+  "details": {
+    "instanceA": "http://127.0.0.1:3218",
+    "instanceB": "http://127.0.0.1:3219",
+    "failure": "Shared monitor/presence state never converged across instances.",
+    "rootCause": {
+      "category": "Redis adapter",
+      "observedRuntimeMode": "memory",
+      "observedServerError": "Redis unavailable, falling back to in-memory runtime store: Connection timeout",
+      "secondaryError": "TypeError: controller[kState].transformAlgorithm is not a function"
+    },
+    "failedChecks": [
+      "teacherConnectedToB",
+      "crossInstanceEventsWork",
+      "sharedPresenceWorks",
+      "submissionAppearsOnBothInstances",
+      "noDuplicateTimerBroadcasts"
+    ],
+    "evidence": [
+      "docs/phase-6/evidence/network/two-instance.json",
+      "docs/phase-6/evidence/database/two-instance-db.json",
+      "docs/phase-6/evidence/console/phase6-two-instance-a.err.log",
+      "docs/phase-6/evidence/console/phase6-two-instance-b.err.log"
+    ]
+  }
+}

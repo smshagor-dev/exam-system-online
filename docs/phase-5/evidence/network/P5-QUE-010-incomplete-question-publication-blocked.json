@@ -1,0 +1,19 @@
+{
+  "method": "PATCH",
+  "url": "/api/questions/cmrhfhg8v0012z6zfrm06i9s9",
+  "status": 409,
+  "json": {
+    "error": "Question publication blocked by incomplete translation",
+    "completeness": {
+      "canPublish": false,
+      "requiredLanguageId": "cmrc1y4h10006k2kdse7x47oh",
+      "missingFields": [
+        {
+          "field": "options.2.text",
+          "message": "Option 3 text is required."
+        }
+      ]
+    }
+  },
+  "text": "{\"error\":\"Question publication blocked by incomplete translation\",\"completeness\":{\"canPublish\":false,\"requiredLanguageId\":\"cmrc1y4h10006k2kdse7x47oh\",\"missingFields\":[{\"field\":\"options.2.text\",\"message\":\"Option 3 text is required.\"}]}}"
+}

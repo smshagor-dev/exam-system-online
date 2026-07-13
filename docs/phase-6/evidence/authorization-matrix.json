@@ -1,0 +1,30 @@
+{
+  "executedAt": "2026-07-13T08:29:43.215Z",
+  "checks": [
+    {
+      "name": "teacher-access-gate",
+      "pass": true,
+      "details": "Teacher socket events still gate on assignment-aware access checks."
+    },
+    {
+      "name": "student-access-gate",
+      "pass": true,
+      "details": "Student join flow still validates active enrollment and lifecycle state server-side."
+    },
+    {
+      "name": "language-snapshot-ownership",
+      "pass": true,
+      "details": "Answer saves are scoped to the frozen attempt snapshot and published translations."
+    },
+    {
+      "name": "exam-route-protection",
+      "pass": true,
+      "details": "Exam detail route keeps student and teacher ownership checks."
+    },
+    {
+      "name": "legacy-enrollment-fallback",
+      "pass": true,
+      "details": "Legacy subject fallback remains in the shared student permission layer."
+    }
+  ]
+}

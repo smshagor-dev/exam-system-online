@@ -1,0 +1,27 @@
+[DB] Skipping Prisma db push because AUTO_DB_PUSH is not enabled
+Creating turbopack project { dir: 'D:\\Public\\exam-system-online', testMode: true }
+[Phase6][Redis] Connecting runtime store to redis://127.0.0.1:62709 (timeout=30000ms)
+[Phase6][Redis] Runtime store connected to redis://127.0.0.1:62709
+[Phase6] Socket runtime initialized in redis mode (instance=192c1611-84d9-463c-ba53-c7fc8bdcd829)
+
+╔════════════════════════════════════════╗
+║      ExamFlow Pro is running! 🎓      ║
+╠════════════════════════════════════════╣
+║  URL:    http://127.0.0.1:3217         ║
+║  Mode:   Development              ║
+║  Socket: Enabled (ws://127.0.0.1:3217) ║
+╚════════════════════════════════════════╝
+    
+ GET /api/auth/csrf 200 in 1543ms (next.js: 1514ms, application-code: 29ms)
+ POST /api/auth/callback/credentials 302 in 700ms (next.js: 8ms, application-code: 693ms)
+ GET / 307 in 2.4s (next.js: 987ms, application-code: 1366ms)
+ GET /login 200 in 873ms (next.js: 67ms, application-code: 806ms)
+ GET /api/auth/csrf 200 in 20ms (next.js: 11ms, application-code: 10ms)
+ POST /api/auth/callback/credentials 302 in 606ms (next.js: 3ms, application-code: 603ms)
+ GET / 307 in 431ms (next.js: 6ms, application-code: 425ms)
+ GET /login 200 in 957ms (next.js: 4ms, application-code: 954ms)
+ GET /api/socket/token 200 in 523ms (next.js: 393ms, application-code: 130ms)
+[Socket] Connected: cmrc1y6pb000rk2kdns7tepny (TEACHER) - GeN2JSqAsBXo3SbsAAAB
+ GET /api/socket/token 200 in 131ms (next.js: 2ms, application-code: 128ms)
+[Socket] Connected: cmrhdzq7d0002whz58rqdkwy3 (STUDENT) - DuioQok1wxNG4MTzAAAD
+[Socket] Disconnected: cmrc1y6pb000rk2kdns7tepny - GeN2JSqAsBXo3SbsAAAB

@@ -1,0 +1,39 @@
+[DB] Skipping Prisma db push because AUTO_DB_PUSH is not enabled
+Creating turbopack project { dir: 'D:\\Public\\exam-system-online', testMode: true }
+[Phase6][Redis] Connecting runtime store to redis://127.0.0.1:63841 (timeout=30000ms)
+[Phase6][Redis] Runtime store connected to redis://127.0.0.1:63841
+[Phase6] Socket runtime initialized in redis mode (instance=9ec8cb5e-538f-4940-b814-9d565a6bee4a)
+
+╔════════════════════════════════════════╗
+║      ExamFlow Pro is running! 🎓      ║
+╠════════════════════════════════════════╣
+║  URL:    http://127.0.0.1:3239         ║
+║  Mode:   Development              ║
+║  Socket: Enabled (ws://127.0.0.1:3239) ║
+╚════════════════════════════════════════╝
+    
+ GET /api/auth/csrf 200 in 3.1s (next.js: 3.1s, application-code: 58ms)
+ POST /api/auth/callback/credentials 302 in 811ms (next.js: 19ms, application-code: 792ms)
+ GET / 307 in 4.3s (next.js: 2.8s, application-code: 1530ms)
+ GET /login 200 in 1228ms (next.js: 95ms, application-code: 1133ms)
+ GET /api/auth/csrf 200 in 22ms (next.js: 12ms, application-code: 10ms)
+ POST /api/auth/callback/credentials 302 in 737ms (next.js: 3ms, application-code: 734ms)
+ GET / 307 in 379ms (next.js: 3ms, application-code: 376ms)
+ GET /login 200 in 1121ms (next.js: 3ms, application-code: 1118ms)
+ GET /api/auth/csrf 200 in 15ms (next.js: 9ms, application-code: 6ms)
+ POST /api/auth/callback/credentials 302 in 1083ms (next.js: 2ms, application-code: 1080ms)
+ GET / 307 in 362ms (next.js: 3ms, application-code: 359ms)
+ GET /login 200 in 499ms (next.js: 5ms, application-code: 494ms)
+ GET /api/auth/csrf 200 in 18ms (next.js: 9ms, application-code: 8ms)
+ POST /api/auth/callback/credentials 302 in 745ms (next.js: 3ms, application-code: 742ms)
+ GET / 307 in 372ms (next.js: 3ms, application-code: 369ms)
+ GET /login 200 in 382ms (next.js: 3ms, application-code: 380ms)
+ GET /api/auth/csrf 200 in 35ms (next.js: 11ms, application-code: 24ms)
+ POST /api/auth/callback/credentials 302 in 691ms (next.js: 2ms, application-code: 689ms)
+ GET / 307 in 409ms (next.js: 2ms, application-code: 407ms)
+ GET /login 200 in 646ms (next.js: 3ms, application-code: 643ms)
+ POST /api/admin/results-enterprise/officers 201 in 1527ms (next.js: 903ms, application-code: 624ms)
+ GET /api/admin/results-enterprise/analytics?departmentId=cmrc1y4pr000ck2kd4d7vqcwq 200 in 1527ms (next.js: 694ms, application-code: 833ms)
+ GET /api/admin/results-enterprise/analytics?departmentId=cmrc1y4pr000ck2kd4d7vqcwq 200 in 1290ms (next.js: 1577µs, application-code: 1289ms)
+ GET /api/admin/results-enterprise/analytics?departmentId=cmrc1y4pr000ck2kd4d7vqcwq 403 in 134ms (next.js: 1563µs, application-code: 133ms)
+ GET /api/admin/results-enterprise/analytics?departmentId=cmrc1y4pr000ck2kd4d7vqcwq 403 in 245ms (next.js: 1679µs, application-code: 243ms)

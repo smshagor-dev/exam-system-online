@@ -1,0 +1,154 @@
+[
+  {
+    "testId": "P4-BR-001",
+    "status": "PASS",
+    "actual": "Teacher department membership saved from admin UI",
+    "evidence": "D:\\Public\\exam-system-online\\docs\\phase-4\\evidence\\P4-BR-001-membership.png",
+    "role": "Department Admin",
+    "pageOrApi": "/admin/teacher-departments"
+  },
+  {
+    "testId": "P4-BR-002",
+    "status": "PASS",
+    "actual": "Lead and examiner assignment created from admin UI",
+    "evidence": "D:\\Public\\exam-system-online\\docs\\phase-4\\evidence\\P4-BR-002-lead-examiner-assignment.png",
+    "role": "Department Admin",
+    "pageOrApi": "/admin/teaching-assignments"
+  },
+  {
+    "testId": "P4-BR-003",
+    "status": "PASS",
+    "actual": "Duplicate assignment request returned 409",
+    "evidence": "D:\\Public\\exam-system-online\\docs\\phase-4\\evidence\\P4-BR-003-duplicate-rejection.txt",
+    "role": "Department Admin",
+    "pageOrApi": "/api/admin/teaching-assignments"
+  },
+  {
+    "testId": "P4-BR-004",
+    "status": "PASS",
+    "actual": "Assignment workflow submit -> approve -> activate completed in admin UI",
+    "evidence": "D:\\Public\\exam-system-online\\docs\\phase-4\\evidence\\P4-BR-004-approval-activation.png",
+    "role": "Department Admin",
+    "pageOrApi": "/admin/teaching-assignments"
+  },
+  {
+    "testId": "P4-BR-005",
+    "status": "PASS",
+    "actual": "Assistant/reviewer assignment activated, suspended, and completed",
+    "evidence": "D:\\Public\\exam-system-online\\docs\\phase-4\\evidence\\P4-BR-005-suspension-completion.png",
+    "role": "Department Admin",
+    "pageOrApi": "/admin/teaching-assignments"
+  },
+  {
+    "testId": "P4-BR-006",
+    "status": "PASS",
+    "actual": "Cross-department assignment attempt returned 403",
+    "evidence": "D:\\Public\\exam-system-online\\docs\\phase-4\\evidence\\P4-BR-006-cross-department-rejection.txt",
+    "role": "Department Admin",
+    "pageOrApi": "/api/admin/teaching-assignments"
+  },
+  {
+    "testId": "P4-BR-007",
+    "status": "PASS",
+    "actual": "Substitution created from admin UI",
+    "evidence": "D:\\Public\\exam-system-online\\docs\\phase-4\\evidence\\P4-BR-007-substitution-create.png",
+    "role": "Department Admin",
+    "pageOrApi": "/admin/teacher-substitutions"
+  },
+  {
+    "testId": "P4-BR-008",
+    "status": "PASS",
+    "actual": "Overlapping substitution attempt returned 409",
+    "evidence": "D:\\Public\\exam-system-online\\docs\\phase-4\\evidence\\P4-BR-008-overlap-rejection.txt",
+    "role": "Department Admin",
+    "pageOrApi": "/api/admin/teacher-substitutions"
+  },
+  {
+    "testId": "P4-BR-009",
+    "status": "PASS",
+    "actual": "Teacher assignments page renders normalized and legacy assignments",
+    "evidence": "D:\\Public\\exam-system-online\\docs\\phase-4\\evidence\\P4-BR-009-teacher-assignments.png",
+    "role": "Teacher",
+    "pageOrApi": "/teacher/assignments"
+  },
+  {
+    "testId": "P4-BR-010",
+    "status": "PASS",
+    "actual": "Teacher workload page renders",
+    "evidence": "D:\\Public\\exam-system-online\\docs\\phase-4\\evidence\\P4-BR-010-teacher-workload.png",
+    "role": "Teacher",
+    "pageOrApi": "/teacher/workload"
+  },
+  {
+    "testId": "P4-BR-011",
+    "status": "PASS",
+    "actual": "Reporting page rendered and CSV export returned 200",
+    "evidence": "D:\\Public\\exam-system-online\\docs\\phase-4\\evidence\\P4-BR-011-workload-report.png",
+    "role": "Department Admin",
+    "pageOrApi": "/admin/teacher-workload"
+  },
+  {
+    "testId": "P4-BR-012",
+    "status": "PASS",
+    "actual": "Lead teacher question creation returned 201",
+    "evidence": "D:\\Public\\exam-system-online\\docs\\phase-4\\evidence\\P4-BR-012-lead-question.txt",
+    "role": "Teacher",
+    "pageOrApi": "/api/questions"
+  },
+  {
+    "testId": "P4-BR-013",
+    "status": "PASS",
+    "actual": "Lead teacher exam creation returned 201",
+    "evidence": "D:\\Public\\exam-system-online\\docs\\phase-4\\evidence\\P4-BR-013-lead-exam.txt",
+    "role": "Teacher",
+    "pageOrApi": "/api/exams"
+  },
+  {
+    "testId": "P4-BR-014",
+    "status": "PASS",
+    "actual": "Active substitute exam visibility returned 200",
+    "evidence": "D:\\Public\\exam-system-online\\docs\\phase-4\\evidence\\P4-BR-014-substitute-exam-list.txt",
+    "role": "Teacher",
+    "pageOrApi": "/api/exams"
+  },
+  {
+    "testId": "P4-BR-015",
+    "status": "PASS",
+    "actual": "Substitute result review returned 200",
+    "evidence": "D:\\Public\\exam-system-online\\docs\\phase-4\\evidence\\P4-BR-015-substitute-result-review.txt",
+    "role": "Teacher",
+    "pageOrApi": "/api/results/[id]"
+  },
+  {
+    "testId": "P4-BR-016",
+    "status": "PASS",
+    "actual": "Substitute socket authorization result: connected",
+    "evidence": "D:\\Public\\exam-system-online\\docs\\phase-4\\evidence\\P4-BR-016-substitute-socket.txt",
+    "role": "Teacher",
+    "pageOrApi": "socket teacher:join_exam_monitor"
+  },
+  {
+    "testId": "P4-BR-017",
+    "status": "PASS",
+    "actual": "Expired substitute denial returned 403",
+    "evidence": "D:\\Public\\exam-system-online\\docs\\phase-4\\evidence\\P4-BR-017-expired-substitute-denial.txt",
+    "role": "Teacher",
+    "pageOrApi": "/api/results/[id]"
+  },
+  {
+    "testId": "P4-BR-018",
+    "status": "PASS",
+    "actual": "Foreign assignment question creation returned 403",
+    "evidence": "D:\\Public\\exam-system-online\\docs\\phase-4\\evidence\\P4-BR-018-foreign-question-denial.txt",
+    "role": "Teacher",
+    "pageOrApi": "/api/questions"
+  },
+  {
+    "testId": "P4-BR-019",
+    "status": "PASS",
+    "actual": "Unassigned teacher socket denial: {\"message\":\"Not allowed for this exam\"}",
+    "evidence": "D:\\Public\\exam-system-online\\docs\\phase-4\\evidence\\P4-BR-019-unassigned-socket-denial.txt",
+    "role": "Teacher",
+    "pageOrApi": "socket teacher:join_exam_monitor"
+  }
+]

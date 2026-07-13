@@ -1,4 +1,8 @@
 import { auth } from '@/lib/auth'
+import {
+  resolveCourseworkAssignmentTranslation,
+  resolveCourseworkRuleTranslation,
+} from '@/lib/academic-content'
 import { COURSEWORK_DIR, MAX_COURSEWORK_SIZE, sanitizeCourseworkFileName } from '@/lib/coursework'
 import { prisma } from '@/lib/prisma'
 import { getAiConfig } from '@/lib/system-settings'
@@ -54,14 +58,19 @@ export async function POST(request: Request) {
     select: {
       id: true,
       studentId: true,
+      title: true,
       rules: true,
       rule: {
         select: {
+          languageId: true,
           rules: true,
           useAiValidation: true,
           submissionDeadline: true,
+          translations: true,
         },
       },
+      languageId: true,
+      translations: true,
       accessRequests: {
         where: {
           status: CourseworkAccessRequestStatus.APPROVED,
@@ -78,7 +87,11 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Coursework assignment not found' }, { status: 404 })
   }
 
-  const activeRules = assignment.rule?.rules ?? assignment.rules ?? ''
+  const resolvedAssignment = resolveCourseworkAssignmentTranslation(assignment, assignment.languageId)
+  const resolvedRule = assignment.rule
+    ? resolveCourseworkRuleTranslation(assignment.rule, assignment.languageId)
+    : null
+  const activeRules = resolvedRule?.rules ?? resolvedAssignment.rules ?? ''
   if (activeRules.trim().length < 10) {
     return NextResponse.json({ error: 'Coursework rules are not configured yet' }, { status: 400 })
   }

@@ -1,0 +1,263 @@
+{
+  "baseUrl": "http://127.0.0.1:3010",
+  "executedAt": "2026-07-13T13:41:37.244Z",
+  "fixtures": {
+    "teacher": "teacher.john@examflow.pro",
+    "assistantTeacher": "teacher.sarah@examflow.pro",
+    "eligibleStudent": "p5.russian.student@examflow.pro",
+    "foreignStudent": "bob@student.examflow.pro"
+  },
+  "cases": [
+    {
+      "testId": "P7-BR-001",
+      "role": "teacher",
+      "steps": [
+        "Login as teacher",
+        "Open /teacher/coursework"
+      ],
+      "expected": "Teacher can authenticate and load enterprise coursework overview.",
+      "actual": "Teacher login succeeded and coursework overview rendered.",
+      "status": "PASS",
+      "evidencePath": "D:\\Public\\exam-system-online\\docs\\phase-7\\evidence\\browser\\p7-br-001.png"
+    },
+    {
+      "testId": "P7-BR-002",
+      "role": "teacher",
+      "steps": [
+        "Create an enterprise coursework template through the authenticated teacher API"
+      ],
+      "expected": "Template and rubric are created for the teacher scope.",
+      "actual": "Template cmrj9u8d30002z8uw1o5pqjef created with 2 rubric criteria.",
+      "status": "PASS",
+      "evidencePath": "D:\\Public\\exam-system-online\\docs\\phase-7\\evidence\\browser\\p7-br-002.png"
+    },
+    {
+      "testId": "P7-BR-003",
+      "role": "teacher",
+      "steps": [
+        "Create a draft publication targeted to the eligible student",
+        "Move it to SCHEDULED",
+        "Move it to PUBLISHED"
+      ],
+      "expected": "Publication lifecycle supports valid DRAFT -> SCHEDULED -> PUBLISHED transitions.",
+      "actual": "Publication cmrj9ud5n000bz8uw7buefjks moved from DRAFT to SCHEDULED to PUBLISHED.",
+      "status": "PASS",
+      "evidencePath": "D:\\Public\\exam-system-online\\docs\\phase-7\\evidence\\browser\\p7-br-003.png"
+    },
+    {
+      "testId": "P7-BR-004",
+      "role": "teacher",
+      "steps": [
+        "Archive the publication",
+        "Attempt invalid ARCHIVED -> DRAFT transition"
+      ],
+      "expected": "Invalid lifecycle transitions are rejected by the server.",
+      "actual": "Archived publication rejected invalid reverse transition as expected.",
+      "status": "PASS",
+      "evidencePath": "D:\\Public\\exam-system-online\\docs\\phase-7\\evidence\\browser\\p7-br-004.png"
+    },
+    {
+      "testId": "P7-BR-005",
+      "role": "student",
+      "steps": [
+        "Login as eligible student",
+        "Open coursework list",
+        "Open coursework detail"
+      ],
+      "expected": "Eligible student can list and open the published targeted coursework.",
+      "actual": "Eligible student listed publication cmrj9ud5n000bz8uw7buefjks and loaded the submission route.",
+      "status": "PASS",
+      "evidencePath": "D:\\Public\\exam-system-online\\docs\\phase-7\\evidence\\browser\\p7-br-005.png"
+    },
+    {
+      "testId": "P7-BR-006",
+      "role": "foreign-student",
+      "steps": [
+        "Login as foreign student",
+        "Attempt to open the targeted coursework detail route"
+      ],
+      "expected": "Non-target student is denied access to the targeted coursework.",
+      "actual": "Foreign student was denied publication visibility and attempts API access.",
+      "status": "PASS",
+      "evidencePath": "D:\\Public\\exam-system-online\\docs\\phase-7\\evidence\\browser\\p7-br-006.png"
+    },
+    {
+      "testId": "P7-BR-007",
+      "role": "student",
+      "steps": [
+        "Open submission page",
+        "Submit text, link, repository URL, and attachment through the UI"
+      ],
+      "expected": "Student can submit an attempt and the attempt is persisted with an attachment.",
+      "actual": "Attempt cmrj9v2zz000pz8uweq3s8qg7 submitted with 1 attachment(s).",
+      "status": "PASS",
+      "evidencePath": "D:\\Public\\exam-system-online\\docs\\phase-7\\evidence\\browser\\p7-br-007.png"
+    },
+    {
+      "testId": "P7-BR-014",
+      "role": "student",
+      "steps": [
+        "Repeat the same submission with the same idempotency key",
+        "Verify no duplicate attempt or attachment is created"
+      ],
+      "expected": "Duplicate submission returns the same submitted attempt without duplicating side effects.",
+      "actual": "Duplicate submit returned attempt cmrj9v2zz000pz8uweq3s8qg7 idempotently and kept attempt count at 1.",
+      "status": "PASS",
+      "evidencePath": "D:\\Public\\exam-system-online\\docs\\phase-7\\evidence\\browser\\p7-br-014.png"
+    },
+    {
+      "testId": "P7-BR-015",
+      "role": "teacher",
+      "steps": [
+        "Return the first attempt for revision",
+        "Student submits a second attempt",
+        "Verify history shows both attempts and the limit blocks a third"
+      ],
+      "expected": "Returned resubmission creates a second immutable attempt and the attempt limit is enforced.",
+      "actual": "Returned attempt created a separate second attempt (cmrj9vck80014z8uwo1ikrph9) and a third attempt was rejected at the limit.",
+      "status": "PASS",
+      "evidencePath": "D:\\Public\\exam-system-online\\docs\\phase-7\\evidence\\browser\\p7-br-015.png"
+    },
+    {
+      "testId": "P7-BR-016",
+      "role": "student",
+      "steps": [
+        "Open the protected download route for your own attachment",
+        "Retry as a foreign student",
+        "Retry without authentication"
+      ],
+      "expected": "Only the owning student and authorized teachers can fetch protected coursework attachments.",
+      "actual": "Protected attachment delivery allowed the owner, denied a foreign student, and rejected anonymous access for attachment cmrj9vcqn0016z8uwir1ex3bm.",
+      "status": "PASS",
+      "evidencePath": "D:\\Public\\exam-system-online\\docs\\phase-7\\evidence\\browser\\p7-br-016.png"
+    },
+    {
+      "testId": "P7-BR-008",
+      "role": "student",
+      "steps": [
+        "Request an extension for the published coursework"
+      ],
+      "expected": "Student can create an extension request for eligible coursework.",
+      "actual": "Extension request cmrj9vmst001cz8uwt3y0lciz created in REQUESTED state.",
+      "status": "PASS",
+      "evidencePath": "D:\\Public\\exam-system-online\\docs\\phase-7\\evidence\\browser\\p7-br-008.png"
+    },
+    {
+      "testId": "P7-BR-009",
+      "role": "teacher",
+      "steps": [
+        "Approve the latest extension request through the teacher API"
+      ],
+      "expected": "Teacher can approve an eligible extension request with a new deadline.",
+      "actual": "Extension request cmrj9vmst001cz8uwt3y0lciz approved with a new deadline.",
+      "status": "PASS",
+      "evidencePath": "D:\\Public\\exam-system-online\\docs\\phase-7\\evidence\\browser\\p7-br-009.png"
+    },
+    {
+      "testId": "P7-LATE-001",
+      "role": "student",
+      "steps": [
+        "Create a publication that is already past due",
+        "Verify the student is blocked",
+        "Approve an extension for the same student",
+        "Verify the same student can submit within the extension window"
+      ],
+      "expected": "Server-side late-policy enforcement blocks after the original deadline and only the approved extension reopens the deadline for that student.",
+      "actual": "Past-due submission was blocked before approval, then attempt cmrj9vzyk001tz8uwdxpxiwm2 succeeded only after the approved extension.",
+      "status": "PASS",
+      "evidencePath": "D:\\Public\\exam-system-online\\docs\\phase-7\\evidence\\browser\\p7-late-001.png"
+    },
+    {
+      "testId": "P7-MOD-001",
+      "role": "teacher",
+      "steps": [
+        "Lead teacher saves a draft grade",
+        "Lead teacher submits for moderation",
+        "Assistant teacher requests changes",
+        "Lead teacher resubmits",
+        "Lead teacher self-approval is denied",
+        "Assistant teacher approves",
+        "Lead teacher publishes",
+        "Published grade mutation is denied"
+      ],
+      "expected": "The moderation chain enforces role separation, keeps draft grades hidden from students, audits each transition, and only exposes the grade after publication.",
+      "actual": "Moderation chain completed for attempt cmrj9vck80014z8uwo1ikrph9, self-approval was denied, and all six transition audits were recorded.",
+      "status": "PASS",
+      "evidencePath": "D:\\Public\\exam-system-online\\docs\\phase-7\\evidence\\browser\\p7-mod-001.png"
+    },
+    {
+      "testId": "P7-BR-010",
+      "role": "teacher",
+      "steps": [
+        "Open the teacher grading studio after moderation and publication"
+      ],
+      "expected": "Teacher can see the published grade state after the moderation workflow completes.",
+      "actual": "Teacher grading studio displayed the published grade cmrj9w8fe0024z8uwxu5edibm after moderation completed.",
+      "status": "PASS",
+      "evidencePath": "D:\\Public\\exam-system-online\\docs\\phase-7\\evidence\\browser\\p7-br-010.png"
+    },
+    {
+      "testId": "P7-NOT-001",
+      "role": "teacher",
+      "steps": [
+        "Verify workflow notifications created by publish, resubmission, extension, grade publication, submission receipt, and review request paths"
+      ],
+      "expected": "Expected coursework notifications exist once for the correct users, with authorized links and no duplicate leakage.",
+      "actual": "Student notifications (5) and teacher notifications (3) were recorded without duplicate grade-publication side effects.",
+      "status": "PASS",
+      "evidencePath": "D:\\Public\\exam-system-online\\docs\\phase-7\\evidence\\browser\\p7-not-001.png"
+    },
+    {
+      "testId": "P7-BR-011",
+      "role": "student",
+      "steps": [
+        "Open coursework history after grade publication"
+      ],
+      "expected": "Student can see published feedback without private teacher notes.",
+      "actual": "Published feedback was visible and private teacher notes were not exposed to the student.",
+      "status": "PASS",
+      "evidencePath": "D:\\Public\\exam-system-online\\docs\\phase-7\\evidence\\browser\\p7-br-011.png"
+    },
+    {
+      "testId": "P7-BR-012",
+      "role": "teacher",
+      "steps": [
+        "Fetch JSON reports",
+        "Fetch grades CSV export"
+      ],
+      "expected": "Teacher reports and CSV export are available for the publication scope.",
+      "actual": "Teacher report JSON and CSV export both succeeded for the publication scope.",
+      "status": "PASS",
+      "evidencePath": "D:\\Public\\exam-system-online\\docs\\phase-7\\evidence\\browser\\p7-br-012.png"
+    },
+    {
+      "testId": "P7-VIEW-001",
+      "role": "teacher",
+      "steps": [
+        "Run critical teacher and student coursework pages in light/dark mode across desktop, tablet, and mobile viewports",
+        "Verify no horizontal overflow, no critical console errors, and no failed network requests"
+      ],
+      "expected": "Critical coursework workflows remain usable across the required viewport and theme matrix.",
+      "actual": "Viewport/theme matrix completed across 12 role+viewport combinations with no overflow, console, or network failures.",
+      "status": "PASS",
+      "evidencePath": "D:\\Public\\exam-system-online\\docs\\phase-7\\evidence\\database\\viewport-theme-matrix.json"
+    },
+    {
+      "testId": "P7-BR-013",
+      "role": "teacher",
+      "steps": [
+        "Close the publication",
+        "Attempt another student submission"
+      ],
+      "expected": "Closed coursework rejects new submissions.",
+      "actual": "Closed publication rejected a new submission attempt.",
+      "status": "PASS",
+      "evidencePath": "D:\\Public\\exam-system-online\\docs\\phase-7\\evidence\\browser\\p7-br-013.png"
+    }
+  ],
+  "status": "PASS",
+  "notes": [
+    "Structured workflow cases executed: 20",
+    "Console error count observed during run: 9"
+  ]
+}

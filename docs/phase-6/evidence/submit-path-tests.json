@@ -1,0 +1,30 @@
+{
+  "executedAt": "2026-07-13T08:29:00.987Z",
+  "results": [
+    {
+      "name": "single-submit-transition",
+      "pass": true,
+      "details": "status=SUBMITTED; result=cmriynkt0004f6gt1h3yarz8u"
+    },
+    {
+      "name": "parallel-duplicate-submit-idempotent",
+      "pass": true,
+      "details": "logs=1; results=1; status=SUBMITTED"
+    },
+    {
+      "name": "repeat-submit-no-extra-side-effects",
+      "pass": true,
+      "details": "logs=1; status=SUBMITTED"
+    },
+    {
+      "name": "manual-submit-after-auto-submit-stays-idempotent",
+      "pass": true,
+      "details": "returned=AUTO_SUBMITTED; autoLogs=1; manualLogs=0"
+    },
+    {
+      "name": "submit-ownership-enforced",
+      "pass": true,
+      "details": "Unauthorized"
+    }
+  ]
+}

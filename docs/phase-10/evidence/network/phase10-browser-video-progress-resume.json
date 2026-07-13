@@ -1,0 +1,32 @@
+{
+  "method": "POST",
+  "url": "/api/student/lms/videos/cmrjgtvli000chgaseyrj68f6/progress",
+  "status": 200,
+  "json": {
+    "id": "cmrjgu5wl000ohgast3ww6ekc",
+    "videoAssetId": "cmrjgtvli000chgaseyrj68f6",
+    "lessonId": "cmrjgto7q0008hgasui20w0q6",
+    "studentId": "cmrhdzsao000bwhz5n1waw7db",
+    "lastPositionSeconds": 420,
+    "watchedSeconds": 420,
+    "watchedPercentage": 70,
+    "resumeCount": 2,
+    "watchHistory": [
+      {
+        "at": "2026-07-13T16:57:51.714Z",
+        "position": 120,
+        "watchedSeconds": 120
+      },
+      {
+        "at": "2026-07-13T16:57:53.355Z",
+        "position": 420,
+        "watchedSeconds": 420
+      }
+    ],
+    "completedAt": null,
+    "lastWatchedAt": "2026-07-13T16:57:53.355Z",
+    "createdAt": "2026-07-13T16:57:51.717Z",
+    "updatedAt": "2026-07-13T16:57:53.357Z"
+  },
+  "text": "{\"id\":\"cmrjgu5wl000ohgast3ww6ekc\",\"videoAssetId\":\"cmrjgtvli000chgaseyrj68f6\",\"lessonId\":\"cmrjgto7q0008hgasui20w0q6\",\"studentId\":\"cmrhdzsao000bwhz5n1waw7db\",\"lastPositionSeconds\":420,\"watchedSeconds\":420,\"watchedPercentage\":70,\"resumeCount\":2,\"watchHistory\":[{\"at\":\"2026-07-13T16:57:51.714Z\",\"position\":120,\"watchedSeconds\":120},{\"at\":\"2026-07-13T16:57:53.355Z\",\"position\":420,\"watchedSeconds\":420}],\"completedAt\":null,\"lastWatchedAt\":\"2026-07-13T16:57:53.355Z\",\"createdAt\":\"2026-07-13T16:57:51.717Z\",\"updatedAt\":\"2026-07-13T16:57:53.357Z\"}"
+}

@@ -1,9 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { auth } from '@/lib/auth'
+import { dedupeTranslations, resolveExamTranslation } from '@/lib/academic-content'
 import { prisma } from '@/lib/prisma'
 import { createExamSchema } from '@/lib/validators'
 import { ExamStatus, Prisma, UserRole } from '@prisma/client'
 import { getStudentExamQueryScope, teacherCanAccessAssignment } from '@/lib/permissions'
+import {
+  buildAccessibleTeachingScopeFilters,
+  getTeacherOfferingAssignments,
+} from '@/lib/teacher-assignment'
 
 export async function GET(req: NextRequest) {
   const session = await auth()
@@ -20,7 +25,11 @@ export async function GET(req: NextRequest) {
   if (session.user.role === UserRole.TEACHER) {
     const profile = await prisma.teacherProfile.findUnique({ where: { userId: session.user.id } })
     if (!profile) return NextResponse.json({ error: 'Profile not found' }, { status: 404 })
-    where.teacherId = profile.id
+    const assignments = await getTeacherOfferingAssignments({ teacherProfileId: profile.id })
+    const scopeFilters = buildAccessibleTeachingScopeFilters(assignments) as Prisma.ExamWhereInput[]
+    where = scopeFilters.length > 0
+      ? { OR: [...scopeFilters, { teacherId: profile.id }] }
+      : { teacherId: profile.id }
   } else if (session.user.role === UserRole.STUDENT) {
     const scope = await getStudentExamQueryScope(session.user.id)
     if (!scope.profile) return NextResponse.json({ error: 'Profile not found' }, { status: 404 })
@@ -39,17 +48,17 @@ export async function GET(req: NextRequest) {
   const exams = await prisma.exam.findMany({
     where,
     include: {
+      translations: true,
       subject: true,
       language: true,
       group: true,
-      academicYear: true,
       semester: true,
       _count: { select: { questions: true, attempts: true } },
     },
     orderBy: { startTime: 'desc' },
   })
 
-  return NextResponse.json(exams)
+  return NextResponse.json(exams.map((exam) => resolveExamTranslation(exam, exam.languageId)))
 }
 
 export async function POST(req: NextRequest) {
@@ -81,29 +90,63 @@ export async function POST(req: NextRequest) {
   const profile = await prisma.teacherProfile.findUnique({ where: { userId: session.user.id } })
   if (!profile) return NextResponse.json({ error: 'Profile not found' }, { status: 404 })
 
-  const { questionIds, ...examData } = parsed.data
+  const { questionIds, translations, ...examData } = parsed.data
 
-  const exam = await prisma.exam.create({
-    data: {
-      ...examData,
-      startTime: new Date(examData.startTime),
-      endTime: new Date(examData.endTime),
-      teacherId: profile.id,
-      academicOfferingId: parsed.data.academicOfferingId ?? null,
-      status: 'SCHEDULED',
-      questions: {
-        create: questionIds.map((q) => ({
-          questionId: q.questionId,
-          orderIndex: q.orderIndex,
-          marks: q.marks,
-        })),
+  const exam = await prisma.$transaction(async (tx) => {
+    const createdExam = await tx.exam.create({
+      data: {
+        ...examData,
+        startTime: new Date(examData.startTime),
+        endTime: new Date(examData.endTime),
+        teacherId: profile.id,
+        academicOfferingId: parsed.data.academicOfferingId ?? null,
+        status: 'DRAFT',
+        questions: {
+          create: questionIds.map((q) => ({
+            questionId: q.questionId,
+            orderIndex: q.orderIndex,
+            marks: q.marks,
+          })),
+        },
       },
-    },
-    include: {
-      questions: { include: { question: true } },
-      subject: true,
-    },
+    })
+
+    const mergedTranslations = dedupeTranslations([
+      {
+        languageId: parsed.data.languageId,
+        title: parsed.data.title,
+        description: parsed.data.description ?? null,
+        instructions: parsed.data.instructions ?? null,
+      },
+      ...(translations ?? []).map((translation) => ({
+        languageId: translation.languageId,
+        title: translation.title,
+        description: translation.description ?? null,
+        instructions: translation.instructions ?? null,
+      })),
+    ])
+
+    if (mergedTranslations.length > 0) {
+      await tx.examTranslation.createMany({
+        data: mergedTranslations.map((translation) => ({
+          examId: createdExam.id,
+          languageId: translation.languageId,
+          title: translation.title,
+          description: translation.description ?? null,
+          instructions: translation.instructions ?? null,
+        })),
+      })
+    }
+
+    return tx.exam.findUniqueOrThrow({
+      where: { id: createdExam.id },
+      include: {
+        translations: true,
+        questions: { include: { question: true } },
+        subject: true,
+      },
+    })
   })
 
-  return NextResponse.json(exam, { status: 201 })
+  return NextResponse.json(resolveExamTranslation(exam, exam.languageId), { status: 201 })
 }

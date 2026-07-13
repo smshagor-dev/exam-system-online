@@ -1,0 +1,9 @@
+{
+  "method": "GET",
+  "url": "/api/admin/lms/courses?departmentId=cmrc1y4pr000ck2kd4d7vqcwq",
+  "status": 403,
+  "json": {
+    "error": "Forbidden"
+  },
+  "text": "{\"error\":\"Forbidden\"}"
+}

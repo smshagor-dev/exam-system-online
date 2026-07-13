@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "generatedAt": "2026-07-13T16:58:43.104Z",
+  "counts": {
+    "courseCount": 7,
+    "versionCount": 7,
+    "sectionCount": 7,
+    "lessonCount": 7,
+    "materialCount": 3,
+    "videoCount": 3,
+    "liveClassCount": 3,
+    "threadCount": 3,
+    "replyCount": 3,
+    "lessonProgressCount": 3,
+    "videoProgressCount": 3,
+    "attendanceCount": 3,
+    "translationCount": 2
+  }
+}

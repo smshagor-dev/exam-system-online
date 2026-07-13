@@ -1,0 +1,233 @@
+[DB] Skipping Prisma db push because AUTO_DB_PUSH is not enabled
+[Phase6][Redis] Connecting runtime store to redis://127.0.0.1:62735 (timeout=30000ms)
+[Phase6][Redis] Runtime store connected to redis://127.0.0.1:62735
+[Phase6] Socket runtime initialized in redis mode (instance=af940940-2690-410d-8498-5883235f7494)
+
+╔════════════════════════════════════════╗
+║      ExamFlow Pro is running! 🎓      ║
+╠════════════════════════════════════════╣
+║  URL:    http://127.0.0.1:3226         ║
+║  Mode:   Production               ║
+║  Socket: Enabled (ws://127.0.0.1:3226) ║
+╚════════════════════════════════════════╝
+    
+[Socket] Connected: cmrc1y6pb000rk2kdns7tepny (TEACHER) - ZGjT0wVBTbQkQNXiAAAB
+[Socket] Connected: cmrhzhqle004z42f0qdvxbycc (STUDENT) - -j_La1tRX1_NNoq2AAAb
+[Socket] Connected: cmrhzhsku005942f04heloj7n (STUDENT) - fs0isU2sKM7nE-xGAAAc
+[Socket] Connected: cmrhzhtke005e42f087bxa77h (STUDENT) - fZvMFKtICpgZPVYcAAAd
+[Socket] Connected: cmrhzhuk2005j42f0k9azvu4c (STUDENT) - MhPS4OvS6eFjKuvIAAAe
+[Socket] Connected: cmrhzhwk2005t42f050h3ed9l (STUDENT) - bo9tfEdlnHQ3ZzjHAAAf
+[Socket] Connected: cmrhzhxk3005y42f06vzovvaj (STUDENT) - M43_SKz-jLyMBVDNAAAg
+[Socket] Connected: cmrhzi4tc006x42f053hckhie (STUDENT) - P5pfg4H9Vh5uH0F-AAAh
+[Socket] Connected: cmrhzi7sj007c42f0ufdfgvft (STUDENT) - EhTYYeD5GXYe_yg2AAAi
+[Socket] Connected: cmrhzhll9004a42f01pvo68hg (STUDENT) - mmZrAKSx8k1us4yRAAAj
+[Socket] Connected: cmrhzhmle004f42f0hyucghyr (STUDENT) - NEXI0NwD8fhhig4_AAAk
+[Socket] Connected: cmrhzhnl6004k42f0mr71mrc0 (STUDENT) - TzwHphtA1jXhyf89AAAl
+[Socket] Connected: cmrhzhol9004p42f0cfw9cs6g (STUDENT) - Y2PrbVPFpU8DYN8EAAAm
+[Socket] Connected: cmrhzhpla004u42f0l9m3uwzg (STUDENT) - 7aSxmCzLr5TP5ZsxAAAn
+[Socket] Connected: cmrhzhrlk005442f05qykagog (STUDENT) - af7izE3aIjOJK1aUAAAo
+[Socket] Connected: cmrhzhvjw005o42f0snuvorch (STUDENT) - cxLgLpjBpYgik4FfAAAp
+[Socket] Connected: cmrhzhykc006342f03nh872lo (STUDENT) - 4lKWyygkpwHcfaBXAAAq
+[Socket] Connected: cmrhzhzkj006842f0ulw8aghx (STUDENT) - KJ78lRRrl-byFZtfAAAr
+[Socket] Connected: cmrhzi0nf006d42f0m902tkbr (STUDENT) - ITRaEb4exS8Z0ADCAAAs
+[Socket] Connected: cmrhzi1nl006i42f0tyyd4m0y (STUDENT) - e4chOBVsL-Vkr4muAAAt
+[Socket] Connected: cmrhzi2q0006n42f0siqvxtso (STUDENT) - h3I-kiCdpYz4IEzBAAAu
+[Socket] Connected: cmrhzi3tn006s42f091vvn71g (STUDENT) - PNEwbSlYzj1LsoCrAAAv
+[Socket] Connected: cmrhzi5sw007242f0byw1hpa6 (STUDENT) - EKkVc-XUZ3zlODrGAAAw
+[Socket] Connected: cmrhzi6sn007742f0gf3xpelk (STUDENT) - EKUsHDpW6fydPY1AAAAx
+[Socket] Connected: cmrhzi8t3007h42f0iidmm2uv (STUDENT) - _5aJ_te0qkqaNn0GAAAy
+[Socket] Connected: cmrhzi9tr007m42f07ofda81u (STUDENT) - Rnf-wq8rK3qMmyJFAAAz
+[Phase6][JoinTiming] {"requestId":"e0b135f4-6a48-4a2f-a2cc-93b37901cfc5","socketId":"-j_La1tRX1_NNoq2AAAb","studentId":null,"examId":"cmri5l0g6003xr4vdpsf80w03","stage":"access_context","durationMs":2980,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"e0b135f4-6a48-4a2f-a2cc-93b37901cfc5","socketId":"-j_La1tRX1_NNoq2AAAb","studentId":"cmrhzhqxc005142f05jmw8mna","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"translation_metadata","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"e0b135f4-6a48-4a2f-a2cc-93b37901cfc5","socketId":"-j_La1tRX1_NNoq2AAAb","studentId":"cmrhzhqxc005142f05jmw8mna","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"room_join","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"5097136f-90dd-4dbc-8a65-2e16bfdf7501","socketId":"mmZrAKSx8k1us4yRAAAj","studentId":null,"examId":"cmri5l0g6003xr4vdpsf80w03","stage":"access_context","durationMs":2976,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"5097136f-90dd-4dbc-8a65-2e16bfdf7501","socketId":"mmZrAKSx8k1us4yRAAAj","studentId":"cmrhzhlxa004c42f025b0ytxg","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"translation_metadata","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"5097136f-90dd-4dbc-8a65-2e16bfdf7501","socketId":"mmZrAKSx8k1us4yRAAAj","studentId":"cmrhzhlxa004c42f025b0ytxg","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"room_join","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"a84224bd-0d32-4e5a-aeb5-e9632a32a1d7","socketId":"fZvMFKtICpgZPVYcAAAd","studentId":null,"examId":"cmri5l0g6003xr4vdpsf80w03","stage":"access_context","durationMs":2978,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"a84224bd-0d32-4e5a-aeb5-e9632a32a1d7","socketId":"fZvMFKtICpgZPVYcAAAd","studentId":"cmrhzhtw5005g42f0soseiydk","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"translation_metadata","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"a84224bd-0d32-4e5a-aeb5-e9632a32a1d7","socketId":"fZvMFKtICpgZPVYcAAAd","studentId":"cmrhzhtw5005g42f0soseiydk","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"room_join","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"ab553862-fc25-47fe-8a98-ded4571ad271","socketId":"MhPS4OvS6eFjKuvIAAAe","studentId":null,"examId":"cmri5l0g6003xr4vdpsf80w03","stage":"access_context","durationMs":2979,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"ab553862-fc25-47fe-8a98-ded4571ad271","socketId":"MhPS4OvS6eFjKuvIAAAe","studentId":"cmrhzhuvy005l42f06q7dnk55","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"translation_metadata","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"ab553862-fc25-47fe-8a98-ded4571ad271","socketId":"MhPS4OvS6eFjKuvIAAAe","studentId":"cmrhzhuvy005l42f06q7dnk55","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"room_join","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"a0de5cd1-9b64-4620-bde1-222711d31858","socketId":"M43_SKz-jLyMBVDNAAAg","studentId":null,"examId":"cmri5l0g6003xr4vdpsf80w03","stage":"access_context","durationMs":2979,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"a0de5cd1-9b64-4620-bde1-222711d31858","socketId":"M43_SKz-jLyMBVDNAAAg","studentId":"cmrhzhxvx006042f0k6hofwo4","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"translation_metadata","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"a0de5cd1-9b64-4620-bde1-222711d31858","socketId":"M43_SKz-jLyMBVDNAAAg","studentId":"cmrhzhxvx006042f0k6hofwo4","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"room_join","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"e0b135f4-6a48-4a2f-a2cc-93b37901cfc5","socketId":"-j_La1tRX1_NNoq2AAAb","studentId":"cmrhzhqxc005142f05jmw8mna","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"presence_update","durationMs":7,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"5097136f-90dd-4dbc-8a65-2e16bfdf7501","socketId":"mmZrAKSx8k1us4yRAAAj","studentId":"cmrhzhlxa004c42f025b0ytxg","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"presence_update","durationMs":6,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"a84224bd-0d32-4e5a-aeb5-e9632a32a1d7","socketId":"fZvMFKtICpgZPVYcAAAd","studentId":"cmrhzhtw5005g42f0soseiydk","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"presence_update","durationMs":5,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"ab553862-fc25-47fe-8a98-ded4571ad271","socketId":"MhPS4OvS6eFjKuvIAAAe","studentId":"cmrhzhuvy005l42f06q7dnk55","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"presence_update","durationMs":4,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"a0de5cd1-9b64-4620-bde1-222711d31858","socketId":"M43_SKz-jLyMBVDNAAAg","studentId":"cmrhzhxvx006042f0k6hofwo4","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"presence_update","durationMs":3,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"9cdb1d6f-b1af-4bda-b852-0859a0e210f8","socketId":"7aSxmCzLr5TP5ZsxAAAn","studentId":null,"examId":"cmri5l0g6003xr4vdpsf80w03","stage":"access_context","durationMs":3108,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"9cdb1d6f-b1af-4bda-b852-0859a0e210f8","socketId":"7aSxmCzLr5TP5ZsxAAAn","studentId":"cmrhzhpx5004w42f0lnx85j1d","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"translation_metadata","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"9cdb1d6f-b1af-4bda-b852-0859a0e210f8","socketId":"7aSxmCzLr5TP5ZsxAAAn","studentId":"cmrhzhpx5004w42f0lnx85j1d","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"room_join","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"118d4ca7-eeb6-4d7c-afc2-fa26d7c4d948","socketId":"cxLgLpjBpYgik4FfAAAp","studentId":null,"examId":"cmri5l0g6003xr4vdpsf80w03","stage":"access_context","durationMs":3109,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"118d4ca7-eeb6-4d7c-afc2-fa26d7c4d948","socketId":"cxLgLpjBpYgik4FfAAAp","studentId":"cmrhzhvvs005q42f023upy2o1","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"translation_metadata","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"118d4ca7-eeb6-4d7c-afc2-fa26d7c4d948","socketId":"cxLgLpjBpYgik4FfAAAp","studentId":"cmrhzhvvs005q42f023upy2o1","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"room_join","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"a7738727-0015-4b1c-87b7-cc52f7f78746","socketId":"EhTYYeD5GXYe_yg2AAAi","studentId":null,"examId":"cmri5l0g6003xr4vdpsf80w03","stage":"access_context","durationMs":3111,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"a7738727-0015-4b1c-87b7-cc52f7f78746","socketId":"EhTYYeD5GXYe_yg2AAAi","studentId":"cmrhzi853007e42f0gnvewsyt","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"translation_metadata","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"a7738727-0015-4b1c-87b7-cc52f7f78746","socketId":"EhTYYeD5GXYe_yg2AAAi","studentId":"cmrhzi853007e42f0gnvewsyt","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"room_join","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"7cb0f430-d495-414f-923b-98d435a74540","socketId":"4lKWyygkpwHcfaBXAAAq","studentId":null,"examId":"cmri5l0g6003xr4vdpsf80w03","stage":"access_context","durationMs":3110,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"7cb0f430-d495-414f-923b-98d435a74540","socketId":"4lKWyygkpwHcfaBXAAAq","studentId":"cmrhzhywb006542f01iipngnr","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"translation_metadata","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"7cb0f430-d495-414f-923b-98d435a74540","socketId":"4lKWyygkpwHcfaBXAAAq","studentId":"cmrhzhywb006542f01iipngnr","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"room_join","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"9cdb1d6f-b1af-4bda-b852-0859a0e210f8","socketId":"7aSxmCzLr5TP5ZsxAAAn","studentId":"cmrhzhpx5004w42f0lnx85j1d","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"presence_update","durationMs":5,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"118d4ca7-eeb6-4d7c-afc2-fa26d7c4d948","socketId":"cxLgLpjBpYgik4FfAAAp","studentId":"cmrhzhvvs005q42f023upy2o1","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"presence_update","durationMs":5,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"a7738727-0015-4b1c-87b7-cc52f7f78746","socketId":"EhTYYeD5GXYe_yg2AAAi","studentId":"cmrhzi853007e42f0gnvewsyt","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"presence_update","durationMs":4,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"7cb0f430-d495-414f-923b-98d435a74540","socketId":"4lKWyygkpwHcfaBXAAAq","studentId":"cmrhzhywb006542f01iipngnr","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"presence_update","durationMs":4,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"63e2bcac-d1b8-4785-8992-7e1ce40e94b9","socketId":"TzwHphtA1jXhyf89AAAl","studentId":null,"examId":"cmri5l0g6003xr4vdpsf80w03","stage":"access_context","durationMs":3145,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"63e2bcac-d1b8-4785-8992-7e1ce40e94b9","socketId":"TzwHphtA1jXhyf89AAAl","studentId":"cmrhzhnxf004m42f0reespwle","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"translation_metadata","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"63e2bcac-d1b8-4785-8992-7e1ce40e94b9","socketId":"TzwHphtA1jXhyf89AAAl","studentId":"cmrhzhnxf004m42f0reespwle","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"room_join","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"63e2bcac-d1b8-4785-8992-7e1ce40e94b9","socketId":"TzwHphtA1jXhyf89AAAl","studentId":"cmrhzhnxf004m42f0reespwle","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"presence_update","durationMs":1,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"e96e0b41-122e-4f1c-97cf-301cdca68d6c","socketId":"KJ78lRRrl-byFZtfAAAr","studentId":null,"examId":"cmri5l0g6003xr4vdpsf80w03","stage":"access_context","durationMs":3217,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"e96e0b41-122e-4f1c-97cf-301cdca68d6c","socketId":"KJ78lRRrl-byFZtfAAAr","studentId":"cmrhzhzwg006a42f0asj8046t","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"translation_metadata","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"e96e0b41-122e-4f1c-97cf-301cdca68d6c","socketId":"KJ78lRRrl-byFZtfAAAr","studentId":"cmrhzhzwg006a42f0asj8046t","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"room_join","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"e96e0b41-122e-4f1c-97cf-301cdca68d6c","socketId":"KJ78lRRrl-byFZtfAAAr","studentId":"cmrhzhzwg006a42f0asj8046t","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"presence_update","durationMs":3,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"5c1ea4ba-bbf6-478f-8cc0-b0f0eb6875b9","socketId":"PNEwbSlYzj1LsoCrAAAv","studentId":null,"examId":"cmri5l0g6003xr4vdpsf80w03","stage":"access_context","durationMs":3231,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"5c1ea4ba-bbf6-478f-8cc0-b0f0eb6875b9","socketId":"PNEwbSlYzj1LsoCrAAAv","studentId":"cmrhzi45j006u42f0g3xxtzs2","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"translation_metadata","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"5c1ea4ba-bbf6-478f-8cc0-b0f0eb6875b9","socketId":"PNEwbSlYzj1LsoCrAAAv","studentId":"cmrhzi45j006u42f0g3xxtzs2","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"room_join","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"e149299a-30e4-4bea-bc29-e88707427ed4","socketId":"af7izE3aIjOJK1aUAAAo","studentId":null,"examId":"cmri5l0g6003xr4vdpsf80w03","stage":"access_context","durationMs":3234,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"e149299a-30e4-4bea-bc29-e88707427ed4","socketId":"af7izE3aIjOJK1aUAAAo","studentId":"cmrhzhrxf005642f01dp3t4gn","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"translation_metadata","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"e149299a-30e4-4bea-bc29-e88707427ed4","socketId":"af7izE3aIjOJK1aUAAAo","studentId":"cmrhzhrxf005642f01dp3t4gn","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"room_join","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"4e20e791-1a1e-4ce1-9360-54445e42ed95","socketId":"ITRaEb4exS8Z0ADCAAAs","studentId":null,"examId":"cmri5l0g6003xr4vdpsf80w03","stage":"access_context","durationMs":3234,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"4e20e791-1a1e-4ce1-9360-54445e42ed95","socketId":"ITRaEb4exS8Z0ADCAAAs","studentId":"cmrhzi0zk006f42f07uwdreo0","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"translation_metadata","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"4e20e791-1a1e-4ce1-9360-54445e42ed95","socketId":"ITRaEb4exS8Z0ADCAAAs","studentId":"cmrhzi0zk006f42f07uwdreo0","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"room_join","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"f56aad3c-123d-4fcb-b2d9-020d947aac6c","socketId":"EKkVc-XUZ3zlODrGAAAw","studentId":null,"examId":"cmri5l0g6003xr4vdpsf80w03","stage":"access_context","durationMs":3232,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"f56aad3c-123d-4fcb-b2d9-020d947aac6c","socketId":"EKkVc-XUZ3zlODrGAAAw","studentId":"cmrhzi64v007442f0ktfllxbn","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"translation_metadata","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"f56aad3c-123d-4fcb-b2d9-020d947aac6c","socketId":"EKkVc-XUZ3zlODrGAAAw","studentId":"cmrhzi64v007442f0ktfllxbn","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"room_join","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"44f1e232-6152-40b7-bc56-d2842b99d161","socketId":"P5pfg4H9Vh5uH0F-AAAh","studentId":null,"examId":"cmri5l0g6003xr4vdpsf80w03","stage":"access_context","durationMs":3236,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"44f1e232-6152-40b7-bc56-d2842b99d161","socketId":"P5pfg4H9Vh5uH0F-AAAh","studentId":"cmrhzi55b006z42f06umpyp0p","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"translation_metadata","durationMs":1,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"44f1e232-6152-40b7-bc56-d2842b99d161","socketId":"P5pfg4H9Vh5uH0F-AAAh","studentId":"cmrhzi55b006z42f06umpyp0p","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"room_join","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"fff4e4c3-532c-41fb-a3c0-e1ebb340b0ac","socketId":"h3I-kiCdpYz4IEzBAAAu","studentId":null,"examId":"cmri5l0g6003xr4vdpsf80w03","stage":"access_context","durationMs":3234,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"fff4e4c3-532c-41fb-a3c0-e1ebb340b0ac","socketId":"h3I-kiCdpYz4IEzBAAAu","studentId":"cmrhzi32g006p42f0u0jzaj9c","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"translation_metadata","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"fff4e4c3-532c-41fb-a3c0-e1ebb340b0ac","socketId":"h3I-kiCdpYz4IEzBAAAu","studentId":"cmrhzi32g006p42f0u0jzaj9c","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"room_join","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"5c1ea4ba-bbf6-478f-8cc0-b0f0eb6875b9","socketId":"PNEwbSlYzj1LsoCrAAAv","studentId":"cmrhzi45j006u42f0g3xxtzs2","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"presence_update","durationMs":6,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"e149299a-30e4-4bea-bc29-e88707427ed4","socketId":"af7izE3aIjOJK1aUAAAo","studentId":"cmrhzhrxf005642f01dp3t4gn","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"presence_update","durationMs":4,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"4e20e791-1a1e-4ce1-9360-54445e42ed95","socketId":"ITRaEb4exS8Z0ADCAAAs","studentId":"cmrhzi0zk006f42f07uwdreo0","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"presence_update","durationMs":4,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"f56aad3c-123d-4fcb-b2d9-020d947aac6c","socketId":"EKkVc-XUZ3zlODrGAAAw","studentId":"cmrhzi64v007442f0ktfllxbn","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"presence_update","durationMs":4,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"44f1e232-6152-40b7-bc56-d2842b99d161","socketId":"P5pfg4H9Vh5uH0F-AAAh","studentId":"cmrhzi55b006z42f06umpyp0p","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"presence_update","durationMs":3,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"fff4e4c3-532c-41fb-a3c0-e1ebb340b0ac","socketId":"h3I-kiCdpYz4IEzBAAAu","studentId":"cmrhzi32g006p42f0u0jzaj9c","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"presence_update","durationMs":2,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"de01e150-1909-448e-9028-f9acb01176cd","socketId":"_5aJ_te0qkqaNn0GAAAy","studentId":null,"examId":"cmri5l0g6003xr4vdpsf80w03","stage":"access_context","durationMs":3269,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"de01e150-1909-448e-9028-f9acb01176cd","socketId":"_5aJ_te0qkqaNn0GAAAy","studentId":"cmrhzi94y007j42f02o3cj081","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"translation_metadata","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"de01e150-1909-448e-9028-f9acb01176cd","socketId":"_5aJ_te0qkqaNn0GAAAy","studentId":"cmrhzi94y007j42f02o3cj081","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"room_join","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"de01e150-1909-448e-9028-f9acb01176cd","socketId":"_5aJ_te0qkqaNn0GAAAy","studentId":"cmrhzi94y007j42f02o3cj081","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"presence_update","durationMs":2,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"d5479048-767c-496f-8df2-c6ad5e91db4b","socketId":"e4chOBVsL-Vkr4muAAAt","studentId":null,"examId":"cmri5l0g6003xr4vdpsf80w03","stage":"access_context","durationMs":3330,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"d5479048-767c-496f-8df2-c6ad5e91db4b","socketId":"e4chOBVsL-Vkr4muAAAt","studentId":"cmrhzi1zm006k42f0g53mto4m","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"translation_metadata","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"d5479048-767c-496f-8df2-c6ad5e91db4b","socketId":"e4chOBVsL-Vkr4muAAAt","studentId":"cmrhzi1zm006k42f0g53mto4m","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"room_join","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"d5479048-767c-496f-8df2-c6ad5e91db4b","socketId":"e4chOBVsL-Vkr4muAAAt","studentId":"cmrhzi1zm006k42f0g53mto4m","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"presence_update","durationMs":2,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"cb8c87e8-c3d5-4580-af83-5376529476bf","socketId":"fs0isU2sKM7nE-xGAAAc","studentId":null,"examId":"cmri5l0g6003xr4vdpsf80w03","stage":"access_context","durationMs":3359,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"cb8c87e8-c3d5-4580-af83-5376529476bf","socketId":"fs0isU2sKM7nE-xGAAAc","studentId":"cmrhzhswp005b42f0jtkdl7nh","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"translation_metadata","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"cb8c87e8-c3d5-4580-af83-5376529476bf","socketId":"fs0isU2sKM7nE-xGAAAc","studentId":"cmrhzhswp005b42f0jtkdl7nh","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"room_join","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"9044b309-42db-4d68-b280-56a69a562cd5","socketId":"EKUsHDpW6fydPY1AAAAx","studentId":null,"examId":"cmri5l0g6003xr4vdpsf80w03","stage":"access_context","durationMs":3354,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"9044b309-42db-4d68-b280-56a69a562cd5","socketId":"EKUsHDpW6fydPY1AAAAx","studentId":"cmrhzi74k007942f0bqfan9np","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"translation_metadata","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"9044b309-42db-4d68-b280-56a69a562cd5","socketId":"EKUsHDpW6fydPY1AAAAx","studentId":"cmrhzi74k007942f0bqfan9np","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"room_join","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"63e2bcac-d1b8-4785-8992-7e1ce40e94b9","socketId":"TzwHphtA1jXhyf89AAAl","studentId":"cmrhzhnxf004m42f0reespwle","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"session_lookup","durationMs":210,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"63e2bcac-d1b8-4785-8992-7e1ce40e94b9","socketId":"TzwHphtA1jXhyf89AAAl","studentId":"cmrhzhnxf004m42f0reespwle","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"join_ack","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"9cdb1d6f-b1af-4bda-b852-0859a0e210f8","socketId":"7aSxmCzLr5TP5ZsxAAAn","studentId":"cmrhzhpx5004w42f0lnx85j1d","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"session_lookup","durationMs":246,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"118d4ca7-eeb6-4d7c-afc2-fa26d7c4d948","socketId":"cxLgLpjBpYgik4FfAAAp","studentId":"cmrhzhvvs005q42f023upy2o1","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"session_lookup","durationMs":246,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"a7738727-0015-4b1c-87b7-cc52f7f78746","socketId":"EhTYYeD5GXYe_yg2AAAi","studentId":"cmrhzi853007e42f0gnvewsyt","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"session_lookup","durationMs":247,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"7cb0f430-d495-414f-923b-98d435a74540","socketId":"4lKWyygkpwHcfaBXAAAq","studentId":"cmrhzhywb006542f01iipngnr","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"session_lookup","durationMs":247,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"9cdb1d6f-b1af-4bda-b852-0859a0e210f8","socketId":"7aSxmCzLr5TP5ZsxAAAn","studentId":"cmrhzhpx5004w42f0lnx85j1d","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"join_ack","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"118d4ca7-eeb6-4d7c-afc2-fa26d7c4d948","socketId":"cxLgLpjBpYgik4FfAAAp","studentId":"cmrhzhvvs005q42f023upy2o1","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"join_ack","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"a7738727-0015-4b1c-87b7-cc52f7f78746","socketId":"EhTYYeD5GXYe_yg2AAAi","studentId":"cmrhzi853007e42f0gnvewsyt","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"join_ack","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"7cb0f430-d495-414f-923b-98d435a74540","socketId":"4lKWyygkpwHcfaBXAAAq","studentId":"cmrhzhywb006542f01iipngnr","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"join_ack","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"a92ee6b2-354a-4f8a-8dc2-6c1bd6a15129","socketId":"bo9tfEdlnHQ3ZzjHAAAf","studentId":null,"examId":"cmri5l0g6003xr4vdpsf80w03","stage":"access_context","durationMs":3366,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"a92ee6b2-354a-4f8a-8dc2-6c1bd6a15129","socketId":"bo9tfEdlnHQ3ZzjHAAAf","studentId":"cmrhzhwwd005v42f0jpmvcrkb","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"translation_metadata","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"a92ee6b2-354a-4f8a-8dc2-6c1bd6a15129","socketId":"bo9tfEdlnHQ3ZzjHAAAf","studentId":"cmrhzhwwd005v42f0jpmvcrkb","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"room_join","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"e0b135f4-6a48-4a2f-a2cc-93b37901cfc5","socketId":"-j_La1tRX1_NNoq2AAAb","studentId":"cmrhzhqxc005142f05jmw8mna","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"session_lookup","durationMs":384,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"5097136f-90dd-4dbc-8a65-2e16bfdf7501","socketId":"mmZrAKSx8k1us4yRAAAj","studentId":"cmrhzhlxa004c42f025b0ytxg","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"session_lookup","durationMs":383,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"a84224bd-0d32-4e5a-aeb5-e9632a32a1d7","socketId":"fZvMFKtICpgZPVYcAAAd","studentId":"cmrhzhtw5005g42f0soseiydk","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"session_lookup","durationMs":383,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"ab553862-fc25-47fe-8a98-ded4571ad271","socketId":"MhPS4OvS6eFjKuvIAAAe","studentId":"cmrhzhuvy005l42f06q7dnk55","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"session_lookup","durationMs":383,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"a0de5cd1-9b64-4620-bde1-222711d31858","socketId":"M43_SKz-jLyMBVDNAAAg","studentId":"cmrhzhxvx006042f0k6hofwo4","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"session_lookup","durationMs":382,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"e0b135f4-6a48-4a2f-a2cc-93b37901cfc5","socketId":"-j_La1tRX1_NNoq2AAAb","studentId":"cmrhzhqxc005142f05jmw8mna","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"join_ack","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"5097136f-90dd-4dbc-8a65-2e16bfdf7501","socketId":"mmZrAKSx8k1us4yRAAAj","studentId":"cmrhzhlxa004c42f025b0ytxg","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"join_ack","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"a84224bd-0d32-4e5a-aeb5-e9632a32a1d7","socketId":"fZvMFKtICpgZPVYcAAAd","studentId":"cmrhzhtw5005g42f0soseiydk","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"join_ack","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"ab553862-fc25-47fe-8a98-ded4571ad271","socketId":"MhPS4OvS6eFjKuvIAAAe","studentId":"cmrhzhuvy005l42f06q7dnk55","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"join_ack","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"a0de5cd1-9b64-4620-bde1-222711d31858","socketId":"M43_SKz-jLyMBVDNAAAg","studentId":"cmrhzhxvx006042f0k6hofwo4","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"join_ack","durationMs":0,"errorCode":null}
+[Socket] Disconnected: cmrhzhnl6004k42f0mr71mrc0 - TzwHphtA1jXhyf89AAAl
+[Socket] Disconnected: cmrhzhpla004u42f0l9m3uwzg - 7aSxmCzLr5TP5ZsxAAAn
+[Socket] Disconnected: cmrhzhvjw005o42f0snuvorch - cxLgLpjBpYgik4FfAAAp
+[Socket] Disconnected: cmrhzi7sj007c42f0ufdfgvft - EhTYYeD5GXYe_yg2AAAi
+[Socket] Disconnected: cmrhzhykc006342f03nh872lo - 4lKWyygkpwHcfaBXAAAq
+[Socket] Disconnected: cmrhzhqle004z42f0qdvxbycc - -j_La1tRX1_NNoq2AAAb
+[Socket] Disconnected: cmrhzhll9004a42f01pvo68hg - mmZrAKSx8k1us4yRAAAj
+[Socket] Disconnected: cmrhzhtke005e42f087bxa77h - fZvMFKtICpgZPVYcAAAd
+[Socket] Disconnected: cmrhzhuk2005j42f0k9azvu4c - MhPS4OvS6eFjKuvIAAAe
+[Socket] Disconnected: cmrhzhxk3005y42f06vzovvaj - M43_SKz-jLyMBVDNAAAg
+[Phase6][JoinTiming] {"requestId":"cb8c87e8-c3d5-4580-af83-5376529476bf","socketId":"fs0isU2sKM7nE-xGAAAc","studentId":"cmrhzhswp005b42f0jtkdl7nh","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"presence_update","durationMs":40,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"9044b309-42db-4d68-b280-56a69a562cd5","socketId":"EKUsHDpW6fydPY1AAAAx","studentId":"cmrhzi74k007942f0bqfan9np","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"presence_update","durationMs":41,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"a92ee6b2-354a-4f8a-8dc2-6c1bd6a15129","socketId":"bo9tfEdlnHQ3ZzjHAAAf","studentId":"cmrhzhwwd005v42f0jpmvcrkb","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"presence_update","durationMs":34,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"e96e0b41-122e-4f1c-97cf-301cdca68d6c","socketId":"KJ78lRRrl-byFZtfAAAr","studentId":"cmrhzhzwg006a42f0asj8046t","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"session_lookup","durationMs":184,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"e96e0b41-122e-4f1c-97cf-301cdca68d6c","socketId":"KJ78lRRrl-byFZtfAAAr","studentId":"cmrhzhzwg006a42f0asj8046t","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"join_ack","durationMs":0,"errorCode":null}
+[Socket] Disconnected: cmrhzhzkj006842f0ulw8aghx - KJ78lRRrl-byFZtfAAAr
+[Phase6][JoinTiming] {"requestId":"22825585-0dbc-4141-8cab-745c4882bf60","socketId":"Y2PrbVPFpU8DYN8EAAAm","studentId":null,"examId":"cmri5l0g6003xr4vdpsf80w03","stage":"access_context","durationMs":3448,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"22825585-0dbc-4141-8cab-745c4882bf60","socketId":"Y2PrbVPFpU8DYN8EAAAm","studentId":"cmrhzhox8004r42f0g58oi6u8","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"translation_metadata","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"22825585-0dbc-4141-8cab-745c4882bf60","socketId":"Y2PrbVPFpU8DYN8EAAAm","studentId":"cmrhzhox8004r42f0g58oi6u8","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"room_join","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"22825585-0dbc-4141-8cab-745c4882bf60","socketId":"Y2PrbVPFpU8DYN8EAAAm","studentId":"cmrhzhox8004r42f0g58oi6u8","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"presence_update","durationMs":2,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"29a44869-4ce0-4da4-87dd-c7d935cf0bc8","socketId":"NEXI0NwD8fhhig4_AAAk","studentId":null,"examId":"cmri5l0g6003xr4vdpsf80w03","stage":"access_context","durationMs":3490,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"29a44869-4ce0-4da4-87dd-c7d935cf0bc8","socketId":"NEXI0NwD8fhhig4_AAAk","studentId":"cmrhzhmxb004h42f056xbd1ef","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"translation_metadata","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"29a44869-4ce0-4da4-87dd-c7d935cf0bc8","socketId":"NEXI0NwD8fhhig4_AAAk","studentId":"cmrhzhmxb004h42f056xbd1ef","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"room_join","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"de01e150-1909-448e-9028-f9acb01176cd","socketId":"_5aJ_te0qkqaNn0GAAAy","studentId":"cmrhzi94y007j42f02o3cj081","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"session_lookup","durationMs":215,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"de01e150-1909-448e-9028-f9acb01176cd","socketId":"_5aJ_te0qkqaNn0GAAAy","studentId":"cmrhzi94y007j42f02o3cj081","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"join_ack","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"d5479048-767c-496f-8df2-c6ad5e91db4b","socketId":"e4chOBVsL-Vkr4muAAAt","studentId":"cmrhzi1zm006k42f0g53mto4m","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"session_lookup","durationMs":159,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"d5479048-767c-496f-8df2-c6ad5e91db4b","socketId":"e4chOBVsL-Vkr4muAAAt","studentId":"cmrhzi1zm006k42f0g53mto4m","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"join_ack","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"5c1ea4ba-bbf6-478f-8cc0-b0f0eb6875b9","socketId":"PNEwbSlYzj1LsoCrAAAv","studentId":"cmrhzi45j006u42f0g3xxtzs2","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"session_lookup","durationMs":255,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"e149299a-30e4-4bea-bc29-e88707427ed4","socketId":"af7izE3aIjOJK1aUAAAo","studentId":"cmrhzhrxf005642f01dp3t4gn","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"session_lookup","durationMs":255,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"4e20e791-1a1e-4ce1-9360-54445e42ed95","socketId":"ITRaEb4exS8Z0ADCAAAs","studentId":"cmrhzi0zk006f42f07uwdreo0","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"session_lookup","durationMs":255,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"f56aad3c-123d-4fcb-b2d9-020d947aac6c","socketId":"EKkVc-XUZ3zlODrGAAAw","studentId":"cmrhzi64v007442f0ktfllxbn","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"session_lookup","durationMs":254,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"44f1e232-6152-40b7-bc56-d2842b99d161","socketId":"P5pfg4H9Vh5uH0F-AAAh","studentId":"cmrhzi55b006z42f06umpyp0p","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"session_lookup","durationMs":254,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"fff4e4c3-532c-41fb-a3c0-e1ebb340b0ac","socketId":"h3I-kiCdpYz4IEzBAAAu","studentId":"cmrhzi32g006p42f0u0jzaj9c","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"session_lookup","durationMs":254,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"5c1ea4ba-bbf6-478f-8cc0-b0f0eb6875b9","socketId":"PNEwbSlYzj1LsoCrAAAv","studentId":"cmrhzi45j006u42f0g3xxtzs2","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"join_ack","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"e149299a-30e4-4bea-bc29-e88707427ed4","socketId":"af7izE3aIjOJK1aUAAAo","studentId":"cmrhzhrxf005642f01dp3t4gn","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"join_ack","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"4e20e791-1a1e-4ce1-9360-54445e42ed95","socketId":"ITRaEb4exS8Z0ADCAAAs","studentId":"cmrhzi0zk006f42f07uwdreo0","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"join_ack","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"f56aad3c-123d-4fcb-b2d9-020d947aac6c","socketId":"EKkVc-XUZ3zlODrGAAAw","studentId":"cmrhzi64v007442f0ktfllxbn","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"join_ack","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"44f1e232-6152-40b7-bc56-d2842b99d161","socketId":"P5pfg4H9Vh5uH0F-AAAh","studentId":"cmrhzi55b006z42f06umpyp0p","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"join_ack","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"fff4e4c3-532c-41fb-a3c0-e1ebb340b0ac","socketId":"h3I-kiCdpYz4IEzBAAAu","studentId":"cmrhzi32g006p42f0u0jzaj9c","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"join_ack","durationMs":0,"errorCode":null}
+[Socket] Disconnected: cmrhzi8t3007h42f0iidmm2uv - _5aJ_te0qkqaNn0GAAAy
+[Socket] Disconnected: cmrhzi1nl006i42f0tyyd4m0y - e4chOBVsL-Vkr4muAAAt
+[Phase6][JoinTiming] {"requestId":"29a44869-4ce0-4da4-87dd-c7d935cf0bc8","socketId":"NEXI0NwD8fhhig4_AAAk","studentId":"cmrhzhmxb004h42f056xbd1ef","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"presence_update","durationMs":15,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"63e2bcac-d1b8-4785-8992-7e1ce40e94b9","socketId":"TzwHphtA1jXhyf89AAAl","studentId":"cmrhzhnxf004m42f0reespwle","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"monitor_broadcast","durationMs":153,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"9cdb1d6f-b1af-4bda-b852-0859a0e210f8","socketId":"7aSxmCzLr5TP5ZsxAAAn","studentId":"cmrhzhpx5004w42f0lnx85j1d","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"monitor_broadcast","durationMs":151,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"118d4ca7-eeb6-4d7c-afc2-fa26d7c4d948","socketId":"cxLgLpjBpYgik4FfAAAp","studentId":"cmrhzhvvs005q42f023upy2o1","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"monitor_broadcast","durationMs":150,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"a7738727-0015-4b1c-87b7-cc52f7f78746","socketId":"EhTYYeD5GXYe_yg2AAAi","studentId":"cmrhzi853007e42f0gnvewsyt","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"monitor_broadcast","durationMs":150,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"7cb0f430-d495-414f-923b-98d435a74540","socketId":"4lKWyygkpwHcfaBXAAAq","studentId":"cmrhzhywb006542f01iipngnr","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"monitor_broadcast","durationMs":150,"errorCode":null}
+[Socket] Disconnected: cmrhzi3tn006s42f091vvn71g - PNEwbSlYzj1LsoCrAAAv
+[Socket] Disconnected: cmrhzhrlk005442f05qykagog - af7izE3aIjOJK1aUAAAo
+[Socket] Disconnected: cmrhzi0nf006d42f0m902tkbr - ITRaEb4exS8Z0ADCAAAs
+[Socket] Disconnected: cmrhzi5sw007242f0byw1hpa6 - EKkVc-XUZ3zlODrGAAAw
+[Socket] Disconnected: cmrhzi4tc006x42f053hckhie - P5pfg4H9Vh5uH0F-AAAh
+[Socket] Disconnected: cmrhzi2q0006n42f0siqvxtso - h3I-kiCdpYz4IEzBAAAu
+[Phase6][JoinTiming] {"requestId":"7771cfb6-ec1c-4c1b-9f89-45f32b364104","socketId":"Rnf-wq8rK3qMmyJFAAAz","studentId":null,"examId":"cmri5l0g6003xr4vdpsf80w03","stage":"access_context","durationMs":3527,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"7771cfb6-ec1c-4c1b-9f89-45f32b364104","socketId":"Rnf-wq8rK3qMmyJFAAAz","studentId":"cmrhzia5l007o42f02hxf7cpk","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"translation_metadata","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"7771cfb6-ec1c-4c1b-9f89-45f32b364104","socketId":"Rnf-wq8rK3qMmyJFAAAz","studentId":"cmrhzia5l007o42f02hxf7cpk","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"room_join","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"7771cfb6-ec1c-4c1b-9f89-45f32b364104","socketId":"Rnf-wq8rK3qMmyJFAAAz","studentId":"cmrhzia5l007o42f02hxf7cpk","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"presence_update","durationMs":2,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"e0b135f4-6a48-4a2f-a2cc-93b37901cfc5","socketId":"-j_La1tRX1_NNoq2AAAb","studentId":"cmrhzhqxc005142f05jmw8mna","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"monitor_broadcast","durationMs":250,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"5097136f-90dd-4dbc-8a65-2e16bfdf7501","socketId":"mmZrAKSx8k1us4yRAAAj","studentId":"cmrhzhlxa004c42f025b0ytxg","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"monitor_broadcast","durationMs":250,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"a84224bd-0d32-4e5a-aeb5-e9632a32a1d7","socketId":"fZvMFKtICpgZPVYcAAAd","studentId":"cmrhzhtw5005g42f0soseiydk","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"monitor_broadcast","durationMs":249,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"ab553862-fc25-47fe-8a98-ded4571ad271","socketId":"MhPS4OvS6eFjKuvIAAAe","studentId":"cmrhzhuvy005l42f06q7dnk55","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"monitor_broadcast","durationMs":249,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"a0de5cd1-9b64-4620-bde1-222711d31858","socketId":"M43_SKz-jLyMBVDNAAAg","studentId":"cmrhzhxvx006042f0k6hofwo4","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"monitor_broadcast","durationMs":249,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"cb8c87e8-c3d5-4580-af83-5376529476bf","socketId":"fs0isU2sKM7nE-xGAAAc","studentId":"cmrhzhswp005b42f0jtkdl7nh","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"session_lookup","durationMs":348,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"cb8c87e8-c3d5-4580-af83-5376529476bf","socketId":"fs0isU2sKM7nE-xGAAAc","studentId":"cmrhzhswp005b42f0jtkdl7nh","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"join_ack","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"9044b309-42db-4d68-b280-56a69a562cd5","socketId":"EKUsHDpW6fydPY1AAAAx","studentId":"cmrhzi74k007942f0bqfan9np","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"session_lookup","durationMs":348,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"a92ee6b2-354a-4f8a-8dc2-6c1bd6a15129","socketId":"bo9tfEdlnHQ3ZzjHAAAf","studentId":"cmrhzhwwd005v42f0jpmvcrkb","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"session_lookup","durationMs":348,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"9044b309-42db-4d68-b280-56a69a562cd5","socketId":"EKUsHDpW6fydPY1AAAAx","studentId":"cmrhzi74k007942f0bqfan9np","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"join_ack","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"a92ee6b2-354a-4f8a-8dc2-6c1bd6a15129","socketId":"bo9tfEdlnHQ3ZzjHAAAf","studentId":"cmrhzhwwd005v42f0jpmvcrkb","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"join_ack","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"22825585-0dbc-4141-8cab-745c4882bf60","socketId":"Y2PrbVPFpU8DYN8EAAAm","studentId":"cmrhzhox8004r42f0g58oi6u8","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"session_lookup","durationMs":298,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"22825585-0dbc-4141-8cab-745c4882bf60","socketId":"Y2PrbVPFpU8DYN8EAAAm","studentId":"cmrhzhox8004r42f0g58oi6u8","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"join_ack","durationMs":0,"errorCode":null}
+[Socket] Disconnected: cmrhzhsku005942f04heloj7n - fs0isU2sKM7nE-xGAAAc
+[Phase6][JoinTiming] {"requestId":"e96e0b41-122e-4f1c-97cf-301cdca68d6c","socketId":"KJ78lRRrl-byFZtfAAAr","studentId":"cmrhzhzwg006a42f0asj8046t","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"monitor_broadcast","durationMs":350,"errorCode":null}
+[Socket] Disconnected: cmrhzi6sn007742f0gf3xpelk - EKUsHDpW6fydPY1AAAAx
+[Socket] Disconnected: cmrhzhwk2005t42f050h3ed9l - bo9tfEdlnHQ3ZzjHAAAf
+[Socket] Disconnected: cmrhzhol9004p42f0cfw9cs6g - Y2PrbVPFpU8DYN8EAAAm
+[Phase6][JoinTiming] {"requestId":"de01e150-1909-448e-9028-f9acb01176cd","socketId":"_5aJ_te0qkqaNn0GAAAy","studentId":"cmrhzi94y007j42f02o3cj081","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"monitor_broadcast","durationMs":288,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"29a44869-4ce0-4da4-87dd-c7d935cf0bc8","socketId":"NEXI0NwD8fhhig4_AAAk","studentId":"cmrhzhmxb004h42f056xbd1ef","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"session_lookup","durationMs":354,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"29a44869-4ce0-4da4-87dd-c7d935cf0bc8","socketId":"NEXI0NwD8fhhig4_AAAk","studentId":"cmrhzhmxb004h42f056xbd1ef","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"join_ack","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"d5479048-767c-496f-8df2-c6ad5e91db4b","socketId":"e4chOBVsL-Vkr4muAAAt","studentId":"cmrhzi1zm006k42f0g53mto4m","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"monitor_broadcast","durationMs":370,"errorCode":null}
+[Socket] Disconnected: cmrhzhmle004f42f0hyucghyr - NEXI0NwD8fhhig4_AAAk
+[Phase6][JoinTiming] {"requestId":"5c1ea4ba-bbf6-478f-8cc0-b0f0eb6875b9","socketId":"PNEwbSlYzj1LsoCrAAAv","studentId":"cmrhzi45j006u42f0g3xxtzs2","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"monitor_broadcast","durationMs":374,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"e149299a-30e4-4bea-bc29-e88707427ed4","socketId":"af7izE3aIjOJK1aUAAAo","studentId":"cmrhzhrxf005642f01dp3t4gn","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"monitor_broadcast","durationMs":373,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"4e20e791-1a1e-4ce1-9360-54445e42ed95","socketId":"ITRaEb4exS8Z0ADCAAAs","studentId":"cmrhzi0zk006f42f07uwdreo0","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"monitor_broadcast","durationMs":373,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"f56aad3c-123d-4fcb-b2d9-020d947aac6c","socketId":"EKkVc-XUZ3zlODrGAAAw","studentId":"cmrhzi64v007442f0ktfllxbn","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"monitor_broadcast","durationMs":373,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"44f1e232-6152-40b7-bc56-d2842b99d161","socketId":"P5pfg4H9Vh5uH0F-AAAh","studentId":"cmrhzi55b006z42f06umpyp0p","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"monitor_broadcast","durationMs":373,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"fff4e4c3-532c-41fb-a3c0-e1ebb340b0ac","socketId":"h3I-kiCdpYz4IEzBAAAu","studentId":"cmrhzi32g006p42f0u0jzaj9c","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"monitor_broadcast","durationMs":373,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"7771cfb6-ec1c-4c1b-9f89-45f32b364104","socketId":"Rnf-wq8rK3qMmyJFAAAz","studentId":"cmrhzia5l007o42f02hxf7cpk","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"session_lookup","durationMs":464,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"7771cfb6-ec1c-4c1b-9f89-45f32b364104","socketId":"Rnf-wq8rK3qMmyJFAAAz","studentId":"cmrhzia5l007o42f02hxf7cpk","examId":"cmri5l0g6003xr4vdpsf80w03","stage":"join_ack","durationMs":0,"errorCode":null}
+[Socket] Disconnected: cmrhzi9tr007m42f07ofda81u - Rnf-wq8rK3qMmyJFAAAz

@@ -1,0 +1,49 @@
+{
+  "method": "POST",
+  "url": "/api/admin/results-enterprise/students/cmrhdzsao000bwhz5n1waw7db/graduation",
+  "status": 201,
+  "json": {
+    "candidate": {
+      "id": "cmrjfklil000zodlbx6xlnoqx",
+      "studentId": "cmrhdzsao000bwhz5n1waw7db",
+      "departmentId": "cmrc1y4pr000ck2kd4d7vqcwq",
+      "enrollmentId": "cmrjf46zb0001nbasi1pxrmqz",
+      "degreeAuditId": "cmrjfkl3c000xodlb20gh2g6k",
+      "graduationId": null,
+      "status": "PENDING",
+      "approvedByUserId": null,
+      "certifiedByUserId": null,
+      "approvedAt": null,
+      "certifiedAt": null,
+      "notes": null,
+      "createdAt": "2026-07-13T16:22:25.773Z",
+      "updatedAt": "2026-07-13T16:22:25.773Z"
+    },
+    "audit": {
+      "id": "cmrjfkl3c000xodlb20gh2g6k",
+      "studentId": "cmrhdzsao000bwhz5n1waw7db",
+      "departmentId": "cmrc1y4pr000ck2kd4d7vqcwq",
+      "programId": "cmrfvc9gk0053wqli5omnqitt",
+      "requiredCredits": 0,
+      "completedCredits": 0,
+      "remainingCredits": 0,
+      "requiredGpa": 2.5,
+      "currentCgpa": 0,
+      "compulsoryOutstanding": [
+        "cmrfvd6hx005zwqlibjb4cjr8",
+        "cmrfvd93s0061wqlik02hz51l"
+      ],
+      "electiveOutstanding": [],
+      "requirementSummary": {
+        "requiredCredits": 0,
+        "completedCredits": 0,
+        "currentCgpa": 0
+      },
+      "isEligible": false,
+      "generatedAt": "2026-07-13T16:22:25.224Z",
+      "createdAt": "2026-07-13T16:22:25.224Z",
+      "updatedAt": "2026-07-13T16:22:25.224Z"
+    }
+  },
+  "text": "{\"candidate\":{\"id\":\"cmrjfklil000zodlbx6xlnoqx\",\"studentId\":\"cmrhdzsao000bwhz5n1waw7db\",\"departmentId\":\"cmrc1y4pr000ck2kd4d7vqcwq\",\"enrollmentId\":\"cmrjf46zb0001nbasi1pxrmqz\",\"degreeAuditId\":\"cmrjfkl3c000xodlb20gh2g6k\",\"graduationId\":null,\"status\":\"PENDING\",\"approvedByUserId\":null,\"certifiedByUserId\":null,\"approvedAt\":null,\"certifiedAt\":null,\"notes\":null,\"createdAt\":\"2026-07-13T16:22:25.773Z\",\"updatedAt\":\"2026-07-13T16:22:25.773Z\"},\"audit\":{\"id\":\"cmrjfkl3c000xodlb20gh2g6k\",\"studentId\":\"cmrhdzsao000bwhz5n1waw7db\",\"departmentId\":\"cmrc1y4pr000ck2kd4d7vqcwq\",\"programId\":\"cmrfvc9gk0053wqli5omnqitt\",\"requiredCredits\":0,\"completedCredits\":0,\"remainingCredits\":0,\"requiredGpa\":2.5,\"currentCgpa\":0,\"compulsoryOutstanding\":[\"cmrfvd6hx005zwqlibjb4cjr8\",\"cmrfvd93s0061wqlik02hz51l\"],\"electiveOutstanding\":[],\"requirementSummary\":{\"requiredCredits\":0,\"completedCredits\":0,\"currentCgpa\":0},\"isEligible\":false,\"generatedAt\":\"2026-07-13T16:22:25.224Z\",\"createdAt\":\"2026-07-13T16:22:25.224Z\",\"updatedAt\":\"2026-07-13T16:22:25.224Z\"}}"
+}

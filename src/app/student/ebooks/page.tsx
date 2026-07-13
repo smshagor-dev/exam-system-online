@@ -1,5 +1,6 @@
 import { formatBytes } from '@/lib/ebooks'
 import { requireRole } from '@/lib/auth'
+import { resolveEbookTranslation } from '@/lib/academic-content'
 import { prisma } from '@/lib/prisma'
 import { UserRole } from '@prisma/client'
 
@@ -15,6 +16,8 @@ type StudentEbookYearGroup = {
       id: string
       title: string
       description: string | null
+      author: string | null
+      category: string | null
       fileUrl: string
       fileSizeBytes: number
       subjectName: string
@@ -68,6 +71,7 @@ export default async function StudentEbooksPage() {
       },
     },
     include: {
+      translations: true,
       subject: true,
       language: true,
       group: true,
@@ -94,11 +98,14 @@ export default async function StudentEbooksPage() {
   const yearMap = new Map<string, StudentEbookYearGroup>()
 
   for (const ebook of ebooks) {
+    const resolvedEbook = resolveEbookTranslation(ebook, ebook.languageId)
     const existingYear = yearMap.get(ebook.academicYearId)
     const mappedEbook = {
       id: ebook.id,
-      title: ebook.title,
-      description: ebook.description,
+      title: resolvedEbook.title,
+      description: resolvedEbook.description,
+      author: resolvedEbook.author ?? ebook.author ?? null,
+      category: resolvedEbook.category ?? ebook.category ?? null,
       fileUrl: ebook.fileUrl,
       fileSizeBytes: ebook.fileSizeBytes,
       subjectName: ebook.subject.name,
@@ -197,6 +204,11 @@ export default async function StudentEbooksPage() {
                               {ebook.subjectName} · {ebook.languageName} · {ebook.groupName}
                             </p>
                             {ebook.description ? <p className="mt-2 text-sm text-slate-600">{ebook.description}</p> : null}
+                            {(ebook.author || ebook.category) ? (
+                              <p className="mt-2 text-xs text-slate-500">
+                                {[ebook.author, ebook.category].filter(Boolean).join(' · ')}
+                              </p>
+                            ) : null}
                             <p className="mt-2 text-xs text-slate-400">
                               Uploaded by {ebook.teacherName} · {new Date(ebook.createdAt).toLocaleDateString()} · {formatBytes(ebook.fileSizeBytes)}
                             </p>

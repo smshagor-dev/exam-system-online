@@ -24,8 +24,9 @@ export function getSocket(token: string): AppSocket {
     auth: { token },
     transports: ['websocket', 'polling'],
     reconnection: true,
-    reconnectionAttempts: 5,
+    reconnectionAttempts: 20,
     reconnectionDelay: 1000,
+    reconnectionDelayMax: 5000,
   }) as AppSocket
 
   socket.on('connect', () => {

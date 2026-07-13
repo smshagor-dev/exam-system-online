@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "generatedAt": "2026-07-13T16:25:50.441Z",
+  "matrix": {
+    "superAdminAnalytics": 200,
+    "departmentAdminOfficerCreate": 201,
+    "teacherAnalytics": 200,
+    "studentAnalytics": 403,
+    "foreignDepartmentAdminAnalytics": 403
+  }
+}

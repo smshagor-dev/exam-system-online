@@ -1,0 +1,68 @@
+{
+  "incidentCreate": {
+    "ok": true,
+    "status": 201,
+    "json": {
+      "id": "cmrjddd2i001x1jokxsutrsfu",
+      "scheduleItemId": "cmrjdcg8h000o1jokl9zxnt1g",
+      "roomId": "cmrjdbyc500091jok0anrm87w",
+      "reporterUserId": "cmrc1y67t000qk2kdsntvvukr",
+      "acknowledgedByUserId": null,
+      "studentId": "cmrhdzsao000bwhz5n1waw7db",
+      "type": "TECHNICAL_ISSUE",
+      "status": "OPEN",
+      "title": "Browser smoke technical issue",
+      "description": "Laptop required a supervised restart during invigilation.",
+      "attachmentUrls": [],
+      "acknowledgedAt": null,
+      "resolvedAt": null,
+      "createdAt": "2026-07-13T15:20:49.002Z",
+      "updatedAt": "2026-07-13T15:20:49.002Z"
+    },
+    "text": "{\"id\":\"cmrjddd2i001x1jokxsutrsfu\",\"scheduleItemId\":\"cmrjdcg8h000o1jokl9zxnt1g\",\"roomId\":\"cmrjdbyc500091jok0anrm87w\",\"reporterUserId\":\"cmrc1y67t000qk2kdsntvvukr\",\"acknowledgedByUserId\":null,\"studentId\":\"cmrhdzsao000bwhz5n1waw7db\",\"type\":\"TECHNICAL_ISSUE\",\"status\":\"OPEN\",\"title\":\"Browser smoke technical issue\",\"description\":\"Laptop required a supervised restart during invigilation.\",\"attachmentUrls\":[],\"acknowledgedAt\":null,\"resolvedAt\":null,\"createdAt\":\"2026-07-13T15:20:49.002Z\",\"updatedAt\":\"2026-07-13T15:20:49.002Z\"}"
+  },
+  "incidentAcknowledge": {
+    "ok": true,
+    "status": 200,
+    "json": {
+      "id": "cmrjddd2i001x1jokxsutrsfu",
+      "scheduleItemId": "cmrjdcg8h000o1jokl9zxnt1g",
+      "roomId": "cmrjdbyc500091jok0anrm87w",
+      "reporterUserId": "cmrc1y67t000qk2kdsntvvukr",
+      "acknowledgedByUserId": "cmrc1y67t000qk2kdsntvvukr",
+      "studentId": "cmrhdzsao000bwhz5n1waw7db",
+      "type": "TECHNICAL_ISSUE",
+      "status": "ACKNOWLEDGED",
+      "title": "Browser smoke technical issue",
+      "description": "Laptop required a supervised restart during invigilation.",
+      "attachmentUrls": [],
+      "acknowledgedAt": "2026-07-13T15:20:50.081Z",
+      "resolvedAt": null,
+      "createdAt": "2026-07-13T15:20:49.002Z",
+      "updatedAt": "2026-07-13T15:20:50.084Z"
+    },
+    "text": "{\"id\":\"cmrjddd2i001x1jokxsutrsfu\",\"scheduleItemId\":\"cmrjdcg8h000o1jokl9zxnt1g\",\"roomId\":\"cmrjdbyc500091jok0anrm87w\",\"reporterUserId\":\"cmrc1y67t000qk2kdsntvvukr\",\"acknowledgedByUserId\":\"cmrc1y67t000qk2kdsntvvukr\",\"studentId\":\"cmrhdzsao000bwhz5n1waw7db\",\"type\":\"TECHNICAL_ISSUE\",\"status\":\"ACKNOWLEDGED\",\"title\":\"Browser smoke technical issue\",\"description\":\"Laptop required a supervised restart during invigilation.\",\"attachmentUrls\":[],\"acknowledgedAt\":\"2026-07-13T15:20:50.081Z\",\"resolvedAt\":null,\"createdAt\":\"2026-07-13T15:20:49.002Z\",\"updatedAt\":\"2026-07-13T15:20:50.084Z\"}"
+  },
+  "incidentResolve": {
+    "ok": true,
+    "status": 200,
+    "json": {
+      "id": "cmrjddd2i001x1jokxsutrsfu",
+      "scheduleItemId": "cmrjdcg8h000o1jokl9zxnt1g",
+      "roomId": "cmrjdbyc500091jok0anrm87w",
+      "reporterUserId": "cmrc1y67t000qk2kdsntvvukr",
+      "acknowledgedByUserId": "cmrc1y67t000qk2kdsntvvukr",
+      "studentId": "cmrhdzsao000bwhz5n1waw7db",
+      "type": "TECHNICAL_ISSUE",
+      "status": "RESOLVED",
+      "title": "Browser smoke technical issue",
+      "description": "Laptop required a supervised restart during invigilation.",
+      "attachmentUrls": [],
+      "acknowledgedAt": "2026-07-13T15:20:50.081Z",
+      "resolvedAt": "2026-07-13T15:20:51.423Z",
+      "createdAt": "2026-07-13T15:20:49.002Z",
+      "updatedAt": "2026-07-13T15:20:51.426Z"
+    },
+    "text": "{\"id\":\"cmrjddd2i001x1jokxsutrsfu\",\"scheduleItemId\":\"cmrjdcg8h000o1jokl9zxnt1g\",\"roomId\":\"cmrjdbyc500091jok0anrm87w\",\"reporterUserId\":\"cmrc1y67t000qk2kdsntvvukr\",\"acknowledgedByUserId\":\"cmrc1y67t000qk2kdsntvvukr\",\"studentId\":\"cmrhdzsao000bwhz5n1waw7db\",\"type\":\"TECHNICAL_ISSUE\",\"status\":\"RESOLVED\",\"title\":\"Browser smoke technical issue\",\"description\":\"Laptop required a supervised restart during invigilation.\",\"attachmentUrls\":[],\"acknowledgedAt\":\"2026-07-13T15:20:50.081Z\",\"resolvedAt\":\"2026-07-13T15:20:51.423Z\",\"createdAt\":\"2026-07-13T15:20:49.002Z\",\"updatedAt\":\"2026-07-13T15:20:51.426Z\"}"
+  }
+}

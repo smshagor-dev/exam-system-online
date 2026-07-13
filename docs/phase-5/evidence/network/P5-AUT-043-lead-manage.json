@@ -1,0 +1,1282 @@
+{
+  "method": "GET",
+  "url": "/api/teacher/translations/questions?languageId=cmrfudipt00001387aijb5mgh",
+  "status": 200,
+  "json": {
+    "entity": "questions",
+    "items": [
+      {
+        "id": "cmrhfhg8v000vz6zfu3b41b9d",
+        "type": "MCQ",
+        "subjectName": "Data Structures & Algorithms",
+        "baseLanguageName": "English",
+        "sourceText": "P5 Evidence EN Question",
+        "preview": {
+          "id": "cmrhfhg8v000vz6zfu3b41b9d",
+          "subjectId": "cmrc1y53e000gk2kdudmed81a",
+          "languageId": "cmrc1y4h10006k2kdse7x47oh",
+          "groupId": "cmrc1y4le000ak2kd1o5se1xs",
+          "academicYearId": "cmrc1y4060000k2kdx7dkghyw",
+          "semesterId": "cmrc1y4cm0004k2kddk9xe7q7",
+          "academicOfferingId": null,
+          "teacherId": "cmrc1y74k000uk2kd8dujfpkd",
+          "type": "MCQ",
+          "text": "P5 Evidence RU Question Translation",
+          "imageUrl": null,
+          "marks": 5,
+          "difficulty": "medium",
+          "expectedAnswer": "",
+          "keywords": "[\"p5\",\"evidence\"]",
+          "explanation": "P5 Evidence RU Question Translation explanation",
+          "isActive": true,
+          "createdAt": "2026-07-12T06:44:26.623Z",
+          "updatedAt": "2026-07-12T06:46:09.169Z",
+          "translations": [
+            {
+              "id": "cmrhfhgo4001ez6zf39ytiwrw",
+              "questionId": "cmrhfhg8v000vz6zfu3b41b9d",
+              "languageId": "cmrc1y4h10006k2kdse7x47oh",
+              "text": "P5 Evidence EN Question",
+              "expectedAnswer": null,
+              "explanation": "P5 Evidence EN Question explanation",
+              "keywords": null,
+              "status": "COMPLETE",
+              "completedAt": "2026-07-12T06:44:27.171Z",
+              "archivedAt": null,
+              "createdAt": "2026-07-12T06:44:27.172Z",
+              "updatedAt": "2026-07-12T06:44:27.172Z"
+            },
+            {
+              "id": "cmrhfiyks0002mg7rqwh2huyh",
+              "questionId": "cmrhfhg8v000vz6zfu3b41b9d",
+              "languageId": "cmrfudipt00001387aijb5mgh",
+              "text": "P5 Evidence RU Question Translation",
+              "expectedAnswer": "",
+              "explanation": "P5 Evidence RU Question Translation explanation",
+              "keywords": "[\"p5\",\"evidence\"]",
+              "status": "COMPLETE",
+              "completedAt": "2026-07-12T06:45:37.028Z",
+              "archivedAt": null,
+              "createdAt": "2026-07-12T06:45:37.036Z",
+              "updatedAt": "2026-07-12T06:45:37.036Z"
+            }
+          ],
+          "options": [
+            {
+              "id": "cmrhfhg8v000yz6zfrof5yu62",
+              "questionId": "cmrhfhg8v000vz6zfu3b41b9d",
+              "text": "RU Option A",
+              "isCorrect": true,
+              "orderIndex": 0,
+              "imageUrl": null,
+              "createdAt": "2026-07-12T06:44:26.623Z",
+              "translations": [
+                {
+                  "id": "cmrhfhgx2001lz6zfg5f6p2m8",
+                  "questionOptionId": "cmrhfhg8v000yz6zfrof5yu62",
+                  "languageId": "cmrc1y4h10006k2kdse7x47oh",
+                  "text": "P5 EN Option A",
+                  "status": "COMPLETE",
+                  "completedAt": "2026-07-12T06:44:27.493Z",
+                  "archivedAt": null,
+                  "createdAt": "2026-07-12T06:44:27.494Z",
+                  "updatedAt": "2026-07-12T06:44:27.494Z"
+                },
+                {
+                  "id": "cmrhfiyrv0004mg7r9hke2t8u",
+                  "questionOptionId": "cmrhfhg8v000yz6zfrof5yu62",
+                  "languageId": "cmrfudipt00001387aijb5mgh",
+                  "text": "RU Option A",
+                  "status": "COMPLETE",
+                  "completedAt": "2026-07-12T06:45:37.286Z",
+                  "archivedAt": null,
+                  "createdAt": "2026-07-12T06:45:37.292Z",
+                  "updatedAt": "2026-07-12T06:45:37.292Z"
+                }
+              ]
+            },
+            {
+              "id": "cmrhfhg8v000zz6zfrcbff1xy",
+              "questionId": "cmrhfhg8v000vz6zfu3b41b9d",
+              "text": "RU Option B",
+              "isCorrect": false,
+              "orderIndex": 1,
+              "imageUrl": null,
+              "createdAt": "2026-07-12T06:44:26.623Z",
+              "translations": [
+                {
+                  "id": "cmrhfhgx2001mz6zfybaaj5q1",
+                  "questionOptionId": "cmrhfhg8v000zz6zfrcbff1xy",
+                  "languageId": "cmrc1y4h10006k2kdse7x47oh",
+                  "text": "P5 EN Option B",
+                  "status": "COMPLETE",
+                  "completedAt": "2026-07-12T06:44:27.493Z",
+                  "archivedAt": null,
+                  "createdAt": "2026-07-12T06:44:27.494Z",
+                  "updatedAt": "2026-07-12T06:44:27.494Z"
+                },
+                {
+                  "id": "cmrhfiyyk0006mg7rq30y1xij",
+                  "questionOptionId": "cmrhfhg8v000zz6zfrcbff1xy",
+                  "languageId": "cmrfudipt00001387aijb5mgh",
+                  "text": "RU Option B",
+                  "status": "COMPLETE",
+                  "completedAt": "2026-07-12T06:45:37.527Z",
+                  "archivedAt": null,
+                  "createdAt": "2026-07-12T06:45:37.532Z",
+                  "updatedAt": "2026-07-12T06:45:37.532Z"
+                }
+              ]
+            },
+            {
+              "id": "cmrhfhg8v0010z6zf331kfv3y",
+              "questionId": "cmrhfhg8v000vz6zfu3b41b9d",
+              "text": "RU Option C",
+              "isCorrect": false,
+              "orderIndex": 2,
+              "imageUrl": null,
+              "createdAt": "2026-07-12T06:44:26.623Z",
+              "translations": [
+                {
+                  "id": "cmrhfhgx2001nz6zfm9fhmtzo",
+                  "questionOptionId": "cmrhfhg8v0010z6zf331kfv3y",
+                  "languageId": "cmrc1y4h10006k2kdse7x47oh",
+                  "text": "P5 EN Option C",
+                  "status": "COMPLETE",
+                  "completedAt": "2026-07-12T06:44:27.493Z",
+                  "archivedAt": null,
+                  "createdAt": "2026-07-12T06:44:27.494Z",
+                  "updatedAt": "2026-07-12T06:44:27.494Z"
+                },
+                {
+                  "id": "cmrhfiz560008mg7rn03f3yzm",
+                  "questionOptionId": "cmrhfhg8v0010z6zf331kfv3y",
+                  "languageId": "cmrfudipt00001387aijb5mgh",
+                  "text": "RU Option C",
+                  "status": "COMPLETE",
+                  "completedAt": "2026-07-12T06:45:37.765Z",
+                  "archivedAt": null,
+                  "createdAt": "2026-07-12T06:45:37.771Z",
+                  "updatedAt": "2026-07-12T06:45:37.771Z"
+                }
+              ]
+            }
+          ],
+          "subject": {
+            "id": "cmrc1y53e000gk2kdudmed81a",
+            "name": "Data Structures & Algorithms",
+            "code": "CSE-201",
+            "description": null,
+            "departmentId": "cmrc1y4pr000ck2kd4d7vqcwq",
+            "languageId": null,
+            "isActive": true,
+            "createdAt": "2026-07-08T12:26:39.819Z",
+            "updatedAt": "2026-07-08T12:26:39.819Z"
+          },
+          "language": {
+            "id": "cmrc1y4h10006k2kdse7x47oh",
+            "name": "English",
+            "code": "EN",
+            "isActive": true,
+            "createdAt": "2026-07-08T12:26:39.014Z",
+            "updatedAt": "2026-07-08T12:26:39.014Z"
+          }
+        },
+        "completeness": {
+          "entity": "questions",
+          "languageId": "cmrfudipt00001387aijb5mgh",
+          "isComplete": true,
+          "missingFields": []
+        }
+      },
+      {
+        "id": "cmrhfhg8v0012z6zfrm06i9s9",
+        "type": "MCQ",
+        "subjectName": "Data Structures & Algorithms",
+        "baseLanguageName": "English",
+        "sourceText": "P5 Evidence Broken EN Question",
+        "preview": {
+          "id": "cmrhfhg8v0012z6zfrm06i9s9",
+          "subjectId": "cmrc1y53e000gk2kdudmed81a",
+          "languageId": "cmrc1y4h10006k2kdse7x47oh",
+          "groupId": "cmrc1y4le000ak2kd1o5se1xs",
+          "academicYearId": "cmrc1y4060000k2kdx7dkghyw",
+          "semesterId": "cmrc1y4cm0004k2kddk9xe7q7",
+          "academicOfferingId": null,
+          "teacherId": "cmrc1y74k000uk2kd8dujfpkd",
+          "type": "MCQ",
+          "text": "P5 Evidence Broken EN Question",
+          "imageUrl": null,
+          "marks": 5,
+          "difficulty": "medium",
+          "expectedAnswer": null,
+          "keywords": null,
+          "explanation": "P5 Evidence Broken EN Question explanation",
+          "isActive": false,
+          "createdAt": "2026-07-12T06:44:26.623Z",
+          "updatedAt": "2026-07-12T06:44:26.623Z",
+          "translations": [
+            {
+              "id": "cmrhfhgne001az6zf7wex90gq",
+              "questionId": "cmrhfhg8v0012z6zfrm06i9s9",
+              "languageId": "cmrc1y4h10006k2kdse7x47oh",
+              "text": "P5 Evidence Broken EN Question",
+              "expectedAnswer": null,
+              "explanation": "P5 Evidence Broken EN Question explanation",
+              "keywords": null,
+              "status": "COMPLETE",
+              "completedAt": "2026-07-12T06:44:27.145Z",
+              "archivedAt": null,
+              "createdAt": "2026-07-12T06:44:27.147Z",
+              "updatedAt": "2026-07-12T06:44:27.147Z"
+            }
+          ],
+          "options": [
+            {
+              "id": "cmrhfhg8v0015z6zf41opqh7b",
+              "questionId": "cmrhfhg8v0012z6zfrm06i9s9",
+              "text": "P5 Broken Option A",
+              "isCorrect": true,
+              "orderIndex": 0,
+              "imageUrl": null,
+              "createdAt": "2026-07-12T06:44:26.623Z",
+              "translations": [
+                {
+                  "id": "cmrhfhgw2001fz6zfpudshoha",
+                  "questionOptionId": "cmrhfhg8v0015z6zf41opqh7b",
+                  "languageId": "cmrc1y4h10006k2kdse7x47oh",
+                  "text": "P5 Broken Option A",
+                  "status": "COMPLETE",
+                  "completedAt": "2026-07-12T06:44:27.457Z",
+                  "archivedAt": null,
+                  "createdAt": "2026-07-12T06:44:27.459Z",
+                  "updatedAt": "2026-07-12T06:44:27.459Z"
+                }
+              ]
+            },
+            {
+              "id": "cmrhfhg8v0017z6zf7jzmxyn0",
+              "questionId": "cmrhfhg8v0012z6zfrm06i9s9",
+              "text": "P5 Broken Option B",
+              "isCorrect": false,
+              "orderIndex": 1,
+              "imageUrl": null,
+              "createdAt": "2026-07-12T06:44:26.623Z",
+              "translations": [
+                {
+                  "id": "cmrhfhgw2001gz6zfovme7vcy",
+                  "questionOptionId": "cmrhfhg8v0017z6zf7jzmxyn0",
+                  "languageId": "cmrc1y4h10006k2kdse7x47oh",
+                  "text": "P5 Broken Option B",
+                  "status": "COMPLETE",
+                  "completedAt": "2026-07-12T06:44:27.457Z",
+                  "archivedAt": null,
+                  "createdAt": "2026-07-12T06:44:27.459Z",
+                  "updatedAt": "2026-07-12T06:44:27.459Z"
+                }
+              ]
+            },
+            {
+              "id": "cmrhfhg8w0018z6zfhnxbngsb",
+              "questionId": "cmrhfhg8v0012z6zfrm06i9s9",
+              "text": "P5 Broken Option C",
+              "isCorrect": false,
+              "orderIndex": 2,
+              "imageUrl": null,
+              "createdAt": "2026-07-12T06:44:26.623Z",
+              "translations": []
+            }
+          ],
+          "subject": {
+            "id": "cmrc1y53e000gk2kdudmed81a",
+            "name": "Data Structures & Algorithms",
+            "code": "CSE-201",
+            "description": null,
+            "departmentId": "cmrc1y4pr000ck2kd4d7vqcwq",
+            "languageId": null,
+            "isActive": true,
+            "createdAt": "2026-07-08T12:26:39.819Z",
+            "updatedAt": "2026-07-08T12:26:39.819Z"
+          },
+          "language": {
+            "id": "cmrc1y4h10006k2kdse7x47oh",
+            "name": "English",
+            "code": "EN",
+            "isActive": true,
+            "createdAt": "2026-07-08T12:26:39.014Z",
+            "updatedAt": "2026-07-08T12:26:39.014Z"
+          }
+        },
+        "completeness": {
+          "entity": "questions",
+          "languageId": "cmrfudipt00001387aijb5mgh",
+          "isComplete": false,
+          "missingFields": [
+            {
+              "field": "text",
+              "message": "Question text is required."
+            },
+            {
+              "field": "options.0.text",
+              "message": "Option 1 text is required."
+            },
+            {
+              "field": "options.1.text",
+              "message": "Option 2 text is required."
+            },
+            {
+              "field": "options.2.text",
+              "message": "Option 3 text is required."
+            }
+          ]
+        }
+      },
+      {
+        "id": "cmrhfhg8v0011z6zfr8ijuhq5",
+        "type": "MCQ",
+        "subjectName": "Programming Fundamentals",
+        "baseLanguageName": "Russian",
+        "sourceText": "P5 Evidence RU Question",
+        "preview": {
+          "id": "cmrhfhg8v0011z6zfr8ijuhq5",
+          "subjectId": "cmrfudk7t00021387u895s14h",
+          "languageId": "cmrfudipt00001387aijb5mgh",
+          "groupId": "cmrfvdjp80067wqli6zjyifgw",
+          "academicYearId": "cmrc1y4060003k2kd2m0dhf10",
+          "semesterId": "cmrc1y4cm0004k2kddk9xe7q7",
+          "academicOfferingId": "cmrfve242006fwqliz6dmghl7",
+          "teacherId": "cmrc1y74k000uk2kd8dujfpkd",
+          "type": "MCQ",
+          "text": "P5 Evidence RU Question",
+          "imageUrl": null,
+          "marks": 5,
+          "difficulty": "medium",
+          "expectedAnswer": null,
+          "keywords": null,
+          "explanation": "P5 Evidence RU Question explanation",
+          "isActive": false,
+          "createdAt": "2026-07-12T06:44:26.623Z",
+          "updatedAt": "2026-07-12T06:44:26.623Z",
+          "translations": [
+            {
+              "id": "cmrhfhgne001cz6zfkcxfuqoy",
+              "questionId": "cmrhfhg8v0011z6zfr8ijuhq5",
+              "languageId": "cmrfudipt00001387aijb5mgh",
+              "text": "P5 Evidence RU Question",
+              "expectedAnswer": null,
+              "explanation": "P5 Evidence RU Question explanation",
+              "keywords": null,
+              "status": "COMPLETE",
+              "completedAt": "2026-07-12T06:44:27.145Z",
+              "archivedAt": null,
+              "createdAt": "2026-07-12T06:44:27.147Z",
+              "updatedAt": "2026-07-12T06:44:27.147Z"
+            },
+            {
+              "id": "cmrhfj2k2000bmg7rymw7hw6k",
+              "questionId": "cmrhfhg8v0011z6zfr8ijuhq5",
+              "languageId": "cmrc1y4h10006k2kdse7x47oh",
+              "text": "P5 Evidence EN Question Translation Edited",
+              "expectedAnswer": "",
+              "explanation": "P5 Evidence EN Question Translation Edited explanation",
+              "keywords": "[\"p5\",\"evidence\"]",
+              "status": "DRAFT",
+              "completedAt": null,
+              "archivedAt": null,
+              "createdAt": "2026-07-12T06:45:42.194Z",
+              "updatedAt": "2026-07-12T06:45:47.342Z"
+            }
+          ],
+          "options": [
+            {
+              "id": "cmrhfhg8v0013z6zfr3k2ewbw",
+              "questionId": "cmrhfhg8v0011z6zfr8ijuhq5",
+              "text": "P5 RU Option A",
+              "isCorrect": true,
+              "orderIndex": 0,
+              "imageUrl": null,
+              "createdAt": "2026-07-12T06:44:26.623Z",
+              "translations": [
+                {
+                  "id": "cmrhfhgw3001iz6zftbq3znhd",
+                  "questionOptionId": "cmrhfhg8v0013z6zfr3k2ewbw",
+                  "languageId": "cmrfudipt00001387aijb5mgh",
+                  "text": "P5 RU Option A",
+                  "status": "COMPLETE",
+                  "completedAt": "2026-07-12T06:44:27.458Z",
+                  "archivedAt": null,
+                  "createdAt": "2026-07-12T06:44:27.459Z",
+                  "updatedAt": "2026-07-12T06:44:27.459Z"
+                },
+                {
+                  "id": "cmrhfj2ql000dmg7rcrt1f4zf",
+                  "questionOptionId": "cmrhfhg8v0013z6zfr3k2ewbw",
+                  "languageId": "cmrc1y4h10006k2kdse7x47oh",
+                  "text": "EN Option A+",
+                  "status": "DRAFT",
+                  "completedAt": null,
+                  "archivedAt": null,
+                  "createdAt": "2026-07-12T06:45:42.429Z",
+                  "updatedAt": "2026-07-12T06:45:47.708Z"
+                }
+              ]
+            },
+            {
+              "id": "cmrhfhg8v0014z6zfiup76ia5",
+              "questionId": "cmrhfhg8v0011z6zfr8ijuhq5",
+              "text": "P5 RU Option B",
+              "isCorrect": false,
+              "orderIndex": 1,
+              "imageUrl": null,
+              "createdAt": "2026-07-12T06:44:26.623Z",
+              "translations": [
+                {
+                  "id": "cmrhfhgw3001jz6zfmnatpzkd",
+                  "questionOptionId": "cmrhfhg8v0014z6zfiup76ia5",
+                  "languageId": "cmrfudipt00001387aijb5mgh",
+                  "text": "P5 RU Option B",
+                  "status": "COMPLETE",
+                  "completedAt": "2026-07-12T06:44:27.458Z",
+                  "archivedAt": null,
+                  "createdAt": "2026-07-12T06:44:27.459Z",
+                  "updatedAt": "2026-07-12T06:44:27.459Z"
+                },
+                {
+                  "id": "cmrhfj2x5000fmg7r0ip135pv",
+                  "questionOptionId": "cmrhfhg8v0014z6zfiup76ia5",
+                  "languageId": "cmrc1y4h10006k2kdse7x47oh",
+                  "text": "EN Option B+",
+                  "status": "DRAFT",
+                  "completedAt": null,
+                  "archivedAt": null,
+                  "createdAt": "2026-07-12T06:45:42.665Z",
+                  "updatedAt": "2026-07-12T06:45:48.075Z"
+                }
+              ]
+            },
+            {
+              "id": "cmrhfhg8v0016z6zf3dmus5hs",
+              "questionId": "cmrhfhg8v0011z6zfr8ijuhq5",
+              "text": "P5 RU Option C",
+              "isCorrect": false,
+              "orderIndex": 2,
+              "imageUrl": null,
+              "createdAt": "2026-07-12T06:44:26.623Z",
+              "translations": [
+                {
+                  "id": "cmrhfhgw3001kz6zfzfiidm7o",
+                  "questionOptionId": "cmrhfhg8v0016z6zf3dmus5hs",
+                  "languageId": "cmrfudipt00001387aijb5mgh",
+                  "text": "P5 RU Option C",
+                  "status": "COMPLETE",
+                  "completedAt": "2026-07-12T06:44:27.458Z",
+                  "archivedAt": null,
+                  "createdAt": "2026-07-12T06:44:27.459Z",
+                  "updatedAt": "2026-07-12T06:44:27.459Z"
+                },
+                {
+                  "id": "cmrhfj33o000hmg7rqe8tbj50",
+                  "questionOptionId": "cmrhfhg8v0016z6zf3dmus5hs",
+                  "languageId": "cmrc1y4h10006k2kdse7x47oh",
+                  "text": "EN Option C+",
+                  "status": "DRAFT",
+                  "completedAt": null,
+                  "archivedAt": null,
+                  "createdAt": "2026-07-12T06:45:42.901Z",
+                  "updatedAt": "2026-07-12T06:45:48.447Z"
+                }
+              ]
+            }
+          ],
+          "subject": {
+            "id": "cmrfudk7t00021387u895s14h",
+            "name": "Programming Fundamentals",
+            "code": "CSE-101",
+            "description": null,
+            "departmentId": "cmrc1y4pr000ck2kd4d7vqcwq",
+            "languageId": null,
+            "isActive": true,
+            "createdAt": "2026-07-11T04:05:47.033Z",
+            "updatedAt": "2026-07-11T04:05:47.033Z"
+          },
+          "language": {
+            "id": "cmrfudipt00001387aijb5mgh",
+            "name": "Russian",
+            "code": "RU",
+            "isActive": true,
+            "createdAt": "2026-07-11T04:05:45.089Z",
+            "updatedAt": "2026-07-11T04:05:45.089Z"
+          }
+        },
+        "completeness": {
+          "entity": "questions",
+          "languageId": "cmrfudipt00001387aijb5mgh",
+          "isComplete": true,
+          "missingFields": []
+        }
+      },
+      {
+        "id": "cmrgsomlh003v8ouz110l2wbd",
+        "type": "MCQ",
+        "subjectName": "Programming Fundamentals",
+        "baseLanguageName": "Russian",
+        "sourceText": "Phase 4 lead teacher question 1783800368797",
+        "preview": {
+          "id": "cmrgsomlh003v8ouz110l2wbd",
+          "subjectId": "cmrfudk7t00021387u895s14h",
+          "languageId": "cmrfudipt00001387aijb5mgh",
+          "groupId": "cmrfvdjp80067wqli6zjyifgw",
+          "academicYearId": "cmrfvcdti0059wqlij5fqmj0g",
+          "semesterId": "cmrc1y4cm0004k2kddk9xe7q7",
+          "academicOfferingId": "cmrfve242006fwqliz6dmghl7",
+          "teacherId": "cmrc1y74k000uk2kd8dujfpkd",
+          "type": "MCQ",
+          "text": "Phase 4 lead teacher question 1783800368797",
+          "imageUrl": null,
+          "marks": 10,
+          "difficulty": "medium",
+          "expectedAnswer": null,
+          "keywords": null,
+          "explanation": null,
+          "isActive": true,
+          "createdAt": "2026-07-11T20:06:10.277Z",
+          "updatedAt": "2026-07-11T20:06:10.277Z",
+          "translations": [
+            {
+              "id": "cmrgtnaw0000zdgofj9daalcx",
+              "questionId": "cmrgsomlh003v8ouz110l2wbd",
+              "languageId": "cmrfudipt00001387aijb5mgh",
+              "text": "Phase 4 lead teacher question 1783800368797",
+              "expectedAnswer": null,
+              "explanation": null,
+              "keywords": null,
+              "status": "DRAFT",
+              "completedAt": null,
+              "archivedAt": null,
+              "createdAt": "2026-07-11T20:33:08.064Z",
+              "updatedAt": "2026-07-11T20:33:08.064Z"
+            }
+          ],
+          "options": [
+            {
+              "id": "cmrgsomlh003w8ouzjdpne8ep",
+              "questionId": "cmrgsomlh003v8ouz110l2wbd",
+              "text": "Option A",
+              "isCorrect": true,
+              "orderIndex": 0,
+              "imageUrl": null,
+              "createdAt": "2026-07-11T20:06:10.277Z",
+              "translations": [
+                {
+                  "id": "cmrgtnb4h0011dgofrphxdl6t",
+                  "questionOptionId": "cmrgsomlh003w8ouzjdpne8ep",
+                  "languageId": "cmrfudipt00001387aijb5mgh",
+                  "text": "Option A",
+                  "status": "DRAFT",
+                  "completedAt": null,
+                  "archivedAt": null,
+                  "createdAt": "2026-07-11T20:33:08.370Z",
+                  "updatedAt": "2026-07-11T20:33:08.370Z"
+                }
+              ]
+            },
+            {
+              "id": "cmrgsomlh003x8ouz8jldkbzo",
+              "questionId": "cmrgsomlh003v8ouz110l2wbd",
+              "text": "Option B",
+              "isCorrect": false,
+              "orderIndex": 1,
+              "imageUrl": null,
+              "createdAt": "2026-07-11T20:06:10.277Z",
+              "translations": [
+                {
+                  "id": "cmrgtnbcy0013dgofcdkgbw73",
+                  "questionOptionId": "cmrgsomlh003x8ouz8jldkbzo",
+                  "languageId": "cmrfudipt00001387aijb5mgh",
+                  "text": "Option B",
+                  "status": "DRAFT",
+                  "completedAt": null,
+                  "archivedAt": null,
+                  "createdAt": "2026-07-11T20:33:08.674Z",
+                  "updatedAt": "2026-07-11T20:33:08.674Z"
+                }
+              ]
+            }
+          ],
+          "subject": {
+            "id": "cmrfudk7t00021387u895s14h",
+            "name": "Programming Fundamentals",
+            "code": "CSE-101",
+            "description": null,
+            "departmentId": "cmrc1y4pr000ck2kd4d7vqcwq",
+            "languageId": null,
+            "isActive": true,
+            "createdAt": "2026-07-11T04:05:47.033Z",
+            "updatedAt": "2026-07-11T04:05:47.033Z"
+          },
+          "language": {
+            "id": "cmrfudipt00001387aijb5mgh",
+            "name": "Russian",
+            "code": "RU",
+            "isActive": true,
+            "createdAt": "2026-07-11T04:05:45.089Z",
+            "updatedAt": "2026-07-11T04:05:45.089Z"
+          }
+        },
+        "completeness": {
+          "entity": "questions",
+          "languageId": "cmrfudipt00001387aijb5mgh",
+          "isComplete": true,
+          "missingFields": []
+        }
+      },
+      {
+        "id": "cmrc1y9xk0027k2kddqj7vqlz",
+        "type": "WRITTEN_ANSWER",
+        "subjectName": "Data Structures & Algorithms",
+        "baseLanguageName": "English",
+        "sourceText": "Explain the difference between BFS and DFS traversal algorithms. Include examples and use cases for each.",
+        "preview": {
+          "id": "cmrc1y9xk0027k2kddqj7vqlz",
+          "subjectId": "cmrc1y53e000gk2kdudmed81a",
+          "languageId": "cmrc1y4h10006k2kdse7x47oh",
+          "groupId": "cmrc1y4le000ak2kd1o5se1xs",
+          "academicYearId": "cmrc1y4060000k2kdx7dkghyw",
+          "semesterId": "cmrc1y4cm0004k2kddk9xe7q7",
+          "academicOfferingId": null,
+          "teacherId": "cmrc1y74k000uk2kd8dujfpkd",
+          "type": "WRITTEN_ANSWER",
+          "text": "Explain the difference between BFS and DFS traversal algorithms. Include examples and use cases for each.",
+          "imageUrl": null,
+          "marks": 5,
+          "difficulty": "medium",
+          "expectedAnswer": null,
+          "keywords": null,
+          "explanation": null,
+          "isActive": true,
+          "createdAt": "2026-07-08T12:26:46.088Z",
+          "updatedAt": "2026-07-08T12:26:46.088Z",
+          "translations": [
+            {
+              "id": "cmrgtnanl000xdgofix45do5b",
+              "questionId": "cmrc1y9xk0027k2kddqj7vqlz",
+              "languageId": "cmrc1y4h10006k2kdse7x47oh",
+              "text": "Explain the difference between BFS and DFS traversal algorithms. Include examples and use cases for each.",
+              "expectedAnswer": null,
+              "explanation": null,
+              "keywords": null,
+              "status": "DRAFT",
+              "completedAt": null,
+              "archivedAt": null,
+              "createdAt": "2026-07-11T20:33:07.761Z",
+              "updatedAt": "2026-07-11T20:33:07.761Z"
+            }
+          ],
+          "options": [],
+          "subject": {
+            "id": "cmrc1y53e000gk2kdudmed81a",
+            "name": "Data Structures & Algorithms",
+            "code": "CSE-201",
+            "description": null,
+            "departmentId": "cmrc1y4pr000ck2kd4d7vqcwq",
+            "languageId": null,
+            "isActive": true,
+            "createdAt": "2026-07-08T12:26:39.819Z",
+            "updatedAt": "2026-07-08T12:26:39.819Z"
+          },
+          "language": {
+            "id": "cmrc1y4h10006k2kdse7x47oh",
+            "name": "English",
+            "code": "EN",
+            "isActive": true,
+            "createdAt": "2026-07-08T12:26:39.014Z",
+            "updatedAt": "2026-07-08T12:26:39.014Z"
+          }
+        },
+        "completeness": {
+          "entity": "questions",
+          "languageId": "cmrfudipt00001387aijb5mgh",
+          "isComplete": false,
+          "missingFields": [
+            {
+              "field": "text",
+              "message": "Question text is required."
+            },
+            {
+              "field": "expectedAnswer",
+              "message": "Expected answer is required for this question type."
+            }
+          ]
+        }
+      },
+      {
+        "id": "cmrc1y9sn0025k2kdpodpdqw4",
+        "type": "SHORT_ANSWER",
+        "subjectName": "Data Structures & Algorithms",
+        "baseLanguageName": "English",
+        "sourceText": "What does FIFO stand for?",
+        "preview": {
+          "id": "cmrc1y9sn0025k2kdpodpdqw4",
+          "subjectId": "cmrc1y53e000gk2kdudmed81a",
+          "languageId": "cmrc1y4h10006k2kdse7x47oh",
+          "groupId": "cmrc1y4le000ak2kd1o5se1xs",
+          "academicYearId": "cmrc1y4060000k2kdx7dkghyw",
+          "semesterId": "cmrc1y4cm0004k2kddk9xe7q7",
+          "academicOfferingId": null,
+          "teacherId": "cmrc1y74k000uk2kd8dujfpkd",
+          "type": "SHORT_ANSWER",
+          "text": "What does FIFO stand for?",
+          "imageUrl": null,
+          "marks": 2,
+          "difficulty": "easy",
+          "expectedAnswer": "First In First Out",
+          "keywords": "[\"first\",\"in\",\"first\",\"out\",\"FIFO\"]",
+          "explanation": null,
+          "isActive": true,
+          "createdAt": "2026-07-08T12:26:45.911Z",
+          "updatedAt": "2026-07-08T12:26:45.911Z",
+          "translations": [
+            {
+              "id": "cmrgtnaf4000vdgofv4elr75z",
+              "questionId": "cmrc1y9sn0025k2kdpodpdqw4",
+              "languageId": "cmrc1y4h10006k2kdse7x47oh",
+              "text": "What does FIFO stand for?",
+              "expectedAnswer": "First In First Out",
+              "explanation": null,
+              "keywords": "[\"first\",\"in\",\"first\",\"out\",\"FIFO\"]",
+              "status": "DRAFT",
+              "completedAt": null,
+              "archivedAt": null,
+              "createdAt": "2026-07-11T20:33:07.457Z",
+              "updatedAt": "2026-07-11T20:33:07.457Z"
+            }
+          ],
+          "options": [],
+          "subject": {
+            "id": "cmrc1y53e000gk2kdudmed81a",
+            "name": "Data Structures & Algorithms",
+            "code": "CSE-201",
+            "description": null,
+            "departmentId": "cmrc1y4pr000ck2kd4d7vqcwq",
+            "languageId": null,
+            "isActive": true,
+            "createdAt": "2026-07-08T12:26:39.819Z",
+            "updatedAt": "2026-07-08T12:26:39.819Z"
+          },
+          "language": {
+            "id": "cmrc1y4h10006k2kdse7x47oh",
+            "name": "English",
+            "code": "EN",
+            "isActive": true,
+            "createdAt": "2026-07-08T12:26:39.014Z",
+            "updatedAt": "2026-07-08T12:26:39.014Z"
+          }
+        },
+        "completeness": {
+          "entity": "questions",
+          "languageId": "cmrfudipt00001387aijb5mgh",
+          "isComplete": false,
+          "missingFields": [
+            {
+              "field": "text",
+              "message": "Question text is required."
+            },
+            {
+              "field": "expectedAnswer",
+              "message": "Expected answer is required for this question type."
+            }
+          ]
+        }
+      },
+      {
+        "id": "cmrc1y9mo0021k2kdr5xtpxc8",
+        "type": "TRUE_FALSE",
+        "subjectName": "Data Structures & Algorithms",
+        "baseLanguageName": "English",
+        "sourceText": "A binary tree can have at most 2 children per node.",
+        "preview": {
+          "id": "cmrc1y9mo0021k2kdr5xtpxc8",
+          "subjectId": "cmrc1y53e000gk2kdudmed81a",
+          "languageId": "cmrc1y4h10006k2kdse7x47oh",
+          "groupId": "cmrc1y4le000ak2kd1o5se1xs",
+          "academicYearId": "cmrc1y4060000k2kdx7dkghyw",
+          "semesterId": "cmrc1y4cm0004k2kddk9xe7q7",
+          "academicOfferingId": null,
+          "teacherId": "cmrc1y74k000uk2kd8dujfpkd",
+          "type": "TRUE_FALSE",
+          "text": "A binary tree can have at most 2 children per node.",
+          "imageUrl": null,
+          "marks": 1,
+          "difficulty": "easy",
+          "expectedAnswer": null,
+          "keywords": null,
+          "explanation": null,
+          "isActive": true,
+          "createdAt": "2026-07-08T12:26:45.696Z",
+          "updatedAt": "2026-07-08T12:26:45.696Z",
+          "translations": [
+            {
+              "id": "cmrgtn9ps000pdgofxu90d9yb",
+              "questionId": "cmrc1y9mo0021k2kdr5xtpxc8",
+              "languageId": "cmrc1y4h10006k2kdse7x47oh",
+              "text": "A binary tree can have at most 2 children per node.",
+              "expectedAnswer": null,
+              "explanation": null,
+              "keywords": null,
+              "status": "DRAFT",
+              "completedAt": null,
+              "archivedAt": null,
+              "createdAt": "2026-07-11T20:33:06.545Z",
+              "updatedAt": "2026-07-11T20:33:06.545Z"
+            }
+          ],
+          "options": [
+            {
+              "id": "cmrc1y9mo0022k2kdebroklna",
+              "questionId": "cmrc1y9mo0021k2kdr5xtpxc8",
+              "text": "True",
+              "isCorrect": true,
+              "orderIndex": 0,
+              "imageUrl": null,
+              "createdAt": "2026-07-08T12:26:45.696Z",
+              "translations": [
+                {
+                  "id": "cmrgtna6p000tdgofv4cu5axu",
+                  "questionOptionId": "cmrc1y9mo0022k2kdebroklna",
+                  "languageId": "cmrc1y4h10006k2kdse7x47oh",
+                  "text": "True",
+                  "status": "DRAFT",
+                  "completedAt": null,
+                  "archivedAt": null,
+                  "createdAt": "2026-07-11T20:33:07.154Z",
+                  "updatedAt": "2026-07-11T20:33:07.154Z"
+                }
+              ]
+            },
+            {
+              "id": "cmrc1y9mo0023k2kd0la5g19a",
+              "questionId": "cmrc1y9mo0021k2kdr5xtpxc8",
+              "text": "False",
+              "isCorrect": false,
+              "orderIndex": 1,
+              "imageUrl": null,
+              "createdAt": "2026-07-08T12:26:45.696Z",
+              "translations": [
+                {
+                  "id": "cmrgtn9ya000rdgof5xsdx278",
+                  "questionOptionId": "cmrc1y9mo0023k2kd0la5g19a",
+                  "languageId": "cmrc1y4h10006k2kdse7x47oh",
+                  "text": "False",
+                  "status": "DRAFT",
+                  "completedAt": null,
+                  "archivedAt": null,
+                  "createdAt": "2026-07-11T20:33:06.851Z",
+                  "updatedAt": "2026-07-11T20:33:06.851Z"
+                }
+              ]
+            }
+          ],
+          "subject": {
+            "id": "cmrc1y53e000gk2kdudmed81a",
+            "name": "Data Structures & Algorithms",
+            "code": "CSE-201",
+            "description": null,
+            "departmentId": "cmrc1y4pr000ck2kd4d7vqcwq",
+            "languageId": null,
+            "isActive": true,
+            "createdAt": "2026-07-08T12:26:39.819Z",
+            "updatedAt": "2026-07-08T12:26:39.819Z"
+          },
+          "language": {
+            "id": "cmrc1y4h10006k2kdse7x47oh",
+            "name": "English",
+            "code": "EN",
+            "isActive": true,
+            "createdAt": "2026-07-08T12:26:39.014Z",
+            "updatedAt": "2026-07-08T12:26:39.014Z"
+          }
+        },
+        "completeness": {
+          "entity": "questions",
+          "languageId": "cmrfudipt00001387aijb5mgh",
+          "isComplete": false,
+          "missingFields": [
+            {
+              "field": "text",
+              "message": "Question text is required."
+            },
+            {
+              "field": "options.0.text",
+              "message": "Option 1 text is required."
+            },
+            {
+              "field": "options.1.text",
+              "message": "Option 2 text is required."
+            }
+          ]
+        }
+      },
+      {
+        "id": "cmrc1y9gp001vk2kde8c96914",
+        "type": "MCQ",
+        "subjectName": "Data Structures & Algorithms",
+        "baseLanguageName": "English",
+        "sourceText": "Which data structure uses LIFO (Last In First Out) principle?",
+        "preview": {
+          "id": "cmrc1y9gp001vk2kde8c96914",
+          "subjectId": "cmrc1y53e000gk2kdudmed81a",
+          "languageId": "cmrc1y4h10006k2kdse7x47oh",
+          "groupId": "cmrc1y4le000ak2kd1o5se1xs",
+          "academicYearId": "cmrc1y4060000k2kdx7dkghyw",
+          "semesterId": "cmrc1y4cm0004k2kddk9xe7q7",
+          "academicOfferingId": null,
+          "teacherId": "cmrc1y74k000uk2kd8dujfpkd",
+          "type": "MCQ",
+          "text": "Which data structure uses LIFO (Last In First Out) principle?",
+          "imageUrl": null,
+          "marks": 2,
+          "difficulty": "easy",
+          "expectedAnswer": null,
+          "keywords": null,
+          "explanation": null,
+          "isActive": true,
+          "createdAt": "2026-07-08T12:26:45.481Z",
+          "updatedAt": "2026-07-08T12:26:45.481Z",
+          "translations": [
+            {
+              "id": "cmrgtn8ig000fdgofx6mcbhs3",
+              "questionId": "cmrc1y9gp001vk2kde8c96914",
+              "languageId": "cmrc1y4h10006k2kdse7x47oh",
+              "text": "Which data structure uses LIFO (Last In First Out) principle?",
+              "expectedAnswer": null,
+              "explanation": null,
+              "keywords": null,
+              "status": "DRAFT",
+              "completedAt": null,
+              "archivedAt": null,
+              "createdAt": "2026-07-11T20:33:04.985Z",
+              "updatedAt": "2026-07-11T20:33:04.985Z"
+            }
+          ],
+          "options": [
+            {
+              "id": "cmrc1y9gq001wk2kdb1qcqpvf",
+              "questionId": "cmrc1y9gp001vk2kde8c96914",
+              "text": "Queue",
+              "isCorrect": false,
+              "orderIndex": 0,
+              "imageUrl": null,
+              "createdAt": "2026-07-08T12:26:45.481Z",
+              "translations": [
+                {
+                  "id": "cmrgtn8zl000jdgofswrp6h8x",
+                  "questionOptionId": "cmrc1y9gq001wk2kdb1qcqpvf",
+                  "languageId": "cmrc1y4h10006k2kdse7x47oh",
+                  "text": "Queue",
+                  "status": "DRAFT",
+                  "completedAt": null,
+                  "archivedAt": null,
+                  "createdAt": "2026-07-11T20:33:05.601Z",
+                  "updatedAt": "2026-07-11T20:33:05.601Z"
+                }
+              ]
+            },
+            {
+              "id": "cmrc1y9gq001xk2kd1r6kewss",
+              "questionId": "cmrc1y9gp001vk2kde8c96914",
+              "text": "Stack",
+              "isCorrect": true,
+              "orderIndex": 1,
+              "imageUrl": null,
+              "createdAt": "2026-07-08T12:26:45.481Z",
+              "translations": [
+                {
+                  "id": "cmrgtn9gt000ndgofntzav20v",
+                  "questionOptionId": "cmrc1y9gq001xk2kd1r6kewss",
+                  "languageId": "cmrc1y4h10006k2kdse7x47oh",
+                  "text": "Stack",
+                  "status": "DRAFT",
+                  "completedAt": null,
+                  "archivedAt": null,
+                  "createdAt": "2026-07-11T20:33:06.221Z",
+                  "updatedAt": "2026-07-11T20:33:06.221Z"
+                }
+              ]
+            },
+            {
+              "id": "cmrc1y9gq001yk2kdpikjmvx9",
+              "questionId": "cmrc1y9gp001vk2kde8c96914",
+              "text": "Linked List",
+              "isCorrect": false,
+              "orderIndex": 2,
+              "imageUrl": null,
+              "createdAt": "2026-07-08T12:26:45.481Z",
+              "translations": [
+                {
+                  "id": "cmrgtn986000ldgofhexl90f2",
+                  "questionOptionId": "cmrc1y9gq001yk2kdpikjmvx9",
+                  "languageId": "cmrc1y4h10006k2kdse7x47oh",
+                  "text": "Linked List",
+                  "status": "DRAFT",
+                  "completedAt": null,
+                  "archivedAt": null,
+                  "createdAt": "2026-07-11T20:33:05.910Z",
+                  "updatedAt": "2026-07-11T20:33:05.910Z"
+                }
+              ]
+            },
+            {
+              "id": "cmrc1y9gq001zk2kdfpar93b9",
+              "questionId": "cmrc1y9gp001vk2kde8c96914",
+              "text": "Tree",
+              "isCorrect": false,
+              "orderIndex": 3,
+              "imageUrl": null,
+              "createdAt": "2026-07-08T12:26:45.481Z",
+              "translations": [
+                {
+                  "id": "cmrgtn8qz000hdgofs3t68czt",
+                  "questionOptionId": "cmrc1y9gq001zk2kdfpar93b9",
+                  "languageId": "cmrc1y4h10006k2kdse7x47oh",
+                  "text": "Tree",
+                  "status": "DRAFT",
+                  "completedAt": null,
+                  "archivedAt": null,
+                  "createdAt": "2026-07-11T20:33:05.291Z",
+                  "updatedAt": "2026-07-11T20:33:05.291Z"
+                }
+              ]
+            }
+          ],
+          "subject": {
+            "id": "cmrc1y53e000gk2kdudmed81a",
+            "name": "Data Structures & Algorithms",
+            "code": "CSE-201",
+            "description": null,
+            "departmentId": "cmrc1y4pr000ck2kd4d7vqcwq",
+            "languageId": null,
+            "isActive": true,
+            "createdAt": "2026-07-08T12:26:39.819Z",
+            "updatedAt": "2026-07-08T12:26:39.819Z"
+          },
+          "language": {
+            "id": "cmrc1y4h10006k2kdse7x47oh",
+            "name": "English",
+            "code": "EN",
+            "isActive": true,
+            "createdAt": "2026-07-08T12:26:39.014Z",
+            "updatedAt": "2026-07-08T12:26:39.014Z"
+          }
+        },
+        "completeness": {
+          "entity": "questions",
+          "languageId": "cmrfudipt00001387aijb5mgh",
+          "isComplete": false,
+          "missingFields": [
+            {
+              "field": "text",
+              "message": "Question text is required."
+            },
+            {
+              "field": "options.0.text",
+              "message": "Option 1 text is required."
+            },
+            {
+              "field": "options.1.text",
+              "message": "Option 2 text is required."
+            },
+            {
+              "field": "options.2.text",
+              "message": "Option 3 text is required."
+            },
+            {
+              "field": "options.3.text",
+              "message": "Option 4 text is required."
+            }
+          ]
+        }
+      },
+      {
+        "id": "cmrc1y9as001pk2kddpqonzo6",
+        "type": "MCQ",
+        "subjectName": "Data Structures & Algorithms",
+        "baseLanguageName": "English",
+        "sourceText": "What is the time complexity of binary search?",
+        "preview": {
+          "id": "cmrc1y9as001pk2kddpqonzo6",
+          "subjectId": "cmrc1y53e000gk2kdudmed81a",
+          "languageId": "cmrc1y4h10006k2kdse7x47oh",
+          "groupId": "cmrc1y4le000ak2kd1o5se1xs",
+          "academicYearId": "cmrc1y4060000k2kdx7dkghyw",
+          "semesterId": "cmrc1y4cm0004k2kddk9xe7q7",
+          "academicOfferingId": null,
+          "teacherId": "cmrc1y74k000uk2kd8dujfpkd",
+          "type": "MCQ",
+          "text": "What is the time complexity of binary search?",
+          "imageUrl": null,
+          "marks": 2,
+          "difficulty": "easy",
+          "expectedAnswer": null,
+          "keywords": null,
+          "explanation": null,
+          "isActive": true,
+          "createdAt": "2026-07-08T12:26:45.268Z",
+          "updatedAt": "2026-07-08T12:26:45.268Z",
+          "translations": [
+            {
+              "id": "cmrgtn7a50005dgof1a0ip6s2",
+              "questionId": "cmrc1y9as001pk2kddpqonzo6",
+              "languageId": "cmrc1y4h10006k2kdse7x47oh",
+              "text": "What is the time complexity of binary search?",
+              "expectedAnswer": null,
+              "explanation": null,
+              "keywords": null,
+              "status": "DRAFT",
+              "completedAt": null,
+              "archivedAt": null,
+              "createdAt": "2026-07-11T20:33:03.390Z",
+              "updatedAt": "2026-07-11T20:33:03.390Z"
+            }
+          ],
+          "options": [
+            {
+              "id": "cmrc1y9as001qk2kdoj9m2vkt",
+              "questionId": "cmrc1y9as001pk2kddpqonzo6",
+              "text": "O(n)",
+              "isCorrect": false,
+              "orderIndex": 0,
+              "imageUrl": null,
+              "createdAt": "2026-07-08T12:26:45.268Z",
+              "translations": [
+                {
+                  "id": "cmrgtn81i000bdgof8eev22ik",
+                  "questionOptionId": "cmrc1y9as001qk2kdoj9m2vkt",
+                  "languageId": "cmrc1y4h10006k2kdse7x47oh",
+                  "text": "O(n)",
+                  "status": "DRAFT",
+                  "completedAt": null,
+                  "archivedAt": null,
+                  "createdAt": "2026-07-11T20:33:04.374Z",
+                  "updatedAt": "2026-07-11T20:33:04.374Z"
+                }
+              ]
+            },
+            {
+              "id": "cmrc1y9as001rk2kdl10okn8h",
+              "questionId": "cmrc1y9as001pk2kddpqonzo6",
+              "text": "O(log n)",
+              "isCorrect": true,
+              "orderIndex": 1,
+              "imageUrl": null,
+              "createdAt": "2026-07-08T12:26:45.268Z",
+              "translations": [
+                {
+                  "id": "cmrgtn89y000ddgof93y0t0on",
+                  "questionOptionId": "cmrc1y9as001rk2kdl10okn8h",
+                  "languageId": "cmrc1y4h10006k2kdse7x47oh",
+                  "text": "O(log n)",
+                  "status": "DRAFT",
+                  "completedAt": null,
+                  "archivedAt": null,
+                  "createdAt": "2026-07-11T20:33:04.679Z",
+                  "updatedAt": "2026-07-11T20:33:04.679Z"
+                }
+              ]
+            },
+            {
+              "id": "cmrc1y9as001sk2kd0m11jphy",
+              "questionId": "cmrc1y9as001pk2kddpqonzo6",
+              "text": "O(n²)",
+              "isCorrect": false,
+              "orderIndex": 2,
+              "imageUrl": null,
+              "createdAt": "2026-07-08T12:26:45.268Z",
+              "translations": [
+                {
+                  "id": "cmrgtn7t00009dgofbfzkhn6x",
+                  "questionOptionId": "cmrc1y9as001sk2kd0m11jphy",
+                  "languageId": "cmrc1y4h10006k2kdse7x47oh",
+                  "text": "O(n²)",
+                  "status": "DRAFT",
+                  "completedAt": null,
+                  "archivedAt": null,
+                  "createdAt": "2026-07-11T20:33:04.069Z",
+                  "updatedAt": "2026-07-11T20:33:04.069Z"
+                }
+              ]
+            },
+            {
+              "id": "cmrc1y9as001tk2kdnz2vj7yj",
+              "questionId": "cmrc1y9as001pk2kddpqonzo6",
+              "text": "O(1)",
+              "isCorrect": false,
+              "orderIndex": 3,
+              "imageUrl": null,
+              "createdAt": "2026-07-08T12:26:45.268Z",
+              "translations": [
+                {
+                  "id": "cmrgtn7jd0007dgofmaii86mg",
+                  "questionOptionId": "cmrc1y9as001tk2kdnz2vj7yj",
+                  "languageId": "cmrc1y4h10006k2kdse7x47oh",
+                  "text": "O(1)",
+                  "status": "DRAFT",
+                  "completedAt": null,
+                  "archivedAt": null,
+                  "createdAt": "2026-07-11T20:33:03.722Z",
+                  "updatedAt": "2026-07-11T20:33:03.722Z"
+                }
+              ]
+            }
+          ],
+          "subject": {
+            "id": "cmrc1y53e000gk2kdudmed81a",
+            "name": "Data Structures & Algorithms",
+            "code": "CSE-201",
+            "description": null,
+            "departmentId": "cmrc1y4pr000ck2kd4d7vqcwq",
+            "languageId": null,
+            "isActive": true,
+            "createdAt": "2026-07-08T12:26:39.819Z",
+            "updatedAt": "2026-07-08T12:26:39.819Z"
+          },
+          "language": {
+            "id": "cmrc1y4h10006k2kdse7x47oh",
+            "name": "English",
+            "code": "EN",
+            "isActive": true,
+            "createdAt": "2026-07-08T12:26:39.014Z",
+            "updatedAt": "2026-07-08T12:26:39.014Z"
+          }
+        },
+        "completeness": {
+          "entity": "questions",
+          "languageId": "cmrfudipt00001387aijb5mgh",
+          "isComplete": false,
+          "missingFields": [
+            {
+              "field": "text",
+              "message": "Question text is required."
+            },
+            {
+              "field": "options.0.text",
+              "message": "Option 1 text is required."
+            },
+            {
+              "field": "options.1.text",
+              "message": "Option 2 text is required."
+            },
+            {
+              "field": "options.2.text",
+              "message": "Option 3 text is required."
+            },
+            {
+              "field": "options.3.text",
+              "message": "Option 4 text is required."
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "text": "{\"entity\":\"questions\",\"items\":[{\"id\":\"cmrhfhg8v000vz6zfu3b41b9d\",\"type\":\"MCQ\",\"subjectName\":\"Data Structures & Algorithms\",\"baseLanguageName\":\"English\",\"sourceText\":\"P5 Evidence EN Question\",\"preview\":{\"id\":\"cmrhfhg8v000vz6zfu3b41b9d\",\"subjectId\":\"cmrc1y53e000gk2kdudmed81a\",\"languageId\":\"cmrc1y4h10006k2kdse7x47oh\",\"groupId\":\"cmrc1y4le000ak2kd1o5se1xs\",\"academicYearId\":\"cmrc1y4060000k2kdx7dkghyw\",\"semesterId\":\"cmrc1y4cm0004k2kddk9xe7q7\",\"academicOfferingId\":null,\"teacherId\":\"cmrc1y74k000uk2kd8dujfpkd\",\"type\":\"MCQ\",\"text\":\"P5 Evidence RU Question Translation\",\"imageUrl\":null,\"marks\":5,\"difficulty\":\"medium\",\"expectedAnswer\":\"\",\"keywords\":\"[\\\"p5\\\",\\\"evidence\\\"]\",\"explanation\":\"P5 Evidence RU Question Translation explanation\",\"isActive\":true,\"createdAt\":\"2026-07-12T06:44:26.623Z\",\"updatedAt\":\"2026-07-12T06:46:09.169Z\",\"translations\":[{\"id\":\"cmrhfhgo4001ez6zf39ytiwrw\",\"questionId\":\"cmrhfhg8v000vz6zfu3b41b9d\",\"languageId\":\"cmrc1y4h10006k2kdse7x47oh\",\"text\":\"P5 Evidence EN Question\",\"expectedAnswer\":null,\"explanation\":\"P5 Evidence EN Question explanation\",\"keywords\":null,\"status\":\"COMPLETE\",\"completedAt\":\"2026-07-12T06:44:27.171Z\",\"archivedAt\":null,\"createdAt\":\"2026-07-12T06:44:27.172Z\",\"updatedAt\":\"2026-07-12T06:44:27.172Z\"},{\"id\":\"cmrhfiyks0002mg7rqwh2huyh\",\"questionId\":\"cmrhfhg8v000vz6zfu3b41b9d\",\"languageId\":\"cmrfudipt00001387aijb5mgh\",\"text\":\"P5 Evidence RU Question Translation\",\"expectedAnswer\":\"\",\"explanation\":\"P5 Evidence RU Question Translation explanation\",\"keywords\":\"[\\\"p5\\\",\\\"evidence\\\"]\",\"status\":\"COMPLETE\",\"completedAt\":\"2026-07-12T06:45:37.028Z\",\"archivedAt\":null,\"createdAt\":\"2026-07-12T06:45:37.036Z\",\"updatedAt\":\"2026-07-12T06:45:37.036Z\"}],\"options\":[{\"id\":\"cmrhfhg8v000yz6zfrof5yu62\",\"questionId\":\"cmrhfhg8v000vz6zfu3b41b9d\",\"text\":\"RU Option A\",\"isCorrect\":true,\"orderIndex\":0,\"imageUrl\":null,\"createdAt\":\"2026-07-12T06:44:26.623Z\",\"translations\":[{\"id\":\"cmrhfhgx2001lz6zfg5f6p2m8\",\"questionOptionId\":\"cmrhfhg8v000yz6zfrof5yu62\",\"languageId\":\"cmrc1y4h10006k2kdse7x47oh\",\"text\":\"P5 EN Option A\",\"status\":\"COMPLETE\",\"completedAt\":\"2026-07-12T06:44:27.493Z\",\"archivedAt\":null,\"createdAt\":\"2026-07-12T06:44:27.494Z\",\"updatedAt\":\"2026-07-12T06:44:27.494Z\"},{\"id\":\"cmrhfiyrv0004mg7r9hke2t8u\",\"questionOptionId\":\"cmrhfhg8v000yz6zfrof5yu62\",\"languageId\":\"cmrfudipt00001387aijb5mgh\",\"text\":\"RU Option A\",\"status\":\"COMPLETE\",\"completedAt\":\"2026-07-12T06:45:37.286Z\",\"archivedAt\":null,\"createdAt\":\"2026-07-12T06:45:37.292Z\",\"updatedAt\":\"2026-07-12T06:45:37.292Z\"}]},{\"id\":\"cmrhfhg8v000zz6zfrcbff1xy\",\"questionId\":\"cmrhfhg8v000vz6zfu3b41b9d\",\"text\":\"RU Option B\",\"isCorrect\":false,\"orderIndex\":1,\"imageUrl\":null,\"createdAt\":\"2026-07-12T06:44:26.623Z\",\"translations\":[{\"id\":\"cmrhfhgx2001mz6zfybaaj5q1\",\"questionOptionId\":\"cmrhfhg8v000zz6zfrcbff1xy\",\"languageId\":\"cmrc1y4h10006k2kdse7x47oh\",\"text\":\"P5 EN Option B\",\"status\":\"COMPLETE\",\"completedAt\":\"2026-07-12T06:44:27.493Z\",\"archivedAt\":null,\"createdAt\":\"2026-07-12T06:44:27.494Z\",\"updatedAt\":\"2026-07-12T06:44:27.494Z\"},{\"id\":\"cmrhfiyyk0006mg7rq30y1xij\",\"questionOptionId\":\"cmrhfhg8v000zz6zfrcbff1xy\",\"languageId\":\"cmrfudipt00001387aijb5mgh\",\"text\":\"RU Option B\",\"status\":\"COMPLETE\",\"completedAt\":\"2026-07-12T06:45:37.527Z\",\"archivedAt\":null,\"createdAt\":\"2026-07-12T06:45:37.532Z\",\"updatedAt\":\"2026-07-12T06:45:37.532Z\"}]},{\"id\":\"cmrhfhg8v0010z6zf331kfv3y\",\"questionId\":\"cmrhfhg8v000vz6zfu3b41b9d\",\"text\":\"RU Option C\",\"isCorrect\":false,\"orderIndex\":2,\"imageUrl\":null,\"createdAt\":\"2026-07-12T06:44:26.623Z\",\"translations\":[{\"id\":\"cmrhfhgx2001nz6zfm9fhmtzo\",\"questionOptionId\":\"cmrhfhg8v0010z6zf331kfv3y\",\"languageId\":\"cmrc1y4h10006k2kdse7x47oh\",\"text\":\"P5 EN Option C\",\"status\":\"COMPLETE\",\"completedAt\":\"2026-07-12T06:44:27.493Z\",\"archivedAt\":null,\"createdAt\":\"2026-07-12T06:44:27.494Z\",\"updatedAt\":\"2026-07-12T06:44:27.494Z\"},{\"id\":\"cmrhfiz560008mg7rn03f3yzm\",\"questionOptionId\":\"cmrhfhg8v0010z6zf331kfv3y\",\"languageId\":\"cmrfudipt00001387aijb5mgh\",\"text\":\"RU Option C\",\"status\":\"COMPLETE\",\"completedAt\":\"2026-07-12T06:45:37.765Z\",\"archivedAt\":null,\"createdAt\":\"2026-07-12T06:45:37.771Z\",\"updatedAt\":\"2026-07-12T06:45:37.771Z\"}]}],\"subject\":{\"id\":\"cmrc1y53e000gk2kdudmed81a\",\"name\":\"Data Structures & Algorithms\",\"code\":\"CSE-201\",\"description\":null,\"departmentId\":\"cmrc1y4pr000ck2kd4d7vqcwq\",\"languageId\":null,\"isActive\":true,\"createdAt\":\"2026-07-08T12:26:39.819Z\",\"updatedAt\":\"2026-07-08T12:26:39.819Z\"},\"language\":{\"id\":\"cmrc1y4h10006k2kdse7x47oh\",\"name\":\"English\",\"code\":\"EN\",\"isActive\":true,\"createdAt\":\"2026-07-08T12:26:39.014Z\",\"updatedAt\":\"2026-07-08T12:26:39.014Z\"}},\"completeness\":{\"entity\":\"questions\",\"languageId\":\"cmrfudipt00001387aijb5mgh\",\"isComplete\":true,\"missingFields\":[]}},{\"id\":\"cmrhfhg8v0012z6zfrm06i9s9\",\"type\":\"MCQ\",\"subjectName\":\"Data Structures & Algorithms\",\"baseLanguageName\":\"English\",\"sourceText\":\"P5 Evidence Broken EN Question\",\"preview\":{\"id\":\"cmrhfhg8v0012z6zfrm06i9s9\",\"subjectId\":\"cmrc1y53e000gk2kdudmed81a\",\"languageId\":\"cmrc1y4h10006k2kdse7x47oh\",\"groupId\":\"cmrc1y4le000ak2kd1o5se1xs\",\"academicYearId\":\"cmrc1y4060000k2kdx7dkghyw\",\"semesterId\":\"cmrc1y4cm0004k2kddk9xe7q7\",\"academicOfferingId\":null,\"teacherId\":\"cmrc1y74k000uk2kd8dujfpkd\",\"type\":\"MCQ\",\"text\":\"P5 Evidence Broken EN Question\",\"imageUrl\":null,\"marks\":5,\"difficulty\":\"medium\",\"expectedAnswer\":null,\"keywords\":null,\"explanation\":\"P5 Evidence Broken EN Question explanation\",\"isActive\":false,\"createdAt\":\"2026-07-12T06:44:26.623Z\",\"updatedAt\":\"2026-07-12T06:44:26.623Z\",\"translations\":[{\"id\":\"cmrhfhgne001az6zf7wex90gq\",\"questionId\":\"cmrhfhg8v0012z6zfrm06i9s9\",\"languageId\":\"cmrc1y4h10006k2kdse7x47oh\",\"text\":\"P5 Evidence Broken EN Question\",\"expectedAnswer\":null,\"explanation\":\"P5 Evidence Broken EN Question explanation\",\"keywords\":null,\"status\":\"COMPLETE\",\"completedAt\":\"2026-07-12T06:44:27.145Z\",\"archivedAt\":null,\"createdAt\":\"2026-07-12T06:44:27.147Z\",\"updatedAt\":\"2026-07-12T06:44:27.147Z\"}],\"options\":[{\"id\":\"cmrhfhg8v0015z6zf41opqh7b\",\"questionId\":\"cmrhfhg8v0012z6zfrm06i9s9\",\"text\":\"P5 Broken Option A\",\"isCorrect\":true,\"orderIndex\":0,\"imageUrl\":null,\"createdAt\":\"2026-07-12T06:44:26.623Z\",\"translations\":[{\"id\":\"cmrhfhgw2001fz6zfpudshoha\",\"questionOptionId\":\"cmrhfhg8v0015z6zf41opqh7b\",\"languageId\":\"cmrc1y4h10006k2kdse7x47oh\",\"text\":\"P5 Broken Option A\",\"status\":\"COMPLETE\",\"completedAt\":\"2026-07-12T06:44:27.457Z\",\"archivedAt\":null,\"createdAt\":\"2026-07-12T06:44:27.459Z\",\"updatedAt\":\"2026-07-12T06:44:27.459Z\"}]},{\"id\":\"cmrhfhg8v0017z6zf7jzmxyn0\",\"questionId\":\"cmrhfhg8v0012z6zfrm06i9s9\",\"text\":\"P5 Broken Option B\",\"isCorrect\":false,\"orderIndex\":1,\"imageUrl\":null,\"createdAt\":\"2026-07-12T06:44:26.623Z\",\"translations\":[{\"id\":\"cmrhfhgw2001gz6zfovme7vcy\",\"questionOptionId\":\"cmrhfhg8v0017z6zf7jzmxyn0\",\"languageId\":\"cmrc1y4h10006k2kdse7x47oh\",\"text\":\"P5 Broken Option B\",\"status\":\"COMPLETE\",\"completedAt\":\"2026-07-12T06:44:27.457Z\",\"archivedAt\":null,\"createdAt\":\"2026-07-12T06:44:27.459Z\",\"updatedAt\":\"2026-07-12T06:44:27.459Z\"}]},{\"id\":\"cmrhfhg8w0018z6zfhnxbngsb\",\"questionId\":\"cmrhfhg8v0012z6zfrm06i9s9\",\"text\":\"P5 Broken Option C\",\"isCorrect\":false,\"orderIndex\":2,\"imageUrl\":null,\"createdAt\":\"2026-07-12T06:44:26.623Z\",\"translations\":[]}],\"subject\":{\"id\":\"cmrc1y53e000gk2kdudmed81a\",\"name\":\"Data Structures & Algorithms\",\"code\":\"CSE-201\",\"description\":null,\"departmentId\":\"cmrc1y4pr000ck2kd4d7vqcwq\",\"languageId\":null,\"isActive\":true,\"createdAt\":\"2026-07-08T12:26:39.819Z\",\"updatedAt\":\"2026-07-08T12:26:39.819Z\"},\"language\":{\"id\":\"cmrc1y4h10006k2kdse7x47oh\",\"name\":\"English\",\"code\":\"EN\",\"isActive\":true,\"createdAt\":\"2026-07-08T12:26:39.014Z\",\"updatedAt\":\"2026-07-08T12:26:39.014Z\"}},\"completeness\":{\"entity\":\"questions\",\"languageId\":\"cmrfudipt00001387aijb5mgh\",\"isComplete\":false,\"missingFields\":[{\"field\":\"text\",\"message\":\"Question text is required.\"},{\"field\":\"options.0.text\",\"message\":\"Option 1 text is required.\"},{\"field\":\"options.1.text\",\"message\":\"Option 2 text is required.\"},{\"field\":\"options.2.text\",\"message\":\"Option 3 text is required.\"}]}},{\"id\":\"cmrhfhg8v0011z6zfr8ijuhq5\",\"type\":\"MCQ\",\"subjectName\":\"Programming Fundamentals\",\"baseLanguageName\":\"Russian\",\"sourceText\":\"P5 Evidence RU Question\",\"preview\":{\"id\":\"cmrhfhg8v0011z6zfr8ijuhq5\",\"subjectId\":\"cmrfudk7t00021387u895s14h\",\"languageId\":\"cmrfudipt00001387aijb5mgh\",\"groupId\":\"cmrfvdjp80067wqli6zjyifgw\",\"academicYearId\":\"cmrc1y4060003k2kd2m0dhf10\",\"semesterId\":\"cmrc1y4cm0004k2kddk9xe7q7\",\"academicOfferingId\":\"cmrfve242006fwqliz6dmghl7\",\"teacherId\":\"cmrc1y74k000uk2kd8dujfpkd\",\"type\":\"MCQ\",\"text\":\"P5 Evidence RU Question\",\"imageUrl\":null,\"marks\":5,\"difficulty\":\"medium\",\"expectedAnswer\":null,\"keywords\":null,\"explanation\":\"P5 Evidence RU Question explanation\",\"isActive\":false,\"createdAt\":\"2026-07-12T06:44:26.623Z\",\"updatedAt\":\"2026-07-12T06:44:26.623Z\",\"translations\":[{\"id\":\"cmrhfhgne001cz6zfkcxfuqoy\",\"questionId\":\"cmrhfhg8v0011z6zfr8ijuhq5\",\"languageId\":\"cmrfudipt00001387aijb5mgh\",\"text\":\"P5 Evidence RU Question\",\"expectedAnswer\":null,\"explanation\":\"P5 Evidence RU Question explanation\",\"keywords\":null,\"status\":\"COMPLETE\",\"completedAt\":\"2026-07-12T06:44:27.145Z\",\"archivedAt\":null,\"createdAt\":\"2026-07-12T06:44:27.147Z\",\"updatedAt\":\"2026-07-12T06:44:27.147Z\"},{\"id\":\"cmrhfj2k2000bmg7rymw7hw6k\",\"questionId\":\"cmrhfhg8v0011z6zfr8ijuhq5\",\"languageId\":\"cmrc1y4h10006k2kdse7x47oh\",\"text\":\"P5 Evidence EN Question Translation Edited\",\"expectedAnswer\":\"\",\"explanation\":\"P5 Evidence EN Question Translation Edited explanation\",\"keywords\":\"[\\\"p5\\\",\\\"evidence\\\"]\",\"status\":\"DRAFT\",\"completedAt\":null,\"archivedAt\":null,\"createdAt\":\"2026-07-12T06:45:42.194Z\",\"updatedAt\":\"2026-07-12T06:45:47.342Z\"}],\"options\":[{\"id\":\"cmrhfhg8v0013z6zfr3k2ewbw\",\"questionId\":\"cmrhfhg8v0011z6zfr8ijuhq5\",\"text\":\"P5 RU Option A\",\"isCorrect\":true,\"orderIndex\":0,\"imageUrl\":null,\"createdAt\":\"2026-07-12T06:44:26.623Z\",\"translations\":[{\"id\":\"cmrhfhgw3001iz6zftbq3znhd\",\"questionOptionId\":\"cmrhfhg8v0013z6zfr3k2ewbw\",\"languageId\":\"cmrfudipt00001387aijb5mgh\",\"text\":\"P5 RU Option A\",\"status\":\"COMPLETE\",\"completedAt\":\"2026-07-12T06:44:27.458Z\",\"archivedAt\":null,\"createdAt\":\"2026-07-12T06:44:27.459Z\",\"updatedAt\":\"2026-07-12T06:44:27.459Z\"},{\"id\":\"cmrhfj2ql000dmg7rcrt1f4zf\",\"questionOptionId\":\"cmrhfhg8v0013z6zfr3k2ewbw\",\"languageId\":\"cmrc1y4h10006k2kdse7x47oh\",\"text\":\"EN Option A+\",\"status\":\"DRAFT\",\"completedAt\":null,\"archivedAt\":null,\"createdAt\":\"2026-07-12T06:45:42.429Z\",\"updatedAt\":\"2026-07-12T06:45:47.708Z\"}]},{\"id\":\"cmrhfhg8v0014z6zfiup76ia5\",\"questionId\":\"cmrhfhg8v0011z6zfr8ijuhq5\",\"text\":\"P5 RU Option B\",\"isCorrect\":false,\"orderIndex\":1,\"imageUrl\":null,\"createdAt\":\"2026-07-12T06:44:26.623Z\",\"translations\":[{\"id\":\"cmrhfhgw3001jz6zfmnatpzkd\",\"questionOptionId\":\"cmrhfhg8v0014z6zfiup76ia5\",\"languageId\":\"cmrfudipt00001387aijb5mgh\",\"text\":\"P5 RU Option B\",\"status\":\"COMPLETE\",\"completedAt\":\"2026-07-12T06:44:27.458Z\",\"archivedAt\":null,\"createdAt\":\"2026-07-12T06:44:27.459Z\",\"updatedAt\":\"2026-07-12T06:44:27.459Z\"},{\"id\":\"cmrhfj2x5000fmg7r0ip135pv\",\"questionOptionId\":\"cmrhfhg8v0014z6zfiup76ia5\",\"languageId\":\"cmrc1y4h10006k2kdse7x47oh\",\"text\":\"EN Option B+\",\"status\":\"DRAFT\",\"completedAt\":null,\"archivedAt\":null,\"createdAt\":\"2026-07-12T06:45:42.665Z\",\"updatedAt\":\"2026-07-12T06:45:48.075Z\"}]},{\"id\":\"cmrhfhg8v0016z6zf3dmus5hs\",\"questionId\":\"cmrhfhg8v0011z6zfr8ijuhq5\",\"text\":\"P5 RU Option C\",\"isCorrect\":false,\"orderIndex\":2,\"imageUrl\":null,\"createdAt\":\"2026-07-12T06:44:26.623Z\",\"translations\":[{\"id\":\"cmrhfhgw3001kz6zfzfiidm7o\",\"questionOptionId\":\"cmrhfhg8v0016z6zf3dmus5hs\",\"languageId\":\"cmrfudipt00001387aijb5mgh\",\"text\":\"P5 RU Option C\",\"status\":\"COMPLETE\",\"completedAt\":\"2026-07-12T06:44:27.458Z\",\"archivedAt\":null,\"createdAt\":\"2026-07-12T06:44:27.459Z\",\"updatedAt\":\"2026-07-12T06:44:27.459Z\"},{\"id\":\"cmrhfj33o000hmg7rqe8tbj50\",\"questionOptionId\":\"cmrhfhg8v0016z6zf3dmus5hs\",\"languageId\":\"cmrc1y4h10006k2kdse7x47oh\",\"text\":\"EN Option C+\",\"status\":\"DRAFT\",\"completedAt\":null,\"archivedAt\":null,\"createdAt\":\"2026-07-12T06:45:42.901Z\",\"updatedAt\":\"2026-07-12T06:45:48.447Z\"}]}],\"subject\":{\"id\":\"cmrfudk7t00021387u895s14h\",\"name\":\"Programming Fundamentals\",\"code\":\"CSE-101\",\"description\":null,\"departmentId\":\"cmrc1y4pr000ck2kd4d7vqcwq\",\"languageId\":null,\"isActive\":true,\"createdAt\":\"2026-07-11T04:05:47.033Z\",\"updatedAt\":\"2026-07-11T04:05:47.033Z\"},\"language\":{\"id\":\"cmrfudipt00001387aijb5mgh\",\"name\":\"Russian\",\"code\":\"RU\",\"isActive\":true,\"createdAt\":\"2026-07-11T04:05:45.089Z\",\"updatedAt\":\"2026-07-11T04:05:45.089Z\"}},\"completeness\":{\"entity\":\"questions\",\"languageId\":\"cmrfudipt00001387aijb5mgh\",\"isComplete\":true,\"missingFields\":[]}},{\"id\":\"cmrgsomlh003v8ouz110l2wbd\",\"type\":\"MCQ\",\"subjectName\":\"Programming Fundamentals\",\"baseLanguageName\":\"Russian\",\"sourceText\":\"Phase 4 lead teacher question 1783800368797\",\"preview\":{\"id\":\"cmrgsomlh003v8ouz110l2wbd\",\"subjectId\":\"cmrfudk7t00021387u895s14h\",\"languageId\":\"cmrfudipt00001387aijb5mgh\",\"groupId\":\"cmrfvdjp80067wqli6zjyifgw\",\"academicYearId\":\"cmrfvcdti0059wqlij5fqmj0g\",\"semesterId\":\"cmrc1y4cm0004k2kddk9xe7q7\",\"academicOfferingId\":\"cmrfve242006fwqliz6dmghl7\",\"teacherId\":\"cmrc1y74k000uk2kd8dujfpkd\",\"type\":\"MCQ\",\"text\":\"Phase 4 lead teacher question 1783800368797\",\"imageUrl\":null,\"marks\":10,\"difficulty\":\"medium\",\"expectedAnswer\":null,\"keywords\":null,\"explanation\":null,\"isActive\":true,\"createdAt\":\"2026-07-11T20:06:10.277Z\",\"updatedAt\":\"2026-07-11T20:06:10.277Z\",\"translations\":[{\"id\":\"cmrgtnaw0000zdgofj9daalcx\",\"questionId\":\"cmrgsomlh003v8ouz110l2wbd\",\"languageId\":\"cmrfudipt00001387aijb5mgh\",\"text\":\"Phase 4 lead teacher question 1783800368797\",\"expectedAnswer\":null,\"explanation\":null,\"keywords\":null,\"status\":\"DRAFT\",\"completedAt\":null,\"archivedAt\":null,\"createdAt\":\"2026-07-11T20:33:08.064Z\",\"updatedAt\":\"2026-07-11T20:33:08.064Z\"}],\"options\":[{\"id\":\"cmrgsomlh003w8ouzjdpne8ep\",\"questionId\":\"cmrgsomlh003v8ouz110l2wbd\",\"text\":\"Option A\",\"isCorrect\":true,\"orderIndex\":0,\"imageUrl\":null,\"createdAt\":\"2026-07-11T20:06:10.277Z\",\"translations\":[{\"id\":\"cmrgtnb4h0011dgofrphxdl6t\",\"questionOptionId\":\"cmrgsomlh003w8ouzjdpne8ep\",\"languageId\":\"cmrfudipt00001387aijb5mgh\",\"text\":\"Option A\",\"status\":\"DRAFT\",\"completedAt\":null,\"archivedAt\":null,\"createdAt\":\"2026-07-11T20:33:08.370Z\",\"updatedAt\":\"2026-07-11T20:33:08.370Z\"}]},{\"id\":\"cmrgsomlh003x8ouz8jldkbzo\",\"questionId\":\"cmrgsomlh003v8ouz110l2wbd\",\"text\":\"Option B\",\"isCorrect\":false,\"orderIndex\":1,\"imageUrl\":null,\"createdAt\":\"2026-07-11T20:06:10.277Z\",\"translations\":[{\"id\":\"cmrgtnbcy0013dgofcdkgbw73\",\"questionOptionId\":\"cmrgsomlh003x8ouz8jldkbzo\",\"languageId\":\"cmrfudipt00001387aijb5mgh\",\"text\":\"Option B\",\"status\":\"DRAFT\",\"completedAt\":null,\"archivedAt\":null,\"createdAt\":\"2026-07-11T20:33:08.674Z\",\"updatedAt\":\"2026-07-11T20:33:08.674Z\"}]}],\"subject\":{\"id\":\"cmrfudk7t00021387u895s14h\",\"name\":\"Programming Fundamentals\",\"code\":\"CSE-101\",\"description\":null,\"departmentId\":\"cmrc1y4pr000ck2kd4d7vqcwq\",\"languageId\":null,\"isActive\":true,\"createdAt\":\"2026-07-11T04:05:47.033Z\",\"updatedAt\":\"2026-07-11T04:05:47.033Z\"},\"language\":{\"id\":\"cmrfudipt00001387aijb5mgh\",\"name\":\"Russian\",\"code\":\"RU\",\"isActive\":true,\"createdAt\":\"2026-07-11T04:05:45.089Z\",\"updatedAt\":\"2026-07-11T04:05:45.089Z\"}},\"completeness\":{\"entity\":\"questions\",\"languageId\":\"cmrfudipt00001387aijb5mgh\",\"isComplete\":true,\"missingFields\":[]}},{\"id\":\"cmrc1y9xk0027k2kddqj7vqlz\",\"type\":\"WRITTEN_ANSWER\",\"subjectName\":\"Data Structures & Algorithms\",\"baseLanguageName\":\"English\",\"sourceText\":\"Explain the difference between BFS and DFS traversal algorithms. Include examples and use cases for each.\",\"preview\":{\"id\":\"cmrc1y9xk0027k2kddqj7vqlz\",\"subjectId\":\"cmrc1y53e000gk2kdudmed81a\",\"languageId\":\"cmrc1y4h10006k2kdse7x47oh\",\"groupId\":\"cmrc1y4le000ak2kd1o5se1xs\",\"academicYearId\":\"cmrc1y4060000k2kdx7dkghyw\",\"semesterId\":\"cmrc1y4cm0004k2kddk9xe7q7\",\"academicOfferingId\":null,\"teacherId\":\"cmrc1y74k000uk2kd8dujfpkd\",\"type\":\"WRITTEN_ANSWER\",\"text\":\"Explain the difference between BFS and DFS traversal algorithms. Include examples and use cases for each.\",\"imageUrl\":null,\"marks\":5,\"difficulty\":\"medium\",\"expectedAnswer\":null,\"keywords\":null,\"explanation\":null,\"isActive\":true,\"createdAt\":\"2026-07-08T12:26:46.088Z\",\"updatedAt\":\"2026-07-08T12:26:46.088Z\",\"translations\":[{\"id\":\"cmrgtnanl000xdgofix45do5b\",\"questionId\":\"cmrc1y9xk0027k2kddqj7vqlz\",\"languageId\":\"cmrc1y4h10006k2kdse7x47oh\",\"text\":\"Explain the difference between BFS and DFS traversal algorithms. Include examples and use cases for each.\",\"expectedAnswer\":null,\"explanation\":null,\"keywords\":null,\"status\":\"DRAFT\",\"completedAt\":null,\"archivedAt\":null,\"createdAt\":\"2026-07-11T20:33:07.761Z\",\"updatedAt\":\"2026-07-11T20:33:07.761Z\"}],\"options\":[],\"subject\":{\"id\":\"cmrc1y53e000gk2kdudmed81a\",\"name\":\"Data Structures & Algorithms\",\"code\":\"CSE-201\",\"description\":null,\"departmentId\":\"cmrc1y4pr000ck2kd4d7vqcwq\",\"languageId\":null,\"isActive\":true,\"createdAt\":\"2026-07-08T12:26:39.819Z\",\"updatedAt\":\"2026-07-08T12:26:39.819Z\"},\"language\":{\"id\":\"cmrc1y4h10006k2kdse7x47oh\",\"name\":\"English\",\"code\":\"EN\",\"isActive\":true,\"createdAt\":\"2026-07-08T12:26:39.014Z\",\"updatedAt\":\"2026-07-08T12:26:39.014Z\"}},\"completeness\":{\"entity\":\"questions\",\"languageId\":\"cmrfudipt00001387aijb5mgh\",\"isComplete\":false,\"missingFields\":[{\"field\":\"text\",\"message\":\"Question text is required.\"},{\"field\":\"expectedAnswer\",\"message\":\"Expected answer is required for this question type.\"}]}},{\"id\":\"cmrc1y9sn0025k2kdpodpdqw4\",\"type\":\"SHORT_ANSWER\",\"subjectName\":\"Data Structures & Algorithms\",\"baseLanguageName\":\"English\",\"sourceText\":\"What does FIFO stand for?\",\"preview\":{\"id\":\"cmrc1y9sn0025k2kdpodpdqw4\",\"subjectId\":\"cmrc1y53e000gk2kdudmed81a\",\"languageId\":\"cmrc1y4h10006k2kdse7x47oh\",\"groupId\":\"cmrc1y4le000ak2kd1o5se1xs\",\"academicYearId\":\"cmrc1y4060000k2kdx7dkghyw\",\"semesterId\":\"cmrc1y4cm0004k2kddk9xe7q7\",\"academicOfferingId\":null,\"teacherId\":\"cmrc1y74k000uk2kd8dujfpkd\",\"type\":\"SHORT_ANSWER\",\"text\":\"What does FIFO stand for?\",\"imageUrl\":null,\"marks\":2,\"difficulty\":\"easy\",\"expectedAnswer\":\"First In First Out\",\"keywords\":\"[\\\"first\\\",\\\"in\\\",\\\"first\\\",\\\"out\\\",\\\"FIFO\\\"]\",\"explanation\":null,\"isActive\":true,\"createdAt\":\"2026-07-08T12:26:45.911Z\",\"updatedAt\":\"2026-07-08T12:26:45.911Z\",\"translations\":[{\"id\":\"cmrgtnaf4000vdgofv4elr75z\",\"questionId\":\"cmrc1y9sn0025k2kdpodpdqw4\",\"languageId\":\"cmrc1y4h10006k2kdse7x47oh\",\"text\":\"What does FIFO stand for?\",\"expectedAnswer\":\"First In First Out\",\"explanation\":null,\"keywords\":\"[\\\"first\\\",\\\"in\\\",\\\"first\\\",\\\"out\\\",\\\"FIFO\\\"]\",\"status\":\"DRAFT\",\"completedAt\":null,\"archivedAt\":null,\"createdAt\":\"2026-07-11T20:33:07.457Z\",\"updatedAt\":\"2026-07-11T20:33:07.457Z\"}],\"options\":[],\"subject\":{\"id\":\"cmrc1y53e000gk2kdudmed81a\",\"name\":\"Data Structures & Algorithms\",\"code\":\"CSE-201\",\"description\":null,\"departmentId\":\"cmrc1y4pr000ck2kd4d7vqcwq\",\"languageId\":null,\"isActive\":true,\"createdAt\":\"2026-07-08T12:26:39.819Z\",\"updatedAt\":\"2026-07-08T12:26:39.819Z\"},\"language\":{\"id\":\"cmrc1y4h10006k2kdse7x47oh\",\"name\":\"English\",\"code\":\"EN\",\"isActive\":true,\"createdAt\":\"2026-07-08T12:26:39.014Z\",\"updatedAt\":\"2026-07-08T12:26:39.014Z\"}},\"completeness\":{\"entity\":\"questions\",\"languageId\":\"cmrfudipt00001387aijb5mgh\",\"isComplete\":false,\"missingFields\":[{\"field\":\"text\",\"message\":\"Question text is required.\"},{\"field\":\"expectedAnswer\",\"message\":\"Expected answer is required for this question type.\"}]}},{\"id\":\"cmrc1y9mo0021k2kdr5xtpxc8\",\"type\":\"TRUE_FALSE\",\"subjectName\":\"Data Structures & Algorithms\",\"baseLanguageName\":\"English\",\"sourceText\":\"A binary tree can have at most 2 children per node.\",\"preview\":{\"id\":\"cmrc1y9mo0021k2kdr5xtpxc8\",\"subjectId\":\"cmrc1y53e000gk2kdudmed81a\",\"languageId\":\"cmrc1y4h10006k2kdse7x47oh\",\"groupId\":\"cmrc1y4le000ak2kd1o5se1xs\",\"academicYearId\":\"cmrc1y4060000k2kdx7dkghyw\",\"semesterId\":\"cmrc1y4cm0004k2kddk9xe7q7\",\"academicOfferingId\":null,\"teacherId\":\"cmrc1y74k000uk2kd8dujfpkd\",\"type\":\"TRUE_FALSE\",\"text\":\"A binary tree can have at most 2 children per node.\",\"imageUrl\":null,\"marks\":1,\"difficulty\":\"easy\",\"expectedAnswer\":null,\"keywords\":null,\"explanation\":null,\"isActive\":true,\"createdAt\":\"2026-07-08T12:26:45.696Z\",\"updatedAt\":\"2026-07-08T12:26:45.696Z\",\"translations\":[{\"id\":\"cmrgtn9ps000pdgofxu90d9yb\",\"questionId\":\"cmrc1y9mo0021k2kdr5xtpxc8\",\"languageId\":\"cmrc1y4h10006k2kdse7x47oh\",\"text\":\"A binary tree can have at most 2 children per node.\",\"expectedAnswer\":null,\"explanation\":null,\"keywords\":null,\"status\":\"DRAFT\",\"completedAt\":null,\"archivedAt\":null,\"createdAt\":\"2026-07-11T20:33:06.545Z\",\"updatedAt\":\"2026-07-11T20:33:06.545Z\"}],\"options\":[{\"id\":\"cmrc1y9mo0022k2kdebroklna\",\"questionId\":\"cmrc1y9mo0021k2kdr5xtpxc8\",\"text\":\"True\",\"isCorrect\":true,\"orderIndex\":0,\"imageUrl\":null,\"createdAt\":\"2026-07-08T12:26:45.696Z\",\"translations\":[{\"id\":\"cmrgtna6p000tdgofv4cu5axu\",\"questionOptionId\":\"cmrc1y9mo0022k2kdebroklna\",\"languageId\":\"cmrc1y4h10006k2kdse7x47oh\",\"text\":\"True\",\"status\":\"DRAFT\",\"completedAt\":null,\"archivedAt\":null,\"createdAt\":\"2026-07-11T20:33:07.154Z\",\"updatedAt\":\"2026-07-11T20:33:07.154Z\"}]},{\"id\":\"cmrc1y9mo0023k2kd0la5g19a\",\"questionId\":\"cmrc1y9mo0021k2kdr5xtpxc8\",\"text\":\"False\",\"isCorrect\":false,\"orderIndex\":1,\"imageUrl\":null,\"createdAt\":\"2026-07-08T12:26:45.696Z\",\"translations\":[{\"id\":\"cmrgtn9ya000rdgof5xsdx278\",\"questionOptionId\":\"cmrc1y9mo0023k2kd0la5g19a\",\"languageId\":\"cmrc1y4h10006k2kdse7x47oh\",\"text\":\"False\",\"status\":\"DRAFT\",\"completedAt\":null,\"archivedAt\":null,\"createdAt\":\"2026-07-11T20:33:06.851Z\",\"updatedAt\":\"2026-07-11T20:33:06.851Z\"}]}],\"subject\":{\"id\":\"cmrc1y53e000gk2kdudmed81a\",\"name\":\"Data Structures & Algorithms\",\"code\":\"CSE-201\",\"description\":null,\"departmentId\":\"cmrc1y4pr000ck2kd4d7vqcwq\",\"languageId\":null,\"isActive\":true,\"createdAt\":\"2026-07-08T12:26:39.819Z\",\"updatedAt\":\"2026-07-08T12:26:39.819Z\"},\"language\":{\"id\":\"cmrc1y4h10006k2kdse7x47oh\",\"name\":\"English\",\"code\":\"EN\",\"isActive\":true,\"createdAt\":\"2026-07-08T12:26:39.014Z\",\"updatedAt\":\"2026-07-08T12:26:39.014Z\"}},\"completeness\":{\"entity\":\"questions\",\"languageId\":\"cmrfudipt00001387aijb5mgh\",\"isComplete\":false,\"missingFields\":[{\"field\":\"text\",\"message\":\"Question text is required.\"},{\"field\":\"options.0.text\",\"message\":\"Option 1 text is required.\"},{\"field\":\"options.1.text\",\"message\":\"Option 2 text is required.\"}]}},{\"id\":\"cmrc1y9gp001vk2kde8c96914\",\"type\":\"MCQ\",\"subjectName\":\"Data Structures & Algorithms\",\"baseLanguageName\":\"English\",\"sourceText\":\"Which data structure uses LIFO (Last In First Out) principle?\",\"preview\":{\"id\":\"cmrc1y9gp001vk2kde8c96914\",\"subjectId\":\"cmrc1y53e000gk2kdudmed81a\",\"languageId\":\"cmrc1y4h10006k2kdse7x47oh\",\"groupId\":\"cmrc1y4le000ak2kd1o5se1xs\",\"academicYearId\":\"cmrc1y4060000k2kdx7dkghyw\",\"semesterId\":\"cmrc1y4cm0004k2kddk9xe7q7\",\"academicOfferingId\":null,\"teacherId\":\"cmrc1y74k000uk2kd8dujfpkd\",\"type\":\"MCQ\",\"text\":\"Which data structure uses LIFO (Last In First Out) principle?\",\"imageUrl\":null,\"marks\":2,\"difficulty\":\"easy\",\"expectedAnswer\":null,\"keywords\":null,\"explanation\":null,\"isActive\":true,\"createdAt\":\"2026-07-08T12:26:45.481Z\",\"updatedAt\":\"2026-07-08T12:26:45.481Z\",\"translations\":[{\"id\":\"cmrgtn8ig000fdgofx6mcbhs3\",\"questionId\":\"cmrc1y9gp001vk2kde8c96914\",\"languageId\":\"cmrc1y4h10006k2kdse7x47oh\",\"text\":\"Which data structure uses LIFO (Last In First Out) principle?\",\"expectedAnswer\":null,\"explanation\":null,\"keywords\":null,\"status\":\"DRAFT\",\"completedAt\":null,\"archivedAt\":null,\"createdAt\":\"2026-07-11T20:33:04.985Z\",\"updatedAt\":\"2026-07-11T20:33:04.985Z\"}],\"options\":[{\"id\":\"cmrc1y9gq001wk2kdb1qcqpvf\",\"questionId\":\"cmrc1y9gp001vk2kde8c96914\",\"text\":\"Queue\",\"isCorrect\":false,\"orderIndex\":0,\"imageUrl\":null,\"createdAt\":\"2026-07-08T12:26:45.481Z\",\"translations\":[{\"id\":\"cmrgtn8zl000jdgofswrp6h8x\",\"questionOptionId\":\"cmrc1y9gq001wk2kdb1qcqpvf\",\"languageId\":\"cmrc1y4h10006k2kdse7x47oh\",\"text\":\"Queue\",\"status\":\"DRAFT\",\"completedAt\":null,\"archivedAt\":null,\"createdAt\":\"2026-07-11T20:33:05.601Z\",\"updatedAt\":\"2026-07-11T20:33:05.601Z\"}]},{\"id\":\"cmrc1y9gq001xk2kd1r6kewss\",\"questionId\":\"cmrc1y9gp001vk2kde8c96914\",\"text\":\"Stack\",\"isCorrect\":true,\"orderIndex\":1,\"imageUrl\":null,\"createdAt\":\"2026-07-08T12:26:45.481Z\",\"translations\":[{\"id\":\"cmrgtn9gt000ndgofntzav20v\",\"questionOptionId\":\"cmrc1y9gq001xk2kd1r6kewss\",\"languageId\":\"cmrc1y4h10006k2kdse7x47oh\",\"text\":\"Stack\",\"status\":\"DRAFT\",\"completedAt\":null,\"archivedAt\":null,\"createdAt\":\"2026-07-11T20:33:06.221Z\",\"updatedAt\":\"2026-07-11T20:33:06.221Z\"}]},{\"id\":\"cmrc1y9gq001yk2kdpikjmvx9\",\"questionId\":\"cmrc1y9gp001vk2kde8c96914\",\"text\":\"Linked List\",\"isCorrect\":false,\"orderIndex\":2,\"imageUrl\":null,\"createdAt\":\"2026-07-08T12:26:45.481Z\",\"translations\":[{\"id\":\"cmrgtn986000ldgofhexl90f2\",\"questionOptionId\":\"cmrc1y9gq001yk2kdpikjmvx9\",\"languageId\":\"cmrc1y4h10006k2kdse7x47oh\",\"text\":\"Linked List\",\"status\":\"DRAFT\",\"completedAt\":null,\"archivedAt\":null,\"createdAt\":\"2026-07-11T20:33:05.910Z\",\"updatedAt\":\"2026-07-11T20:33:05.910Z\"}]},{\"id\":\"cmrc1y9gq001zk2kdfpar93b9\",\"questionId\":\"cmrc1y9gp001vk2kde8c96914\",\"text\":\"Tree\",\"isCorrect\":false,\"orderIndex\":3,\"imageUrl\":null,\"createdAt\":\"2026-07-08T12:26:45.481Z\",\"translations\":[{\"id\":\"cmrgtn8qz000hdgofs3t68czt\",\"questionOptionId\":\"cmrc1y9gq001zk2kdfpar93b9\",\"languageId\":\"cmrc1y4h10006k2kdse7x47oh\",\"text\":\"Tree\",\"status\":\"DRAFT\",\"completedAt\":null,\"archivedAt\":null,\"createdAt\":\"2026-07-11T20:33:05.291Z\",\"updatedAt\":\"2026-07-11T20:33:05.291Z\"}]}],\"subject\":{\"id\":\"cmrc1y53e000gk2kdudmed81a\",\"name\":\"Data Structures & Algorithms\",\"code\":\"CSE-201\",\"description\":null,\"departmentId\":\"cmrc1y4pr000ck2kd4d7vqcwq\",\"languageId\":null,\"isActive\":true,\"createdAt\":\"2026-07-08T12:26:39.819Z\",\"updatedAt\":\"2026-07-08T12:26:39.819Z\"},\"language\":{\"id\":\"cmrc1y4h10006k2kdse7x47oh\",\"name\":\"English\",\"code\":\"EN\",\"isActive\":true,\"createdAt\":\"2026-07-08T12:26:39.014Z\",\"updatedAt\":\"2026-07-08T12:26:39.014Z\"}},\"completeness\":{\"entity\":\"questions\",\"languageId\":\"cmrfudipt00001387aijb5mgh\",\"isComplete\":false,\"missingFields\":[{\"field\":\"text\",\"message\":\"Question text is required.\"},{\"field\":\"options.0.text\",\"message\":\"Option 1 text is required.\"},{\"field\":\"options.1.text\",\"message\":\"Option 2 text is required.\"},{\"field\":\"options.2.text\",\"message\":\"Option 3 text is required.\"},{\"field\":\"options.3.text\",\"message\":\"Option 4 text is required.\"}]}},{\"id\":\"cmrc1y9as001pk2kddpqonzo6\",\"type\":\"MCQ\",\"subjectName\":\"Data Structures & Algorithms\",\"baseLanguageName\":\"English\",\"sourceText\":\"What is the time complexity of binary search?\",\"preview\":{\"id\":\"cmrc1y9as001pk2kddpqonzo6\",\"subjectId\":\"cmrc1y53e000gk2kdudmed81a\",\"languageId\":\"cmrc1y4h10006k2kdse7x47oh\",\"groupId\":\"cmrc1y4le000ak2kd1o5se1xs\",\"academicYearId\":\"cmrc1y4060000k2kdx7dkghyw\",\"semesterId\":\"cmrc1y4cm0004k2kddk9xe7q7\",\"academicOfferingId\":null,\"teacherId\":\"cmrc1y74k000uk2kd8dujfpkd\",\"type\":\"MCQ\",\"text\":\"What is the time complexity of binary search?\",\"imageUrl\":null,\"marks\":2,\"difficulty\":\"easy\",\"expectedAnswer\":null,\"keywords\":null,\"explanation\":null,\"isActive\":true,\"createdAt\":\"2026-07-08T12:26:45.268Z\",\"updatedAt\":\"2026-07-08T12:26:45.268Z\",\"translations\":[{\"id\":\"cmrgtn7a50005dgof1a0ip6s2\",\"questionId\":\"cmrc1y9as001pk2kddpqonzo6\",\"languageId\":\"cmrc1y4h10006k2kdse7x47oh\",\"text\":\"What is the time complexity of binary search?\",\"expectedAnswer\":null,\"explanation\":null,\"keywords\":null,\"status\":\"DRAFT\",\"completedAt\":null,\"archivedAt\":null,\"createdAt\":\"2026-07-11T20:33:03.390Z\",\"updatedAt\":\"2026-07-11T20:33:03.390Z\"}],\"options\":[{\"id\":\"cmrc1y9as001qk2kdoj9m2vkt\",\"questionId\":\"cmrc1y9as001pk2kddpqonzo6\",\"text\":\"O(n)\",\"isCorrect\":false,\"orderIndex\":0,\"imageUrl\":null,\"createdAt\":\"2026-07-08T12:26:45.268Z\",\"translations\":[{\"id\":\"cmrgtn81i000bdgof8eev22ik\",\"questionOptionId\":\"cmrc1y9as001qk2kdoj9m2vkt\",\"languageId\":\"cmrc1y4h10006k2kdse7x47oh\",\"text\":\"O(n)\",\"status\":\"DRAFT\",\"completedAt\":null,\"archivedAt\":null,\"createdAt\":\"2026-07-11T20:33:04.374Z\",\"updatedAt\":\"2026-07-11T20:33:04.374Z\"}]},{\"id\":\"cmrc1y9as001rk2kdl10okn8h\",\"questionId\":\"cmrc1y9as001pk2kddpqonzo6\",\"text\":\"O(log n)\",\"isCorrect\":true,\"orderIndex\":1,\"imageUrl\":null,\"createdAt\":\"2026-07-08T12:26:45.268Z\",\"translations\":[{\"id\":\"cmrgtn89y000ddgof93y0t0on\",\"questionOptionId\":\"cmrc1y9as001rk2kdl10okn8h\",\"languageId\":\"cmrc1y4h10006k2kdse7x47oh\",\"text\":\"O(log n)\",\"status\":\"DRAFT\",\"completedAt\":null,\"archivedAt\":null,\"createdAt\":\"2026-07-11T20:33:04.679Z\",\"updatedAt\":\"2026-07-11T20:33:04.679Z\"}]},{\"id\":\"cmrc1y9as001sk2kd0m11jphy\",\"questionId\":\"cmrc1y9as001pk2kddpqonzo6\",\"text\":\"O(n²)\",\"isCorrect\":false,\"orderIndex\":2,\"imageUrl\":null,\"createdAt\":\"2026-07-08T12:26:45.268Z\",\"translations\":[{\"id\":\"cmrgtn7t00009dgofbfzkhn6x\",\"questionOptionId\":\"cmrc1y9as001sk2kd0m11jphy\",\"languageId\":\"cmrc1y4h10006k2kdse7x47oh\",\"text\":\"O(n²)\",\"status\":\"DRAFT\",\"completedAt\":null,\"archivedAt\":null,\"createdAt\":\"2026-07-11T20:33:04.069Z\",\"updatedAt\":\"2026-07-11T20:33:04.069Z\"}]},{\"id\":\"cmrc1y9as001tk2kdnz2vj7yj\",\"questionId\":\"cmrc1y9as001pk2kddpqonzo6\",\"text\":\"O(1)\",\"isCorrect\":false,\"orderIndex\":3,\"imageUrl\":null,\"createdAt\":\"2026-07-08T12:26:45.268Z\",\"translations\":[{\"id\":\"cmrgtn7jd0007dgofmaii86mg\",\"questionOptionId\":\"cmrc1y9as001tk2kdnz2vj7yj\",\"languageId\":\"cmrc1y4h10006k2kdse7x47oh\",\"text\":\"O(1)\",\"status\":\"DRAFT\",\"completedAt\":null,\"archivedAt\":null,\"createdAt\":\"2026-07-11T20:33:03.722Z\",\"updatedAt\":\"2026-07-11T20:33:03.722Z\"}]}],\"subject\":{\"id\":\"cmrc1y53e000gk2kdudmed81a\",\"name\":\"Data Structures & Algorithms\",\"code\":\"CSE-201\",\"description\":null,\"departmentId\":\"cmrc1y4pr000ck2kd4d7vqcwq\",\"languageId\":null,\"isActive\":true,\"createdAt\":\"2026-07-08T12:26:39.819Z\",\"updatedAt\":\"2026-07-08T12:26:39.819Z\"},\"language\":{\"id\":\"cmrc1y4h10006k2kdse7x47oh\",\"name\":\"English\",\"code\":\"EN\",\"isActive\":true,\"createdAt\":\"2026-07-08T12:26:39.014Z\",\"updatedAt\":\"2026-07-08T12:26:39.014Z\"}},\"completeness\":{\"entity\":\"questions\",\"languageId\":\"cmrfudipt00001387aijb5mgh\",\"isComplete\":false,\"missingFields\":[{\"field\":\"text\",\"message\":\"Question text is required.\"},{\"field\":\"options.0.text\",\"message\":\"Option 1 text is required.\"},{\"field\":\"options.1.text\",\"message\":\"Option 2 text is required.\"},{\"field\":\"options.2.text\",\"message\":\"Option 3 text is required.\"},{\"field\":\"options.3.text\",\"message\":\"Option 4 text is required.\"}]}}]}"
+}

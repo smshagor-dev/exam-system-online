@@ -1,0 +1,9 @@
+{
+  "method": "GET",
+  "url": "/api/teacher/translations/questions/cmrhfhg8v000vz6zfu3b41b9d?languageId=cmrfudipt00001387aijb5mgh",
+  "status": 401,
+  "json": {
+    "error": "Unauthorized"
+  },
+  "text": "{\"error\":\"Unauthorized\"}"
+}

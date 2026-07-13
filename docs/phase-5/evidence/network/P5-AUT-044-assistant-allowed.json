@@ -1,0 +1,267 @@
+{
+  "method": "GET",
+  "url": "/api/teacher/translations/questions/cmrhfhg8v0011z6zfr8ijuhq5?languageId=cmrc1y4h10006k2kdse7x47oh",
+  "status": 200,
+  "json": {
+    "entity": "questions",
+    "parentId": "cmrhfhg8v0011z6zfr8ijuhq5",
+    "baseLanguageId": "cmrfudipt00001387aijb5mgh",
+    "languageId": "cmrc1y4h10006k2kdse7x47oh",
+    "translation": {
+      "id": "cmrhfj2k2000bmg7rymw7hw6k",
+      "questionId": "cmrhfhg8v0011z6zfr8ijuhq5",
+      "languageId": "cmrc1y4h10006k2kdse7x47oh",
+      "text": "P5 Evidence EN Question Translation Edited",
+      "expectedAnswer": "",
+      "explanation": "P5 Evidence EN Question Translation Edited explanation",
+      "keywords": [
+        "p5",
+        "evidence"
+      ],
+      "status": "DRAFT",
+      "completedAt": null,
+      "archivedAt": null,
+      "createdAt": "2026-07-12T06:45:42.194Z",
+      "updatedAt": "2026-07-12T06:45:47.342Z"
+    },
+    "optionTranslations": [
+      {
+        "optionId": "cmrhfhg8v0013z6zfr3k2ewbw",
+        "orderIndex": 0,
+        "text": "EN Option A+",
+        "status": "DRAFT"
+      },
+      {
+        "optionId": "cmrhfhg8v0014z6zfiup76ia5",
+        "orderIndex": 1,
+        "text": "EN Option B+",
+        "status": "DRAFT"
+      },
+      {
+        "optionId": "cmrhfhg8v0016z6zf3dmus5hs",
+        "orderIndex": 2,
+        "text": "EN Option C+",
+        "status": "DRAFT"
+      }
+    ],
+    "completeness": {
+      "entity": "questions",
+      "languageId": "cmrc1y4h10006k2kdse7x47oh",
+      "isComplete": true,
+      "missingFields": []
+    },
+    "preview": {
+      "id": "cmrhfhg8v0011z6zfr8ijuhq5",
+      "subjectId": "cmrfudk7t00021387u895s14h",
+      "languageId": "cmrfudipt00001387aijb5mgh",
+      "groupId": "cmrfvdjp80067wqli6zjyifgw",
+      "academicYearId": "cmrc1y4060003k2kd2m0dhf10",
+      "semesterId": "cmrc1y4cm0004k2kddk9xe7q7",
+      "academicOfferingId": "cmrfve242006fwqliz6dmghl7",
+      "teacherId": "cmrc1y74k000uk2kd8dujfpkd",
+      "type": "MCQ",
+      "text": "P5 Evidence EN Question Translation Edited",
+      "imageUrl": null,
+      "marks": 5,
+      "difficulty": "medium",
+      "expectedAnswer": "",
+      "keywords": [
+        "p5",
+        "evidence"
+      ],
+      "explanation": "P5 Evidence EN Question Translation Edited explanation",
+      "isActive": false,
+      "createdAt": "2026-07-12T06:44:26.623Z",
+      "updatedAt": "2026-07-12T06:44:26.623Z",
+      "translations": [
+        {
+          "id": "cmrhfhgne001cz6zfkcxfuqoy",
+          "questionId": "cmrhfhg8v0011z6zfr8ijuhq5",
+          "languageId": "cmrfudipt00001387aijb5mgh",
+          "text": "P5 Evidence RU Question",
+          "expectedAnswer": null,
+          "explanation": "P5 Evidence RU Question explanation",
+          "keywords": null,
+          "status": "COMPLETE",
+          "completedAt": "2026-07-12T06:44:27.145Z",
+          "archivedAt": null,
+          "createdAt": "2026-07-12T06:44:27.147Z",
+          "updatedAt": "2026-07-12T06:44:27.147Z"
+        },
+        {
+          "id": "cmrhfj2k2000bmg7rymw7hw6k",
+          "questionId": "cmrhfhg8v0011z6zfr8ijuhq5",
+          "languageId": "cmrc1y4h10006k2kdse7x47oh",
+          "text": "P5 Evidence EN Question Translation Edited",
+          "expectedAnswer": "",
+          "explanation": "P5 Evidence EN Question Translation Edited explanation",
+          "keywords": "[\"p5\",\"evidence\"]",
+          "status": "DRAFT",
+          "completedAt": null,
+          "archivedAt": null,
+          "createdAt": "2026-07-12T06:45:42.194Z",
+          "updatedAt": "2026-07-12T06:45:47.342Z"
+        }
+      ],
+      "options": [
+        {
+          "id": "cmrhfhg8v0013z6zfr3k2ewbw",
+          "questionId": "cmrhfhg8v0011z6zfr8ijuhq5",
+          "text": "EN Option A+",
+          "isCorrect": true,
+          "orderIndex": 0,
+          "imageUrl": null,
+          "createdAt": "2026-07-12T06:44:26.623Z",
+          "translations": [
+            {
+              "id": "cmrhfhgw3001iz6zftbq3znhd",
+              "questionOptionId": "cmrhfhg8v0013z6zfr3k2ewbw",
+              "languageId": "cmrfudipt00001387aijb5mgh",
+              "text": "P5 RU Option A",
+              "status": "COMPLETE",
+              "completedAt": "2026-07-12T06:44:27.458Z",
+              "archivedAt": null,
+              "createdAt": "2026-07-12T06:44:27.459Z",
+              "updatedAt": "2026-07-12T06:44:27.459Z"
+            },
+            {
+              "id": "cmrhfj2ql000dmg7rcrt1f4zf",
+              "questionOptionId": "cmrhfhg8v0013z6zfr3k2ewbw",
+              "languageId": "cmrc1y4h10006k2kdse7x47oh",
+              "text": "EN Option A+",
+              "status": "DRAFT",
+              "completedAt": null,
+              "archivedAt": null,
+              "createdAt": "2026-07-12T06:45:42.429Z",
+              "updatedAt": "2026-07-12T06:45:47.708Z"
+            }
+          ]
+        },
+        {
+          "id": "cmrhfhg8v0014z6zfiup76ia5",
+          "questionId": "cmrhfhg8v0011z6zfr8ijuhq5",
+          "text": "EN Option B+",
+          "isCorrect": false,
+          "orderIndex": 1,
+          "imageUrl": null,
+          "createdAt": "2026-07-12T06:44:26.623Z",
+          "translations": [
+            {
+              "id": "cmrhfhgw3001jz6zfmnatpzkd",
+              "questionOptionId": "cmrhfhg8v0014z6zfiup76ia5",
+              "languageId": "cmrfudipt00001387aijb5mgh",
+              "text": "P5 RU Option B",
+              "status": "COMPLETE",
+              "completedAt": "2026-07-12T06:44:27.458Z",
+              "archivedAt": null,
+              "createdAt": "2026-07-12T06:44:27.459Z",
+              "updatedAt": "2026-07-12T06:44:27.459Z"
+            },
+            {
+              "id": "cmrhfj2x5000fmg7r0ip135pv",
+              "questionOptionId": "cmrhfhg8v0014z6zfiup76ia5",
+              "languageId": "cmrc1y4h10006k2kdse7x47oh",
+              "text": "EN Option B+",
+              "status": "DRAFT",
+              "completedAt": null,
+              "archivedAt": null,
+              "createdAt": "2026-07-12T06:45:42.665Z",
+              "updatedAt": "2026-07-12T06:45:48.075Z"
+            }
+          ]
+        },
+        {
+          "id": "cmrhfhg8v0016z6zf3dmus5hs",
+          "questionId": "cmrhfhg8v0011z6zfr8ijuhq5",
+          "text": "EN Option C+",
+          "isCorrect": false,
+          "orderIndex": 2,
+          "imageUrl": null,
+          "createdAt": "2026-07-12T06:44:26.623Z",
+          "translations": [
+            {
+              "id": "cmrhfhgw3001kz6zfzfiidm7o",
+              "questionOptionId": "cmrhfhg8v0016z6zf3dmus5hs",
+              "languageId": "cmrfudipt00001387aijb5mgh",
+              "text": "P5 RU Option C",
+              "status": "COMPLETE",
+              "completedAt": "2026-07-12T06:44:27.458Z",
+              "archivedAt": null,
+              "createdAt": "2026-07-12T06:44:27.459Z",
+              "updatedAt": "2026-07-12T06:44:27.459Z"
+            },
+            {
+              "id": "cmrhfj33o000hmg7rqe8tbj50",
+              "questionOptionId": "cmrhfhg8v0016z6zf3dmus5hs",
+              "languageId": "cmrc1y4h10006k2kdse7x47oh",
+              "text": "EN Option C+",
+              "status": "DRAFT",
+              "completedAt": null,
+              "archivedAt": null,
+              "createdAt": "2026-07-12T06:45:42.901Z",
+              "updatedAt": "2026-07-12T06:45:48.447Z"
+            }
+          ]
+        }
+      ],
+      "subject": {
+        "id": "cmrfudk7t00021387u895s14h",
+        "name": "Programming Fundamentals",
+        "code": "CSE-101",
+        "description": null,
+        "departmentId": "cmrc1y4pr000ck2kd4d7vqcwq",
+        "languageId": null,
+        "isActive": true,
+        "createdAt": "2026-07-11T04:05:47.033Z",
+        "updatedAt": "2026-07-11T04:05:47.033Z"
+      },
+      "language": {
+        "id": "cmrfudipt00001387aijb5mgh",
+        "name": "Russian",
+        "code": "RU",
+        "isActive": true,
+        "createdAt": "2026-07-11T04:05:45.089Z",
+        "updatedAt": "2026-07-11T04:05:45.089Z"
+      },
+      "group": {
+        "id": "cmrfvdjp80067wqli6zjyifgw",
+        "name": "BSC-CS-11R",
+        "code": "BSC-CS-11R",
+        "academicYearId": "cmrc1y4060003k2kd2m0dhf10",
+        "departmentId": "cmrc1y4pr000ck2kd4d7vqcwq",
+        "programId": "cmrfvc9gk0053wqli5omnqitt",
+        "languageId": "cmrfudipt00001387aijb5mgh",
+        "departmentLanguageId": "cmrfvc3kg004xwqli8kpib47u",
+        "academicSessionId": "cmrfvc6kk0050wqliy7jsvc0r",
+        "programYearId": "cmrfvcdti0059wqlij5fqmj0g",
+        "currentProgramSemesterId": "cmrfvcvjd005nwqlinyw6zg68",
+        "isActive": true,
+        "createdAt": "2026-07-11T04:33:45.980Z",
+        "updatedAt": "2026-07-11T04:33:45.980Z"
+      },
+      "academicYear": {
+        "id": "cmrc1y4060003k2kd2m0dhf10",
+        "name": "Year 1",
+        "year": 1,
+        "isActive": true,
+        "createdAt": "2026-07-08T12:26:38.406Z",
+        "updatedAt": "2026-07-08T12:26:38.406Z"
+      },
+      "semester": {
+        "id": "cmrc1y4cm0004k2kddk9xe7q7",
+        "name": "Semester 1",
+        "number": 1,
+        "isActive": true,
+        "createdAt": "2026-07-08T12:26:38.854Z",
+        "updatedAt": "2026-07-08T12:26:38.854Z"
+      }
+    },
+    "source": {
+      "text": "P5 Evidence RU Question",
+      "expectedAnswer": null,
+      "explanation": "P5 Evidence RU Question explanation",
+      "keywords": []
+    }
+  },
+  "text": "{\"entity\":\"questions\",\"parentId\":\"cmrhfhg8v0011z6zfr8ijuhq5\",\"baseLanguageId\":\"cmrfudipt00001387aijb5mgh\",\"languageId\":\"cmrc1y4h10006k2kdse7x47oh\",\"translation\":{\"id\":\"cmrhfj2k2000bmg7rymw7hw6k\",\"questionId\":\"cmrhfhg8v0011z6zfr8ijuhq5\",\"languageId\":\"cmrc1y4h10006k2kdse7x47oh\",\"text\":\"P5 Evidence EN Question Translation Edited\",\"expectedAnswer\":\"\",\"explanation\":\"P5 Evidence EN Question Translation Edited explanation\",\"keywords\":[\"p5\",\"evidence\"],\"status\":\"DRAFT\",\"completedAt\":null,\"archivedAt\":null,\"createdAt\":\"2026-07-12T06:45:42.194Z\",\"updatedAt\":\"2026-07-12T06:45:47.342Z\"},\"optionTranslations\":[{\"optionId\":\"cmrhfhg8v0013z6zfr3k2ewbw\",\"orderIndex\":0,\"text\":\"EN Option A+\",\"status\":\"DRAFT\"},{\"optionId\":\"cmrhfhg8v0014z6zfiup76ia5\",\"orderIndex\":1,\"text\":\"EN Option B+\",\"status\":\"DRAFT\"},{\"optionId\":\"cmrhfhg8v0016z6zf3dmus5hs\",\"orderIndex\":2,\"text\":\"EN Option C+\",\"status\":\"DRAFT\"}],\"completeness\":{\"entity\":\"questions\",\"languageId\":\"cmrc1y4h10006k2kdse7x47oh\",\"isComplete\":true,\"missingFields\":[]},\"preview\":{\"id\":\"cmrhfhg8v0011z6zfr8ijuhq5\",\"subjectId\":\"cmrfudk7t00021387u895s14h\",\"languageId\":\"cmrfudipt00001387aijb5mgh\",\"groupId\":\"cmrfvdjp80067wqli6zjyifgw\",\"academicYearId\":\"cmrc1y4060003k2kd2m0dhf10\",\"semesterId\":\"cmrc1y4cm0004k2kddk9xe7q7\",\"academicOfferingId\":\"cmrfve242006fwqliz6dmghl7\",\"teacherId\":\"cmrc1y74k000uk2kd8dujfpkd\",\"type\":\"MCQ\",\"text\":\"P5 Evidence EN Question Translation Edited\",\"imageUrl\":null,\"marks\":5,\"difficulty\":\"medium\",\"expectedAnswer\":\"\",\"keywords\":[\"p5\",\"evidence\"],\"explanation\":\"P5 Evidence EN Question Translation Edited explanation\",\"isActive\":false,\"createdAt\":\"2026-07-12T06:44:26.623Z\",\"updatedAt\":\"2026-07-12T06:44:26.623Z\",\"translations\":[{\"id\":\"cmrhfhgne001cz6zfkcxfuqoy\",\"questionId\":\"cmrhfhg8v0011z6zfr8ijuhq5\",\"languageId\":\"cmrfudipt00001387aijb5mgh\",\"text\":\"P5 Evidence RU Question\",\"expectedAnswer\":null,\"explanation\":\"P5 Evidence RU Question explanation\",\"keywords\":null,\"status\":\"COMPLETE\",\"completedAt\":\"2026-07-12T06:44:27.145Z\",\"archivedAt\":null,\"createdAt\":\"2026-07-12T06:44:27.147Z\",\"updatedAt\":\"2026-07-12T06:44:27.147Z\"},{\"id\":\"cmrhfj2k2000bmg7rymw7hw6k\",\"questionId\":\"cmrhfhg8v0011z6zfr8ijuhq5\",\"languageId\":\"cmrc1y4h10006k2kdse7x47oh\",\"text\":\"P5 Evidence EN Question Translation Edited\",\"expectedAnswer\":\"\",\"explanation\":\"P5 Evidence EN Question Translation Edited explanation\",\"keywords\":\"[\\\"p5\\\",\\\"evidence\\\"]\",\"status\":\"DRAFT\",\"completedAt\":null,\"archivedAt\":null,\"createdAt\":\"2026-07-12T06:45:42.194Z\",\"updatedAt\":\"2026-07-12T06:45:47.342Z\"}],\"options\":[{\"id\":\"cmrhfhg8v0013z6zfr3k2ewbw\",\"questionId\":\"cmrhfhg8v0011z6zfr8ijuhq5\",\"text\":\"EN Option A+\",\"isCorrect\":true,\"orderIndex\":0,\"imageUrl\":null,\"createdAt\":\"2026-07-12T06:44:26.623Z\",\"translations\":[{\"id\":\"cmrhfhgw3001iz6zftbq3znhd\",\"questionOptionId\":\"cmrhfhg8v0013z6zfr3k2ewbw\",\"languageId\":\"cmrfudipt00001387aijb5mgh\",\"text\":\"P5 RU Option A\",\"status\":\"COMPLETE\",\"completedAt\":\"2026-07-12T06:44:27.458Z\",\"archivedAt\":null,\"createdAt\":\"2026-07-12T06:44:27.459Z\",\"updatedAt\":\"2026-07-12T06:44:27.459Z\"},{\"id\":\"cmrhfj2ql000dmg7rcrt1f4zf\",\"questionOptionId\":\"cmrhfhg8v0013z6zfr3k2ewbw\",\"languageId\":\"cmrc1y4h10006k2kdse7x47oh\",\"text\":\"EN Option A+\",\"status\":\"DRAFT\",\"completedAt\":null,\"archivedAt\":null,\"createdAt\":\"2026-07-12T06:45:42.429Z\",\"updatedAt\":\"2026-07-12T06:45:47.708Z\"}]},{\"id\":\"cmrhfhg8v0014z6zfiup76ia5\",\"questionId\":\"cmrhfhg8v0011z6zfr8ijuhq5\",\"text\":\"EN Option B+\",\"isCorrect\":false,\"orderIndex\":1,\"imageUrl\":null,\"createdAt\":\"2026-07-12T06:44:26.623Z\",\"translations\":[{\"id\":\"cmrhfhgw3001jz6zfmnatpzkd\",\"questionOptionId\":\"cmrhfhg8v0014z6zfiup76ia5\",\"languageId\":\"cmrfudipt00001387aijb5mgh\",\"text\":\"P5 RU Option B\",\"status\":\"COMPLETE\",\"completedAt\":\"2026-07-12T06:44:27.458Z\",\"archivedAt\":null,\"createdAt\":\"2026-07-12T06:44:27.459Z\",\"updatedAt\":\"2026-07-12T06:44:27.459Z\"},{\"id\":\"cmrhfj2x5000fmg7r0ip135pv\",\"questionOptionId\":\"cmrhfhg8v0014z6zfiup76ia5\",\"languageId\":\"cmrc1y4h10006k2kdse7x47oh\",\"text\":\"EN Option B+\",\"status\":\"DRAFT\",\"completedAt\":null,\"archivedAt\":null,\"createdAt\":\"2026-07-12T06:45:42.665Z\",\"updatedAt\":\"2026-07-12T06:45:48.075Z\"}]},{\"id\":\"cmrhfhg8v0016z6zf3dmus5hs\",\"questionId\":\"cmrhfhg8v0011z6zfr8ijuhq5\",\"text\":\"EN Option C+\",\"isCorrect\":false,\"orderIndex\":2,\"imageUrl\":null,\"createdAt\":\"2026-07-12T06:44:26.623Z\",\"translations\":[{\"id\":\"cmrhfhgw3001kz6zfzfiidm7o\",\"questionOptionId\":\"cmrhfhg8v0016z6zf3dmus5hs\",\"languageId\":\"cmrfudipt00001387aijb5mgh\",\"text\":\"P5 RU Option C\",\"status\":\"COMPLETE\",\"completedAt\":\"2026-07-12T06:44:27.458Z\",\"archivedAt\":null,\"createdAt\":\"2026-07-12T06:44:27.459Z\",\"updatedAt\":\"2026-07-12T06:44:27.459Z\"},{\"id\":\"cmrhfj33o000hmg7rqe8tbj50\",\"questionOptionId\":\"cmrhfhg8v0016z6zf3dmus5hs\",\"languageId\":\"cmrc1y4h10006k2kdse7x47oh\",\"text\":\"EN Option C+\",\"status\":\"DRAFT\",\"completedAt\":null,\"archivedAt\":null,\"createdAt\":\"2026-07-12T06:45:42.901Z\",\"updatedAt\":\"2026-07-12T06:45:48.447Z\"}]}],\"subject\":{\"id\":\"cmrfudk7t00021387u895s14h\",\"name\":\"Programming Fundamentals\",\"code\":\"CSE-101\",\"description\":null,\"departmentId\":\"cmrc1y4pr000ck2kd4d7vqcwq\",\"languageId\":null,\"isActive\":true,\"createdAt\":\"2026-07-11T04:05:47.033Z\",\"updatedAt\":\"2026-07-11T04:05:47.033Z\"},\"language\":{\"id\":\"cmrfudipt00001387aijb5mgh\",\"name\":\"Russian\",\"code\":\"RU\",\"isActive\":true,\"createdAt\":\"2026-07-11T04:05:45.089Z\",\"updatedAt\":\"2026-07-11T04:05:45.089Z\"},\"group\":{\"id\":\"cmrfvdjp80067wqli6zjyifgw\",\"name\":\"BSC-CS-11R\",\"code\":\"BSC-CS-11R\",\"academicYearId\":\"cmrc1y4060003k2kd2m0dhf10\",\"departmentId\":\"cmrc1y4pr000ck2kd4d7vqcwq\",\"programId\":\"cmrfvc9gk0053wqli5omnqitt\",\"languageId\":\"cmrfudipt00001387aijb5mgh\",\"departmentLanguageId\":\"cmrfvc3kg004xwqli8kpib47u\",\"academicSessionId\":\"cmrfvc6kk0050wqliy7jsvc0r\",\"programYearId\":\"cmrfvcdti0059wqlij5fqmj0g\",\"currentProgramSemesterId\":\"cmrfvcvjd005nwqlinyw6zg68\",\"isActive\":true,\"createdAt\":\"2026-07-11T04:33:45.980Z\",\"updatedAt\":\"2026-07-11T04:33:45.980Z\"},\"academicYear\":{\"id\":\"cmrc1y4060003k2kd2m0dhf10\",\"name\":\"Year 1\",\"year\":1,\"isActive\":true,\"createdAt\":\"2026-07-08T12:26:38.406Z\",\"updatedAt\":\"2026-07-08T12:26:38.406Z\"},\"semester\":{\"id\":\"cmrc1y4cm0004k2kddk9xe7q7\",\"name\":\"Semester 1\",\"number\":1,\"isActive\":true,\"createdAt\":\"2026-07-08T12:26:38.854Z\",\"updatedAt\":\"2026-07-08T12:26:38.854Z\"}},\"source\":{\"text\":\"P5 Evidence RU Question\",\"expectedAnswer\":null,\"explanation\":\"P5 Evidence RU Question explanation\",\"keywords\":[]}}"
+}

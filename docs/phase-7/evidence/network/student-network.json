@@ -1,0 +1,318 @@
+[
+  {
+    "url": "http://127.0.0.1:3010/login",
+    "status": 200
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Broot-of-the-server%5D__164viu6._.css",
+    "status": 200
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1xx01vv._.js",
+    "status": 200
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/media/83afe278b6a6bb3c-s.p.2bn3s6zvc0dyp.woff2",
+    "status": 200
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_1amofcm._.js",
+    "status": 200
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_164kp-6._.js",
+    "status": 200
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/chunks/_1anvha4._.js",
+    "status": 200
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_%40swc_helpers_cjs_1r9vbqw._.js",
+    "status": 200
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js",
+    "status": 200
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/chunks/turbopack-_01_ro95._.js",
+    "status": 200
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_layout_tsx_007e4b2._.js",
+    "status": 200
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_12krwfk._.js",
+    "status": 200
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_1nyev3z._.js",
+    "status": 200
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_(auth)_login_page_tsx_0rxu8o2._.js",
+    "status": 200
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_client_components_builtin_global-error_0rxu8o2.js",
+    "status": 200
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_next-devtools_index_090k2jm.js",
+    "status": 200
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_000yk3b._.js",
+    "status": 200
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_client_0r5nbpw._.js",
+    "status": 200
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js",
+    "status": 200
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_0qcefa3._.js",
+    "status": 200
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1xch-cm._.js",
+    "status": 200
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1mojsay._.js",
+    "status": 200
+  },
+  {
+    "url": "http://127.0.0.1:3010/api/public/system-settings",
+    "status": 200
+  },
+  {
+    "url": "http://127.0.0.1:3010/api/auth/providers",
+    "status": 200
+  },
+  {
+    "url": "http://127.0.0.1:3010/api/auth/csrf",
+    "status": 200
+  },
+  {
+    "url": "http://127.0.0.1:3010/student/coursework",
+    "status": 307
+  },
+  {
+    "url": "http://127.0.0.1:3010/api/auth/callback/credentials?",
+    "status": 200
+  },
+  {
+    "url": "http://127.0.0.1:3010/?_rsc=qYT2Wy2QR8kXuUU6",
+    "status": 200
+  },
+  {
+    "url": "http://127.0.0.1:3010/?_rsc=q3mOO9BClNZHexY7",
+    "status": 200
+  },
+  {
+    "url": "http://127.0.0.1:3010/",
+    "status": 307
+  },
+  {
+    "url": "http://127.0.0.1:3010/__nextjs_font/geist-latin.woff2",
+    "status": 200
+  },
+  {
+    "url": "http://127.0.0.1:3010/student/dashboard?_rsc=2Md0sTUZcnjCijMr",
+    "status": 200
+  },
+  {
+    "url": "http://127.0.0.1:3010/student/dashboard?_rsc=2Md0sTUZcnjCijMr",
+    "status": 200
+  },
+  {
+    "url": "http://127.0.0.1:3010/login",
+    "status": 200
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/media/83afe278b6a6bb3c-s.p.2bn3s6zvc0dyp.woff2",
+    "status": 200
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Broot-of-the-server%5D__164viu6._.css",
+    "status": 200
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_164kp-6._.js",
+    "status": 200
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1xx01vv._.js",
+    "status": 200
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_1amofcm._.js",
+    "status": 200
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/chunks/_1anvha4._.js",
+    "status": 200
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_layout_tsx_007e4b2._.js",
+    "status": 200
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_(auth)_login_page_tsx_0rxu8o2._.js",
+    "status": 200
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_client_components_builtin_global-error_0rxu8o2.js",
+    "status": 200
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_12krwfk._.js",
+    "status": 200
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_%40swc_helpers_cjs_1r9vbqw._.js",
+    "status": 200
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/chunks/turbopack-_01_ro95._.js",
+    "status": 200
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_000yk3b._.js",
+    "status": 200
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js",
+    "status": 200
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_1nyev3z._.js",
+    "status": 200
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_next-devtools_index_090k2jm.js",
+    "status": 200
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js",
+    "status": 200
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_client_0r5nbpw._.js",
+    "status": 200
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_0qcefa3._.js",
+    "status": 200
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1xch-cm._.js",
+    "status": 200
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1mojsay._.js",
+    "status": 200
+  },
+  {
+    "url": "http://127.0.0.1:3010/__nextjs_font/geist-latin.woff2",
+    "status": 200
+  },
+  {
+    "url": "http://127.0.0.1:3010/api/public/system-settings",
+    "status": 200
+  },
+  {
+    "url": "http://127.0.0.1:3010/student/coursework/extensions",
+    "status": 200
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/media/83afe278b6a6bb3c-s.p.2bn3s6zvc0dyp.woff2",
+    "status": 200
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Broot-of-the-server%5D__164viu6._.css",
+    "status": 304
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1xx01vv._.js",
+    "status": 304
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_next-devtools_index_090k2jm.js",
+    "status": 304
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js",
+    "status": 304
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_164kp-6._.js",
+    "status": 304
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_compiled_1amofcm._.js",
+    "status": 304
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_client_0r5nbpw._.js",
+    "status": 304
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js",
+    "status": 304
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/chunks/_1anvha4._.js",
+    "status": 304
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_%40swc_helpers_cjs_1r9vbqw._.js",
+    "status": 304
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/chunks/turbopack-_01_ro95._.js",
+    "status": 304
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_1nyev3z._.js",
+    "status": 304
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_12krwfk._.js",
+    "status": 304
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_layout_tsx_007e4b2._.js",
+    "status": 304
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/chunks/node_modules_next_dist_client_components_builtin_global-error_0rxu8o2.js",
+    "status": 304
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/chunks/src_app_student_layout_tsx_0rxu8o2._.js",
+    "status": 200
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/chunks/_1refy7w._.js",
+    "status": 200
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1mojsay._.js",
+    "status": 304
+  },
+  {
+    "url": "http://127.0.0.1:3010/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1xch-cm._.js",
+    "status": 304
+  },
+  {
+    "url": "http://127.0.0.1:3010/__nextjs_font/geist-latin.woff2",
+    "status": 200
+  }
+]

@@ -68,7 +68,12 @@ export async function getTeacherCourseworkWorkspace(userId: string) {
               teacherId: teacherProfile.id,
             },
             include: {
-              rule: true,
+              rule: {
+                include: {
+                  translations: true,
+                },
+              },
+              translations: true,
               accessRequests: {
                 orderBy: {
                   createdAt: 'desc',
@@ -95,6 +100,7 @@ export async function getTeacherCourseworkWorkspace(userId: string) {
       teacherId: teacherProfile.id,
     },
     include: {
+      translations: true,
       subject: true,
       language: true,
       group: true,
@@ -102,6 +108,7 @@ export async function getTeacherCourseworkWorkspace(userId: string) {
       semester: true,
       assignments: {
         include: {
+          translations: true,
           student: {
             include: {
               user: {
@@ -158,7 +165,12 @@ export async function getTeacherCourseworkWorkspace(userId: string) {
       },
       assignment: {
         include: {
-          rule: true,
+          rule: {
+            include: {
+              translations: true,
+            },
+          },
+          translations: true,
           subject: true,
           language: true,
           group: true,
@@ -191,7 +203,12 @@ export async function getTeacherCourseworkWorkspace(userId: string) {
       },
       assignment: {
         include: {
-          rule: true,
+          rule: {
+            include: {
+              translations: true,
+            },
+          },
+          translations: true,
           subject: true,
           language: true,
           group: true,

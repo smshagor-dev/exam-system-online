@@ -1,0 +1,112 @@
+[DB] Skipping Prisma db push because AUTO_DB_PUSH is not enabled
+Creating turbopack project { dir: 'D:\\Public\\exam-system-online', testMode: true }
+[Phase6][Redis] Connecting runtime store to redis://127.0.0.1:58125 (timeout=30000ms)
+[Phase6][Redis] Runtime store connected to redis://127.0.0.1:58125
+[Phase6] Socket runtime initialized in redis mode (instance=ed21312a-0204-4c6e-86eb-cbb80678008b)
+
+╔════════════════════════════════════════╗
+║      ExamFlow Pro is running! 🎓      ║
+╠════════════════════════════════════════╣
+║  URL:    http://127.0.0.1:3216         ║
+║  Mode:   Development              ║
+║  Socket: Enabled (ws://127.0.0.1:3216) ║
+╚════════════════════════════════════════╝
+    
+ GET /api/auth/csrf 200 in 1539ms (next.js: 1510ms, application-code: 29ms)
+ POST /api/auth/callback/credentials 302 in 661ms (next.js: 8ms, application-code: 653ms)
+ GET / 307 in 2.3s (next.js: 1036ms, application-code: 1287ms)
+ GET /login 200 in 996ms (next.js: 76ms, application-code: 920ms)
+ GET /login 200 in 436ms (next.js: 6ms, application-code: 431ms)
+ GET /api/public/system-settings 200 in 593ms (next.js: 362ms, application-code: 231ms)
+ GET /api/auth/providers 200 in 33ms (next.js: 21ms, application-code: 12ms)
+ GET /api/auth/csrf 200 in 8ms (next.js: 3ms, application-code: 5ms)
+ POST /api/auth/callback/credentials? 200 in 658ms (next.js: 2ms, application-code: 656ms)
+ GET / 200 in 284ms (next.js: 4ms, application-code: 280ms)
+ GET / 200 in 855ms (next.js: 4ms, application-code: 851ms)
+ GET /teacher/dashboard 200 in 1270ms (next.js: 3ms, application-code: 1267ms)
+ GET /teacher/dashboard 200 in 1831ms (next.js: 449ms, application-code: 1381ms)
+ GET /api/auth/csrf 200 in 11ms (next.js: 6ms, application-code: 4ms)
+ POST /api/auth/callback/credentials 302 in 594ms (next.js: 1762µs, application-code: 592ms)
+ GET / 307 in 403ms (next.js: 4ms, application-code: 399ms)
+ GET /login 200 in 423ms (next.js: 4ms, application-code: 420ms)
+ GET /login 200 in 412ms (next.js: 2ms, application-code: 410ms)
+ GET /api/public/system-settings 200 in 226ms (next.js: 1513µs, application-code: 225ms)
+ GET /api/auth/providers 200 in 32ms (next.js: 19ms, application-code: 14ms)
+ GET /api/auth/csrf 200 in 8ms (next.js: 3ms, application-code: 5ms)
+ POST /api/auth/callback/credentials? 200 in 700ms (next.js: 1499µs, application-code: 698ms)
+ GET / 200 in 277ms (next.js: 2ms, application-code: 275ms)
+ GET / 200 in 353ms (next.js: 2ms, application-code: 350ms)
+ GET /student/dashboard 200 in 1617ms (next.js: 126ms, application-code: 1491ms)
+ GET /student/dashboard 200 in 1526ms (next.js: 3ms, application-code: 1524ms)
+ GET /api/auth/csrf 200 in 19ms (next.js: 10ms, application-code: 9ms)
+ POST /api/auth/callback/credentials 302 in 664ms (next.js: 4ms, application-code: 660ms)
+ GET / 307 in 423ms (next.js: 4ms, application-code: 419ms)
+ GET /login 200 in 419ms (next.js: 5ms, application-code: 414ms)
+ GET /login 200 in 413ms (next.js: 4ms, application-code: 409ms)
+ GET /api/public/system-settings 200 in 227ms (next.js: 2ms, application-code: 225ms)
+ GET /api/auth/providers 200 in 13ms (next.js: 8ms, application-code: 5ms)
+ GET /api/auth/csrf 200 in 10ms (next.js: 2ms, application-code: 8ms)
+ POST /api/auth/callback/credentials? 200 in 617ms (next.js: 1583µs, application-code: 615ms)
+ GET / 200 in 267ms (next.js: 3ms, application-code: 264ms)
+ GET / 200 in 373ms (next.js: 1826µs, application-code: 371ms)
+ GET /student/dashboard 200 in 1385ms (next.js: 2ms, application-code: 1383ms)
+ GET /student/dashboard 200 in 1365ms (next.js: 3ms, application-code: 1362ms)
+ GET /api/auth/csrf 200 in 10ms (next.js: 5ms, application-code: 4ms)
+ POST /api/auth/callback/credentials 302 in 665ms (next.js: 1450µs, application-code: 664ms)
+ GET / 307 in 435ms (next.js: 3ms, application-code: 432ms)
+ GET /login 200 in 412ms (next.js: 6ms, application-code: 407ms)
+ GET /login 200 in 420ms (next.js: 1516µs, application-code: 418ms)
+ GET /api/public/system-settings 200 in 231ms (next.js: 3ms, application-code: 228ms)
+ GET /api/auth/providers 200 in 25ms (next.js: 16ms, application-code: 9ms)
+ GET /api/auth/csrf 200 in 7ms (next.js: 1617µs, application-code: 6ms)
+ POST /api/auth/callback/credentials? 200 in 687ms (next.js: 1922µs, application-code: 685ms)
+ GET / 200 in 282ms (next.js: 4ms, application-code: 278ms)
+ GET / 200 in 359ms (next.js: 5ms, application-code: 355ms)
+ GET /teacher/dashboard 200 in 650ms (next.js: 2ms, application-code: 647ms)
+ GET /teacher/dashboard 200 in 1220ms (next.js: 2ms, application-code: 1218ms)
+ GET /api/socket/token 200 in 564ms (next.js: 427ms, application-code: 137ms)
+[Socket] Connected: cmrc1y6pb000rk2kdns7tepny (TEACHER) - Z0bcNAOW_lsJt8DrAAAB
+ GET /teacher/exams/cmrizvx6k003u8a0mnmujhyp7/live 200 in 1266ms (next.js: 444ms, application-code: 822ms)
+ GET /api/socket/token 200 in 623ms (next.js: 3ms, application-code: 620ms)
+[Socket] Connected: cmrc1y6pb000rk2kdns7tepny (TEACHER) - mOxQ26op5RDL92J3AAAD
+ GET /api/exams/cmrizvx6k003u8a0mnmujhyp7 200 in 2.6s (next.js: 1055ms, application-code: 1568ms)
+ GET /student/exams/cmrizvx6k003u8a0mnmujhyp7/attempt 200 in 1053ms (next.js: 353ms, application-code: 700ms)
+ GET /api/exams/cmrizvx6k003u8a0mnmujhyp7?withQuestions=true 200 in 2.7s (next.js: 7ms, application-code: 2.7s)
+ GET /api/socket/token 200 in 137ms (next.js: 5ms, application-code: 132ms)
+[Socket] Connected: cmrhdzq7d0002whz58rqdkwy3 (STUDENT) - 3KOSBt12AFhJ0_GzAAAF
+ GET /api/socket/token 200 in 126ms (next.js: 2ms, application-code: 124ms)
+[Socket] Connected: cmrhdzq7d0002whz58rqdkwy3 (STUDENT) - GuJfLlGNXIdizCZjAAAH
+[Socket] Disconnected: cmrhdzq7d0002whz58rqdkwy3 - 3KOSBt12AFhJ0_GzAAAF
+[Socket] Connected: cmrhdzq7d0002whz58rqdkwy3 (STUDENT) - fb3IwInZrB2tZuFAAAAJ
+[Socket] Disconnected: cmrhdzq7d0002whz58rqdkwy3 - fb3IwInZrB2tZuFAAAAJ
+ GET /student/exams/cmrizvx6k003u8a0mnmujhyp7/attempt 200 in 482ms (next.js: 9ms, application-code: 473ms)
+ GET /api/exams/cmrizvx6k003u8a0mnmujhyp7?withQuestions=true 200 in 1818ms (next.js: 6ms, application-code: 1813ms)
+ GET /api/socket/token 200 in 131ms (next.js: 2ms, application-code: 129ms)
+[Socket] Connected: cmrhdzq7d0002whz58rqdkwy3 (STUDENT) - JEsSjOAaaSyOIAnyAAAL
+ GET /api/socket/token 200 in 121ms (next.js: 2ms, application-code: 119ms)
+ GET /api/socket/token 200 in 143ms (next.js: 5ms, application-code: 138ms)
+[Socket] Connected: cmrhdzqx00003whz5ryga8cli (STUDENT) - oG5jRkRaPjhAikpZAAAN
+ GET /student/exams/cmrizvx6k003u8a0mnmujhyp7 404 in 1743ms (next.js: 419ms, application-code: 1324ms)
+ GET /student/exams/cmrizvx6k003u8a0mnmujhyp7/attempt 200 in 436ms (next.js: 7ms, application-code: 429ms)
+ GET /api/exams/cmrizvx6k003u8a0mnmujhyp7?withQuestions=true 200 in 2.0s (next.js: 7ms, application-code: 2.0s)
+ GET /api/socket/token 200 in 152ms (next.js: 6ms, application-code: 146ms)
+[Socket] Connected: cmrhdzq7d0002whz58rqdkwy3 (STUDENT) - ZcEsnleL3OUkyimhAAAR
+ GET /api/socket/token 200 in 133ms (next.js: 2ms, application-code: 131ms)
+[Socket] Disconnected: cmrhdzq7d0002whz58rqdkwy3 - ZcEsnleL3OUkyimhAAAR
+[Socket] Disconnected: cmrc1y6pb000rk2kdns7tepny - mOxQ26op5RDL92J3AAAD
+ GET /teacher/exams/cmrizvx6k003w8a0m3u42frfj/live 200 in 399ms (next.js: 9ms, application-code: 391ms)
+ GET /api/socket/token 200 in 129ms (next.js: 3ms, application-code: 126ms)
+[Socket] Connected: cmrc1y6pb000rk2kdns7tepny (TEACHER) - Q7gMj3xS4D-tgWKjAAAT
+ GET /api/exams/cmrizvx6k003w8a0m3u42frfj 200 in 1533ms (next.js: 6ms, application-code: 1527ms)
+ GET /student/exams/cmrizvx6k003w8a0m3u42frfj/attempt 200 in 434ms (next.js: 17ms, application-code: 417ms)
+ GET /api/exams/cmrizvx6k003w8a0m3u42frfj?withQuestions=true 200 in 2.6s (next.js: 11ms, application-code: 2.6s)
+ GET /api/socket/token 200 in 133ms (next.js: 4ms, application-code: 129ms)
+[Socket] Connected: cmrhdzq7d0002whz58rqdkwy3 (STUDENT) - XEgMRc2tJ0T2wgirAAAV
+[Socket] Disconnected: cmrhdzq7d0002whz58rqdkwy3 - XEgMRc2tJ0T2wgirAAAV
+ GET /student/exams/cmrizvx6k003w8a0m3u42frfj/attempt 200 in 433ms (next.js: 11ms, application-code: 422ms)
+ GET /api/exams/cmrizvx6k003w8a0m3u42frfj?withQuestions=true 200 in 1948ms (next.js: 12ms, application-code: 1936ms)
+[Socket] Disconnected: cmrc1y6pb000rk2kdns7tepny - Z0bcNAOW_lsJt8DrAAAB
+[Socket] Disconnected: cmrhdzq7d0002whz58rqdkwy3 - GuJfLlGNXIdizCZjAAAH
+[Socket] Disconnected: cmrhdzqx00003whz5ryga8cli - oG5jRkRaPjhAikpZAAAN
+[Socket] Disconnected: cmrc1y6pb000rk2kdns7tepny - Q7gMj3xS4D-tgWKjAAAT
+[Socket] Disconnected: cmrhdzq7d0002whz58rqdkwy3 - JEsSjOAaaSyOIAnyAAAL

@@ -1,0 +1,19 @@
+{
+  "method": "PATCH",
+  "url": "/api/exams/cmrhfhhoe001wz6zf59fziqr0",
+  "status": 409,
+  "json": {
+    "error": "Exam publication blocked by incomplete translation",
+    "completeness": {
+      "canPublish": false,
+      "requiredLanguageId": "cmrc1y4h10006k2kdse7x47oh",
+      "missingFields": [
+        {
+          "field": "options.2.text",
+          "message": "Option 3 text is required."
+        }
+      ]
+    }
+  },
+  "text": "{\"error\":\"Exam publication blocked by incomplete translation\",\"completeness\":{\"canPublish\":false,\"requiredLanguageId\":\"cmrc1y4h10006k2kdse7x47oh\",\"missingFields\":[{\"field\":\"options.2.text\",\"message\":\"Option 3 text is required.\"}]}}"
+}

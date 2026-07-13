@@ -1,0 +1,131 @@
+{
+  "generatedAt": "2026-07-13T16:58:09.870Z",
+  "status": "PASS",
+  "total": 9,
+  "passed": 9,
+  "failed": 0,
+  "results": [
+    {
+      "testId": "P10-BR-001",
+      "role": "Department Admin",
+      "precondition": "Authenticated department admin session exists.",
+      "steps": "Open the Phase 10 LMS admin page on desktop light mode.",
+      "expected": "The Enterprise LMS admin page renders successfully.",
+      "actual": "Admin LMS dashboard rendered.",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-10/evidence/browser/phase10-admin-lms.png",
+        "docs/phase-10/evidence/console/phase10-admin-lms.txt",
+        "docs/phase-10/evidence/network/phase10-admin-lms.txt"
+      ]
+    },
+    {
+      "testId": "P10-BR-002",
+      "role": "Department Admin",
+      "precondition": "A valid academic offering is available for the CSE department.",
+      "steps": "Create a Phase 10 LMS course with a lesson through the admin API.",
+      "expected": "Course creation succeeds and returns a lesson id.",
+      "actual": "status=201; courseId=cmrjgtnox0002hgaskh6bjez1; lessonId=cmrjgto7q0008hgasui20w0q6",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-10/evidence/network/phase10-browser-course-create.json"
+      ]
+    },
+    {
+      "testId": "P10-BR-003",
+      "role": "Teacher",
+      "precondition": "Authenticated teacher session exists for the same academic offering.",
+      "steps": "Open the teacher LMS workspace on desktop light mode.",
+      "expected": "The teaching workspace loads without critical UI failures.",
+      "actual": "Teacher LMS page rendered.",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-10/evidence/browser/phase10-teacher-lms.png",
+        "docs/phase-10/evidence/console/phase10-teacher-lms.txt",
+        "docs/phase-10/evidence/network/phase10-teacher-lms.txt"
+      ]
+    },
+    {
+      "testId": "P10-BR-004",
+      "role": "Teacher",
+      "precondition": "A Phase 10 lesson exists.",
+      "steps": "Upload learning material, attach a video asset, and publish the lesson.",
+      "expected": "Material upload, video creation, and publication all succeed.",
+      "actual": "material=201; video=201; publish=200",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-10/evidence/network/phase10-browser-material-upload.json",
+        "docs/phase-10/evidence/network/phase10-browser-video-create.json",
+        "docs/phase-10/evidence/network/phase10-browser-lesson-publish.json"
+      ]
+    },
+    {
+      "testId": "P10-BR-005",
+      "role": "Teacher",
+      "precondition": "The lesson has been published.",
+      "steps": "Schedule a live class for the published lesson.",
+      "expected": "The live class is created with a join url.",
+      "actual": "status=201; liveClassId=cmrjgu137000ihgasdk2iz1jb",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-10/evidence/network/phase10-browser-live-class.json"
+      ]
+    },
+    {
+      "testId": "P10-BR-006",
+      "role": "Student",
+      "precondition": "A published video lesson is available to the student.",
+      "steps": "Open the student LMS page on tablet dark mode, watch the video, and resume playback.",
+      "expected": "The course appears in the student LMS, and video progress persists across resumes.",
+      "actual": "pageHasCourse=true; first=200; resume=200; resumeCount=2",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-10/evidence/network/phase10-browser-video-progress-initial.json",
+        "docs/phase-10/evidence/network/phase10-browser-video-progress-resume.json",
+        "docs/phase-10/evidence/browser/phase10-student-lms-tablet.png",
+        "docs/phase-10/evidence/console/phase10-student-lms-tablet.txt",
+        "docs/phase-10/evidence/network/phase10-student-lms-tablet.txt"
+      ]
+    },
+    {
+      "testId": "P10-BR-007",
+      "role": "Student",
+      "precondition": "A live class has been scheduled for the lesson.",
+      "steps": "Join the live class and update learning progress.",
+      "expected": "Attendance and lesson progress are recorded successfully.",
+      "actual": "join=200; lessonProgress=200; attendance=ATTENDED",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-10/evidence/network/phase10-browser-live-join.json",
+        "docs/phase-10/evidence/network/phase10-browser-lesson-progress.json"
+      ]
+    },
+    {
+      "testId": "P10-BR-008",
+      "role": "Student",
+      "precondition": "The student can access the lesson discussion area.",
+      "steps": "Create a discussion thread and post a reply.",
+      "expected": "Both discussion actions succeed and are persisted.",
+      "actual": "thread=201; reply=201",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-10/evidence/network/phase10-browser-discussion-thread.json",
+        "docs/phase-10/evidence/network/phase10-browser-discussion-reply.json"
+      ]
+    },
+    {
+      "testId": "P10-BR-009",
+      "role": "Student",
+      "precondition": "The student has created progress and discussion data for the course.",
+      "steps": "Open the course detail page on mobile dark mode and inspect persisted progress data.",
+      "expected": "The mobile course page renders, and progress/discussion records are present.",
+      "actual": "pageHasLesson=true; progressRows=1; threadReplies=1",
+      "status": "PASS",
+      "evidencePaths": [
+        "docs/phase-10/evidence/browser/phase10-student-course-mobile.png",
+        "docs/phase-10/evidence/console/phase10-student-course-mobile.txt",
+        "docs/phase-10/evidence/network/phase10-student-course-mobile.txt"
+      ]
+    }
+  ]
+}

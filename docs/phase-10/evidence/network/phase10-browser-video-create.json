@@ -1,0 +1,23 @@
+{
+  "method": "POST",
+  "url": "/api/teacher/lms/lessons/cmrjgto7q0008hgasui20w0q6/videos",
+  "status": 201,
+  "json": {
+    "id": "cmrjgtvli000chgaseyrj68f6",
+    "lessonId": "cmrjgto7q0008hgasui20w0q6",
+    "title": "Phase 10 Video",
+    "sourceType": "UPLOAD",
+    "fileName": "phase10-video.mp4",
+    "fileUrl": "D:\\Public\\exam-system-online\\.generated\\phase-10\\videos\\1783961858355-b98490f6-phase10-video.mp4",
+    "externalUrl": null,
+    "streamingUrl": null,
+    "durationSeconds": 600,
+    "thumbnailUrl": "https://example.com/phase10-video.png",
+    "captions": null,
+    "metadata": null,
+    "isPublished": false,
+    "createdAt": "2026-07-13T16:57:38.358Z",
+    "updatedAt": "2026-07-13T16:57:38.358Z"
+  },
+  "text": "{\"id\":\"cmrjgtvli000chgaseyrj68f6\",\"lessonId\":\"cmrjgto7q0008hgasui20w0q6\",\"title\":\"Phase 10 Video\",\"sourceType\":\"UPLOAD\",\"fileName\":\"phase10-video.mp4\",\"fileUrl\":\"D:\\\\Public\\\\exam-system-online\\\\.generated\\\\phase-10\\\\videos\\\\1783961858355-b98490f6-phase10-video.mp4\",\"externalUrl\":null,\"streamingUrl\":null,\"durationSeconds\":600,\"thumbnailUrl\":\"https://example.com/phase10-video.png\",\"captions\":null,\"metadata\":null,\"isPublished\":false,\"createdAt\":\"2026-07-13T16:57:38.358Z\",\"updatedAt\":\"2026-07-13T16:57:38.358Z\"}"
+}

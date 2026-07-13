@@ -1,0 +1,15 @@
+[DB] Skipping Prisma db push because AUTO_DB_PUSH is not enabled
+[Phase6][Redis] Connecting runtime store to redis://127.0.0.1:56315 (timeout=15000ms)
+[Phase6][Redis] Runtime store connected to redis://127.0.0.1:56315
+[Phase6] Socket runtime initialized in redis mode (instance=f09552c7-a39e-4cee-ab69-8b56b97db74a)
+
+╔════════════════════════════════════════╗
+║      ExamFlow Pro is running! 🎓      ║
+╠════════════════════════════════════════╣
+║  URL:    http://127.0.0.1:3223         ║
+║  Mode:   Production               ║
+║  Socket: Enabled (ws://127.0.0.1:3223) ║
+╚════════════════════════════════════════╝
+    
+[Socket] Connected: cmrhzhll9004a42f01pvo68hg (STUDENT) - iDykPRA3DWrnwD4-AAAB
+[Socket] Disconnected: cmrhzhll9004a42f01pvo68hg - iDykPRA3DWrnwD4-AAAB

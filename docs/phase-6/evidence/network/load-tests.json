@@ -1,0 +1,440 @@
+{
+  "executedAt": "2026-07-13T08:38:38.365Z",
+  "status": "PASS",
+  "thresholds": {
+    "connectionSuccessRateMin": 95,
+    "joinSuccessRateMin": 95,
+    "saveSuccessRateMin": 95,
+    "submitSuccessRateMin": 95,
+    "maxDuplicateRecords": 0
+  },
+  "stageTimeoutsMs": {
+    "connect": 5000,
+    "join": 20000,
+    "start": 30000,
+    "save": 10000,
+    "heartbeat": 5000,
+    "submit": 10000
+  },
+  "batchConfig": {
+    "connect": {
+      "size": 50,
+      "delayMs": 40
+    },
+    "join": {
+      "size": 25,
+      "delayMs": 75
+    },
+    "start": {
+      "size": 10,
+      "delayMs": 100
+    },
+    "save": {
+      "size": 20,
+      "delayMs": 40
+    },
+    "heartbeat": {
+      "size": 20,
+      "delayMs": 25
+    },
+    "submit": {
+      "size": 20,
+      "delayMs": 40
+    }
+  },
+  "scenarios": {
+    "run10": {
+      "label": "run10",
+      "attemptedClients": 10,
+      "connectedClients": 10,
+      "successfulJoins": 10,
+      "successfulStarts": 10,
+      "successfulSaves": 10,
+      "successfulHeartbeats": 10,
+      "successfulSubmits": 10,
+      "connectionSuccessRate": 100,
+      "joinSuccessRate": 100,
+      "saveSuccessRate": 100,
+      "submitSuccessRate": 100,
+      "errorCountByStage": {},
+      "errorCountByCode": {},
+      "joinFailureByCode": {},
+      "submitFailureByCode": {},
+      "errorRate": 0,
+      "latencyMs": {
+        "connect": {
+          "count": 10,
+          "p50": 31,
+          "p95": 32,
+          "p99": 32
+        },
+        "join": {
+          "count": 10,
+          "p50": 774,
+          "p95": 774,
+          "p99": 774
+        },
+        "start": {
+          "count": 10,
+          "p50": 4269,
+          "p95": 4801,
+          "p99": 4801
+        },
+        "save": {
+          "count": 10,
+          "p50": 1131,
+          "p95": 1230,
+          "p99": 1230
+        },
+        "heartbeat": {
+          "count": 10,
+          "p50": 343,
+          "p95": 426,
+          "p99": 426
+        },
+        "submit": {
+          "count": 10,
+          "p50": 1057,
+          "p95": 1074,
+          "p99": 1074
+        }
+      },
+      "eventLoopLagMs": {
+        "p50": 32.65,
+        "p95": 35.06,
+        "p99": 35.65,
+        "max": 36.14
+      },
+      "incompleteMetrics": false,
+      "sampleErrors": []
+    },
+    "run25": {
+      "label": "run25",
+      "attemptedClients": 25,
+      "connectedClients": 25,
+      "successfulJoins": 25,
+      "successfulStarts": 25,
+      "successfulSaves": 25,
+      "successfulHeartbeats": 25,
+      "successfulSubmits": 25,
+      "connectionSuccessRate": 100,
+      "joinSuccessRate": 100,
+      "saveSuccessRate": 100,
+      "submitSuccessRate": 100,
+      "errorCountByStage": {},
+      "errorCountByCode": {},
+      "joinFailureByCode": {},
+      "submitFailureByCode": {},
+      "errorRate": 0,
+      "latencyMs": {
+        "connect": {
+          "count": 25,
+          "p50": 49,
+          "p95": 51,
+          "p99": 52
+        },
+        "join": {
+          "count": 25,
+          "p50": 928,
+          "p95": 1048,
+          "p99": 1057
+        },
+        "start": {
+          "count": 25,
+          "p50": 3383,
+          "p95": 3795,
+          "p99": 3832
+        },
+        "save": {
+          "count": 25,
+          "p50": 2319,
+          "p95": 2429,
+          "p99": 2429
+        },
+        "heartbeat": {
+          "count": 25,
+          "p50": 568,
+          "p95": 719,
+          "p99": 757
+        },
+        "submit": {
+          "count": 25,
+          "p50": 1700,
+          "p95": 2624,
+          "p99": 2725
+        }
+      },
+      "eventLoopLagMs": {
+        "p50": 32.62,
+        "p95": 34.77,
+        "p99": 35.36,
+        "max": 35.91
+      },
+      "incompleteMetrics": false,
+      "sampleErrors": []
+    },
+    "run100": {
+      "label": "run100",
+      "attemptedClients": 100,
+      "connectedClients": 100,
+      "successfulJoins": 100,
+      "successfulStarts": 100,
+      "successfulSaves": 100,
+      "successfulHeartbeats": 100,
+      "successfulSubmits": 100,
+      "connectionSuccessRate": 100,
+      "joinSuccessRate": 100,
+      "saveSuccessRate": 100,
+      "submitSuccessRate": 100,
+      "errorCountByStage": {},
+      "errorCountByCode": {},
+      "joinFailureByCode": {},
+      "submitFailureByCode": {},
+      "errorRate": 0,
+      "latencyMs": {
+        "connect": {
+          "count": 100,
+          "p50": 70,
+          "p95": 74,
+          "p99": 74
+        },
+        "join": {
+          "count": 100,
+          "p50": 1580,
+          "p95": 1773,
+          "p99": 1784
+        },
+        "start": {
+          "count": 100,
+          "p50": 3284,
+          "p95": 3945,
+          "p99": 4071
+        },
+        "save": {
+          "count": 100,
+          "p50": 2246,
+          "p95": 2447,
+          "p99": 2466
+        },
+        "heartbeat": {
+          "count": 100,
+          "p50": 674,
+          "p95": 787,
+          "p99": 850
+        },
+        "submit": {
+          "count": 100,
+          "p50": 5766,
+          "p95": 6051,
+          "p99": 6094
+        }
+      },
+      "eventLoopLagMs": {
+        "p50": 32.57,
+        "p95": 34.77,
+        "p99": 35.65,
+        "max": 58.29
+      },
+      "incompleteMetrics": false,
+      "sampleErrors": []
+    },
+    "run250": {
+      "label": "run250",
+      "attemptedClients": 250,
+      "connectedClients": 250,
+      "successfulJoins": 250,
+      "successfulStarts": 250,
+      "successfulSaves": 250,
+      "successfulHeartbeats": 250,
+      "successfulSubmits": 250,
+      "connectionSuccessRate": 100,
+      "joinSuccessRate": 100,
+      "saveSuccessRate": 100,
+      "submitSuccessRate": 100,
+      "errorCountByStage": {},
+      "errorCountByCode": {},
+      "joinFailureByCode": {},
+      "submitFailureByCode": {},
+      "errorRate": 0,
+      "latencyMs": {
+        "connect": {
+          "count": 250,
+          "p50": 68,
+          "p95": 81,
+          "p99": 88
+        },
+        "join": {
+          "count": 250,
+          "p50": 1697,
+          "p95": 6391,
+          "p99": 6391
+        },
+        "start": {
+          "count": 250,
+          "p50": 3349,
+          "p95": 3559,
+          "p99": 4029
+        },
+        "save": {
+          "count": 250,
+          "p50": 2315,
+          "p95": 2466,
+          "p99": 2475
+        },
+        "heartbeat": {
+          "count": 250,
+          "p50": 717,
+          "p95": 850,
+          "p99": 868
+        },
+        "submit": {
+          "count": 250,
+          "p50": 6206,
+          "p95": 6508,
+          "p99": 6587
+        }
+      },
+      "eventLoopLagMs": {
+        "p50": 32.57,
+        "p95": 34.73,
+        "p99": 35.62,
+        "max": 62.91
+      },
+      "incompleteMetrics": false,
+      "sampleErrors": []
+    },
+    "run500": {
+      "label": "run500",
+      "attemptedClients": 500,
+      "connectedClients": 500,
+      "successfulJoins": 500,
+      "successfulStarts": 500,
+      "successfulSaves": 500,
+      "successfulHeartbeats": 500,
+      "successfulSubmits": 500,
+      "connectionSuccessRate": 100,
+      "joinSuccessRate": 100,
+      "saveSuccessRate": 100,
+      "submitSuccessRate": 100,
+      "errorCountByStage": {},
+      "errorCountByCode": {},
+      "joinFailureByCode": {},
+      "submitFailureByCode": {},
+      "errorRate": 0,
+      "latencyMs": {
+        "connect": {
+          "count": 500,
+          "p50": 47,
+          "p95": 81,
+          "p99": 86
+        },
+        "join": {
+          "count": 500,
+          "p50": 1677,
+          "p95": 2094,
+          "p99": 6149
+        },
+        "start": {
+          "count": 500,
+          "p50": 3365,
+          "p95": 3981,
+          "p99": 4257
+        },
+        "save": {
+          "count": 500,
+          "p50": 2328,
+          "p95": 2484,
+          "p99": 2552
+        },
+        "heartbeat": {
+          "count": 500,
+          "p50": 749,
+          "p95": 866,
+          "p99": 908
+        },
+        "submit": {
+          "count": 500,
+          "p50": 6119,
+          "p95": 6720,
+          "p99": 6832
+        }
+      },
+      "eventLoopLagMs": {
+        "p50": 32.44,
+        "p95": 34.73,
+        "p99": 35.62,
+        "max": 69.27
+      },
+      "incompleteMetrics": false,
+      "sampleErrors": []
+    },
+    "reconnectStorm": {
+      "attemptedClients": 25,
+      "reconnectCycles": 3,
+      "successfulReconnects": 75,
+      "errorCountByStage": {},
+      "errorCountByCode": {},
+      "sampleErrors": []
+    },
+    "duplicateSaveStorm": {
+      "attemptedClients": 40,
+      "duplicateAnswerGroups": 0,
+      "errorCountByStage": {},
+      "errorCountByCode": {}
+    },
+    "duplicateSubmitStorm": {
+      "attemptedClients": 40,
+      "beforeDuplicateLogs": 40,
+      "afterDuplicateLogs": 40,
+      "noDuplicateSubmitSideEffects": true,
+      "errorCountByStage": {},
+      "errorCountByCode": {}
+    },
+    "heartbeatLoad": {
+      "attemptedClients": 60,
+      "successfulHeartbeats": 60,
+      "errorCountByStage": {},
+      "errorCountByCode": {}
+    },
+    "teacherMonitorFanOut": {
+      "attemptedMonitorSockets": 5,
+      "initialMonitorReceipts": 5
+    }
+  },
+  "metrics": {
+    "databaseHealthBeforeStart": "ok",
+    "redisHealthBeforeStart": "PONG",
+    "serverStats": {
+      "before100": {
+        "cpuSeconds": 14.8,
+        "workingSetMb": 259.34,
+        "handles": 341
+      },
+      "after100": {
+        "cpuSeconds": 34.48,
+        "workingSetMb": 347.19,
+        "handles": 359
+      },
+      "after500": {
+        "cpuSeconds": 184.89,
+        "workingSetMb": 558.48,
+        "handles": 358
+      }
+    },
+    "redisUsage": {
+      "memory": "# Memory\r\nused_memory:3037752\r\nused_memory_human:2.90M\r\nused_memory_rss:2999032\r\nused_memory_rss_human:2.86M\r\nused_memory_peak:12853960\r\nused_memory_peak_human:12.26M\r\nused_memory_peak_perc:23.63%\r\nused_memory_overhead:992872\r\nused_memory_startup:762512\r\nused_memory_dataset:2044880\r\nused_memory_dataset_perc:89.88%\r\nallocator_allocated:2999032\r\nallocator_active:2999032\r\nallocator_resident:2999032\r\nallocator_muzzy:0\r\ntotal_system_memory:17179869184\r\ntotal_system_memory_human:16.00G\r\nused_memory_lua:36864\r\nused_memory_vm_eval:36864\r\nused_memory_lua_human:36.00K\r\nused_memory_scripts_eval:816\r\nnumber_of_cached_scripts:2\r\nnumber_of_functions:0\r\nnumber_of_libraries:0\r\nused_memory_vm_functions:33792\r\nused_memory_vm_total:70656\r\nused_memory_vm_total_human:69.00K\r\nused_memory_functions:200\r\nused_memory_scripts:1016\r\nused_memory_scripts_human:1016B\r\nmaxmemory:8589934592\r\nmaxmemory_human:8.00G\r\nmaxmemory_policy:noeviction\r\nallocator_frag_ratio:1.00\r\nallocator_frag_bytes:0\r\nallocator_rss_ratio:1.00\r\nallocator_rss_bytes:0\r\nrss_overhead_ratio:1.00\r\nrss_overhead_bytes:0\r\nmem_fragmentation_ratio:1.00\r\nmem_fragmentation_bytes:0\r\nmem_not_counted_for_evict:0\r\nmem_replication_backlog:0\r\nmem_total_replication_buffers:0\r\nmem_clients_slaves:0\r\nmem_clients_normal:66736\r\nmem_cluster_links:0\r\nmem_aof_buffer:0\r\nmem_allocator:jemalloc-3.6.0\r\nmem_overhead_db_hashtable_rehashing:0\r\nactive_defrag_running:0\r\nlazyfree_pending_objects:0\r\nlazyfreed_objects:0\r\n",
+      "stats": "# Stats\r\ntotal_connections_received:7\r\ntotal_commands_processed:233596\r\ninstantaneous_ops_per_sec:154\r\ntotal_net_input_bytes:737321232\r\ntotal_net_output_bytes:1759060810\r\ntotal_net_repl_input_bytes:0\r\ntotal_net_repl_output_bytes:0\r\ninstantaneous_input_kbps:35.55\r\ninstantaneous_output_kbps:38.26\r\ninstantaneous_input_repl_kbps:0.00\r\ninstantaneous_output_repl_kbps:0.00\r\nrejected_connections:0\r\nsync_full:0\r\nsync_partial_ok:0\r\nsync_partial_err:0\r\nexpired_subkeys:0\r\nexpired_keys:730\r\nexpired_stale_perc:0.00\r\nexpired_time_cap_reached_count:0\r\nexpire_cycle_cpu_milliseconds:150\r\nevicted_keys:0\r\nevicted_clients:0\r\nevicted_scripts:0\r\ntotal_eviction_exceeded_time:0\r\ncurrent_eviction_exceeded_time:0\r\nkeyspace_hits:18998\r\nkeyspace_misses:5819\r\npubsub_channels:3\r\npubsub_patterns:1\r\npubsubshard_channels:0\r\nlatest_fork_usec:0\r\ntotal_forks:0\r\nmigrate_cached_sockets:0\r\nslave_expires_tracked_keys:0\r\nactive_defrag_hits:0\r\nactive_defrag_misses:0\r\nactive_defrag_key_hits:0\r\nactive_defrag_key_misses:0\r\ntotal_active_defrag_time:0\r\ncurrent_active_defrag_time:0\r\ntracking_total_keys:0\r\ntracking_total_items:0\r\ntracking_total_prefixes:0\r\nunexpected_error_replies:0\r\ntotal_error_replies:7\r\ndump_payload_sanitizations:0\r\ntotal_reads_processed:31571\r\ntotal_writes_processed:357273\r\nio_threaded_reads_processed:0\r\nio_threaded_writes_processed:0\r\nclient_query_buffer_limit_disconnections:0\r\nclient_output_buffer_limit_disconnections:0\r\nreply_buffer_shrinks:302\r\nreply_buffer_expands:1077\r\neventloop_cycles:385077\r\neventloop_duration_sum:8970942\r\neventloop_duration_cmd_sum:1410022\r\ninstantaneous_eventloop_cycles_per_sec:26\r\ninstantaneous_eventloop_duration_usec:72\r\nacl_access_denied_auth:0\r\nacl_access_denied_cmd:0\r\nacl_access_denied_key:0\r\nacl_access_denied_channel:0\r\n"
+    },
+    "finalServerStats": {
+      "cpuSeconds": 210.92,
+      "workingSetMb": 542.92,
+      "handles": 358
+    },
+    "duplicateRecords": {
+      "answerGroups": 0,
+      "attemptGroups": 0
+    }
+  },
+  "bottleneck": null,
+  "notes": []
+}

@@ -1,0 +1,80 @@
+{
+  "verifyQr": {
+    "ok": true,
+    "status": 200,
+    "json": {
+      "valid": true,
+      "verificationType": "QR",
+      "student": {
+        "name": "P5 Russian Student",
+        "email": "p5.russian.student@examflow.pro",
+        "department": "Computer Science & Engineering"
+      },
+      "session": {
+        "name": "Phase 8 Browser Final Session",
+        "type": "FINAL",
+        "status": "PUBLISHED"
+      },
+      "seats": [
+        {
+          "subject": "Programming Fundamentals",
+          "room": "Phase 8 Hall A",
+          "building": "Phase 8 Browser Building",
+          "campus": "Phase 8 Browser Campus 1783955979210",
+          "seatNumber": "A1",
+          "barcode": "BAR-zxnt1g-waw7db-1",
+          "qrCode": "QR-zxnt1g-waw7db-1"
+        }
+      ]
+    },
+    "text": "{\"valid\":true,\"verificationType\":\"QR\",\"student\":{\"name\":\"P5 Russian Student\",\"email\":\"p5.russian.student@examflow.pro\",\"department\":\"Computer Science & Engineering\"},\"session\":{\"name\":\"Phase 8 Browser Final Session\",\"type\":\"FINAL\",\"status\":\"PUBLISHED\"},\"seats\":[{\"subject\":\"Programming Fundamentals\",\"room\":\"Phase 8 Hall A\",\"building\":\"Phase 8 Browser Building\",\"campus\":\"Phase 8 Browser Campus 1783955979210\",\"seatNumber\":\"A1\",\"barcode\":\"BAR-zxnt1g-waw7db-1\",\"qrCode\":\"QR-zxnt1g-waw7db-1\"}]}"
+  },
+  "verifyBad": {
+    "ok": false,
+    "status": 404,
+    "json": {
+      "error": "Verification token is invalid"
+    },
+    "text": "{\"error\":\"Verification token is invalid\"}"
+  },
+  "attendanceMark": {
+    "ok": true,
+    "status": 200,
+    "json": {
+      "id": "cmrjddaa2001m1jokkieveg7r",
+      "scheduleItemId": "cmrjdcg8h000o1jokl9zxnt1g",
+      "studentId": "cmrhdzsao000bwhz5n1waw7db",
+      "roomId": "cmrjdbyc500091jok0anrm87w",
+      "seatAssignmentId": "cmrjdcmt0000x1jokjlgx06o3",
+      "markedByUserId": "cmrc1y67t000qk2kdsntvvukr",
+      "status": "PRESENT",
+      "method": "QR",
+      "markedAt": "2026-07-13T15:20:45.386Z",
+      "arrivedAt": null,
+      "notes": null,
+      "createdAt": "2026-07-13T15:20:45.386Z",
+      "updatedAt": "2026-07-13T15:20:45.386Z"
+    },
+    "text": "{\"id\":\"cmrjddaa2001m1jokkieveg7r\",\"scheduleItemId\":\"cmrjdcg8h000o1jokl9zxnt1g\",\"studentId\":\"cmrhdzsao000bwhz5n1waw7db\",\"roomId\":\"cmrjdbyc500091jok0anrm87w\",\"seatAssignmentId\":\"cmrjdcmt0000x1jokjlgx06o3\",\"markedByUserId\":\"cmrc1y67t000qk2kdsntvvukr\",\"status\":\"PRESENT\",\"method\":\"QR\",\"markedAt\":\"2026-07-13T15:20:45.386Z\",\"arrivedAt\":null,\"notes\":null,\"createdAt\":\"2026-07-13T15:20:45.386Z\",\"updatedAt\":\"2026-07-13T15:20:45.386Z\"}"
+  },
+  "attendanceCorrection": {
+    "ok": true,
+    "status": 200,
+    "json": {
+      "id": "cmrjddaa2001m1jokkieveg7r",
+      "scheduleItemId": "cmrjdcg8h000o1jokl9zxnt1g",
+      "studentId": "cmrhdzsao000bwhz5n1waw7db",
+      "roomId": "cmrjdbyc500091jok0anrm87w",
+      "seatAssignmentId": "cmrjdcmt0000x1jokjlgx06o3",
+      "markedByUserId": "cmrc1y67t000qk2kdsntvvukr",
+      "status": "LATE",
+      "method": "MANUAL",
+      "markedAt": "2026-07-13T15:20:46.599Z",
+      "arrivedAt": null,
+      "notes": "Student arrived after identity verification delay",
+      "createdAt": "2026-07-13T15:20:45.386Z",
+      "updatedAt": "2026-07-13T15:20:46.601Z"
+    },
+    "text": "{\"id\":\"cmrjddaa2001m1jokkieveg7r\",\"scheduleItemId\":\"cmrjdcg8h000o1jokl9zxnt1g\",\"studentId\":\"cmrhdzsao000bwhz5n1waw7db\",\"roomId\":\"cmrjdbyc500091jok0anrm87w\",\"seatAssignmentId\":\"cmrjdcmt0000x1jokjlgx06o3\",\"markedByUserId\":\"cmrc1y67t000qk2kdsntvvukr\",\"status\":\"LATE\",\"method\":\"MANUAL\",\"markedAt\":\"2026-07-13T15:20:46.599Z\",\"arrivedAt\":null,\"notes\":\"Student arrived after identity verification delay\",\"createdAt\":\"2026-07-13T15:20:45.386Z\",\"updatedAt\":\"2026-07-13T15:20:46.601Z\"}"
+  }
+}

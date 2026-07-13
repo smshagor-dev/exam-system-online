@@ -1,4 +1,5 @@
 import { requireRole } from '@/lib/auth'
+import { resolveExamTranslation } from '@/lib/academic-content'
 import { prisma } from '@/lib/prisma'
 import { UserRole } from '@prisma/client'
 import Link from 'next/link'
@@ -24,6 +25,7 @@ export default async function StudentExamDetailPage({ params }: PageProps) {
   const exam = await prisma.exam.findUnique({
     where: { id },
     include: {
+      translations: true,
       subject: true,
       language: true,
       group: true,
@@ -35,6 +37,7 @@ export default async function StudentExamDetailPage({ params }: PageProps) {
   })
 
   if (!exam) notFound()
+  const resolvedExam = resolveExamTranslation(exam, exam.languageId)
 
   const attempt = await prisma.studentExamAttempt.findUnique({
     where: {
@@ -49,7 +52,7 @@ export default async function StudentExamDetailPage({ params }: PageProps) {
   const hasStarted = now >= exam.startTime
   const hasEnded = now > exam.endTime
   const isAvailableNow =
-    (exam.status === 'SCHEDULED' || exam.status === 'LIVE') && hasStarted && !hasEnded
+    (resolvedExam.status === 'SCHEDULED' || resolvedExam.status === 'LIVE') && hasStarted && !hasEnded
   const inProgressAttempt = attempt?.status === 'IN_PROGRESS'
 
   return (
@@ -76,27 +79,27 @@ export default async function StudentExamDetailPage({ params }: PageProps) {
         </div>
 
         <div className="p-6">
-          <h1 className="mb-1 text-2xl font-bold text-gray-900">{exam.title}</h1>
-          {exam.description && <p className="mb-4 text-gray-500">{exam.description}</p>}
+          <h1 className="mb-1 text-2xl font-bold text-gray-900">{resolvedExam.title}</h1>
+          {resolvedExam.description && <p className="mb-4 text-gray-500">{resolvedExam.description}</p>}
 
           <div className="mb-6 grid grid-cols-2 gap-4">
-            <InfoItem label="Subject" value={exam.subject.name} />
-            <InfoItem label="Department Language" value={exam.language.name} />
-            <InfoItem label="Group" value={exam.group.name} />
-            <InfoItem label="Academic Year" value={exam.academicYear.name} />
-            <InfoItem label="Semester" value={exam.semester.name} />
-            <InfoItem label="Duration" value={`${exam.duration} minutes`} />
-            <InfoItem label="Total Marks" value={String(exam.totalMarks)} />
-            <InfoItem label="Passing Marks" value={String(exam.passingMarks)} />
-            <InfoItem label="Questions" value={String(exam._count.questions)} />
-            <InfoItem label="Start Time" value={new Date(exam.startTime).toLocaleString()} />
-            <InfoItem label="End Time" value={new Date(exam.endTime).toLocaleString()} />
+            <InfoItem label="Subject" value={resolvedExam.subject.name} />
+            <InfoItem label="Department Language" value={resolvedExam.language.name} />
+            <InfoItem label="Group" value={resolvedExam.group.name} />
+            <InfoItem label="Academic Year" value={resolvedExam.academicYear.name} />
+            <InfoItem label="Semester" value={resolvedExam.semester.name} />
+            <InfoItem label="Duration" value={`${resolvedExam.duration} minutes`} />
+            <InfoItem label="Total Marks" value={String(resolvedExam.totalMarks)} />
+            <InfoItem label="Passing Marks" value={String(resolvedExam.passingMarks)} />
+            <InfoItem label="Questions" value={String(resolvedExam._count.questions)} />
+            <InfoItem label="Start Time" value={new Date(resolvedExam.startTime).toLocaleString()} />
+            <InfoItem label="End Time" value={new Date(resolvedExam.endTime).toLocaleString()} />
           </div>
 
-          {exam.instructions && (
+          {resolvedExam.instructions && (
             <div className="mb-6 rounded-xl bg-blue-50 p-4">
               <p className="mb-1 text-sm font-semibold text-blue-900">Instructions</p>
-              <p className="whitespace-pre-line text-sm text-blue-800">{exam.instructions}</p>
+              <p className="whitespace-pre-line text-sm text-blue-800">{resolvedExam.instructions}</p>
             </div>
           )}
 
@@ -118,7 +121,7 @@ export default async function StudentExamDetailPage({ params }: PageProps) {
               <div className="rounded-xl bg-blue-50 py-4 text-center">
                 <p className="font-medium text-blue-800">Exam starts at:</p>
                 <p className="mt-1 text-lg font-bold text-blue-900">
-                  {new Date(exam.startTime).toLocaleString()}
+                  {new Date(resolvedExam.startTime).toLocaleString()}
                 </p>
               </div>
             ) : (

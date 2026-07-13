@@ -1,0 +1,36 @@
+[DB] Skipping Prisma db push because AUTO_DB_PUSH is not enabled
+Creating turbopack project { dir: 'D:\\Public\\exam-system-online', testMode: true }
+[Phase6][Redis] Connecting runtime store to redis://127.0.0.1:65476 (timeout=30000ms)
+[Phase6][Redis] Runtime store connected to redis://127.0.0.1:65476
+[Phase6] Socket runtime initialized in redis mode (instance=4bf14786-1e48-41f1-b7cd-da932614b1f5)
+
+╔════════════════════════════════════════╗
+║      ExamFlow Pro is running! 🎓      ║
+╠════════════════════════════════════════╣
+║  URL:    http://127.0.0.1:3250         ║
+║  Mode:   Development              ║
+║  Socket: Enabled (ws://127.0.0.1:3250) ║
+╚════════════════════════════════════════╝
+    
+ GET /api/auth/csrf 200 in 1563ms (next.js: 1512ms, application-code: 51ms)
+ POST /api/auth/callback/credentials 302 in 690ms (next.js: 13ms, application-code: 677ms)
+ GET / 307 in 2.4s (next.js: 1084ms, application-code: 1270ms)
+ GET /login 200 in 883ms (next.js: 73ms, application-code: 810ms)
+ GET /api/auth/csrf 200 in 24ms (next.js: 13ms, application-code: 11ms)
+ POST /api/auth/callback/credentials 302 in 662ms (next.js: 1994µs, application-code: 660ms)
+ GET / 307 in 412ms (next.js: 4ms, application-code: 407ms)
+ GET /login 200 in 934ms (next.js: 3ms, application-code: 931ms)
+ GET /api/auth/csrf 200 in 18ms (next.js: 10ms, application-code: 9ms)
+ POST /api/auth/callback/credentials 302 in 630ms (next.js: 3ms, application-code: 627ms)
+ GET / 307 in 388ms (next.js: 6ms, application-code: 382ms)
+ GET /login 200 in 389ms (next.js: 1710µs, application-code: 387ms)
+ GET /api/auth/csrf 200 in 25ms (next.js: 14ms, application-code: 11ms)
+ POST /api/auth/callback/credentials 302 in 660ms (next.js: 4ms, application-code: 657ms)
+ GET / 307 in 416ms (next.js: 4ms, application-code: 411ms)
+ GET /login 200 in 421ms (next.js: 4ms, application-code: 417ms)
+ POST /api/admin/lms/courses 201 in 3.2s (next.js: 430ms, application-code: 2.8s)
+ POST /api/admin/lms/courses 201 in 3.4s (next.js: 3ms, application-code: 3.4s)
+ POST /api/admin/lms/courses 403 in 282ms (next.js: 4ms, application-code: 279ms)
+ POST /api/admin/lms/courses 403 in 431ms (next.js: 4ms, application-code: 427ms)
+ GET /api/admin/lms/courses?departmentId=cmrc1y4pr000ck2kd4d7vqcwq 403 in 248ms (next.js: 7ms, application-code: 242ms)
+ POST /api/teacher/lms/lessons/cmrjgvtsb000haj6u3tmb8qo1/publish 200 in 4.5s (next.js: 1135ms, application-code: 3.3s)

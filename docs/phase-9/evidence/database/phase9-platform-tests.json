@@ -1,0 +1,75 @@
+{
+  "status": "PASS",
+  "generatedAt": "2026-07-13T16:25:15.335Z",
+  "officerAssignmentId": "cmrjfnlh60001yn8tud2y1lnd",
+  "gradebookId": "cmrjfnlzs0003yn8tnvufxh0u",
+  "calculation": {
+    "gradebookId": "cmrjfnlzs0003yn8tnvufxh0u",
+    "calculatedCount": 2
+  },
+  "resultRecordId": "cmrjfno5h000byn8tn09hedgi",
+  "resultTransitions": [
+    "VERIFIED",
+    "MODERATED",
+    "APPROVED",
+    "PUBLISHED"
+  ],
+  "publicationLockMessage": "Gradebook is locked after publication",
+  "degreeAudit": {
+    "id": "cmrjfo02s000vyn8tepx8greh",
+    "isEligible": true,
+    "requiredCredits": 0,
+    "completedCredits": 0,
+    "currentCgpa": 3.25
+  },
+  "graduation": {
+    "candidateId": "cmrjfo0hj000xyn8tjvnov0n8",
+    "approvedStatus": "APPROVED",
+    "certifiedStatus": "CERTIFIED",
+    "graduationId": "cmrjf3aof0012gwks9vbjwib9"
+  },
+  "transcript": {
+    "id": "cmrjfo4rz0010yn8tvjsmap19",
+    "verificationCode": "TRX-mrjfo4rr-2f98f15d",
+    "filePath": "D:\\Public\\exam-system-online\\.generated\\phase-9\\transcripts\\TRX-mrjfo4rr-2f98f15d.pdf"
+  },
+  "marksheet": {
+    "id": "cmrjfo5od0012yn8t20m4ewux",
+    "verificationCode": "MRK-mrjfo5o7-0cb85c82",
+    "filePath": "D:\\Public\\exam-system-online\\.generated\\phase-9\\marksheets\\MRK-mrjfo5o7-0cb85c82.pdf"
+  },
+  "certificate": {
+    "id": "cmrjfo6fi0014yn8tdfsm8n1p",
+    "certificateNumber": "CERT-mrjfo6fb-978ee4ad",
+    "verificationCode": "VC-mrjfo6fb-d3328c8b",
+    "filePath": "D:\\Public\\exam-system-online\\.generated\\phase-9\\certificates\\VC-mrjfo6fb-d3328c8b.pdf"
+  },
+  "appeal": {
+    "id": "cmrjfo6p00016yn8tqy0zwyjp",
+    "status": "RESOLVED",
+    "reviewedAt": "2026-07-13T16:25:13.608Z"
+  },
+  "analytics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 8,
+    "passRate": 0,
+    "failureRate": 100,
+    "averageCgpa": 0,
+    "averageGpa": 0
+  },
+  "verifications": {
+    "transcript": {
+      "type": "transcript",
+      "valid": true,
+      "holder": "P5 Russian Student",
+      "generatedAt": "2026-07-13T16:25:10.703Z"
+    },
+    "certificate": {
+      "type": "certificate",
+      "valid": true,
+      "holder": "P5 Russian Student",
+      "generatedAt": "2026-07-13T16:25:12.847Z"
+    }
+  }
+}

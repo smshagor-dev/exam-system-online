@@ -1,0 +1,104 @@
+[DB] Skipping Prisma db push because AUTO_DB_PUSH is not enabled
+[Phase6][Redis] Connecting runtime store to redis://127.0.0.1:50063 (timeout=30000ms)
+[Phase6][Redis] Runtime store connected to redis://127.0.0.1:50063
+[Phase6] Socket runtime initialized in redis mode (instance=2c10502b-e8bb-4718-a096-13d4924de80d)
+
+╔════════════════════════════════════════╗
+║      ExamFlow Pro is running! 🎓      ║
+╠════════════════════════════════════════╣
+║  URL:    http://127.0.0.1:3224         ║
+║  Mode:   Production               ║
+║  Socket: Enabled (ws://127.0.0.1:3224) ║
+╚════════════════════════════════════════╝
+    
+[Socket] Connected: cmrc1y6pb000rk2kdns7tepny (TEACHER) - dqzwCD7vZArFcdTqAAAB
+[Socket] Connected: cmrhzhll9004a42f01pvo68hg (STUDENT) - OBhC4V41RrWpQ2JEAAAD
+[Phase6][JoinTiming] {"requestId":"c6e2f899-7846-4a11-aed2-b4488e54071f","socketId":"OBhC4V41RrWpQ2JEAAAD","studentId":null,"examId":"cmri5i39800411bmllcxpz1mj","stage":"access_context","durationMs":1386,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"c6e2f899-7846-4a11-aed2-b4488e54071f","socketId":"OBhC4V41RrWpQ2JEAAAD","studentId":"cmrhzhlxa004c42f025b0ytxg","examId":"cmri5i39800411bmllcxpz1mj","stage":"translation_metadata","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"c6e2f899-7846-4a11-aed2-b4488e54071f","socketId":"OBhC4V41RrWpQ2JEAAAD","studentId":"cmrhzhlxa004c42f025b0ytxg","examId":"cmri5i39800411bmllcxpz1mj","stage":"room_join","durationMs":1,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"c6e2f899-7846-4a11-aed2-b4488e54071f","socketId":"OBhC4V41RrWpQ2JEAAAD","studentId":"cmrhzhlxa004c42f025b0ytxg","examId":"cmri5i39800411bmllcxpz1mj","stage":"presence_update","durationMs":2,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"c6e2f899-7846-4a11-aed2-b4488e54071f","socketId":"OBhC4V41RrWpQ2JEAAAD","studentId":"cmrhzhlxa004c42f025b0ytxg","examId":"cmri5i39800411bmllcxpz1mj","stage":"session_lookup","durationMs":213,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"c6e2f899-7846-4a11-aed2-b4488e54071f","socketId":"OBhC4V41RrWpQ2JEAAAD","studentId":"cmrhzhlxa004c42f025b0ytxg","examId":"cmri5i39800411bmllcxpz1mj","stage":"join_ack","durationMs":0,"errorCode":null}
+[Socket] Disconnected: cmrhzhll9004a42f01pvo68hg - OBhC4V41RrWpQ2JEAAAD
+[Socket] Connected: cmrhzhmle004f42f0hyucghyr (STUDENT) - v9yy6MnwP0xF_Zf2AAAF
+[Phase6][JoinTiming] {"requestId":"c6e2f899-7846-4a11-aed2-b4488e54071f","socketId":"OBhC4V41RrWpQ2JEAAAD","studentId":"cmrhzhlxa004c42f025b0ytxg","examId":"cmri5i39800411bmllcxpz1mj","stage":"monitor_broadcast","durationMs":173,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"080e540b-8759-46f1-9d3f-45365c36d900","socketId":"v9yy6MnwP0xF_Zf2AAAF","studentId":null,"examId":"cmri5i39800411bmllcxpz1mj","stage":"access_context","durationMs":2168,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"080e540b-8759-46f1-9d3f-45365c36d900","socketId":"v9yy6MnwP0xF_Zf2AAAF","studentId":"cmrhzhmxb004h42f056xbd1ef","examId":"cmri5i39800411bmllcxpz1mj","stage":"translation_metadata","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"080e540b-8759-46f1-9d3f-45365c36d900","socketId":"v9yy6MnwP0xF_Zf2AAAF","studentId":"cmrhzhmxb004h42f056xbd1ef","examId":"cmri5i39800411bmllcxpz1mj","stage":"room_join","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"080e540b-8759-46f1-9d3f-45365c36d900","socketId":"v9yy6MnwP0xF_Zf2AAAF","studentId":"cmrhzhmxb004h42f056xbd1ef","examId":"cmri5i39800411bmllcxpz1mj","stage":"presence_update","durationMs":3,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"080e540b-8759-46f1-9d3f-45365c36d900","socketId":"v9yy6MnwP0xF_Zf2AAAF","studentId":"cmrhzhmxb004h42f056xbd1ef","examId":"cmri5i39800411bmllcxpz1mj","stage":"session_lookup","durationMs":226,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"080e540b-8759-46f1-9d3f-45365c36d900","socketId":"v9yy6MnwP0xF_Zf2AAAF","studentId":"cmrhzhmxb004h42f056xbd1ef","examId":"cmri5i39800411bmllcxpz1mj","stage":"join_ack","durationMs":0,"errorCode":null}
+[Socket] Disconnected: cmrhzhmle004f42f0hyucghyr - v9yy6MnwP0xF_Zf2AAAF
+[Socket] Connected: cmrhzhnl6004k42f0mr71mrc0 (STUDENT) - R3tIkKS5iSGZQJxwAAAH
+[Phase6][JoinTiming] {"requestId":"080e540b-8759-46f1-9d3f-45365c36d900","socketId":"v9yy6MnwP0xF_Zf2AAAF","studentId":"cmrhzhmxb004h42f056xbd1ef","examId":"cmri5i39800411bmllcxpz1mj","stage":"monitor_broadcast","durationMs":179,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"0958fab7-17fe-4b66-acbf-7fc1aaa1fc07","socketId":"R3tIkKS5iSGZQJxwAAAH","studentId":null,"examId":"cmri5i39800411bmllcxpz1mj","stage":"access_context","durationMs":1253,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"0958fab7-17fe-4b66-acbf-7fc1aaa1fc07","socketId":"R3tIkKS5iSGZQJxwAAAH","studentId":"cmrhzhnxf004m42f0reespwle","examId":"cmri5i39800411bmllcxpz1mj","stage":"translation_metadata","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"0958fab7-17fe-4b66-acbf-7fc1aaa1fc07","socketId":"R3tIkKS5iSGZQJxwAAAH","studentId":"cmrhzhnxf004m42f0reespwle","examId":"cmri5i39800411bmllcxpz1mj","stage":"room_join","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"0958fab7-17fe-4b66-acbf-7fc1aaa1fc07","socketId":"R3tIkKS5iSGZQJxwAAAH","studentId":"cmrhzhnxf004m42f0reespwle","examId":"cmri5i39800411bmllcxpz1mj","stage":"presence_update","durationMs":2,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"0958fab7-17fe-4b66-acbf-7fc1aaa1fc07","socketId":"R3tIkKS5iSGZQJxwAAAH","studentId":"cmrhzhnxf004m42f0reespwle","examId":"cmri5i39800411bmllcxpz1mj","stage":"session_lookup","durationMs":203,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"0958fab7-17fe-4b66-acbf-7fc1aaa1fc07","socketId":"R3tIkKS5iSGZQJxwAAAH","studentId":"cmrhzhnxf004m42f0reespwle","examId":"cmri5i39800411bmllcxpz1mj","stage":"join_ack","durationMs":0,"errorCode":null}
+[Socket] Disconnected: cmrhzhnl6004k42f0mr71mrc0 - R3tIkKS5iSGZQJxwAAAH
+[Socket] Connected: cmrhzhol9004p42f0cfw9cs6g (STUDENT) - NxKU50PRVIWpUOeWAAAJ
+[Phase6][JoinTiming] {"requestId":"0958fab7-17fe-4b66-acbf-7fc1aaa1fc07","socketId":"R3tIkKS5iSGZQJxwAAAH","studentId":"cmrhzhnxf004m42f0reespwle","examId":"cmri5i39800411bmllcxpz1mj","stage":"monitor_broadcast","durationMs":225,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"954af568-2f24-49c5-ab29-5abf865be029","socketId":"NxKU50PRVIWpUOeWAAAJ","studentId":null,"examId":"cmri5i39800411bmllcxpz1mj","stage":"access_context","durationMs":1215,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"954af568-2f24-49c5-ab29-5abf865be029","socketId":"NxKU50PRVIWpUOeWAAAJ","studentId":"cmrhzhox8004r42f0g58oi6u8","examId":"cmri5i39800411bmllcxpz1mj","stage":"translation_metadata","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"954af568-2f24-49c5-ab29-5abf865be029","socketId":"NxKU50PRVIWpUOeWAAAJ","studentId":"cmrhzhox8004r42f0g58oi6u8","examId":"cmri5i39800411bmllcxpz1mj","stage":"room_join","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"954af568-2f24-49c5-ab29-5abf865be029","socketId":"NxKU50PRVIWpUOeWAAAJ","studentId":"cmrhzhox8004r42f0g58oi6u8","examId":"cmri5i39800411bmllcxpz1mj","stage":"presence_update","durationMs":2,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"954af568-2f24-49c5-ab29-5abf865be029","socketId":"NxKU50PRVIWpUOeWAAAJ","studentId":"cmrhzhox8004r42f0g58oi6u8","examId":"cmri5i39800411bmllcxpz1mj","stage":"session_lookup","durationMs":188,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"954af568-2f24-49c5-ab29-5abf865be029","socketId":"NxKU50PRVIWpUOeWAAAJ","studentId":"cmrhzhox8004r42f0g58oi6u8","examId":"cmri5i39800411bmllcxpz1mj","stage":"join_ack","durationMs":0,"errorCode":null}
+[Socket] Disconnected: cmrhzhol9004p42f0cfw9cs6g - NxKU50PRVIWpUOeWAAAJ
+[Socket] Connected: cmrhzhpla004u42f0l9m3uwzg (STUDENT) - mMOiZzCv8cG4S0QCAAAL
+[Phase6][JoinTiming] {"requestId":"954af568-2f24-49c5-ab29-5abf865be029","socketId":"NxKU50PRVIWpUOeWAAAJ","studentId":"cmrhzhox8004r42f0g58oi6u8","examId":"cmri5i39800411bmllcxpz1mj","stage":"monitor_broadcast","durationMs":141,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"e3189637-a487-40bd-9cfd-b2afe23817f9","socketId":"mMOiZzCv8cG4S0QCAAAL","studentId":null,"examId":"cmri5i39800411bmllcxpz1mj","stage":"access_context","durationMs":1429,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"e3189637-a487-40bd-9cfd-b2afe23817f9","socketId":"mMOiZzCv8cG4S0QCAAAL","studentId":"cmrhzhpx5004w42f0lnx85j1d","examId":"cmri5i39800411bmllcxpz1mj","stage":"translation_metadata","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"e3189637-a487-40bd-9cfd-b2afe23817f9","socketId":"mMOiZzCv8cG4S0QCAAAL","studentId":"cmrhzhpx5004w42f0lnx85j1d","examId":"cmri5i39800411bmllcxpz1mj","stage":"room_join","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"e3189637-a487-40bd-9cfd-b2afe23817f9","socketId":"mMOiZzCv8cG4S0QCAAAL","studentId":"cmrhzhpx5004w42f0lnx85j1d","examId":"cmri5i39800411bmllcxpz1mj","stage":"presence_update","durationMs":2,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"e3189637-a487-40bd-9cfd-b2afe23817f9","socketId":"mMOiZzCv8cG4S0QCAAAL","studentId":"cmrhzhpx5004w42f0lnx85j1d","examId":"cmri5i39800411bmllcxpz1mj","stage":"session_lookup","durationMs":126,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"e3189637-a487-40bd-9cfd-b2afe23817f9","socketId":"mMOiZzCv8cG4S0QCAAAL","studentId":"cmrhzhpx5004w42f0lnx85j1d","examId":"cmri5i39800411bmllcxpz1mj","stage":"join_ack","durationMs":0,"errorCode":null}
+[Socket] Disconnected: cmrhzhpla004u42f0l9m3uwzg - mMOiZzCv8cG4S0QCAAAL
+[Socket] Connected: cmrhzhqle004z42f0qdvxbycc (STUDENT) - SNcROv8UmY3hB0ZhAAAN
+[Phase6][JoinTiming] {"requestId":"e3189637-a487-40bd-9cfd-b2afe23817f9","socketId":"mMOiZzCv8cG4S0QCAAAL","studentId":"cmrhzhpx5004w42f0lnx85j1d","examId":"cmri5i39800411bmllcxpz1mj","stage":"monitor_broadcast","durationMs":142,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"3756da11-e933-4883-9ece-33da6ccf86ff","socketId":"SNcROv8UmY3hB0ZhAAAN","studentId":null,"examId":"cmri5i39800411bmllcxpz1mj","stage":"access_context","durationMs":1199,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"3756da11-e933-4883-9ece-33da6ccf86ff","socketId":"SNcROv8UmY3hB0ZhAAAN","studentId":"cmrhzhqxc005142f05jmw8mna","examId":"cmri5i39800411bmllcxpz1mj","stage":"translation_metadata","durationMs":1,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"3756da11-e933-4883-9ece-33da6ccf86ff","socketId":"SNcROv8UmY3hB0ZhAAAN","studentId":"cmrhzhqxc005142f05jmw8mna","examId":"cmri5i39800411bmllcxpz1mj","stage":"room_join","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"3756da11-e933-4883-9ece-33da6ccf86ff","socketId":"SNcROv8UmY3hB0ZhAAAN","studentId":"cmrhzhqxc005142f05jmw8mna","examId":"cmri5i39800411bmllcxpz1mj","stage":"presence_update","durationMs":2,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"3756da11-e933-4883-9ece-33da6ccf86ff","socketId":"SNcROv8UmY3hB0ZhAAAN","studentId":"cmrhzhqxc005142f05jmw8mna","examId":"cmri5i39800411bmllcxpz1mj","stage":"session_lookup","durationMs":187,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"3756da11-e933-4883-9ece-33da6ccf86ff","socketId":"SNcROv8UmY3hB0ZhAAAN","studentId":"cmrhzhqxc005142f05jmw8mna","examId":"cmri5i39800411bmllcxpz1mj","stage":"join_ack","durationMs":0,"errorCode":null}
+[Socket] Disconnected: cmrhzhqle004z42f0qdvxbycc - SNcROv8UmY3hB0ZhAAAN
+[Socket] Connected: cmrhzhrlk005442f05qykagog (STUDENT) - b41etCfZDdlFQOn6AAAP
+[Phase6][JoinTiming] {"requestId":"3756da11-e933-4883-9ece-33da6ccf86ff","socketId":"SNcROv8UmY3hB0ZhAAAN","studentId":"cmrhzhqxc005142f05jmw8mna","examId":"cmri5i39800411bmllcxpz1mj","stage":"monitor_broadcast","durationMs":121,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"72f313eb-8552-4cb8-96fc-450ed5af05fc","socketId":"b41etCfZDdlFQOn6AAAP","studentId":null,"examId":"cmri5i39800411bmllcxpz1mj","stage":"access_context","durationMs":1098,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"72f313eb-8552-4cb8-96fc-450ed5af05fc","socketId":"b41etCfZDdlFQOn6AAAP","studentId":"cmrhzhrxf005642f01dp3t4gn","examId":"cmri5i39800411bmllcxpz1mj","stage":"translation_metadata","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"72f313eb-8552-4cb8-96fc-450ed5af05fc","socketId":"b41etCfZDdlFQOn6AAAP","studentId":"cmrhzhrxf005642f01dp3t4gn","examId":"cmri5i39800411bmllcxpz1mj","stage":"room_join","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"72f313eb-8552-4cb8-96fc-450ed5af05fc","socketId":"b41etCfZDdlFQOn6AAAP","studentId":"cmrhzhrxf005642f01dp3t4gn","examId":"cmri5i39800411bmllcxpz1mj","stage":"presence_update","durationMs":1,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"72f313eb-8552-4cb8-96fc-450ed5af05fc","socketId":"b41etCfZDdlFQOn6AAAP","studentId":"cmrhzhrxf005642f01dp3t4gn","examId":"cmri5i39800411bmllcxpz1mj","stage":"session_lookup","durationMs":133,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"72f313eb-8552-4cb8-96fc-450ed5af05fc","socketId":"b41etCfZDdlFQOn6AAAP","studentId":"cmrhzhrxf005642f01dp3t4gn","examId":"cmri5i39800411bmllcxpz1mj","stage":"join_ack","durationMs":0,"errorCode":null}
+[Socket] Disconnected: cmrhzhrlk005442f05qykagog - b41etCfZDdlFQOn6AAAP
+[Socket] Connected: cmrhzhsku005942f04heloj7n (STUDENT) - 2C1zO8nShTJm_cImAAAR
+[Phase6][JoinTiming] {"requestId":"72f313eb-8552-4cb8-96fc-450ed5af05fc","socketId":"b41etCfZDdlFQOn6AAAP","studentId":"cmrhzhrxf005642f01dp3t4gn","examId":"cmri5i39800411bmllcxpz1mj","stage":"monitor_broadcast","durationMs":165,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"d0f4faa8-ce64-4855-bb61-9b1533b07744","socketId":"2C1zO8nShTJm_cImAAAR","studentId":null,"examId":"cmri5i39800411bmllcxpz1mj","stage":"access_context","durationMs":1083,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"d0f4faa8-ce64-4855-bb61-9b1533b07744","socketId":"2C1zO8nShTJm_cImAAAR","studentId":"cmrhzhswp005b42f0jtkdl7nh","examId":"cmri5i39800411bmllcxpz1mj","stage":"translation_metadata","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"d0f4faa8-ce64-4855-bb61-9b1533b07744","socketId":"2C1zO8nShTJm_cImAAAR","studentId":"cmrhzhswp005b42f0jtkdl7nh","examId":"cmri5i39800411bmllcxpz1mj","stage":"room_join","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"d0f4faa8-ce64-4855-bb61-9b1533b07744","socketId":"2C1zO8nShTJm_cImAAAR","studentId":"cmrhzhswp005b42f0jtkdl7nh","examId":"cmri5i39800411bmllcxpz1mj","stage":"presence_update","durationMs":2,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"d0f4faa8-ce64-4855-bb61-9b1533b07744","socketId":"2C1zO8nShTJm_cImAAAR","studentId":"cmrhzhswp005b42f0jtkdl7nh","examId":"cmri5i39800411bmllcxpz1mj","stage":"session_lookup","durationMs":142,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"d0f4faa8-ce64-4855-bb61-9b1533b07744","socketId":"2C1zO8nShTJm_cImAAAR","studentId":"cmrhzhswp005b42f0jtkdl7nh","examId":"cmri5i39800411bmllcxpz1mj","stage":"join_ack","durationMs":0,"errorCode":null}
+[Socket] Disconnected: cmrhzhsku005942f04heloj7n - 2C1zO8nShTJm_cImAAAR
+[Socket] Connected: cmrhzhtke005e42f087bxa77h (STUDENT) - UvLzml8mrsb7DI_sAAAT
+[Phase6][JoinTiming] {"requestId":"d0f4faa8-ce64-4855-bb61-9b1533b07744","socketId":"2C1zO8nShTJm_cImAAAR","studentId":"cmrhzhswp005b42f0jtkdl7nh","examId":"cmri5i39800411bmllcxpz1mj","stage":"monitor_broadcast","durationMs":129,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"07a0bb91-0a3c-462c-9425-5dfcd4031936","socketId":"UvLzml8mrsb7DI_sAAAT","studentId":null,"examId":"cmri5i39800411bmllcxpz1mj","stage":"access_context","durationMs":911,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"07a0bb91-0a3c-462c-9425-5dfcd4031936","socketId":"UvLzml8mrsb7DI_sAAAT","studentId":"cmrhzhtw5005g42f0soseiydk","examId":"cmri5i39800411bmllcxpz1mj","stage":"translation_metadata","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"07a0bb91-0a3c-462c-9425-5dfcd4031936","socketId":"UvLzml8mrsb7DI_sAAAT","studentId":"cmrhzhtw5005g42f0soseiydk","examId":"cmri5i39800411bmllcxpz1mj","stage":"room_join","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"07a0bb91-0a3c-462c-9425-5dfcd4031936","socketId":"UvLzml8mrsb7DI_sAAAT","studentId":"cmrhzhtw5005g42f0soseiydk","examId":"cmri5i39800411bmllcxpz1mj","stage":"presence_update","durationMs":1,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"07a0bb91-0a3c-462c-9425-5dfcd4031936","socketId":"UvLzml8mrsb7DI_sAAAT","studentId":"cmrhzhtw5005g42f0soseiydk","examId":"cmri5i39800411bmllcxpz1mj","stage":"session_lookup","durationMs":121,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"07a0bb91-0a3c-462c-9425-5dfcd4031936","socketId":"UvLzml8mrsb7DI_sAAAT","studentId":"cmrhzhtw5005g42f0soseiydk","examId":"cmri5i39800411bmllcxpz1mj","stage":"join_ack","durationMs":0,"errorCode":null}
+[Socket] Disconnected: cmrhzhtke005e42f087bxa77h - UvLzml8mrsb7DI_sAAAT
+[Socket] Connected: cmrhzhuk2005j42f0k9azvu4c (STUDENT) - zZ7YIRQSVCW2iOQ7AAAV
+[Phase6][JoinTiming] {"requestId":"07a0bb91-0a3c-462c-9425-5dfcd4031936","socketId":"UvLzml8mrsb7DI_sAAAT","studentId":"cmrhzhtw5005g42f0soseiydk","examId":"cmri5i39800411bmllcxpz1mj","stage":"monitor_broadcast","durationMs":181,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"6068ba7e-175b-4ff0-8e02-f4a276c33938","socketId":"zZ7YIRQSVCW2iOQ7AAAV","studentId":null,"examId":"cmri5i39800411bmllcxpz1mj","stage":"access_context","durationMs":1269,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"6068ba7e-175b-4ff0-8e02-f4a276c33938","socketId":"zZ7YIRQSVCW2iOQ7AAAV","studentId":"cmrhzhuvy005l42f06q7dnk55","examId":"cmri5i39800411bmllcxpz1mj","stage":"translation_metadata","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"6068ba7e-175b-4ff0-8e02-f4a276c33938","socketId":"zZ7YIRQSVCW2iOQ7AAAV","studentId":"cmrhzhuvy005l42f06q7dnk55","examId":"cmri5i39800411bmllcxpz1mj","stage":"room_join","durationMs":0,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"6068ba7e-175b-4ff0-8e02-f4a276c33938","socketId":"zZ7YIRQSVCW2iOQ7AAAV","studentId":"cmrhzhuvy005l42f06q7dnk55","examId":"cmri5i39800411bmllcxpz1mj","stage":"presence_update","durationMs":3,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"6068ba7e-175b-4ff0-8e02-f4a276c33938","socketId":"zZ7YIRQSVCW2iOQ7AAAV","studentId":"cmrhzhuvy005l42f06q7dnk55","examId":"cmri5i39800411bmllcxpz1mj","stage":"session_lookup","durationMs":206,"errorCode":null}
+[Phase6][JoinTiming] {"requestId":"6068ba7e-175b-4ff0-8e02-f4a276c33938","socketId":"zZ7YIRQSVCW2iOQ7AAAV","studentId":"cmrhzhuvy005l42f06q7dnk55","examId":"cmri5i39800411bmllcxpz1mj","stage":"join_ack","durationMs":0,"errorCode":null}
+[Socket] Disconnected: cmrhzhuk2005j42f0k9azvu4c - zZ7YIRQSVCW2iOQ7AAAV
+[Socket] Disconnected: cmrc1y6pb000rk2kdns7tepny - dqzwCD7vZArFcdTqAAAB

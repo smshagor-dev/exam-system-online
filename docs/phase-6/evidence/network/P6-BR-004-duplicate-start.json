@@ -1,0 +1,48 @@
+{
+  "attemptId": "cmrizwycd0003avkywxlcob3t",
+  "remainingSeconds": 1196,
+  "snapshot": {
+    "exam": {
+      "title": "P6 Evidence Manual Exam",
+      "instructions": "P6 manual reconnect and submit exam",
+      "duration": 20,
+      "totalMarks": 5,
+      "subject": {
+        "name": "Data Structures & Algorithms"
+      }
+    },
+    "questions": [
+      {
+        "id": "cmrizvvvz00318a0md2ux5wy4",
+        "examQuestionId": "cmrizvx6k003y8a0mdydznssa",
+        "orderIndex": 0,
+        "marks": 5,
+        "question": {
+          "id": "cmrizvvvz00318a0md2ux5wy4",
+          "type": "MCQ",
+          "text": "P6 Evidence Manual Question",
+          "options": [
+            {
+              "id": "cmrizvvvz00348a0mf7r1tftu",
+              "text": "P6 Evidence Manual Question Option A",
+              "orderIndex": 0
+            },
+            {
+              "id": "cmrizvvvz00358a0mk580cayz",
+              "text": "P6 Evidence Manual Question Option B",
+              "orderIndex": 1
+            },
+            {
+              "id": "cmrizvvvz00378a0muqj4jdqf",
+              "text": "P6 Evidence Manual Question Option C",
+              "orderIndex": 2
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "answers": [],
+  "reconnectToken": "9fdeb45d-6e7d-4687-8c1e-462c0cc3dd32",
+  "resumed": true
+}

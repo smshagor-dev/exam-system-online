@@ -1,0 +1,22 @@
+{
+  "roomCsvHeaders": {
+    "vary": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+    "cache-control": "private, no-store",
+    "content-disposition": "attachment; filename=\"phase8-room-utilization.csv\"",
+    "content-type": "text/csv; charset=utf-8",
+    "date": "Mon, 13 Jul 2026 15:20:54 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5",
+    "transfer-encoding": "chunked"
+  },
+  "attendancePdfHeaders": {
+    "vary": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+    "cache-control": "private, no-store",
+    "content-disposition": "attachment; filename=\"phase8-attendance.pdf\"",
+    "content-type": "application/pdf",
+    "date": "Mon, 13 Jul 2026 15:20:55 GMT",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5",
+    "transfer-encoding": "chunked"
+  }
+}

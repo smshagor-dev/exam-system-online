@@ -1,0 +1,9 @@
+{
+  "method": "POST",
+  "url": "/api/admin/lms/courses",
+  "status": 403,
+  "json": {
+    "error": "Forbidden"
+  },
+  "text": "{\"error\":\"Forbidden\"}"
+}

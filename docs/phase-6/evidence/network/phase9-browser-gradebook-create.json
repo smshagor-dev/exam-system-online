@@ -1,0 +1,78 @@
+{
+  "method": "POST",
+  "url": "/api/admin/results-enterprise/gradebooks",
+  "status": 201,
+  "json": {
+    "id": "cmrjfjt460001odlbpate7fc0",
+    "academicOfferingId": "cmrfve242006fwqliz6dmghl7",
+    "departmentId": "cmrc1y4pr000ck2kd4d7vqcwq",
+    "academicSessionId": "cmrfvc6kk0050wqliy7jsvc0r",
+    "programId": "cmrfvc9gk0053wqli5omnqitt",
+    "semesterId": "cmrc1y4cm0004k2kddk9xe7q7",
+    "groupId": "cmrfvdjp80067wqli6zjyifgw",
+    "gradingScaleId": "cmrjezt600003y34dilgtsxkk",
+    "teacherId": "cmrc1y74k000uk2kd8dujfpkd",
+    "title": "Phase 9 Browser 1783959707919",
+    "status": "DRAFT",
+    "moderationNotes": null,
+    "publishedAt": null,
+    "lockedAt": null,
+    "createdAt": "2026-07-13T16:21:48.966Z",
+    "updatedAt": "2026-07-13T16:21:48.966Z",
+    "components": [
+      {
+        "id": "cmrjfjt460002odlbph0ecot3",
+        "gradebookId": "cmrjfjt460001odlbpate7fc0",
+        "type": "INTERNAL",
+        "name": "Internal",
+        "weight": 25,
+        "maxMarks": 25,
+        "passingMarks": null,
+        "isRequired": true,
+        "sortOrder": 0,
+        "createdAt": "2026-07-13T16:21:48.966Z",
+        "updatedAt": "2026-07-13T16:21:48.966Z"
+      },
+      {
+        "id": "cmrjfjt460003odlbqab27t6y",
+        "gradebookId": "cmrjfjt460001odlbpate7fc0",
+        "type": "COURSEWORK",
+        "name": "Coursework",
+        "weight": 25,
+        "maxMarks": 25,
+        "passingMarks": null,
+        "isRequired": true,
+        "sortOrder": 1,
+        "createdAt": "2026-07-13T16:21:48.966Z",
+        "updatedAt": "2026-07-13T16:21:48.966Z"
+      },
+      {
+        "id": "cmrjfjt460004odlbu6loy4ge",
+        "gradebookId": "cmrjfjt460001odlbpate7fc0",
+        "type": "ATTENDANCE",
+        "name": "Attendance",
+        "weight": 10,
+        "maxMarks": 10,
+        "passingMarks": null,
+        "isRequired": true,
+        "sortOrder": 2,
+        "createdAt": "2026-07-13T16:21:48.966Z",
+        "updatedAt": "2026-07-13T16:21:48.966Z"
+      },
+      {
+        "id": "cmrjfjt460005odlb4oz98vxv",
+        "gradebookId": "cmrjfjt460001odlbpate7fc0",
+        "type": "FINAL",
+        "name": "Final",
+        "weight": 40,
+        "maxMarks": 40,
+        "passingMarks": null,
+        "isRequired": true,
+        "sortOrder": 3,
+        "createdAt": "2026-07-13T16:21:48.966Z",
+        "updatedAt": "2026-07-13T16:21:48.966Z"
+      }
+    ]
+  },
+  "text": "{\"id\":\"cmrjfjt460001odlbpate7fc0\",\"academicOfferingId\":\"cmrfve242006fwqliz6dmghl7\",\"departmentId\":\"cmrc1y4pr000ck2kd4d7vqcwq\",\"academicSessionId\":\"cmrfvc6kk0050wqliy7jsvc0r\",\"programId\":\"cmrfvc9gk0053wqli5omnqitt\",\"semesterId\":\"cmrc1y4cm0004k2kddk9xe7q7\",\"groupId\":\"cmrfvdjp80067wqli6zjyifgw\",\"gradingScaleId\":\"cmrjezt600003y34dilgtsxkk\",\"teacherId\":\"cmrc1y74k000uk2kd8dujfpkd\",\"title\":\"Phase 9 Browser 1783959707919\",\"status\":\"DRAFT\",\"moderationNotes\":null,\"publishedAt\":null,\"lockedAt\":null,\"createdAt\":\"2026-07-13T16:21:48.966Z\",\"updatedAt\":\"2026-07-13T16:21:48.966Z\",\"components\":[{\"id\":\"cmrjfjt460002odlbph0ecot3\",\"gradebookId\":\"cmrjfjt460001odlbpate7fc0\",\"type\":\"INTERNAL\",\"name\":\"Internal\",\"weight\":25,\"maxMarks\":25,\"passingMarks\":null,\"isRequired\":true,\"sortOrder\":0,\"createdAt\":\"2026-07-13T16:21:48.966Z\",\"updatedAt\":\"2026-07-13T16:21:48.966Z\"},{\"id\":\"cmrjfjt460003odlbqab27t6y\",\"gradebookId\":\"cmrjfjt460001odlbpate7fc0\",\"type\":\"COURSEWORK\",\"name\":\"Coursework\",\"weight\":25,\"maxMarks\":25,\"passingMarks\":null,\"isRequired\":true,\"sortOrder\":1,\"createdAt\":\"2026-07-13T16:21:48.966Z\",\"updatedAt\":\"2026-07-13T16:21:48.966Z\"},{\"id\":\"cmrjfjt460004odlbu6loy4ge\",\"gradebookId\":\"cmrjfjt460001odlbpate7fc0\",\"type\":\"ATTENDANCE\",\"name\":\"Attendance\",\"weight\":10,\"maxMarks\":10,\"passingMarks\":null,\"isRequired\":true,\"sortOrder\":2,\"createdAt\":\"2026-07-13T16:21:48.966Z\",\"updatedAt\":\"2026-07-13T16:21:48.966Z\"},{\"id\":\"cmrjfjt460005odlb4oz98vxv\",\"gradebookId\":\"cmrjfjt460001odlbpate7fc0\",\"type\":\"FINAL\",\"name\":\"Final\",\"weight\":40,\"maxMarks\":40,\"passingMarks\":null,\"isRequired\":true,\"sortOrder\":3,\"createdAt\":\"2026-07-13T16:21:48.966Z\",\"updatedAt\":\"2026-07-13T16:21:48.966Z\"}]}"
+}

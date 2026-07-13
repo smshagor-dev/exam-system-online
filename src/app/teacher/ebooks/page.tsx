@@ -25,6 +25,7 @@ export default async function TeacherEbooksPage() {
       },
       ebookUploads: {
         include: {
+          translations: true,
           subject: true,
           language: true,
           group: true,
@@ -54,6 +55,8 @@ export default async function TeacherEbooksPage() {
         id: ebook.id,
         title: ebook.title,
         description: ebook.description,
+        author: ebook.author,
+        category: ebook.category,
         fileUrl: ebook.fileUrl,
         fileSizeBytes: ebook.fileSizeBytes,
         createdAt: ebook.createdAt.toISOString(),

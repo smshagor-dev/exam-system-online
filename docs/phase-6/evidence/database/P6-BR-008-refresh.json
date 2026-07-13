@@ -1,0 +1,21 @@
+{
+  "attemptId": "cmrizwycd0003avkywxlcob3t",
+  "reconnectStudent": {
+    "userId": "cmrhdzq7d0002whz58rqdkwy3",
+    "studentId": "cmrhdzrxv0009whz5oa9zfcgk",
+    "socketId": "fb3IwInZrB2tZuFAAAAJ",
+    "studentName": "P5 English Student",
+    "online": true,
+    "submitted": false,
+    "submittedAtMs": null,
+    "attemptStatus": "NOT_STARTED",
+    "warnings": 0,
+    "tabSwitches": 0,
+    "reconnects": 0,
+    "lastViolation": null,
+    "lastHeartbeatAtMs": 1783933458783
+  },
+  "renderedSeconds": 1184,
+  "expectedRemainingSeconds": 1184,
+  "replayedOption": "cmrizvvvz00358a0mk580cayz"
+}

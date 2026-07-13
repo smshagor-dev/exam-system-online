@@ -1,0 +1,12 @@
+{
+  "id": "cmrjdcs8600181jok1js2b5ba",
+  "scheduleItemId": "cmrjdcg8h000o1jokl9zxnt1g",
+  "teacherId": "cmrc1y74k000uk2kd8dujfpkd",
+  "replacementTeacherId": "cmrc1y78y000wk2kd157911xr",
+  "roleType": "PRIMARY",
+  "startsAt": "2026-04-21T06:00:00.000Z",
+  "endsAt": "2026-04-21T07:00:00.000Z",
+  "notes": "Primary with nominated replacement",
+  "createdAt": "2026-07-13T15:20:21.990Z",
+  "updatedAt": "2026-07-13T15:20:21.990Z"
+}

@@ -1,0 +1,2 @@
+TypeError: Cannot read properties of undefined (reading 'newContext')
+    at main (file:///D:/Public/exam-system-online/scripts/phase-8/browser-smoke.mjs:1056:59)
