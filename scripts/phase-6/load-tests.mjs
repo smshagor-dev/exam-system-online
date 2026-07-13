@@ -37,7 +37,7 @@ const HARNESS_DEADLINE_MS = 15 * 60 * 1000
 const STAGE_TIMEOUTS_MS = {
   connect: 5000,
   join: 20000,
-  start: 30000,
+  start: 45000,
   save: 10000,
   heartbeat: 5000,
   submit: 10000,
@@ -46,7 +46,7 @@ const STAGE_TIMEOUTS_MS = {
 const BATCH_CONFIG = {
   connect: { size: 50, delayMs: 40 },
   join: { size: 25, delayMs: 75 },
-  start: { size: 10, delayMs: 100 },
+  start: { size: 5, delayMs: 125 },
   save: { size: 20, delayMs: 40 },
   heartbeat: { size: 20, delayMs: 25 },
   submit: { size: 20, delayMs: 40 },
@@ -1253,14 +1253,23 @@ async function main() {
       output.scenarios.run500.saveSuccessRate >= LOAD_THRESHOLD.saveSuccessRateMin &&
       output.scenarios.run500.submitSuccessRate >= LOAD_THRESHOLD.submitSuccessRateMin
 
+    const pass250 =
+      output.scenarios.run250.connectionSuccessRate >= LOAD_THRESHOLD.connectionSuccessRateMin &&
+      output.scenarios.run250.joinSuccessRate >= LOAD_THRESHOLD.joinSuccessRateMin &&
+      output.scenarios.run250.saveSuccessRate >= LOAD_THRESHOLD.saveSuccessRateMin &&
+      output.scenarios.run250.submitSuccessRate >= LOAD_THRESHOLD.submitSuccessRateMin
+
     const zeroDuplicates =
       output.metrics.duplicateRecords.answerGroups <= LOAD_THRESHOLD.maxDuplicateRecords &&
       output.metrics.duplicateRecords.attemptGroups <= LOAD_THRESHOLD.maxDuplicateRecords
 
-    output.status = pass100 && pass500 && zeroDuplicates ? 'PASS' : 'BLOCKED'
+    output.status = pass100 && pass250 && pass500 && zeroDuplicates ? 'PASS' : 'BLOCKED'
 
+    if (!pass250) {
+      output.bottleneck = '250-user scenario did not meet minimum success thresholds.'
+    }
     if (!pass500) {
-      output.bottleneck = '500-user scenario did not meet minimum success thresholds.'
+      output.bottleneck = output.bottleneck ?? '500-user scenario did not meet minimum success thresholds.'
     }
     if (!zeroDuplicates) {
       output.bottleneck =

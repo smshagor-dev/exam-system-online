@@ -1,15 +1,15 @@
 {
   "method": "POST",
-  "url": "/api/teacher/lms/lessons/cmrjgto7q0008hgasui20w0q6/materials/upload",
+  "url": "/api/teacher/lms/lessons/cmrjnp45j008mochonxgbri7r/materials/upload",
   "status": 201,
   "json": {
-    "id": "cmrjgtti6000ahgaset5wjng6",
-    "lessonId": "cmrjgto7q0008hgasui20w0q6",
+    "id": "cmrjnp9rr008socho1dli63o6",
+    "lessonId": "cmrjnp45j008mochonxgbri7r",
     "type": "PDF",
     "title": "Phase 10 Material",
     "description": "Material uploaded during browser smoke.",
     "fileName": "phase10-material.txt",
-    "fileUrl": "D:\\Public\\exam-system-online\\.generated\\phase-10\\materials\\1783961855643-012c4833-phase10-material.txt",
+    "fileUrl": "D:\\Public\\exam-system-online\\.generated\\phase-10\\materials\\1783973400751-b0df1324-phase10-material.txt",
     "mimeType": "text/plain",
     "externalUrl": null,
     "richText": null,
@@ -20,9 +20,9 @@
     "sortOrder": 1,
     "isPublished": false,
     "publishedAt": null,
-    "createdAt": "2026-07-13T16:57:35.646Z",
-    "updatedAt": "2026-07-13T16:57:35.646Z",
+    "createdAt": "2026-07-13T20:10:00.759Z",
+    "updatedAt": "2026-07-13T20:10:00.759Z",
     "translations": []
   },
-  "text": "{\"id\":\"cmrjgtti6000ahgaset5wjng6\",\"lessonId\":\"cmrjgto7q0008hgasui20w0q6\",\"type\":\"PDF\",\"title\":\"Phase 10 Material\",\"description\":\"Material uploaded during browser smoke.\",\"fileName\":\"phase10-material.txt\",\"fileUrl\":\"D:\\\\Public\\\\exam-system-online\\\\.generated\\\\phase-10\\\\materials\\\\1783961855643-012c4833-phase10-material.txt\",\"mimeType\":\"text/plain\",\"externalUrl\":null,\"richText\":null,\"scormManifestUrl\":null,\"scormLaunchUrl\":null,\"metadata\":null,\"sizeBytes\":24,\"sortOrder\":1,\"isPublished\":false,\"publishedAt\":null,\"createdAt\":\"2026-07-13T16:57:35.646Z\",\"updatedAt\":\"2026-07-13T16:57:35.646Z\",\"translations\":[]}"
+  "text": "{\"id\":\"cmrjnp9rr008socho1dli63o6\",\"lessonId\":\"cmrjnp45j008mochonxgbri7r\",\"type\":\"PDF\",\"title\":\"Phase 10 Material\",\"description\":\"Material uploaded during browser smoke.\",\"fileName\":\"phase10-material.txt\",\"fileUrl\":\"D:\\\\Public\\\\exam-system-online\\\\.generated\\\\phase-10\\\\materials\\\\1783973400751-b0df1324-phase10-material.txt\",\"mimeType\":\"text/plain\",\"externalUrl\":null,\"richText\":null,\"scormManifestUrl\":null,\"scormLaunchUrl\":null,\"metadata\":null,\"sizeBytes\":24,\"sortOrder\":1,\"isPublished\":false,\"publishedAt\":null,\"createdAt\":\"2026-07-13T20:10:00.759Z\",\"updatedAt\":\"2026-07-13T20:10:00.759Z\",\"translations\":[]}"
 }

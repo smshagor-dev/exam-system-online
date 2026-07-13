@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
+import { enforceAuthRateLimit } from '@/lib/auth-rate-limit'
 import { registerStudentSchema } from '@/lib/validators'
 import bcrypt from 'bcryptjs'
 import { UserRole } from '@prisma/client'
@@ -16,6 +17,15 @@ export async function POST(req: NextRequest) {
   }
 
   const { email, password, name, course, departmentId, subjectId, languageId, groupId, academicYearId, semesterId, phone, customFieldResponses } = parsed.data
+
+  const rateLimitResponse = await enforceAuthRateLimit({
+    req,
+    action: 'register',
+    accountKey: email,
+  })
+  if (rateLimitResponse) {
+    return rateLimitResponse
+  }
 
   // Check email uniqueness
   const existing = await prisma.user.findUnique({ where: { email } })

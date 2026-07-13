@@ -193,6 +193,19 @@ export function resolveTeacherAssignment(
   if (record.academicOfferingId) {
     const existingOffering = offerings.find((offering) => offering.id === record.academicOfferingId)
     if (!existingOffering) {
+      if (candidateOfferings.length === 1) {
+        return {
+          recordType: 'teacherAssignments',
+          recordId: record.id,
+          classification: 'SAFE_SINGLE_CANDIDATE',
+          resolutionStatus: 'MAPPED',
+          reason: 'The stored academic offering is orphaned, but exactly one compatible offering can be reconstructed from the legacy tuple.',
+          recommendedAction: 'Repair the orphan reference by remapping to the single compatible offering.',
+          candidateOfferings,
+          selectedOfferingId: candidateOfferings[0].id,
+        }
+      }
+
       return {
         recordType: 'teacherAssignments',
         recordId: record.id,
@@ -293,6 +306,19 @@ export function resolveStudentSubject(
   if (record.academicOfferingId) {
     const existingOffering = offerings.find((offering) => offering.id === record.academicOfferingId)
     if (!existingOffering) {
+      if (candidateOfferings.length === 1) {
+        return {
+          recordType: 'studentSubjects',
+          recordId: record.id,
+          classification: 'SAFE_SINGLE_CANDIDATE',
+          resolutionStatus: 'MAPPED',
+          reason: 'The stored academic offering is orphaned, but exactly one compatible offering can be reconstructed from the student subject tuple.',
+          recommendedAction: 'Repair the orphan reference by remapping to the single compatible offering.',
+          candidateOfferings,
+          selectedOfferingId: candidateOfferings[0].id,
+        }
+      }
+
       return {
         recordType: 'studentSubjects',
         recordId: record.id,

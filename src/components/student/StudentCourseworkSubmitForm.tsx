@@ -1,6 +1,7 @@
 'use client'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+import RichTextContent from '@/components/editor/RichTextContent'
 
 type Props = {
   publication: {
@@ -102,7 +103,12 @@ export default function StudentCourseworkSubmitForm({ publication }: Props) {
         <p className="mt-1 text-sm text-slate-500">
           Due {publication.dueAt ? new Date(publication.dueAt).toLocaleString() : 'not set'} | {publication.allowUnlimitedAttempts ? 'Unlimited attempts' : `${publication.maxAttempts ?? 1} attempts`}
         </p>
-        {publication.instructions ? <div className="mt-4 rounded-2xl bg-slate-50 p-4 text-sm text-slate-700" dangerouslySetInnerHTML={{ __html: publication.instructions }} /> : null}
+        {publication.instructions ? (
+          <RichTextContent
+            html={publication.instructions}
+            className="mt-4 rounded-2xl bg-slate-50 p-4 text-sm text-slate-700"
+          />
+        ) : null}
       </section>
 
       <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">

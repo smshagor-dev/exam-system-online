@@ -1,0 +1,270 @@
+{
+  "generatedAt": "2026-07-13T20:08:45.866Z",
+  "status": "PASS",
+  "pages": [
+    {
+      "page": "admin-lms-desktop-light",
+      "viewport": "desktop",
+      "colorScheme": "light",
+      "title": "ExamFlow Pro",
+      "interactiveCount": 23,
+      "missingAccessibleNames": [],
+      "focusOrder": [
+        {
+          "tag": "a",
+          "id": "",
+          "role": "",
+          "text": "Dashboard"
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "role": "",
+          "text": "Departments"
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "role": "",
+          "text": "Degree Levels"
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "role": "",
+          "text": "Programs"
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "role": "",
+          "text": "Department Languages"
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "role": "",
+          "text": "Academic Sessions"
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "role": "",
+          "text": "Program Years"
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "role": "",
+          "text": "Program Semesters"
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "role": "",
+          "text": "Curriculum"
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "role": "",
+          "text": "Academic Offerings"
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "role": "",
+          "text": "Exam Calendar"
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "role": "",
+          "text": "Exam Venues"
+        }
+      ],
+      "contrastFailures": [],
+      "consoleErrors": [],
+      "pageErrors": [],
+      "evidencePaths": [
+        "docs/final-audit/evidence/accessibility/browser/admin-lms-desktop-light.png",
+        "docs/final-audit/evidence/accessibility/console/admin-lms-desktop-light.txt",
+        "docs/final-audit/evidence/accessibility/data/admin-lms-desktop-light.json"
+      ]
+    },
+    {
+      "page": "teacher-lms-tablet-dark",
+      "viewport": "tablet",
+      "colorScheme": "dark",
+      "title": "ExamFlow Pro",
+      "interactiveCount": 25,
+      "missingAccessibleNames": [],
+      "focusOrder": [
+        {
+          "tag": "button",
+          "id": "",
+          "role": "",
+          "text": ""
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "role": "",
+          "text": "Menu"
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "role": "",
+          "text": "Dashboard"
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "role": "",
+          "text": "Assignments"
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "role": "",
+          "text": "Question Bank"
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "role": "",
+          "text": "Translations"
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "role": "",
+          "text": "Ebooks"
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "role": "",
+          "text": "Exams"
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "role": "",
+          "text": "Invigilation"
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "role": "",
+          "text": "Create Exam"
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "role": "",
+          "text": "Students"
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "role": "",
+          "text": "Reviews"
+        }
+      ],
+      "contrastFailures": [],
+      "consoleErrors": [],
+      "pageErrors": [],
+      "evidencePaths": [
+        "docs/final-audit/evidence/accessibility/browser/teacher-lms-tablet-dark.png",
+        "docs/final-audit/evidence/accessibility/console/teacher-lms-tablet-dark.txt",
+        "docs/final-audit/evidence/accessibility/data/teacher-lms-tablet-dark.json"
+      ]
+    },
+    {
+      "page": "student-lms-mobile-light",
+      "viewport": "mobile",
+      "colorScheme": "light",
+      "title": "ExamFlow Pro",
+      "interactiveCount": 11,
+      "missingAccessibleNames": [],
+      "focusOrder": [
+        {
+          "tag": "button",
+          "id": "",
+          "role": "",
+          "text": ""
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "role": "",
+          "text": "Menu"
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "role": "",
+          "text": "Dashboard"
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "role": "",
+          "text": "Progress"
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "role": "",
+          "text": "Ebooks"
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "role": "",
+          "text": "Course Work & Report"
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "role": "",
+          "text": "My Exams"
+        },
+        {
+          "tag": "a",
+          "id": "",
+          "role": "",
+          "text": "Results"
+        },
+        {
+          "tag": "select",
+          "id": "",
+          "role": "",
+          "text": "EnglishRussian"
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "role": "",
+          "text": "PP5 Russian Studentp5.russian.student@examflow.pro"
+        },
+        {
+          "tag": "button",
+          "id": "",
+          "role": "",
+          "text": "Menu"
+        }
+      ],
+      "contrastFailures": [],
+      "consoleErrors": [],
+      "pageErrors": [],
+      "evidencePaths": [
+        "docs/final-audit/evidence/accessibility/browser/student-lms-mobile-light.png",
+        "docs/final-audit/evidence/accessibility/console/student-lms-mobile-light.txt",
+        "docs/final-audit/evidence/accessibility/data/student-lms-mobile-light.json"
+      ]
+    }
+  ]
+}

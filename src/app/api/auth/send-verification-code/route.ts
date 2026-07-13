@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
+import { enforceAuthRateLimit } from '@/lib/auth-rate-limit'
 import { sendVerificationCodeSchema } from '@/lib/validators'
 import { sendOneTimeCodeEmail, storeVerificationCode } from '@/lib/auth-code'
 import { isEmailVerificationRequired } from '@/lib/system-settings'
@@ -26,6 +27,16 @@ export async function POST(req: NextRequest) {
       isEmailVerified: true,
     },
   })
+
+  const rateLimitResponse = await enforceAuthRateLimit({
+    req,
+    action: 'send-verification-code',
+    accountKey: parsed.data.email,
+    userId: user?.id ?? null,
+  })
+  if (rateLimitResponse) {
+    return rateLimitResponse
+  }
 
   if (!user) {
     return NextResponse.json({ message: 'If the account exists, a new verification code has been sent.' })

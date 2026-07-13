@@ -1,22 +1,22 @@
 {
   "method": "POST",
-  "url": "/api/student/lms/discussions/cmrjgudc00012hgas1n5ifwlg/replies",
+  "url": "/api/student/lms/discussions/cmrjnq20r00a0ochoppdg8j68/replies",
   "status": 201,
   "json": {
-    "id": "cmrjgufna0014hgaslyxy5zgw",
-    "threadId": "cmrjgudc00012hgas1n5ifwlg",
+    "id": "cmrjnq3xy00a6ochopcjj1x5d",
+    "threadId": "cmrjnq20r00a0ochoppdg8j68",
     "authorUserId": "cmrhdzqx00003whz5ryga8cli",
     "body": "Replying to the Phase 10 discussion thread.",
     "isTeacherReply": false,
     "isModerated": false,
     "moderatedByUserId": null,
     "moderatedAt": null,
-    "createdAt": "2026-07-13T16:58:04.343Z",
-    "updatedAt": "2026-07-13T16:58:04.343Z",
+    "createdAt": "2026-07-13T20:10:39.862Z",
+    "updatedAt": "2026-07-13T20:10:39.862Z",
     "thread": {
-      "id": "cmrjgudc00012hgas1n5ifwlg",
-      "courseId": "cmrjgtnox0002hgaskh6bjez1",
-      "lessonId": "cmrjgto7q0008hgasui20w0q6",
+      "id": "cmrjnq20r00a0ochoppdg8j68",
+      "courseId": "cmrjnp3ly008cochoo82g7nbf",
+      "lessonId": "cmrjnp45j008mochonxgbri7r",
       "authorUserId": "cmrhdzqx00003whz5ryga8cli",
       "title": "Phase 10 discussion thread",
       "body": "Testing the discussion flow.",
@@ -27,10 +27,10 @@
       "isModerated": false,
       "moderatedByUserId": null,
       "moderatedAt": null,
-      "createdAt": "2026-07-13T16:58:01.344Z",
-      "updatedAt": "2026-07-13T16:58:01.344Z",
+      "createdAt": "2026-07-13T20:10:37.372Z",
+      "updatedAt": "2026-07-13T20:10:37.372Z",
       "course": {
-        "id": "cmrjgtnox0002hgaskh6bjez1",
+        "id": "cmrjnp3ly008cochoo82g7nbf",
         "departmentId": "cmrc1y4pr000ck2kd4d7vqcwq",
         "programId": "cmrfvc9gk0053wqli5omnqitt",
         "academicOfferingId": "cmrfve242006fwqliz6dmghl7",
@@ -38,18 +38,18 @@
         "semesterId": "cmrc1y4cm0004k2kddk9xe7q7",
         "groupId": "cmrfvdjp80067wqli6zjyifgw",
         "languageId": "cmrfudipt00001387aijb5mgh",
-        "code": "P10-BROWSER-1783961847303",
-        "title": "Phase 10 Browser Course 1783961847303",
+        "code": "P10-BROWSER-1783973390523",
+        "title": "Phase 10 Browser Course 1783973390523",
         "summary": "Course created during browser smoke.",
         "credits": 3,
         "status": "PUBLISHED",
-        "currentVersionId": "cmrjgtnv60004hgasa15cpqzb",
+        "currentVersionId": "cmrjnp3sg008gochowq3jp7eq",
         "isPublished": true,
-        "publishedAt": "2026-07-13T16:57:41.470Z",
-        "createdAt": "2026-07-13T16:57:28.113Z",
-        "updatedAt": "2026-07-13T16:57:41.472Z"
+        "publishedAt": "2026-07-13T20:10:08.067Z",
+        "createdAt": "2026-07-13T20:09:52.774Z",
+        "updatedAt": "2026-07-13T20:10:08.069Z"
       }
     }
   },
-  "text": "{\"id\":\"cmrjgufna0014hgaslyxy5zgw\",\"threadId\":\"cmrjgudc00012hgas1n5ifwlg\",\"authorUserId\":\"cmrhdzqx00003whz5ryga8cli\",\"body\":\"Replying to the Phase 10 discussion thread.\",\"isTeacherReply\":false,\"isModerated\":false,\"moderatedByUserId\":null,\"moderatedAt\":null,\"createdAt\":\"2026-07-13T16:58:04.343Z\",\"updatedAt\":\"2026-07-13T16:58:04.343Z\",\"thread\":{\"id\":\"cmrjgudc00012hgas1n5ifwlg\",\"courseId\":\"cmrjgtnox0002hgaskh6bjez1\",\"lessonId\":\"cmrjgto7q0008hgasui20w0q6\",\"authorUserId\":\"cmrhdzqx00003whz5ryga8cli\",\"title\":\"Phase 10 discussion thread\",\"body\":\"Testing the discussion flow.\",\"status\":\"OPEN\",\"isPinned\":false,\"pinnedByUserId\":null,\"pinnedAt\":null,\"isModerated\":false,\"moderatedByUserId\":null,\"moderatedAt\":null,\"createdAt\":\"2026-07-13T16:58:01.344Z\",\"updatedAt\":\"2026-07-13T16:58:01.344Z\",\"course\":{\"id\":\"cmrjgtnox0002hgaskh6bjez1\",\"departmentId\":\"cmrc1y4pr000ck2kd4d7vqcwq\",\"programId\":\"cmrfvc9gk0053wqli5omnqitt\",\"academicOfferingId\":\"cmrfve242006fwqliz6dmghl7\",\"subjectId\":\"cmrfudk7t00021387u895s14h\",\"semesterId\":\"cmrc1y4cm0004k2kddk9xe7q7\",\"groupId\":\"cmrfvdjp80067wqli6zjyifgw\",\"languageId\":\"cmrfudipt00001387aijb5mgh\",\"code\":\"P10-BROWSER-1783961847303\",\"title\":\"Phase 10 Browser Course 1783961847303\",\"summary\":\"Course created during browser smoke.\",\"credits\":3,\"status\":\"PUBLISHED\",\"currentVersionId\":\"cmrjgtnv60004hgasa15cpqzb\",\"isPublished\":true,\"publishedAt\":\"2026-07-13T16:57:41.470Z\",\"createdAt\":\"2026-07-13T16:57:28.113Z\",\"updatedAt\":\"2026-07-13T16:57:41.472Z\"}}}"
+  "text": "{\"id\":\"cmrjnq3xy00a6ochopcjj1x5d\",\"threadId\":\"cmrjnq20r00a0ochoppdg8j68\",\"authorUserId\":\"cmrhdzqx00003whz5ryga8cli\",\"body\":\"Replying to the Phase 10 discussion thread.\",\"isTeacherReply\":false,\"isModerated\":false,\"moderatedByUserId\":null,\"moderatedAt\":null,\"createdAt\":\"2026-07-13T20:10:39.862Z\",\"updatedAt\":\"2026-07-13T20:10:39.862Z\",\"thread\":{\"id\":\"cmrjnq20r00a0ochoppdg8j68\",\"courseId\":\"cmrjnp3ly008cochoo82g7nbf\",\"lessonId\":\"cmrjnp45j008mochonxgbri7r\",\"authorUserId\":\"cmrhdzqx00003whz5ryga8cli\",\"title\":\"Phase 10 discussion thread\",\"body\":\"Testing the discussion flow.\",\"status\":\"OPEN\",\"isPinned\":false,\"pinnedByUserId\":null,\"pinnedAt\":null,\"isModerated\":false,\"moderatedByUserId\":null,\"moderatedAt\":null,\"createdAt\":\"2026-07-13T20:10:37.372Z\",\"updatedAt\":\"2026-07-13T20:10:37.372Z\",\"course\":{\"id\":\"cmrjnp3ly008cochoo82g7nbf\",\"departmentId\":\"cmrc1y4pr000ck2kd4d7vqcwq\",\"programId\":\"cmrfvc9gk0053wqli5omnqitt\",\"academicOfferingId\":\"cmrfve242006fwqliz6dmghl7\",\"subjectId\":\"cmrfudk7t00021387u895s14h\",\"semesterId\":\"cmrc1y4cm0004k2kddk9xe7q7\",\"groupId\":\"cmrfvdjp80067wqli6zjyifgw\",\"languageId\":\"cmrfudipt00001387aijb5mgh\",\"code\":\"P10-BROWSER-1783973390523\",\"title\":\"Phase 10 Browser Course 1783973390523\",\"summary\":\"Course created during browser smoke.\",\"credits\":3,\"status\":\"PUBLISHED\",\"currentVersionId\":\"cmrjnp3sg008gochowq3jp7eq\",\"isPublished\":true,\"publishedAt\":\"2026-07-13T20:10:08.067Z\",\"createdAt\":\"2026-07-13T20:09:52.774Z\",\"updatedAt\":\"2026-07-13T20:10:08.069Z\"}}}"
 }

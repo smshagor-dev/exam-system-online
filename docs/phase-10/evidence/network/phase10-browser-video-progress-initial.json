@@ -1,11 +1,11 @@
 {
   "method": "POST",
-  "url": "/api/student/lms/videos/cmrjgtvli000chgaseyrj68f6/progress",
+  "url": "/api/student/lms/videos/cmrjnpcjv008wocho6awmfz7c/progress",
   "status": 200,
   "json": {
-    "id": "cmrjgu5wl000ohgast3ww6ekc",
-    "videoAssetId": "cmrjgtvli000chgaseyrj68f6",
-    "lessonId": "cmrjgto7q0008hgasui20w0q6",
+    "id": "cmrjnps3e009iochoul3sn27f",
+    "videoAssetId": "cmrjnpcjv008wocho6awmfz7c",
+    "lessonId": "cmrjnp45j008mochonxgbri7r",
     "studentId": "cmrhdzsao000bwhz5n1waw7db",
     "lastPositionSeconds": 120,
     "watchedSeconds": 120,
@@ -13,15 +13,15 @@
     "resumeCount": 1,
     "watchHistory": [
       {
-        "at": "2026-07-13T16:57:51.714Z",
+        "at": "2026-07-13T20:10:24.501Z",
         "position": 120,
         "watchedSeconds": 120
       }
     ],
     "completedAt": null,
-    "lastWatchedAt": "2026-07-13T16:57:51.714Z",
-    "createdAt": "2026-07-13T16:57:51.717Z",
-    "updatedAt": "2026-07-13T16:57:51.717Z"
+    "lastWatchedAt": "2026-07-13T20:10:24.501Z",
+    "createdAt": "2026-07-13T20:10:24.506Z",
+    "updatedAt": "2026-07-13T20:10:24.506Z"
   },
-  "text": "{\"id\":\"cmrjgu5wl000ohgast3ww6ekc\",\"videoAssetId\":\"cmrjgtvli000chgaseyrj68f6\",\"lessonId\":\"cmrjgto7q0008hgasui20w0q6\",\"studentId\":\"cmrhdzsao000bwhz5n1waw7db\",\"lastPositionSeconds\":120,\"watchedSeconds\":120,\"watchedPercentage\":20,\"resumeCount\":1,\"watchHistory\":[{\"at\":\"2026-07-13T16:57:51.714Z\",\"position\":120,\"watchedSeconds\":120}],\"completedAt\":null,\"lastWatchedAt\":\"2026-07-13T16:57:51.714Z\",\"createdAt\":\"2026-07-13T16:57:51.717Z\",\"updatedAt\":\"2026-07-13T16:57:51.717Z\"}"
+  "text": "{\"id\":\"cmrjnps3e009iochoul3sn27f\",\"videoAssetId\":\"cmrjnpcjv008wocho6awmfz7c\",\"lessonId\":\"cmrjnp45j008mochonxgbri7r\",\"studentId\":\"cmrhdzsao000bwhz5n1waw7db\",\"lastPositionSeconds\":120,\"watchedSeconds\":120,\"watchedPercentage\":20,\"resumeCount\":1,\"watchHistory\":[{\"at\":\"2026-07-13T20:10:24.501Z\",\"position\":120,\"watchedSeconds\":120}],\"completedAt\":null,\"lastWatchedAt\":\"2026-07-13T20:10:24.501Z\",\"createdAt\":\"2026-07-13T20:10:24.506Z\",\"updatedAt\":\"2026-07-13T20:10:24.506Z\"}"
 }

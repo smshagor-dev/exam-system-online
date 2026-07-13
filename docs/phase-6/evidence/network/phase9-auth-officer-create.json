@@ -3,15 +3,15 @@
   "url": "/api/admin/results-enterprise/officers",
   "status": 201,
   "json": {
-    "id": "cmrjfowox0001xxttpn0lffx6",
+    "id": "cmrjnrlop00aiochozchfc84j",
     "teacherId": "cmrc1y74k000uk2kd8dujfpkd",
     "departmentId": "cmrc1y4pr000ck2kd4d7vqcwq",
     "roleType": "CONTROLLER_OF_EXAMINATION",
     "startsAt": null,
     "endsAt": null,
     "isActive": true,
-    "createdAt": "2026-07-13T16:25:46.879Z",
-    "updatedAt": "2026-07-13T16:25:46.879Z"
+    "createdAt": "2026-07-13T20:11:49.513Z",
+    "updatedAt": "2026-07-13T20:11:49.513Z"
   },
-  "text": "{\"id\":\"cmrjfowox0001xxttpn0lffx6\",\"teacherId\":\"cmrc1y74k000uk2kd8dujfpkd\",\"departmentId\":\"cmrc1y4pr000ck2kd4d7vqcwq\",\"roleType\":\"CONTROLLER_OF_EXAMINATION\",\"startsAt\":null,\"endsAt\":null,\"isActive\":true,\"createdAt\":\"2026-07-13T16:25:46.879Z\",\"updatedAt\":\"2026-07-13T16:25:46.879Z\"}"
+  "text": "{\"id\":\"cmrjnrlop00aiochozchfc84j\",\"teacherId\":\"cmrc1y74k000uk2kd8dujfpkd\",\"departmentId\":\"cmrc1y4pr000ck2kd4d7vqcwq\",\"roleType\":\"CONTROLLER_OF_EXAMINATION\",\"startsAt\":null,\"endsAt\":null,\"isActive\":true,\"createdAt\":\"2026-07-13T20:11:49.513Z\",\"updatedAt\":\"2026-07-13T20:11:49.513Z\"}"
 }

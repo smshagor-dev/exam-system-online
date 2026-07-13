@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-13T16:22:44.657Z",
+  "generatedAt": "2026-07-13T20:10:57.893Z",
   "status": "PASS",
   "total": 16,
   "passed": 16,
@@ -49,7 +49,7 @@
       "precondition": "Grade entry exists for the gradebook.",
       "steps": "Calculate the gradebook results and GPA.",
       "expected": "A result record is produced with semester GPA and CGPA fields.",
-      "actual": "status=200; resultRecord=cmrjfjxno0009odlb1nndbfne; gpa=0; cgpa=0",
+      "actual": "status=200; resultRecord=cmrjnp3qy008eochotw7echer; gpa=0; cgpa=0",
       "status": "PASS",
       "evidencePaths": [
         "docs/phase-6/evidence/network/phase9-browser-calculate.json"
@@ -76,7 +76,7 @@
       "precondition": "A result has been published for the logged-in student.",
       "steps": "Fetch student result records from the student API.",
       "expected": "Published result records are visible to the student.",
-      "actual": "status=200; records=7",
+      "actual": "status=200; records=13",
       "status": "PASS",
       "evidencePaths": [
         "docs/phase-6/evidence/network/phase9-browser-student-results.json"
@@ -116,7 +116,7 @@
       "precondition": "The student can see a published result.",
       "steps": "Submit a result appeal from the student API.",
       "expected": "Appeal is created in submitted status.",
-      "actual": "status=201; appealId=cmrjfkhet000vodlb6plpcpuc",
+      "actual": "status=201; appealId=cmrjnpxcj009wochoe9agfw8u",
       "status": "PASS",
       "evidencePaths": [
         "docs/phase-6/evidence/network/phase9-browser-appeal-submit.json"

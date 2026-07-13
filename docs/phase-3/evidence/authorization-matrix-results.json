@@ -8,13 +8,13 @@
         "expectedStatus": "Allowed business response (200/201/400/404/409/422)",
         "actualStatus": 200,
         "pass": true,
-        "responseSnippet": "{\"items\":[{\"id\":\"cmrgp1vg90004n93kb2blq0s4\",\"studentId\":\"cmrgp1v100002n93k632sbda4\",\"departmentId\":\"cmrgowfh6000apmlz718clmq8\",\"academicYearId\":\"cmrgowcza0000pmlzakerzxid\",\"academicSessionId\":\"cmrgowg82000dpmlzdld2uohm\","
+        "responseSnippet": "{\"items\":[{\"id\":\"cmrjf46zb0001nbasi1pxrmqz\",\"studentId\":\"cmrhdzsao000bwhz5n1waw7db\",\"departmentId\":\"cmrc1y4pr000ck2kd4d7vqcwq\",\"academicYearId\":\"cmrc1y4060003k2kd2m0dhf10\",\"academicSessionId\":\"cmrfvc6kk0050wqliy7jsvc0r\","
       },
       "deptOwn": {
         "expectedStatus": "Allowed business response (200/201/400/404/409/422)",
         "actualStatus": 200,
         "pass": true,
-        "responseSnippet": "{\"items\":[{\"id\":\"cmrgp18ai00hxpmlzfawe9ten\",\"studentId\":\"cmrgox8uo005cpmlzpbikt00w\",\"departmentId\":\"cmrgowf870009pmlzozbfj64d\",\"academicYearId\":\"cmrgowcza0000pmlzakerzxid\",\"academicSessionId\":\"cmrgowg82000dpmlzdld2uohm\","
+        "responseSnippet": "{\"items\":[{\"id\":\"cmrjf46zb0001nbasi1pxrmqz\",\"studentId\":\"cmrhdzsao000bwhz5n1waw7db\",\"departmentId\":\"cmrc1y4pr000ck2kd4d7vqcwq\",\"academicYearId\":\"cmrc1y4060003k2kd2m0dhf10\",\"academicSessionId\":\"cmrfvc6kk0050wqliy7jsvc0r\","
       },
       "deptForeign": {
         "expectedStatus": "403",
@@ -88,19 +88,19 @@
   {
     "id": "AUTH-ENR-PATCH",
     "method": "PATCH",
-    "pathLabel": "/api/admin/enrollments/cmrgoxdx8005ypmlzl151rkdj",
+    "pathLabel": "/api/admin/enrollments/cmrgc1dcq0001ito32yevsbw0",
     "roles": {
       "superAdmin": {
         "expectedStatus": "Allowed business response (200/201/400/404/409/422)",
-        "actualStatus": 200,
+        "actualStatus": 400,
         "pass": true,
-        "responseSnippet": "{\"id\":\"cmrgoxdx8005ypmlzl151rkdj\",\"studentId\":\"cmrgowvz3003ipmlzjls44rak\",\"departmentId\":\"cmrgowf870009pmlzozbfj64d\",\"academicYearId\":\"cmrgowcza0000pmlzakerzxid\",\"academicSessionId\":\"cmrgowg82000dpmlzdld2uohm\",\"programId"
+        "responseSnippet": "{\"error\":\"Group does not belong to the selected language\"}"
       },
       "deptOwn": {
         "expectedStatus": "Allowed business response (200/201/400/404/409/422)",
-        "actualStatus": 200,
+        "actualStatus": 400,
         "pass": true,
-        "responseSnippet": "{\"id\":\"cmrgoxdx8005ypmlzl151rkdj\",\"studentId\":\"cmrgowvz3003ipmlzjls44rak\",\"departmentId\":\"cmrgowf870009pmlzozbfj64d\",\"academicYearId\":\"cmrgowcza0000pmlzakerzxid\",\"academicSessionId\":\"cmrgowg82000dpmlzdld2uohm\",\"programId"
+        "responseSnippet": "{\"error\":\"Group does not belong to the selected language\"}"
       },
       "deptForeign": {
         "expectedStatus": "403",
@@ -131,19 +131,19 @@
   {
     "id": "AUTH-TIMELINE-GET",
     "method": "GET",
-    "pathLabel": "/api/admin/enrollments/cmrgowvz3003ipmlzjls44rak/timeline",
+    "pathLabel": "/api/admin/enrollments/cmrc1y8f7001bk2kdnzbaq7p5/timeline",
     "roles": {
       "superAdmin": {
         "expectedStatus": "Allowed business response (200/201/400/404/409/422)",
         "actualStatus": 200,
         "pass": true,
-        "responseSnippet": "[{\"id\":\"cmrgoxe3b0060pmlztt79z3zj\",\"studentId\":\"cmrgowvz3003ipmlzjls44rak\",\"enrollmentId\":\"cmrgoxdx8005ypmlzl151rkdj\",\"actorUserId\":\"cmrgowtlk0039pmlzr4cvsfxf\",\"eventType\":\"ENROLLMENT\",\"fromDepartmentId\":null,\"toDepartme"
+        "responseSnippet": "[{\"id\":\"cmrgcc1sf000ohkqvfg1ndnrm\",\"studentId\":\"cmrc1y8f7001bk2kdnzbaq7p5\",\"enrollmentId\":\"cmrgc1dcq0001ito32yevsbw0\",\"actorUserId\":\"cmrc1y5wd000pk2kddbqws6up\",\"eventType\":\"ACADEMIC_LEAVE\",\"fromDepartmentId\":\"cmrc1y4pr00"
       },
       "deptOwn": {
         "expectedStatus": "Allowed business response (200/201/400/404/409/422)",
         "actualStatus": 200,
         "pass": true,
-        "responseSnippet": "[{\"id\":\"cmrgoxe3b0060pmlztt79z3zj\",\"studentId\":\"cmrgowvz3003ipmlzjls44rak\",\"enrollmentId\":\"cmrgoxdx8005ypmlzl151rkdj\",\"actorUserId\":\"cmrgowtlk0039pmlzr4cvsfxf\",\"eventType\":\"ENROLLMENT\",\"fromDepartmentId\":null,\"toDepartme"
+        "responseSnippet": "[{\"id\":\"cmrgcc1sf000ohkqvfg1ndnrm\",\"studentId\":\"cmrc1y8f7001bk2kdnzbaq7p5\",\"enrollmentId\":\"cmrgc1dcq0001ito32yevsbw0\",\"actorUserId\":\"cmrc1y5wd000pk2kddbqws6up\",\"eventType\":\"ACADEMIC_LEAVE\",\"fromDepartmentId\":\"cmrc1y4pr00"
       },
       "deptForeign": {
         "expectedStatus": "403",
@@ -223,13 +223,13 @@
         "expectedStatus": "Allowed business response (200/201/400/404/409/422)",
         "actualStatus": 200,
         "pass": true,
-        "responseSnippet": "{\"mode\":\"single\",\"studentId\":\"cmzzzzzzzzzzzzzzzzzzzzzzz\",\"eligible\":false,\"reasons\":[\"Active enrollment not found\"]}"
+        "responseSnippet": "{\"mode\":\"single\",\"studentId\":\"cmzzzzzzzzzzzzzzzzzzzzzzz\",\"eligible\":false,\"reasons\":[\"Group does not belong to the selected program year\"]}"
       },
       "deptOwn": {
         "expectedStatus": "Allowed business response (200/201/400/404/409/422)",
         "actualStatus": 200,
         "pass": true,
-        "responseSnippet": "{\"mode\":\"single\",\"studentId\":\"cmzzzzzzzzzzzzzzzzzzzzzzz\",\"eligible\":false,\"reasons\":[\"Active enrollment not found\"]}"
+        "responseSnippet": "{\"mode\":\"single\",\"studentId\":\"cmzzzzzzzzzzzzzzzzzzzzzzz\",\"eligible\":false,\"reasons\":[\"Group does not belong to the selected program year\"]}"
       },
       "deptForeign": {
         "expectedStatus": "403",
@@ -350,9 +350,9 @@
     "roles": {
       "superAdmin": {
         "expectedStatus": "Allowed business response (200/201/400/404/409/422)",
-        "actualStatus": 201,
+        "actualStatus": 400,
         "pass": true,
-        "responseSnippet": "{\"leave\":{\"id\":\"cmrgp2wa3000k4mvahr76qtni\",\"studentId\":\"cmrgowvz3003ipmlzjls44rak\",\"enrollmentId\":\"cmrgoy1600071pmlzzqydqeo5\",\"leaveType\":\"MEDICAL\",\"startsAt\":\"2026-07-11T18:24:30.140Z\",\"endsAt\":\"2026-07-12T18:24:30.141Z"
+        "responseSnippet": "{\"error\":\"Active enrollment not found\"}"
       },
       "deptOwn": {
         "expectedStatus": "Allowed business response (200/201/400/404/409/422)",
@@ -548,7 +548,7 @@
         "expectedStatus": "200",
         "actualStatus": 200,
         "pass": true,
-        "responseSnippet": "[{\"id\":\"cmrgoxe3b0060pmlztt79z3zj\",\"eventType\":\"ENROLLMENT\",\"reason\":\"Initial enrollment\",\"occurredAt\":\"2026-07-11T18:21:00.691Z\",\"notes\":\"Alice BSc enrollment\",\"fromProgram\":null,\"toProgram\":\"BSc in Computer Science\",\"f"
+        "responseSnippet": "[{\"id\":\"cmrgcc1sf000ohkqvfg1ndnrm\",\"eventType\":\"ACADEMIC_LEAVE\",\"reason\":\"Authorization matrix probe\",\"occurredAt\":\"2026-07-11T12:27:44.208Z\",\"notes\":null,\"fromProgram\":\"BSc Computer Science\",\"toProgram\":null,\"fromGroup\""
       },
       "anon": {
         "expectedStatus": "401",

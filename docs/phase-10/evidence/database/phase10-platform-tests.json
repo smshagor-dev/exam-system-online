@@ -1,24 +1,24 @@
 {
   "status": "PASS",
-  "generatedAt": "2026-07-13T16:58:40.227Z",
+  "generatedAt": "2026-07-13T20:11:55.512Z",
   "course": {
-    "id": "cmrjguu1z0002ukjza1l768lt",
-    "code": "P10-1783961903010",
-    "versionId": "cmrjguusa000aukjzfk4xq07g",
-    "lessonId": "cmrjguv5f000eukjzt30flyzy",
+    "id": "cmrjnrdtv0002ckdhpmmekhpg",
+    "code": "P10-1783973499329",
+    "versionId": "cmrjnreh7000ackdhverayz85",
+    "lessonId": "cmrjnret5000eckdhympzndf3",
     "published": true
   },
   "materials": {
-    "materialId": "cmrjgux01000iukjzs43708f1",
-    "videoId": "cmrjguxgp000mukjzzot41dxa",
-    "liveClassId": "cmrjguzjw000sukjz3ntz4n8r"
+    "materialId": "cmrjnrgg0000ickdho99lhxyv",
+    "videoId": "cmrjnrguu000mckdhzzmec9il",
+    "liveClassId": "cmrjnripj000sckdhbdd5sxvm"
   },
   "progress": {
     "firstWatchPercent": 30,
     "resumedWatchPercent": 90,
     "resumeCount": 2,
-    "lessonProgressId": "cmrjgv1lf0010ukjzql0olrcb",
-    "attendanceId": "cmrjgv3ji0018ukjzmefv4lvl",
+    "lessonProgressId": "cmrjnrkho0010ckdh8qbq2sit",
+    "attendanceId": "cmrjnrmao0018ckdhx721y9yp",
     "summary": {
       "totalLessons": 1,
       "completedLessons": 1,
@@ -30,8 +30,8 @@
     }
   },
   "discussion": {
-    "threadId": "cmrjgv4am001cukjzsv98ut0u",
-    "replyId": "cmrjgv4kh001eukjzfsg18slm",
+    "threadId": "cmrjnrn56001cckdhuupcrl32",
+    "replyId": "cmrjnrngm001eckdhogj9o9rw",
     "pinned": true
   }
 }

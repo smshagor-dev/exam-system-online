@@ -1,19 +1,19 @@
 {
   "status": "PASS",
-  "generatedAt": "2026-07-13T16:58:43.104Z",
+  "generatedAt": "2026-07-13T20:11:36.333Z",
   "counts": {
-    "courseCount": 7,
-    "versionCount": 7,
-    "sectionCount": 7,
-    "lessonCount": 7,
-    "materialCount": 3,
-    "videoCount": 3,
-    "liveClassCount": 3,
-    "threadCount": 3,
-    "replyCount": 3,
-    "lessonProgressCount": 3,
-    "videoProgressCount": 3,
-    "attendanceCount": 3,
-    "translationCount": 2
+    "courseCount": 16,
+    "versionCount": 16,
+    "sectionCount": 16,
+    "lessonCount": 16,
+    "materialCount": 8,
+    "videoCount": 8,
+    "liveClassCount": 8,
+    "threadCount": 8,
+    "replyCount": 8,
+    "lessonProgressCount": 8,
+    "videoProgressCount": 8,
+    "attendanceCount": 8,
+    "translationCount": 3
   }
 }

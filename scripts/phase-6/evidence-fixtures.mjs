@@ -18,6 +18,7 @@ async function cleanupPhase6Records() {
 
     if (attemptIds.length > 0) {
       await prisma.examResult.deleteMany({ where: { attemptId: { in: attemptIds } } })
+      await prisma.examResult.deleteMany({ where: { examId: { in: examIds } } })
       await prisma.studentAnswer.deleteMany({ where: { attemptId: { in: attemptIds } } })
       await prisma.examAttemptSnapshot.deleteMany({ where: { attemptId: { in: attemptIds } } })
       await prisma.activityLog.deleteMany({
@@ -33,6 +34,7 @@ async function cleanupPhase6Records() {
         },
       }).catch(() => {})
       await prisma.studentExamAttempt.deleteMany({ where: { id: { in: attemptIds } } })
+      await prisma.studentExamAttempt.deleteMany({ where: { examId: { in: examIds } } })
     }
 
     if (examIds.length === 0) {
@@ -48,7 +50,13 @@ async function cleanupPhase6Records() {
       break
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error)
-      if (!message.includes('ExamToExamResult') || pass === 4) {
+      if (
+        (
+          !message.includes('ExamToExamResult') &&
+          !message.includes('ExamToStudentExamAttempt')
+        ) ||
+        pass === 4
+      ) {
         throw error
       }
       await new Promise((resolve) => setTimeout(resolve, 250 * (pass + 1)))

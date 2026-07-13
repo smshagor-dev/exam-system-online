@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
+import { enforceAuthRateLimit } from '@/lib/auth-rate-limit'
 import { forgotPasswordSchema } from '@/lib/validators'
 import { sendOneTimeCodeEmail, storePasswordResetCode } from '@/lib/auth-code'
 
@@ -19,6 +20,16 @@ export async function POST(req: NextRequest) {
       name: true,
     },
   })
+
+  const rateLimitResponse = await enforceAuthRateLimit({
+    req,
+    action: 'forgot-password',
+    accountKey: parsed.data.email,
+    userId: user?.id ?? null,
+  })
+  if (rateLimitResponse) {
+    return rateLimitResponse
+  }
 
   if (!user) {
     return NextResponse.json({ message: 'If the account exists, a 6-digit reset code has been sent.' })

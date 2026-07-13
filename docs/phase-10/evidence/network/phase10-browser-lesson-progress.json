@@ -1,10 +1,10 @@
 {
   "method": "POST",
-  "url": "/api/student/lms/lessons/cmrjgto7q0008hgasui20w0q6/progress",
+  "url": "/api/student/lms/lessons/cmrjnp45j008mochonxgbri7r/progress",
   "status": 200,
   "json": {
-    "id": "cmrjgu6cs000qhgasztol8u5z",
-    "lessonId": "cmrjgto7q0008hgasui20w0q6",
+    "id": "cmrjnpsl8009kocho60lqhw40",
+    "lessonId": "cmrjnp45j008mochonxgbri7r",
     "studentId": "cmrhdzsao000bwhz5n1waw7db",
     "completionPercent": 100,
     "readingProgressPercent": 100,
@@ -13,9 +13,9 @@
     "attendanceCompleted": true,
     "quizCompleted": true,
     "isCompleted": true,
-    "completedAt": "2026-07-13T16:57:58.811Z",
-    "createdAt": "2026-07-13T16:57:52.300Z",
-    "updatedAt": "2026-07-13T16:57:58.812Z"
+    "completedAt": "2026-07-13T20:10:33.660Z",
+    "createdAt": "2026-07-13T20:10:25.148Z",
+    "updatedAt": "2026-07-13T20:10:33.663Z"
   },
-  "text": "{\"id\":\"cmrjgu6cs000qhgasztol8u5z\",\"lessonId\":\"cmrjgto7q0008hgasui20w0q6\",\"studentId\":\"cmrhdzsao000bwhz5n1waw7db\",\"completionPercent\":100,\"readingProgressPercent\":100,\"watchProgressPercent\":70,\"assignmentCompleted\":true,\"attendanceCompleted\":true,\"quizCompleted\":true,\"isCompleted\":true,\"completedAt\":\"2026-07-13T16:57:58.811Z\",\"createdAt\":\"2026-07-13T16:57:52.300Z\",\"updatedAt\":\"2026-07-13T16:57:58.812Z\"}"
+  "text": "{\"id\":\"cmrjnpsl8009kocho60lqhw40\",\"lessonId\":\"cmrjnp45j008mochonxgbri7r\",\"studentId\":\"cmrhdzsao000bwhz5n1waw7db\",\"completionPercent\":100,\"readingProgressPercent\":100,\"watchProgressPercent\":70,\"assignmentCompleted\":true,\"attendanceCompleted\":true,\"quizCompleted\":true,\"isCompleted\":true,\"completedAt\":\"2026-07-13T20:10:33.660Z\",\"createdAt\":\"2026-07-13T20:10:25.148Z\",\"updatedAt\":\"2026-07-13T20:10:33.663Z\"}"
 }

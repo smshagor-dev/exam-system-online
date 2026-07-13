@@ -1,0 +1,5 @@
+log: [Fast Refresh] rebuilding
+log: [Fast Refresh] done in 3619ms
+log: [HMR] connected
+
+No page errors captured

@@ -20,14 +20,14 @@ Status: PARTIAL_EXECUTED_EVIDENCE
 - Teacher: expected 403, actual 403, PASS, evidence `docs/phase-3/evidence/authorization-matrix-results.json`
 - Student: expected 200 for own history only, otherwise 403, actual 403, PASS, evidence `docs/phase-3/evidence/authorization-matrix-results.json`
 - Unauthenticated: expected 401, actual 401, PASS, evidence `docs/phase-3/evidence/authorization-matrix-results.json`
-- `AUTH-ENR-PATCH` PATCH `/api/admin/enrollments/cmrgoxdx8005ypmlzl151rkdj`
-- Super Admin: expected Allowed business response (200/201/400/404/409/422), actual 200, PASS, evidence `docs/phase-3/evidence/authorization-matrix-results.json`
-- Department Admin own scope: expected Allowed business response (200/201/400/404/409/422), actual 200, PASS, evidence `docs/phase-3/evidence/authorization-matrix-results.json`
+- `AUTH-ENR-PATCH` PATCH `/api/admin/enrollments/cmrgc1dcq0001ito32yevsbw0`
+- Super Admin: expected Allowed business response (200/201/400/404/409/422), actual 400, PASS, evidence `docs/phase-3/evidence/authorization-matrix-results.json`
+- Department Admin own scope: expected Allowed business response (200/201/400/404/409/422), actual 400, PASS, evidence `docs/phase-3/evidence/authorization-matrix-results.json`
 - Department Admin foreign scope: expected 403, actual 403, PASS, evidence `docs/phase-3/evidence/authorization-matrix-results.json`
 - Teacher: expected 403, actual 403, PASS, evidence `docs/phase-3/evidence/authorization-matrix-results.json`
 - Student: expected 200 for own history only, otherwise 403, actual 403, PASS, evidence `docs/phase-3/evidence/authorization-matrix-results.json`
 - Unauthenticated: expected 401, actual 401, PASS, evidence `docs/phase-3/evidence/authorization-matrix-results.json`
-- `AUTH-TIMELINE-GET` GET `/api/admin/enrollments/cmrgowvz3003ipmlzjls44rak/timeline`
+- `AUTH-TIMELINE-GET` GET `/api/admin/enrollments/cmrc1y8f7001bk2kdnzbaq7p5/timeline`
 - Super Admin: expected Allowed business response (200/201/400/404/409/422), actual 200, PASS, evidence `docs/phase-3/evidence/authorization-matrix-results.json`
 - Department Admin own scope: expected Allowed business response (200/201/400/404/409/422), actual 200, PASS, evidence `docs/phase-3/evidence/authorization-matrix-results.json`
 - Department Admin foreign scope: expected 403, actual 403, PASS, evidence `docs/phase-3/evidence/authorization-matrix-results.json`
@@ -63,7 +63,7 @@ Status: PARTIAL_EXECUTED_EVIDENCE
 - Student: expected 200 for own history only, otherwise 403, actual 403, PASS, evidence `docs/phase-3/evidence/authorization-matrix-results.json`
 - Unauthenticated: expected 401, actual 401, PASS, evidence `docs/phase-3/evidence/authorization-matrix-results.json`
 - `AUTH-LEV-POST` POST `/api/admin/leaves`
-- Super Admin: expected Allowed business response (200/201/400/404/409/422), actual 201, PASS, evidence `docs/phase-3/evidence/authorization-matrix-results.json`
+- Super Admin: expected Allowed business response (200/201/400/404/409/422), actual 400, PASS, evidence `docs/phase-3/evidence/authorization-matrix-results.json`
 - Department Admin own scope: expected Allowed business response (200/201/400/404/409/422), actual 400, PASS, evidence `docs/phase-3/evidence/authorization-matrix-results.json`
 - Department Admin foreign scope: expected 403, actual 403, PASS, evidence `docs/phase-3/evidence/authorization-matrix-results.json`
 - Teacher: expected 403, actual 403, PASS, evidence `docs/phase-3/evidence/authorization-matrix-results.json`
@@ -99,13 +99,13 @@ Status: PARTIAL_EXECUTED_EVIDENCE
 - Unauthenticated: expected 401, actual 401, PASS, evidence `docs/phase-3/evidence/authorization-matrix-results.json`
 | `/api/admin/enrollments` | `GET` | 200 / PASS | 200 / PASS | 403 / PASS | 403 / PASS | 403 / PASS | 401 / PASS |
 | `/api/admin/enrollments` | `POST` | 400 / PASS | 400 / PASS | 403 / PASS | 403 / PASS | 403 / PASS | 401 / PASS |
-| `/api/admin/enrollments/cmrgoxdx8005ypmlzl151rkdj` | `PATCH` | 200 / PASS | 200 / PASS | 403 / PASS | 403 / PASS | 403 / PASS | 401 / PASS |
-| `/api/admin/enrollments/cmrgowvz3003ipmlzjls44rak/timeline` | `GET` | 200 / PASS | 200 / PASS | 403 / PASS | 403 / PASS | 403 / PASS | 401 / PASS |
+| `/api/admin/enrollments/cmrgc1dcq0001ito32yevsbw0` | `PATCH` | 400 / PASS | 400 / PASS | 403 / PASS | 403 / PASS | 403 / PASS | 401 / PASS |
+| `/api/admin/enrollments/cmrc1y8f7001bk2kdnzbaq7p5/timeline` | `GET` | 200 / PASS | 200 / PASS | 403 / PASS | 403 / PASS | 403 / PASS | 401 / PASS |
 | `/api/admin/promotions` | `POST` | 400 / PASS | 400 / PASS | 403 / PASS | 403 / PASS | 403 / PASS | 401 / PASS |
 | `/api/admin/promotions/preview` | `POST` | 200 / PASS | 200 / PASS | 403 / PASS | 403 / PASS | 403 / PASS | 401 / PASS |
 | `/api/admin/promotions/bulk` | `POST` | 200 / PASS | 200 / PASS | 403 / PASS | 403 / PASS | 403 / PASS | 401 / PASS |
 | `/api/admin/transfers` | `POST` | 404 / PASS | 404 / PASS | 404 / PASS | 403 / PASS | 403 / PASS | 401 / PASS |
-| `/api/admin/leaves` | `POST` | 201 / PASS | 400 / PASS | 403 / PASS | 403 / PASS | 403 / PASS | 401 / PASS |
+| `/api/admin/leaves` | `POST` | 400 / PASS | 400 / PASS | 403 / PASS | 403 / PASS | 403 / PASS | 401 / PASS |
 | `/api/admin/readmissions` | `POST` | 400 / PASS | 400 / PASS | 403 / PASS | 403 / PASS | 403 / PASS | 401 / PASS |
 | `/api/admin/graduations` | `POST` | 400 / PASS | 400 / PASS | 403 / PASS | 403 / PASS | 403 / PASS | 401 / PASS |
 | `/api/admin/graduations` | `PATCH` | 400 / PASS | 400 / PASS | 403 / PASS | 403 / PASS | 403 / PASS | 401 / PASS |

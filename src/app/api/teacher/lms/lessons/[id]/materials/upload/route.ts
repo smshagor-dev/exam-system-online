@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { requirePhase10Permission } from '@/lib/phase10-route-auth'
 import { uploadPhase10LessonMaterial } from '@/lib/phase10-lms'
+import { validatePhase10MaterialUpload } from '@/lib/phase10-upload-security'
 import { phase10MaterialCreateSchema } from '@/lib/phase10-validators'
 
 type RouteContext = { params: Promise<{ id: string }> }
@@ -45,6 +46,21 @@ export async function POST(req: Request, { params }: RouteContext) {
   if (!payload.success) return NextResponse.json({ error: payload.error.flatten() }, { status: 400 })
 
   const file = formData.get('file')
+  if (file instanceof File) {
+    try {
+      validatePhase10MaterialUpload({
+        name: file.name,
+        type: file.type,
+        size: file.size,
+      })
+    } catch (error) {
+      return NextResponse.json(
+        { error: error instanceof Error ? error.message : 'Invalid LMS material upload' },
+        { status: 400 }
+      )
+    }
+  }
+
   const material = await uploadPhase10LessonMaterial(
     id,
     payload.data,

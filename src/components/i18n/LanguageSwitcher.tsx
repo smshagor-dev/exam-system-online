@@ -6,7 +6,7 @@ export default function LanguageSwitcher({ compact = false }: { compact?: boolea
   const { locale, locales, setLocale, t } = useI18n()
 
   return (
-    <label className={`flex items-center gap-2 ${compact ? 'text-xs' : 'text-sm'} text-slate-600`}>
+    <label className={`flex items-center gap-2 ${compact ? 'text-xs' : 'text-sm'} text-current`}>
       <span>{t('common.site_language', 'Site Language')}</span>
       <select
         value={locale}

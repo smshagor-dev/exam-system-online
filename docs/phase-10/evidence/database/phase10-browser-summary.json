@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-13T16:58:09.870Z",
+  "generatedAt": "2026-07-13T20:10:44.809Z",
   "status": "PASS",
   "total": 9,
   "passed": 9,
@@ -25,7 +25,7 @@
       "precondition": "A valid academic offering is available for the CSE department.",
       "steps": "Create a Phase 10 LMS course with a lesson through the admin API.",
       "expected": "Course creation succeeds and returns a lesson id.",
-      "actual": "status=201; courseId=cmrjgtnox0002hgaskh6bjez1; lessonId=cmrjgto7q0008hgasui20w0q6",
+      "actual": "status=201; courseId=cmrjnp3ly008cochoo82g7nbf; lessonId=cmrjnp45j008mochonxgbri7r",
       "status": "PASS",
       "evidencePaths": [
         "docs/phase-10/evidence/network/phase10-browser-course-create.json"
@@ -65,7 +65,7 @@
       "precondition": "The lesson has been published.",
       "steps": "Schedule a live class for the published lesson.",
       "expected": "The live class is created with a join url.",
-      "actual": "status=201; liveClassId=cmrjgu137000ihgasdk2iz1jb",
+      "actual": "status=201; liveClassId=cmrjnpije0098ocho3hwqaq8b",
       "status": "PASS",
       "evidencePaths": [
         "docs/phase-10/evidence/network/phase10-browser-live-class.json"

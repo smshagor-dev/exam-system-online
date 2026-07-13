@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { requirePhase10Permission } from '@/lib/phase10-route-auth'
 import { createPhase10VideoAsset } from '@/lib/phase10-lms'
+import { validatePhase10VideoUpload } from '@/lib/phase10-upload-security'
 import { phase10VideoCreateSchema } from '@/lib/phase10-validators'
 
 type RouteContext = { params: Promise<{ id: string }> }
@@ -38,6 +39,21 @@ export async function POST(req: Request, { params }: RouteContext) {
   if (!payload.success) return NextResponse.json({ error: payload.error.flatten() }, { status: 400 })
 
   const file = formData.get('file')
+  if (file instanceof File) {
+    try {
+      validatePhase10VideoUpload({
+        name: file.name,
+        type: file.type,
+        size: file.size,
+      })
+    } catch (error) {
+      return NextResponse.json(
+        { error: error instanceof Error ? error.message : 'Invalid LMS video upload' },
+        { status: 400 }
+      )
+    }
+  }
+
   const video = await createPhase10VideoAsset(
     id,
     payload.data,

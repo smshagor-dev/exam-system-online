@@ -1,0 +1,178 @@
+{
+  "title": "ExamFlow Pro",
+  "interactiveCount": 11,
+  "missingNames": [],
+  "focusOrder": [
+    "body#.inter_5972bc34-module__OU16Qa__className"
+  ],
+  "realFocusOrder": [
+    {
+      "tag": "button",
+      "id": "",
+      "role": "",
+      "text": ""
+    },
+    {
+      "tag": "button",
+      "id": "",
+      "role": "",
+      "text": "Menu"
+    },
+    {
+      "tag": "a",
+      "id": "",
+      "role": "",
+      "text": "Dashboard"
+    },
+    {
+      "tag": "a",
+      "id": "",
+      "role": "",
+      "text": "Progress"
+    },
+    {
+      "tag": "a",
+      "id": "",
+      "role": "",
+      "text": "Ebooks"
+    },
+    {
+      "tag": "a",
+      "id": "",
+      "role": "",
+      "text": "Course Work & Report"
+    },
+    {
+      "tag": "a",
+      "id": "",
+      "role": "",
+      "text": "My Exams"
+    },
+    {
+      "tag": "a",
+      "id": "",
+      "role": "",
+      "text": "Results"
+    },
+    {
+      "tag": "select",
+      "id": "",
+      "role": "",
+      "text": "EnglishRussian"
+    },
+    {
+      "tag": "button",
+      "id": "",
+      "role": "",
+      "text": "PP5 Russian Studentp5.russian.student@examflow.pro"
+    },
+    {
+      "tag": "button",
+      "id": "",
+      "role": "",
+      "text": "Menu"
+    }
+  ],
+  "contrastChecks": [
+    {
+      "tag": "p",
+      "text": "ExamFlow Pro",
+      "ratio": 16.81
+    },
+    {
+      "tag": "p",
+      "text": "Student Portal",
+      "ratio": 11.32
+    },
+    {
+      "tag": "button",
+      "text": "Menu",
+      "ratio": 16.81
+    },
+    {
+      "tag": "a",
+      "text": "Dashboard",
+      "ratio": 11.32
+    },
+    {
+      "tag": "a",
+      "text": "Progress",
+      "ratio": 11.32
+    },
+    {
+      "tag": "a",
+      "text": "Ebooks",
+      "ratio": 11.32
+    },
+    {
+      "tag": "a",
+      "text": "Course Work & Report",
+      "ratio": 11.32
+    },
+    {
+      "tag": "a",
+      "text": "My Exams",
+      "ratio": 11.32
+    },
+    {
+      "tag": "a",
+      "text": "Results",
+      "ratio": 11.32
+    },
+    {
+      "tag": "label",
+      "text": "Site LanguageEnglishRussian",
+      "ratio": 16.81
+    },
+    {
+      "tag": "select",
+      "text": "EnglishRussian",
+      "ratio": 10.35
+    },
+    {
+      "tag": "button",
+      "text": "PP5 Russian Studentp5.russian.student@examflow.pro",
+      "ratio": 16.81
+    },
+    {
+      "tag": "p",
+      "text": "P5 Russian Student",
+      "ratio": 16.81
+    },
+    {
+      "tag": "p",
+      "text": "p5.russian.student@examflow.pro",
+      "ratio": 13.64
+    },
+    {
+      "tag": "p",
+      "text": "Student Panel",
+      "ratio": 6.61
+    },
+    {
+      "tag": "h1",
+      "text": "Learning Workspace",
+      "ratio": 16.61
+    },
+    {
+      "tag": "button",
+      "text": "Menu",
+      "ratio": 10.35
+    },
+    {
+      "tag": "h1",
+      "text": "Phase 10 Browser Course 1783972936822",
+      "ratio": 17.85
+    },
+    {
+      "tag": "p",
+      "text": "Course created during browser smoke.",
+      "ratio": 4.76
+    },
+    {
+      "tag": "p",
+      "text": "Watch and Resume",
+      "ratio": 17.85
+    }
+  ]
+}

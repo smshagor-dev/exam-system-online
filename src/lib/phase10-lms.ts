@@ -13,14 +13,16 @@ import {
   Phase10VideoSourceType,
 } from '@prisma/client'
 import { findTranslation } from './academic-content'
+import { sanitizeRichHtml } from './safe-html'
 import { prisma } from './prisma'
+import { sanitizePhase10FileName } from './phase10-upload-security'
 
 const PHASE10_STORAGE_DIR = path.join(process.cwd(), '.generated', 'phase-10')
 const PHASE10_MATERIAL_DIR = path.join(PHASE10_STORAGE_DIR, 'materials')
 const PHASE10_VIDEO_DIR = path.join(PHASE10_STORAGE_DIR, 'videos')
 
 function safeName(value: string) {
-  return value.replace(/[^a-zA-Z0-9._-]+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '') || 'asset'
+  return sanitizePhase10FileName(value)
 }
 
 async function ensureDir(dirPath: string) {
@@ -420,7 +422,7 @@ export async function uploadPhase10LessonMaterial(
   if (file) {
     const saved = await saveBinaryAsset(PHASE10_MATERIAL_DIR, file.name, file.buffer)
     stored = {
-      fileName: file.name,
+      fileName: safeName(file.name),
       fileUrl: saved.filePath,
       sizeBytes: file.buffer.byteLength,
       mimeType: file.type || 'application/octet-stream',
@@ -434,7 +436,7 @@ export async function uploadPhase10LessonMaterial(
       title: input.title,
       description: input.description ?? null,
       externalUrl: input.externalUrl ?? null,
-      richText: input.richText ?? null,
+      richText: sanitizeRichHtml(input.richText) || null,
       scormManifestUrl: input.scormManifestUrl ?? null,
       scormLaunchUrl: input.scormLaunchUrl ?? null,
       sortOrder: input.sortOrder ?? 0,
@@ -448,7 +450,7 @@ export async function uploadPhase10LessonMaterial(
           languageId: translation.languageId,
           title: translation.title,
           description: translation.description ?? null,
-          richText: translation.richText ?? null,
+          richText: sanitizeRichHtml(translation.richText) || null,
         })),
       },
     },
@@ -479,7 +481,7 @@ export async function createPhase10VideoAsset(
   if (file) {
     const saved = await saveBinaryAsset(PHASE10_VIDEO_DIR, file.name, file.buffer)
     stored = {
-      fileName: file.name,
+      fileName: safeName(file.name),
       fileUrl: saved.filePath,
     }
   }

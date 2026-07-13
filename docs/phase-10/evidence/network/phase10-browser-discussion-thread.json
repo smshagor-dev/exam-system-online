@@ -3,9 +3,9 @@
   "url": "/api/student/lms/discussions",
   "status": 201,
   "json": {
-    "id": "cmrjgudc00012hgas1n5ifwlg",
-    "courseId": "cmrjgtnox0002hgaskh6bjez1",
-    "lessonId": "cmrjgto7q0008hgasui20w0q6",
+    "id": "cmrjnq20r00a0ochoppdg8j68",
+    "courseId": "cmrjnp3ly008cochoo82g7nbf",
+    "lessonId": "cmrjnp45j008mochonxgbri7r",
     "authorUserId": "cmrhdzqx00003whz5ryga8cli",
     "title": "Phase 10 discussion thread",
     "body": "Testing the discussion flow.",
@@ -16,8 +16,8 @@
     "isModerated": false,
     "moderatedByUserId": null,
     "moderatedAt": null,
-    "createdAt": "2026-07-13T16:58:01.344Z",
-    "updatedAt": "2026-07-13T16:58:01.344Z"
+    "createdAt": "2026-07-13T20:10:37.372Z",
+    "updatedAt": "2026-07-13T20:10:37.372Z"
   },
-  "text": "{\"id\":\"cmrjgudc00012hgas1n5ifwlg\",\"courseId\":\"cmrjgtnox0002hgaskh6bjez1\",\"lessonId\":\"cmrjgto7q0008hgasui20w0q6\",\"authorUserId\":\"cmrhdzqx00003whz5ryga8cli\",\"title\":\"Phase 10 discussion thread\",\"body\":\"Testing the discussion flow.\",\"status\":\"OPEN\",\"isPinned\":false,\"pinnedByUserId\":null,\"pinnedAt\":null,\"isModerated\":false,\"moderatedByUserId\":null,\"moderatedAt\":null,\"createdAt\":\"2026-07-13T16:58:01.344Z\",\"updatedAt\":\"2026-07-13T16:58:01.344Z\"}"
+  "text": "{\"id\":\"cmrjnq20r00a0ochoppdg8j68\",\"courseId\":\"cmrjnp3ly008cochoo82g7nbf\",\"lessonId\":\"cmrjnp45j008mochonxgbri7r\",\"authorUserId\":\"cmrhdzqx00003whz5ryga8cli\",\"title\":\"Phase 10 discussion thread\",\"body\":\"Testing the discussion flow.\",\"status\":\"OPEN\",\"isPinned\":false,\"pinnedByUserId\":null,\"pinnedAt\":null,\"isModerated\":false,\"moderatedByUserId\":null,\"moderatedAt\":null,\"createdAt\":\"2026-07-13T20:10:37.372Z\",\"updatedAt\":\"2026-07-13T20:10:37.372Z\"}"
 }

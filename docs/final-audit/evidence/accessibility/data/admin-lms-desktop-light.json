@@ -1,0 +1,184 @@
+{
+  "title": "ExamFlow Pro",
+  "interactiveCount": 23,
+  "missingNames": [],
+  "focusOrder": [
+    "body#.inter_5972bc34-module__OU16Qa__className"
+  ],
+  "realFocusOrder": [
+    {
+      "tag": "a",
+      "id": "",
+      "role": "",
+      "text": "Dashboard"
+    },
+    {
+      "tag": "a",
+      "id": "",
+      "role": "",
+      "text": "Departments"
+    },
+    {
+      "tag": "a",
+      "id": "",
+      "role": "",
+      "text": "Degree Levels"
+    },
+    {
+      "tag": "a",
+      "id": "",
+      "role": "",
+      "text": "Programs"
+    },
+    {
+      "tag": "a",
+      "id": "",
+      "role": "",
+      "text": "Department Languages"
+    },
+    {
+      "tag": "a",
+      "id": "",
+      "role": "",
+      "text": "Academic Sessions"
+    },
+    {
+      "tag": "a",
+      "id": "",
+      "role": "",
+      "text": "Program Years"
+    },
+    {
+      "tag": "a",
+      "id": "",
+      "role": "",
+      "text": "Program Semesters"
+    },
+    {
+      "tag": "a",
+      "id": "",
+      "role": "",
+      "text": "Curriculum"
+    },
+    {
+      "tag": "a",
+      "id": "",
+      "role": "",
+      "text": "Academic Offerings"
+    },
+    {
+      "tag": "a",
+      "id": "",
+      "role": "",
+      "text": "Exam Calendar"
+    },
+    {
+      "tag": "a",
+      "id": "",
+      "role": "",
+      "text": "Exam Venues"
+    }
+  ],
+  "contrastChecks": [
+    {
+      "tag": "p",
+      "text": "ExamFlow Pro",
+      "ratio": 16.92
+    },
+    {
+      "tag": "p",
+      "text": "Administration Panel",
+      "ratio": 11.39
+    },
+    {
+      "tag": "a",
+      "text": "Dashboard",
+      "ratio": 11.39
+    },
+    {
+      "tag": "a",
+      "text": "Departments",
+      "ratio": 11.39
+    },
+    {
+      "tag": "a",
+      "text": "Degree Levels",
+      "ratio": 11.39
+    },
+    {
+      "tag": "a",
+      "text": "Programs",
+      "ratio": 11.39
+    },
+    {
+      "tag": "a",
+      "text": "Department Languages",
+      "ratio": 11.39
+    },
+    {
+      "tag": "a",
+      "text": "Academic Sessions",
+      "ratio": 11.39
+    },
+    {
+      "tag": "a",
+      "text": "Program Years",
+      "ratio": 11.39
+    },
+    {
+      "tag": "a",
+      "text": "Program Semesters",
+      "ratio": 11.39
+    },
+    {
+      "tag": "a",
+      "text": "Curriculum",
+      "ratio": 11.39
+    },
+    {
+      "tag": "a",
+      "text": "Academic Offerings",
+      "ratio": 11.39
+    },
+    {
+      "tag": "a",
+      "text": "Exam Calendar",
+      "ratio": 11.39
+    },
+    {
+      "tag": "a",
+      "text": "Exam Venues",
+      "ratio": 11.39
+    },
+    {
+      "tag": "a",
+      "text": "Exam Scheduling",
+      "ratio": 11.39
+    },
+    {
+      "tag": "a",
+      "text": "Subjects",
+      "ratio": 11.39
+    },
+    {
+      "tag": "a",
+      "text": "Groups",
+      "ratio": 11.39
+    },
+    {
+      "tag": "a",
+      "text": "Academic Years",
+      "ratio": 11.39
+    },
+    {
+      "tag": "a",
+      "text": "Teachers",
+      "ratio": 11.39
+    },
+    {
+      "tag": "a",
+      "text": "Students",
+      "ratio": 11.39
+    }
+  ]
+}

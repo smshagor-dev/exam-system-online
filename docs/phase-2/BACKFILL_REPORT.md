@@ -1,6 +1,6 @@
 # Backfill Report
 
-Mode: DRY RUN
+Mode: APPLY
 Database: examflow_pro
 Environment: development
 
@@ -8,18 +8,18 @@ Environment: development
 ```json
 {
   "teacherAssignments": {
-    "total": 3,
-    "resolved": 0,
+    "total": 4,
+    "resolved": 1,
     "acceptedUnresolved": 3,
     "ambiguous": 0,
     "failed": 0
   },
   "studentSubjects": {
-    "total": 6,
-    "resolved": 0,
+    "total": 1534,
+    "resolved": 2,
     "acceptedUnresolved": 6,
     "ambiguous": 0,
-    "failed": 0
+    "failed": 1526
   }
 }
 ```

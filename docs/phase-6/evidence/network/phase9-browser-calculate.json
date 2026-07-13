@@ -1,10 +1,10 @@
 {
   "method": "POST",
-  "url": "/api/admin/results-enterprise/gradebooks/cmrjfjt460001odlbpate7fc0/calculate",
+  "url": "/api/admin/results-enterprise/gradebooks/cmrjnoud20083ochoki2dba9e/calculate",
   "status": 200,
   "json": {
-    "gradebookId": "cmrjfjt460001odlbpate7fc0",
+    "gradebookId": "cmrjnoud20083ochoki2dba9e",
     "calculatedCount": 2
   },
-  "text": "{\"gradebookId\":\"cmrjfjt460001odlbpate7fc0\",\"calculatedCount\":2}"
+  "text": "{\"gradebookId\":\"cmrjnoud20083ochoki2dba9e\",\"calculatedCount\":2}"
 }

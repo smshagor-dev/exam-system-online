@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
+import { enforceAuthRateLimit } from '@/lib/auth-rate-limit'
 import { verifyAccountSchema } from '@/lib/validators'
 import { isEmailVerificationRequired } from '@/lib/system-settings'
 
@@ -22,6 +23,16 @@ export async function POST(req: NextRequest) {
       emailVerificationExpiresAt: true,
     },
   })
+
+  const rateLimitResponse = await enforceAuthRateLimit({
+    req,
+    action: 'verify-account',
+    accountKey: parsed.data.email,
+    userId: user?.id ?? null,
+  })
+  if (rateLimitResponse) {
+    return rateLimitResponse
+  }
 
   if (!user) {
     return NextResponse.json({ error: 'Invalid verification request.' }, { status: 400 })

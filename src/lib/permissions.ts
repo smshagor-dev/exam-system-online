@@ -572,6 +572,20 @@ export function invalidateStudentExamAccessContextCache(studentUserId: string, e
   studentExamAccessContextCache.delete(buildStudentExamAccessContextCacheKey(studentUserId, examId))
 }
 
+export function invalidateStudentExamAccessCaches(studentUserId: string) {
+  for (const key of studentExamAccessProfileCache.keys()) {
+    if (key.startsWith(`${studentUserId}:`)) {
+      studentExamAccessProfileCache.delete(key)
+    }
+  }
+
+  for (const key of studentExamAccessContextCache.keys()) {
+    if (key.startsWith(`${studentUserId}:`)) {
+      studentExamAccessContextCache.delete(key)
+    }
+  }
+}
+
 export function invalidateExamAccessCaches(examId: string) {
   studentExamAccessExamCache.delete(examId)
   for (const key of studentExamAccessProfileCache.keys()) {
@@ -1127,8 +1141,12 @@ export async function studentCanAccessExam(
   examId: string
 ): Promise<{ allowed: boolean; reason?: string }> {
   const result = await getStudentExamAccessContext(studentUserId, examId)
-  return {
-    allowed: result.allowed,
-    reason: result.reason,
-  }
+  return result.reason
+    ? {
+        allowed: result.allowed,
+        reason: result.reason,
+      }
+    : {
+        allowed: result.allowed,
+      }
 }

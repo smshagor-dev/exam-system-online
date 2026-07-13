@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import bcrypt from 'bcryptjs'
+import { enforceAuthRateLimit } from '@/lib/auth-rate-limit'
 import { prisma } from '@/lib/prisma'
 import { resetPasswordSchema } from '@/lib/validators'
 
@@ -19,6 +20,16 @@ export async function POST(req: NextRequest) {
       passwordResetExpiresAt: true,
     },
   })
+
+  const rateLimitResponse = await enforceAuthRateLimit({
+    req,
+    action: 'reset-password',
+    accountKey: parsed.data.email,
+    userId: user?.id ?? null,
+  })
+  if (rateLimitResponse) {
+    return rateLimitResponse
+  }
 
   if (
     !user ||

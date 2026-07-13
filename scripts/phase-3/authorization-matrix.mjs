@@ -20,41 +20,34 @@ async function getBaseDatabaseUrl() {
   return match[1]
 }
 
-function withDatabaseName(databaseUrl, suffix) {
-  const [base, query = ''] = databaseUrl.split('?')
-  const dbName = base.slice(base.lastIndexOf('/') + 1)
-  const root = base.slice(0, base.lastIndexOf('/') + 1)
-  return `${root}${dbName}${suffix}${query ? `?${query}` : ''}`
-}
-
 const roles = {
   superAdmin: {
     label: 'Super Admin',
-    email: 'admin@test.local',
+    email: 'admin@examflow.pro',
     password: 'Admin@123',
     landing: '/admin',
   },
   deptOwn: {
     label: 'Department Admin own scope',
-    email: 'cse.admin@test.local',
+    email: 'cse.admin@examflow.pro',
     password: 'Admin@123',
     landing: '/admin',
   },
   deptForeign: {
     label: 'Department Admin foreign scope',
-    email: 'cse.admin@test.local',
+    email: 'cse.admin@examflow.pro',
     password: 'Admin@123',
     landing: '/admin',
   },
   teacher: {
     label: 'Teacher',
-    email: 'teacher@test.local',
+    email: 'teacher.john@examflow.pro',
     password: 'Teacher@123',
     landing: '/teacher',
   },
   student: {
     label: 'Student',
-    email: 'alice@student.test',
+    email: 'alice@student.examflow.pro',
     password: 'Student@123',
     landing: '/student',
   },
@@ -135,7 +128,7 @@ async function ensureLifecycleFixture(prisma) {
 
   const [aliceProfile, cseProgram, eeeProgram, cseSession, cseProgramYear, eeeProgramYear, cseSemester, cseProgramSemester, eeeProgramSemester, cseGroup, eeeGroup, cseDeptLanguage, eeeDeptLanguage, cseYear] = await Promise.all([
     prisma.studentProfile.findFirst({
-      where: { user: { email: 'alice@student.test' } },
+      where: { user: { email: 'alice@student.examflow.pro' } },
       select: { id: true, departmentId: true },
     }),
     prisma.academicProgram.findFirst({ where: { departmentId: cse.id, isActive: true }, orderBy: { createdAt: 'asc' } }),
@@ -656,7 +649,7 @@ function renderMarkdown(results) {
 }
 
 async function main() {
-  process.env.DATABASE_URL = withDatabaseName(await getBaseDatabaseUrl(), '_phase3_tests')
+  process.env.DATABASE_URL = process.env.PHASE3_DATABASE_URL || await getBaseDatabaseUrl()
   await ensureEvidenceDir()
   const prisma = new PrismaClient()
   const fixture = await ensureLifecycleFixture(prisma)

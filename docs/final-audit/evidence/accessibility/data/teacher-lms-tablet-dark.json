@@ -1,0 +1,184 @@
+{
+  "title": "ExamFlow Pro",
+  "interactiveCount": 25,
+  "missingNames": [],
+  "focusOrder": [
+    "body#.inter_5972bc34-module__OU16Qa__className"
+  ],
+  "realFocusOrder": [
+    {
+      "tag": "button",
+      "id": "",
+      "role": "",
+      "text": ""
+    },
+    {
+      "tag": "button",
+      "id": "",
+      "role": "",
+      "text": "Menu"
+    },
+    {
+      "tag": "a",
+      "id": "",
+      "role": "",
+      "text": "Dashboard"
+    },
+    {
+      "tag": "a",
+      "id": "",
+      "role": "",
+      "text": "Assignments"
+    },
+    {
+      "tag": "a",
+      "id": "",
+      "role": "",
+      "text": "Question Bank"
+    },
+    {
+      "tag": "a",
+      "id": "",
+      "role": "",
+      "text": "Translations"
+    },
+    {
+      "tag": "a",
+      "id": "",
+      "role": "",
+      "text": "Ebooks"
+    },
+    {
+      "tag": "a",
+      "id": "",
+      "role": "",
+      "text": "Exams"
+    },
+    {
+      "tag": "a",
+      "id": "",
+      "role": "",
+      "text": "Invigilation"
+    },
+    {
+      "tag": "a",
+      "id": "",
+      "role": "",
+      "text": "Create Exam"
+    },
+    {
+      "tag": "a",
+      "id": "",
+      "role": "",
+      "text": "Students"
+    },
+    {
+      "tag": "a",
+      "id": "",
+      "role": "",
+      "text": "Reviews"
+    }
+  ],
+  "contrastChecks": [
+    {
+      "tag": "p",
+      "text": "ExamFlow Pro",
+      "ratio": 15.52
+    },
+    {
+      "tag": "p",
+      "text": "Teacher Workspace",
+      "ratio": 10.45
+    },
+    {
+      "tag": "button",
+      "text": "Menu",
+      "ratio": 15.52
+    },
+    {
+      "tag": "a",
+      "text": "Dashboard",
+      "ratio": 10.45
+    },
+    {
+      "tag": "a",
+      "text": "Assignments",
+      "ratio": 10.45
+    },
+    {
+      "tag": "a",
+      "text": "Question Bank",
+      "ratio": 10.45
+    },
+    {
+      "tag": "a",
+      "text": "Translations",
+      "ratio": 10.45
+    },
+    {
+      "tag": "a",
+      "text": "Ebooks",
+      "ratio": 10.45
+    },
+    {
+      "tag": "a",
+      "text": "Exams",
+      "ratio": 10.45
+    },
+    {
+      "tag": "a",
+      "text": "Invigilation",
+      "ratio": 10.45
+    },
+    {
+      "tag": "a",
+      "text": "Create Exam",
+      "ratio": 10.45
+    },
+    {
+      "tag": "a",
+      "text": "Students",
+      "ratio": 10.45
+    },
+    {
+      "tag": "a",
+      "text": "Reviews",
+      "ratio": 10.45
+    },
+    {
+      "tag": "a",
+      "text": "AI Settings",
+      "ratio": 10.45
+    },
+    {
+      "tag": "a",
+      "text": "Overview",
+      "ratio": 10.45
+    },
+    {
+      "tag": "a",
+      "text": "Templates",
+      "ratio": 10.45
+    },
+    {
+      "tag": "a",
+      "text": "Assignments",
+      "ratio": 10.45
+    },
+    {
+      "tag": "a",
+      "text": "Submissions",
+      "ratio": 10.45
+    },
+    {
+      "tag": "a",
+      "text": "Grading",
+      "ratio": 10.45
+    },
+    {
+      "tag": "a",
+      "text": "Extensions",
+      "ratio": 10.45
+    }
+  ]
+}

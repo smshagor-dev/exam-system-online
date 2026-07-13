@@ -3,7 +3,7 @@
   "url": "/api/admin/results-enterprise/students/cmrhdzsao000bwhz5n1waw7db/degree-audit",
   "status": 201,
   "json": {
-    "id": "cmrjfkzu40014odlbwp71aofj",
+    "id": "cmrjnqhlw00abochoc6in6vi6",
     "studentId": "cmrhdzsao000bwhz5n1waw7db",
     "departmentId": "cmrc1y4pr000ck2kd4d7vqcwq",
     "programId": "cmrfvc9gk0053wqli5omnqitt",
@@ -23,9 +23,9 @@
       "currentCgpa": 0
     },
     "isEligible": false,
-    "generatedAt": "2026-07-13T16:22:44.332Z",
-    "createdAt": "2026-07-13T16:22:44.332Z",
-    "updatedAt": "2026-07-13T16:22:44.332Z"
+    "generatedAt": "2026-07-13T20:10:57.572Z",
+    "createdAt": "2026-07-13T20:10:57.572Z",
+    "updatedAt": "2026-07-13T20:10:57.572Z"
   },
-  "text": "{\"id\":\"cmrjfkzu40014odlbwp71aofj\",\"studentId\":\"cmrhdzsao000bwhz5n1waw7db\",\"departmentId\":\"cmrc1y4pr000ck2kd4d7vqcwq\",\"programId\":\"cmrfvc9gk0053wqli5omnqitt\",\"requiredCredits\":0,\"completedCredits\":0,\"remainingCredits\":0,\"requiredGpa\":2.5,\"currentCgpa\":0,\"compulsoryOutstanding\":[\"cmrfvd6hx005zwqlibjb4cjr8\",\"cmrfvd93s0061wqlik02hz51l\"],\"electiveOutstanding\":[],\"requirementSummary\":{\"requiredCredits\":0,\"completedCredits\":0,\"currentCgpa\":0},\"isEligible\":false,\"generatedAt\":\"2026-07-13T16:22:44.332Z\",\"createdAt\":\"2026-07-13T16:22:44.332Z\",\"updatedAt\":\"2026-07-13T16:22:44.332Z\"}"
+  "text": "{\"id\":\"cmrjnqhlw00abochoc6in6vi6\",\"studentId\":\"cmrhdzsao000bwhz5n1waw7db\",\"departmentId\":\"cmrc1y4pr000ck2kd4d7vqcwq\",\"programId\":\"cmrfvc9gk0053wqli5omnqitt\",\"requiredCredits\":0,\"completedCredits\":0,\"remainingCredits\":0,\"requiredGpa\":2.5,\"currentCgpa\":0,\"compulsoryOutstanding\":[\"cmrfvd6hx005zwqlibjb4cjr8\",\"cmrfvd93s0061wqlik02hz51l\"],\"electiveOutstanding\":[],\"requirementSummary\":{\"requiredCredits\":0,\"completedCredits\":0,\"currentCgpa\":0},\"isEligible\":false,\"generatedAt\":\"2026-07-13T20:10:57.572Z\",\"createdAt\":\"2026-07-13T20:10:57.572Z\",\"updatedAt\":\"2026-07-13T20:10:57.572Z\"}"
 }

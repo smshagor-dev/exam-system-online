@@ -3,8 +3,8 @@
   "url": "/api/student/results-enterprise/appeals",
   "status": 201,
   "json": {
-    "id": "cmrjfkhet000vodlb6plpcpuc",
-    "resultRecordId": "cmrjfjxno0009odlb1nndbfne",
+    "id": "cmrjnpxcj009wochoe9agfw8u",
+    "resultRecordId": "cmrjnp3qy008eochotw7echer",
     "studentId": "cmrhdzsao000bwhz5n1waw7db",
     "departmentId": "cmrc1y4pr000ck2kd4d7vqcwq",
     "teacherId": "cmrc1y74k000uk2kd8dujfpkd",
@@ -13,7 +13,7 @@
     "auditTrail": [
       {
         "status": "SUBMITTED",
-        "timestamp": "2026-07-13T16:22:20.446Z",
+        "timestamp": "2026-07-13T20:10:31.313Z",
         "reason": "Browser smoke appeal submission for published result."
       }
     ],
@@ -22,8 +22,8 @@
     "reviewedByUserId": null,
     "reviewedAt": null,
     "resolvedAt": null,
-    "createdAt": "2026-07-13T16:22:20.453Z",
-    "updatedAt": "2026-07-13T16:22:20.453Z"
+    "createdAt": "2026-07-13T20:10:31.315Z",
+    "updatedAt": "2026-07-13T20:10:31.315Z"
   },
-  "text": "{\"id\":\"cmrjfkhet000vodlb6plpcpuc\",\"resultRecordId\":\"cmrjfjxno0009odlb1nndbfne\",\"studentId\":\"cmrhdzsao000bwhz5n1waw7db\",\"departmentId\":\"cmrc1y4pr000ck2kd4d7vqcwq\",\"teacherId\":\"cmrc1y74k000uk2kd8dujfpkd\",\"status\":\"SUBMITTED\",\"reason\":\"Browser smoke appeal submission for published result.\",\"auditTrail\":[{\"status\":\"SUBMITTED\",\"timestamp\":\"2026-07-13T16:22:20.446Z\",\"reason\":\"Browser smoke appeal submission for published result.\"}],\"teacherResponse\":null,\"adminDecision\":null,\"reviewedByUserId\":null,\"reviewedAt\":null,\"resolvedAt\":null,\"createdAt\":\"2026-07-13T16:22:20.453Z\",\"updatedAt\":\"2026-07-13T16:22:20.453Z\"}"
+  "text": "{\"id\":\"cmrjnpxcj009wochoe9agfw8u\",\"resultRecordId\":\"cmrjnp3qy008eochotw7echer\",\"studentId\":\"cmrhdzsao000bwhz5n1waw7db\",\"departmentId\":\"cmrc1y4pr000ck2kd4d7vqcwq\",\"teacherId\":\"cmrc1y74k000uk2kd8dujfpkd\",\"status\":\"SUBMITTED\",\"reason\":\"Browser smoke appeal submission for published result.\",\"auditTrail\":[{\"status\":\"SUBMITTED\",\"timestamp\":\"2026-07-13T20:10:31.313Z\",\"reason\":\"Browser smoke appeal submission for published result.\"}],\"teacherResponse\":null,\"adminDecision\":null,\"reviewedByUserId\":null,\"reviewedAt\":null,\"resolvedAt\":null,\"createdAt\":\"2026-07-13T20:10:31.315Z\",\"updatedAt\":\"2026-07-13T20:10:31.315Z\"}"
 }

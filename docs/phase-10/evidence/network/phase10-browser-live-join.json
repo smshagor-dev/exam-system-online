@@ -1,19 +1,19 @@
 {
   "method": "POST",
-  "url": "/api/student/lms/live-classes/cmrjgu137000ihgasdk2iz1jb/join",
+  "url": "/api/student/lms/live-classes/cmrjnpije0098ocho3hwqaq8b/join",
   "status": 200,
   "json": {
-    "id": "cmrjgu9hs000whgasfog5v3re",
-    "liveClassId": "cmrjgu137000ihgasdk2iz1jb",
+    "id": "cmrjnpwyv009sochoyf3a95d9",
+    "liveClassId": "cmrjnpije0098ocho3hwqaq8b",
     "studentId": "cmrhdzsao000bwhz5n1waw7db",
     "status": "ATTENDED",
-    "joinedAt": "2026-07-13T18:02:54.593Z",
-    "leftAt": "2026-07-13T18:22:54.593Z",
+    "joinedAt": "2026-07-13T21:15:29.127Z",
+    "leftAt": "2026-07-13T21:35:29.127Z",
     "durationMinutes": 20,
     "attendanceSourceRecordId": null,
     "notes": null,
-    "createdAt": "2026-07-13T16:57:56.368Z",
-    "updatedAt": "2026-07-13T16:57:56.368Z"
+    "createdAt": "2026-07-13T20:10:30.823Z",
+    "updatedAt": "2026-07-13T20:10:30.823Z"
   },
-  "text": "{\"id\":\"cmrjgu9hs000whgasfog5v3re\",\"liveClassId\":\"cmrjgu137000ihgasdk2iz1jb\",\"studentId\":\"cmrhdzsao000bwhz5n1waw7db\",\"status\":\"ATTENDED\",\"joinedAt\":\"2026-07-13T18:02:54.593Z\",\"leftAt\":\"2026-07-13T18:22:54.593Z\",\"durationMinutes\":20,\"attendanceSourceRecordId\":null,\"notes\":null,\"createdAt\":\"2026-07-13T16:57:56.368Z\",\"updatedAt\":\"2026-07-13T16:57:56.368Z\"}"
+  "text": "{\"id\":\"cmrjnpwyv009sochoyf3a95d9\",\"liveClassId\":\"cmrjnpije0098ocho3hwqaq8b\",\"studentId\":\"cmrhdzsao000bwhz5n1waw7db\",\"status\":\"ATTENDED\",\"joinedAt\":\"2026-07-13T21:15:29.127Z\",\"leftAt\":\"2026-07-13T21:35:29.127Z\",\"durationMinutes\":20,\"attendanceSourceRecordId\":null,\"notes\":null,\"createdAt\":\"2026-07-13T20:10:30.823Z\",\"updatedAt\":\"2026-07-13T20:10:30.823Z\"}"
 }

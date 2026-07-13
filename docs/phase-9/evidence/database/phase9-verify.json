@@ -1,17 +1,17 @@
 {
   "status": "PASS",
-  "generatedAt": "2026-07-13T16:25:17.778Z",
+  "generatedAt": "2026-07-13T20:11:36.394Z",
   "counts": {
-    "gradebookCount": 8,
-    "resultCount": 16,
-    "transitionCount": 48,
-    "degreeAuditCount": 15,
-    "transcriptCount": 5,
-    "marksheetCount": 5,
-    "certificateCount": 5,
-    "appealCount": 5,
-    "graduationCandidateCount": 8,
-    "officerCount": 7,
+    "gradebookCount": 13,
+    "resultCount": 26,
+    "transitionCount": 78,
+    "degreeAuditCount": 25,
+    "transcriptCount": 10,
+    "marksheetCount": 10,
+    "certificateCount": 10,
+    "appealCount": 10,
+    "graduationCandidateCount": 13,
+    "officerCount": 10,
     "policyCount": 1
   }
 }

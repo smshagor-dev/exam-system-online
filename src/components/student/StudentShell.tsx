@@ -82,7 +82,7 @@ export default function StudentShell({ children, user, branding }: StudentShellP
             <button
               type="button"
               onClick={() => setSidebarOpen(true)}
-              className="inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-medium text-slate-200"
+              className="inline-flex items-center gap-2 rounded-2xl border border-white/20 bg-white/12 px-4 py-3 text-sm font-semibold text-white shadow-sm"
             >
               <Menu className="h-4 w-4" />
               {t('common.menu', 'Menu')}
@@ -128,7 +128,7 @@ export default function StudentShell({ children, user, branding }: StudentShellP
               <button
                 type="button"
                 onClick={() => setProfileOpen((current) => !current)}
-                className="flex w-full items-center gap-3 rounded-2xl text-left transition hover:bg-white/5"
+                className="flex w-full items-center gap-3 rounded-2xl bg-white/8 px-3 py-3 text-left text-white transition hover:bg-white/12"
               >
                 <div className="flex h-11 w-11 items-center justify-center rounded-full bg-[#7c3aed] text-sm font-semibold text-white">
                   {user.avatarUrl ? (
@@ -138,11 +138,11 @@ export default function StudentShell({ children, user, branding }: StudentShellP
                     user.name.charAt(0)
                   )}
                 </div>
-                <div className="min-w-0">
+                <div className="min-w-0 flex-1">
                   <p className="truncate text-sm font-semibold text-white">{user.name}</p>
-                  <p className="truncate text-xs text-slate-300">{user.email}</p>
+                  <p className="truncate text-xs text-slate-200">{user.email}</p>
                 </div>
-                <ChevronsUpDown className="h-4 w-4 text-slate-400" />
+                <ChevronsUpDown className="h-4 w-4 text-slate-200" />
               </button>
               <div className="mt-3 rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-xs uppercase tracking-[0.18em] text-slate-300">
                 {user.role.replace('_', ' ')}

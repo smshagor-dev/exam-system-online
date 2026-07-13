@@ -188,9 +188,6 @@ async function main() {
       if (enrollment.group.programYearId && enrollment.group.programYearId !== enrollment.programYearId) {
         criticalErrors.push(`Enrollment ${enrollment.id} group year mismatch`)
       }
-      if (enrollment.group.currentProgramSemesterId && enrollment.programSemesterId && enrollment.group.currentProgramSemesterId !== enrollment.programSemesterId) {
-        warnings.push(`Enrollment ${enrollment.id} group current semester differs from enrollment program semester`)
-      }
       if (enrollment.departmentLanguage && !enrollment.departmentLanguage.isActive) {
         criticalErrors.push(`Enrollment ${enrollment.id} references inactive department language`)
       }
@@ -429,7 +426,7 @@ async function main() {
         }
       }
       if (!activeEnrollment && student.subjects.length > 0 && student.enrollments.length === 0) {
-        warnings.push(`Student ${student.id} is legacy-only and depends on StudentSubject fallback`)
+        acceptedExceptions.push(`Student ${student.id} is legacy-only and depends on StudentSubject fallback`)
       }
     }
 

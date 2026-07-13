@@ -10,6 +10,7 @@ import {
   UserRole,
 } from '@prisma/client'
 import { prisma } from '@/lib/prisma'
+import { invalidateStudentExamAccessCaches } from '@/lib/permissions'
 
 type Tx = Prisma.TransactionClient
 const LIFECYCLE_TX_OPTIONS = { maxWait: 5_000, timeout: 20_000 } as const
@@ -38,6 +39,10 @@ type EnrollmentContextInput = {
   academicYearId?: string | null
   departmentLanguageId?: string | null
   languageId?: string | null
+}
+
+function clearStudentAccessAfterLifecycleChange(studentUserId: string) {
+  invalidateStudentExamAccessCaches(studentUserId)
 }
 
 type EnrollmentContextResolved = EnrollmentContextInput & {
@@ -513,7 +518,7 @@ export async function createEnrollment(
   },
   actor: LifecycleActor = {}
 ) {
-  return prisma.$transaction(async (tx) => {
+  const result = await prisma.$transaction(async (tx) => {
     const student = await getStudentOrThrow(studentId, tx)
     const activeEnrollment = await getActiveEnrollment(studentId, tx)
     if (activeEnrollment) {
@@ -581,8 +586,11 @@ export async function createEnrollment(
         ...buildTargetHistorySnapshot(context, input.status ?? StudentEnrollmentStatus.ACTIVE),
       }, tx)
     }
-    return { enrollment, legacySync }
+    return { enrollment, legacySync, studentUserId: student.userId }
   }, LIFECYCLE_TX_OPTIONS)
+
+  clearStudentAccessAfterLifecycleChange(result.studentUserId)
+  return { enrollment: result.enrollment, legacySync: result.legacySync }
 }
 
 export async function updateEnrollment(
@@ -597,7 +605,7 @@ export async function updateEnrollment(
   },
   actor: LifecycleActor = {}
 ) {
-  return prisma.$transaction(async (tx) => {
+  const updated = await prisma.$transaction(async (tx) => {
     const existing = await tx.studentEnrollment.findUnique({
       where: { id: enrollmentId },
       include: { student: { include: { user: true } } },
@@ -671,8 +679,11 @@ export async function updateEnrollment(
       },
     })
 
-    return updated
+    return { updated, studentUserId: existing.student.userId }
   }, LIFECYCLE_TX_OPTIONS)
+
+  clearStudentAccessAfterLifecycleChange(updated.studentUserId)
+  return updated.updated
 }
 
 export async function deactivateEnrollment(
@@ -680,7 +691,7 @@ export async function deactivateEnrollment(
   reason: string,
   actor: LifecycleActor = {}
 ) {
-  return prisma.$transaction(async (tx) => {
+  const updated = await prisma.$transaction(async (tx) => {
     const existing = await tx.studentEnrollment.findUnique({
       where: { id: enrollmentId },
       include: { student: { include: { user: true } } },
@@ -722,8 +733,11 @@ export async function deactivateEnrollment(
       },
     })
 
-    return updated
+    return { updated, studentUserId: existing.student.userId }
   }, LIFECYCLE_TX_OPTIONS)
+
+  clearStudentAccessAfterLifecycleChange(updated.studentUserId)
+  return updated.updated
 }
 
 export async function evaluatePromotionEligibility(
@@ -755,7 +769,7 @@ export async function promoteStudent(
   },
   actor: LifecycleActor = {}
 ) {
-  return prisma.$transaction(async (tx) => {
+  const result = await prisma.$transaction(async (tx) => {
     const activeEnrollment = await getActiveEnrollment(studentId, tx)
     if (!activeEnrollment) {
       throw new Error('Active enrollment not found')
@@ -815,7 +829,6 @@ export async function promoteStudent(
 
     await createHistoryEntry({
       studentId,
-      enrollmentId: nextEnrollment.id,
       actorUserId: actor.actorUserId ?? null,
       eventType: StudentAcademicHistoryEventType.PROMOTION,
       reason: input.overrideReason ?? 'Student promoted',
@@ -823,6 +836,7 @@ export async function promoteStudent(
       occurredAt: promotedAt,
       ...buildHistorySnapshot(activeEnrollment),
       ...buildTargetHistorySnapshot(targetContext, StudentEnrollmentStatus.ACTIVE),
+      enrollmentId: nextEnrollment.id,
     }, tx)
 
     const legacySync = await syncLegacySubjectsForEnrollment(studentId, targetContext, tx)
@@ -854,8 +868,11 @@ export async function promoteStudent(
         ...buildTargetHistorySnapshot(targetContext, StudentEnrollmentStatus.ACTIVE),
       }, tx)
     }
-    return { promotion, enrollment: nextEnrollment, legacySync }
+    return { promotion, enrollment: nextEnrollment, legacySync, studentUserId: activeEnrollment.student.userId }
   }, LIFECYCLE_TX_OPTIONS)
+
+  clearStudentAccessAfterLifecycleChange(result.studentUserId)
+  return { promotion: result.promotion, enrollment: result.enrollment, legacySync: result.legacySync }
 }
 
 export async function transferStudent(
@@ -869,7 +886,7 @@ export async function transferStudent(
   },
   actor: LifecycleActor = {}
 ) {
-  return prisma.$transaction(async (tx) => {
+  const result = await prisma.$transaction(async (tx) => {
     const activeEnrollment = await getActiveEnrollment(studentId, tx)
     if (!activeEnrollment) {
       throw new Error('Active enrollment not found')
@@ -946,7 +963,6 @@ export async function transferStudent(
 
     await createHistoryEntry({
       studentId,
-      enrollmentId: nextEnrollment.id,
       actorUserId: actor.actorUserId ?? null,
       eventType,
       reason: input.reason ?? 'Student transfer',
@@ -954,6 +970,7 @@ export async function transferStudent(
       occurredAt: transferredAt,
       ...buildHistorySnapshot(activeEnrollment),
       ...buildTargetHistorySnapshot(targetContext, StudentEnrollmentStatus.ACTIVE),
+      enrollmentId: nextEnrollment.id,
     }, tx)
 
     const legacySync = await syncLegacySubjectsForEnrollment(studentId, targetContext, tx)
@@ -986,8 +1003,11 @@ export async function transferStudent(
         ...buildTargetHistorySnapshot(targetContext, StudentEnrollmentStatus.ACTIVE),
       }, tx)
     }
-    return { transfer, enrollment: nextEnrollment, legacySync }
+    return { transfer, enrollment: nextEnrollment, legacySync, studentUserId: activeEnrollment.student.userId }
   }, LIFECYCLE_TX_OPTIONS)
+
+  clearStudentAccessAfterLifecycleChange(result.studentUserId)
+  return { transfer: result.transfer, enrollment: result.enrollment, legacySync: result.legacySync }
 }
 
 export async function placeStudentOnLeave(
@@ -1003,7 +1023,7 @@ export async function placeStudentOnLeave(
   },
   actor: LifecycleActor = {}
 ) {
-  return prisma.$transaction(async (tx) => {
+  const result = await prisma.$transaction(async (tx) => {
     const activeEnrollment = await getActiveEnrollment(studentId, tx)
     if (!activeEnrollment) {
       throw new Error('Active enrollment not found')
@@ -1066,8 +1086,11 @@ export async function placeStudentOnLeave(
       },
     })
 
-    return { leave, enrollment: endedEnrollment }
+    return { leave, enrollment: endedEnrollment, studentUserId: activeEnrollment.student.userId }
   }, LIFECYCLE_TX_OPTIONS)
+
+  clearStudentAccessAfterLifecycleChange(result.studentUserId)
+  return { leave: result.leave, enrollment: result.enrollment }
 }
 
 export async function readmitStudent(
@@ -1079,7 +1102,7 @@ export async function readmitStudent(
   },
   actor: LifecycleActor = {}
 ) {
-  return prisma.$transaction(async (tx) => {
+  const result = await prisma.$transaction(async (tx) => {
     const student = await getStudentOrThrow(studentId, tx)
     const activeEnrollment = await getActiveEnrollment(studentId, tx)
     if (activeEnrollment) {
@@ -1140,7 +1163,6 @@ export async function readmitStudent(
 
     await createHistoryEntry({
       studentId,
-      enrollmentId: enrollment.id,
       actorUserId: actor.actorUserId ?? null,
       eventType: StudentAcademicHistoryEventType.READMISSION,
       reason: 'Student readmitted',
@@ -1148,6 +1170,7 @@ export async function readmitStudent(
       occurredAt: readmittedAt,
       ...buildHistorySnapshot(inactiveEnrollment),
       ...buildTargetHistorySnapshot(context, StudentEnrollmentStatus.ACTIVE),
+      enrollmentId: enrollment.id,
     }, tx)
 
     const legacySync = await syncLegacySubjectsForEnrollment(studentId, context, tx)
@@ -1178,8 +1201,11 @@ export async function readmitStudent(
         ...buildTargetHistorySnapshot(context, StudentEnrollmentStatus.ACTIVE),
       }, tx)
     }
-    return { enrollment, legacySync }
+    return { enrollment, legacySync, studentUserId: student.userId }
   }, LIFECYCLE_TX_OPTIONS)
+
+  clearStudentAccessAfterLifecycleChange(result.studentUserId)
+  return { enrollment: result.enrollment, legacySync: result.legacySync }
 }
 
 export async function graduateStudent(
@@ -1195,7 +1221,7 @@ export async function graduateStudent(
   },
   actor: LifecycleActor = {}
 ) {
-  return prisma.$transaction(async (tx) => {
+  const result = await prisma.$transaction(async (tx) => {
     const activeEnrollment = await getActiveEnrollment(studentId, tx)
     if (!activeEnrollment) {
       throw new Error('Active enrollment not found')
@@ -1330,8 +1356,11 @@ export async function graduateStudent(
       },
     })
 
-    return { graduation, enrollment: graduatedEnrollment }
+    return { graduation, enrollment: graduatedEnrollment, studentUserId: activeEnrollment.student.userId }
   }, LIFECYCLE_TX_OPTIONS)
+
+  clearStudentAccessAfterLifecycleChange(result.studentUserId)
+  return { graduation: result.graduation, enrollment: result.enrollment }
 }
 
 export async function markStudentAsAlumni(

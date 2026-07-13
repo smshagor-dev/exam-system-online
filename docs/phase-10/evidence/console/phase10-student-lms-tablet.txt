@@ -1,19 +1,29 @@
 log: [Fast Refresh] rebuilding
-log: [Fast Refresh] done in 661ms
+log: [Fast Refresh] done in 1960ms
 log: [Fast Refresh] rebuilding
-log: [Fast Refresh] done in 563ms
+log: [Fast Refresh] done in 975ms
 log: [Fast Refresh] rebuilding
-log: [Fast Refresh] done in 673ms
+log: [Fast Refresh] done in 1254ms
 log: [Fast Refresh] rebuilding
-log: [Fast Refresh] done in 582ms
+log: [Fast Refresh] done in 1875ms
 log: [Fast Refresh] rebuilding
-log: [Fast Refresh] done in 501ms
+log: [Fast Refresh] done in 1607ms
 log: [Fast Refresh] rebuilding
-log: [Fast Refresh] done in 342ms
+log: [Fast Refresh] done in 1375ms
 log: [Fast Refresh] rebuilding
-log: [Fast Refresh] done in 582ms
+log: [Fast Refresh] done in 1185ms
 log: [Fast Refresh] rebuilding
-log: [Fast Refresh] done in 587ms
+log: [Fast Refresh] done in 727ms
+log: [Fast Refresh] rebuilding
+log: [Fast Refresh] done in 2507ms
 log: [HMR] connected
 log: [Fast Refresh] rebuilding
-log: [Fast Refresh] done in 621ms
+log: [Fast Refresh] done in 589ms
+log: [Fast Refresh] rebuilding
+log: [Fast Refresh] done in 2495ms
+log: [Fast Refresh] rebuilding
+log: [Fast Refresh] done in 121ms
+log: [Fast Refresh] rebuilding
+log: [Fast Refresh] done in 1059ms
+log: [Fast Refresh] rebuilding
+log: [Fast Refresh] done in 889ms

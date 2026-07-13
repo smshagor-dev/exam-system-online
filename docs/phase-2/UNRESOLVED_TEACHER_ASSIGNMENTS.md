@@ -1,7 +1,7 @@
 # Unresolved Teacher Assignments
 
 ## cmrc1y7dc000yk2kdpfp6fmwd
-- Classification: MISSING_GROUP_CONTEXT
+- Classification: MISSING_CURRICULUM_MAPPING
 - Resolution status: EXPLICITLY_ACCEPTED_UNRESOLVED
 - Reason unresolved: No academic offering can be proven from the legacy tuple and current normalized group/program context.
 - Recommended action: Leave the record legacy-only until historical program and group context can be reconstructed from source records.
@@ -12,7 +12,7 @@
 - Approved by: Phase 2 completion pass on 2026-07-11
 
 ## cmrc1y7hz0010k2kde8t3a8h3
-- Classification: MISSING_GROUP_CONTEXT
+- Classification: MISSING_CURRICULUM_MAPPING
 - Resolution status: EXPLICITLY_ACCEPTED_UNRESOLVED
 - Reason unresolved: No academic offering can be proven from the legacy tuple and current normalized group/program context.
 - Recommended action: Leave the record legacy-only until historical program and group context can be reconstructed from source records.

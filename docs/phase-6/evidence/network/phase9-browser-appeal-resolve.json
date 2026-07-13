@@ -1,10 +1,10 @@
 {
   "method": "PATCH",
-  "url": "/api/admin/results-enterprise/appeals/cmrjfkhet000vodlb6plpcpuc",
+  "url": "/api/admin/results-enterprise/appeals/cmrjnpxcj009wochoe9agfw8u",
   "status": 200,
   "json": {
-    "id": "cmrjfkhet000vodlb6plpcpuc",
-    "resultRecordId": "cmrjfjxno0009odlb1nndbfne",
+    "id": "cmrjnpxcj009wochoe9agfw8u",
+    "resultRecordId": "cmrjnp3qy008eochotw7echer",
     "studentId": "cmrhdzsao000bwhz5n1waw7db",
     "departmentId": "cmrc1y4pr000ck2kd4d7vqcwq",
     "teacherId": "cmrc1y74k000uk2kd8dujfpkd",
@@ -13,12 +13,12 @@
     "auditTrail": [
       {
         "status": "SUBMITTED",
-        "timestamp": "2026-07-13T16:22:20.446Z",
+        "timestamp": "2026-07-13T20:10:31.313Z",
         "reason": "Browser smoke appeal submission for published result."
       },
       {
         "status": "RESOLVED",
-        "timestamp": "2026-07-13T16:22:22.383Z",
+        "timestamp": "2026-07-13T20:10:33.397Z",
         "teacherResponse": "Verified against grade entries.",
         "adminDecision": "Resolved after review."
       }
@@ -26,10 +26,10 @@
     "teacherResponse": "Verified against grade entries.",
     "adminDecision": "Resolved after review.",
     "reviewedByUserId": "cmrc1y67t000qk2kdsntvvukr",
-    "reviewedAt": "2026-07-13T16:22:22.383Z",
-    "resolvedAt": "2026-07-13T16:22:22.383Z",
-    "createdAt": "2026-07-13T16:22:20.453Z",
-    "updatedAt": "2026-07-13T16:22:22.390Z"
+    "reviewedAt": "2026-07-13T20:10:33.397Z",
+    "resolvedAt": "2026-07-13T20:10:33.397Z",
+    "createdAt": "2026-07-13T20:10:31.315Z",
+    "updatedAt": "2026-07-13T20:10:33.400Z"
   },
-  "text": "{\"id\":\"cmrjfkhet000vodlb6plpcpuc\",\"resultRecordId\":\"cmrjfjxno0009odlb1nndbfne\",\"studentId\":\"cmrhdzsao000bwhz5n1waw7db\",\"departmentId\":\"cmrc1y4pr000ck2kd4d7vqcwq\",\"teacherId\":\"cmrc1y74k000uk2kd8dujfpkd\",\"status\":\"RESOLVED\",\"reason\":\"Browser smoke appeal submission for published result.\",\"auditTrail\":[{\"status\":\"SUBMITTED\",\"timestamp\":\"2026-07-13T16:22:20.446Z\",\"reason\":\"Browser smoke appeal submission for published result.\"},{\"status\":\"RESOLVED\",\"timestamp\":\"2026-07-13T16:22:22.383Z\",\"teacherResponse\":\"Verified against grade entries.\",\"adminDecision\":\"Resolved after review.\"}],\"teacherResponse\":\"Verified against grade entries.\",\"adminDecision\":\"Resolved after review.\",\"reviewedByUserId\":\"cmrc1y67t000qk2kdsntvvukr\",\"reviewedAt\":\"2026-07-13T16:22:22.383Z\",\"resolvedAt\":\"2026-07-13T16:22:22.383Z\",\"createdAt\":\"2026-07-13T16:22:20.453Z\",\"updatedAt\":\"2026-07-13T16:22:22.390Z\"}"
+  "text": "{\"id\":\"cmrjnpxcj009wochoe9agfw8u\",\"resultRecordId\":\"cmrjnp3qy008eochotw7echer\",\"studentId\":\"cmrhdzsao000bwhz5n1waw7db\",\"departmentId\":\"cmrc1y4pr000ck2kd4d7vqcwq\",\"teacherId\":\"cmrc1y74k000uk2kd8dujfpkd\",\"status\":\"RESOLVED\",\"reason\":\"Browser smoke appeal submission for published result.\",\"auditTrail\":[{\"status\":\"SUBMITTED\",\"timestamp\":\"2026-07-13T20:10:31.313Z\",\"reason\":\"Browser smoke appeal submission for published result.\"},{\"status\":\"RESOLVED\",\"timestamp\":\"2026-07-13T20:10:33.397Z\",\"teacherResponse\":\"Verified against grade entries.\",\"adminDecision\":\"Resolved after review.\"}],\"teacherResponse\":\"Verified against grade entries.\",\"adminDecision\":\"Resolved after review.\",\"reviewedByUserId\":\"cmrc1y67t000qk2kdsntvvukr\",\"reviewedAt\":\"2026-07-13T20:10:33.397Z\",\"resolvedAt\":\"2026-07-13T20:10:33.397Z\",\"createdAt\":\"2026-07-13T20:10:31.315Z\",\"updatedAt\":\"2026-07-13T20:10:33.400Z\"}"
 }
