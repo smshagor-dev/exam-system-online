@@ -17,9 +17,18 @@ const path = require('path')
 const { initStudentPromotionCron, stopStudentPromotionCron } = require('./server/student-promotion-cron')
 
 const dev = process.env.NODE_ENV !== 'production'
-const hostname = process.env.HOST || 'localhost'
+const hostname = process.env.HOST || (dev ? 'localhost' : '0.0.0.0')
 const port = parseInt(process.env.PORT || '3000', 10)
 const prismaCli = path.join(__dirname, 'node_modules', 'prisma', 'build', 'index.js')
+
+function isTruthy(value) {
+  return ['1', 'true', 'yes', 'on'].includes(String(value || '').trim().toLowerCase())
+}
+
+function isPlaceholderSecret(value) {
+  const normalized = String(value || '').trim().toLowerCase()
+  return !normalized || normalized.includes('replace-with') || normalized.includes('changeme')
+}
 
 function runCommand(command, args) {
   const result = spawnSync(command, args, {
@@ -34,6 +43,10 @@ function runCommand(command, args) {
 }
 
 function runDatabaseSetup() {
+  if (!dev && process.env.AUTO_DB_PUSH === 'true') {
+    throw new Error('AUTO_DB_PUSH=true is not allowed in production startup.')
+  }
+
   if (process.env.AUTO_DB_PUSH !== 'true') {
     console.log('[DB] Skipping Prisma db push because AUTO_DB_PUSH is not enabled')
     return
@@ -43,9 +56,37 @@ function runDatabaseSetup() {
   runCommand(process.execPath, [prismaCli, 'db', 'push'])
 }
 
+function validateProductionEnvironment() {
+  if (dev) {
+    return
+  }
+
+  if (isPlaceholderSecret(process.env.AUTH_SECRET) && isPlaceholderSecret(process.env.NEXTAUTH_SECRET)) {
+    throw new Error('Production startup requires AUTH_SECRET or NEXTAUTH_SECRET to be configured.')
+  }
+
+  const nextAuthUrl = String(process.env.NEXTAUTH_URL || '').trim()
+  if (!nextAuthUrl || nextAuthUrl.includes('localhost')) {
+    throw new Error('Production startup requires NEXTAUTH_URL to be set to a non-localhost URL.')
+  }
+
+  if (!String(process.env.DATABASE_URL || '').trim()) {
+    throw new Error('Production startup requires DATABASE_URL.')
+  }
+
+  if (!isTruthy(process.env.REDIS_REQUIRED)) {
+    throw new Error('Production startup requires REDIS_REQUIRED=true.')
+  }
+
+  if (isTruthy(process.env.ALLOW_MEMORY_RUNTIME_FALLBACK)) {
+    throw new Error('Production startup refuses ALLOW_MEMORY_RUNTIME_FALLBACK=true.')
+  }
+}
+
 // We need to compile TypeScript socket-server on the fly in dev
 // In production, build first with `next build`
 async function startServer() {
+  validateProductionEnvironment()
   runDatabaseSetup()
 
   require('ts-node').register({

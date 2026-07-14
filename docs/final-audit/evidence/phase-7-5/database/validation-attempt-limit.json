@@ -1,0 +1,65 @@
+{
+  "limitFirst": {
+    "ok": true,
+    "status": 201,
+    "attempt": {
+      "id": "cmrkostef003cnb8iux2q7al6",
+      "publicationId": "cmrkosr1w0037nb8i0cy7xflk",
+      "studentId": "cmrko7do0000g1iyajbr86xrt",
+      "targetId": "cmrkosrew0039nb8ih3nw9den",
+      "previousAttemptId": null,
+      "attemptNumber": 1,
+      "status": "SUBMITTED",
+      "submissionType": "MIXED",
+      "plainTextSubmission": "Abstract\nFirst limited attempt has enough words to be accepted before the attempt-limit check.\nMethodology\nThe method section is present and valid.\nConclusion\nThe conclusion is present and valid.\nReferences\nSmith, 2024.\nDoe, 2023.",
+      "richTextSubmission": null,
+      "externalLink": null,
+      "repositoryUrl": "https://github.com/example/limit-first",
+      "finalContentHash": "fd56811e897dcdae49968909f69d5cd70e0afa0d61ab505eda6c99e3c8aade2a",
+      "isLate": false,
+      "latePenaltyApplied": 0,
+      "teacherLocked": false,
+      "lockedAt": null,
+      "lockedByTeacherId": null,
+      "submittedAt": "2026-07-14T13:28:31.953Z",
+      "returnedAt": null,
+      "legacySubmissionId": null,
+      "metadata": {
+        "submissionValidation": {
+          "extractedWordCount": 49,
+          "referenceCount": 2
+        }
+      },
+      "createdAt": "2026-07-14T13:28:31.959Z",
+      "updatedAt": "2026-07-14T13:28:31.959Z",
+      "attachments": [
+        {
+          "id": "cmrkosu2p003enb8i3itjjcc8",
+          "attemptId": "cmrkostef003cnb8iux2q7al6",
+          "studentId": "cmrko7do0000g1iyajbr86xrt",
+          "fileName": "limit-first.docx",
+          "fileUrl": "/uploads/coursework-enterprise/cmrko7do0000g1iyajbr86xrt-cmrkosr1w0037nb8i0cy7xflk-1784035711795-0-limit-first.docx",
+          "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+          "extension": "docx",
+          "fileSizeBytes": 1238,
+          "contentHash": null,
+          "malwareStatus": "CLEAN",
+          "malwareDetails": "Validated by enterprise coursework upload hook.",
+          "isPrimary": true,
+          "uploadedAt": "2026-07-14T13:28:32.834Z",
+          "createdAt": "2026-07-14T13:28:32.834Z",
+          "updatedAt": "2026-07-14T13:28:32.834Z"
+        }
+      ]
+    },
+    "remainingAttempts": 0,
+    "late": false,
+    "latePenaltyApplied": 0,
+    "idempotent": false
+  },
+  "limitSecond": {
+    "ok": false,
+    "status": 400,
+    "error": "Maximum attempts reached for this coursework"
+  }
+}

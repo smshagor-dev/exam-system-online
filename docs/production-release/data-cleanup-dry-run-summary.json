@@ -1,0 +1,42 @@
+{
+  "mode": "dry-run",
+  "generatedAt": "2026-07-14T13:37:36.649Z",
+  "counts": {
+    "fixtureUsers": 0,
+    "fixtureTeacherProfiles": 0,
+    "fixtureStudentProfiles": 0,
+    "fixtureExams": 0,
+    "fixtureQuestions": 0,
+    "fixtureTemplates": 0,
+    "fixturePublications": 0,
+    "fixtureAttempts": 0,
+    "fixtureAttemptAttachments": 0,
+    "fixtureRubrics": 0,
+    "orphanAttachmentFiles": 0,
+    "orphanAttachmentBytes": 0,
+    "demoDepartments": 2,
+    "demoSubjects": 3,
+    "demoLanguages": 1,
+    "demoGroups": 3,
+    "demoAcademicYears": 3,
+    "demoSemesters": 1,
+    "demoDegreeLevels": 2,
+    "demoAcademicPrograms": 2,
+    "demoAcademicSessions": 1,
+    "demoProgramYears": 0,
+    "demoAcademicOfferings": 0
+  },
+  "recordIds": {
+    "users": [],
+    "exams": [],
+    "templates": [],
+    "publications": [],
+    "attempts": [],
+    "academicOfferings": []
+  },
+  "files": {
+    "referencedFixtureUploads": [],
+    "orphanFixtureUploads": []
+  },
+  "applyResult": null
+}

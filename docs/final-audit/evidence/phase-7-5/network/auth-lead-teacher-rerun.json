@@ -1,0 +1,12 @@
+{
+  "method": "POST",
+  "url": "/api/teacher/coursework/attempts/cmrkov06a00022udykt24woea/ai-review",
+  "status": 200,
+  "json": {
+    "ok": true,
+    "reviewId": "cmrkovg9z000z2udyki5txp15",
+    "versionNumber": 2,
+    "validationPassed": true
+  },
+  "text": "{\"ok\":true,\"reviewId\":\"cmrkovg9z000z2udyki5txp15\",\"versionNumber\":2,\"validationPassed\":true}"
+}

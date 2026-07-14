@@ -1,0 +1,8 @@
+{
+  "belowMin": {
+    "ok": false,
+    "status": 400,
+    "error": "Word count 17 is below the minimum 30."
+  },
+  "belowMinReview": null
+}

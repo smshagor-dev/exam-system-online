@@ -1,0 +1,128 @@
+{
+  "generatedAt": "2026-07-14T13:28:50.072Z",
+  "status": "PASS",
+  "passed": 15,
+  "failed": 0,
+  "results": [
+    {
+      "id": "P7.5-DB-001",
+      "area": "Student submission",
+      "expected": "Valid DOCX submission creates an attempt and triggers an AI review.",
+      "actual": "Attempt cmrkorby0000dnb8i865ca657 created with AI review cmrkorhby000pnb8izlckbmxn in status COMPLETED.",
+      "status": "PASS",
+      "evidenceFile": "docs/final-audit/evidence/phase-7-5/database/valid-submission.json"
+    },
+    {
+      "id": "P7.5-DB-002",
+      "area": "Review lifecycle",
+      "expected": "Review status should move through QUEUED -> PROCESSING -> COMPLETED.",
+      "actual": "Job=COMPLETED; review=COMPLETED; processingStartedAt=2026-07-14T13:27:30.117Z; completedAt=2026-07-14T13:27:33.989Z.",
+      "status": "PASS",
+      "evidenceFile": "docs/final-audit/evidence/phase-7-5/database/review-lifecycle.json"
+    },
+    {
+      "id": "P7.5-DB-003",
+      "area": "Duplicate submit",
+      "expected": "Duplicate submit does not create duplicate review jobs.",
+      "actual": "Submission idempotent=true; review job count for attempt=1.",
+      "status": "PASS",
+      "evidenceFile": "docs/final-audit/evidence/phase-7-5/database/duplicate-submit.json"
+    },
+    {
+      "id": "P7.5-DB-004",
+      "area": "Immutability",
+      "expected": "Every rerun creates a new immutable AI review version and preserves older versions.",
+      "actual": "Rerun result=2; stored versions=1, 2.",
+      "status": "PASS",
+      "evidenceFile": "docs/final-audit/evidence/phase-7-5/database/rerun-versions.json"
+    },
+    {
+      "id": "P7.5-DB-005",
+      "area": "Resubmission versioning",
+      "expected": "Resubmission creates a new immutable AI review version.",
+      "actual": "Resubmission created attempt cmrkos0gm0024nb8izmctheke with review version 3; previousReviewId=cmrkorsuv001fnb8ikj0cpi6n; previousAttemptId=cmrkorby0000dnb8i865ca657.",
+      "status": "PASS",
+      "evidenceFile": "docs/final-audit/evidence/phase-7-5/database/resubmission-versioning.json"
+    },
+    {
+      "id": "P7.5-VAL-001",
+      "area": "Submission validation",
+      "expected": "Wrong extension is rejected and AI review does not run.",
+      "actual": "Status=400; error=Executable attachment .exe is not allowed.",
+      "status": "PASS",
+      "evidenceFile": "docs/final-audit/evidence/phase-7-5/database/validation-wrong-extension.json"
+    },
+    {
+      "id": "P7.5-VAL-002",
+      "area": "Submission validation",
+      "expected": "MIME mismatch is rejected and AI review does not run.",
+      "actual": "Status=400; error=File mime-mismatch.docx failed MIME validation for .docx.",
+      "status": "PASS",
+      "evidenceFile": "docs/final-audit/evidence/phase-7-5/database/validation-mime-mismatch.json"
+    },
+    {
+      "id": "P7.5-VAL-003",
+      "area": "Submission validation",
+      "expected": "Oversized file is rejected and AI review does not run.",
+      "actual": "Status=400; error=File oversized.docx exceeds the maximum allowed size.",
+      "status": "PASS",
+      "evidenceFile": "docs/final-audit/evidence/phase-7-5/database/validation-oversized.json"
+    },
+    {
+      "id": "P7.5-VAL-004",
+      "area": "Submission validation",
+      "expected": "Corrupted DOCX is rejected and AI review does not run.",
+      "actual": "Rejected with error File corrupted.docx is corrupted or unreadable: Can't find end of central directory : is this a zip file ? If it is, see https://stuk.github.io/jszip/documentation/howto/read_zip.html.",
+      "status": "PASS",
+      "evidenceFile": "docs/final-audit/evidence/phase-7-5/database/validation-corrupted-docx.json"
+    },
+    {
+      "id": "P7.5-VAL-005",
+      "area": "Assignment rules",
+      "expected": "Below minimum word count is rejected before AI runs.",
+      "actual": "Rejected at submit time with Word count 17 is below the minimum 30..",
+      "status": "PASS",
+      "evidenceFile": "docs/final-audit/evidence/phase-7-5/database/validation-below-minimum.json"
+    },
+    {
+      "id": "P7.5-VAL-006",
+      "area": "Assignment rules",
+      "expected": "Above maximum word count is rejected before AI runs.",
+      "actual": "Rejected at submit time with Word count 306 exceeds the maximum 250..",
+      "status": "PASS",
+      "evidenceFile": "docs/final-audit/evidence/phase-7-5/database/validation-above-maximum.json"
+    },
+    {
+      "id": "P7.5-VAL-007",
+      "area": "Submission validation",
+      "expected": "Closed assignment rejects submission and AI review does not run.",
+      "actual": "Status=400; error=Coursework publication is not open for new submissions.",
+      "status": "PASS",
+      "evidenceFile": "docs/final-audit/evidence/phase-7-5/database/validation-closed-assignment.json"
+    },
+    {
+      "id": "P7.5-VAL-008",
+      "area": "Submission validation",
+      "expected": "Attempt-limit exceeded is rejected and AI review does not run.",
+      "actual": "First=201; second=400; secondError=Maximum attempts reached for this coursework.",
+      "status": "PASS",
+      "evidenceFile": "docs/final-audit/evidence/phase-7-5/database/validation-attempt-limit.json"
+    },
+    {
+      "id": "P7.5-VAL-009",
+      "area": "Authorization",
+      "expected": "Foreign student submission is rejected.",
+      "actual": "Status=403; error=Student is not a target for this coursework publication.",
+      "status": "PASS",
+      "evidenceFile": "docs/final-audit/evidence/phase-7-5/database/validation-foreign-student.json"
+    },
+    {
+      "id": "P7.5-VIS-001",
+      "area": "Student visibility",
+      "expected": "Student sees only released AI review summary and no internal source matches.",
+      "actual": "Released review exists in DB with 0 internal source matches attached to storage; runtime filtering is enforced in student serialization.",
+      "status": "PASS",
+      "evidenceFile": "docs/final-audit/evidence/phase-7-5/database/student-visibility.json"
+    }
+  ]
+}

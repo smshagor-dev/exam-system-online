@@ -1,0 +1,13 @@
+{
+    "statusCode":  200,
+    "redisUrl":  "redis://127.0.0.1:6382",
+    "body":  {
+                 "ready":  true,
+                 "appReady":  true,
+                 "databaseReady":  true,
+                 "redisReady":  true,
+                 "socketReady":  true,
+                 "runtimeMode":  "redis",
+                 "checkedAt":  "2026-07-14T12:27:09.557Z"
+             }
+}

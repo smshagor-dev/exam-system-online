@@ -1,0 +1,177 @@
+[
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/register?_rsc=sW2A7HEmFQnSVIMx",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/forgot-password?_rsc=sW2A7HEmFQnSVIMx",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/?_rsc=q3mOO9BClNZHexY7",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/?_rsc=qYT2Wy2QR8kXuUU6",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/forgot-password?_rsc=tXyZJ52UQVBCVsD3",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/register?_rsc=tXyZJ52UQVBCVsD3",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/admin/dashboard?_rsc=2Md0sTUZcnjCijMr",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/admin/program-semesters?_rsc=cduDTPtv0UIYlG9Y",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/admin/program-years?_rsc=cduDTPtv0UIYlG9Y",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/admin/academic-sessions?_rsc=cduDTPtv0UIYlG9Y",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/admin/department-languages?_rsc=cduDTPtv0UIYlG9Y",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/admin/programs?_rsc=cduDTPtv0UIYlG9Y",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/admin/degree-levels?_rsc=cduDTPtv0UIYlG9Y",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/admin/departments?_rsc=cduDTPtv0UIYlG9Y",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/admin/program-semesters?_rsc=L8H_kjkQuRZYxv9n",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/admin/department-languages?_rsc=L8H_kjkQuRZYxv9n",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/admin/academic-sessions?_rsc=L8H_kjkQuRZYxv9n",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/admin/programs?_rsc=L8H_kjkQuRZYxv9n",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/admin/degree-levels?_rsc=L8H_kjkQuRZYxv9n",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/admin/departments?_rsc=L8H_kjkQuRZYxv9n",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/admin/program-years?_rsc=L8H_kjkQuRZYxv9n",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/admin/program-years?_rsc=cduDTPtv0UIYlG9Y",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/admin/program-semesters?_rsc=cduDTPtv0UIYlG9Y",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/admin/academic-sessions?_rsc=cduDTPtv0UIYlG9Y",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/admin/programs?_rsc=cduDTPtv0UIYlG9Y",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/admin/degree-levels?_rsc=cduDTPtv0UIYlG9Y",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/admin/departments?_rsc=cduDTPtv0UIYlG9Y",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/admin/program-years?_rsc=L8H_kjkQuRZYxv9n",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/admin/academic-sessions?_rsc=L8H_kjkQuRZYxv9n",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/admin/program-semesters?_rsc=L8H_kjkQuRZYxv9n",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/admin/department-languages?_rsc=L8H_kjkQuRZYxv9n",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/admin/programs?_rsc=L8H_kjkQuRZYxv9n",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/admin/degree-levels?_rsc=L8H_kjkQuRZYxv9n",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/admin/departments?_rsc=L8H_kjkQuRZYxv9n",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/admin/dashboard?_rsc=L8H_kjkQuRZYxv9n",
+    "message": "net::ERR_ABORTED"
+  }
+]

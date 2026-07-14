@@ -14,8 +14,30 @@ import {
   calculateCourseworkGradeTotals,
   dispatchCourseworkDueSoonNotifications,
 } from '../../src/lib/coursework-enterprise'
+import { ensureCourseworkTestFixtures } from './ensure-coursework-test-fixtures'
 import { prisma } from '../../src/lib/prisma'
 import { submitCourseworkAttemptForStudent } from '../../src/lib/coursework-enterprise-submission'
+
+async function loadLeadAssignment() {
+  return prisma.teachingAssignment.findFirst({
+    where: {
+      status: 'ACTIVE',
+      roles: {
+        some: {
+          role: 'LEAD_TEACHER',
+        },
+      },
+    },
+    include: {
+      academicOffering: true,
+      teacher: {
+        include: {
+          user: true,
+        },
+      },
+    },
+  })
+}
 
 async function createScopedPublicationFixture(input: {
   templateId: string
@@ -84,6 +106,16 @@ async function createScopedPublicationFixture(input: {
 }
 
 async function cleanupScopedPublicationFixture(publicationId: string) {
+  await prisma.courseworkAIAudit.deleteMany({ where: { review: { publicationId } } })
+  await prisma.courseworkAIRecommendation.deleteMany({ where: { review: { publicationId } } })
+  await prisma.courseworkAIGrammarFinding.deleteMany({ where: { review: { publicationId } } })
+  await prisma.courseworkAICitationFinding.deleteMany({ where: { review: { publicationId } } })
+  await prisma.courseworkAIRubricSuggestion.deleteMany({ where: { review: { publicationId } } })
+  await prisma.courseworkAISourceMatch.deleteMany({ where: { review: { publicationId } } })
+  await prisma.courseworkAIFinding.deleteMany({ where: { review: { publicationId } } })
+  await prisma.courseworkAICheck.deleteMany({ where: { review: { publicationId } } })
+  await prisma.courseworkAIReview.deleteMany({ where: { publicationId } })
+  await prisma.courseworkAIReviewJob.deleteMany({ where: { publicationId } })
   await prisma.courseworkAttemptRequest.deleteMany({ where: { publicationId } })
   await prisma.courseworkAttemptAttachment.deleteMany({ where: { attempt: { publicationId } } })
   await prisma.courseworkAttempt.deleteMany({ where: { publicationId } })
@@ -98,24 +130,13 @@ async function cleanupScopedPublicationFixture(publicationId: string) {
 async function main() {
   console.log('[phase7:test] Looking up seeded academic scope...')
 
-  const leadAssignment = await prisma.teachingAssignment.findFirst({
-    where: {
-      status: 'ACTIVE',
-      roles: {
-        some: {
-          role: 'LEAD_TEACHER',
-        },
-      },
-    },
-    include: {
-      academicOffering: true,
-      teacher: {
-        include: {
-          user: true,
-        },
-      },
-    },
-  })
+  let leadAssignment = await loadLeadAssignment()
+
+  if (!leadAssignment) {
+    console.log('[phase7:test] No seeded scope found. Rebuilding legacy test fixtures...')
+    await ensureCourseworkTestFixtures()
+    leadAssignment = await loadLeadAssignment()
+  }
 
   if (!leadAssignment) {
     throw new Error('No active lead teaching assignment found for Phase 7 tests')
@@ -335,6 +356,14 @@ async function main() {
       },
     })
     createdIds.extensionRequestId = extensionRequest.id
+
+    await prisma.notification.deleteMany({
+      where: {
+        userId: leadAssignment.teacher.user.id,
+        title: 'Coursework submission received',
+        link: '/teacher/coursework',
+      },
+    })
 
     const teacherNotificationCountBefore = await prisma.notification.count({
       where: {
@@ -1027,6 +1056,16 @@ async function main() {
       await prisma.courseworkGrade.deleteMany({ where: { id: createdIds.gradeId } })
     }
     if (createdIds.publicationId) {
+      await prisma.courseworkAIAudit.deleteMany({ where: { review: { publicationId: createdIds.publicationId } } })
+      await prisma.courseworkAIRecommendation.deleteMany({ where: { review: { publicationId: createdIds.publicationId } } })
+      await prisma.courseworkAIGrammarFinding.deleteMany({ where: { review: { publicationId: createdIds.publicationId } } })
+      await prisma.courseworkAICitationFinding.deleteMany({ where: { review: { publicationId: createdIds.publicationId } } })
+      await prisma.courseworkAIRubricSuggestion.deleteMany({ where: { review: { publicationId: createdIds.publicationId } } })
+      await prisma.courseworkAISourceMatch.deleteMany({ where: { review: { publicationId: createdIds.publicationId } } })
+      await prisma.courseworkAIFinding.deleteMany({ where: { review: { publicationId: createdIds.publicationId } } })
+      await prisma.courseworkAICheck.deleteMany({ where: { review: { publicationId: createdIds.publicationId } } })
+      await prisma.courseworkAIReview.deleteMany({ where: { publicationId: createdIds.publicationId } })
+      await prisma.courseworkAIReviewJob.deleteMany({ where: { publicationId: createdIds.publicationId } })
       await prisma.courseworkAttemptRequest.deleteMany({ where: { publicationId: createdIds.publicationId } })
       await prisma.courseworkAttemptAttachment.deleteMany({
         where: {

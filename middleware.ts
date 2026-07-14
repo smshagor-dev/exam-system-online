@@ -16,6 +16,10 @@ export default auth((req: NextAuthRequest) => {
   const { nextUrl, auth: session } = req
   const pathname = nextUrl.pathname
 
+  if (pathname.startsWith('/uploads/coursework-enterprise/') || pathname.startsWith('/uploads/coursework/')) {
+    return new NextResponse('Not found', { status: 404 })
+  }
+
   if (PUBLIC_PATHS.some((path) => pathname.startsWith(path))) {
     return NextResponse.next()
   }

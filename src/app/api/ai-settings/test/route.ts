@@ -4,6 +4,10 @@ import { requireRole } from '@/lib/auth'
 import { aiEvaluationService } from '@/services/ai-evaluation.service'
 
 export async function POST() {
+  if (process.env.NODE_ENV === 'production') {
+    return NextResponse.json({ error: 'Not found' }, { status: 404 })
+  }
+
   await requireRole(UserRole.SUPER_ADMIN, UserRole.TEACHER)
 
   try {

@@ -1,0 +1,9 @@
+{
+  "method": "POST",
+  "url": "/api/teacher/coursework/attempts/cmrkov06a00022udykt24woea/ai-review",
+  "status": 403,
+  "json": {
+    "error": "You do not have permission to review this coursework attempt"
+  },
+  "text": "{\"error\":\"You do not have permission to review this coursework attempt\"}"
+}

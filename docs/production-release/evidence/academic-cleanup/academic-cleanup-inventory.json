@@ -1,0 +1,832 @@
+{
+  "generatedAt": "2026-07-14T13:37:29.764Z",
+  "mode": "dry-run",
+  "records": [
+    {
+      "model": "Department",
+      "recordId": "cmrc1y4pr000ck2kd4d7vqcwq",
+      "name": "Computer Science & Engineering",
+      "code": "CSE",
+      "createdAt": "2026-07-08T12:26:39.328Z",
+      "createdSource": "LEGACY_DEMO_SEED",
+      "relations": {
+        "subjects": 5,
+        "programs": 2,
+        "academicOfferings": 6,
+        "scheduledExamItems": 14,
+        "academicCalendars": 14,
+        "schedulingSessions": 14,
+        "teachers": 0,
+        "students": 0,
+        "enrollments": 0
+      },
+      "classification": "REAL_REQUIRED_REFERENCE_DATA",
+      "recommendedAction": "KEEP",
+      "rationale": "The record is actively referenced by retained academic structures or runtime scheduling data."
+    },
+    {
+      "model": "Department",
+      "recordId": "cmrc1y4uk000dk2kdqc6m8jp6",
+      "name": "Electrical & Electronic Engineering",
+      "code": "EEE",
+      "createdAt": "2026-07-08T12:26:39.500Z",
+      "createdSource": "LEGACY_DEMO_SEED",
+      "relations": {
+        "subjects": 0,
+        "programs": 1,
+        "academicOfferings": 0,
+        "scheduledExamItems": 0,
+        "academicCalendars": 0,
+        "schedulingSessions": 0,
+        "teachers": 0,
+        "students": 0,
+        "enrollments": 0
+      },
+      "classification": "REAL_REQUIRED_REFERENCE_DATA",
+      "recommendedAction": "KEEP",
+      "rationale": "The record is actively referenced by retained academic structures or runtime scheduling data."
+    },
+    {
+      "model": "Subject",
+      "recordId": "cmrfudk7t00021387u895s14h",
+      "name": "Programming Fundamentals",
+      "code": "CSE-101",
+      "createdAt": "2026-07-11T04:05:47.033Z",
+      "createdSource": "PHASE_TEST_FIXTURE",
+      "relations": {
+        "academicOfferings": 2,
+        "exams": 0,
+        "courseworkPublications": 0,
+        "studentSubjects": 0,
+        "programSubjects": 0
+      },
+      "classification": "REAL_REQUIRED_REFERENCE_DATA",
+      "recommendedAction": "KEEP",
+      "rationale": "The record is actively referenced by retained academic structures or runtime scheduling data."
+    },
+    {
+      "model": "Subject",
+      "recordId": "cmrc1y53e000gk2kdudmed81a",
+      "name": "Data Structures & Algorithms",
+      "code": "CSE-201",
+      "createdAt": "2026-07-08T12:26:39.819Z",
+      "createdSource": "LEGACY_DEMO_SEED",
+      "relations": {
+        "academicOfferings": 1,
+        "exams": 0,
+        "courseworkPublications": 0,
+        "studentSubjects": 0,
+        "programSubjects": 0
+      },
+      "classification": "REAL_REQUIRED_REFERENCE_DATA",
+      "recommendedAction": "KEEP",
+      "rationale": "The record is actively referenced by retained academic structures or runtime scheduling data."
+    },
+    {
+      "model": "Subject",
+      "recordId": "cmrc1y57t000ik2kdf6fol422",
+      "name": "Database Management Systems",
+      "code": "CSE-301",
+      "createdAt": "2026-07-08T12:26:39.978Z",
+      "createdSource": "LEGACY_DEMO_SEED",
+      "relations": {
+        "academicOfferings": 1,
+        "exams": 0,
+        "courseworkPublications": 0,
+        "studentSubjects": 0,
+        "programSubjects": 0
+      },
+      "classification": "REAL_REQUIRED_REFERENCE_DATA",
+      "recommendedAction": "KEEP",
+      "rationale": "The record is actively referenced by retained academic structures or runtime scheduling data."
+    },
+    {
+      "model": "Subject",
+      "recordId": "cmrc1y5c9000kk2kde5g3n6nk",
+      "name": "Web Development",
+      "code": "CSE-401",
+      "createdAt": "2026-07-08T12:26:40.137Z",
+      "createdSource": "LEGACY_DEMO_SEED",
+      "relations": {
+        "academicOfferings": 1,
+        "exams": 0,
+        "courseworkPublications": 0,
+        "studentSubjects": 0,
+        "programSubjects": 0
+      },
+      "classification": "REAL_REQUIRED_REFERENCE_DATA",
+      "recommendedAction": "KEEP",
+      "rationale": "The record is actively referenced by retained academic structures or runtime scheduling data."
+    },
+    {
+      "model": "Subject",
+      "recordId": "cmrfudkmb00041387dv9nrmtb",
+      "name": "Machine Learning",
+      "code": "CSE-501",
+      "createdAt": "2026-07-11T04:05:47.555Z",
+      "createdSource": "PHASE_TEST_FIXTURE",
+      "relations": {
+        "academicOfferings": 1,
+        "exams": 0,
+        "courseworkPublications": 0,
+        "studentSubjects": 0,
+        "programSubjects": 0
+      },
+      "classification": "REAL_REQUIRED_REFERENCE_DATA",
+      "recommendedAction": "KEEP",
+      "rationale": "The record is actively referenced by retained academic structures or runtime scheduling data."
+    },
+    {
+      "model": "Language",
+      "recordId": "cmrc1y4h10006k2kdse7x47oh",
+      "name": "English",
+      "code": "EN",
+      "createdAt": "2026-07-08T12:26:39.014Z",
+      "createdSource": "LEGACY_DEMO_SEED",
+      "relations": {
+        "academicOfferings": 5,
+        "groups": 4,
+        "departmentLanguages": 1,
+        "exams": 0,
+        "courseworkPublications": 0,
+        "enrollments": 0
+      },
+      "classification": "SYSTEM_DEFAULT",
+      "recommendedAction": "KEEP",
+      "rationale": "English is an active academic language and a production default."
+    },
+    {
+      "model": "Language",
+      "recordId": "cmrfudipt00001387aijb5mgh",
+      "name": "Russian",
+      "code": "RU",
+      "createdAt": "2026-07-11T04:05:45.089Z",
+      "createdSource": "PHASE_TEST_FIXTURE",
+      "relations": {
+        "academicOfferings": 1,
+        "groups": 2,
+        "departmentLanguages": 2,
+        "exams": 0,
+        "courseworkPublications": 0,
+        "enrollments": 0
+      },
+      "classification": "REAL_REQUIRED_REFERENCE_DATA",
+      "recommendedAction": "KEEP",
+      "rationale": "The record is actively referenced by retained academic structures or runtime scheduling data."
+    },
+    {
+      "model": "Group",
+      "recordId": "cmrfvdojh0069wqlin9rvrq3m",
+      "name": "BSC-CS-11E",
+      "code": "BSC-CS-11E",
+      "createdAt": "2026-07-11T04:33:52.253Z",
+      "createdSource": "PHASE_TEST_FIXTURE",
+      "relations": {
+        "academicOfferings": 1,
+        "exams": 0,
+        "courseworkPublications": 0,
+        "enrollments": 0,
+        "department": 1,
+        "program": 1,
+        "language": 1,
+        "session": 1,
+        "academicYear": 1
+      },
+      "classification": "REAL_REQUIRED_REFERENCE_DATA",
+      "recommendedAction": "KEEP",
+      "rationale": "The record is actively referenced by retained academic structures or runtime scheduling data."
+    },
+    {
+      "model": "Group",
+      "recordId": "cmrfvdjp80067wqli6zjyifgw",
+      "name": "BSC-CS-11R",
+      "code": "BSC-CS-11R",
+      "createdAt": "2026-07-11T04:33:45.980Z",
+      "createdSource": "PHASE_TEST_FIXTURE",
+      "relations": {
+        "academicOfferings": 1,
+        "exams": 0,
+        "courseworkPublications": 0,
+        "enrollments": 0,
+        "department": 1,
+        "program": 1,
+        "language": 1,
+        "session": 1,
+        "academicYear": 1
+      },
+      "classification": "REAL_REQUIRED_REFERENCE_DATA",
+      "recommendedAction": "KEEP",
+      "rationale": "The record is actively referenced by retained academic structures or runtime scheduling data."
+    },
+    {
+      "model": "Group",
+      "recordId": "cmrfvdxcl006dwqlijzoq1afu",
+      "name": "EEE-RU-11",
+      "code": "EEE-RU-11",
+      "createdAt": "2026-07-11T04:34:03.669Z",
+      "createdSource": "PHASE_TEST_FIXTURE",
+      "relations": {
+        "academicOfferings": 0,
+        "exams": 0,
+        "courseworkPublications": 0,
+        "enrollments": 0,
+        "department": 1,
+        "program": 1,
+        "language": 1,
+        "session": 1,
+        "academicYear": 1
+      },
+      "classification": "REAL_REQUIRED_REFERENCE_DATA",
+      "recommendedAction": "KEEP",
+      "rationale": "The record is actively referenced by retained academic structures or runtime scheduling data."
+    },
+    {
+      "model": "Group",
+      "recordId": "cmrc1y4le000ak2kd1o5se1xs",
+      "name": "Group A",
+      "code": "GRP-A",
+      "createdAt": "2026-07-08T12:26:39.170Z",
+      "createdSource": "LEGACY_DEMO_SEED",
+      "relations": {
+        "academicOfferings": 2,
+        "exams": 0,
+        "courseworkPublications": 0,
+        "enrollments": 0,
+        "department": 1,
+        "program": 1,
+        "language": 1,
+        "session": 1,
+        "academicYear": 1
+      },
+      "classification": "REAL_REQUIRED_REFERENCE_DATA",
+      "recommendedAction": "KEEP",
+      "rationale": "The record is actively referenced by retained academic structures or runtime scheduling data."
+    },
+    {
+      "model": "Group",
+      "recordId": "cmrc1y4le0009k2kdpo214w8b",
+      "name": "Group B",
+      "code": "GRP-B",
+      "createdAt": "2026-07-08T12:26:39.170Z",
+      "createdSource": "LEGACY_DEMO_SEED",
+      "relations": {
+        "academicOfferings": 1,
+        "exams": 0,
+        "courseworkPublications": 0,
+        "enrollments": 0,
+        "department": 1,
+        "program": 1,
+        "language": 1,
+        "session": 1,
+        "academicYear": 1
+      },
+      "classification": "REAL_REQUIRED_REFERENCE_DATA",
+      "recommendedAction": "KEEP",
+      "rationale": "The record is actively referenced by retained academic structures or runtime scheduling data."
+    },
+    {
+      "model": "Group",
+      "recordId": "cmrfvdt6v006bwqlimgo85td6",
+      "name": "MSC-AI-11E",
+      "code": "MSC-AI-11E",
+      "createdAt": "2026-07-11T04:33:58.279Z",
+      "createdSource": "LEGACY_DEMO_SEED",
+      "relations": {
+        "academicOfferings": 1,
+        "exams": 0,
+        "courseworkPublications": 0,
+        "enrollments": 0,
+        "department": 1,
+        "program": 1,
+        "language": 1,
+        "session": 1,
+        "academicYear": 1
+      },
+      "classification": "REAL_REQUIRED_REFERENCE_DATA",
+      "recommendedAction": "KEEP",
+      "rationale": "The record is actively referenced by retained academic structures or runtime scheduling data."
+    },
+    {
+      "model": "AcademicYear",
+      "recordId": "cmrc1y4060003k2kd2m0dhf10",
+      "name": "Year 1",
+      "code": "1",
+      "createdAt": "2026-07-08T12:26:38.406Z",
+      "createdSource": "LEGACY_DEMO_SEED",
+      "relations": {
+        "groups": 4,
+        "exams": 0,
+        "courseworkPublications": 0,
+        "enrollments": 0
+      },
+      "classification": "REAL_REQUIRED_REFERENCE_DATA",
+      "recommendedAction": "KEEP",
+      "rationale": "The record is actively referenced by retained academic structures or runtime scheduling data."
+    },
+    {
+      "model": "AcademicYear",
+      "recordId": "cmrc1y4060000k2kdx7dkghyw",
+      "name": "Year 2",
+      "code": "2",
+      "createdAt": "2026-07-08T12:26:38.406Z",
+      "createdSource": "LEGACY_DEMO_SEED",
+      "relations": {
+        "groups": 1,
+        "exams": 0,
+        "courseworkPublications": 0,
+        "enrollments": 0
+      },
+      "classification": "REAL_REQUIRED_REFERENCE_DATA",
+      "recommendedAction": "KEEP",
+      "rationale": "The record is actively referenced by retained academic structures or runtime scheduling data."
+    },
+    {
+      "model": "AcademicYear",
+      "recordId": "cmrc1y4060002k2kd52mc7lt0",
+      "name": "Year 3",
+      "code": "3",
+      "createdAt": "2026-07-08T12:26:38.406Z",
+      "createdSource": "LEGACY_DEMO_SEED",
+      "relations": {
+        "groups": 1,
+        "exams": 0,
+        "courseworkPublications": 0,
+        "enrollments": 0
+      },
+      "classification": "REAL_REQUIRED_REFERENCE_DATA",
+      "recommendedAction": "KEEP",
+      "rationale": "The record is actively referenced by retained academic structures or runtime scheduling data."
+    },
+    {
+      "model": "Semester",
+      "recordId": "cmrc1y4cm0004k2kddk9xe7q7",
+      "name": "Semester 1",
+      "code": "1",
+      "createdAt": "2026-07-08T12:26:38.854Z",
+      "createdSource": "LEGACY_DEMO_SEED",
+      "relations": {
+        "academicOfferings": 6,
+        "programSemesters": 0,
+        "programSubjects": 0,
+        "exams": 0,
+        "courseworkPublications": 0,
+        "enrollments": 0
+      },
+      "classification": "REAL_REQUIRED_REFERENCE_DATA",
+      "recommendedAction": "KEEP",
+      "rationale": "The record is actively referenced by retained academic structures or runtime scheduling data."
+    },
+    {
+      "model": "DegreeLevel",
+      "recordId": "cmrfvbyml004swqlipq4d1lvw",
+      "name": "Bachelor of Science",
+      "code": "BSC",
+      "createdAt": "2026-07-11T04:32:32.013Z",
+      "createdSource": "LEGACY_DEMO_SEED",
+      "relations": {
+        "programs": 2
+      },
+      "classification": "REAL_REQUIRED_REFERENCE_DATA",
+      "recommendedAction": "KEEP",
+      "rationale": "The record is actively referenced by retained academic structures or runtime scheduling data."
+    },
+    {
+      "model": "DegreeLevel",
+      "recordId": "cmrfvbznf004twqlirmayo5rn",
+      "name": "Master of Science",
+      "code": "MSC",
+      "createdAt": "2026-07-11T04:32:33.339Z",
+      "createdSource": "LEGACY_DEMO_SEED",
+      "relations": {
+        "programs": 1
+      },
+      "classification": "REAL_REQUIRED_REFERENCE_DATA",
+      "recommendedAction": "KEEP",
+      "rationale": "The record is actively referenced by retained academic structures or runtime scheduling data."
+    },
+    {
+      "model": "AcademicProgram",
+      "recordId": "cmrfvc9gk0053wqli5omnqitt",
+      "name": "BSc Computer Science",
+      "code": "BSC-CS",
+      "createdAt": "2026-07-11T04:32:46.052Z",
+      "createdSource": "LEGACY_DEMO_SEED",
+      "relations": {
+        "groups": 4,
+        "programYears": 4,
+        "programSemesters": 0,
+        "programSubjects": 0,
+        "academicOfferings": 5,
+        "enrollments": 0,
+        "degreeLevel": 1,
+        "department": 1
+      },
+      "classification": "REAL_REQUIRED_REFERENCE_DATA",
+      "recommendedAction": "KEEP",
+      "rationale": "The record is actively referenced by retained academic structures or runtime scheduling data."
+    },
+    {
+      "model": "AcademicProgram",
+      "recordId": "cmrfvcbzp0057wqlipcapgs15",
+      "name": "BSc Electrical Engineering",
+      "code": "BSC-EEE",
+      "createdAt": "2026-07-11T04:32:49.333Z",
+      "createdSource": "PHASE_TEST_FIXTURE",
+      "relations": {
+        "groups": 1,
+        "programYears": 1,
+        "programSemesters": 0,
+        "programSubjects": 0,
+        "academicOfferings": 0,
+        "enrollments": 0,
+        "degreeLevel": 1,
+        "department": 1
+      },
+      "classification": "REAL_REQUIRED_REFERENCE_DATA",
+      "recommendedAction": "KEEP",
+      "rationale": "The record is actively referenced by retained academic structures or runtime scheduling data."
+    },
+    {
+      "model": "AcademicProgram",
+      "recordId": "cmrfvcapp0055wqlijldrxbb2",
+      "name": "MSc Artificial Intelligence",
+      "code": "MSC-AI",
+      "createdAt": "2026-07-11T04:32:47.677Z",
+      "createdSource": "LEGACY_DEMO_SEED",
+      "relations": {
+        "groups": 1,
+        "programYears": 2,
+        "programSemesters": 0,
+        "programSubjects": 0,
+        "academicOfferings": 1,
+        "enrollments": 0,
+        "degreeLevel": 1,
+        "department": 1
+      },
+      "classification": "REAL_REQUIRED_REFERENCE_DATA",
+      "recommendedAction": "KEEP",
+      "rationale": "The record is actively referenced by retained academic structures or runtime scheduling data."
+    },
+    {
+      "model": "AcademicSession",
+      "recordId": "cmrfvc6kk0050wqliy7jsvc0r",
+      "name": "2026-2027",
+      "code": "2026-2027",
+      "createdAt": "2026-07-11T04:32:42.308Z",
+      "createdSource": "LEGACY_DEMO_SEED",
+      "relations": {
+        "groups": 6,
+        "academicOfferings": 6,
+        "enrollments": 0,
+        "academicCalendars": 14,
+        "schedulingSessions": 14
+      },
+      "classification": "REAL_REQUIRED_REFERENCE_DATA",
+      "recommendedAction": "KEEP",
+      "rationale": "The current academic session is actively referenced by offerings and scheduling records."
+    },
+    {
+      "model": "DepartmentLanguage",
+      "recordId": "cmrfvc2k7004vwqliecl9ia07",
+      "name": "CSE-EN",
+      "code": "CSE-EN",
+      "createdAt": "2026-07-11T04:32:37.111Z",
+      "createdSource": "DERIVED_FROM_DEMO_STRUCTURE",
+      "relations": {
+        "groups": 4,
+        "academicOfferings": 2,
+        "enrollments": 0,
+        "department": 1,
+        "language": 1
+      },
+      "classification": "REAL_REQUIRED_REFERENCE_DATA",
+      "recommendedAction": "KEEP",
+      "rationale": "The record is actively referenced by retained academic structures or runtime scheduling data."
+    },
+    {
+      "model": "DepartmentLanguage",
+      "recordId": "cmrfvc3kg004xwqli8kpib47u",
+      "name": "CSE-RU",
+      "code": "CSE-RU",
+      "createdAt": "2026-07-11T04:32:38.416Z",
+      "createdSource": "DERIVED_FROM_DEMO_STRUCTURE",
+      "relations": {
+        "groups": 1,
+        "academicOfferings": 1,
+        "enrollments": 0,
+        "department": 1,
+        "language": 1
+      },
+      "classification": "REAL_REQUIRED_REFERENCE_DATA",
+      "recommendedAction": "KEEP",
+      "rationale": "The record is actively referenced by retained academic structures or runtime scheduling data."
+    },
+    {
+      "model": "DepartmentLanguage",
+      "recordId": "cmrfvc4vl004zwqlibzive0z6",
+      "name": "EEE-RU",
+      "code": "EEE-RU",
+      "createdAt": "2026-07-11T04:32:40.113Z",
+      "createdSource": "DERIVED_FROM_DEMO_STRUCTURE",
+      "relations": {
+        "groups": 1,
+        "academicOfferings": 0,
+        "enrollments": 0,
+        "department": 1,
+        "language": 1
+      },
+      "classification": "REAL_REQUIRED_REFERENCE_DATA",
+      "recommendedAction": "KEEP",
+      "rationale": "The record is actively referenced by retained academic structures or runtime scheduling data."
+    },
+    {
+      "model": "ProgramYear",
+      "recordId": "cmrfvcdti0059wqlij5fqmj0g",
+      "name": "BSc Year 1",
+      "code": "BSC-CS-Y1",
+      "createdAt": "2026-07-11T04:32:51.702Z",
+      "createdSource": "DERIVED_FROM_DEMO_STRUCTURE",
+      "relations": {
+        "groups": 2,
+        "academicOfferings": 2,
+        "enrollments": 0,
+        "programSemesters": 0,
+        "programSubjects": 0,
+        "program": 1
+      },
+      "classification": "REAL_REQUIRED_REFERENCE_DATA",
+      "recommendedAction": "KEEP",
+      "rationale": "The record is actively referenced by retained academic structures or runtime scheduling data."
+    },
+    {
+      "model": "ProgramYear",
+      "recordId": "cmrfvcew4005bwqli4649yh99",
+      "name": "BSc Year 2",
+      "code": "BSC-CS-Y2",
+      "createdAt": "2026-07-11T04:32:53.092Z",
+      "createdSource": "DERIVED_FROM_DEMO_STRUCTURE",
+      "relations": {
+        "groups": 1,
+        "academicOfferings": 2,
+        "enrollments": 0,
+        "programSemesters": 0,
+        "programSubjects": 0,
+        "program": 1
+      },
+      "classification": "REAL_REQUIRED_REFERENCE_DATA",
+      "recommendedAction": "KEEP",
+      "rationale": "The record is actively referenced by retained academic structures or runtime scheduling data."
+    },
+    {
+      "model": "ProgramYear",
+      "recordId": "cmrfvcg51005dwqliadldkhdh",
+      "name": "BSc Year 3",
+      "code": "BSC-CS-Y3",
+      "createdAt": "2026-07-11T04:32:54.709Z",
+      "createdSource": "DERIVED_FROM_DEMO_STRUCTURE",
+      "relations": {
+        "groups": 1,
+        "academicOfferings": 1,
+        "enrollments": 0,
+        "programSemesters": 0,
+        "programSubjects": 0,
+        "program": 1
+      },
+      "classification": "REAL_REQUIRED_REFERENCE_DATA",
+      "recommendedAction": "KEEP",
+      "rationale": "The record is actively referenced by retained academic structures or runtime scheduling data."
+    },
+    {
+      "model": "ProgramYear",
+      "recordId": "cmrfvchfr005fwqlik6ctjp1y",
+      "name": "BSc Year 4",
+      "code": "BSC-CS-Y4",
+      "createdAt": "2026-07-11T04:32:56.392Z",
+      "createdSource": "DERIVED_FROM_DEMO_STRUCTURE",
+      "relations": {
+        "groups": 0,
+        "academicOfferings": 0,
+        "enrollments": 0,
+        "programSemesters": 0,
+        "programSubjects": 0,
+        "program": 1
+      },
+      "classification": "REAL_REQUIRED_REFERENCE_DATA",
+      "recommendedAction": "KEEP",
+      "rationale": "The record is actively referenced by retained academic structures or runtime scheduling data."
+    },
+    {
+      "model": "ProgramYear",
+      "recordId": "cmrfvcir6005hwqlidjmubxek",
+      "name": "MSc Year 1",
+      "code": "MSC-AI-Y1",
+      "createdAt": "2026-07-11T04:32:58.099Z",
+      "createdSource": "DERIVED_FROM_DEMO_STRUCTURE",
+      "relations": {
+        "groups": 1,
+        "academicOfferings": 1,
+        "enrollments": 0,
+        "programSemesters": 0,
+        "programSubjects": 0,
+        "program": 1
+      },
+      "classification": "REAL_REQUIRED_REFERENCE_DATA",
+      "recommendedAction": "KEEP",
+      "rationale": "The record is actively referenced by retained academic structures or runtime scheduling data."
+    },
+    {
+      "model": "ProgramYear",
+      "recordId": "cmrfvck33005jwqlioe5lhxrb",
+      "name": "MSc Year 2",
+      "code": "MSC-AI-Y2",
+      "createdAt": "2026-07-11T04:32:59.823Z",
+      "createdSource": "DERIVED_FROM_DEMO_STRUCTURE",
+      "relations": {
+        "groups": 0,
+        "academicOfferings": 0,
+        "enrollments": 0,
+        "programSemesters": 0,
+        "programSubjects": 0,
+        "program": 1
+      },
+      "classification": "REAL_REQUIRED_REFERENCE_DATA",
+      "recommendedAction": "KEEP",
+      "rationale": "The record is actively referenced by retained academic structures or runtime scheduling data."
+    },
+    {
+      "model": "ProgramYear",
+      "recordId": "cmrfvct0p005lwqlij6pakctd",
+      "name": "EEE Year 1",
+      "code": "BSC-EEE-Y1",
+      "createdAt": "2026-07-11T04:33:11.402Z",
+      "createdSource": "DERIVED_FROM_DEMO_STRUCTURE",
+      "relations": {
+        "groups": 1,
+        "academicOfferings": 0,
+        "enrollments": 0,
+        "programSemesters": 0,
+        "programSubjects": 0,
+        "program": 1
+      },
+      "classification": "REAL_REQUIRED_REFERENCE_DATA",
+      "recommendedAction": "KEEP",
+      "rationale": "The record is actively referenced by retained academic structures or runtime scheduling data."
+    },
+    {
+      "model": "AcademicOffering",
+      "recordId": "cmrfve242006fwqliz6dmghl7",
+      "name": "BSC-CS:CSE-101:BSC-CS-11R:RU",
+      "code": "BSC-CS:CSE-101:BSC-CS-11R:RU",
+      "createdAt": "2026-07-11T04:34:09.842Z",
+      "createdSource": "DERIVED_FROM_DEMO_STRUCTURE",
+      "relations": {
+        "exams": 0,
+        "courseworkPublications": 0,
+        "teacherAssignments": 0,
+        "teachingAssignments": 0,
+        "scheduledExamItems": 14,
+        "studentSubjects": 0,
+        "questions": 0,
+        "department": 1,
+        "subject": 1,
+        "language": 1,
+        "group": 1,
+        "session": 1,
+        "program": 1
+      },
+      "classification": "REAL_REQUIRED_REFERENCE_DATA",
+      "recommendedAction": "KEEP",
+      "rationale": "The record is actively referenced by retained academic structures or runtime scheduling data."
+    },
+    {
+      "model": "AcademicOffering",
+      "recordId": "cmrfve715006hwqlipidbzoh9",
+      "name": "BSC-CS:CSE-101:BSC-CS-11E:EN",
+      "code": "BSC-CS:CSE-101:BSC-CS-11E:EN",
+      "createdAt": "2026-07-11T04:34:16.217Z",
+      "createdSource": "DERIVED_FROM_DEMO_STRUCTURE",
+      "relations": {
+        "exams": 0,
+        "courseworkPublications": 0,
+        "teacherAssignments": 0,
+        "teachingAssignments": 0,
+        "scheduledExamItems": 0,
+        "studentSubjects": 0,
+        "questions": 0,
+        "department": 1,
+        "subject": 1,
+        "language": 1,
+        "group": 1,
+        "session": 1,
+        "program": 1
+      },
+      "classification": "REAL_REQUIRED_REFERENCE_DATA",
+      "recommendedAction": "KEEP",
+      "rationale": "The record is actively referenced by retained academic structures or runtime scheduling data."
+    },
+    {
+      "model": "AcademicOffering",
+      "recordId": "cmrfvece5006jwqlifqz8hb2j",
+      "name": "MSC-AI:CSE-501:MSC-AI-11E:EN",
+      "code": "MSC-AI:CSE-501:MSC-AI-11E:EN",
+      "createdAt": "2026-07-11T04:34:23.165Z",
+      "createdSource": "DERIVED_FROM_DEMO_STRUCTURE",
+      "relations": {
+        "exams": 0,
+        "courseworkPublications": 0,
+        "teacherAssignments": 0,
+        "teachingAssignments": 0,
+        "scheduledExamItems": 0,
+        "studentSubjects": 0,
+        "questions": 0,
+        "department": 1,
+        "subject": 1,
+        "language": 1,
+        "group": 1,
+        "session": 1,
+        "program": 1
+      },
+      "classification": "REAL_REQUIRED_REFERENCE_DATA",
+      "recommendedAction": "KEEP",
+      "rationale": "The record is actively referenced by retained academic structures or runtime scheduling data."
+    },
+    {
+      "model": "AcademicOffering",
+      "recordId": "cmrjk67hu0001lmykow5uis4a",
+      "name": "BSC-CS:CSE-201:GRP-A:EN",
+      "code": "BSC-CS:CSE-201:GRP-A:EN",
+      "createdAt": "2026-07-13T18:31:12.498Z",
+      "createdSource": "DERIVED_FROM_DEMO_STRUCTURE",
+      "relations": {
+        "exams": 0,
+        "courseworkPublications": 0,
+        "teacherAssignments": 0,
+        "teachingAssignments": 0,
+        "scheduledExamItems": 0,
+        "studentSubjects": 0,
+        "questions": 0,
+        "department": 1,
+        "subject": 1,
+        "language": 1,
+        "group": 1,
+        "session": 1,
+        "program": 1
+      },
+      "classification": "REAL_REQUIRED_REFERENCE_DATA",
+      "recommendedAction": "KEEP",
+      "rationale": "The record is actively referenced by retained academic structures or runtime scheduling data."
+    },
+    {
+      "model": "AcademicOffering",
+      "recordId": "cmrjk67yz0003lmyk0g1zk0su",
+      "name": "BSC-CS:CSE-301:GRP-A:EN",
+      "code": "BSC-CS:CSE-301:GRP-A:EN",
+      "createdAt": "2026-07-13T18:31:13.115Z",
+      "createdSource": "DERIVED_FROM_DEMO_STRUCTURE",
+      "relations": {
+        "exams": 0,
+        "courseworkPublications": 0,
+        "teacherAssignments": 0,
+        "teachingAssignments": 0,
+        "scheduledExamItems": 0,
+        "studentSubjects": 0,
+        "questions": 0,
+        "department": 1,
+        "subject": 1,
+        "language": 1,
+        "group": 1,
+        "session": 1,
+        "program": 1
+      },
+      "classification": "REAL_REQUIRED_REFERENCE_DATA",
+      "recommendedAction": "KEEP",
+      "rationale": "The record is actively referenced by retained academic structures or runtime scheduling data."
+    },
+    {
+      "model": "AcademicOffering",
+      "recordId": "cmrjk68ea0005lmyk10cm1gbg",
+      "name": "BSC-CS:CSE-401:GRP-B:EN",
+      "code": "BSC-CS:CSE-401:GRP-B:EN",
+      "createdAt": "2026-07-13T18:31:13.666Z",
+      "createdSource": "DERIVED_FROM_DEMO_STRUCTURE",
+      "relations": {
+        "exams": 0,
+        "courseworkPublications": 0,
+        "teacherAssignments": 0,
+        "teachingAssignments": 0,
+        "scheduledExamItems": 0,
+        "studentSubjects": 0,
+        "questions": 0,
+        "department": 1,
+        "subject": 1,
+        "language": 1,
+        "group": 1,
+        "session": 1,
+        "program": 1
+      },
+      "classification": "REAL_REQUIRED_REFERENCE_DATA",
+      "recommendedAction": "KEEP",
+      "rationale": "The record is actively referenced by retained academic structures or runtime scheduling data."
+    }
+  ]
+}

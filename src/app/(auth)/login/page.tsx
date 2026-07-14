@@ -207,17 +207,6 @@ export default function LoginPage() {
               {t('auth.login.register_here', 'Register here')}
             </Link>
           </p>
-
-          <div className="mt-6 p-4 rounded-lg bg-gray-50 border border-gray-200">
-            <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">{t('auth.login.demo_credentials', 'Demo Credentials')}</p>
-            <div className="space-y-1 text-xs text-gray-600">
-              <p><span className="font-medium">Admin:</span> admin@examflow.pro / Admin@123</p>
-              <p><span className="font-medium">Department Admin:</span> cse.admin@examflow.pro / Admin@123</p>
-              <p><span className="font-medium">Teacher:</span> teacher.john@examflow.pro / Teacher@123</p>
-              <p><span className="font-medium">Student:</span> alice@student.examflow.pro / Student@123</p>
-            </div>
-          </div>
-
           {branding.footerText && (
             <p className="mt-4 text-center text-xs text-gray-500">{branding.footerText}</p>
           )}

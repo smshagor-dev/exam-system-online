@@ -14,6 +14,16 @@ import { UserRole } from '@prisma/client'
 import { z } from 'zod'
 import { getAuthSecret } from './auth-secret'
 
+type AppToken = {
+  id?: string
+  role?: UserRole
+  avatarUrl?: string | null
+  isActive?: boolean
+  name?: string | null
+  email?: string | null
+  sub?: string
+}
+
 const loginSchema = z.object({
   email: z.string().email(),
   password: z.string().min(6),
@@ -72,11 +82,12 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   ],
   callbacks: {
     async jwt({ token, user }) {
+      const appToken = token as typeof token & AppToken
       if (user) {
-        if (user.id) token.id = user.id
-        if (user.role) token.role = user.role
+        if (user.id) appToken.id = user.id
+        if (user.role) appToken.role = user.role
       }
-      const userId = (token.id as string | undefined) ?? token.sub
+      const userId = appToken.id ?? appToken.sub
       if (userId) {
         const dbUser = await prisma.user.findUnique({
           where: { id: userId },
@@ -91,24 +102,25 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         })
 
         if (dbUser) {
-          token.id = dbUser.id
-          token.name = dbUser.name
-          token.email = dbUser.email
-          token.role = dbUser.role
-          token.avatarUrl = dbUser.avatarUrl ?? null
-          token.isActive = dbUser.isActive
+          appToken.id = dbUser.id
+          appToken.name = dbUser.name
+          appToken.email = dbUser.email
+          appToken.role = dbUser.role
+          appToken.avatarUrl = dbUser.avatarUrl ?? null
+          appToken.isActive = dbUser.isActive
         }
       }
-      return token
+      return appToken
     },
     async session({ session, token }) {
-      if (token) {
-        session.user.id = token.id as string
-        session.user.name = token.name as string
-        session.user.email = token.email as string
-        session.user.role = token.role as UserRole
-        session.user.avatarUrl = (token.avatarUrl as string | null | undefined) ?? null
-        session.user.isActive = (token.isActive as boolean | undefined) ?? true
+      const appToken = token as typeof token & AppToken
+      if (appToken) {
+        session.user.id = appToken.id as string
+        session.user.name = appToken.name as string
+        session.user.email = appToken.email as string
+        session.user.role = appToken.role as UserRole
+        session.user.avatarUrl = appToken.avatarUrl ?? null
+        session.user.isActive = appToken.isActive ?? true
       }
       return session
     },
@@ -161,14 +173,5 @@ declare module 'next-auth' {
       isActive: boolean
       avatarUrl?: string | null
     }
-  }
-}
-
-declare module '@auth/core/jwt' {
-  interface JWT {
-    id: string
-    role: UserRole
-    isActive?: boolean
-    avatarUrl?: string | null
   }
 }

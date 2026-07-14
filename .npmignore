@@ -1,0 +1,10 @@
+.git
+.agents
+.codex
+.generated
+.next
+docs
+scripts
+public/uploads/coursework-enterprise
+public/uploads/ebooks
+*.log

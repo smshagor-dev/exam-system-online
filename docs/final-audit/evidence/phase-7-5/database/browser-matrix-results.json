@@ -1,0 +1,32 @@
+[
+  {
+    "label": "student-tablet-dark",
+    "url": "/student/coursework/cmrkoyuyl000514d4z1oe3ako",
+    "overflow": false
+  },
+  {
+    "label": "student-mobile-light",
+    "url": "/student/coursework/cmrkoyuyl000514d4z1oe3ako/submit",
+    "overflow": false
+  },
+  {
+    "label": "teacher-desktop-light",
+    "url": "/teacher/coursework/submissions",
+    "overflow": false
+  },
+  {
+    "label": "teacher-desktop-dark",
+    "url": "/teacher/coursework/submissions",
+    "overflow": false
+  },
+  {
+    "label": "student-tablet-light",
+    "url": "/student/coursework/cmrkoyuyl000514d4z1oe3ako/history",
+    "overflow": false
+  },
+  {
+    "label": "student-mobile-dark",
+    "url": "/student/coursework/cmrkoyuyl000514d4z1oe3ako/history",
+    "overflow": false
+  }
+]

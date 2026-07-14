@@ -1,0 +1,65 @@
+[DB] Skipping Prisma db push because AUTO_DB_PUSH is not enabled
+Creating turbopack project { dir: 'D:\\Public\\exam-system-online', testMode: true }
+[Phase6][Redis] Connecting runtime store to redis://127.0.0.1:63396 (timeout=30000ms)
+[Phase6][Redis] Runtime store connected to redis://127.0.0.1:63396
+[Phase6] Socket runtime initialized in redis mode (instance=7d3163dd-ba1d-4f11-8e44-0d8fc4974334)
+
+╔════════════════════════════════════════╗
+║      ExamFlow Pro is running! 🎓      ║
+╠════════════════════════════════════════╣
+║  URL:    http://127.0.0.1:3265         ║
+║  Mode:   Development              ║
+║  Socket: Enabled (ws://127.0.0.1:3265) ║
+╚════════════════════════════════════════╝
+    
+ GET /api/auth/csrf 200 in 1643ms (next.js: 1610ms, application-code: 32ms)
+ POST /api/auth/callback/credentials 302 in 823ms (next.js: 7ms, application-code: 815ms)
+ GET / 307 in 2.9s (next.js: 1023ms, application-code: 1926ms)
+ GET /login 200 in 1622ms (next.js: 95ms, application-code: 1526ms)
+ GET /api/auth/csrf 200 in 15ms (next.js: 8ms, application-code: 7ms)
+ POST /api/auth/callback/credentials 302 in 1052ms (next.js: 3ms, application-code: 1050ms)
+ GET / 307 in 559ms (next.js: 5ms, application-code: 554ms)
+ GET /login 200 in 1663ms (next.js: 5ms, application-code: 1657ms)
+ GET /api/auth/csrf 200 in 23ms (next.js: 14ms, application-code: 9ms)
+ POST /api/auth/callback/credentials 302 in 771ms (next.js: 3ms, application-code: 768ms)
+ GET / 307 in 567ms (next.js: 6ms, application-code: 561ms)
+ GET /login 200 in 560ms (next.js: 4ms, application-code: 556ms)
+ GET /api/auth/csrf 200 in 28ms (next.js: 15ms, application-code: 14ms)
+ POST /api/auth/callback/credentials 302 in 781ms (next.js: 3ms, application-code: 779ms)
+ GET / 307 in 825ms (next.js: 4ms, application-code: 821ms)
+ GET /login 200 in 563ms (next.js: 6ms, application-code: 558ms)
+ GET /api/auth/csrf 200 in 23ms (next.js: 13ms, application-code: 10ms)
+ POST /api/auth/callback/credentials 302 in 1053ms (next.js: 3ms, application-code: 1049ms)
+ GET / 307 in 567ms (next.js: 6ms, application-code: 561ms)
+ GET /login 200 in 541ms (next.js: 4ms, application-code: 537ms)
+ GET /api/auth/csrf 200 in 25ms (next.js: 15ms, application-code: 10ms)
+ POST /api/auth/callback/credentials 302 in 1085ms (next.js: 3ms, application-code: 1082ms)
+ GET / 307 in 826ms (next.js: 4ms, application-code: 822ms)
+ GET /login 200 in 537ms (next.js: 1790µs, application-code: 536ms)
+ GET /api/auth/csrf 200 in 17ms (next.js: 12ms, application-code: 5ms)
+ POST /api/auth/callback/credentials 302 in 835ms (next.js: 1592µs, application-code: 833ms)
+ GET / 307 in 1114ms (next.js: 4ms, application-code: 1110ms)
+ GET /login 200 in 754ms (next.js: 3ms, application-code: 751ms)
+ POST /api/student/coursework/publications/cmrkouvis0005q79vcyp5pms2/attempts 201 in 19.4s (next.js: 2.1s, application-code: 17.3s)
+ POST /api/teacher/coursework/attempts/cmrkov06a00022udykt24woea/ai-review 403 in 1391ms (next.js: 1202ms, application-code: 189ms)
+ POST /api/teacher/coursework/attempts/cmrkov06a00022udykt24woea/ai-review 200 in 12.3s (next.js: 11ms, application-code: 12.3s)
+ PATCH /api/teacher/coursework/ai-reviews/cmrkov47h000c2udyp5mzpwfb 200 in 7.2s (next.js: 1084ms, application-code: 6.1s)
+ GET /api/teacher/coursework/ai-reviews/cmrkov47h000c2udyp5mzpwfb/report?format=json 200 in 6.8s (next.js: 1059ms, application-code: 5.8s)
+ POST /api/teacher/coursework/attempts/cmrkov06a00022udykt24woea/ai-review 200 in 14.2s (next.js: 10ms, application-code: 14.1s)
+ PATCH /api/teacher/coursework/ai-reviews/cmrkov47h000c2udyp5mzpwfb 200 in 5.3s (next.js: 15ms, application-code: 5.3s)
+ GET /api/teacher/coursework/ai-reviews/cmrkov47h000c2udyp5mzpwfb/report?format=json 200 in 4.8s (next.js: 15ms, application-code: 4.8s)
+ POST /api/teacher/coursework/attempts/cmrkov06a00022udykt24woea/ai-review 403 in 1711ms (next.js: 14ms, application-code: 1697ms)
+ PATCH /api/teacher/coursework/ai-reviews/cmrkov47h000c2udyp5mzpwfb 403 in 4.0s (next.js: 15ms, application-code: 4.0s)
+ GET /api/teacher/coursework/ai-reviews/cmrkov47h000c2udyp5mzpwfb/report?format=json 403 in 3.7s (next.js: 14ms, application-code: 3.7s)
+ POST /api/teacher/coursework/attempts/cmrkov06a00022udykt24woea/ai-review 403 in 475ms (next.js: 16ms, application-code: 459ms)
+ PATCH /api/teacher/coursework/ai-reviews/cmrkov47h000c2udyp5mzpwfb 403 in 182ms (next.js: 7ms, application-code: 174ms)
+ GET /api/teacher/coursework/ai-reviews/cmrkov47h000c2udyp5mzpwfb/report?format=json 403 in 456ms (next.js: 6ms, application-code: 450ms)
+ POST /api/teacher/coursework/attempts/cmrkov06a00022udykt24woea/ai-review 403 in 183ms (next.js: 6ms, application-code: 177ms)
+ PATCH /api/teacher/coursework/ai-reviews/cmrkov47h000c2udyp5mzpwfb 403 in 186ms (next.js: 7ms, application-code: 179ms)
+ GET /api/teacher/coursework/ai-reviews/cmrkov47h000c2udyp5mzpwfb/report?format=json 403 in 189ms (next.js: 6ms, application-code: 183ms)
+ POST /api/teacher/coursework/attempts/cmrkov06a00022udykt24woea/ai-review 403 in 176ms (next.js: 6ms, application-code: 170ms)
+ PATCH /api/teacher/coursework/ai-reviews/cmrkov47h000c2udyp5mzpwfb 403 in 170ms (next.js: 1893µs, application-code: 168ms)
+ GET /api/teacher/coursework/ai-reviews/cmrkov47h000c2udyp5mzpwfb/report?format=json 403 in 188ms (next.js: 6ms, application-code: 182ms)
+ POST /api/teacher/coursework/attempts/cmrkov06a00022udykt24woea/ai-review 403 in 180ms (next.js: 7ms, application-code: 174ms)
+ PATCH /api/teacher/coursework/ai-reviews/cmrkov47h000c2udyp5mzpwfb 403 in 193ms (next.js: 7ms, application-code: 186ms)
+ GET /api/teacher/coursework/ai-reviews/cmrkov47h000c2udyp5mzpwfb/report?format=json 403 in 171ms (next.js: 6ms, application-code: 166ms)

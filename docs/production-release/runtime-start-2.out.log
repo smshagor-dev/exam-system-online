@@ -1,0 +1,17 @@
+
+> examflow-pro@1.0.0 start
+> node -e "process.env.NODE_ENV='production'; require('./server.js')"
+
+[DB] Skipping Prisma db push because AUTO_DB_PUSH is not enabled
+[Phase6][Redis] Connecting runtime store to redis://127.0.0.1:6382 (timeout=15000ms)
+[Phase6][Redis] Runtime store connected to redis://127.0.0.1:6382
+[Phase6] Socket runtime initialized in redis mode (instance=c7996f11-5602-43bb-abd2-b0012badd8a0)
+
+╔════════════════════════════════════════╗
+║      ExamFlow Pro is running! 🎓      ║
+╠════════════════════════════════════════╣
+║  URL:    http://0.0.0.0:3101         ║
+║  Mode:   Production               ║
+║  Socket: Enabled (ws://0.0.0.0:3101) ║
+╚════════════════════════════════════════╝
+    

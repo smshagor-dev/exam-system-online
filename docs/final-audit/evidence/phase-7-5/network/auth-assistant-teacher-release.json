@@ -1,0 +1,9 @@
+{
+  "method": "PATCH",
+  "url": "/api/teacher/coursework/ai-reviews/cmrkov47h000c2udyp5mzpwfb",
+  "status": 200,
+  "json": {
+    "ok": true
+  },
+  "text": "{\"ok\":true}"
+}

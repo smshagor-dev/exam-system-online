@@ -1,0 +1,9 @@
+{
+  "method": "PATCH",
+  "url": "/api/teacher/coursework/ai-reviews/cmrkov47h000c2udyp5mzpwfb",
+  "status": 403,
+  "json": {
+    "error": "Only teachers can manage AI coursework reviews"
+  },
+  "text": "{\"error\":\"Only teachers can manage AI coursework reviews\"}"
+}

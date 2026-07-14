@@ -17,6 +17,17 @@ type Props = {
     allowExternalLink: boolean
     allowGitRepository: boolean
     allowedFileTypes: string[]
+    aiReviewPolicy?: {
+      minWords: number | null
+      maxWords: number | null
+      requiredSections: string[]
+      minimumReferenceCount: number | null
+      citationStyle: string | null
+      requiredFigures: number | null
+      requiredTables: number | null
+      requireRepositoryLink: boolean
+      requiredAttachments: number | null
+    }
     attempts: Array<{ id: string; status: string; attemptNumber: number }>
     extensionRequests: Array<{ id: string; status: string; approvedUntil: string | null }>
   }
@@ -103,6 +114,17 @@ export default function StudentCourseworkSubmitForm({ publication }: Props) {
         <p className="mt-1 text-sm text-slate-500">
           Due {publication.dueAt ? new Date(publication.dueAt).toLocaleString() : 'not set'} | {publication.allowUnlimitedAttempts ? 'Unlimited attempts' : `${publication.maxAttempts ?? 1} attempts`}
         </p>
+        <div className="mt-4 rounded-2xl border border-sky-200 bg-sky-50 px-4 py-3 text-sm text-sky-800">
+          Every submitted attempt is automatically analyzed before teacher review. AI provides findings and suggestions only; your teacher makes the final academic decision.
+        </div>
+        {publication.aiReviewPolicy ? (
+          <div className="mt-4 grid gap-3 md:grid-cols-2">
+            {publication.aiReviewPolicy.minWords ? <div className="rounded-2xl bg-slate-50 p-3 text-sm text-slate-700">Minimum words: {publication.aiReviewPolicy.minWords}</div> : null}
+            {publication.aiReviewPolicy.maxWords ? <div className="rounded-2xl bg-slate-50 p-3 text-sm text-slate-700">Maximum words: {publication.aiReviewPolicy.maxWords}</div> : null}
+            {publication.aiReviewPolicy.minimumReferenceCount ? <div className="rounded-2xl bg-slate-50 p-3 text-sm text-slate-700">Minimum references: {publication.aiReviewPolicy.minimumReferenceCount}</div> : null}
+            {publication.aiReviewPolicy.citationStyle ? <div className="rounded-2xl bg-slate-50 p-3 text-sm text-slate-700">Citation style: {publication.aiReviewPolicy.citationStyle}</div> : null}
+          </div>
+        ) : null}
         {publication.instructions ? (
           <RichTextContent
             html={publication.instructions}

@@ -1,0 +1,14 @@
+.git
+.agents
+.codex
+.generated
+.next
+node_modules
+.env
+.env.*
+docs
+scripts
+public/uploads/coursework-enterprise
+public/uploads/ebooks
+*.log
+tsconfig.typecheck.tsbuildinfo

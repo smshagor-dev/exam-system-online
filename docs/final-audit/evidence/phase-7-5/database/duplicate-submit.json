@@ -1,0 +1,61 @@
+{
+  "duplicateSubmission": {
+    "ok": true,
+    "status": 200,
+    "attempt": {
+      "id": "cmrkorby0000dnb8i865ca657",
+      "publicationId": "cmrkor8ql0008nb8imbr8dcqk",
+      "studentId": "cmrko7do0000g1iyajbr86xrt",
+      "targetId": "cmrkor93p000anb8iuum7xwyy",
+      "previousAttemptId": null,
+      "attemptNumber": 1,
+      "status": "SUBMITTED",
+      "submissionType": "MIXED",
+      "plainTextSubmission": "Abstract\nThis is a valid academic submission with more than thirty words.\nMethodology\nThe method is described clearly with enough detail for verification.\nConclusion\nThe result is summarised clearly for assessment.\nReferences\nSmith, 2024.\nDoe, 2023.",
+      "richTextSubmission": null,
+      "externalLink": "https://example.com/project",
+      "repositoryUrl": "https://github.com/examflow/example",
+      "finalContentHash": "416a924c6d0ae4e3d41da645fcec3c7b8b46c44eeb2efd65209813ae29c0f9e9",
+      "isLate": false,
+      "latePenaltyApplied": 0,
+      "teacherLocked": false,
+      "lockedAt": null,
+      "lockedByTeacherId": null,
+      "submittedAt": "2026-07-14T13:27:22.670Z",
+      "returnedAt": null,
+      "legacySubmissionId": null,
+      "metadata": {
+        "submissionValidation": {
+          "extractedWordCount": 51,
+          "referenceCount": 2
+        }
+      },
+      "createdAt": "2026-07-14T13:27:22.680Z",
+      "updatedAt": "2026-07-14T13:27:22.680Z",
+      "attachments": [
+        {
+          "id": "cmrkorc6m000fnb8iokkietni",
+          "attemptId": "cmrkorby0000dnb8i865ca657",
+          "studentId": "cmrko7do0000g1iyajbr86xrt",
+          "fileName": "valid-submission.docx",
+          "fileUrl": "/uploads/coursework-enterprise/cmrko7do0000g1iyajbr86xrt-cmrkor8ql0008nb8imbr8dcqk-1784035642052-0-valid-submission.docx",
+          "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+          "extension": "docx",
+          "fileSizeBytes": 1238,
+          "contentHash": null,
+          "malwareStatus": "CLEAN",
+          "malwareDetails": "Validated by enterprise coursework upload hook.",
+          "isPrimary": true,
+          "uploadedAt": "2026-07-14T13:27:22.990Z",
+          "createdAt": "2026-07-14T13:27:22.990Z",
+          "updatedAt": "2026-07-14T13:27:22.990Z"
+        }
+      ]
+    },
+    "remainingAttempts": 9,
+    "late": false,
+    "latePenaltyApplied": 0,
+    "idempotent": true
+  },
+  "duplicateJobs": 1
+}

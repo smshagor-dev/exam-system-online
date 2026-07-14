@@ -1,0 +1,9 @@
+{
+  "method": "POST",
+  "url": "/api/teacher/coursework/attempts/cmrkov06a00022udykt24woea/ai-review",
+  "status": 403,
+  "json": {
+    "error": "Only teachers can re-run AI coursework reviews"
+  },
+  "text": "{\"error\":\"Only teachers can re-run AI coursework reviews\"}"
+}

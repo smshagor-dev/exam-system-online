@@ -1,0 +1,337 @@
+{
+  "studentAttemptsApi": {
+    "id": "cmrkorby0000dnb8i865ca657",
+    "publicationId": "cmrkor8ql0008nb8imbr8dcqk",
+    "studentId": "cmrko7do0000g1iyajbr86xrt",
+    "targetId": "cmrkor93p000anb8iuum7xwyy",
+    "previousAttemptId": null,
+    "attemptNumber": 1,
+    "status": "SUBMITTED",
+    "submissionType": "MIXED",
+    "plainTextSubmission": "Abstract\nThis is a valid academic submission with more than thirty words.\nMethodology\nThe method is described clearly with enough detail for verification.\nConclusion\nThe result is summarised clearly for assessment.\nReferences\nSmith, 2024.\nDoe, 2023.",
+    "richTextSubmission": null,
+    "externalLink": "https://example.com/project",
+    "repositoryUrl": "https://github.com/examflow/example",
+    "finalContentHash": "416a924c6d0ae4e3d41da645fcec3c7b8b46c44eeb2efd65209813ae29c0f9e9",
+    "isLate": false,
+    "latePenaltyApplied": 0,
+    "teacherLocked": false,
+    "lockedAt": null,
+    "lockedByTeacherId": null,
+    "submittedAt": "2026-07-14T13:27:22.670Z",
+    "returnedAt": null,
+    "legacySubmissionId": null,
+    "metadata": {
+      "submissionValidation": {
+        "extractedWordCount": 51,
+        "referenceCount": 2
+      }
+    },
+    "createdAt": "2026-07-14T13:27:22.680Z",
+    "updatedAt": "2026-07-14T13:27:22.680Z",
+    "aiReviews": [
+      {
+        "id": "cmrkorsuv001fnb8ikj0cpi6n",
+        "publicationId": "cmrkor8ql0008nb8imbr8dcqk",
+        "attemptId": "cmrkorby0000dnb8i865ca657",
+        "studentId": "cmrko7do0000g1iyajbr86xrt",
+        "jobId": "cmrkors24001dnb8i35lujp4q",
+        "previousReviewId": "cmrkorhby000pnb8izlckbmxn",
+        "versionNumber": 2,
+        "status": "COMPLETED",
+        "provider": null,
+        "providerName": "LOCAL",
+        "modelName": "coursework-review-heuristic-v1",
+        "promptVersion": "phase-7.5-review-v1",
+        "validationPassed": true,
+        "documentFormat": "DOCX",
+        "extractedWordCount": 51,
+        "extractedCharacterCount": 394,
+        "complianceScore": 100,
+        "similarityScore": 0,
+        "grammarScore": 81,
+        "citationScore": 64,
+        "writingRiskLevel": "INCONCLUSIVE",
+        "normalizedDocument": {
+          "headings": [
+            "Abstract",
+            "Methodology",
+            "Conclusion",
+            "References"
+          ],
+          "paragraphs": [
+            "Abstract",
+            "Valid submission abstract.",
+            "Methodology",
+            "Documented method.",
+            "Conclusion",
+            "Documented conclusion.",
+            "References",
+            "Smith, 2024.",
+            "Doe, 2023."
+          ],
+          "tables": [],
+          "lists": [],
+          "references": [
+            "Smith, 2024.",
+            "Doe, 2023."
+          ],
+          "images": [],
+          "captions": [],
+          "footnotes": [],
+          "pageNumbers": []
+        },
+        "extractedText": "Abstract\nThis is a valid academic submission with more than thirty words.\nMethodology\nThe method is described clearly with enough detail for verification.\nConclusion\nThe result is summarised clearly for assessment.\nReferences\nSmith, 2024.\nDoe, 2023.\n\nAbstract\n\nValid submission abstract.\n\nMethodology\n\nDocumented method.\n\nConclusion\n\nDocumented conclusion.\n\nReferences\n\nSmith, 2024.\n\nDoe, 2023.",
+        "summary": "AI review completed. Teacher action is still required before any academic decision.",
+        "errorCode": null,
+        "errorMessage": null,
+        "processingStartedAt": "2026-07-14T13:27:45.051Z",
+        "completedAt": "2026-07-14T13:27:48.850Z",
+        "processingTimeMs": 4260,
+        "createdAt": "2026-07-14T13:27:44.599Z",
+        "updatedAt": "2026-07-14T13:27:48.861Z",
+        "audits": [
+          {
+            "id": "cmrkorw5b0021nb8i6u6go2l2",
+            "reviewId": "cmrkorsuv001fnb8ikj0cpi6n",
+            "actorTeacherId": null,
+            "action": "AI_REVIEW_CREATED",
+            "details": {
+              "trigger": "RERUN",
+              "validationPassed": true,
+              "highestSimilarity": 0,
+              "recommendation": "APPROVE_SUGGESTED"
+            },
+            "createdAt": "2026-07-14T13:27:48.861Z"
+          }
+        ],
+        "sourceMatches": [],
+        "recommendations": [
+          {
+            "id": "cmrkorw5b001znb8ihgg9ss7c",
+            "reviewId": "cmrkorsuv001fnb8ikj0cpi6n",
+            "code": "APPROVE_SUGGESTED",
+            "confidence": 0.72,
+            "rationale": "Submission is structurally compliant and ready for teacher grading review.",
+            "teacherOnly": true,
+            "metadata": {
+              "similarityScore": 0,
+              "grammarScore": 81,
+              "citationScore": 64,
+              "complianceScore": 100
+            },
+            "createdAt": "2026-07-14T13:27:48.861Z"
+          }
+        ]
+      },
+      {
+        "id": "cmrkorhby000pnb8izlckbmxn",
+        "publicationId": "cmrkor8ql0008nb8imbr8dcqk",
+        "attemptId": "cmrkorby0000dnb8i865ca657",
+        "studentId": "cmrko7do0000g1iyajbr86xrt",
+        "jobId": "cmrkorgyt000nnb8i22y3sy0m",
+        "previousReviewId": null,
+        "versionNumber": 1,
+        "status": "COMPLETED",
+        "provider": null,
+        "providerName": "LOCAL",
+        "modelName": "coursework-review-heuristic-v1",
+        "promptVersion": "phase-7.5-review-v1",
+        "validationPassed": true,
+        "documentFormat": "DOCX",
+        "extractedWordCount": 51,
+        "extractedCharacterCount": 394,
+        "complianceScore": 100,
+        "similarityScore": 0,
+        "grammarScore": 81,
+        "citationScore": 64,
+        "writingRiskLevel": "INCONCLUSIVE",
+        "normalizedDocument": {
+          "headings": [
+            "Abstract",
+            "Methodology",
+            "Conclusion",
+            "References"
+          ],
+          "paragraphs": [
+            "Abstract",
+            "Valid submission abstract.",
+            "Methodology",
+            "Documented method.",
+            "Conclusion",
+            "Documented conclusion.",
+            "References",
+            "Smith, 2024.",
+            "Doe, 2023."
+          ],
+          "tables": [],
+          "lists": [],
+          "references": [
+            "Smith, 2024.",
+            "Doe, 2023."
+          ],
+          "images": [],
+          "captions": [],
+          "footnotes": [],
+          "pageNumbers": []
+        },
+        "extractedText": "Abstract\nThis is a valid academic submission with more than thirty words.\nMethodology\nThe method is described clearly with enough detail for verification.\nConclusion\nThe result is summarised clearly for assessment.\nReferences\nSmith, 2024.\nDoe, 2023.\n\nAbstract\n\nValid submission abstract.\n\nMethodology\n\nDocumented method.\n\nConclusion\n\nDocumented conclusion.\n\nReferences\n\nSmith, 2024.\n\nDoe, 2023.",
+        "summary": "AI review completed. Teacher action is still required before any academic decision.",
+        "errorCode": null,
+        "errorMessage": null,
+        "processingStartedAt": "2026-07-14T13:27:30.117Z",
+        "completedAt": "2026-07-14T13:27:33.989Z",
+        "processingTimeMs": 4337,
+        "createdAt": "2026-07-14T13:27:29.662Z",
+        "updatedAt": "2026-07-14T13:27:34.003Z",
+        "audits": [
+          {
+            "id": "cmrkot5vf004anb8ir1axnl19",
+            "reviewId": "cmrkorhby000pnb8izlckbmxn",
+            "actorTeacherId": "cmrko7dnz000b1iya81uznctp",
+            "action": "RELEASED_TO_STUDENT",
+            "details": {
+              "note": "Release for verification"
+            },
+            "createdAt": "2026-07-14T13:28:48.123Z"
+          },
+          {
+            "id": "cmrkorkok001bnb8itlu592ez",
+            "reviewId": "cmrkorhby000pnb8izlckbmxn",
+            "actorTeacherId": null,
+            "action": "AI_REVIEW_CREATED",
+            "details": {
+              "trigger": "SUBMISSION",
+              "validationPassed": true,
+              "highestSimilarity": 0,
+              "recommendation": "APPROVE_SUGGESTED"
+            },
+            "createdAt": "2026-07-14T13:27:34.003Z"
+          }
+        ],
+        "sourceMatches": [],
+        "recommendations": [
+          {
+            "id": "cmrkorkok0019nb8i3ei8gv40",
+            "reviewId": "cmrkorhby000pnb8izlckbmxn",
+            "code": "APPROVE_SUGGESTED",
+            "confidence": 0.72,
+            "rationale": "Submission is structurally compliant and ready for teacher grading review.",
+            "teacherOnly": true,
+            "metadata": {
+              "similarityScore": 0,
+              "grammarScore": 81,
+              "citationScore": 64,
+              "complianceScore": 100
+            },
+            "createdAt": "2026-07-14T13:27:34.003Z"
+          }
+        ]
+      }
+    ]
+  },
+  "releasedReview": {
+    "id": "cmrkorhby000pnb8izlckbmxn",
+    "publicationId": "cmrkor8ql0008nb8imbr8dcqk",
+    "attemptId": "cmrkorby0000dnb8i865ca657",
+    "studentId": "cmrko7do0000g1iyajbr86xrt",
+    "jobId": "cmrkorgyt000nnb8i22y3sy0m",
+    "previousReviewId": null,
+    "versionNumber": 1,
+    "status": "COMPLETED",
+    "provider": null,
+    "providerName": "LOCAL",
+    "modelName": "coursework-review-heuristic-v1",
+    "promptVersion": "phase-7.5-review-v1",
+    "validationPassed": true,
+    "documentFormat": "DOCX",
+    "extractedWordCount": 51,
+    "extractedCharacterCount": 394,
+    "complianceScore": 100,
+    "similarityScore": 0,
+    "grammarScore": 81,
+    "citationScore": 64,
+    "writingRiskLevel": "INCONCLUSIVE",
+    "normalizedDocument": {
+      "headings": [
+        "Abstract",
+        "Methodology",
+        "Conclusion",
+        "References"
+      ],
+      "paragraphs": [
+        "Abstract",
+        "Valid submission abstract.",
+        "Methodology",
+        "Documented method.",
+        "Conclusion",
+        "Documented conclusion.",
+        "References",
+        "Smith, 2024.",
+        "Doe, 2023."
+      ],
+      "tables": [],
+      "lists": [],
+      "references": [
+        "Smith, 2024.",
+        "Doe, 2023."
+      ],
+      "images": [],
+      "captions": [],
+      "footnotes": [],
+      "pageNumbers": []
+    },
+    "extractedText": "Abstract\nThis is a valid academic submission with more than thirty words.\nMethodology\nThe method is described clearly with enough detail for verification.\nConclusion\nThe result is summarised clearly for assessment.\nReferences\nSmith, 2024.\nDoe, 2023.\n\nAbstract\n\nValid submission abstract.\n\nMethodology\n\nDocumented method.\n\nConclusion\n\nDocumented conclusion.\n\nReferences\n\nSmith, 2024.\n\nDoe, 2023.",
+    "summary": "AI review completed. Teacher action is still required before any academic decision.",
+    "errorCode": null,
+    "errorMessage": null,
+    "processingStartedAt": "2026-07-14T13:27:30.117Z",
+    "completedAt": "2026-07-14T13:27:33.989Z",
+    "processingTimeMs": 4337,
+    "createdAt": "2026-07-14T13:27:29.662Z",
+    "updatedAt": "2026-07-14T13:27:34.003Z",
+    "audits": [
+      {
+        "id": "cmrkot5vf004anb8ir1axnl19",
+        "reviewId": "cmrkorhby000pnb8izlckbmxn",
+        "actorTeacherId": "cmrko7dnz000b1iya81uznctp",
+        "action": "RELEASED_TO_STUDENT",
+        "details": {
+          "note": "Release for verification"
+        },
+        "createdAt": "2026-07-14T13:28:48.123Z"
+      },
+      {
+        "id": "cmrkorkok001bnb8itlu592ez",
+        "reviewId": "cmrkorhby000pnb8izlckbmxn",
+        "actorTeacherId": null,
+        "action": "AI_REVIEW_CREATED",
+        "details": {
+          "trigger": "SUBMISSION",
+          "validationPassed": true,
+          "highestSimilarity": 0,
+          "recommendation": "APPROVE_SUGGESTED"
+        },
+        "createdAt": "2026-07-14T13:27:34.003Z"
+      }
+    ],
+    "sourceMatches": [],
+    "recommendations": [
+      {
+        "id": "cmrkorkok0019nb8i3ei8gv40",
+        "reviewId": "cmrkorhby000pnb8izlckbmxn",
+        "code": "APPROVE_SUGGESTED",
+        "confidence": 0.72,
+        "rationale": "Submission is structurally compliant and ready for teacher grading review.",
+        "teacherOnly": true,
+        "metadata": {
+          "similarityScore": 0,
+          "grammarScore": 81,
+          "citationScore": 64,
+          "complianceScore": 100
+        },
+        "createdAt": "2026-07-14T13:27:34.003Z"
+      }
+    ]
+  }
+}

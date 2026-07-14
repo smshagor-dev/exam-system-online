@@ -1,0 +1,5 @@
+log: [Fast Refresh] rebuilding
+log: [Fast Refresh] done in 397ms
+log: [HMR] connected
+log: [Fast Refresh] rebuilding
+log: [Fast Refresh] done in 1923ms

@@ -1,6 +1,6 @@
 import RichTextContent from '@/components/editor/RichTextContent'
 import { requireRole } from '@/lib/auth'
-import { getStudentEnterpriseCourseworkWorkspace } from '@/lib/coursework-enterprise-workspace'
+import { getStudentCourseworkPublicationWorkspace } from '@/lib/coursework-enterprise-workspace'
 import { UserRole } from '@prisma/client'
 import Link from 'next/link'
 
@@ -11,8 +11,8 @@ type PageProps = {
 export default async function StudentCourseworkDetailPage({ params }: PageProps) {
   const session = await requireRole(UserRole.STUDENT)
   const { id } = await params
-  const workspace = await getStudentEnterpriseCourseworkWorkspace(session.user.id)
-  const publication = workspace?.publications.find((item) => item.id === id)
+  const workspace = await getStudentCourseworkPublicationWorkspace(session.user.id, id)
+  const publication = workspace?.publication
 
   if (!publication) {
     return <div className="py-20 text-center text-gray-500">Coursework not found or not available to you.</div>
@@ -53,6 +53,21 @@ export default async function StudentCourseworkDetailPage({ params }: PageProps)
           <p className="mt-2 text-3xl font-semibold text-slate-900">{latestAttempt?.latestGrade ? `${latestAttempt.latestGrade.percentage.toFixed(0)}%` : 'N/A'}</p>
         </div>
       </section>
+
+      {publication.aiReviewPolicy ? (
+        <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+          <h2 className="text-xl font-semibold text-slate-900">AI Review Rules</h2>
+          <div className="mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+            {publication.aiReviewPolicy.minWords ? <div className="rounded-2xl bg-slate-50 p-4 text-sm text-slate-700">Minimum words: {publication.aiReviewPolicy.minWords}</div> : null}
+            {publication.aiReviewPolicy.maxWords ? <div className="rounded-2xl bg-slate-50 p-4 text-sm text-slate-700">Maximum words: {publication.aiReviewPolicy.maxWords}</div> : null}
+            {publication.aiReviewPolicy.minimumReferenceCount ? <div className="rounded-2xl bg-slate-50 p-4 text-sm text-slate-700">Minimum references: {publication.aiReviewPolicy.minimumReferenceCount}</div> : null}
+            {publication.aiReviewPolicy.citationStyle ? <div className="rounded-2xl bg-slate-50 p-4 text-sm text-slate-700">Citation style: {publication.aiReviewPolicy.citationStyle}</div> : null}
+          </div>
+          <p className="mt-4 text-sm text-slate-500">
+            Every submitted document is analyzed automatically, but AI does not approve or reject coursework. Only your teacher makes the final academic decision.
+          </p>
+        </section>
+      ) : null}
 
       {publication.rubric ? (
         <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">

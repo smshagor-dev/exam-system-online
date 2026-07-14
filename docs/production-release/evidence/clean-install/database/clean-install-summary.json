@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "baseUrl": "http://127.0.0.1:3320",
+  "users": {
+    "admin": "release.verify.admin@examflow.pro",
+    "teacher": "release.verify.teacher@examflow.pro",
+    "student": "release.verify.student@examflow.pro"
+  },
+  "evidence": {
+    "adminDashboard": "docs/production-release/evidence/clean-install/browser/admin-dashboard.png",
+    "teacherSubmissions": "docs/production-release/evidence/clean-install/browser/teacher-submissions.png",
+    "studentCoursework": "docs/production-release/evidence/clean-install/browser/student-coursework.png",
+    "unauthDenied": "docs/production-release/evidence/clean-install/browser/unauth-admin-denied.png"
+  },
+  "criticalConsole": [],
+  "unexpectedNetwork": [],
+  "deniedToLogin": true
+}

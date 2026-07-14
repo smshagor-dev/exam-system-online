@@ -1,0 +1,8 @@
+{
+  "removedUsers": [
+    "release.verify.admin@examflow.pro",
+    "release.verify.student@examflow.pro",
+    "release.verify.teacher@examflow.pro"
+  ],
+  "removedDepartmentCode": "RELV-DEPT"
+}

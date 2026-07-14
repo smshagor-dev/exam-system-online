@@ -1,0 +1,131 @@
+{
+  "rerun": {
+    "reviewId": "cmrkorsuv001fnb8ikj0cpi6n",
+    "versionNumber": 2,
+    "validationPassed": true
+  },
+  "reviewsAfterRerun": [
+    {
+      "id": "cmrkorhby000pnb8izlckbmxn",
+      "publicationId": "cmrkor8ql0008nb8imbr8dcqk",
+      "attemptId": "cmrkorby0000dnb8i865ca657",
+      "studentId": "cmrko7do0000g1iyajbr86xrt",
+      "jobId": "cmrkorgyt000nnb8i22y3sy0m",
+      "previousReviewId": null,
+      "versionNumber": 1,
+      "status": "COMPLETED",
+      "provider": null,
+      "providerName": "LOCAL",
+      "modelName": "coursework-review-heuristic-v1",
+      "promptVersion": "phase-7.5-review-v1",
+      "validationPassed": true,
+      "documentFormat": "DOCX",
+      "extractedWordCount": 51,
+      "extractedCharacterCount": 394,
+      "complianceScore": 100,
+      "similarityScore": 0,
+      "grammarScore": 81,
+      "citationScore": 64,
+      "writingRiskLevel": "INCONCLUSIVE",
+      "normalizedDocument": {
+        "headings": [
+          "Abstract",
+          "Methodology",
+          "Conclusion",
+          "References"
+        ],
+        "paragraphs": [
+          "Abstract",
+          "Valid submission abstract.",
+          "Methodology",
+          "Documented method.",
+          "Conclusion",
+          "Documented conclusion.",
+          "References",
+          "Smith, 2024.",
+          "Doe, 2023."
+        ],
+        "tables": [],
+        "lists": [],
+        "references": [
+          "Smith, 2024.",
+          "Doe, 2023."
+        ],
+        "images": [],
+        "captions": [],
+        "footnotes": [],
+        "pageNumbers": []
+      },
+      "extractedText": "Abstract\nThis is a valid academic submission with more than thirty words.\nMethodology\nThe method is described clearly with enough detail for verification.\nConclusion\nThe result is summarised clearly for assessment.\nReferences\nSmith, 2024.\nDoe, 2023.\n\nAbstract\n\nValid submission abstract.\n\nMethodology\n\nDocumented method.\n\nConclusion\n\nDocumented conclusion.\n\nReferences\n\nSmith, 2024.\n\nDoe, 2023.",
+      "summary": "AI review completed. Teacher action is still required before any academic decision.",
+      "errorCode": null,
+      "errorMessage": null,
+      "processingStartedAt": "2026-07-14T13:27:30.117Z",
+      "completedAt": "2026-07-14T13:27:33.989Z",
+      "processingTimeMs": 4337,
+      "createdAt": "2026-07-14T13:27:29.662Z",
+      "updatedAt": "2026-07-14T13:27:34.003Z"
+    },
+    {
+      "id": "cmrkorsuv001fnb8ikj0cpi6n",
+      "publicationId": "cmrkor8ql0008nb8imbr8dcqk",
+      "attemptId": "cmrkorby0000dnb8i865ca657",
+      "studentId": "cmrko7do0000g1iyajbr86xrt",
+      "jobId": "cmrkors24001dnb8i35lujp4q",
+      "previousReviewId": "cmrkorhby000pnb8izlckbmxn",
+      "versionNumber": 2,
+      "status": "COMPLETED",
+      "provider": null,
+      "providerName": "LOCAL",
+      "modelName": "coursework-review-heuristic-v1",
+      "promptVersion": "phase-7.5-review-v1",
+      "validationPassed": true,
+      "documentFormat": "DOCX",
+      "extractedWordCount": 51,
+      "extractedCharacterCount": 394,
+      "complianceScore": 100,
+      "similarityScore": 0,
+      "grammarScore": 81,
+      "citationScore": 64,
+      "writingRiskLevel": "INCONCLUSIVE",
+      "normalizedDocument": {
+        "headings": [
+          "Abstract",
+          "Methodology",
+          "Conclusion",
+          "References"
+        ],
+        "paragraphs": [
+          "Abstract",
+          "Valid submission abstract.",
+          "Methodology",
+          "Documented method.",
+          "Conclusion",
+          "Documented conclusion.",
+          "References",
+          "Smith, 2024.",
+          "Doe, 2023."
+        ],
+        "tables": [],
+        "lists": [],
+        "references": [
+          "Smith, 2024.",
+          "Doe, 2023."
+        ],
+        "images": [],
+        "captions": [],
+        "footnotes": [],
+        "pageNumbers": []
+      },
+      "extractedText": "Abstract\nThis is a valid academic submission with more than thirty words.\nMethodology\nThe method is described clearly with enough detail for verification.\nConclusion\nThe result is summarised clearly for assessment.\nReferences\nSmith, 2024.\nDoe, 2023.\n\nAbstract\n\nValid submission abstract.\n\nMethodology\n\nDocumented method.\n\nConclusion\n\nDocumented conclusion.\n\nReferences\n\nSmith, 2024.\n\nDoe, 2023.",
+      "summary": "AI review completed. Teacher action is still required before any academic decision.",
+      "errorCode": null,
+      "errorMessage": null,
+      "processingStartedAt": "2026-07-14T13:27:45.051Z",
+      "completedAt": "2026-07-14T13:27:48.850Z",
+      "processingTimeMs": 4260,
+      "createdAt": "2026-07-14T13:27:44.599Z",
+      "updatedAt": "2026-07-14T13:27:48.861Z"
+    }
+  ]
+}

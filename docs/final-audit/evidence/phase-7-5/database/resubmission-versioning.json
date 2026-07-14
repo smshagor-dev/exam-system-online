@@ -1,0 +1,121 @@
+{
+  "resubmission": {
+    "ok": true,
+    "status": 201,
+    "attempt": {
+      "id": "cmrkos0gm0024nb8izmctheke",
+      "publicationId": "cmrkor8ql0008nb8imbr8dcqk",
+      "studentId": "cmrko7do0000g1iyajbr86xrt",
+      "targetId": "cmrkor93p000anb8iuum7xwyy",
+      "previousAttemptId": "cmrkorby0000dnb8i865ca657",
+      "attemptNumber": 2,
+      "status": "SUBMITTED",
+      "submissionType": "MIXED",
+      "plainTextSubmission": "Abstract\nResubmission content exceeds thirty words and remains within the configured maximum.\nMethodology\nUpdated method steps are included here for the second attempt.\nConclusion\nUpdated conclusion is included.\nReferences\nSmith, 2024.\nDoe, 2023.",
+      "richTextSubmission": null,
+      "externalLink": "https://example.com/project-v2",
+      "repositoryUrl": "https://github.com/examflow/example-v2",
+      "finalContentHash": "0cfb6eb2f6605a8d50ae1a5ba6979b426423df40ebb3b03b667b66429f74be7f",
+      "isLate": false,
+      "latePenaltyApplied": 0,
+      "teacherLocked": false,
+      "lockedAt": null,
+      "lockedByTeacherId": null,
+      "submittedAt": "2026-07-14T13:27:54.445Z",
+      "returnedAt": null,
+      "legacySubmissionId": null,
+      "metadata": {
+        "submissionValidation": {
+          "extractedWordCount": 48,
+          "referenceCount": 2
+        }
+      },
+      "createdAt": "2026-07-14T13:27:54.454Z",
+      "updatedAt": "2026-07-14T13:27:54.454Z",
+      "attachments": [
+        {
+          "id": "cmrkos0xc0026nb8in01987tm",
+          "attemptId": "cmrkos0gm0024nb8izmctheke",
+          "studentId": "cmrko7do0000g1iyajbr86xrt",
+          "fileName": "valid-submission-v2.docx",
+          "fileUrl": "/uploads/coursework-enterprise/cmrko7do0000g1iyajbr86xrt-cmrkor8ql0008nb8imbr8dcqk-1784035674130-0-valid-submission-v2.docx",
+          "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+          "extension": "docx",
+          "fileSizeBytes": 1238,
+          "contentHash": null,
+          "malwareStatus": "CLEAN",
+          "malwareDetails": "Validated by enterprise coursework upload hook.",
+          "isPrimary": true,
+          "uploadedAt": "2026-07-14T13:27:55.056Z",
+          "createdAt": "2026-07-14T13:27:55.056Z",
+          "updatedAt": "2026-07-14T13:27:55.056Z"
+        }
+      ]
+    },
+    "remainingAttempts": 8,
+    "late": false,
+    "latePenaltyApplied": 0,
+    "idempotent": false
+  },
+  "resubmissionReview": {
+    "id": "cmrkos4wb002enb8iyz9wxwaf",
+    "publicationId": "cmrkor8ql0008nb8imbr8dcqk",
+    "attemptId": "cmrkos0gm0024nb8izmctheke",
+    "studentId": "cmrko7do0000g1iyajbr86xrt",
+    "jobId": "cmrkos4jh002cnb8iau3y7la8",
+    "previousReviewId": "cmrkorsuv001fnb8ikj0cpi6n",
+    "versionNumber": 3,
+    "status": "COMPLETED",
+    "provider": null,
+    "providerName": "LOCAL",
+    "modelName": "coursework-review-heuristic-v1",
+    "promptVersion": "phase-7.5-review-v1",
+    "validationPassed": true,
+    "documentFormat": "DOCX",
+    "extractedWordCount": 48,
+    "extractedCharacterCount": 391,
+    "complianceScore": 100,
+    "similarityScore": 21.73913043478261,
+    "grammarScore": 81,
+    "citationScore": 64,
+    "writingRiskLevel": "INCONCLUSIVE",
+    "normalizedDocument": {
+      "headings": [
+        "Abstract",
+        "Methodology",
+        "Conclusion",
+        "References"
+      ],
+      "paragraphs": [
+        "Abstract",
+        "Valid submission abstract.",
+        "Methodology",
+        "Documented method.",
+        "Conclusion",
+        "Documented conclusion.",
+        "References",
+        "Smith, 2024.",
+        "Doe, 2023."
+      ],
+      "tables": [],
+      "lists": [],
+      "references": [
+        "Smith, 2024.",
+        "Doe, 2023."
+      ],
+      "images": [],
+      "captions": [],
+      "footnotes": [],
+      "pageNumbers": []
+    },
+    "extractedText": "Abstract\nResubmission content exceeds thirty words and remains within the configured maximum.\nMethodology\nUpdated method steps are included here for the second attempt.\nConclusion\nUpdated conclusion is included.\nReferences\nSmith, 2024.\nDoe, 2023.\n\nAbstract\n\nValid submission abstract.\n\nMethodology\n\nDocumented method.\n\nConclusion\n\nDocumented conclusion.\n\nReferences\n\nSmith, 2024.\n\nDoe, 2023.",
+    "summary": "AI review completed. Teacher action is still required before any academic decision.",
+    "errorCode": null,
+    "errorMessage": null,
+    "processingStartedAt": "2026-07-14T13:28:00.659Z",
+    "completedAt": "2026-07-14T13:28:04.976Z",
+    "processingTimeMs": 4782,
+    "createdAt": "2026-07-14T13:28:00.203Z",
+    "updatedAt": "2026-07-14T13:28:04.988Z"
+  }
+}

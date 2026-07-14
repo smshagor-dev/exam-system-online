@@ -1,0 +1,5 @@
+{
+  "ok": false,
+  "status": 400,
+  "error": "Coursework publication is not open for new submissions"
+}

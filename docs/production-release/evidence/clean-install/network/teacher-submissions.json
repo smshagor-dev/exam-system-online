@@ -1,0 +1,267 @@
+[
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/register?_rsc=_H_fFy2_Q06N8BA7",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/forgot-password?_rsc=_H_fFy2_Q06N8BA7",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/register?_rsc=sW2A7HEmFQnSVIMx",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/forgot-password?_rsc=sW2A7HEmFQnSVIMx",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/register?_rsc=tXyZJ52UQVBCVsD3",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/forgot-password?_rsc=tXyZJ52UQVBCVsD3",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/?_rsc=qYT2Wy2QR8kXuUU6",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/?_rsc=q3mOO9BClNZHexY7",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/teacher/dashboard?_rsc=2Md0sTUZcnjCijMr",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/teacher/exams/create?_rsc=Fq8Xc43v6jqAPDV-",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/teacher/exams?_rsc=Fq8Xc43v6jqAPDV-",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/teacher/reviews?_rsc=Fq8Xc43v6jqAPDV-",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/teacher/ebooks?_rsc=Fq8Xc43v6jqAPDV-",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/teacher/questions?_rsc=Fq8Xc43v6jqAPDV-",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/teacher/assignments?_rsc=Fq8Xc43v6jqAPDV-",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/teacher/invigilation?_rsc=Fq8Xc43v6jqAPDV-",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/teacher/translations?_rsc=Fq8Xc43v6jqAPDV-",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/teacher/exams?_rsc=m4RYGARIhxmwPQsa",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/teacher/reviews?_rsc=m4RYGARIhxmwPQsa",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/teacher/exams/create?_rsc=m4RYGARIhxmwPQsa",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/teacher/ebooks?_rsc=m4RYGARIhxmwPQsa",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/teacher/questions?_rsc=m4RYGARIhxmwPQsa",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/teacher/assignments?_rsc=m4RYGARIhxmwPQsa",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/teacher/invigilation?_rsc=m4RYGARIhxmwPQsa",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/teacher/translations?_rsc=m4RYGARIhxmwPQsa",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/teacher/coursework/reports?_rsc=jTOJyxdLTDkOjZys",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/teacher/coursework/extensions?_rsc=jTOJyxdLTDkOjZys",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/teacher/coursework/grading?_rsc=jTOJyxdLTDkOjZys",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/teacher/coursework/assignments?_rsc=jTOJyxdLTDkOjZys",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/teacher/coursework/templates?_rsc=jTOJyxdLTDkOjZys",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/teacher/coursework?_rsc=jTOJyxdLTDkOjZys",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/teacher/exams/create?_rsc=jTOJyxdLTDkOjZys",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/teacher/invigilation?_rsc=jTOJyxdLTDkOjZys",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/teacher/exams?_rsc=jTOJyxdLTDkOjZys",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/teacher/ebooks?_rsc=jTOJyxdLTDkOjZys",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/teacher/translations?_rsc=jTOJyxdLTDkOjZys",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/teacher/questions?_rsc=jTOJyxdLTDkOjZys",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/teacher/assignments?_rsc=jTOJyxdLTDkOjZys",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/teacher/dashboard?_rsc=jTOJyxdLTDkOjZys",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/teacher/coursework/submissions?_rsc=l8_kbPfMVDBjn7TY",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/teacher/coursework/extensions?_rsc=l8_kbPfMVDBjn7TY",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/teacher/coursework/reports?_rsc=l8_kbPfMVDBjn7TY",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/teacher/coursework/grading?_rsc=l8_kbPfMVDBjn7TY",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/teacher/coursework/assignments?_rsc=l8_kbPfMVDBjn7TY",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/teacher/exams/create?_rsc=l8_kbPfMVDBjn7TY",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/teacher/coursework?_rsc=l8_kbPfMVDBjn7TY",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/teacher/translations?_rsc=l8_kbPfMVDBjn7TY",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/teacher/invigilation?_rsc=l8_kbPfMVDBjn7TY",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/teacher/ebooks?_rsc=l8_kbPfMVDBjn7TY",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/teacher/exams?_rsc=l8_kbPfMVDBjn7TY",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/teacher/questions?_rsc=l8_kbPfMVDBjn7TY",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/teacher/dashboard?_rsc=l8_kbPfMVDBjn7TY",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/teacher/assignments?_rsc=l8_kbPfMVDBjn7TY",
+    "message": "net::ERR_ABORTED"
+  }
+]

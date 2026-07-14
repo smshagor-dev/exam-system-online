@@ -1,0 +1,79 @@
+{
+  "generatedAt": "2026-07-14T13:31:33.134Z",
+  "status": "PASS",
+  "rows": [
+    {
+      "actor": "Lead Teacher",
+      "role": "TEACHER",
+      "rerunStatus": 200,
+      "releaseStatus": 200,
+      "reportStatus": 200,
+      "rerunEvidence": "docs/final-audit/evidence/phase-7-5/network/auth-lead-teacher-rerun.json",
+      "releaseEvidence": "docs/final-audit/evidence/phase-7-5/network/auth-lead-teacher-release.json"
+    },
+    {
+      "actor": "Assistant Teacher",
+      "role": "TEACHER",
+      "rerunStatus": 200,
+      "releaseStatus": 200,
+      "reportStatus": 200,
+      "rerunEvidence": "docs/final-audit/evidence/phase-7-5/network/auth-assistant-teacher-rerun.json",
+      "releaseEvidence": "docs/final-audit/evidence/phase-7-5/network/auth-assistant-teacher-release.json"
+    },
+    {
+      "actor": "Unassigned Teacher",
+      "role": "TEACHER",
+      "rerunStatus": 403,
+      "releaseStatus": 403,
+      "reportStatus": 403,
+      "rerunEvidence": "docs/final-audit/evidence/phase-7-5/network/auth-unassigned-teacher-rerun.json",
+      "releaseEvidence": "docs/final-audit/evidence/phase-7-5/network/auth-unassigned-teacher-release.json"
+    },
+    {
+      "actor": "Department Admin A",
+      "role": "DEPARTMENT_ADMIN",
+      "rerunStatus": 403,
+      "releaseStatus": 403,
+      "reportStatus": 403,
+      "rerunEvidence": "docs/final-audit/evidence/phase-7-5/network/auth-department-admin-a-rerun.json",
+      "releaseEvidence": "docs/final-audit/evidence/phase-7-5/network/auth-department-admin-a-release.json"
+    },
+    {
+      "actor": "Department Admin B",
+      "role": "DEPARTMENT_ADMIN",
+      "rerunStatus": 403,
+      "releaseStatus": 403,
+      "reportStatus": 403,
+      "rerunEvidence": "docs/final-audit/evidence/phase-7-5/network/auth-department-admin-b-rerun.json",
+      "releaseEvidence": "docs/final-audit/evidence/phase-7-5/network/auth-department-admin-b-release.json"
+    },
+    {
+      "actor": "Student owner",
+      "role": "STUDENT",
+      "rerunStatus": 403,
+      "releaseStatus": 403,
+      "reportStatus": 403,
+      "rerunEvidence": "docs/final-audit/evidence/phase-7-5/network/auth-student-owner-rerun.json",
+      "releaseEvidence": "docs/final-audit/evidence/phase-7-5/network/auth-student-owner-release.json"
+    },
+    {
+      "actor": "Foreign student",
+      "role": "STUDENT",
+      "rerunStatus": 403,
+      "releaseStatus": 403,
+      "reportStatus": 403,
+      "rerunEvidence": "docs/final-audit/evidence/phase-7-5/network/auth-foreign-student-rerun.json",
+      "releaseEvidence": "docs/final-audit/evidence/phase-7-5/network/auth-foreign-student-release.json"
+    },
+    {
+      "actor": "Unauthenticated user",
+      "role": "ANON",
+      "permissionCheck": false,
+      "rerunStatus": 401,
+      "releaseStatus": 401,
+      "reportStatus": 401,
+      "rerunEvidence": null,
+      "releaseEvidence": null
+    }
+  ]
+}

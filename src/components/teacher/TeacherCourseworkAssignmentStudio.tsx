@@ -49,6 +49,12 @@ export default function TeacherCourseworkAssignmentStudio({ templates, publicati
   const [dueAt, setDueAt] = useState('')
   const [hardCloseAt, setHardCloseAt] = useState('')
   const [scheduledFor, setScheduledFor] = useState('')
+  const [minWords, setMinWords] = useState('')
+  const [maxWords, setMaxWords] = useState('')
+  const [requiredSections, setRequiredSections] = useState('')
+  const [minimumReferenceCount, setMinimumReferenceCount] = useState('')
+  const [citationStyle, setCitationStyle] = useState('')
+  const [requiredAttachments, setRequiredAttachments] = useState('')
   const [saving, setSaving] = useState(false)
   const [message, setMessage] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
@@ -68,6 +74,22 @@ export default function TeacherCourseworkAssignmentStudio({ templates, publicati
           dueAt: dueAt || null,
           hardCloseAt: hardCloseAt || null,
           scheduledFor: scheduledFor || null,
+          metadata: {
+            aiReviewPolicy: {
+              minWords: minWords ? Number(minWords) : null,
+              maxWords: maxWords ? Number(maxWords) : null,
+              requiredSections: requiredSections
+                .split(',')
+                .map((value) => value.trim())
+                .filter(Boolean),
+              minimumReferenceCount: minimumReferenceCount ? Number(minimumReferenceCount) : null,
+              citationStyle: citationStyle || null,
+              requiredAttachments: requiredAttachments ? Number(requiredAttachments) : null,
+              requireRepositoryLink: false,
+              requiredFigures: null,
+              requiredTables: null,
+            },
+          },
         }),
       })
       const data = await response.json()
@@ -76,6 +98,12 @@ export default function TeacherCourseworkAssignmentStudio({ templates, publicati
       }
       setMessage('Coursework assignment created.')
       setTitle('')
+      setMinWords('')
+      setMaxWords('')
+      setRequiredSections('')
+      setMinimumReferenceCount('')
+      setCitationStyle('')
+      setRequiredAttachments('')
       router.refresh()
     } catch (requestError) {
       setError(requestError instanceof Error ? requestError.message : 'Failed to create coursework assignment')
@@ -147,6 +175,37 @@ export default function TeacherCourseworkAssignmentStudio({ templates, publicati
           <label className="text-sm font-medium text-slate-700">
             Scheduled For
             <input type="datetime-local" value={scheduledFor} onChange={(event) => setScheduledFor(event.target.value)} className="mt-2 w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm" />
+          </label>
+          <label className="text-sm font-medium text-slate-700">
+            Min words
+            <input type="number" min="0" value={minWords} onChange={(event) => setMinWords(event.target.value)} className="mt-2 w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm" />
+          </label>
+          <label className="text-sm font-medium text-slate-700">
+            Max words
+            <input type="number" min="0" value={maxWords} onChange={(event) => setMaxWords(event.target.value)} className="mt-2 w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm" />
+          </label>
+          <label className="text-sm font-medium text-slate-700">
+            Min references
+            <input type="number" min="0" value={minimumReferenceCount} onChange={(event) => setMinimumReferenceCount(event.target.value)} className="mt-2 w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm" />
+          </label>
+          <label className="text-sm font-medium text-slate-700">
+            Required attachments
+            <input type="number" min="0" value={requiredAttachments} onChange={(event) => setRequiredAttachments(event.target.value)} className="mt-2 w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm" />
+          </label>
+          <label className="text-sm font-medium text-slate-700">
+            Citation style
+            <select value={citationStyle} onChange={(event) => setCitationStyle(event.target.value)} className="mt-2 w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm">
+              <option value="">Not enforced</option>
+              <option value="APA">APA</option>
+              <option value="IEEE">IEEE</option>
+              <option value="MLA">MLA</option>
+              <option value="HARVARD">Harvard</option>
+              <option value="CHICAGO">Chicago</option>
+            </select>
+          </label>
+          <label className="text-sm font-medium text-slate-700 xl:col-span-2">
+            Required sections
+            <input value={requiredSections} onChange={(event) => setRequiredSections(event.target.value)} className="mt-2 w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm" placeholder="Introduction, Methodology, Conclusion" />
           </label>
         </div>
         <div className="mt-6 flex justify-end">

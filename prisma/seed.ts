@@ -17,7 +17,7 @@ import bcrypt from 'bcryptjs'
 
 const prisma = new PrismaClient()
 
-async function main() {
+export async function runLegacyDemoSeed() {
   console.log('🌱 Seeding ExamFlow Pro database...')
 
   // ─── Clean slate ────────────────────────────────────────────
@@ -901,11 +901,13 @@ async function main() {
   console.log('═══════════════════════════════════════\n')
 }
 
-main()
+if (require.main === module) {
+  runLegacyDemoSeed()
   .catch((e) => {
     console.error('❌ Seed failed:', e)
     process.exit(1)
   })
-  .finally(async () => {
-    await prisma.$disconnect()
-  })
+    .finally(async () => {
+      await prisma.$disconnect()
+    })
+}

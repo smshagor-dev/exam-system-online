@@ -383,6 +383,59 @@ enum AiProvider {
   CLAUDE
 }
 
+enum CourseworkAIReviewStatus {
+  QUEUED
+  PROCESSING
+  COMPLETED
+  FAILED
+  CANCELLED
+}
+
+enum CourseworkAIReviewJobStatus {
+  QUEUED
+  PROCESSING
+  COMPLETED
+  FAILED
+  CANCELLED
+  RETRYING
+}
+
+enum CourseworkAICheckType {
+  SUBMISSION_VALIDATION
+  DOCUMENT_PARSING
+  CONTENT_EXTRACTION
+  ASSIGNMENT_RULES_VALIDATION
+  SIMILARITY_ANALYSIS
+  AI_WRITING_RISK
+  GRAMMAR_REVIEW
+  CITATION_VALIDATION
+  RUBRIC_AI_EVALUATION
+  RECOMMENDATION_GENERATION
+}
+
+enum CourseworkAICheckStatus {
+  PENDING
+  PASSED
+  WARNING
+  FAILED
+  SKIPPED
+}
+
+enum CourseworkAIWritingRiskLevel {
+  LOW
+  MEDIUM
+  HIGH
+  INCONCLUSIVE
+}
+
+enum CourseworkAIRecommendationCode {
+  READY_FOR_REVIEW
+  APPROVE_SUGGESTED
+  RETURN_FOR_REVISION
+  MANUAL_REVIEW_REQUIRED
+  HIGH_SIMILARITY_REVIEW
+}
+
 enum AnswerCheckStatus {
   UNCHECKED
   AUTO_CHECKED
@@ -860,6 +913,7 @@ model TeacherProfile {
   moderatedCourseworkGrades           CourseworkGrade[]              @relation("CourseworkModerator")
   approvedCourseworkGrades            CourseworkGrade[]              @relation("CourseworkDepartmentApprover")
   courseworkModerationDecisions       CourseworkModerationDecision[] @relation("CourseworkModerationActor")
+  courseworkAIReviewAudits            CourseworkAIAudit[]
   examDutyAssignments                 ExamDutyAssignment[]
   invigilatorAssignments              ExamInvigilatorAssignment[]    @relation("ExamInvigilatorTeacher")
   replacementInvigilatorAssignments   ExamInvigilatorAssignment[]    @relation("ExamInvigilatorReplacement")
@@ -893,6 +947,8 @@ model StudentProfile {
   courseworkExtensionRequests  CourseworkExtensionRequest[]
   courseworkGrades             CourseworkGrade[]
   courseworkAttemptRequests    CourseworkAttemptRequest[]
+  courseworkAIReviews          CourseworkAIReview[]
+  courseworkAISourceMatches    CourseworkAISourceMatch[]
   enrollments                  StudentEnrollment[]
   academicHistory              StudentAcademicHistory[]
   promotionRecords             StudentPromotion[]
@@ -2468,9 +2524,10 @@ model CourseworkRubricCriterion {
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
-  rubric CourseworkRubric                @relation(fields: [rubricId], references: [id])
-  levels CourseworkRubricLevel[]
-  scores CourseworkGradeCriterionScore[]
+  rubric        CourseworkRubric                @relation(fields: [rubricId], references: [id])
+  levels        CourseworkRubricLevel[]
+  scores        CourseworkGradeCriterionScore[]
+  aiSuggestions CourseworkAIRubricSuggestion[]
 
   @@index([rubricId, orderIndex])
   @@map("coursework_rubric_criteria")
@@ -2555,6 +2612,8 @@ model CourseworkPublication {
   extensionRequests CourseworkExtensionRequest[]
   grades            CourseworkGrade[]
   attemptRequests   CourseworkAttemptRequest[]
+  aiReviewJobs      CourseworkAIReviewJob[]
+  aiReviews         CourseworkAIReview[]
 
   @@index([teacherId, status, createdAt])
   @@index([departmentId, subjectId, languageId])
@@ -2585,6 +2644,7 @@ model CourseworkAttempt {
   publicationId       String
   studentId           String
   targetId            String?
+  previousAttemptId   String?
   attemptNumber       Int
   status              CourseworkAttemptStatus  @default(DRAFT)
   submissionType      CourseworkSubmissionType @default(TEXT)
@@ -2612,6 +2672,8 @@ model CourseworkAttempt {
   attachments     CourseworkAttemptAttachment[]
   grades          CourseworkGrade[]
   requestRecords  CourseworkAttemptRequest[]
+  aiReviewJobs    CourseworkAIReviewJob[]
+  aiReviews       CourseworkAIReview[]
 
   @@unique([publicationId, studentId, attemptNumber])
   @@index([studentId, publicationId, createdAt])
@@ -2661,6 +2723,228 @@ model CourseworkAttemptAttachment {
   @@index([attemptId, uploadedAt])
   @@index([studentId, uploadedAt])
   @@map("coursework_attempt_attachments")
+}
+
+model CourseworkAIReviewJob {
+  id               String                      @id @default(cuid()) @map("_id")
+  publicationId    String
+  attemptId        String
+  status           CourseworkAIReviewJobStatus @default(QUEUED)
+  trigger          String
+  progressPercent  Int                         @default(0)
+  retryCount       Int                         @default(0)
+  startedAt        DateTime?
+  leaseExpiresAt   DateTime?
+  completedAt      DateTime?
+  failedAt         DateTime?
+  errorMessage     String?
+  processingTimeMs Int?
+  createdAt        DateTime                    @default(now())
+  updatedAt        DateTime                    @updatedAt
+
+  publication CourseworkPublication @relation(fields: [publicationId], references: [id])
+  attempt     CourseworkAttempt     @relation(fields: [attemptId], references: [id])
+  review      CourseworkAIReview?
+
+  @@index([attemptId, createdAt])
+  @@index([publicationId, status, createdAt])
+  @@map("coursework_ai_review_jobs")
+}
+
+model CourseworkAIReview {
+  id                      String                       @id @default(cuid()) @map("_id")
+  publicationId           String
+  attemptId               String
+  studentId               String
+  jobId                   String                       @unique
+  previousReviewId        String?
+  versionNumber           Int
+  status                  CourseworkAIReviewStatus     @default(QUEUED)
+  provider                AiProvider?
+  providerName            String?
+  modelName               String?
+  promptVersion           String?
+  validationPassed        Boolean                      @default(false)
+  documentFormat          String?
+  extractedWordCount      Int                          @default(0)
+  extractedCharacterCount Int                          @default(0)
+  complianceScore         Float?
+  similarityScore         Float?
+  grammarScore            Float?
+  citationScore           Float?
+  writingRiskLevel        CourseworkAIWritingRiskLevel @default(INCONCLUSIVE)
+  normalizedDocument      Json?
+  extractedText           String?
+  summary                 String?
+  errorCode               String?
+  errorMessage            String?
+  processingStartedAt     DateTime?
+  completedAt             DateTime?
+  processingTimeMs        Int?
+  createdAt               DateTime                     @default(now())
+  updatedAt               DateTime                     @updatedAt
+
+  publication       CourseworkPublication          @relation(fields: [publicationId], references: [id])
+  attempt           CourseworkAttempt              @relation(fields: [attemptId], references: [id])
+  student           StudentProfile                 @relation(fields: [studentId], references: [id])
+  job               CourseworkAIReviewJob          @relation(fields: [jobId], references: [id])
+  checks            CourseworkAICheck[]
+  findings          CourseworkAIFinding[]
+  sourceMatches     CourseworkAISourceMatch[]
+  rubricSuggestions CourseworkAIRubricSuggestion[]
+  citationFindings  CourseworkAICitationFinding[]
+  grammarFindings   CourseworkAIGrammarFinding[]
+  recommendations   CourseworkAIRecommendation[]
+  audits            CourseworkAIAudit[]
+
+  @@unique([attemptId, versionNumber])
+  @@index([previousReviewId])
+  @@index([publicationId, createdAt])
+  @@index([studentId, createdAt])
+  @@map("coursework_ai_reviews")
+}
+
+model CourseworkAICheck {
+  id        String                  @id @default(cuid()) @map("_id")
+  reviewId  String
+  checkType CourseworkAICheckType
+  status    CourseworkAICheckStatus @default(PENDING)
+  score     Float?
+  details   Json?
+  message   String?
+  createdAt DateTime                @default(now())
+
+  review CourseworkAIReview @relation(fields: [reviewId], references: [id])
+
+  @@unique([reviewId, checkType])
+  @@index([checkType, createdAt])
+  @@map("coursework_ai_checks")
+}
+
+model CourseworkAIFinding {
+  id           String   @id @default(cuid()) @map("_id")
+  reviewId     String
+  category     String
+  severity     String
+  title        String
+  description  String?
+  evidenceText String?
+  startOffset  Int?
+  endOffset    Int?
+  metadata     Json?
+  createdAt    DateTime @default(now())
+
+  review CourseworkAIReview @relation(fields: [reviewId], references: [id])
+
+  @@index([reviewId, category, severity])
+  @@map("coursework_ai_findings")
+}
+
+model CourseworkAISourceMatch {
+  id                String   @id @default(cuid()) @map("_id")
+  reviewId          String
+  matchedStudentId  String?
+  providerKey       String
+  sourceTitle       String
+  sourceUrl         String?
+  matchedText       String
+  similarityPercent Float
+  sourceType        String
+  teacherEvidence   String?
+  metadata          Json?
+  createdAt         DateTime @default(now())
+
+  review         CourseworkAIReview @relation(fields: [reviewId], references: [id])
+  matchedStudent StudentProfile?    @relation(fields: [matchedStudentId], references: [id])
+
+  @@index([reviewId, similarityPercent])
+  @@index([matchedStudentId])
+  @@map("coursework_ai_source_matches")
+}
+
+model CourseworkAIRubricSuggestion {
+  id             String   @id @default(cuid()) @map("_id")
+  reviewId       String
+  criterionId    String
+  suggestedScore Float
+  confidence     Float
+  reason         String
+  evidenceText   String?
+  metadata       Json?
+  createdAt      DateTime @default(now())
+
+  review    CourseworkAIReview        @relation(fields: [reviewId], references: [id])
+  criterion CourseworkRubricCriterion @relation(fields: [criterionId], references: [id])
+
+  @@unique([reviewId, criterionId])
+  @@index([criterionId])
+  @@map("coursework_ai_rubric_suggestions")
+}
+
+model CourseworkAICitationFinding {
+  id            String   @id @default(cuid()) @map("_id")
+  reviewId      String
+  citationStyle String?
+  issueType     String
+  description   String
+  referenceText String?
+  locationLabel String?
+  metadata      Json?
+  createdAt     DateTime @default(now())
+
+  review CourseworkAIReview @relation(fields: [reviewId], references: [id])
+
+  @@index([reviewId, issueType])
+  @@map("coursework_ai_citation_findings")
+}
+
+model CourseworkAIGrammarFinding {
+  id           String   @id @default(cuid()) @map("_id")
+  reviewId     String
+  issueType    String
+  severity     String
+  sentenceText String?
+  suggestion   String?
+  explanation  String?
+  metadata     Json?
+  createdAt    DateTime @default(now())
+
+  review CourseworkAIReview @relation(fields: [reviewId], references: [id])
+
+  @@index([reviewId, issueType, severity])
+  @@map("coursework_ai_grammar_findings")
+}
+
+model CourseworkAIRecommendation {
+  id          String                         @id @default(cuid()) @map("_id")
+  reviewId    String
+  code        CourseworkAIRecommendationCode
+  confidence  Float
+  rationale   String
+  teacherOnly Boolean                        @default(true)
+  metadata    Json?
+  createdAt   DateTime                       @default(now())
+
+  review CourseworkAIReview @relation(fields: [reviewId], references: [id])
+
+  @@index([reviewId, code])
+  @@map("coursework_ai_recommendations")
+}
+
+model CourseworkAIAudit {
+  id             String   @id @default(cuid()) @map("_id")
+  reviewId       String
+  actorTeacherId String?
+  action         String
+  details        Json?
+  createdAt      DateTime @default(now())
+
+  review       CourseworkAIReview @relation(fields: [reviewId], references: [id])
+  actorTeacher TeacherProfile?    @relation(fields: [actorTeacherId], references: [id])
+
+  @@index([reviewId, createdAt])
+  @@index([actorTeacherId, createdAt])
+  @@map("coursework_ai_audits")
 }
 
 model CourseworkExtensionRequest {

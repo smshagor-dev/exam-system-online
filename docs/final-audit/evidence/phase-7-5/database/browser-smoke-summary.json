@@ -1,0 +1,54 @@
+{
+  "generatedAt": "2026-07-14T13:34:56.491Z",
+  "status": "PASS",
+  "results": [
+    {
+      "caseId": "P7.5-BR-001",
+      "status": "PASS",
+      "actual": "Submit form rendered and attempt cmrkozz6d0005ny3tgg83bvvf produced review cmrkp01xi000pny3ti2ifnfx7 with status PROCESSING.",
+      "evidencePaths": [
+        "docs/final-audit/evidence/phase-7-5/browser/phase7-5-student-submit-tablet-light.png",
+        "docs/final-audit/evidence/phase-7-5/console/phase7-5-student-submit-tablet-light.txt",
+        "docs/final-audit/evidence/phase-7-5/network/phase7-5-student-submit-tablet-light.txt"
+      ]
+    },
+    {
+      "caseId": "P7.5-BR-002",
+      "status": "PASS",
+      "actual": "Teacher submissions page rendered AI review summary card.",
+      "evidencePaths": [
+        "docs/final-audit/evidence/phase-7-5/browser/phase7-5-teacher-submissions-desktop-light.png",
+        "docs/final-audit/evidence/phase-7-5/console/phase7-5-teacher-submissions-desktop-light.txt",
+        "docs/final-audit/evidence/phase-7-5/network/phase7-5-teacher-submissions-desktop-light.txt"
+      ]
+    },
+    {
+      "caseId": "P7.5-BR-003",
+      "status": "PASS",
+      "actual": "Teacher submissions page rendered in dark desktop mode.",
+      "evidencePaths": [
+        "docs/final-audit/evidence/phase-7-5/browser/phase7-5-teacher-submissions-desktop-dark.png",
+        "docs/final-audit/evidence/phase-7-5/console/phase7-5-teacher-submissions-desktop-dark.txt",
+        "docs/final-audit/evidence/phase-7-5/network/phase7-5-teacher-submissions-desktop-dark.txt"
+      ]
+    },
+    {
+      "caseId": "P7.5-BR-004",
+      "status": "PASS",
+      "actual": "Released AI review is visible to the student and internal match rows are not rendered.",
+      "evidencePaths": [
+        "docs/final-audit/evidence/phase-7-5/browser/phase7-5-student-history-mobile-dark.png",
+        "docs/final-audit/evidence/phase-7-5/console/phase7-5-student-history-mobile-dark.txt",
+        "docs/final-audit/evidence/phase-7-5/network/phase7-5-student-history-mobile-dark.txt"
+      ]
+    },
+    {
+      "caseId": "P7.5-BR-005",
+      "status": "PASS",
+      "actual": "Desktop/tablet/mobile light/dark matrix rendered without horizontal overflow.",
+      "evidencePaths": [
+        "docs/final-audit/evidence/phase-7-5/database/browser-matrix-results.json"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "generatedAt": "2026-07-14T13:37:29.770Z",
+  "mode": "dry-run",
+  "inventoryPath": "docs/production-release/evidence/academic-cleanup/academic-cleanup-inventory.json",
+  "summaryBefore": {
+    "totalRecords": 41,
+    "byClassification": {
+      "realRequired": 40,
+      "systemDefault": 1,
+      "demoData": 0,
+      "unknown": 0
+    }
+  }
+}

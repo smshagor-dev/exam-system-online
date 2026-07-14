@@ -1,0 +1,176 @@
+{
+  "generatedAt": "2026-07-14T13:36:47.612Z",
+  "fixtureUsers": [
+    {
+      "id": "cmrko7acw00011iyastyar3id",
+      "email": "teacher.anna@examflow.pro",
+      "role": "TEACHER",
+      "name": "Anna Petrova"
+    },
+    {
+      "id": "cmrko7acw00031iya0tbtf7uo",
+      "email": "teacher.john@examflow.pro",
+      "role": "TEACHER",
+      "name": "John Smith"
+    },
+    {
+      "id": "cmrko7acw00001iyayjrgz3kb",
+      "email": "eee.admin@examflow.pro",
+      "role": "DEPARTMENT_ADMIN",
+      "name": "EEE Department Admin"
+    },
+    {
+      "id": "cmrko7acx00061iyan0p4vg2w",
+      "email": "alice@student.examflow.pro",
+      "role": "STUDENT",
+      "name": "Alice Brown"
+    },
+    {
+      "id": "cmrko7acx00071iyaai01iwzv",
+      "email": "auth.eee.student@examflow.pro",
+      "role": "STUDENT",
+      "name": "EEE Auth Student"
+    },
+    {
+      "id": "cmrko7acx00081iyawbn7h1qa",
+      "email": "bob@student.examflow.pro",
+      "role": "STUDENT",
+      "name": "Bob Davis"
+    },
+    {
+      "id": "cmrko7acw00041iyalsdx6g8n",
+      "email": "teacher.sarah@examflow.pro",
+      "role": "TEACHER",
+      "name": "Sarah Johnson"
+    },
+    {
+      "id": "cmrko7acw00051iyal3uq76lo",
+      "email": "admin@examflow.pro",
+      "role": "SUPER_ADMIN",
+      "name": "Super Admin"
+    },
+    {
+      "id": "cmrko7acw00021iyaif4wao4e",
+      "email": "cse.admin@examflow.pro",
+      "role": "DEPARTMENT_ADMIN",
+      "name": "CSE Department Admin"
+    }
+  ],
+  "fixtureTeacherIds": [
+    "cmrko7do0000d1iya8sc87tj0",
+    "cmrko7do0000e1iya7viws40m",
+    "cmrko7dnz000b1iya81uznctp"
+  ],
+  "fixtureStudentIds": [
+    "cmrko7do0000g1iyajbr86xrt",
+    "cmrko7do0000i1iyacurp88qq",
+    "cmrko7do1000k1iyaka7lu2zv"
+  ],
+  "fixtureExamIds": [],
+  "fixtureExams": [],
+  "fixtureQuestionIds": [],
+  "fixtureTemplateIds": [],
+  "fixtureTemplates": [],
+  "fixturePublicationIds": [],
+  "fixturePublications": [],
+  "fixtureAttemptIds": [],
+  "fixtureAttemptAttachmentIds": [],
+  "fixtureAttachmentFiles": [],
+  "orphanAttachmentFiles": [
+    "cmrko7do0000g1iyajbr86xrt-cmrko7rmo001m1iyahxz9zp9e-1784034733695-0-phase7-test.txt",
+    "cmrko7do0000g1iyajbr86xrt-cmrko7rmo001m1iyahxz9zp9e-1784034754113-0-phase7-test-revision.txt",
+    "cmrko7do0000g1iyajbr86xrt-cmrko8v7y003t1iyajtxuf4sz-1784034783773-0-grace-pass.txt",
+    "cmrko7do0000g1iyajbr86xrt-cmrko9l7j004u1iyap7jyo79m-1784034817620-0-late-without-penalty.txt",
+    "cmrko7do0000g1iyajbr86xrt-cmrkoa9bp005v1iyanxl43i7k-1784034849196-0-percentage-penalty.txt",
+    "cmrko7do0000g1iyajbr86xrt-cmrkoawwo006w1iyav73jh6dv-1784034880140-0-fixed-penalty.txt",
+    "cmrko7do0000g1iyajbr86xrt-cmrkobko3007x1iyayrf7th85-1784034911143-0-daily-penalty.txt",
+    "cmrko7do0000g1iyajbr86xrt-cmrkociay00911iyamg5xmk9i-1784034954916-0-extension-allowed.txt",
+    "cmrko7do0000g1iyajbr86xrt-cmrkod8mh00a31iya0u49ozcc-1784034988226-0-late-audit.txt",
+    "cmrko7do0000g1iyajbr86xrt-cmrkolr770005dubupouroht4-1784035390800-0-fixture.txt",
+    "cmrko7do0000g1iyajbr86xrt-cmrkouvis0005q79vcyp5pms2-1784035813873-0-fixture.txt"
+  ],
+  "orphanAttachmentBytes": 154,
+  "fixtureRubricIds": [],
+  "fixtureAcademicOfferingIds": [
+    "cmrfve242006fwqliz6dmghl7"
+  ],
+  "fixtureTeacherAssignmentIds": [
+    "cmrko7hhm000s1iyaxznwsx78",
+    "cmrko7hyr000u1iyaxandfvfv"
+  ],
+  "fixtureTeachingAssignmentIds": [
+    "cmrko7ifn000w1iyaryuptvbn",
+    "cmrko7j4b000y1iyazmq5ltr6"
+  ],
+  "demoAcademicMetadata": {
+    "departmentIds": [
+      "cmrc1y4pr000ck2kd4d7vqcwq",
+      "cmrc1y4uk000dk2kdqc6m8jp6"
+    ],
+    "subjectIds": [
+      "cmrc1y53e000gk2kdudmed81a",
+      "cmrc1y57t000ik2kdf6fol422",
+      "cmrc1y5c9000kk2kde5g3n6nk"
+    ],
+    "languageIds": [
+      "cmrc1y4h10006k2kdse7x47oh"
+    ],
+    "groupIds": [
+      "cmrc1y4le0009k2kdpo214w8b",
+      "cmrc1y4le000ak2kd1o5se1xs",
+      "cmrfvdt6v006bwqlimgo85td6"
+    ],
+    "academicYearIds": [
+      "cmrc1y4060002k2kd52mc7lt0",
+      "cmrc1y4060000k2kdx7dkghyw",
+      "cmrc1y4060003k2kd2m0dhf10"
+    ],
+    "semesterIds": [
+      "cmrc1y4cm0004k2kddk9xe7q7"
+    ],
+    "degreeLevelIds": [
+      "cmrfvbyml004swqlipq4d1lvw",
+      "cmrfvbznf004twqlirmayo5rn"
+    ],
+    "academicProgramIds": [
+      "cmrfvc9gk0053wqli5omnqitt",
+      "cmrfvcapp0055wqlijldrxbb2"
+    ],
+    "academicSessionIds": [
+      "cmrfvc6kk0050wqliy7jsvc0r"
+    ],
+    "programYearIds": [],
+    "programSemesterIds": [],
+    "programSubjectIds": [],
+    "departmentLanguageIds": [
+      "cmrfvc2k7004vwqliecl9ia07",
+      "cmrfvc3kg004xwqli8kpib47u",
+      "cmrfvc4vl004zwqlibzive0z6"
+    ]
+  },
+  "counts": {
+    "fixtureUsers": 9,
+    "fixtureTeacherProfiles": 3,
+    "fixtureStudentProfiles": 3,
+    "fixtureExams": 0,
+    "fixtureQuestions": 0,
+    "fixtureTemplates": 0,
+    "fixturePublications": 0,
+    "fixtureAttempts": 0,
+    "fixtureAttemptAttachments": 0,
+    "fixtureRubrics": 0,
+    "orphanAttachmentFiles": 11,
+    "orphanAttachmentBytes": 154,
+    "demoDepartments": 2,
+    "demoSubjects": 3,
+    "demoLanguages": 1,
+    "demoGroups": 3,
+    "demoAcademicYears": 3,
+    "demoSemesters": 1,
+    "demoDegreeLevels": 2,
+    "demoAcademicPrograms": 2,
+    "demoAcademicSessions": 1,
+    "demoProgramYears": 0,
+    "demoAcademicOfferings": 1
+  }
+}

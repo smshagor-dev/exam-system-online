@@ -1,0 +1,5 @@
+{
+  "ok": false,
+  "status": 400,
+  "error": "File mime-mismatch.docx failed MIME validation for .docx"
+}

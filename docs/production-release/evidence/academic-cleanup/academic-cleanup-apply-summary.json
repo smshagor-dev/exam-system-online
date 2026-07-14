@@ -1,0 +1,55 @@
+{
+  "generatedAt": "2026-07-14T12:46:19.110Z",
+  "mode": "apply",
+  "deleted": {
+    "offerings": [],
+    "programSubjects": [],
+    "programSemesters": [],
+    "programYears": [],
+    "departmentLanguages": [],
+    "groups": [
+      "cmrc1y4le000bk2kddgfbl9bh"
+    ],
+    "sessions": [
+      "cmrfvc7k70051wqli1zwftkcq"
+    ],
+    "programs": [],
+    "degreeLevels": [],
+    "subjects": [
+      "cmrc1y5l3000ok2kd6mrx80qt",
+      "cmrc1y5go000mk2kdadumjp9x",
+      "cmrfudl0900061387hxp2g7tr"
+    ],
+    "departments": [
+      "cmrc1y4yz000ek2kdp9o6mc0b"
+    ],
+    "languages": [
+      "cmrc1y4h10008k2kdhp4cyedo",
+      "cmrc1y4h10007k2kdg1stvr5e"
+    ],
+    "years": [
+      "cmrc1y4060001k2kdo5fojcbm"
+    ],
+    "semesters": [
+      "cmrc1y4cm0005k2kdkfnd4qir"
+    ]
+  },
+  "summaryBefore": {
+    "totalRecords": 51,
+    "byClassification": {
+      "realRequired": 40,
+      "systemDefault": 1,
+      "demoData": 10,
+      "unknown": 0
+    }
+  },
+  "summaryAfter": {
+    "totalRecords": 41,
+    "byClassification": {
+      "realRequired": 40,
+      "systemDefault": 1,
+      "demoData": 0,
+      "unknown": 0
+    }
+  }
+}

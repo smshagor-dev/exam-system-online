@@ -1,0 +1,147 @@
+[
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/register?_rsc=_H_fFy2_Q06N8BA7",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/forgot-password?_rsc=sW2A7HEmFQnSVIMx",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/register?_rsc=sW2A7HEmFQnSVIMx",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/register?_rsc=tXyZJ52UQVBCVsD3",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/forgot-password?_rsc=tXyZJ52UQVBCVsD3",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/?_rsc=qYT2Wy2QR8kXuUU6",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/?_rsc=q3mOO9BClNZHexY7",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/student/dashboard?_rsc=2Md0sTUZcnjCijMr",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/student/exams?_rsc=9MxZsHLJTkMUAOU0",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/student/results?_rsc=9MxZsHLJTkMUAOU0",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/student/ebooks?_rsc=9MxZsHLJTkMUAOU0",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/student/coursework?_rsc=9MxZsHLJTkMUAOU0",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/student/progress?_rsc=9MxZsHLJTkMUAOU0",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/student/results?_rsc=HorwHf_D3_W0eQIY",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/student/exams?_rsc=HorwHf_D3_W0eQIY",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/student/ebooks?_rsc=HorwHf_D3_W0eQIY",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/student/coursework?_rsc=HorwHf_D3_W0eQIY",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/student/progress?_rsc=HorwHf_D3_W0eQIY",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/student/results?_rsc=6ZBuOdNME1Ciml-6",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/student/exams?_rsc=6ZBuOdNME1Ciml-6",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/student/ebooks?_rsc=6ZBuOdNME1Ciml-6",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/student/progress?_rsc=6ZBuOdNME1Ciml-6",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/student/dashboard?_rsc=6ZBuOdNME1Ciml-6",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/student/exams?_rsc=pfkviWEa7YtWZCVq",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/student/results?_rsc=pfkviWEa7YtWZCVq",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/student/ebooks?_rsc=pfkviWEa7YtWZCVq",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/student/coursework?_rsc=pfkviWEa7YtWZCVq",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/student/progress?_rsc=pfkviWEa7YtWZCVq",
+    "message": "net::ERR_ABORTED"
+  },
+  {
+    "kind": "requestfailed",
+    "url": "http://127.0.0.1:3320/student/dashboard?_rsc=pfkviWEa7YtWZCVq",
+    "message": "net::ERR_ABORTED"
+  }
+]

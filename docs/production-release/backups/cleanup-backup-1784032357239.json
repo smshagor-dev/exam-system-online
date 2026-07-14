@@ -1,0 +1,115 @@
+{
+  "generatedAt": "2026-07-14T12:32:37.232Z",
+  "fixtureUsers": [],
+  "fixtureTeacherIds": [],
+  "fixtureStudentIds": [],
+  "fixtureExamIds": [],
+  "fixtureExams": [],
+  "fixtureQuestionIds": [],
+  "fixtureTemplateIds": [],
+  "fixtureTemplates": [],
+  "fixturePublicationIds": [],
+  "fixturePublications": [],
+  "fixtureAttemptIds": [],
+  "fixtureAttemptAttachmentIds": [],
+  "fixtureAttachmentFiles": [],
+  "orphanAttachmentFiles": [
+    "cmrkl5juh000gdvx6opu2hm2h-cmrkl61mh000b11c8lcdkny46-1784029614454-0-phase7-test.txt",
+    "cmrkl5juh000gdvx6opu2hm2h-cmrkl61mh000b11c8lcdkny46-1784029636753-0-phase7-test-revision.txt",
+    "cmrkl5juh000gdvx6opu2hm2h-cmrkl77kh002i11c8y84hfkre-1784029667840-0-grace-pass.txt",
+    "cmrkl5juh000gdvx6opu2hm2h-cmrkl7vsn003j11c8hwchqukn-1784029699226-0-late-without-penalty.txt",
+    "cmrkl5juh000gdvx6opu2hm2h-cmrkl8jjh004k11c841555rbw-1784029732209-0-percentage-penalty.txt",
+    "cmrkl5juh000gdvx6opu2hm2h-cmrkl97fk005l11c8h38i7fqi-1784029761506-0-fixed-penalty.txt",
+    "cmrkl5juh000gdvx6opu2hm2h-cmrkl9xg1006m11c84iohmbmp-1784029794671-0-daily-penalty.txt",
+    "cmrkl5juh000gdvx6opu2hm2h-cmrklaspg007q11c82stvrjbh-1784029835342-0-extension-allowed.txt",
+    "cmrkl5juh000gdvx6opu2hm2h-cmrklbi0c008s11c8t8jgz0kd-1784029867687-0-late-audit.txt",
+    "cmrkl5juh000gdvx6opu2hm2h-cmrklkyp30005fvh7deh9w9fb-1784030312271-0-fixture.txt",
+    "cmrkl5juh000gdvx6opu2hm2h-cmrklo4c00005dx0ewa6nc1pu-1784030458906-0-fixture.txt",
+    "cmrkl5juh000gdvx6opu2hm2h-cmrklx7g4000590efac7048or-1784030883143-0-fixture.txt",
+    "cmrkl5juh000gdvx6opu2hm2h-cmrkm9ogt0005i2mxjtxfn8cs-1784031466012-0-fixture.txt"
+  ],
+  "orphanAttachmentBytes": 168,
+  "fixtureRubricIds": [],
+  "fixtureAcademicOfferingIds": [],
+  "fixtureTeacherAssignmentIds": [],
+  "fixtureTeachingAssignmentIds": [],
+  "demoAcademicMetadata": {
+    "departmentIds": [
+      "cmrc1y4pr000ck2kd4d7vqcwq",
+      "cmrc1y4uk000dk2kdqc6m8jp6",
+      "cmrc1y4yz000ek2kdp9o6mc0b"
+    ],
+    "subjectIds": [
+      "cmrc1y53e000gk2kdudmed81a",
+      "cmrc1y57t000ik2kdf6fol422",
+      "cmrc1y5c9000kk2kde5g3n6nk",
+      "cmrc1y5go000mk2kdadumjp9x",
+      "cmrc1y5l3000ok2kd6mrx80qt"
+    ],
+    "languageIds": [
+      "cmrc1y4h10007k2kdg1stvr5e",
+      "cmrc1y4h10008k2kdhp4cyedo",
+      "cmrc1y4h10006k2kdse7x47oh"
+    ],
+    "groupIds": [
+      "cmrc1y4le0009k2kdpo214w8b",
+      "cmrc1y4le000ak2kd1o5se1xs",
+      "cmrc1y4le000bk2kddgfbl9bh",
+      "cmrfvdt6v006bwqlimgo85td6"
+    ],
+    "academicYearIds": [
+      "cmrc1y4060002k2kd52mc7lt0",
+      "cmrc1y4060001k2kdo5fojcbm",
+      "cmrc1y4060000k2kdx7dkghyw",
+      "cmrc1y4060003k2kd2m0dhf10"
+    ],
+    "semesterIds": [
+      "cmrc1y4cm0005k2kdkfnd4qir",
+      "cmrc1y4cm0004k2kddk9xe7q7"
+    ],
+    "degreeLevelIds": [
+      "cmrfvbyml004swqlipq4d1lvw",
+      "cmrfvbznf004twqlirmayo5rn"
+    ],
+    "academicProgramIds": [
+      "cmrfvc9gk0053wqli5omnqitt",
+      "cmrfvcapp0055wqlijldrxbb2"
+    ],
+    "academicSessionIds": [
+      "cmrfvc6kk0050wqliy7jsvc0r"
+    ],
+    "programYearIds": [],
+    "programSemesterIds": [],
+    "programSubjectIds": [],
+    "departmentLanguageIds": [
+      "cmrfvc2k7004vwqliecl9ia07",
+      "cmrfvc3kg004xwqli8kpib47u",
+      "cmrfvc4vl004zwqlibzive0z6"
+    ]
+  },
+  "counts": {
+    "fixtureUsers": 0,
+    "fixtureTeacherProfiles": 0,
+    "fixtureStudentProfiles": 0,
+    "fixtureExams": 0,
+    "fixtureQuestions": 0,
+    "fixtureTemplates": 0,
+    "fixturePublications": 0,
+    "fixtureAttempts": 0,
+    "fixtureAttemptAttachments": 0,
+    "fixtureRubrics": 0,
+    "orphanAttachmentFiles": 13,
+    "orphanAttachmentBytes": 168,
+    "demoDepartments": 3,
+    "demoSubjects": 5,
+    "demoLanguages": 3,
+    "demoGroups": 4,
+    "demoAcademicYears": 4,
+    "demoSemesters": 2,
+    "demoDegreeLevels": 2,
+    "demoAcademicPrograms": 2,
+    "demoAcademicSessions": 1,
+    "demoProgramYears": 0,
+    "demoAcademicOfferings": 0
+  }
+}

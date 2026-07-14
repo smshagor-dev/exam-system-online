@@ -15,5 +15,5 @@
     },
     "outDir": "./dist"
   },
-  "include": ["prisma/seed.ts", "scripts/**/*.ts", "src/**/*.ts", "src/**/*.tsx"]
+  "include": ["prisma/**/*.ts", "scripts/**/*.ts", "src/**/*.ts", "src/**/*.tsx"]
 }

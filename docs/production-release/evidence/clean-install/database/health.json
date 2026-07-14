@@ -1,0 +1,9 @@
+{
+  "ready": true,
+  "appReady": true,
+  "databaseReady": true,
+  "redisReady": true,
+  "socketReady": true,
+  "runtimeMode": "redis",
+  "checkedAt": "2026-07-14T13:07:01.148Z"
+}

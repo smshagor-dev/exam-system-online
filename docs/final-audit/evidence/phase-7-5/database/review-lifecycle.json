@@ -1,0 +1,231 @@
+{
+  "id": "cmrkorhby000pnb8izlckbmxn",
+  "publicationId": "cmrkor8ql0008nb8imbr8dcqk",
+  "attemptId": "cmrkorby0000dnb8i865ca657",
+  "studentId": "cmrko7do0000g1iyajbr86xrt",
+  "jobId": "cmrkorgyt000nnb8i22y3sy0m",
+  "previousReviewId": null,
+  "versionNumber": 1,
+  "status": "COMPLETED",
+  "provider": null,
+  "providerName": "LOCAL",
+  "modelName": "coursework-review-heuristic-v1",
+  "promptVersion": "phase-7.5-review-v1",
+  "validationPassed": true,
+  "documentFormat": "DOCX",
+  "extractedWordCount": 51,
+  "extractedCharacterCount": 394,
+  "complianceScore": 100,
+  "similarityScore": 0,
+  "grammarScore": 81,
+  "citationScore": 64,
+  "writingRiskLevel": "INCONCLUSIVE",
+  "normalizedDocument": {
+    "headings": [
+      "Abstract",
+      "Methodology",
+      "Conclusion",
+      "References"
+    ],
+    "paragraphs": [
+      "Abstract",
+      "Valid submission abstract.",
+      "Methodology",
+      "Documented method.",
+      "Conclusion",
+      "Documented conclusion.",
+      "References",
+      "Smith, 2024.",
+      "Doe, 2023."
+    ],
+    "tables": [],
+    "lists": [],
+    "references": [
+      "Smith, 2024.",
+      "Doe, 2023."
+    ],
+    "images": [],
+    "captions": [],
+    "footnotes": [],
+    "pageNumbers": []
+  },
+  "extractedText": "Abstract\nThis is a valid academic submission with more than thirty words.\nMethodology\nThe method is described clearly with enough detail for verification.\nConclusion\nThe result is summarised clearly for assessment.\nReferences\nSmith, 2024.\nDoe, 2023.\n\nAbstract\n\nValid submission abstract.\n\nMethodology\n\nDocumented method.\n\nConclusion\n\nDocumented conclusion.\n\nReferences\n\nSmith, 2024.\n\nDoe, 2023.",
+  "summary": "AI review completed. Teacher action is still required before any academic decision.",
+  "errorCode": null,
+  "errorMessage": null,
+  "processingStartedAt": "2026-07-14T13:27:30.117Z",
+  "completedAt": "2026-07-14T13:27:33.989Z",
+  "processingTimeMs": 4337,
+  "createdAt": "2026-07-14T13:27:29.662Z",
+  "updatedAt": "2026-07-14T13:27:34.003Z",
+  "job": {
+    "id": "cmrkorgyt000nnb8i22y3sy0m",
+    "publicationId": "cmrkor8ql0008nb8imbr8dcqk",
+    "attemptId": "cmrkorby0000dnb8i865ca657",
+    "status": "COMPLETED",
+    "trigger": "SUBMISSION",
+    "progressPercent": 100,
+    "retryCount": 0,
+    "startedAt": "2026-07-14T13:27:30.117Z",
+    "leaseExpiresAt": null,
+    "completedAt": "2026-07-14T13:27:33.989Z",
+    "failedAt": null,
+    "errorMessage": null,
+    "processingTimeMs": 4338,
+    "createdAt": "2026-07-14T13:27:29.189Z",
+    "updatedAt": "2026-07-14T13:27:34.003Z"
+  },
+  "recommendations": [
+    {
+      "id": "cmrkorkok0019nb8i3ei8gv40",
+      "reviewId": "cmrkorhby000pnb8izlckbmxn",
+      "code": "APPROVE_SUGGESTED",
+      "confidence": 0.72,
+      "rationale": "Submission is structurally compliant and ready for teacher grading review.",
+      "teacherOnly": true,
+      "metadata": {
+        "similarityScore": 0,
+        "grammarScore": 81,
+        "citationScore": 64,
+        "complianceScore": 100
+      },
+      "createdAt": "2026-07-14T13:27:34.003Z"
+    }
+  ],
+  "sourceMatches": [],
+  "checks": [
+    {
+      "id": "cmrkork2t000rnb8i6rc4luv6",
+      "reviewId": "cmrkorhby000pnb8izlckbmxn",
+      "checkType": "SUBMISSION_VALIDATION",
+      "status": "PASSED",
+      "score": 100,
+      "details": {
+        "issues": []
+      },
+      "message": "Submission validation passed and AI analysis proceeded.",
+      "createdAt": "2026-07-14T13:27:33.221Z"
+    },
+    {
+      "id": "cmrkorkoj000snb8iieap73lv",
+      "reviewId": "cmrkorhby000pnb8izlckbmxn",
+      "checkType": "DOCUMENT_PARSING",
+      "status": "PASSED",
+      "score": 100,
+      "details": {
+        "parseFailures": [],
+        "documentFormat": "DOCX"
+      },
+      "message": "Document parsing completed.",
+      "createdAt": "2026-07-14T13:27:34.003Z"
+    },
+    {
+      "id": "cmrkorkoj000tnb8ix9liogu0",
+      "reviewId": "cmrkorhby000pnb8izlckbmxn",
+      "checkType": "CONTENT_EXTRACTION",
+      "status": "PASSED",
+      "score": 100,
+      "details": {
+        "wordCount": 51,
+        "characterCount": 394
+      },
+      "message": "Content extraction completed.",
+      "createdAt": "2026-07-14T13:27:34.003Z"
+    },
+    {
+      "id": "cmrkorkoj000unb8ibkijoztb",
+      "reviewId": "cmrkorhby000pnb8izlckbmxn",
+      "checkType": "ASSIGNMENT_RULES_VALIDATION",
+      "status": "PASSED",
+      "score": 100,
+      "details": {
+        "complianceScore": 100,
+        "missingSections": [],
+        "missingReferences": 0,
+        "missingRules": [],
+        "citationStyleExpected": "APA"
+      },
+      "message": "Assignment rule validation completed.",
+      "createdAt": "2026-07-14T13:27:34.003Z"
+    },
+    {
+      "id": "cmrkorkoj000vnb8ikbcrresf",
+      "reviewId": "cmrkorhby000pnb8izlckbmxn",
+      "checkType": "SIMILARITY_ANALYSIS",
+      "status": "PASSED",
+      "score": 0,
+      "details": {
+        "matches": 0
+      },
+      "message": "Similarity analysis completed.",
+      "createdAt": "2026-07-14T13:27:34.003Z"
+    },
+    {
+      "id": "cmrkorkoj000wnb8im6pj9c00",
+      "reviewId": "cmrkorhby000pnb8izlckbmxn",
+      "checkType": "AI_WRITING_RISK",
+      "status": "PASSED",
+      "score": 50,
+      "details": {
+        "level": "INCONCLUSIVE",
+        "score": 50,
+        "evidence": "Document length is too small for reliable writing-risk analysis."
+      },
+      "message": "Writing-risk analysis completed.",
+      "createdAt": "2026-07-14T13:27:34.003Z"
+    },
+    {
+      "id": "cmrkorkoj000xnb8ioj6zm117",
+      "reviewId": "cmrkorhby000pnb8izlckbmxn",
+      "checkType": "GRAMMAR_REVIEW",
+      "status": "PASSED",
+      "score": 81,
+      "details": {
+        "readability": 5.1,
+        "passiveVoiceCount": 2
+      },
+      "message": "Grammar review completed.",
+      "createdAt": "2026-07-14T13:27:34.003Z"
+    },
+    {
+      "id": "cmrkorkoj000ynb8iq0c4y6bi",
+      "reviewId": "cmrkorhby000pnb8izlckbmxn",
+      "checkType": "CITATION_VALIDATION",
+      "status": "PASSED",
+      "score": 64,
+      "details": {
+        "referenceCount": 11,
+        "inlineCitationCount": 0,
+        "style": null
+      },
+      "message": "Citation validation completed.",
+      "createdAt": "2026-07-14T13:27:34.003Z"
+    },
+    {
+      "id": "cmrkorkoj000znb8ih4bo3a36",
+      "reviewId": "cmrkorhby000pnb8izlckbmxn",
+      "checkType": "RUBRIC_AI_EVALUATION",
+      "status": "PASSED",
+      "score": 100,
+      "details": {
+        "suggestions": 2
+      },
+      "message": "Rubric suggestions generated.",
+      "createdAt": "2026-07-14T13:27:34.003Z"
+    },
+    {
+      "id": "cmrkorkoj0010nb8i8w8dmt90",
+      "reviewId": "cmrkorhby000pnb8izlckbmxn",
+      "checkType": "RECOMMENDATION_GENERATION",
+      "status": "PASSED",
+      "score": 72,
+      "details": {
+        "code": "APPROVE_SUGGESTED",
+        "confidence": 0.72,
+        "rationale": "Submission is structurally compliant and ready for teacher grading review."
+      },
+      "message": "Recommendation generated.",
+      "createdAt": "2026-07-14T13:27:34.003Z"
+    }
+  ]
+}

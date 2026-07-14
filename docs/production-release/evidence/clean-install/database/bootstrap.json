@@ -1,0 +1,17 @@
+{
+  "departmentId": "cmrko0z5z0000agwsq0ixqf1m",
+  "users": {
+    "admin": {
+      "email": "release.verify.admin@examflow.pro",
+      "role": "SUPER_ADMIN"
+    },
+    "teacher": {
+      "email": "release.verify.teacher@examflow.pro",
+      "role": "TEACHER"
+    },
+    "student": {
+      "email": "release.verify.student@examflow.pro",
+      "role": "STUDENT"
+    }
+  }
+}

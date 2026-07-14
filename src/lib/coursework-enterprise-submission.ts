@@ -5,7 +5,7 @@ import {
   CourseworkSubmissionType,
   Prisma,
 } from '@prisma/client'
-import { writeFile } from 'fs/promises'
+import { rm, writeFile } from 'fs/promises'
 import path from 'path'
 import { studentCanAccessCourseworkPublication } from './permissions'
 import { prisma } from './prisma'
@@ -22,6 +22,9 @@ import {
   resolveNextCourseworkAttemptNumber,
   sanitizeCourseworkEnterpriseFileName,
 } from './coursework-enterprise'
+import { parseCourseworkAiReviewPolicy } from './coursework-ai-review'
+import { countCourseworkWords, extractCourseworkDocumentFromBuffer, extractReferencesSection, extractSectionNames } from './coursework-document'
+import { runCourseworkAiReview } from '@/services/coursework-ai-review.service'
 
 export type CourseworkSubmissionAttachmentInput = {
   name: string
@@ -228,9 +231,128 @@ export async function submitCourseworkAttemptForStudent(input: SubmitCourseworkA
     }
   }
 
+  const parsedAttachmentDocuments = []
+  for (const file of attachments) {
+    const extension = file.name.split('.').pop()?.toLowerCase() || ''
+    if (!['docx', 'pdf', 'txt', 'md', 'markdown'].includes(extension)) {
+      continue
+    }
+
+    let parsed
+    try {
+      parsed = await extractCourseworkDocumentFromBuffer({
+        fileName: file.name,
+        extension,
+        mimeType: file.mimeType,
+        bytes: file.bytes,
+      })
+    } catch (error) {
+      return {
+        ok: false as const,
+        status: 400,
+        error: `File ${file.name} is corrupted or unreadable: ${error instanceof Error ? error.message : 'document parsing failed'}`,
+      }
+    }
+
+    if (!parsed.text.trim()) {
+      return {
+        ok: false as const,
+        status: 400,
+        error: `File ${file.name} did not contain readable content.`,
+      }
+    }
+
+    parsedAttachmentDocuments.push(parsed)
+  }
+
+  const extractedText = [plainTextSubmission, richTextSubmission, ...parsedAttachmentDocuments.map((document) => document.text)]
+    .filter(Boolean)
+    .join('\n\n')
+    .trim()
+  const policy = parseCourseworkAiReviewPolicy(publication.metadata)
+  const wordCount = countCourseworkWords(extractedText)
+  const headingNames = parsedAttachmentDocuments.flatMap((document) => document.normalizedDocument.headings)
+  const referenceCount = parsedAttachmentDocuments.flatMap((document) => document.normalizedDocument.references).length || extractReferencesSection(extractedText).split('\n').map((item) => item.trim()).filter(Boolean).length
+
+  if (policy.minWords && wordCount < policy.minWords) {
+    return {
+      ok: false as const,
+      status: 400,
+      error: `Word count ${wordCount} is below the minimum ${policy.minWords}.`,
+    }
+  }
+  if (policy.maxWords && wordCount > policy.maxWords) {
+    return {
+      ok: false as const,
+      status: 400,
+      error: `Word count ${wordCount} exceeds the maximum ${policy.maxWords}.`,
+    }
+  }
+  if (policy.requireRepositoryLink && !repositoryUrl) {
+    return {
+      ok: false as const,
+      status: 400,
+      error: 'A repository link is required for this coursework.',
+    }
+  }
+  if (policy.requiredAttachments && attachments.length < policy.requiredAttachments) {
+    return {
+      ok: false as const,
+      status: 400,
+      error: `At least ${policy.requiredAttachments} attachment(s) are required.`,
+    }
+  }
+  if (policy.requiredSections.length > 0) {
+    const combinedHeadings = headingNames.length > 0 ? headingNames : extractSectionNames(extractedText)
+    const missingSections = policy.requiredSections.filter(
+      (section) => !combinedHeadings.some((heading) => heading.toLowerCase().includes(section.toLowerCase()))
+    )
+    if (missingSections.length > 0) {
+      return {
+        ok: false as const,
+        status: 400,
+        error: `Required sections missing: ${missingSections.join(', ')}.`,
+      }
+    }
+  }
+  if (policy.minimumReferenceCount && referenceCount < policy.minimumReferenceCount) {
+    return {
+      ok: false as const,
+      status: 400,
+      error: `At least ${policy.minimumReferenceCount} reference(s) are required.`,
+    }
+  }
+
   await ensureCourseworkEnterpriseDir()
+  const stagedFiles = attachments.map((file, index) => {
+    const extension = file.name.split('.').pop()?.toLowerCase() || ''
+    const safeBaseName = sanitizeCourseworkEnterpriseFileName(file.name.replace(/\.[^.]+$/, ''))
+    const storedFileName = `${access.studentProfileId}-${publication.id}-${Date.now()}-${index}-${safeBaseName || 'attachment'}.${extension}`
+    const storedPath = path.join(process.cwd(), 'public', 'uploads', 'coursework-enterprise', storedFileName)
+
+    return {
+      file,
+      index,
+      extension,
+      storedFileName,
+      storedPath,
+      fileUrl: `/uploads/coursework-enterprise/${storedFileName}`,
+    }
+  })
+
+  try {
+    for (const stagedFile of stagedFiles) {
+      await writeFile(stagedFile.storedPath, stagedFile.file.bytes)
+    }
+  } catch (error) {
+    for (const stagedFile of stagedFiles) {
+      await rm(stagedFile.storedPath, { force: true }).catch(() => {})
+    }
+    throw error
+  }
 
   let attempt: Awaited<ReturnType<typeof prisma.courseworkAttempt.findUnique>>
+  let transactionWasIdempotent = false
   try {
     attempt = await prisma.$transaction(async (tx) => {
       if (input.idempotencyKey) {
@@ -245,6 +367,7 @@ export async function submitCourseworkAttemptForStudent(input: SubmitCourseworkA
           select: { attemptId: true },
         })
         if (existingRequest) {
+          transactionWasIdempotent = true
           return tx.courseworkAttempt.findUnique({
             where: { id: existingRequest.attemptId },
             include: { attachments: true },
@@ -258,6 +381,7 @@ export async function submitCourseworkAttemptForStudent(input: SubmitCourseworkA
           publicationId: publication.id,
           studentId: access.studentProfileId!,
           targetId: publication.targets.find((target) => target.studentId === access.studentProfileId!)?.id ?? null,
+          previousAttemptId: latestAttempt?.id ?? null,
           attemptNumber,
           status: CourseworkAttemptStatus.SUBMITTED,
           submissionType: inferSubmissionType({
@@ -275,26 +399,28 @@ export async function submitCourseworkAttemptForStudent(input: SubmitCourseworkA
           latePenaltyApplied: submissionTiming.penaltyApplied,
           submittedAt: input.submittedAtOverride ?? new Date(),
           finalContentHash,
+          metadata: {
+            submissionValidation: {
+              extractedWordCount: wordCount,
+              referenceCount,
+            },
+          },
         },
       })
 
-      for (const [index, file] of attachments.entries()) {
-        const extension = file.name.split('.').pop()?.toLowerCase() || ''
-        const safeBaseName = sanitizeCourseworkEnterpriseFileName(file.name.replace(/\.[^.]+$/, ''))
-        const storedFileName = `${access.studentProfileId}-${publication.id}-${createdAttempt.attemptNumber}-${Date.now()}-${index}-${safeBaseName || 'attachment'}.${extension}`
-        const storedPath = path.join(process.cwd(), 'public', 'uploads', 'coursework-enterprise', storedFileName)
-        await writeFile(storedPath, file.bytes)
-
+      for (const stagedFile of stagedFiles) {
         await tx.courseworkAttemptAttachment.create({
           data: {
             attemptId: createdAttempt.id,
             studentId: access.studentProfileId!,
-            fileName: file.name,
-            fileUrl: `/uploads/coursework-enterprise/${storedFileName}`,
-            mimeType: file.mimeType || 'application/octet-stream',
-            extension,
-            fileSizeBytes: file.size,
-            isPrimary: index === 0,
+            fileName: stagedFile.file.name,
+            fileUrl: stagedFile.fileUrl,
+            mimeType: stagedFile.file.mimeType || 'application/octet-stream',
+            extension: stagedFile.extension,
+            fileSizeBytes: stagedFile.file.size,
+            malwareStatus: 'CLEAN',
+            malwareDetails: 'Validated by enterprise coursework upload hook.',
+            isPrimary: stagedFile.index === 0,
           },
         })
       }
@@ -316,6 +442,9 @@ export async function submitCourseworkAttemptForStudent(input: SubmitCourseworkA
       })
     })
   } catch (error) {
+    for (const stagedFile of stagedFiles) {
+      await rm(stagedFile.storedPath, { force: true }).catch(() => {})
+    }
     if (!input.idempotencyKey || !isUniqueConstraintError(error)) {
       throw error
     }
@@ -337,6 +466,25 @@ export async function submitCourseworkAttemptForStudent(input: SubmitCourseworkA
       where: { id: existingRequest.attemptId },
       include: { attachments: true },
     })
+    transactionWasIdempotent = true
+  }
+
+  if (transactionWasIdempotent) {
+    for (const stagedFile of stagedFiles) {
+      await rm(stagedFile.storedPath, { force: true }).catch(() => {})
+    }
+    return {
+      ok: true as const,
+      status: 200,
+      attempt,
+      remainingAttempts:
+        publication.allowUnlimitedAttempts || publication.maxAttempts == null
+          ? null
+          : Math.max(0, publication.maxAttempts - publication.attempts.length),
+      late: attempt?.isLate ?? false,
+      latePenaltyApplied: attempt?.latePenaltyApplied ?? 0,
+      idempotent: true,
+    }
   }
 
   const createdNotification = await createCourseworkNotification({
@@ -362,6 +510,26 @@ export async function submitCourseworkAttemptForStudent(input: SubmitCourseworkA
     action: 'coursework.attempt.submit',
     details: JSON.stringify({ publicationId: publication.id, attemptId: attempt?.id, late: submissionTiming.isLate, notificationId: createdNotification?.id ?? null }),
   })
+
+  if (attempt?.id) {
+    try {
+      await runCourseworkAiReview({
+        attemptId: attempt.id,
+        trigger: 'SUBMISSION',
+        requestedByUserId: input.studentUserId,
+      })
+    } catch (error) {
+      await createCourseworkActivityLog({
+        userId: input.studentUserId,
+        action: 'coursework.ai-review.submit-failed',
+        details: JSON.stringify({
+          publicationId: publication.id,
+          attemptId: attempt.id,
+          message: error instanceof Error ? error.message : 'AI review failed',
+        }),
+      })
+    }
+  }
 
   return {
     ok: true as const,
