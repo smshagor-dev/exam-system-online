@@ -34,6 +34,7 @@ const englishMessages = {
   'common.records': 'records',
   'common.no_items_yet': 'No items yet',
   'common.actions': 'Actions',
+  'common.system_name': 'Exam Management System',
   'common.system_language': 'System Language',
   'common.system_languages': 'System Languages',
   'common.system_language_name': 'System Language',
@@ -123,10 +124,9 @@ const englishMessages = {
   'auth.register.group': 'Group *',
   'auth.register.language': 'Department Language *',
   'auth.register.semester': 'Semester *',
-  'auth.register.subject': 'Subject *',
   'auth.register.additional_info': 'Additional Information',
   'auth.register.additional_info_help': 'These extra details were added dynamically by your department admin.',
-  'auth.register.scope_help': 'Your dashboard and exam access will use your selected course, department, academic year, group, department language, semester, and subject. Your site language is separate and can be changed from the language switcher.',
+  'auth.register.scope_help': 'Your dashboard and exam access will use your selected course, department, academic year, group, department language, and semester. Subject enrollment is assigned separately by the academic team. Your site language is separate and can be changed from the language switcher.',
   'auth.register.create_account': 'Create Account',
   'auth.register.registering': 'Registering...',
   'auth.register.already_have_account': 'Already have an account?',
@@ -205,7 +205,8 @@ const englishMessages = {
   'admin.dashboard.date': 'Date',
   'admin.dashboard.status': 'Status',
   'admin.dashboard.no_exams': 'No exams available yet.',
-  'admin.dashboard.all_rights': 'В© 2024 Exam Management System. All rights reserved.',
+  'admin.dashboard.all_rights': '© 2024 Exam Management System. All rights reserved.',
+  'admin.dashboard.all_rights_short': 'All rights reserved.',
 } as const
 
 export function getSourceMessages() {
@@ -234,7 +235,7 @@ export const defaultMessages: Record<SupportedLocale, Record<string, string>> = 
     'auth.register.course_msc': 'Магистр наук',
     'auth.register.course_help': 'Выберите курс, который соответствует вашей программе.',
     'auth.register.language': 'Язык отдела *',
-    'auth.register.scope_help': 'Ваша панель и доступ к экзаменам будут использовать выбранные курс, отдел, учебный год, группу, язык отдела, семестр и предмет. Язык сайта настраивается отдельно через переключатель языка.',
+    'auth.register.scope_help': 'Ваша панель и доступ к экзаменам будут использовать выбранные курс, отдел, учебный год, группу, язык отдела и семестр. Предметы назначаются отдельно учебной администрацией. Язык сайта настраивается отдельно через переключатель языка.',
     'admin.system_language.title': 'Язык системы',
     'admin.system_language.current_language': 'Текущий язык',
     'admin.system_language.translation_key': 'Английский ключ',
@@ -242,5 +243,6 @@ export const defaultMessages: Record<SupportedLocale, Record<string, string>> = 
     'admin.system_language.locale': 'Локаль',
     'admin.system_language.available_entries': 'Доступные варианты перевода',
     'admin.system_language.reference_key': 'Системный ключ',
+    'admin.dashboard.all_rights_short': 'Все права защищены.',
   },
 }
