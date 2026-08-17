@@ -91,6 +91,11 @@ export default function TeacherShell({ children, user, branding }: TeacherShellP
     },
   ]
 
+  const activeHref = navSections
+    .flatMap((section) => section.items)
+    .filter((item) => pathname === item.href || pathname.startsWith(`${item.href}/`))
+    .sort((a, b) => b.href.length - a.href.length)[0]?.href
+
   useEffect(() => {
     setSidebarOpen(false)
     setProfileOpen(false)
@@ -162,8 +167,7 @@ export default function TeacherShell({ children, user, branding }: TeacherShellP
                   <div className="space-y-1.5">
                     {section.items.map((item) => {
                       const Icon = item.icon
-                      const isCourseworkOverview = item.href === '/teacher/coursework'
-                      const isActive = pathname === item.href || (!isCourseworkOverview && pathname.startsWith(`${item.href}/`))
+                      const isActive = activeHref === item.href
 
                       return (
                         <Link
