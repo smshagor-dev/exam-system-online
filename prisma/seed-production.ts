@@ -45,6 +45,33 @@ async function upsertDemoUser(account: (typeof DEMO_USERS)[number]) {
   })
 }
 
+function dashboardForRole(role: UserRole) {
+  if (role === UserRole.TEACHER) return '/teacher/dashboard'
+  if (role === UserRole.STUDENT) return '/student/dashboard'
+  return '/admin/dashboard'
+}
+
+async function ensureDemoNotification(userId: string, role: UserRole) {
+  const title = 'Welcome to ExamFlow Pro'
+  const existing = await prisma.notification.findFirst({
+    where: { userId, title },
+    select: { id: true },
+  })
+
+  if (existing) return
+
+  await prisma.notification.create({
+    data: {
+      userId,
+      title,
+      message: 'Your demo account is ready. Notifications for exams, results, coursework, and account activity will appear here.',
+      type: 'info',
+      link: dashboardForRole(role),
+      isRead: false,
+    },
+  })
+}
+
 async function runProductionSeed() {
   if (process.env.ALLOW_TEST_FIXTURES === 'true') {
     throw new Error('Production seed refuses to run while test fixture flags are enabled.')
@@ -102,7 +129,9 @@ async function runProductionSeed() {
 
   const demoUsers = new Map<string, Awaited<ReturnType<typeof upsertDemoUser>>>()
   for (const account of DEMO_USERS) {
-    demoUsers.set(account.email, await upsertDemoUser(account))
+    const user = await upsertDemoUser(account)
+    demoUsers.set(account.email, user)
+    await ensureDemoNotification(user.id, account.role)
   }
 
   const departmentAdmin = demoUsers.get('cse.admin@examflow.pro')
@@ -140,6 +169,7 @@ async function runProductionSeed() {
   console.log('Production seed completed successfully.')
   console.log(`System languages ensured: ${SYSTEM_LANGUAGES.length}`)
   console.log(`Demo users ensured: ${DEMO_USERS.length}`)
+  console.log('Demo notification center initialized.')
   console.log('Demo credentials: admin@examflow.pro / Admin@123, teacher.john@examflow.pro / Teacher@123, alice@student.examflow.pro / Student@123')
 }
 
