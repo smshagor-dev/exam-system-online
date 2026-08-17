@@ -72,7 +72,7 @@ export default function AdminDashboardView({
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="min-w-0">
             <h1 className="text-xl font-semibold text-slate-950 sm:text-2xl">
-              {t('admin.dashboard.welcome', 'Welcome back')}, {adminName}!
+              {t('admin.dashboard.welcome', 'Welcome back, Admin!')}
             </h1>
             <p className="mt-1 max-w-2xl text-sm leading-6 text-slate-500">
               {t('admin.dashboard.subtitle', "Here's what's happening with your exam management system today.")}
