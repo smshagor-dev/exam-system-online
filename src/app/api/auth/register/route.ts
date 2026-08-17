@@ -8,36 +8,46 @@ import { createEmailVerificationCode, sendOneTimeCodeEmail } from '@/lib/auth-co
 import { getActiveRegistrationFields, validateRegistrationFieldResponses } from '@/lib/registration-fields'
 import { isEmailVerificationRequired } from '@/lib/system-settings'
 
+const publicRegistrationSchema = registerStudentSchema.omit({ subjectId: true })
+
 export async function POST(req: NextRequest) {
   const body = await req.json()
-  const parsed = registerStudentSchema.safeParse(body)
+  const parsed = publicRegistrationSchema.safeParse(body)
 
   if (!parsed.success) {
     return NextResponse.json({ error: parsed.error.flatten().fieldErrors }, { status: 400 })
   }
 
-  const { email, password, name, course, departmentId, subjectId, languageId, groupId, academicYearId, semesterId, phone, customFieldResponses } = parsed.data
+  const {
+    email,
+    password,
+    name,
+    course,
+    departmentId,
+    languageId,
+    groupId,
+    academicYearId,
+    semesterId,
+    phone,
+    customFieldResponses,
+  } = parsed.data
 
   const rateLimitResponse = await enforceAuthRateLimit({
     req,
     action: 'register',
     accountKey: email,
   })
-  if (rateLimitResponse) {
-    return rateLimitResponse
-  }
+  if (rateLimitResponse) return rateLimitResponse
 
-  // Check email uniqueness
   const existing = await prisma.user.findUnique({ where: { email } })
   if (existing) return NextResponse.json({ error: 'Email already registered' }, { status: 409 })
 
-  const [dept, year, group, language, semester, subject] = await Promise.all([
+  const [dept, year, group, language, semester] = await Promise.all([
     prisma.department.findFirst({ where: { id: departmentId, isActive: true } }),
     prisma.academicYear.findFirst({ where: { id: academicYearId, isActive: true } }),
     prisma.group.findFirst({ where: { id: groupId, academicYearId, isActive: true } }),
     prisma.language.findFirst({ where: { id: languageId, isActive: true } }),
     prisma.semester.findFirst({ where: { id: semesterId, isActive: true } }),
-    prisma.subject.findFirst({ where: { id: subjectId, departmentId, isActive: true } }),
   ])
 
   if (!dept) return NextResponse.json({ error: 'Invalid department' }, { status: 400 })
@@ -45,7 +55,6 @@ export async function POST(req: NextRequest) {
   if (!group) return NextResponse.json({ error: 'Group does not belong to this academic year' }, { status: 400 })
   if (!language) return NextResponse.json({ error: 'Invalid department language' }, { status: 400 })
   if (!semester) return NextResponse.json({ error: 'Invalid semester' }, { status: 400 })
-  if (!subject) return NextResponse.json({ error: 'Subject does not belong to this department' }, { status: 400 })
 
   const dynamicFields = await getActiveRegistrationFields(departmentId)
   const dynamicValidation = validateRegistrationFieldResponses(dynamicFields, customFieldResponses)
@@ -55,7 +64,6 @@ export async function POST(req: NextRequest) {
 
   const hashedPwd = await bcrypt.hash(password, 12)
   const requireVerification = await isEmailVerificationRequired()
-
   const verification = requireVerification ? createEmailVerificationCode() : null
 
   const user = await prisma.user.create({
@@ -73,16 +81,11 @@ export async function POST(req: NextRequest) {
           phone,
           customFieldResponses: {
             course,
+            academicYearId,
+            groupId,
+            languageId,
+            semesterId,
             ...(customFieldResponses ?? {}),
-          },
-          subjects: {
-            create: {
-              subjectId,
-              languageId,
-              groupId,
-              academicYearId,
-              semesterId,
-            },
           },
         },
       },
