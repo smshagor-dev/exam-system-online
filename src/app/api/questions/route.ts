@@ -8,12 +8,18 @@ import {
   serializeKeywords,
 } from '@/lib/academic-content'
 import { createQuestionSchema } from '@/lib/validators'
-import { Prisma, UserRole } from '@prisma/client'
+import { Prisma, QuestionType, UserRole } from '@prisma/client'
 import { teacherCanAccessAssignment } from '@/lib/permissions'
 import {
   buildAccessibleTeachingScopeFilters,
   getTeacherOfferingAssignments,
 } from '@/lib/teacher-assignment'
+import {
+  embedQuestionCodeMetadata,
+  isSupportedCodeLanguage,
+  type QuestionAnswerMode,
+  type QuestionContentMode,
+} from '@/lib/question-code'
 
 export async function GET(req: NextRequest) {
   const session = await auth()
@@ -72,10 +78,58 @@ export async function POST(req: NextRequest) {
   }
 
   const body = await req.json()
-  const parsed = createQuestionSchema.safeParse(body)
+  const {
+    contentMode: rawContentMode,
+    codeContent: rawCodeContent,
+    codeLanguage: rawCodeLanguage,
+    answerMode: rawAnswerMode,
+    answerCodeLanguage: rawAnswerCodeLanguage,
+    answerStarterCode: rawAnswerStarterCode,
+    ...legacyBody
+  } = body
+
+  const parsed = createQuestionSchema.safeParse(legacyBody)
   if (!parsed.success) {
     return NextResponse.json({ error: parsed.error.flatten().fieldErrors }, { status: 400 })
   }
+
+  const contentMode: QuestionContentMode = rawContentMode === 'TEXT_CODE' ? 'TEXT_CODE' : 'TEXT'
+  const answerMode: QuestionAnswerMode = rawAnswerMode === 'CODE' ? 'CODE' : 'TEXT'
+  const codeContent = typeof rawCodeContent === 'string' ? rawCodeContent : ''
+  const codeLanguage = typeof rawCodeLanguage === 'string' ? rawCodeLanguage : 'cpp'
+  const answerCodeLanguage =
+    typeof rawAnswerCodeLanguage === 'string' ? rawAnswerCodeLanguage : codeLanguage
+  const answerStarterCode = typeof rawAnswerStarterCode === 'string' ? rawAnswerStarterCode : ''
+
+  if (contentMode === 'TEXT_CODE') {
+    if (!codeContent.trim()) {
+      return NextResponse.json({ error: 'Code content is required when question content mode is Text + Code' }, { status: 400 })
+    }
+    if (!isSupportedCodeLanguage(codeLanguage)) {
+      return NextResponse.json({ error: 'Unsupported question code language' }, { status: 400 })
+    }
+  }
+
+  if (answerMode === 'CODE') {
+    if (parsed.data.type !== QuestionType.WRITTEN_ANSWER) {
+      return NextResponse.json(
+        { error: 'Code answers require the Written Answer question type' },
+        { status: 400 }
+      )
+    }
+    if (!isSupportedCodeLanguage(answerCodeLanguage)) {
+      return NextResponse.json({ error: 'Unsupported answer code language' }, { status: 400 })
+    }
+  }
+
+  const storedText = embedQuestionCodeMetadata(parsed.data.text, {
+    contentMode,
+    codeContent: contentMode === 'TEXT_CODE' ? codeContent : '',
+    codeLanguage,
+    answerMode,
+    answerCodeLanguage,
+    answerStarterCode: answerMode === 'CODE' ? answerStarterCode : '',
+  })
 
   const ctx = { userId: session.user.id, role: session.user.role }
   const canAccess = await teacherCanAccessAssignment(ctx, {
@@ -100,6 +154,7 @@ export async function POST(req: NextRequest) {
     const createdQuestion = await tx.question.create({
       data: {
         ...questionData,
+        text: storedText,
         teacherId: profile.id,
         isActive: false,
         keywords: serializeKeywords(keywords),
@@ -124,7 +179,7 @@ export async function POST(req: NextRequest) {
     const mergedTranslations = dedupeTranslations([
       {
         languageId: parsed.data.languageId,
-        text: parsed.data.text,
+        text: storedText,
         expectedAnswer: parsed.data.expectedAnswer ?? null,
         explanation: parsed.data.explanation ?? null,
         keywords: serializeKeywords(parsed.data.keywords),
@@ -176,9 +231,7 @@ export async function POST(req: NextRequest) {
         .filter((value): value is { questionOptionId: string; languageId: string; text: string } => Boolean(value))
 
       if (optionTranslations.length > 0) {
-        await tx.questionOptionTranslation.createMany({
-          data: optionTranslations,
-        })
+        await tx.questionOptionTranslation.createMany({ data: optionTranslations })
       }
     }
 

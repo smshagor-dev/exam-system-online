@@ -4,6 +4,8 @@ import { use, useCallback, useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { getSocket, type AppSocket } from '@/lib/socket'
 import RichTextContent from '@/components/editor/RichTextContent'
+import { CodeBlock, CodeEditor } from '@/components/code/CodeEditor'
+import { parseQuestionCodeMetadata } from '@/lib/question-code'
 
 type Question = {
   id: string
@@ -13,6 +15,12 @@ type Question = {
   marks: number
   options: { id: string; text: string }[]
   orderIndex: number
+  contentMode: 'TEXT' | 'TEXT_CODE'
+  codeContent: string
+  codeLanguage: string
+  answerMode: 'TEXT' | 'CODE'
+  answerCodeLanguage: string
+  answerStarterCode: string
 }
 
 type ExamQuestionPayload = {
@@ -79,16 +87,10 @@ function getAttemptQueueStorageKey(examId: string) {
 }
 
 function readPersistedAttemptQueue(examId: string): QueuedAnswer[] {
-  if (typeof window === 'undefined') {
-    return []
-  }
-
+  if (typeof window === 'undefined') return []
   try {
     const raw = window.sessionStorage.getItem(getAttemptQueueStorageKey(examId))
-    if (!raw) {
-      return []
-    }
-
+    if (!raw) return []
     const restoredQueue = JSON.parse(raw) as QueuedAnswer[]
     return Array.isArray(restoredQueue) ? restoredQueue : []
   } catch {
@@ -105,6 +107,31 @@ function buildQueuedAnswerState(queued: QueuedAnswer[]): AnswerState {
     }
     return result
   }, {})
+}
+
+function toQuestion(entry: {
+  id: string
+  examQuestionId: string
+  orderIndex: number
+  marks: number
+  question: { id: string; type: string; text: string; options: Array<{ id: string; text: string }> }
+}): Question {
+  const parsed = parseQuestionCodeMetadata(entry.question.text)
+  return {
+    id: entry.id,
+    examQuestionId: entry.examQuestionId,
+    text: parsed.text,
+    type: entry.question.type,
+    marks: entry.marks,
+    options: entry.question.options.map((option) => ({ id: option.id, text: option.text })),
+    orderIndex: entry.orderIndex,
+    contentMode: parsed.metadata.contentMode,
+    codeContent: parsed.metadata.codeContent,
+    codeLanguage: parsed.metadata.codeLanguage,
+    answerMode: parsed.metadata.answerMode,
+    answerCodeLanguage: parsed.metadata.answerCodeLanguage,
+    answerStarterCode: parsed.metadata.answerStarterCode,
+  }
 }
 
 export default function ExamAttemptPage({ params }: Props) {
@@ -130,93 +157,59 @@ export default function ExamAttemptPage({ params }: Props) {
   const [errorMsg, setErrorMsg] = useState('')
   const [submitting, setSubmitting] = useState(false)
   const [showSubmitConfirm, setShowSubmitConfirm] = useState(false)
-  const [warningInfo, setWarningInfo] = useState<{
-    count: number
-    max: number
-    message: string
-    type: string
-  } | null>(null)
+  const [warningInfo, setWarningInfo] = useState<{ count: number; max: number; message: string; type: string } | null>(null)
   const [devtoolsOpen, setDevtoolsOpen] = useState(false)
   const [connectionState, setConnectionState] = useState<'online' | 'reconnecting' | 'offline'>('online')
   const [pendingQueueSize, setPendingQueueSize] = useState(restoredQueue.length)
   const [attemptSummary, setAttemptSummary] = useState<ExamData['attemptSummary']>(null)
 
-  const persistQueue = useCallback(
-    (queued: QueuedAnswer[]) => {
-      if (typeof window === 'undefined') {
-        return
-      }
-
-      if (queued.length === 0) {
-        window.sessionStorage.removeItem(getAttemptQueueStorageKey(examId))
-        return
-      }
-
-      window.sessionStorage.setItem(getAttemptQueueStorageKey(examId), JSON.stringify(queued))
-    },
-    [examId]
-  )
+  const persistQueue = useCallback((queued: QueuedAnswer[]) => {
+    if (typeof window === 'undefined') return
+    if (queued.length === 0) {
+      window.sessionStorage.removeItem(getAttemptQueueStorageKey(examId))
+      return
+    }
+    window.sessionStorage.setItem(getAttemptQueueStorageKey(examId), JSON.stringify(queued))
+  }, [examId])
 
   const clearExamIntervals = useCallback(() => {
-    if (autoSaveRef.current) {
-      clearInterval(autoSaveRef.current)
-      autoSaveRef.current = null
-    }
-    if (countdownRef.current) {
-      clearInterval(countdownRef.current)
-      countdownRef.current = null
-    }
-    if (heartbeatRef.current) {
-      clearInterval(heartbeatRef.current)
-      heartbeatRef.current = null
-    }
+    if (autoSaveRef.current) clearInterval(autoSaveRef.current)
+    if (countdownRef.current) clearInterval(countdownRef.current)
+    if (heartbeatRef.current) clearInterval(heartbeatRef.current)
+    autoSaveRef.current = null
+    countdownRef.current = null
+    heartbeatRef.current = null
   }, [])
 
-  useEffect(() => {
-    answersRef.current = answers
-  }, [answers])
-
-  useEffect(() => {
-    attemptIdRef.current = attemptId
-  }, [attemptId])
-
-  useEffect(() => {
-    return () => {
-      clearExamIntervals()
-      socketRef.current?.disconnect()
-    }
+  useEffect(() => { answersRef.current = answers }, [answers])
+  useEffect(() => { attemptIdRef.current = attemptId }, [attemptId])
+  useEffect(() => () => {
+    clearExamIntervals()
+    socketRef.current?.disconnect()
   }, [clearExamIntervals])
 
   useEffect(() => {
     fetch(`/api/exams/${examId}?withQuestions=true`)
       .then(async (response) => {
-        if (!response.ok) {
-          throw new Error('Exam not found')
-        }
+        if (!response.ok) throw new Error('Exam not found')
         return (await response.json()) as ExamData
       })
       .then((data) => {
         setExam(data)
         setAttemptSummary(data.attemptSummary ?? null)
-        // Before the attempt starts these are hidden placeholders. The complete
-        // randomized question set replaces them from the immutable snapshot.
         setQuestions(
-          data.questions
-            .slice()
-            .sort((left, right) => left.orderIndex - right.orderIndex)
-            .map((entry) => ({
+          data.questions.slice().sort((a, b) => a.orderIndex - b.orderIndex).map((entry) =>
+            toQuestion({
               id: entry.question.id,
               examQuestionId: entry.id,
-              text: entry.question.text,
-              type: entry.question.type,
-              marks: entry.marks,
-              options: entry.question.options,
               orderIndex: entry.orderIndex,
-            }))
+              marks: entry.marks,
+              question: entry.question,
+            })
+          )
         )
         setStatus(
-          data.attemptSummary?.status === 'SUBMITTED' ||
-            data.attemptSummary?.status === 'AUTO_SUBMITTED'
+          data.attemptSummary?.status === 'SUBMITTED' || data.attemptSummary?.status === 'AUTO_SUBMITTED'
             ? 'submitted'
             : 'ready'
         )
@@ -230,65 +223,46 @@ export default function ExamAttemptPage({ params }: Props) {
   useEffect(() => {
     const handleVisibility = () => {
       if (document.hidden && status === 'started' && attemptId) {
-        socketRef.current?.emit('student:security_violation', {
-          attemptId,
-          type: 'TAB_SWITCH',
-        })
+        socketRef.current?.emit('student:security_violation', { attemptId, type: 'TAB_SWITCH' })
       }
     }
-
     document.addEventListener('visibilitychange', handleVisibility)
     return () => document.removeEventListener('visibilitychange', handleVisibility)
   }, [attemptId, status])
 
   useEffect(() => {
     if (status !== 'started' || !attemptId) return
-
     const reportViolation = (type: WarningType) => {
       socketRef.current?.emit('student:security_violation', { attemptId, type })
     }
-
     const handleCopyLike = (event: ClipboardEvent) => {
       event.preventDefault()
       reportViolation('COPY')
     }
-
     const handleKeyDown = (event: KeyboardEvent) => {
       const isPrintScreen = event.key === 'PrintScreen'
       const isScreenshotCombo =
         (event.ctrlKey && event.shiftKey && (event.key === 'S' || event.key === 's')) ||
         (event.metaKey && event.shiftKey && ['3', '4', '5', 'S', 's'].includes(event.key))
-
-      if (isPrintScreen || isScreenshotCombo) {
-        reportViolation('SCREENSHOT')
-      }
+      if (isPrintScreen || isScreenshotCombo) reportViolation('SCREENSHOT')
     }
-
     const detectDevtools = () => {
-      const widthGap = window.outerWidth - window.innerWidth
-      const heightGap = window.outerHeight - window.innerHeight
-      const detected = widthGap > 160 || heightGap > 160
+      const detected = window.outerWidth - window.innerWidth > 160 || window.outerHeight - window.innerHeight > 160
       setDevtoolsOpen(detected)
-
       if (detected && !warningsRef.current.devtoolsOpen) {
         warningsRef.current.devtoolsOpen = true
         reportViolation('DEVTOOLS')
       }
-
-      if (!detected) {
-        warningsRef.current.devtoolsOpen = false
-      }
+      if (!detected) warningsRef.current.devtoolsOpen = false
     }
 
     document.addEventListener('copy', handleCopyLike)
     document.addEventListener('cut', handleCopyLike)
     document.addEventListener('paste', handleCopyLike)
     window.addEventListener('keydown', handleKeyDown)
-
     const interval = setInterval(detectDevtools, 1500)
     detectDevtools()
     const warningState = warningsRef.current
-
     return () => {
       document.removeEventListener('copy', handleCopyLike)
       document.removeEventListener('cut', handleCopyLike)
@@ -303,16 +277,11 @@ export default function ExamAttemptPage({ params }: Props) {
   const flushQueue = useCallback(() => {
     const socket = socketRef.current
     const activeAttemptId = attemptIdRef.current
-
-    if (!socket || !socket.connected || !activeAttemptId || queueRef.current.length === 0) {
-      return
-    }
-
+    if (!socket || !socket.connected || !activeAttemptId || queueRef.current.length === 0) return
     const queued = [...queueRef.current]
     queueRef.current = []
-    persistQueue(queueRef.current)
+    persistQueue([])
     setPendingQueueSize(0)
-
     queued.forEach((item) => {
       socket.emit('student:save_answer', {
         attemptId: activeAttemptId,
@@ -325,191 +294,114 @@ export default function ExamAttemptPage({ params }: Props) {
     })
   }, [persistQueue])
 
-  const queueAnswer = useCallback(
-    (questionId: string, data: { selectedOption?: string; answerText?: string }) => {
-      queueRef.current = [
-        ...queueRef.current.filter((item) => item.questionId !== questionId),
-        {
-          questionId,
-          selectedOption: data.selectedOption,
-          answerText: data.answerText,
-          requestId: crypto.randomUUID(),
-          clientSavedAtMs: Date.now(),
-        },
-      ]
-      persistQueue(queueRef.current)
-      setPendingQueueSize(queueRef.current.length)
-    },
-    [persistQueue]
-  )
+  const queueAnswer = useCallback((questionId: string, data: { selectedOption?: string; answerText?: string }) => {
+    queueRef.current = [
+      ...queueRef.current.filter((item) => item.questionId !== questionId),
+      { questionId, ...data, requestId: crypto.randomUUID(), clientSavedAtMs: Date.now() },
+    ]
+    persistQueue(queueRef.current)
+    setPendingQueueSize(queueRef.current.length)
+  }, [persistQueue])
 
-  const startAutoSave = useCallback(
-    (_socket: AppSocket, _activeAttemptId: string) => {
-      if (autoSaveRef.current) {
-        clearInterval(autoSaveRef.current)
+  const startAutoSave = useCallback(() => {
+    if (autoSaveRef.current) clearInterval(autoSaveRef.current)
+    autoSaveRef.current = setInterval(() => {
+      Object.entries(answersRef.current).forEach(([questionId, answer]) => queueAnswer(questionId, answer))
+      flushQueue()
+    }, 5000)
+  }, [flushQueue, queueAnswer])
+
+  const startLocalCountdown = useCallback((socket: AppSocket, activeAttemptId: string, initialRemainingSeconds: number) => {
+    if (countdownRef.current) clearInterval(countdownRef.current)
+    let remaining = initialRemainingSeconds
+    countdownRef.current = setInterval(() => {
+      remaining -= 1
+      setRemainingSeconds(Math.max(0, remaining))
+      if (remaining <= 0) {
+        if (countdownRef.current) clearInterval(countdownRef.current)
+        countdownRef.current = null
+        socket.emit('student:submit_exam', { attemptId: activeAttemptId })
       }
-
-      autoSaveRef.current = setInterval(() => {
-        Object.entries(answersRef.current).forEach(([questionId, answer]) => {
-          queueAnswer(questionId, answer)
-        })
-        flushQueue()
-      }, 5000)
-    },
-    [flushQueue, queueAnswer]
-  )
-
-  const startLocalCountdown = useCallback(
-    (socket: AppSocket, activeAttemptId: string, initialRemainingSeconds: number) => {
-      if (countdownRef.current) {
-        clearInterval(countdownRef.current)
-      }
-
-      let remaining = initialRemainingSeconds
-      countdownRef.current = setInterval(() => {
-        remaining -= 1
-        setRemainingSeconds(Math.max(0, remaining))
-
-        if (remaining <= 0) {
-          if (countdownRef.current) {
-            clearInterval(countdownRef.current)
-            countdownRef.current = null
-          }
-          socket.emit('student:submit_exam', { attemptId: activeAttemptId })
-        }
-      }, 1000)
-    },
-    []
-  )
-
-  const startHeartbeat = useCallback(
-    (socket: AppSocket, activeAttemptId: string) => {
-      if (heartbeatRef.current) {
-        clearInterval(heartbeatRef.current)
-      }
-
-      heartbeatRef.current = setInterval(() => {
-        if (!socket.connected) {
-          return
-        }
-
-        socket.emit('student:heartbeat', {
-          examId,
-          attemptId: activeAttemptId,
-          pendingQueueSize: queueRef.current.length,
-          reconnectToken: reconnectTokenRef.current ?? undefined,
-        })
-        flushQueue()
-      }, 10000)
-    },
-    [examId, flushQueue]
-  )
-
-  const applySnapshot = useCallback((snapshot: AttemptSnapshotPayload) => {
-    setExam((current) =>
-      current
-        ? {
-            ...current,
-            title: snapshot.exam.title,
-            duration: snapshot.exam.duration,
-            totalMarks: snapshot.exam.totalMarks,
-            instructions: snapshot.exam.instructions,
-            subject: snapshot.exam.subject,
-          }
-        : {
-            title: snapshot.exam.title,
-            duration: snapshot.exam.duration,
-            totalMarks: snapshot.exam.totalMarks,
-            instructions: snapshot.exam.instructions,
-            subject: snapshot.exam.subject,
-            questions: [],
-          }
-    )
-
-    // The whole randomized set is loaded at once and rendered together below.
-    setQuestions(
-      snapshot.questions
-        .slice()
-        .sort((left, right) => left.orderIndex - right.orderIndex)
-        .map((entry) => ({
-          id: entry.id,
-          examQuestionId: entry.examQuestionId,
-          text: entry.question.text,
-          type: entry.question.type,
-          marks: entry.marks,
-          options: entry.question.options.map((option) => ({
-            id: option.id,
-            text: option.text,
-          })),
-          orderIndex: entry.orderIndex,
-        }))
-    )
+    }, 1000)
   }, [])
 
-  const applyRecoveredAttempt = useCallback(
-    (payload: {
-      attemptId: string | null
-      status: 'NOT_STARTED' | 'IN_PROGRESS' | 'SUBMITTED' | 'AUTO_SUBMITTED' | 'TIMED_OUT'
-      remainingSeconds: number | null
-      reconnectToken?: string
-      snapshot?: AttemptSnapshotPayload
-      answers?: Array<{
-        questionId: string
-        selectedOption: string | null
-        answerText: string | null
-        savedAtMs: number
-      }>
-    }) => {
-      if (payload.snapshot) {
-        applySnapshot(payload.snapshot)
-      }
+  const startHeartbeat = useCallback((socket: AppSocket, activeAttemptId: string) => {
+    if (heartbeatRef.current) clearInterval(heartbeatRef.current)
+    heartbeatRef.current = setInterval(() => {
+      if (!socket.connected) return
+      socket.emit('student:heartbeat', {
+        examId,
+        attemptId: activeAttemptId,
+        pendingQueueSize: queueRef.current.length,
+        reconnectToken: reconnectTokenRef.current ?? undefined,
+      })
+      flushQueue()
+    }, 10000)
+  }, [examId, flushQueue])
 
-      const serverAnswers = Object.fromEntries(
-        (payload.answers ?? []).map((entry) => [
-          entry.questionId,
-          {
-            selectedOption: entry.selectedOption ?? undefined,
-            answerText: entry.answerText ?? undefined,
-          },
-        ])
-      )
-      const queuedAnswers = buildQueuedAnswerState(queueRef.current)
-      const mergedAnswers = { ...serverAnswers, ...queuedAnswers }
-      answersRef.current = mergedAnswers
-      setAnswers(mergedAnswers)
+  const applySnapshot = useCallback((snapshot: AttemptSnapshotPayload) => {
+    setExam((current) => current ? {
+      ...current,
+      title: snapshot.exam.title,
+      duration: snapshot.exam.duration,
+      totalMarks: snapshot.exam.totalMarks,
+      instructions: snapshot.exam.instructions,
+      subject: snapshot.exam.subject,
+    } : {
+      title: snapshot.exam.title,
+      duration: snapshot.exam.duration,
+      totalMarks: snapshot.exam.totalMarks,
+      instructions: snapshot.exam.instructions,
+      subject: snapshot.exam.subject,
+      questions: [],
+    })
+    setQuestions(snapshot.questions.slice().sort((a, b) => a.orderIndex - b.orderIndex).map(toQuestion))
+  }, [])
 
-      if (payload.attemptId) {
-        attemptIdRef.current = payload.attemptId
-        setAttemptId(payload.attemptId)
-      }
-      reconnectTokenRef.current = payload.reconnectToken ?? reconnectTokenRef.current
+  const applyRecoveredAttempt = useCallback((payload: {
+    attemptId: string | null
+    status: 'NOT_STARTED' | 'IN_PROGRESS' | 'SUBMITTED' | 'AUTO_SUBMITTED' | 'TIMED_OUT'
+    remainingSeconds: number | null
+    reconnectToken?: string
+    snapshot?: AttemptSnapshotPayload
+    answers?: Array<{ questionId: string; selectedOption: string | null; answerText: string | null; savedAtMs: number }>
+  }) => {
+    if (payload.snapshot) applySnapshot(payload.snapshot)
+    const serverAnswers = Object.fromEntries((payload.answers ?? []).map((entry) => [entry.questionId, {
+      selectedOption: entry.selectedOption ?? undefined,
+      answerText: entry.answerText ?? undefined,
+    }]))
+    const mergedAnswers = { ...serverAnswers, ...buildQueuedAnswerState(queueRef.current) }
+    answersRef.current = mergedAnswers
+    setAnswers(mergedAnswers)
 
-      if (payload.status === 'IN_PROGRESS' && payload.attemptId && payload.remainingSeconds !== null) {
-        setRemainingSeconds(payload.remainingSeconds)
-        setStatus('started')
-        if (socketRef.current) {
-          startAutoSave(socketRef.current, payload.attemptId)
-          startLocalCountdown(socketRef.current, payload.attemptId, payload.remainingSeconds)
-          startHeartbeat(socketRef.current, payload.attemptId)
-          setTimeout(() => flushQueue(), 0)
-        }
-      } else if (payload.status === 'SUBMITTED' || payload.status === 'AUTO_SUBMITTED') {
-        clearExamIntervals()
-        setStatus('submitted')
+    if (payload.attemptId) {
+      attemptIdRef.current = payload.attemptId
+      setAttemptId(payload.attemptId)
+    }
+    reconnectTokenRef.current = payload.reconnectToken ?? reconnectTokenRef.current
+
+    if (payload.status === 'IN_PROGRESS' && payload.attemptId && payload.remainingSeconds !== null) {
+      setRemainingSeconds(payload.remainingSeconds)
+      setStatus('started')
+      if (socketRef.current) {
+        startAutoSave()
+        startLocalCountdown(socketRef.current, payload.attemptId, payload.remainingSeconds)
+        startHeartbeat(socketRef.current, payload.attemptId)
+        setTimeout(() => flushQueue(), 0)
       }
-    },
-    [applySnapshot, clearExamIntervals, flushQueue, startAutoSave, startHeartbeat, startLocalCountdown]
-  )
+    } else if (payload.status === 'SUBMITTED' || payload.status === 'AUTO_SUBMITTED') {
+      clearExamIntervals()
+      setStatus('submitted')
+    }
+  }, [applySnapshot, clearExamIntervals, flushQueue, startAutoSave, startHeartbeat, startLocalCountdown])
 
   const startExam = useCallback(async () => {
     try {
       const tokenResponse = await fetch('/api/socket/token')
-      if (!tokenResponse.ok) {
-        throw new Error('Could not authenticate exam connection')
-      }
+      if (!tokenResponse.ok) throw new Error('Could not authenticate exam connection')
       const { token } = (await tokenResponse.json()) as { token: string }
       const socket = getSocket(token)
-
       socketRef.current = socket
       socket.removeAllListeners()
       setConnectionState(socket.connected ? 'online' : 'reconnecting')
@@ -519,80 +411,40 @@ export default function ExamAttemptPage({ params }: Props) {
         socket.emit('student:join_exam', { examId })
         setTimeout(() => flushQueue(), 0)
       })
-
-      socket.on('disconnect', () => {
-        setConnectionState('reconnecting')
-      })
-
-      socket.on('connect_error', () => {
-        setConnectionState('offline')
-      })
-
+      socket.on('disconnect', () => setConnectionState('reconnecting'))
+      socket.on('connect_error', () => setConnectionState('offline'))
       socket.on('exam:joined', (data) => {
-        if (!data.attemptId) {
-          socket.emit('student:start_attempt', { examId })
-        }
+        if (!data.attemptId) socket.emit('student:start_attempt', { examId })
       })
-
-      socket.on('exam:attempt_started', (data) => {
-        applyRecoveredAttempt({
-          attemptId: data.attemptId,
-          status: 'IN_PROGRESS',
-          remainingSeconds: data.remainingSeconds,
-          reconnectToken: data.reconnectToken,
-          snapshot: data.snapshot,
-          answers: data.answers,
-        })
-      })
-
-      socket.on('exam:attempt_state', (data) => {
-        applyRecoveredAttempt(data)
-      })
-
+      socket.on('exam:attempt_started', (data) => applyRecoveredAttempt({
+        attemptId: data.attemptId,
+        status: 'IN_PROGRESS',
+        remainingSeconds: data.remainingSeconds,
+        reconnectToken: data.reconnectToken,
+        snapshot: data.snapshot,
+        answers: data.answers,
+      }))
+      socket.on('exam:attempt_state', (data) => applyRecoveredAttempt(data))
       socket.on('exam:timer_update', (data) => {
-        if (data.examId === examId && attemptIdRef.current) {
-          setRemainingSeconds(data.remaining)
-        }
+        if (data.examId === examId && attemptIdRef.current) setRemainingSeconds(data.remaining)
       })
-
       socket.on('exam:auto_submitted', (data) => {
         if (data.examId !== examId) return
-        clearExamIntervals()
-        setStatus('submitted')
+        clearExamIntervals(); setStatus('submitted')
       })
-
       socket.on('exam:ended', (data) => {
         if (data.examId !== examId) return
-        clearExamIntervals()
-        setStatus('submitted')
+        clearExamIntervals(); setStatus('submitted')
       })
-
       socket.on('exam:warning_issued', (data) => {
         if (data.examId !== examId) return
-        setWarningInfo({
-          count: data.warningCount,
-          max: data.maxWarnings,
-          message: data.message,
-          type: data.type,
-        })
+        setWarningInfo({ count: data.warningCount, max: data.maxWarnings, message: data.message, type: data.type })
       })
+      socket.on('exam:heartbeat_ack', () => { setConnectionState('online'); flushQueue() })
+      socket.on('error', (data) => { clearExamIntervals(); setStatus('error'); setErrorMsg(data.message) })
 
-      socket.on('exam:heartbeat_ack', () => {
-        setConnectionState('online')
-        flushQueue()
-      })
-
-      socket.on('error', (data) => {
-        clearExamIntervals()
-        setStatus('error')
-        setErrorMsg(data.message)
-      })
-
-      if (!socket.connected) {
-        socket.connect()
-      } else {
-        socket.emit('student:join_exam', { examId })
-      }
+      if (!socket.connected) socket.connect()
+      else socket.emit('student:join_exam', { examId })
     } catch (error) {
       setStatus('error')
       setErrorMsg(error instanceof Error ? error.message : 'Failed to connect to exam server')
@@ -600,38 +452,25 @@ export default function ExamAttemptPage({ params }: Props) {
   }, [applyRecoveredAttempt, clearExamIntervals, examId, flushQueue])
 
   useEffect(() => {
-    if (status !== 'ready') return
-
-    if (attemptSummary?.status === 'IN_PROGRESS') {
-      const timer = window.setTimeout(() => {
-        void startExam()
-      }, 0)
-      return () => window.clearTimeout(timer)
-    }
+    if (status !== 'ready' || attemptSummary?.status !== 'IN_PROGRESS') return
+    const timer = window.setTimeout(() => void startExam(), 0)
+    return () => window.clearTimeout(timer)
   }, [attemptSummary, startExam, status])
 
-  const saveAnswer = useCallback(
-    (questionId: string, data: { selectedOption?: string; answerText?: string }) => {
-      setAnswers((current) => {
-        const next = { ...current, [questionId]: data }
-        answersRef.current = next
-        return next
-      })
-      queueAnswer(questionId, data)
-      if (attemptIdRef.current && socketRef.current?.connected) {
-        flushQueue()
-      }
-    },
-    [flushQueue, queueAnswer]
-  )
+  const saveAnswer = useCallback((questionId: string, data: { selectedOption?: string; answerText?: string }) => {
+    setAnswers((current) => {
+      const next = { ...current, [questionId]: data }
+      answersRef.current = next
+      return next
+    })
+    queueAnswer(questionId, data)
+    if (attemptIdRef.current && socketRef.current?.connected) flushQueue()
+  }, [flushQueue, queueAnswer])
 
   const handleSubmit = async () => {
     if (!attemptId || submitting) return
-
     setSubmitting(true)
-    Object.entries(answersRef.current).forEach(([questionId, answer]) => {
-      queueAnswer(questionId, answer)
-    })
+    Object.entries(answersRef.current).forEach(([questionId, answer]) => queueAnswer(questionId, answer))
     flushQueue()
     socketRef.current?.emit('student:submit_exam', { attemptId })
     clearExamIntervals()
@@ -643,65 +482,24 @@ export default function ExamAttemptPage({ params }: Props) {
     const hours = Math.floor(seconds / 3600)
     const minutes = Math.floor((seconds % 3600) / 60)
     const remaining = seconds % 60
-
-    if (hours > 0) {
-      return `${hours}:${String(minutes).padStart(2, '0')}:${String(remaining).padStart(2, '0')}`
-    }
-    return `${String(minutes).padStart(2, '0')}:${String(remaining).padStart(2, '0')}`
+    return hours > 0
+      ? `${hours}:${String(minutes).padStart(2, '0')}:${String(remaining).padStart(2, '0')}`
+      : `${String(minutes).padStart(2, '0')}:${String(remaining).padStart(2, '0')}`
   }
 
   const hasAnswer = (questionId: string) => {
     const answer = answers[questionId]
     return Boolean(answer?.selectedOption || answer?.answerText?.trim())
   }
-
   const isWarning = remainingSeconds !== null && remainingSeconds < 300
   const isCritical = remainingSeconds !== null && remainingSeconds < 60
   const answeredCount = questions.filter((question) => hasAnswer(question.id)).length
 
-  if (status === 'loading') {
-    return (
-      <div className="flex min-h-screen items-center justify-center">
-        <div className="text-center">
-          <div className="mx-auto mb-4 h-10 w-10 animate-spin rounded-full border-4 border-blue-600 border-t-transparent" />
-          <p className="text-gray-500">Loading exam...</p>
-        </div>
-      </div>
-    )
-  }
+  if (status === 'loading') return <div className="flex min-h-screen items-center justify-center"><div className="text-center"><div className="mx-auto mb-4 h-10 w-10 animate-spin rounded-full border-4 border-blue-600 border-t-transparent" /><p className="text-gray-500">Loading exam...</p></div></div>
 
-  if (status === 'error') {
-    return (
-      <div className="mx-auto mt-20 max-w-md text-center">
-        <div className="mb-4 text-5xl">X</div>
-        <h2 className="mb-2 text-xl font-bold text-gray-900">Cannot Access Exam</h2>
-        <p className="mb-6 text-gray-500">{errorMsg}</p>
-        <button
-          onClick={() => router.push('/student/exams')}
-          className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
-        >
-          Back to Exams
-        </button>
-      </div>
-    )
-  }
+  if (status === 'error') return <div className="mx-auto mt-20 max-w-md text-center"><div className="mb-4 text-5xl">X</div><h2 className="mb-2 text-xl font-bold text-gray-900">Cannot Access Exam</h2><p className="mb-6 text-gray-500">{errorMsg}</p><button onClick={() => router.push('/student/exams')} className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700">Back to Exams</button></div>
 
-  if (status === 'submitted') {
-    return (
-      <div className="mx-auto mt-20 max-w-md text-center">
-        <div className="mb-4 text-6xl">OK</div>
-        <h2 className="mb-2 text-2xl font-bold text-gray-900">Exam Submitted!</h2>
-        <p className="mb-2 text-gray-500">Your answers have been saved and submitted successfully.</p>
-        <p className="mb-6 text-sm text-gray-400">You&apos;ll be notified when results are published.</p>
-        <button
-          onClick={() => router.push('/student/dashboard')}
-          className="rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white hover:bg-blue-700"
-        >
-          Back to Dashboard
-        </button>
-      </div>
-    )
-  }
+  if (status === 'submitted') return <div className="mx-auto mt-20 max-w-md text-center"><div className="mb-4 text-6xl">OK</div><h2 className="mb-2 text-2xl font-bold text-gray-900">Exam Submitted!</h2><p className="mb-2 text-gray-500">Your answers have been saved and submitted successfully.</p><p className="mb-6 text-sm text-gray-400">You&apos;ll be notified when results are published.</p><button onClick={() => router.push('/student/dashboard')} className="rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white hover:bg-blue-700">Back to Dashboard</button></div>
 
   if (status === 'ready') {
     return (
@@ -710,34 +508,13 @@ export default function ExamAttemptPage({ params }: Props) {
           <h1 className="mb-2 text-2xl font-bold text-gray-900">{exam?.title}</h1>
           <p className="mb-6 text-gray-500">{exam?.subject?.name}</p>
           <div className="mb-6 grid grid-cols-3 gap-4">
-            <div className="rounded-xl bg-gray-50 p-4">
-              <p className="text-xl font-bold text-gray-900">{exam?.duration}</p>
-              <p className="text-xs text-gray-500">Minutes</p>
-            </div>
-            <div className="rounded-xl bg-gray-50 p-4">
-              <p className="text-xl font-bold text-gray-900">{questions.length}</p>
-              <p className="text-xs text-gray-500">Questions</p>
-            </div>
-            <div className="rounded-xl bg-gray-50 p-4">
-              <p className="text-xl font-bold text-gray-900">{exam?.totalMarks}</p>
-              <p className="text-xs text-gray-500">Total Marks</p>
-            </div>
+            <div className="rounded-xl bg-gray-50 p-4"><p className="text-xl font-bold text-gray-900">{exam?.duration}</p><p className="text-xs text-gray-500">Minutes</p></div>
+            <div className="rounded-xl bg-gray-50 p-4"><p className="text-xl font-bold text-gray-900">{questions.length}</p><p className="text-xs text-gray-500">Questions</p></div>
+            <div className="rounded-xl bg-gray-50 p-4"><p className="text-xl font-bold text-gray-900">{exam?.totalMarks}</p><p className="text-xs text-gray-500">Total Marks</p></div>
           </div>
-          {exam?.instructions && (
-            <div className="mb-6 rounded-xl bg-blue-50 p-4 text-left">
-              <p className="mb-1 text-sm font-semibold text-blue-900">Instructions:</p>
-              <p className="whitespace-pre-line text-sm text-blue-800">{exam.instructions}</p>
-            </div>
-          )}
-          <p className="mb-4 text-sm text-gray-500">
-            After you start, your complete randomized question set will be loaded once and locked to this attempt.
-          </p>
-          <button
-            onClick={startExam}
-            className="w-full rounded-xl bg-green-600 py-3 text-lg font-semibold text-white transition hover:bg-green-700"
-          >
-            Start Exam
-          </button>
+          {exam?.instructions && <div className="mb-6 rounded-xl bg-blue-50 p-4 text-left"><p className="mb-1 text-sm font-semibold text-blue-900">Instructions:</p><p className="whitespace-pre-line text-sm text-blue-800">{exam.instructions}</p></div>}
+          <p className="mb-4 text-sm text-gray-500">After you start, your complete randomized question set will be loaded once and locked to this attempt.</p>
+          <button onClick={startExam} className="w-full rounded-xl bg-green-600 py-3 text-lg font-semibold text-white transition hover:bg-green-700">Start Exam</button>
         </div>
       </div>
     )
@@ -745,195 +522,63 @@ export default function ExamAttemptPage({ params }: Props) {
 
   return (
     <div className="mx-auto max-w-4xl space-y-5 pb-16">
-      {devtoolsOpen && status === 'started' && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950 p-6 text-center text-white">
-          <div>
-            <h2 className="text-2xl font-bold">Exam Locked</h2>
-            <p className="mt-2 text-sm text-slate-200">
-              Developer tools detected. Close them to continue the exam.
-            </p>
-          </div>
-        </div>
-      )}
+      {devtoolsOpen && status === 'started' && <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950 p-6 text-center text-white"><div><h2 className="text-2xl font-bold">Exam Locked</h2><p className="mt-2 text-sm text-slate-200">Developer tools detected. Close them to continue the exam.</p></div></div>}
 
       <div className="sticky top-2 z-30 flex items-center justify-between rounded-xl border border-gray-200 bg-white/95 p-4 shadow-sm backdrop-blur">
         <div>
           <p className="text-sm font-semibold text-gray-900">{exam?.title}</p>
-          <p className="text-xs text-gray-500">
-            {answeredCount}/{questions.length} answered · All {questions.length} questions loaded
-          </p>
-          {(connectionState !== 'online' || pendingQueueSize > 0) && (
-            <p className="mt-1 text-xs text-orange-600">
-              {connectionState === 'online'
-                ? `${pendingQueueSize} answer update${pendingQueueSize === 1 ? '' : 's'} syncing`
-                : connectionState === 'reconnecting'
-                  ? 'Connection lost, trying to recover your attempt'
-                  : 'Offline mode active, changes will replay after reconnect'}
-            </p>
-          )}
+          <p className="text-xs text-gray-500">{answeredCount}/{questions.length} answered · All {questions.length} questions loaded</p>
+          {(connectionState !== 'online' || pendingQueueSize > 0) && <p className="mt-1 text-xs text-orange-600">{connectionState === 'online' ? `${pendingQueueSize} answer update${pendingQueueSize === 1 ? '' : 's'} syncing` : connectionState === 'reconnecting' ? 'Connection lost, trying to recover your attempt' : 'Offline mode active, changes will replay after reconnect'}</p>}
         </div>
-        <div
-          className={`rounded-xl px-4 py-2 font-mono text-xl font-bold ${
-            isCritical
-              ? 'animate-pulse bg-red-100 text-red-600'
-              : isWarning
-                ? 'bg-orange-100 text-orange-600'
-                : 'bg-gray-100 text-gray-900'
-          }`}
-        >
-          {remainingSeconds !== null ? formatTime(remainingSeconds) : '--:--'}
-        </div>
+        <div className={`rounded-xl px-4 py-2 font-mono text-xl font-bold ${isCritical ? 'animate-pulse bg-red-100 text-red-600' : isWarning ? 'bg-orange-100 text-orange-600' : 'bg-gray-100 text-gray-900'}`}>{remainingSeconds !== null ? formatTime(remainingSeconds) : '--:--'}</div>
       </div>
 
-      {warningInfo && (
-        <div
-          className={`rounded-xl border px-4 py-3 text-sm ${
-            warningInfo.count >= warningInfo.max
-              ? 'border-red-200 bg-red-50 text-red-700'
-              : 'border-orange-200 bg-orange-50 text-orange-700'
-          }`}
-        >
-          <p className="font-semibold">
-            Warning {warningInfo.count}/{warningInfo.max}
-          </p>
-          <p className="mt-1">{warningInfo.message}</p>
-        </div>
-      )}
+      {warningInfo && <div className={`rounded-xl border px-4 py-3 text-sm ${warningInfo.count >= warningInfo.max ? 'border-red-200 bg-red-50 text-red-700' : 'border-orange-200 bg-orange-50 text-orange-700'}`}><p className="font-semibold">Warning {warningInfo.count}/{warningInfo.max}</p><p className="mt-1">{warningInfo.message}</p></div>}
 
-      <div className="h-1.5 overflow-hidden rounded-full bg-gray-200">
-        <div
-          className="h-full bg-blue-600 transition-all duration-300"
-          style={{ width: `${questions.length > 0 ? (answeredCount / questions.length) * 100 : 0}%` }}
-        />
-      </div>
+      <div className="h-1.5 overflow-hidden rounded-full bg-gray-200"><div className="h-full bg-blue-600 transition-all duration-300" style={{ width: `${questions.length > 0 ? (answeredCount / questions.length) * 100 : 0}%` }} /></div>
 
       <div className="space-y-5">
         {questions.map((question, index) => (
-          <section
-            key={question.id}
-            id={`question-${index + 1}`}
-            className="scroll-mt-28 rounded-xl border border-gray-200 bg-white p-5 sm:p-6"
-          >
+          <section key={question.id} id={`question-${index + 1}`} className="scroll-mt-28 rounded-xl border border-gray-200 bg-white p-5 sm:p-6">
             <div className="mb-4 flex items-center justify-between gap-3">
-              <span className="text-sm font-semibold text-gray-600">
-                Question {index + 1} of {questions.length}
-              </span>
+              <span className="text-sm font-semibold text-gray-600">Question {index + 1} of {questions.length}</span>
               <div className="flex items-center gap-2">
-                {hasAnswer(question.id) && (
-                  <span className="rounded-full bg-green-100 px-2 py-1 text-xs font-medium text-green-700">
-                    Answered
-                  </span>
-                )}
-                <span className="rounded-full bg-blue-100 px-2 py-1 text-xs font-medium text-blue-700">
-                  {question.marks} mark{question.marks > 1 ? 's' : ''}
-                </span>
+                {question.contentMode === 'TEXT_CODE' && <span className="rounded-full bg-slate-800 px-2 py-1 text-xs font-medium text-white">CODE</span>}
+                {question.answerMode === 'CODE' && <span className="rounded-full bg-sky-100 px-2 py-1 text-xs font-medium text-sky-700">CODE ANSWER</span>}
+                {hasAnswer(question.id) && <span className="rounded-full bg-green-100 px-2 py-1 text-xs font-medium text-green-700">Answered</span>}
+                <span className="rounded-full bg-blue-100 px-2 py-1 text-xs font-medium text-blue-700">{question.marks} mark{question.marks > 1 ? 's' : ''}</span>
               </div>
             </div>
 
-            <RichTextContent
-              html={question.text}
-              className="rich-text-content mb-5 font-medium text-gray-900"
-            />
+            <RichTextContent html={question.text} className="rich-text-content mb-5 font-medium text-gray-900" />
+            {question.contentMode === 'TEXT_CODE' && question.codeContent && <div className="mb-5"><CodeBlock code={question.codeContent} language={question.codeLanguage} label="Question Code" /></div>}
 
-            {(question.type === 'MCQ' || question.type === 'TRUE_FALSE') && (
-              <div className="space-y-3">
-                {question.options.map((option) => {
+            {question.answerMode === 'CODE' ? (
+              <CodeEditor
+                value={answers[question.id]?.answerText ?? question.answerStarterCode}
+                onChange={(answerText) => saveAnswer(question.id, { answerText })}
+                language={question.answerCodeLanguage}
+                label="Your Code Answer"
+                placeholder="Write your code answer here..."
+                minHeight={340}
+              />
+            ) : (
+              <>
+                {(question.type === 'MCQ' || question.type === 'TRUE_FALSE') && <div className="space-y-3">{question.options.map((option) => {
                   const isSelected = answers[question.id]?.selectedOption === option.id
-                  return (
-                    <label
-                      key={option.id}
-                      className={`flex cursor-pointer items-center gap-3 rounded-xl border-2 p-4 transition ${
-                        isSelected
-                          ? 'border-blue-500 bg-blue-50'
-                          : 'border-gray-200 hover:border-gray-300'
-                      }`}
-                    >
-                      <input
-                        type="radio"
-                        name={`q-${question.id}`}
-                        checked={isSelected}
-                        onChange={() => saveAnswer(question.id, { selectedOption: option.id })}
-                        className="h-4 w-4 text-blue-600"
-                      />
-                      <span className="text-sm text-gray-900">{option.text}</span>
-                    </label>
-                  )
-                })}
-              </div>
-            )}
-
-            {question.type === 'SHORT_ANSWER' && (
-              <input
-                type="text"
-                value={answers[question.id]?.answerText ?? ''}
-                onChange={(event) => saveAnswer(question.id, { answerText: event.target.value })}
-                className="w-full rounded-xl border-2 border-gray-200 px-4 py-3 text-sm text-gray-900 outline-none transition focus:border-blue-500"
-                placeholder="Type your answer here..."
-              />
-            )}
-
-            {question.type === 'WRITTEN_ANSWER' && (
-              <textarea
-                value={answers[question.id]?.answerText ?? ''}
-                onChange={(event) => saveAnswer(question.id, { answerText: event.target.value })}
-                className="w-full resize-y rounded-xl border-2 border-gray-200 px-4 py-3 text-sm text-gray-900 outline-none transition focus:border-blue-500"
-                rows={8}
-                placeholder="Write your detailed answer here..."
-              />
+                  return <label key={option.id} className={`flex cursor-pointer items-center gap-3 rounded-xl border-2 p-4 transition ${isSelected ? 'border-blue-500 bg-blue-50' : 'border-gray-200 hover:border-gray-300'}`}><input type="radio" name={`q-${question.id}`} checked={isSelected} onChange={() => saveAnswer(question.id, { selectedOption: option.id })} className="h-4 w-4 text-blue-600" /><span className="text-sm text-gray-900">{option.text}</span></label>
+                })}</div>}
+                {question.type === 'SHORT_ANSWER' && <input type="text" value={answers[question.id]?.answerText ?? ''} onChange={(event) => saveAnswer(question.id, { answerText: event.target.value })} className="w-full rounded-xl border-2 border-gray-200 px-4 py-3 text-sm text-gray-900 outline-none transition focus:border-blue-500" placeholder="Type your answer here..." />}
+                {question.type === 'WRITTEN_ANSWER' && <textarea value={answers[question.id]?.answerText ?? ''} onChange={(event) => saveAnswer(question.id, { answerText: event.target.value })} className="w-full resize-y rounded-xl border-2 border-gray-200 px-4 py-3 text-sm text-gray-900 outline-none transition focus:border-blue-500" rows={8} placeholder="Write your detailed answer here..." />}
+              </>
             )}
           </section>
         ))}
       </div>
 
-      <div className="sticky bottom-3 z-20 rounded-xl border border-gray-200 bg-white/95 p-4 shadow-lg backdrop-blur">
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <p className="text-sm font-semibold text-gray-900">
-              {answeredCount} of {questions.length} questions answered
-            </p>
-            <p className="text-xs text-gray-500">Review any question above before final submission.</p>
-          </div>
-          <button
-            onClick={() => setShowSubmitConfirm(true)}
-            className="rounded-lg bg-green-600 px-6 py-3 text-sm font-semibold text-white hover:bg-green-700"
-          >
-            Stop and Submit
-          </button>
-        </div>
-      </div>
+      <div className="sticky bottom-3 z-20 rounded-xl border border-gray-200 bg-white/95 p-4 shadow-lg backdrop-blur"><div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"><div><p className="text-sm font-semibold text-gray-900">{answeredCount} of {questions.length} questions answered</p><p className="text-xs text-gray-500">Review any question above before final submission.</p></div><button onClick={() => setShowSubmitConfirm(true)} className="rounded-lg bg-green-600 px-6 py-3 text-sm font-semibold text-white hover:bg-green-700">Stop and Submit</button></div></div>
 
-      {showSubmitConfirm && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-          <div className="w-full max-w-sm rounded-2xl bg-white p-6 shadow-2xl">
-            <h3 className="mb-2 text-lg font-bold text-gray-900">Submit Exam?</h3>
-            <p className="mb-2 text-sm text-gray-500">
-              You have answered {answeredCount} of {questions.length} questions.
-            </p>
-            {answeredCount < questions.length && (
-              <p className="mb-4 text-sm text-orange-600">
-                {questions.length - answeredCount} question
-                {questions.length - answeredCount > 1 ? 's' : ''} unanswered.
-              </p>
-            )}
-            <p className="mb-6 text-sm text-gray-500">This action cannot be undone.</p>
-            <div className="flex gap-3">
-              <button
-                onClick={() => setShowSubmitConfirm(false)}
-                className="flex-1 rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-              >
-                Review Answers
-              </button>
-              <button
-                onClick={handleSubmit}
-                disabled={submitting}
-                className="flex-1 rounded-lg bg-green-600 px-4 py-2 text-sm font-semibold text-white hover:bg-green-700 disabled:opacity-50"
-              >
-                {submitting ? 'Submitting...' : 'Yes, Stop and Submit'}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      {showSubmitConfirm && <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"><div className="w-full max-w-sm rounded-2xl bg-white p-6 shadow-2xl"><h3 className="mb-2 text-lg font-bold text-gray-900">Submit Exam?</h3><p className="mb-2 text-sm text-gray-500">You have answered {answeredCount} of {questions.length} questions.</p>{answeredCount < questions.length && <p className="mb-4 text-sm text-orange-600">{questions.length - answeredCount} question{questions.length - answeredCount > 1 ? 's' : ''} unanswered.</p>}<p className="mb-6 text-sm text-gray-500">This action cannot be undone.</p><div className="flex gap-3"><button onClick={() => setShowSubmitConfirm(false)} className="flex-1 rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Review Answers</button><button onClick={handleSubmit} disabled={submitting} className="flex-1 rounded-lg bg-green-600 px-4 py-2 text-sm font-semibold text-white hover:bg-green-700 disabled:opacity-50">{submitting ? 'Submitting...' : 'Yes, Stop and Submit'}</button></div></div></div>}
     </div>
   )
 }

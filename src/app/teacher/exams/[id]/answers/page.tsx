@@ -3,6 +3,8 @@
 import { use, useEffect, useState } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import RichTextContent from '@/components/editor/RichTextContent'
+import { CodeBlock } from '@/components/code/CodeEditor'
+import { parseQuestionCodeMetadata } from '@/lib/question-code'
 
 type Answer = {
   id: string
@@ -60,21 +62,20 @@ export default function AnswersReviewPage({ params }: PageProps) {
   useEffect(() => {
     if (!resultId) return
     fetch(`/api/results/${resultId}`)
-      .then((r) => r.json())
+      .then((response) => response.json())
       .then((data) => {
         setResult(data)
-        // Initialize overrides from existing teacher marks
-        const init: Record<string, { marks: number; feedback: string }> = {}
-        data.attempt.answers.forEach((a: Answer) => {
-          if (a.teacherMarks !== null) {
-            init[a.id] = { marks: a.teacherMarks, feedback: a.teacherFeedback ?? '' }
-          } else if (a.aiSuggestedMarks !== null) {
-            init[a.id] = { marks: a.aiSuggestedMarks, feedback: a.aiSuggestedFeedback ?? '' }
+        const initial: Record<string, { marks: number; feedback: string }> = {}
+        data.attempt.answers.forEach((answer: Answer) => {
+          if (answer.teacherMarks !== null) {
+            initial[answer.id] = { marks: answer.teacherMarks, feedback: answer.teacherFeedback ?? '' }
+          } else if (answer.aiSuggestedMarks !== null) {
+            initial[answer.id] = { marks: answer.aiSuggestedMarks, feedback: answer.aiSuggestedFeedback ?? '' }
           } else {
-            init[a.id] = { marks: a.marksAwarded ?? 0, feedback: '' }
+            initial[answer.id] = { marks: answer.marksAwarded ?? 0, feedback: '' }
           }
         })
-        setMarkOverrides(init)
+        setMarkOverrides(initial)
         setLoading(false)
       })
   }, [resultId])
@@ -83,7 +84,7 @@ export default function AnswersReviewPage({ params }: PageProps) {
     if (!resultId) return
     setSaving(answerId)
     try {
-      await fetch(`/api/results/${resultId}`, {
+      const response = await fetch(`/api/results/${resultId}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -93,6 +94,7 @@ export default function AnswersReviewPage({ params }: PageProps) {
           feedback: markOverrides[answerId]?.feedback ?? '',
         }),
       })
+      if (!response.ok) throw new Error('Save failed')
       setMessage({ type: 'success', text: 'Saved!' })
       setTimeout(() => setMessage(null), 2000)
     } catch {
@@ -105,12 +107,12 @@ export default function AnswersReviewPage({ params }: PageProps) {
   const publishResult = async () => {
     if (!resultId || !confirm('Publish this result? Student will be notified.')) return
     setPublishing(true)
-    const res = await fetch(`/api/results/${resultId}`, {
+    const response = await fetch(`/api/results/${resultId}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ action: 'publish' }),
     })
-    if (res.ok) {
+    if (response.ok) {
       setMessage({ type: 'success', text: 'Result published! Student notified.' })
       router.push('/teacher/reviews')
     } else {
@@ -123,19 +125,19 @@ export default function AnswersReviewPage({ params }: PageProps) {
   if (!result) return <div className="py-20 text-center text-gray-400">Result not found</div>
 
   const manualAnswers = result.attempt.answers.filter(
-    (a) => a.question.type === 'SHORT_ANSWER' || a.question.type === 'WRITTEN_ANSWER'
+    (answer) => answer.question.type === 'SHORT_ANSWER' || answer.question.type === 'WRITTEN_ANSWER'
   )
+
   return (
-    <div className="space-y-6 max-w-4xl mx-auto">
-      {/* Header */}
-      <div className="bg-white rounded-xl border border-gray-200 p-5">
+    <div className="mx-auto max-w-4xl space-y-6">
+      <div className="rounded-xl border border-gray-200 bg-white p-5">
         <div className="flex items-start justify-between">
           <div>
             <h1 className="text-xl font-bold text-gray-900">{result.exam.title}</h1>
-            <p className="text-gray-500 text-sm">{result.exam.subject.name}</p>
-            <p className="text-gray-700 text-sm mt-1">
+            <p className="text-sm text-gray-500">{result.exam.subject.name}</p>
+            <p className="mt-1 text-sm text-gray-700">
               Student: <span className="font-medium">{result.attempt.student.user.name}</span>
-              <span className="text-gray-400 ml-2">{result.attempt.student.user.email}</span>
+              <span className="ml-2 text-gray-400">{result.attempt.student.user.email}</span>
             </p>
           </div>
           <div className="text-right">
@@ -149,92 +151,76 @@ export default function AnswersReviewPage({ params }: PageProps) {
       </div>
 
       {message && (
-        <div className={`p-3 rounded-lg text-sm ${message.type === 'success' ? 'bg-green-50 border border-green-200 text-green-700' : 'bg-red-50 border border-red-200 text-red-700'}`}>
+        <div className={`rounded-lg border p-3 text-sm ${message.type === 'success' ? 'border-green-200 bg-green-50 text-green-700' : 'border-red-200 bg-red-50 text-red-700'}`}>
           {message.text}
         </div>
       )}
 
-      {/* Manual Review Section */}
       {manualAnswers.length > 0 && (
         <div className="space-y-4">
           <h2 className="font-semibold text-gray-900">Answers Requiring Review ({manualAnswers.length})</h2>
           {manualAnswers.map((answer) => {
             const override = markOverrides[answer.id] ?? { marks: 0, feedback: '' }
             const maxMarks = answer.question.marks
+            const parsedQuestion = parseQuestionCodeMetadata(answer.question.text)
+            const codeMeta = parsedQuestion.metadata
+
             return (
-              <div key={answer.id} className="bg-white rounded-xl border border-gray-200 p-5">
-                <div className="flex items-center gap-2 mb-3">
-                  <span className={`text-xs px-2 py-0.5 rounded font-medium ${answer.question.type === 'SHORT_ANSWER' ? 'bg-yellow-100 text-yellow-700' : 'bg-purple-100 text-purple-700'}`}>
+              <div key={answer.id} className="rounded-xl border border-gray-200 bg-white p-5">
+                <div className="mb-3 flex flex-wrap items-center gap-2">
+                  <span className={`rounded px-2 py-0.5 text-xs font-medium ${answer.question.type === 'SHORT_ANSWER' ? 'bg-yellow-100 text-yellow-700' : 'bg-purple-100 text-purple-700'}`}>
                     {answer.question.type.replace('_', ' ')}
                   </span>
+                  {codeMeta.contentMode === 'TEXT_CODE' && <span className="rounded bg-slate-800 px-2 py-0.5 text-xs font-medium text-white">CODE QUESTION</span>}
+                  {codeMeta.answerMode === 'CODE' && <span className="rounded bg-sky-100 px-2 py-0.5 text-xs font-medium text-sky-700">CODE ANSWER</span>}
                   <span className="text-xs text-gray-500">Max: {maxMarks} marks</span>
-                  {answer.aiSuggestedMarks !== null && (
-                    <span className="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded">
-                      AI suggests: {answer.aiSuggestedMarks}
-                    </span>
+                  {answer.aiSuggestedMarks !== null && <span className="rounded bg-blue-100 px-2 py-0.5 text-xs text-blue-700">AI suggests: {answer.aiSuggestedMarks}</span>}
+                </div>
+
+                <RichTextContent html={parsedQuestion.text} className="rich-text-content mb-3 text-gray-900" />
+                {codeMeta.contentMode === 'TEXT_CODE' && codeMeta.codeContent && (
+                  <div className="mb-4"><CodeBlock code={codeMeta.codeContent} language={codeMeta.codeLanguage} label="Question Code" /></div>
+                )}
+
+                {answer.question.expectedAnswer && (
+                  <div className="mb-3">
+                    {codeMeta.answerMode === 'CODE' ? (
+                      <CodeBlock code={answer.question.expectedAnswer} language={codeMeta.answerCodeLanguage} label="Reference / Expected Code" />
+                    ) : (
+                      <div className="rounded-lg bg-green-50 p-3">
+                        <p className="mb-1 text-xs font-semibold text-green-800">Expected Answer:</p>
+                        <p className="text-sm text-green-700">{answer.question.expectedAnswer}</p>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                <div className="mb-4">
+                  {codeMeta.answerMode === 'CODE' ? (
+                    answer.answerText ? <CodeBlock code={answer.answerText} language={codeMeta.answerCodeLanguage} label="Student Code Answer" /> : <div className="rounded-lg bg-gray-50 p-3 text-sm italic text-gray-400">No answer provided</div>
+                  ) : (
+                    <div className="rounded-lg bg-gray-50 p-3">
+                      <p className="mb-1 text-xs font-semibold text-gray-600">Student Answer:</p>
+                      <p className="whitespace-pre-wrap text-sm text-gray-900">{answer.answerText || <span className="italic text-gray-400">No answer provided</span>}</p>
+                    </div>
                   )}
                 </div>
 
-                <RichTextContent html={answer.question.text} className="rich-text-content mb-3 text-gray-900" />
+                {answer.aiSuggestedFeedback && <div className="mb-4 rounded-lg bg-blue-50 p-3"><p className="mb-1 text-xs font-semibold text-blue-800">AI Feedback Suggestion:</p><p className="text-sm text-blue-700">{answer.aiSuggestedFeedback}</p></div>}
 
-                {answer.question.expectedAnswer && (
-                  <div className="bg-green-50 rounded-lg p-3 mb-3">
-                    <p className="text-xs font-semibold text-green-800 mb-1">Expected Answer:</p>
-                    <p className="text-sm text-green-700">{answer.question.expectedAnswer}</p>
-                  </div>
-                )}
-
-                <div className="bg-gray-50 rounded-lg p-3 mb-4">
-                  <p className="text-xs font-semibold text-gray-600 mb-1">Student Answer:</p>
-                  <p className="text-sm text-gray-900">{answer.answerText || <span className="text-gray-400 italic">No answer provided</span>}</p>
-                </div>
-
-                {answer.aiSuggestedFeedback && (
-                  <div className="bg-blue-50 rounded-lg p-3 mb-4">
-                    <p className="text-xs font-semibold text-blue-800 mb-1">AI Feedback Suggestion:</p>
-                    <p className="text-sm text-blue-700">{answer.aiSuggestedFeedback}</p>
-                  </div>
-                )}
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
                   <div>
-                    <label className="block text-xs font-medium text-gray-700 mb-1">
-                      Marks Awarded (0–{maxMarks})
-                    </label>
-                    <input
-                      type="number"
-                      min={0}
-                      max={maxMarks}
-                      step={0.5}
-                      value={override.marks}
-                      onChange={(e) => setMarkOverrides((prev) => ({
-                        ...prev,
-                        [answer.id]: { ...prev[answer.id], marks: parseFloat(e.target.value) },
-                      }))}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm outline-none focus:border-blue-500"
-                    />
+                    <label className="mb-1 block text-xs font-medium text-gray-700">Marks Awarded (0–{maxMarks})</label>
+                    <input type="number" min={0} max={maxMarks} step={0.5} value={override.marks} onChange={(event) => setMarkOverrides((prev) => ({ ...prev, [answer.id]: { ...prev[answer.id], marks: Number(event.target.value) } }))} className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm outline-none focus:border-blue-500" />
                   </div>
                   <div className="md:col-span-2">
-                    <label className="block text-xs font-medium text-gray-700 mb-1">Feedback (optional)</label>
-                    <input
-                      type="text"
-                      value={override.feedback}
-                      onChange={(e) => setMarkOverrides((prev) => ({
-                        ...prev,
-                        [answer.id]: { ...prev[answer.id], feedback: e.target.value },
-                      }))}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm outline-none focus:border-blue-500"
-                      placeholder="Optional feedback for student..."
-                    />
+                    <label className="mb-1 block text-xs font-medium text-gray-700">Feedback (optional)</label>
+                    <input type="text" value={override.feedback} onChange={(event) => setMarkOverrides((prev) => ({ ...prev, [answer.id]: { ...prev[answer.id], feedback: event.target.value } }))} className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm outline-none focus:border-blue-500" placeholder="Optional feedback for student..." />
                   </div>
                 </div>
 
                 <div className="mt-3 flex justify-end">
-                  <button
-                    onClick={() => saveAnswer(answer.id)}
-                    disabled={saving === answer.id}
-                    className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 disabled:opacity-50"
-                  >
+                  <button onClick={() => saveAnswer(answer.id)} disabled={saving === answer.id} className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-50">
                     {saving === answer.id ? 'Saving...' : 'Save Marks'}
                   </button>
                 </div>
@@ -244,18 +230,10 @@ export default function AnswersReviewPage({ params }: PageProps) {
         </div>
       )}
 
-      {/* Publish */}
-      <div className="bg-white rounded-xl border border-gray-200 p-5">
-        <h2 className="font-semibold text-gray-900 mb-3">Finalize & Publish</h2>
-        <p className="text-sm text-gray-500 mb-4">
-          Once published, the student will be notified and can view their result.
-          Make sure all answers have been reviewed before publishing.
-        </p>
-        <button
-          onClick={publishResult}
-          disabled={publishing}
-          className="px-6 py-2 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 disabled:opacity-50"
-        >
+      <div className="rounded-xl border border-gray-200 bg-white p-5">
+        <h2 className="mb-3 font-semibold text-gray-900">Finalize & Publish</h2>
+        <p className="mb-4 text-sm text-gray-500">Once published, the student will be notified and can view their result. Make sure all answers have been reviewed before publishing.</p>
+        <button onClick={publishResult} disabled={publishing} className="rounded-lg bg-green-600 px-6 py-2 font-semibold text-white hover:bg-green-700 disabled:opacity-50">
           {publishing ? 'Publishing...' : 'Publish Result'}
         </button>
       </div>
