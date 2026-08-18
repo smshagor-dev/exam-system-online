@@ -5,6 +5,7 @@ import { prisma } from '@/lib/prisma'
 import { createExamSchema } from '@/lib/validators'
 import { ExamStatus, Prisma, UserRole } from '@prisma/client'
 import { getStudentExamQueryScope, teacherCanAccessAssignment } from '@/lib/permissions'
+import { getReExamVisibilityForStudent } from '@/lib/reexam-store'
 import {
   buildAccessibleTeachingScopeFilters,
   getTeacherOfferingAssignments,
@@ -58,7 +59,17 @@ export async function GET(req: NextRequest) {
     orderBy: { startTime: 'desc' },
   })
 
-  return NextResponse.json(exams.map((exam) => resolveExamTranslation(exam, exam.languageId)))
+  let visibleExams = exams
+  if (session.user.role === UserRole.STUDENT) {
+    const visibility = await getReExamVisibilityForStudent(session.user.id)
+    const allReExamIds = new Set(visibility.allReExamIds)
+    const studentReExamIds = new Set(visibility.studentReExamIds)
+    visibleExams = exams.filter(
+      (exam) => !allReExamIds.has(exam.id) || studentReExamIds.has(exam.id)
+    )
+  }
+
+  return NextResponse.json(visibleExams.map((exam) => resolveExamTranslation(exam, exam.languageId)))
 }
 
 export async function POST(req: NextRequest) {
