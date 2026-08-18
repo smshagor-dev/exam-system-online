@@ -1,5 +1,6 @@
 import { requireRole } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
+import { getReExamVisibilityForStudent } from '@/lib/reexam-store'
 import { UserRole } from '@prisma/client'
 import Link from 'next/link'
 
@@ -26,12 +27,12 @@ async function getStudentData(userId: string) {
     departmentId: profile.departmentId,
   }))
 
-  const [upcomingExams, availableExams, recentResults] = await Promise.all([
+  const [upcomingExamsRaw, availableExamsRaw, recentResults, reExamVisibility] = await Promise.all([
     orConditions.length > 0
       ? prisma.exam.findMany({
           where: { OR: orConditions, status: { in: ['SCHEDULED', 'LIVE'] }, startTime: { gt: now } },
           include: { subject: true, _count: { select: { questions: true } } },
-          take: 5,
+          take: 12,
           orderBy: { startTime: 'asc' },
         })
       : [],
@@ -52,7 +53,14 @@ async function getStudentData(userId: string) {
       take: 5,
       orderBy: { publishedAt: 'desc' },
     }),
+    getReExamVisibilityForStudent(userId),
   ])
+
+  const allReExamIds = new Set(reExamVisibility.allReExamIds)
+  const myReExamIds = new Set(reExamVisibility.studentReExamIds)
+  const canSeeExam = (examId: string) => !allReExamIds.has(examId) || myReExamIds.has(examId)
+  const upcomingExams = upcomingExamsRaw.filter((exam) => canSeeExam(exam.id)).slice(0, 5)
+  const availableExams = availableExamsRaw.filter((exam) => canSeeExam(exam.id))
 
   const currentAcademicYearNumber = profile.subjects.length > 0
     ? Math.max(...profile.subjects.map((subject) => subject.academicYear.year))

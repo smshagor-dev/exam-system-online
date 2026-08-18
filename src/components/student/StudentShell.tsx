@@ -9,7 +9,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import type { ComponentType, ReactNode } from 'react'
 import { useEffect, useState } from 'react'
-import { BarChart3, BookMarked, BookText, ChevronsUpDown, FileBadge2, FileChartColumn, Menu, ScrollText, X } from 'lucide-react'
+import { BarChart3, BookMarked, BookText, ChevronsUpDown, FileBadge2, FileChartColumn, Menu, RotateCcw, ScrollText, X } from 'lucide-react'
 
 type StudentShellProps = {
   children: ReactNode
@@ -44,6 +44,7 @@ export default function StudentShell({ children, user, branding }: StudentShellP
     { href: '/student/ebooks', label: 'Ebooks', icon: BookText },
     { href: '/student/coursework', label: 'Course Work & Report', icon: FileBadge2 },
     { href: '/student/exams', label: t('shell.my_exams', 'My Exams'), icon: ScrollText },
+    { href: '/student/re-exams', label: 'Re-exams', icon: RotateCcw },
     { href: '/student/results', label: t('shell.results', 'Results'), icon: FileChartColumn },
   ]
 

@@ -4,10 +4,15 @@ import { prisma } from '@/lib/prisma'
 import { UserRole } from '@prisma/client'
 import Link from 'next/link'
 import { getStudentExamCatalogScope } from '@/lib/permissions'
+import { getReExamVisibilityForStudent, listReExamRequestsByStudent } from '@/lib/reexam-store'
 
 export default async function StudentExamsPage() {
   const session = await requireRole(UserRole.STUDENT)
-  const { profile, blockedReason, subjectScopes } = await getStudentExamCatalogScope(session.user.id)
+  const [{ profile, blockedReason, subjectScopes }, reExamVisibility, reExamRequests] = await Promise.all([
+    getStudentExamCatalogScope(session.user.id),
+    getReExamVisibilityForStudent(session.user.id),
+    listReExamRequestsByStudent(session.user.id),
+  ])
 
   if (!profile) {
     return <div className="py-20 text-center text-gray-500">Student profile not found.</div>
@@ -38,7 +43,7 @@ export default async function StudentExamsPage() {
     )
   }
 
-  const [activeWindowExams, upcomingExams, completedExams] = await Promise.all([
+  const [activeWindowExamsRaw, upcomingExamsRaw, completedExamsRaw] = await Promise.all([
     prisma.exam.findMany({
       where: {
         OR: orConditions,
@@ -87,6 +92,24 @@ export default async function StudentExamsPage() {
     }),
   ])
 
+  const allReExamIds = new Set(reExamVisibility.allReExamIds)
+  const myReExamIds = new Set(reExamVisibility.studentReExamIds)
+  const myReExamType = new Map(
+    reExamVisibility.studentRecords
+      .filter((record) => record.reExamId)
+      .map((record) => [record.reExamId as string, record.type])
+  )
+  const requestByOriginalExam = new Map(
+    reExamRequests
+      .filter((record) => record.status === 'PENDING' || record.status === 'APPROVED')
+      .map((record) => [record.originalExamId, record])
+  )
+  const isVisibleToStudent = (examId: string) => !allReExamIds.has(examId) || myReExamIds.has(examId)
+
+  const activeWindowExams = activeWindowExamsRaw.filter((exam) => isVisibleToStudent(exam.id))
+  const upcomingExams = upcomingExamsRaw.filter((exam) => isVisibleToStudent(exam.id))
+  const completedExams = completedExamsRaw.filter((exam) => isVisibleToStudent(exam.id))
+
   const attemptMap = Object.fromEntries(
     (
       await prisma.studentExamAttempt.findMany({
@@ -113,7 +136,12 @@ export default async function StudentExamsPage() {
 
   return (
     <div className="space-y-8">
-      <h1 className="text-2xl font-bold text-gray-900">My Exams</h1>
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <h1 className="text-2xl font-bold text-gray-900">My Exams</h1>
+        <Link href="/student/re-exams" className="inline-flex w-fit rounded-xl border border-violet-200 bg-violet-50 px-4 py-2 text-sm font-semibold text-violet-700 hover:bg-violet-100">
+          Re-exam Requests
+        </Link>
+      </div>
 
       {blockedReason && (
         <div className="rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-800">
@@ -133,10 +161,17 @@ export default async function StudentExamsPage() {
             {resolvedActiveWindowExams.map((exam) => (
               <div
                 key={exam.id}
-                className="flex items-center justify-between rounded-xl border-2 border-green-300 bg-white p-5"
+                className="flex flex-col gap-4 rounded-xl border-2 border-green-300 bg-white p-5 sm:flex-row sm:items-center sm:justify-between"
               >
                 <div>
-                  <h3 className="font-semibold text-gray-900">{exam.title}</h3>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <h3 className="font-semibold text-gray-900">{exam.title}</h3>
+                    {myReExamIds.has(exam.id) && (
+                      <span className="rounded-full bg-violet-100 px-2.5 py-1 text-[11px] font-semibold text-violet-700">
+                        {(myReExamType.get(exam.id) ?? 'RETAKE').replaceAll('_', ' ')}
+                      </span>
+                    )}
+                  </div>
                   <p className="text-sm text-gray-500">
                     {exam.subject.name} · {exam._count.questions} questions · {exam.duration} min
                   </p>
@@ -154,7 +189,7 @@ export default async function StudentExamsPage() {
                   ) : (
                     <Link
                       href={`/student/exams/${exam.id}`}
-                      className="rounded-xl bg-green-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-green-700"
+                      className="inline-flex rounded-xl bg-green-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-green-700"
                     >
                       {attemptMap[exam.id] === 'IN_PROGRESS' ? 'Resume Exam ->' : 'Start Exam ->'}
                     </Link>
@@ -176,9 +211,16 @@ export default async function StudentExamsPage() {
           <div className="space-y-3">
             {resolvedUpcomingExams.map((exam) => (
               <div key={exam.id} className="rounded-xl border border-gray-200 bg-white p-5">
-                <div className="flex items-start justify-between">
+                <div className="flex items-start justify-between gap-4">
                   <div>
-                    <h3 className="font-semibold text-gray-900">{exam.title}</h3>
+                    <div className="flex flex-wrap items-center gap-2">
+                      <h3 className="font-semibold text-gray-900">{exam.title}</h3>
+                      {myReExamIds.has(exam.id) && (
+                        <span className="rounded-full bg-violet-100 px-2.5 py-1 text-[11px] font-semibold text-violet-700">
+                          {(myReExamType.get(exam.id) ?? 'RETAKE').replaceAll('_', ' ')}
+                        </span>
+                      )}
+                    </div>
                     <p className="text-sm text-gray-500">
                       {exam.subject.name} · {exam._count.questions} questions
                     </p>
@@ -205,14 +247,22 @@ export default async function StudentExamsPage() {
           <div className="space-y-3">
             {resolvedCompletedExams.map((exam) => {
               const attemptStatus = attemptMap[exam.id]
+              const reExamRequest = requestByOriginalExam.get(exam.id)
+              const isReExam = myReExamIds.has(exam.id)
+
               return (
-                <div key={exam.id} className="rounded-xl border border-gray-200 bg-white p-5 opacity-80">
-                  <div className="flex items-center justify-between">
+                <div key={exam.id} className="rounded-xl border border-gray-200 bg-white p-5 opacity-90">
+                  <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                     <div>
-                      <h3 className="font-medium text-gray-900">{exam.title}</h3>
+                      <div className="flex flex-wrap items-center gap-2">
+                        <h3 className="font-medium text-gray-900">{exam.title}</h3>
+                        {isReExam && (
+                          <span className="rounded-full bg-violet-100 px-2 py-0.5 text-[10px] font-semibold text-violet-700">Re-exam</span>
+                        )}
+                      </div>
                       <p className="text-sm text-gray-500">{exam.subject.name}</p>
                     </div>
-                    <div className="text-right">
+                    <div className="flex flex-wrap items-center gap-2 sm:justify-end">
                       {attemptStatus ? (
                         <span className="rounded-full bg-gray-100 px-2.5 py-1 text-xs font-medium text-gray-600">
                           {attemptStatus === 'SUBMITTED' || attemptStatus === 'AUTO_SUBMITTED' ? 'Submitted' : 'Attempted'}
@@ -222,10 +272,28 @@ export default async function StudentExamsPage() {
                           Missed
                         </span>
                       )}
+
+                      {!isReExam && reExamRequest?.status === 'PENDING' && (
+                        <span className="rounded-full bg-amber-100 px-2.5 py-1 text-xs font-semibold text-amber-700">Re-exam Pending</span>
+                      )}
+                      {!isReExam && reExamRequest?.status === 'APPROVED' && (
+                        <Link href="/student/re-exams" className="rounded-full bg-emerald-100 px-2.5 py-1 text-xs font-semibold text-emerald-700 hover:bg-emerald-200">
+                          Re-exam Enabled
+                        </Link>
+                      )}
+                      {!isReExam && !reExamRequest && (
+                        <Link
+                          href={`/student/re-exams?examId=${exam.id}`}
+                          className="rounded-lg border border-violet-200 bg-violet-50 px-3 py-1.5 text-xs font-semibold text-violet-700 hover:bg-violet-100"
+                        >
+                          Request Re-exam
+                        </Link>
+                      )}
+
                       {exam.status === 'RESULT_PUBLISHED' && (
                         <Link
                           href="/student/results"
-                          className="mt-1 block text-xs text-blue-600 hover:underline"
+                          className="text-xs font-medium text-blue-600 hover:underline"
                         >
                           {'View result ->'}
                         </Link>

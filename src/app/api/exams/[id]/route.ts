@@ -9,6 +9,7 @@ import { prisma } from '@/lib/prisma'
 import { UserRole } from '@prisma/client'
 import { teacherOwnsExam, studentCanAccessExam } from '@/lib/permissions'
 import { validateExamPublication } from '@/lib/phase5-translations'
+import { getReExamTargetForExam } from '@/lib/reexam-store'
 
 type RouteContext = { params: Promise<{ id: string }> }
 type ExamQuestionEntry = {
@@ -196,6 +197,11 @@ export async function PATCH(req: NextRequest, { params }: RouteContext) {
   }
 
   const body = await req.json()
+  const previousExam = await prisma.exam.findUnique({
+    where: { id },
+    select: { status: true },
+  })
+  if (!previousExam) return NextResponse.json({ error: 'Exam not found' }, { status: 404 })
 
   if (typeof body.status === 'string' && ['SCHEDULED', 'LIVE'].includes(body.status)) {
     const examForPublication = await prisma.exam.findUnique({
@@ -239,8 +245,47 @@ export async function PATCH(req: NextRequest, { params }: RouteContext) {
       where: { id },
       data: body,
     })
+
+    const reExamTarget = await getReExamTargetForExam(id)
+    if (reExamTarget) {
+      if (
+        Object.prototype.hasOwnProperty.call(body, 'title') ||
+        Object.prototype.hasOwnProperty.call(body, 'description') ||
+        Object.prototype.hasOwnProperty.call(body, 'instructions')
+      ) {
+        const primaryTranslation = await prisma.examTranslation.findFirst({
+          where: { examId: id, languageId: exam.languageId },
+          select: { id: true },
+        })
+
+        if (primaryTranslation) {
+          await prisma.examTranslation.update({
+            where: { id: primaryTranslation.id },
+            data: {
+              ...(typeof body.title === 'string' ? { title: body.title } : {}),
+              ...(Object.prototype.hasOwnProperty.call(body, 'description') ? { description: body.description ?? null } : {}),
+              ...(Object.prototype.hasOwnProperty.call(body, 'instructions') ? { instructions: body.instructions ?? null } : {}),
+            },
+          })
+        }
+      }
+
+      if (body.status === 'SCHEDULED' && previousExam.status !== 'SCHEDULED') {
+        await prisma.notification.create({
+          data: {
+            userId: reExamTarget.studentUserId,
+            title: 'Re-exam Scheduled',
+            message: `${exam.title} has been scheduled. Check My Exams for the date and time.`,
+            link: `/student/exams/${exam.id}`,
+            type: 'success',
+          },
+        })
+      }
+    }
+
     return NextResponse.json(exam)
-  } catch {
+  } catch (error) {
+    console.error('[Exam] Update failed:', error)
     return NextResponse.json({ error: 'Update failed' }, { status: 500 })
   }
 }
