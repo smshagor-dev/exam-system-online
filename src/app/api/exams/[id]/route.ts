@@ -10,10 +10,6 @@ import { UserRole } from '@prisma/client'
 import { teacherOwnsExam, studentCanAccessExam } from '@/lib/permissions'
 import { validateExamPublication } from '@/lib/phase5-translations'
 import { getReExamTargetForExam } from '@/lib/reexam-store'
-import {
-  formatUniqueQuestionCapacityError,
-  validateUniqueQuestionCapacity,
-} from '@/lib/exam-question-allocation'
 
 type RouteContext = { params: Promise<{ id: string }> }
 type ExamQuestionEntry = {
@@ -153,6 +149,8 @@ export async function GET(req: NextRequest, { params }: RouteContext) {
 
   const examWithQuestions = exam as typeof exam & { questions: ExamQuestionEntry[] }
 
+  // Students receive only the question count/shape before starting. The real
+  // randomized content is delivered from the immutable attempt snapshot.
   if (session.user.role === UserRole.STUDENT) {
     return NextResponse.json({
       ...resolvedExam,
@@ -246,18 +244,6 @@ export async function PATCH(req: NextRequest, { params }: RouteContext) {
     if (!completeness.canPublish) {
       return NextResponse.json(
         { error: 'Exam publication blocked by incomplete translation', completeness },
-        { status: 409 }
-      )
-    }
-
-    const capacity = await validateUniqueQuestionCapacity(id)
-    if (!capacity.ok) {
-      return NextResponse.json(
-        {
-          error: formatUniqueQuestionCapacityError(capacity),
-          code: 'UNIQUE_QUESTION_CAPACITY_INSUFFICIENT',
-          capacity,
-        },
         { status: 409 }
       )
     }
