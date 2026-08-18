@@ -4,13 +4,14 @@ import { prisma } from '@/lib/prisma'
 import { UserRole } from '@prisma/client'
 import Link from 'next/link'
 import { getStudentExamCatalogScope } from '@/lib/permissions'
-import { getReExamVisibilityForStudent } from '@/lib/reexam-store'
+import { getReExamVisibilityForStudent, listReExamRequestsByStudent } from '@/lib/reexam-store'
 
 export default async function StudentExamsPage() {
   const session = await requireRole(UserRole.STUDENT)
-  const [{ profile, blockedReason, subjectScopes }, reExamVisibility] = await Promise.all([
+  const [{ profile, blockedReason, subjectScopes }, reExamVisibility, reExamRequests] = await Promise.all([
     getStudentExamCatalogScope(session.user.id),
     getReExamVisibilityForStudent(session.user.id),
+    listReExamRequestsByStudent(session.user.id),
   ])
 
   if (!profile) {
@@ -97,6 +98,11 @@ export default async function StudentExamsPage() {
     reExamVisibility.studentRecords
       .filter((record) => record.reExamId)
       .map((record) => [record.reExamId as string, record.type])
+  )
+  const requestByOriginalExam = new Map(
+    reExamRequests
+      .filter((record) => record.status === 'PENDING' || record.status === 'APPROVED')
+      .map((record) => [record.originalExamId, record])
   )
   const isVisibleToStudent = (examId: string) => !allReExamIds.has(examId) || myReExamIds.has(examId)
 
@@ -241,19 +247,22 @@ export default async function StudentExamsPage() {
           <div className="space-y-3">
             {resolvedCompletedExams.map((exam) => {
               const attemptStatus = attemptMap[exam.id]
+              const reExamRequest = requestByOriginalExam.get(exam.id)
+              const isReExam = myReExamIds.has(exam.id)
+
               return (
-                <div key={exam.id} className="rounded-xl border border-gray-200 bg-white p-5 opacity-80">
-                  <div className="flex items-center justify-between gap-4">
+                <div key={exam.id} className="rounded-xl border border-gray-200 bg-white p-5 opacity-90">
+                  <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                     <div>
                       <div className="flex flex-wrap items-center gap-2">
                         <h3 className="font-medium text-gray-900">{exam.title}</h3>
-                        {myReExamIds.has(exam.id) && (
+                        {isReExam && (
                           <span className="rounded-full bg-violet-100 px-2 py-0.5 text-[10px] font-semibold text-violet-700">Re-exam</span>
                         )}
                       </div>
                       <p className="text-sm text-gray-500">{exam.subject.name}</p>
                     </div>
-                    <div className="text-right">
+                    <div className="flex flex-wrap items-center gap-2 sm:justify-end">
                       {attemptStatus ? (
                         <span className="rounded-full bg-gray-100 px-2.5 py-1 text-xs font-medium text-gray-600">
                           {attemptStatus === 'SUBMITTED' || attemptStatus === 'AUTO_SUBMITTED' ? 'Submitted' : 'Attempted'}
@@ -263,10 +272,28 @@ export default async function StudentExamsPage() {
                           Missed
                         </span>
                       )}
+
+                      {!isReExam && reExamRequest?.status === 'PENDING' && (
+                        <span className="rounded-full bg-amber-100 px-2.5 py-1 text-xs font-semibold text-amber-700">Re-exam Pending</span>
+                      )}
+                      {!isReExam && reExamRequest?.status === 'APPROVED' && (
+                        <Link href="/student/re-exams" className="rounded-full bg-emerald-100 px-2.5 py-1 text-xs font-semibold text-emerald-700 hover:bg-emerald-200">
+                          Re-exam Enabled
+                        </Link>
+                      )}
+                      {!isReExam && !reExamRequest && (
+                        <Link
+                          href={`/student/re-exams?examId=${exam.id}`}
+                          className="rounded-lg border border-violet-200 bg-violet-50 px-3 py-1.5 text-xs font-semibold text-violet-700 hover:bg-violet-100"
+                        >
+                          Request Re-exam
+                        </Link>
+                      )}
+
                       {exam.status === 'RESULT_PUBLISHED' && (
                         <Link
                           href="/student/results"
-                          className="mt-1 block text-xs text-blue-600 hover:underline"
+                          className="text-xs font-medium text-blue-600 hover:underline"
                         >
                           {'View result ->'}
                         </Link>
