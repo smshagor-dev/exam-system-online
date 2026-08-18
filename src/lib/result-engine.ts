@@ -100,7 +100,7 @@ async function processAnswer(
     marks: number
     options: { id: string; isCorrect: boolean }[]
   },
-  examMarks: number, // marks from ExamQuestion override
+  examMarks: number,
   resultMode: ResultMode
 ): Promise<{
   checkStatus: AnswerCheckStatus
@@ -112,7 +112,6 @@ async function processAnswer(
   switch (question.type) {
     case QuestionType.MCQ:
     case QuestionType.TRUE_FALSE: {
-      // Always auto-check MCQ and T/F in all modes
       if (!answer.selectedOption) {
         return { checkStatus: AnswerCheckStatus.AUTO_CHECKED, isCorrect: false, marksAwarded: 0 }
       }
@@ -138,12 +137,10 @@ async function processAnswer(
           marksAwarded: isCorrect ? maxMarks : 0,
         }
       }
-      // TEACHER_REVIEW or AI_ASSISTED: leave for review
       return { checkStatus: AnswerCheckStatus.UNCHECKED, isCorrect: null, marksAwarded: 0 }
     }
 
     case QuestionType.WRITTEN_ANSWER: {
-      // Written answers always require review unless AI assists
       return { checkStatus: AnswerCheckStatus.UNCHECKED, isCorrect: null, marksAwarded: 0 }
     }
 
@@ -192,13 +189,39 @@ export async function calculateResult(attemptId: string): Promise<void> {
   let totalMarksAwarded = 0
   let pendingAnswers = 0
 
-  // Process each answer
+  // Snapshot questions are authoritative because each student can receive a
+  // different question from the database for the same blueprint slot.
   for (const answer of attempt.answers) {
-    const examQuestion = exam.questions.find((eq) => eq.questionId === answer.questionId)
-    if (!examQuestion) continue
     const snapshotQuestion = snapshot?.questions.find(
       (entry: (typeof snapshot.questions)[number]) => entry.id === answer.questionId
     )
+    const examQuestion = exam.questions.find((eq) => eq.questionId === answer.questionId)
+
+    if (!snapshotQuestion && !examQuestion) {
+      continue
+    }
+
+    const resolvedFallbackQuestion = examQuestion
+      ? resolveQuestionTranslation(examQuestion.question, exam.languageId)
+      : null
+
+    const question = snapshotQuestion
+      ? {
+          type: snapshotQuestion.question.type as QuestionType,
+          expectedAnswer: snapshotQuestion.question.expectedAnswer,
+          keywords: snapshotQuestion.question.keywords,
+          marks: snapshotQuestion.marks,
+          options: snapshotQuestion.question.options,
+        }
+      : {
+          type: examQuestion!.question.type,
+          expectedAnswer: resolvedFallbackQuestion?.expectedAnswer ?? null,
+          keywords: resolvedFallbackQuestion?.keywords ?? null,
+          marks: examQuestion!.question.marks,
+          options: examQuestion!.question.options.map((option) =>
+            resolveQuestionOptionTranslation(option, exam.languageId)
+          ),
+        }
 
     const result = await processAnswer(
       {
@@ -207,34 +230,8 @@ export async function calculateResult(attemptId: string): Promise<void> {
         selectedOption: answer.selectedOption,
         answerText: answer.answerText,
       },
-      snapshot
-        ? {
-            type: (snapshotQuestion?.question.type ?? examQuestion.question.type) as QuestionType,
-            expectedAnswer: snapshotQuestion?.question.expectedAnswer ?? null,
-            keywords: snapshotQuestion?.question.keywords ?? null,
-            marks: examQuestion.question.marks,
-            options:
-              snapshotQuestion?.question.options ??
-              examQuestion.question.options.map((option) =>
-                resolveQuestionOptionTranslation(option, exam.languageId)
-              ),
-          }
-        : {
-            type: examQuestion.question.type,
-            expectedAnswer: resolveQuestionTranslation(
-              examQuestion.question,
-              exam.languageId
-            ).expectedAnswer,
-            keywords: resolveQuestionTranslation(
-              examQuestion.question,
-              exam.languageId
-            ).keywords,
-            marks: examQuestion.question.marks,
-            options: examQuestion.question.options.map((option) =>
-              resolveQuestionOptionTranslation(option, exam.languageId)
-            ),
-          },
-      examQuestion.marks,
+      question,
+      snapshotQuestion?.marks ?? examQuestion!.marks,
       resultMode
     )
 
@@ -265,20 +262,17 @@ export async function calculateResult(attemptId: string): Promise<void> {
     }
   }
 
-  // Determine result status
   let resultStatus: ResultStatus
   if (resultMode === ResultMode.AUTO && pendingAnswers === 0) {
-    resultStatus = ResultStatus.REVIEWED // Ready to publish
+    resultStatus = ResultStatus.REVIEWED
   } else {
     resultStatus = ResultStatus.PENDING_REVIEW
   }
 
-  // Calculate percentage using auto-checked marks only for now
   const percentage = exam.totalMarks > 0 ? (totalMarksAwarded / exam.totalMarks) * 100 : 0
   const isPassed = totalMarksAwarded >= exam.passingMarks
   const grade = calculateGrade(percentage)
 
-  // Upsert result record
   await prisma.examResult.upsert({
     where: { attemptId },
     create: {
@@ -301,16 +295,13 @@ export async function calculateResult(attemptId: string): Promise<void> {
     },
   })
 
-  // Auto-publish if configured
   if (exam.autoPublish && resultStatus === ResultStatus.REVIEWED) {
     await publishResult(attemptId, exam.id, attempt.studentId)
   }
 
-  // If AI_ASSISTED mode and AI is enabled, request AI evaluation for pending answers
   if (resultMode === ResultMode.AI_ASSISTED_OPTIONAL && pendingAnswers > 0) {
-    // Non-blocking - AI runs in background
     requestAiEvaluation(attemptId).catch((err) => {
-      console.error('[ResultEngine] AI evaluation failed:', err)
+      console.error('[AI] AI evaluation failed:', err)
     })
   }
 }
@@ -329,7 +320,6 @@ export async function recalculateAfterReview(attemptId: string): Promise<void> {
   })
   if (!attempt) throw new Error('Attempt not found')
 
-  // Sum all answered marks (teacher marks take priority over auto-marks)
   let totalMarksAwarded = 0
   for (const answer of attempt.answers) {
     const marks = answer.teacherMarks ?? answer.marksAwarded ?? 0
@@ -401,7 +391,6 @@ export async function publishResult(
     include: { attempt: { include: { student: { include: { user: true } } } } },
   })
 
-  // Create notification for student
   const existingNotification = await prisma.notification.findFirst({
     where: {
       userId: result.attempt.student.userId,
@@ -424,10 +413,6 @@ export async function publishResult(
   }
 }
 
-/**
- * Placeholder for AI evaluation.
- * Currently logs and returns; OpenAI/other AI can be wired in here.
- */
 async function requestAiEvaluation(attemptId: string): Promise<void> {
   if (!(await aiEvaluationService.isEnabled())) {
     console.log('[AI] AI evaluation disabled, skipping')
