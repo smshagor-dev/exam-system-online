@@ -2,9 +2,9 @@
  * Permission facade.
  *
  * The complete existing permission engine is preserved in permissions-core.ts.
- * This facade adds one rule for targeted re-exams: an approved re-exam may only
- * be opened/joined by the student it was assigned to. All regular exam,
- * enrollment, lifecycle, assignment and coursework rules remain unchanged.
+ * This facade adds re-exam rules without changing the regular permission engine:
+ * - an approved re-exam may only be opened/joined by its assigned student;
+ * - legacy same-exam retakes are disabled so a submitted attempt is never reused.
  */
 
 import {
@@ -32,7 +32,22 @@ export async function getStudentExamAccessContext(
     }
   }
 
-  return getCoreStudentExamAccessContext(studentUserId, examId, observer)
+  const context = await getCoreStudentExamAccessContext(studentUserId, examId, observer)
+
+  // The old allowRetake path re-opened the same StudentExamAttempt. Re-exams now
+  // use a separate cloned Exam, so Socket.IO must always treat a submitted
+  // regular exam as non-retakable even if an old record still has allowRetake=true.
+  if (!reExamTarget && context.exam?.allowRetake) {
+    return {
+      ...context,
+      exam: {
+        ...context.exam,
+        allowRetake: false,
+      },
+    }
+  }
+
+  return context
 }
 
 export async function studentCanAccessExam(
