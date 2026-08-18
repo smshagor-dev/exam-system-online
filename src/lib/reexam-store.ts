@@ -42,6 +42,10 @@ let visibilityCache:
     }
   | null = null
 
+function activeKey(originalExamId: string, studentId: string) {
+  return `${originalExamId}:${studentId}`
+}
+
 function asRecord(value: unknown): ReExamRecord | null {
   if (!value || typeof value !== 'object') return null
   const raw = value as Record<string, unknown>
@@ -90,6 +94,12 @@ async function ensureIndexes() {
             {
               key: { reExamId: 1 },
               name: 'reexam_exam_idx',
+              sparse: true,
+            },
+            {
+              key: { activeKey: 1 },
+              name: 'reexam_active_unique_idx',
+              unique: true,
               sparse: true,
             },
           ],
@@ -248,6 +258,11 @@ export async function createReExamRecord(input: {
         decidedAt: record.decidedAt,
         createdAt: record.createdAt,
         updatedAt: record.updatedAt,
+        ...(
+          record.status === 'PENDING' || record.status === 'APPROVED'
+            ? { activeKey: activeKey(record.originalExamId, record.studentId) }
+            : {}
+        ),
       },
     ],
   })
@@ -270,13 +285,16 @@ export async function updateReExamRecord(
     ...patch,
     updatedAt: new Date().toISOString(),
   }
+  const releasesActiveKey = patch.status === 'REJECTED' || patch.status === 'CANCELLED'
 
   await prisma.$runCommandRaw({
     update: COLLECTION,
     updates: [
       {
         q: { _id: id },
-        u: { $set: set },
+        u: releasesActiveKey
+          ? { $set: set, $unset: { activeKey: '' } }
+          : { $set: set },
         multi: false,
         upsert: false,
       },
