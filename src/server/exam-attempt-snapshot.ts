@@ -326,7 +326,6 @@ export async function ensureAttemptSnapshot(input: {
 
     let selected: (typeof questionBank)[number] | (typeof exam.questions)[number]['question'] | null = null
 
-    // First choice: a never-used question that this attempt can atomically reserve.
     const neverUsedCandidates = shuffle(
       sameTypeCandidates.filter((candidate) => (usageCount.get(candidate.id) ?? 0) === 0)
     )
@@ -344,8 +343,6 @@ export async function ensureAttemptSnapshot(input: {
       }
     }
 
-    // If the unique pool for this question type is exhausted, use the least-used
-    // compatible question. This is the only path that permits overlap.
     if (!selected && sameTypeCandidates.length > 0) {
       const minimumUsage = Math.min(
         ...sameTypeCandidates.map((candidate) => usageCount.get(candidate.id) ?? 0)
@@ -369,6 +366,15 @@ export async function ensureAttemptSnapshot(input: {
 
     selectedQuestionIds.add(selected.id)
     allocated.push({ slot, selected })
+  }
+
+  // Never deliver an overlapping/fallback set. Capacity is checked when the exam
+  // is scheduled; this runtime guard also protects against roster/question-bank
+  // changes or concurrent allocation anomalies after scheduling.
+  if (unavoidableOverlapCount > 0 || fallbackToBlueprintCount > 0) {
+    throw new Error(
+      'Strict unique-question allocation is exhausted. The exam cannot start until the question bank has enough unused questions.'
+    )
   }
 
   const randomizedAllocation = shuffle(allocated)
