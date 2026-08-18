@@ -101,7 +101,6 @@ export async function GET(req: NextRequest, { params }: RouteContext) {
 
   if (!exam) return NextResponse.json({ error: 'Exam not found' }, { status: 404 })
 
-  // Role-based access
   if (session.user.role === UserRole.STUDENT) {
     const { allowed, reason } = await studentCanAccessExam(session.user.id, id)
     if (!allowed) return NextResponse.json({ error: reason }, { status: 403 })
@@ -150,9 +149,21 @@ export async function GET(req: NextRequest, { params }: RouteContext) {
 
   const examWithQuestions = exam as typeof exam & { questions: ExamQuestionEntry[] }
 
+  // Students receive only metadata over REST. The actual per-student randomized
+  // question snapshot is delivered only after the secure Socket.IO attempt starts.
+  if (session.user.role === UserRole.STUDENT) {
+    return NextResponse.json({
+      ...resolvedExam,
+      attemptSummary: studentAttemptSummary,
+      questionCount: examWithQuestions.questions.length,
+      questions: [],
+    })
+  }
+
   return NextResponse.json({
     ...resolvedExam,
     attemptSummary: studentAttemptSummary,
+    questionCount: examWithQuestions.questions.length,
     questions: examWithQuestions.questions.map((entry) => {
       const resolvedQuestion = resolveQuestionTranslation(entry.question, exam.languageId)
 
@@ -160,19 +171,9 @@ export async function GET(req: NextRequest, { params }: RouteContext) {
         ...entry,
         question: {
           ...resolvedQuestion,
-          options: entry.question.options.map((option) => {
-            const resolvedOption = resolveQuestionOptionTranslation(option, exam.languageId)
-
-            if (session.user.role === UserRole.STUDENT) {
-              return {
-                id: resolvedOption.id,
-                text: resolvedOption.text,
-                orderIndex: resolvedOption.orderIndex,
-              }
-            }
-
-            return resolvedOption
-          }),
+          options: entry.question.options.map((option) =>
+            resolveQuestionOptionTranslation(option, exam.languageId)
+          ),
         },
       }
     }),
@@ -299,7 +300,6 @@ export async function DELETE(_req: NextRequest, { params }: RouteContext) {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
   }
 
-  // Only allow deletion of DRAFT exams
   const exam = await prisma.exam.findUnique({ where: { id } })
   if (!exam) return NextResponse.json({ error: 'Not found' }, { status: 404 })
   if (exam.status !== 'DRAFT') {
