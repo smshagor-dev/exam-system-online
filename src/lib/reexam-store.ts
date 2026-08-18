@@ -1,4 +1,5 @@
 import { randomUUID } from 'node:crypto'
+import type { Prisma } from '@prisma/client'
 import { prisma } from './prisma'
 
 export type ReExamRequestStatus = 'PENDING' | 'APPROVED' | 'REJECTED' | 'CANCELLED'
@@ -104,8 +105,8 @@ async function ensureIndexes() {
 }
 
 async function findRecords(
-  filter: Record<string, unknown>,
-  options: { limit?: number; sort?: Record<string, 1 | -1> } = {}
+  filter: Prisma.InputJsonObject,
+  options: { limit?: number; sort?: Prisma.InputJsonObject } = {}
 ) {
   await ensureIndexes()
   const result = (await prisma.$runCommandRaw({
@@ -148,17 +149,6 @@ export async function findActiveReExamRequest(originalExamId: string, studentId:
   return records[0] ?? null
 }
 
-export async function getReExamTargetForExam(reExamId: string) {
-  const records = await findRecords(
-    {
-      reExamId,
-      status: 'APPROVED',
-    },
-    { limit: 1 }
-  )
-  return records[0] ?? null
-}
-
 async function getApprovedReExamRecords() {
   if (visibilityCache && visibilityCache.expiresAt > Date.now()) {
     return visibilityCache.records
@@ -178,6 +168,11 @@ async function getApprovedReExamRecords() {
   }
 
   return records
+}
+
+export async function getReExamTargetForExam(reExamId: string) {
+  const records = await getApprovedReExamRecords()
+  return records.find((record) => record.reExamId === reExamId) ?? null
 }
 
 export async function getReExamVisibilityForStudent(studentUserId: string) {
