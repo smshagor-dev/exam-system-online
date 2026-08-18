@@ -8,6 +8,7 @@ import {
 
 const SNAPSHOT_ACTION = 'ATTEMPT_SNAPSHOT'
 const QUESTION_ALLOCATION_ACTION = 'ATTEMPT_QUESTION_ALLOCATION'
+const QUESTION_ALLOCATION_COLLECTION = 'exam_question_allocations'
 
 type SnapshotQuestion = {
   id: string
@@ -51,6 +52,12 @@ type AttemptSnapshot = {
   questions: SnapshotQuestion[]
 }
 
+type AllocationClaimResult = {
+  value?: {
+    attemptId?: string
+  } | null
+}
+
 function parseSnapshot(details: string | null | undefined) {
   if (!details) {
     return null
@@ -86,6 +93,33 @@ function shuffle<T>(items: readonly T[]) {
     copy[swapIndex] = current
   }
   return copy
+}
+
+async function claimUnusedQuestion(input: {
+  examId: string
+  questionId: string
+  attemptId: string
+  studentId: string
+}) {
+  const allocationId = `${input.examId}:${input.questionId}`
+  const result = (await prisma.$runCommandRaw({
+    findAndModify: QUESTION_ALLOCATION_COLLECTION,
+    query: { _id: allocationId },
+    update: {
+      $setOnInsert: {
+        _id: allocationId,
+        examId: input.examId,
+        questionId: input.questionId,
+        attemptId: input.attemptId,
+        studentId: input.studentId,
+        createdAt: new Date().toISOString(),
+      },
+    },
+    upsert: true,
+    new: true,
+  })) as unknown as AllocationClaimResult
+
+  return result.value?.attemptId === input.attemptId
 }
 
 function buildSnapshotPayload(model: {
@@ -279,25 +313,54 @@ export async function ensureAttemptSnapshot(input: {
   const selectedQuestionIds = new Set<string>()
   let unavoidableOverlapCount = 0
   let fallbackToBlueprintCount = 0
+  let atomicallyUniqueCount = 0
+  const allocated: Array<{
+    slot: (typeof exam.questions)[number]
+    selected: (typeof questionBank)[number] | (typeof exam.questions)[number]['question']
+  }> = []
 
-  const allocated = exam.questions.map((slot) => {
+  for (const slot of exam.questions) {
     const sameTypeCandidates = questionBank.filter(
       (candidate) => candidate.type === slot.question.type && !selectedQuestionIds.has(candidate.id)
     )
 
-    let selected = slot.question
-    if (sameTypeCandidates.length > 0) {
+    let selected: (typeof questionBank)[number] | (typeof exam.questions)[number]['question'] | null = null
+
+    // First choice: a never-used question that this attempt can atomically reserve.
+    const neverUsedCandidates = shuffle(
+      sameTypeCandidates.filter((candidate) => (usageCount.get(candidate.id) ?? 0) === 0)
+    )
+    for (const candidate of neverUsedCandidates) {
+      const claimed = await claimUnusedQuestion({
+        examId: input.examId,
+        questionId: candidate.id,
+        attemptId: input.attemptId,
+        studentId: input.studentId,
+      })
+      if (claimed) {
+        selected = candidate
+        atomicallyUniqueCount += 1
+        break
+      }
+    }
+
+    // If the unique pool for this question type is exhausted, use the least-used
+    // compatible question. This is the only path that permits overlap.
+    if (!selected && sameTypeCandidates.length > 0) {
       const minimumUsage = Math.min(
         ...sameTypeCandidates.map((candidate) => usageCount.get(candidate.id) ?? 0)
       )
-      const leastUsed = sameTypeCandidates.filter(
-        (candidate) => (usageCount.get(candidate.id) ?? 0) === minimumUsage
+      const leastUsed = shuffle(
+        sameTypeCandidates.filter(
+          (candidate) => (usageCount.get(candidate.id) ?? 0) === minimumUsage
+        )
       )
-      selected = leastUsed[randomInt(leastUsed.length)] ?? slot.question
-      if (minimumUsage > 0) {
-        unavoidableOverlapCount += 1
-      }
-    } else {
+      selected = leastUsed[0] ?? null
+      unavoidableOverlapCount += 1
+    }
+
+    if (!selected) {
+      selected = slot.question
       fallbackToBlueprintCount += 1
       if ((usageCount.get(slot.question.id) ?? 0) > 0) {
         unavoidableOverlapCount += 1
@@ -305,14 +368,9 @@ export async function ensureAttemptSnapshot(input: {
     }
 
     selectedQuestionIds.add(selected.id)
-    return {
-      slot,
-      selected,
-    }
-  })
+    allocated.push({ slot, selected })
+  }
 
-  // Every student receives a different display sequence even when the bank is too
-  // small to guarantee a completely disjoint question set.
   const randomizedAllocation = shuffle(allocated)
   const resolvedExam = resolveExamTranslation(exam, exam.languageId)
 
@@ -336,8 +394,6 @@ export async function ensureAttemptSnapshot(input: {
 
           return {
             sourceQuestionId: selected.id,
-            // Keep the original ExamQuestion row as the blueprint slot so its marks
-            // and question-type distribution remain authoritative for this exam.
             examQuestionId: slot.id,
             orderIndex,
             marks: slot.marks,
@@ -398,6 +454,7 @@ export async function ensureAttemptSnapshot(input: {
           blueprintSlots: exam.questions.length,
           bankSize: questionBank.length,
           allocatedQuestionIds: payload.questions.map((question) => question.id),
+          atomicallyUniqueCount,
           unavoidableOverlapCount,
           fallbackToBlueprintCount,
         }),
