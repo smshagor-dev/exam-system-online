@@ -149,21 +149,31 @@ export async function GET(req: NextRequest, { params }: RouteContext) {
 
   const examWithQuestions = exam as typeof exam & { questions: ExamQuestionEntry[] }
 
-  // Students receive only metadata over REST. The actual per-student randomized
-  // question snapshot is delivered only after the secure Socket.IO attempt starts.
+  // Do not leak blueprint question text/options before the secure attempt starts.
+  // Placeholders preserve the existing ready-screen question count. The real
+  // randomized snapshot replaces these entries after Socket.IO creates/resumes
+  // the student's attempt.
   if (session.user.role === UserRole.STUDENT) {
     return NextResponse.json({
       ...resolvedExam,
       attemptSummary: studentAttemptSummary,
-      questionCount: examWithQuestions.questions.length,
-      questions: [],
+      questions: examWithQuestions.questions.map((entry) => ({
+        id: entry.id,
+        marks: entry.marks,
+        orderIndex: entry.orderIndex,
+        question: {
+          id: entry.id,
+          text: '',
+          type: 'HIDDEN',
+          options: [],
+        },
+      })),
     })
   }
 
   return NextResponse.json({
     ...resolvedExam,
     attemptSummary: studentAttemptSummary,
-    questionCount: examWithQuestions.questions.length,
     questions: examWithQuestions.questions.map((entry) => {
       const resolvedQuestion = resolveQuestionTranslation(entry.question, exam.languageId)
 
