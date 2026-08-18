@@ -24,7 +24,6 @@ import {
 import { aiEvaluationService } from '@/services/ai-evaluation.service'
 import { loadAttemptSnapshot } from '@/server/exam-attempt-snapshot'
 
-// Grade boundaries
 const GRADE_BANDS = [
   { min: 90, grade: 'A+' },
   { min: 80, grade: 'A' },
@@ -35,6 +34,14 @@ const GRADE_BANDS = [
   { min: 0, grade: 'F' },
 ]
 
+type GradingQuestion = {
+  type: QuestionType
+  expectedAnswer: string | null
+  keywords: string | null
+  marks: number
+  options: Array<{ id: string; isCorrect: boolean }>
+}
+
 function calculateGrade(percentage: number): string {
   for (const band of GRADE_BANDS) {
     if (percentage >= band.min) return band.grade
@@ -42,10 +49,6 @@ function calculateGrade(percentage: number): string {
   return 'F'
 }
 
-/**
- * Check a short answer against expected answer and keywords.
- * Returns a confidence score [0, 1].
- */
 function checkShortAnswer(
   studentAnswer: string,
   expectedAnswer: string | null,
@@ -57,12 +60,10 @@ function checkShortAnswer(
 
   const cleaned = studentAnswer.toLowerCase().trim()
 
-  // Exact match (case-insensitive)
   if (expectedAnswer && cleaned === expectedAnswer.toLowerCase().trim()) {
     return { isCorrect: true, confidence: 1.0 }
   }
 
-  // Keyword matching
   if (keywordsJson) {
     try {
       const keywords: string[] = JSON.parse(keywordsJson)
@@ -71,7 +72,7 @@ function checkShortAnswer(
       )
       const confidence = matchedKeywords.length / keywords.length
       return {
-        isCorrect: confidence >= 0.7, // 70% keyword match = correct
+        isCorrect: confidence >= 0.7,
         confidence,
       }
     } catch {
@@ -82,10 +83,6 @@ function checkShortAnswer(
   return { isCorrect: false, confidence: 0 }
 }
 
-/**
- * Process a single student answer for AUTO mode.
- * Returns the marks to award.
- */
 async function processAnswer(
   answer: {
     id: string
@@ -93,14 +90,8 @@ async function processAnswer(
     selectedOption: string | null
     answerText: string | null
   },
-  question: {
-    type: QuestionType
-    expectedAnswer: string | null
-    keywords: string | null
-    marks: number
-    options: { id: string; isCorrect: boolean }[]
-  },
-  examMarks: number, // marks from ExamQuestion override
+  question: GradingQuestion,
+  examMarks: number,
   resultMode: ResultMode
 ): Promise<{
   checkStatus: AnswerCheckStatus
@@ -112,7 +103,6 @@ async function processAnswer(
   switch (question.type) {
     case QuestionType.MCQ:
     case QuestionType.TRUE_FALSE: {
-      // Always auto-check MCQ and T/F in all modes
       if (!answer.selectedOption) {
         return { checkStatus: AnswerCheckStatus.AUTO_CHECKED, isCorrect: false, marksAwarded: 0 }
       }
@@ -138,24 +128,17 @@ async function processAnswer(
           marksAwarded: isCorrect ? maxMarks : 0,
         }
       }
-      // TEACHER_REVIEW or AI_ASSISTED: leave for review
       return { checkStatus: AnswerCheckStatus.UNCHECKED, isCorrect: null, marksAwarded: 0 }
     }
 
-    case QuestionType.WRITTEN_ANSWER: {
-      // Written answers always require review unless AI assists
+    case QuestionType.WRITTEN_ANSWER:
       return { checkStatus: AnswerCheckStatus.UNCHECKED, isCorrect: null, marksAwarded: 0 }
-    }
 
     default:
       return { checkStatus: AnswerCheckStatus.UNCHECKED, isCorrect: null, marksAwarded: 0 }
   }
 }
 
-/**
- * Main entry point: calculate and persist result for a completed attempt.
- * Called when student submits (manually or auto-submit).
- */
 export async function calculateResult(attemptId: string): Promise<void> {
   const attempt = await prisma.studentExamAttempt.findUnique({
     where: { id: attemptId },
@@ -192,13 +175,48 @@ export async function calculateResult(attemptId: string): Promise<void> {
   let totalMarksAwarded = 0
   let pendingAnswers = 0
 
-  // Process each answer
   for (const answer of attempt.answers) {
-    const examQuestion = exam.questions.find((eq) => eq.questionId === answer.questionId)
-    if (!examQuestion) continue
     const snapshotQuestion = snapshot?.questions.find(
       (entry: (typeof snapshot.questions)[number]) => entry.id === answer.questionId
     )
+    const examQuestion = exam.questions.find((entry) => entry.questionId === answer.questionId)
+
+    let gradingQuestion: GradingQuestion | null = null
+    let maxMarks = 0
+
+    if (snapshotQuestion) {
+      gradingQuestion = {
+        type: snapshotQuestion.question.type as QuestionType,
+        expectedAnswer: snapshotQuestion.question.expectedAnswer,
+        keywords: snapshotQuestion.question.keywords,
+        marks: snapshotQuestion.marks,
+        options: snapshotQuestion.question.options.map((option) => ({
+          id: option.id,
+          isCorrect: option.isCorrect,
+        })),
+      }
+      maxMarks = snapshotQuestion.marks
+    } else if (examQuestion) {
+      const resolvedQuestion = resolveQuestionTranslation(examQuestion.question, exam.languageId)
+      gradingQuestion = {
+        type: examQuestion.question.type,
+        expectedAnswer: resolvedQuestion.expectedAnswer,
+        keywords: resolvedQuestion.keywords,
+        marks: examQuestion.question.marks,
+        options: examQuestion.question.options.map((option) => {
+          const resolvedOption = resolveQuestionOptionTranslation(option, exam.languageId)
+          return {
+            id: resolvedOption.id,
+            isCorrect: option.isCorrect,
+          }
+        }),
+      }
+      maxMarks = examQuestion.marks
+    }
+
+    if (!gradingQuestion) {
+      continue
+    }
 
     const result = await processAnswer(
       {
@@ -207,34 +225,8 @@ export async function calculateResult(attemptId: string): Promise<void> {
         selectedOption: answer.selectedOption,
         answerText: answer.answerText,
       },
-      snapshot
-        ? {
-            type: (snapshotQuestion?.question.type ?? examQuestion.question.type) as QuestionType,
-            expectedAnswer: snapshotQuestion?.question.expectedAnswer ?? null,
-            keywords: snapshotQuestion?.question.keywords ?? null,
-            marks: examQuestion.question.marks,
-            options:
-              snapshotQuestion?.question.options ??
-              examQuestion.question.options.map((option) =>
-                resolveQuestionOptionTranslation(option, exam.languageId)
-              ),
-          }
-        : {
-            type: examQuestion.question.type,
-            expectedAnswer: resolveQuestionTranslation(
-              examQuestion.question,
-              exam.languageId
-            ).expectedAnswer,
-            keywords: resolveQuestionTranslation(
-              examQuestion.question,
-              exam.languageId
-            ).keywords,
-            marks: examQuestion.question.marks,
-            options: examQuestion.question.options.map((option) =>
-              resolveQuestionOptionTranslation(option, exam.languageId)
-            ),
-          },
-      examQuestion.marks,
+      gradingQuestion,
+      maxMarks,
       resultMode
     )
 
@@ -265,20 +257,17 @@ export async function calculateResult(attemptId: string): Promise<void> {
     }
   }
 
-  // Determine result status
   let resultStatus: ResultStatus
   if (resultMode === ResultMode.AUTO && pendingAnswers === 0) {
-    resultStatus = ResultStatus.REVIEWED // Ready to publish
+    resultStatus = ResultStatus.REVIEWED
   } else {
     resultStatus = ResultStatus.PENDING_REVIEW
   }
 
-  // Calculate percentage using auto-checked marks only for now
   const percentage = exam.totalMarks > 0 ? (totalMarksAwarded / exam.totalMarks) * 100 : 0
   const isPassed = totalMarksAwarded >= exam.passingMarks
   const grade = calculateGrade(percentage)
 
-  // Upsert result record
   await prisma.examResult.upsert({
     where: { attemptId },
     create: {
@@ -301,24 +290,17 @@ export async function calculateResult(attemptId: string): Promise<void> {
     },
   })
 
-  // Auto-publish if configured
   if (exam.autoPublish && resultStatus === ResultStatus.REVIEWED) {
     await publishResult(attemptId, exam.id, attempt.studentId)
   }
 
-  // If AI_ASSISTED mode and AI is enabled, request AI evaluation for pending answers
   if (resultMode === ResultMode.AI_ASSISTED_OPTIONAL && pendingAnswers > 0) {
-    // Non-blocking - AI runs in background
     requestAiEvaluation(attemptId).catch((err) => {
       console.error('[ResultEngine] AI evaluation failed:', err)
     })
   }
 }
 
-/**
- * Recalculate result totals after teacher review.
- * Call this after teacher updates marks on individual answers.
- */
 export async function recalculateAfterReview(attemptId: string): Promise<void> {
   const attempt = await prisma.studentExamAttempt.findUnique({
     where: { id: attemptId },
@@ -329,7 +311,6 @@ export async function recalculateAfterReview(attemptId: string): Promise<void> {
   })
   if (!attempt) throw new Error('Attempt not found')
 
-  // Sum all answered marks (teacher marks take priority over auto-marks)
   let totalMarksAwarded = 0
   for (const answer of attempt.answers) {
     const marks = answer.teacherMarks ?? answer.marksAwarded ?? 0
@@ -354,9 +335,6 @@ export async function recalculateAfterReview(attemptId: string): Promise<void> {
   })
 }
 
-/**
- * Publish a result - makes it visible to the student.
- */
 export async function publishResult(
   attemptId: string,
   _examId: string,
@@ -401,7 +379,6 @@ export async function publishResult(
     include: { attempt: { include: { student: { include: { user: true } } } } },
   })
 
-  // Create notification for student
   const existingNotification = await prisma.notification.findFirst({
     where: {
       userId: result.attempt.student.userId,
@@ -424,10 +401,6 @@ export async function publishResult(
   }
 }
 
-/**
- * Placeholder for AI evaluation.
- * Currently logs and returns; OpenAI/other AI can be wired in here.
- */
 async function requestAiEvaluation(attemptId: string): Promise<void> {
   if (!(await aiEvaluationService.isEnabled())) {
     console.log('[AI] AI evaluation disabled, skipping')

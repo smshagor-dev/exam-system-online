@@ -10,6 +10,10 @@ import { UserRole } from '@prisma/client'
 import { teacherOwnsExam, studentCanAccessExam } from '@/lib/permissions'
 import { validateExamPublication } from '@/lib/phase5-translations'
 import { getReExamTargetForExam } from '@/lib/reexam-store'
+import {
+  formatUniqueQuestionCapacityError,
+  validateUniqueQuestionCapacity,
+} from '@/lib/exam-question-allocation'
 
 type RouteContext = { params: Promise<{ id: string }> }
 type ExamQuestionEntry = {
@@ -101,7 +105,6 @@ export async function GET(req: NextRequest, { params }: RouteContext) {
 
   if (!exam) return NextResponse.json({ error: 'Exam not found' }, { status: 404 })
 
-  // Role-based access
   if (session.user.role === UserRole.STUDENT) {
     const { allowed, reason } = await studentCanAccessExam(session.user.id, id)
     if (!allowed) return NextResponse.json({ error: reason }, { status: 403 })
@@ -150,6 +153,24 @@ export async function GET(req: NextRequest, { params }: RouteContext) {
 
   const examWithQuestions = exam as typeof exam & { questions: ExamQuestionEntry[] }
 
+  if (session.user.role === UserRole.STUDENT) {
+    return NextResponse.json({
+      ...resolvedExam,
+      attemptSummary: studentAttemptSummary,
+      questions: examWithQuestions.questions.map((entry) => ({
+        id: entry.id,
+        marks: entry.marks,
+        orderIndex: entry.orderIndex,
+        question: {
+          id: entry.id,
+          text: '',
+          type: 'HIDDEN',
+          options: [],
+        },
+      })),
+    })
+  }
+
   return NextResponse.json({
     ...resolvedExam,
     attemptSummary: studentAttemptSummary,
@@ -160,19 +181,9 @@ export async function GET(req: NextRequest, { params }: RouteContext) {
         ...entry,
         question: {
           ...resolvedQuestion,
-          options: entry.question.options.map((option) => {
-            const resolvedOption = resolveQuestionOptionTranslation(option, exam.languageId)
-
-            if (session.user.role === UserRole.STUDENT) {
-              return {
-                id: resolvedOption.id,
-                text: resolvedOption.text,
-                orderIndex: resolvedOption.orderIndex,
-              }
-            }
-
-            return resolvedOption
-          }),
+          options: entry.question.options.map((option) =>
+            resolveQuestionOptionTranslation(option, exam.languageId)
+          ),
         },
       }
     }),
@@ -238,6 +249,18 @@ export async function PATCH(req: NextRequest, { params }: RouteContext) {
         { status: 409 }
       )
     }
+
+    const capacity = await validateUniqueQuestionCapacity(id)
+    if (!capacity.ok) {
+      return NextResponse.json(
+        {
+          error: formatUniqueQuestionCapacityError(capacity),
+          code: 'UNIQUE_QUESTION_CAPACITY_INSUFFICIENT',
+          capacity,
+        },
+        { status: 409 }
+      )
+    }
   }
 
   try {
@@ -299,7 +322,6 @@ export async function DELETE(_req: NextRequest, { params }: RouteContext) {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
   }
 
-  // Only allow deletion of DRAFT exams
   const exam = await prisma.exam.findUnique({ where: { id } })
   if (!exam) return NextResponse.json({ error: 'Not found' }, { status: 404 })
   if (exam.status !== 'DRAFT') {

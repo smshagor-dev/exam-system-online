@@ -1,3 +1,4 @@
+import { randomInt } from 'node:crypto'
 import { prisma } from '@/lib/prisma'
 import {
   resolveExamTranslation,
@@ -6,6 +7,8 @@ import {
 } from '@/lib/academic-content'
 
 const SNAPSHOT_ACTION = 'ATTEMPT_SNAPSHOT'
+const QUESTION_ALLOCATION_ACTION = 'ATTEMPT_QUESTION_ALLOCATION'
+const QUESTION_ALLOCATION_COLLECTION = 'exam_question_allocations'
 
 type SnapshotQuestion = {
   id: string
@@ -49,6 +52,12 @@ type AttemptSnapshot = {
   questions: SnapshotQuestion[]
 }
 
+type AllocationClaimResult = {
+  value?: {
+    attemptId?: string
+  } | null
+}
+
 function parseSnapshot(details: string | null | undefined) {
   if (!details) {
     return null
@@ -73,6 +82,44 @@ function parseSnapshot(details: string | null | undefined) {
   } catch {
     return null
   }
+}
+
+function shuffle<T>(items: readonly T[]) {
+  const copy = [...items]
+  for (let index = copy.length - 1; index > 0; index -= 1) {
+    const swapIndex = randomInt(index + 1)
+    const current = copy[index]
+    copy[index] = copy[swapIndex]
+    copy[swapIndex] = current
+  }
+  return copy
+}
+
+async function claimUnusedQuestion(input: {
+  examId: string
+  questionId: string
+  attemptId: string
+  studentId: string
+}) {
+  const allocationId = `${input.examId}:${input.questionId}`
+  const result = (await prisma.$runCommandRaw({
+    findAndModify: QUESTION_ALLOCATION_COLLECTION,
+    query: { _id: allocationId },
+    update: {
+      $setOnInsert: {
+        _id: allocationId,
+        examId: input.examId,
+        questionId: input.questionId,
+        attemptId: input.attemptId,
+        studentId: input.studentId,
+        createdAt: new Date().toISOString(),
+      },
+    },
+    upsert: true,
+    new: true,
+  })) as unknown as AllocationClaimResult
+
+  return result.value?.attemptId === input.attemptId
 }
 
 function buildSnapshotPayload(model: {
@@ -174,7 +221,7 @@ async function loadActivityLogAttemptSnapshot(attemptId: string) {
     where: {
       action: SNAPSHOT_ACTION,
       details: {
-        contains: `"attemptId":"${attemptId}"`,
+        contains: `\"attemptId\":\"${attemptId}\"`,
       },
     },
     orderBy: { createdAt: 'desc' },
@@ -223,8 +270,110 @@ export async function ensureAttemptSnapshot(input: {
   if (!exam) {
     throw new Error('Exam not found')
   }
+  if (exam.questions.length === 0) {
+    throw new Error('Exam has no question blueprint')
+  }
 
+  const [questionBank, priorSnapshots] = await Promise.all([
+    prisma.question.findMany({
+      where: {
+        subjectId: exam.subjectId,
+        languageId: exam.languageId,
+        groupId: exam.groupId,
+        academicYearId: exam.academicYearId,
+        semesterId: exam.semesterId,
+        teacherId: exam.teacherId,
+        isActive: true,
+      },
+      include: {
+        translations: true,
+        options: {
+          include: { translations: true },
+          orderBy: { orderIndex: 'asc' },
+        },
+      },
+    }),
+    prisma.examAttemptSnapshot.findMany({
+      where: { examId: input.examId },
+      select: {
+        questions: {
+          select: { sourceQuestionId: true },
+        },
+      },
+    }),
+  ])
+
+  const usageCount = new Map<string, number>()
+  for (const snapshot of priorSnapshots) {
+    for (const question of snapshot.questions) {
+      usageCount.set(question.sourceQuestionId, (usageCount.get(question.sourceQuestionId) ?? 0) + 1)
+    }
+  }
+
+  const selectedQuestionIds = new Set<string>()
+  let unavoidableOverlapCount = 0
+  let fallbackToBlueprintCount = 0
+  let atomicallyUniqueCount = 0
+  const allocated: Array<{
+    slot: (typeof exam.questions)[number]
+    selected: (typeof questionBank)[number] | (typeof exam.questions)[number]['question']
+  }> = []
+
+  for (const slot of exam.questions) {
+    const sameTypeCandidates = questionBank.filter(
+      (candidate) => candidate.type === slot.question.type && !selectedQuestionIds.has(candidate.id)
+    )
+
+    let selected: (typeof questionBank)[number] | (typeof exam.questions)[number]['question'] | null = null
+
+    // First choice: a never-used question that this attempt can atomically reserve.
+    const neverUsedCandidates = shuffle(
+      sameTypeCandidates.filter((candidate) => (usageCount.get(candidate.id) ?? 0) === 0)
+    )
+    for (const candidate of neverUsedCandidates) {
+      const claimed = await claimUnusedQuestion({
+        examId: input.examId,
+        questionId: candidate.id,
+        attemptId: input.attemptId,
+        studentId: input.studentId,
+      })
+      if (claimed) {
+        selected = candidate
+        atomicallyUniqueCount += 1
+        break
+      }
+    }
+
+    // If the unique pool for this question type is exhausted, use the least-used
+    // compatible question. This is the only path that permits overlap.
+    if (!selected && sameTypeCandidates.length > 0) {
+      const minimumUsage = Math.min(
+        ...sameTypeCandidates.map((candidate) => usageCount.get(candidate.id) ?? 0)
+      )
+      const leastUsed = shuffle(
+        sameTypeCandidates.filter(
+          (candidate) => (usageCount.get(candidate.id) ?? 0) === minimumUsage
+        )
+      )
+      selected = leastUsed[0] ?? null
+      unavoidableOverlapCount += 1
+    }
+
+    if (!selected) {
+      selected = slot.question
+      fallbackToBlueprintCount += 1
+      if ((usageCount.get(slot.question.id) ?? 0) > 0) {
+        unavoidableOverlapCount += 1
+      }
+    }
+
+    selectedQuestionIds.add(selected.id)
+    allocated.push({ slot, selected })
+  }
+
+  const randomizedAllocation = shuffle(allocated)
   const resolvedExam = resolveExamTranslation(exam, exam.languageId)
+
   const immutableSnapshot = await prisma.examAttemptSnapshot.create({
     data: {
       attemptId: input.attemptId,
@@ -239,26 +388,27 @@ export async function ensureAttemptSnapshot(input: {
       passingMarks: exam.passingMarks,
       subjectName: exam.subject?.name ?? null,
       questions: {
-        create: exam.questions.map((entry) => {
-          const resolvedQuestion = resolveQuestionTranslation(entry.question, exam.languageId)
+        create: randomizedAllocation.map(({ slot, selected }, orderIndex) => {
+          const resolvedQuestion = resolveQuestionTranslation(selected, exam.languageId)
+          const randomizedOptions = shuffle(selected.options)
 
           return {
-            sourceQuestionId: entry.question.id,
-            examQuestionId: entry.id,
-            orderIndex: entry.orderIndex,
-            marks: entry.marks,
-            type: entry.question.type,
+            sourceQuestionId: selected.id,
+            examQuestionId: slot.id,
+            orderIndex,
+            marks: slot.marks,
+            type: selected.type,
             text: resolvedQuestion.text,
             expectedAnswer: resolvedQuestion.expectedAnswer ?? null,
             explanation: resolvedQuestion.explanation ?? null,
             keywords: resolvedQuestion.keywords ?? null,
             options: {
-              create: entry.question.options.map((option) => {
+              create: randomizedOptions.map((option, optionIndex) => {
                 const resolvedOption = resolveQuestionOptionTranslation(option, exam.languageId)
                 return {
                   sourceOptionId: option.id,
                   text: resolvedOption.text,
-                  orderIndex: option.orderIndex,
+                  orderIndex: optionIndex,
                   isCorrect: option.isCorrect,
                 }
               }),
@@ -281,17 +431,36 @@ export async function ensureAttemptSnapshot(input: {
 
   const payload = buildSnapshotPayload(immutableSnapshot)
 
-  await prisma.activityLog.create({
-    data: {
-      userId: input.studentUserId,
-      examId: input.examId,
-      action: SNAPSHOT_ACTION,
-      details: JSON.stringify({
-        ...payload,
-        storage: 'activity-log',
-      }),
-    },
-  })
+  await Promise.all([
+    prisma.activityLog.create({
+      data: {
+        userId: input.studentUserId,
+        examId: input.examId,
+        action: SNAPSHOT_ACTION,
+        details: JSON.stringify({
+          ...payload,
+          storage: 'activity-log',
+        }),
+      },
+    }),
+    prisma.activityLog.create({
+      data: {
+        userId: input.studentUserId,
+        examId: input.examId,
+        action: QUESTION_ALLOCATION_ACTION,
+        details: JSON.stringify({
+          attemptId: input.attemptId,
+          studentId: input.studentId,
+          blueprintSlots: exam.questions.length,
+          bankSize: questionBank.length,
+          allocatedQuestionIds: payload.questions.map((question) => question.id),
+          atomicallyUniqueCount,
+          unavoidableOverlapCount,
+          fallbackToBlueprintCount,
+        }),
+      },
+    }),
+  ])
 
   return payload
 }
@@ -347,8 +516,11 @@ export async function verifyAttemptSnapshotIntegrity() {
     }
 
     for (const question of snapshot.questions) {
-      if (question.options.length === 0) {
-        problems.push(`snapshot question missing options: ${attempt.id}:${question.id}`)
+      if (
+        (question.type === 'MCQ' || question.type === 'TRUE_FALSE') &&
+        question.options.length === 0
+      ) {
+        problems.push(`snapshot objective question missing options: ${attempt.id}:${question.id}`)
       }
     }
   }
