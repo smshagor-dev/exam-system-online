@@ -8,7 +8,6 @@ import {
 
 const SNAPSHOT_ACTION = 'ATTEMPT_SNAPSHOT'
 const QUESTION_ALLOCATION_ACTION = 'ATTEMPT_QUESTION_ALLOCATION'
-const QUESTION_ALLOCATION_COLLECTION = 'exam_question_allocations'
 
 type SnapshotQuestion = {
   id: string
@@ -52,12 +51,6 @@ type AttemptSnapshot = {
   questions: SnapshotQuestion[]
 }
 
-type AllocationClaimResult = {
-  value?: {
-    attemptId?: string
-  } | null
-}
-
 function parseSnapshot(details: string | null | undefined) {
   if (!details) {
     return null
@@ -93,33 +86,6 @@ function shuffle<T>(items: readonly T[]) {
     copy[swapIndex] = current
   }
   return copy
-}
-
-async function claimUnusedQuestion(input: {
-  examId: string
-  questionId: string
-  attemptId: string
-  studentId: string
-}) {
-  const allocationId = `${input.examId}:${input.questionId}`
-  const result = (await prisma.$runCommandRaw({
-    findAndModify: QUESTION_ALLOCATION_COLLECTION,
-    query: { _id: allocationId },
-    update: {
-      $setOnInsert: {
-        _id: allocationId,
-        examId: input.examId,
-        questionId: input.questionId,
-        attemptId: input.attemptId,
-        studentId: input.studentId,
-        createdAt: new Date().toISOString(),
-      },
-    },
-    upsert: true,
-    new: true,
-  })) as unknown as AllocationClaimResult
-
-  return result.value?.attemptId === input.attemptId
 }
 
 function buildSnapshotPayload(model: {
@@ -240,6 +206,8 @@ export async function ensureAttemptSnapshot(input: {
   studentUserId: string
   studentId: string
 }) {
+  // Once an attempt has a snapshot, always return it unchanged. This is what keeps
+  // the student's random question set stable across refreshes and reconnects.
   const existing = await loadAttemptSnapshot(input.attemptId)
   if (existing) {
     return existing
@@ -274,109 +242,65 @@ export async function ensureAttemptSnapshot(input: {
     throw new Error('Exam has no question blueprint')
   }
 
-  const [questionBank, priorSnapshots] = await Promise.all([
-    prisma.question.findMany({
-      where: {
-        subjectId: exam.subjectId,
-        languageId: exam.languageId,
-        groupId: exam.groupId,
-        academicYearId: exam.academicYearId,
-        semesterId: exam.semesterId,
-        teacherId: exam.teacherId,
-        isActive: true,
+  const questionBank = await prisma.question.findMany({
+    where: {
+      subjectId: exam.subjectId,
+      languageId: exam.languageId,
+      groupId: exam.groupId,
+      academicYearId: exam.academicYearId,
+      semesterId: exam.semesterId,
+      teacherId: exam.teacherId,
+      isActive: true,
+    },
+    include: {
+      translations: true,
+      options: {
+        include: { translations: true },
+        orderBy: { orderIndex: 'asc' },
       },
-      include: {
-        translations: true,
-        options: {
-          include: { translations: true },
-          orderBy: { orderIndex: 'asc' },
-        },
-      },
-    }),
-    prisma.examAttemptSnapshot.findMany({
-      where: { examId: input.examId },
-      select: {
-        questions: {
-          select: { sourceQuestionId: true },
-        },
-      },
-    }),
-  ])
+    },
+  })
 
-  const usageCount = new Map<string, number>()
-  for (const snapshot of priorSnapshots) {
-    for (const question of snapshot.questions) {
-      usageCount.set(question.sourceQuestionId, (usageCount.get(question.sourceQuestionId) ?? 0) + 1)
+  // Include the blueprint questions themselves so an exam can still start even if
+  // some attached questions are not currently marked active in the broader bank.
+  // Dedupe by question id. Questions may overlap across different students, but
+  // within one student's set we prefer distinct questions.
+  const candidateById = new Map<string, (typeof questionBank)[number]>()
+  for (const question of questionBank) {
+    candidateById.set(question.id, question)
+  }
+  for (const entry of exam.questions) {
+    if (!candidateById.has(entry.question.id)) {
+      candidateById.set(entry.question.id, entry.question)
     }
   }
 
+  const candidates = Array.from(candidateById.values())
   const selectedQuestionIds = new Set<string>()
-  let unavoidableOverlapCount = 0
-  let fallbackToBlueprintCount = 0
-  let atomicallyUniqueCount = 0
   const allocated: Array<{
     slot: (typeof exam.questions)[number]
-    selected: (typeof questionBank)[number] | (typeof exam.questions)[number]['question']
+    selected: (typeof candidates)[number]
   }> = []
 
   for (const slot of exam.questions) {
-    const sameTypeCandidates = questionBank.filter(
+    // Preserve the teacher's blueprint question-type mix where possible, but make
+    // the actual source question random for each student.
+    let choices = candidates.filter(
       (candidate) => candidate.type === slot.question.type && !selectedQuestionIds.has(candidate.id)
     )
 
-    let selected: (typeof questionBank)[number] | (typeof exam.questions)[number]['question'] | null = null
-
-    const neverUsedCandidates = shuffle(
-      sameTypeCandidates.filter((candidate) => (usageCount.get(candidate.id) ?? 0) === 0)
-    )
-    for (const candidate of neverUsedCandidates) {
-      const claimed = await claimUnusedQuestion({
-        examId: input.examId,
-        questionId: candidate.id,
-        attemptId: input.attemptId,
-        studentId: input.studentId,
-      })
-      if (claimed) {
-        selected = candidate
-        atomicallyUniqueCount += 1
-        break
-      }
+    if (choices.length === 0) {
+      // Defensive fallback: keep questions distinct inside the same attempt even
+      // if the bank's type distribution is unusual.
+      choices = candidates.filter((candidate) => !selectedQuestionIds.has(candidate.id))
     }
 
-    if (!selected && sameTypeCandidates.length > 0) {
-      const minimumUsage = Math.min(
-        ...sameTypeCandidates.map((candidate) => usageCount.get(candidate.id) ?? 0)
-      )
-      const leastUsed = shuffle(
-        sameTypeCandidates.filter(
-          (candidate) => (usageCount.get(candidate.id) ?? 0) === minimumUsage
-        )
-      )
-      selected = leastUsed[0] ?? null
-      unavoidableOverlapCount += 1
-    }
-
-    if (!selected) {
-      selected = slot.question
-      fallbackToBlueprintCount += 1
-      if ((usageCount.get(slot.question.id) ?? 0) > 0) {
-        unavoidableOverlapCount += 1
-      }
-    }
-
+    const selected = shuffle(choices)[0] ?? slot.question
     selectedQuestionIds.add(selected.id)
     allocated.push({ slot, selected })
   }
 
-  // Never deliver an overlapping/fallback set. Capacity is checked when the exam
-  // is scheduled; this runtime guard also protects against roster/question-bank
-  // changes or concurrent allocation anomalies after scheduling.
-  if (unavoidableOverlapCount > 0 || fallbackToBlueprintCount > 0) {
-    throw new Error(
-      'Strict unique-question allocation is exhausted. The exam cannot start until the question bank has enough unused questions.'
-    )
-  }
-
+  // Randomize the visible question order independently for this student.
   const randomizedAllocation = shuffle(allocated)
   const resolvedExam = resolveExamTranslation(exam, exam.languageId)
 
@@ -457,12 +381,10 @@ export async function ensureAttemptSnapshot(input: {
         details: JSON.stringify({
           attemptId: input.attemptId,
           studentId: input.studentId,
+          strategy: 'PER_STUDENT_RANDOM_OVERLAP_ALLOWED',
           blueprintSlots: exam.questions.length,
-          bankSize: questionBank.length,
+          bankSize: candidates.length,
           allocatedQuestionIds: payload.questions.map((question) => question.id),
-          atomicallyUniqueCount,
-          unavoidableOverlapCount,
-          fallbackToBlueprintCount,
         }),
       },
     }),
