@@ -43,6 +43,7 @@ export default function StudentShell({ children, user, branding }: StudentShellP
     { href: '/student/progress', label: t('shell.progress', 'Progress'), icon: BookMarked },
     { href: '/student/ebooks', label: 'Ebooks', icon: BookText },
     { href: '/student/coursework', label: 'Course Work & Report', icon: FileBadge2 },
+    { href: '/student/class-tests', label: 'Class Tests', icon: BookMarked },
     { href: '/student/exams', label: t('shell.my_exams', 'My Exams'), icon: ScrollText },
     { href: '/student/re-exams', label: 'Re-exams', icon: RotateCcw },
     { href: '/student/results', label: t('shell.results', 'Results'), icon: FileChartColumn },
