@@ -68,6 +68,7 @@ export default function TeacherShell({ children, user, branding }: TeacherShellP
         { href: '/teacher/questions', label: t('shell.question_bank', 'Question Bank'), icon: BookOpenCheck },
         { href: '/teacher/translations', label: 'Translations', icon: Languages },
         { href: '/teacher/ebooks', label: 'Ebooks', icon: BookText },
+        { href: '/teacher/class-tests', label: 'Class Tests', icon: ClipboardList },
         { href: '/teacher/exams', label: t('shell.exams', 'Exams'), icon: ScrollText },
         { href: '/teacher/re-exams', label: 'Re-exams', icon: RotateCcw },
         { href: '/teacher/invigilation', label: 'Invigilation', icon: ClipboardList },
