@@ -130,12 +130,15 @@ export async function PATCH(req: NextRequest, { params }: RouteContext) {
         })
         return NextResponse.json({ attempt: studentAttemptPayload(attempt, test) })
       }
-      if (action === 'submit') {
+      if (action === 'submit' || action === 'auto_submit') {
         const attempt = await getClassTestAttemptById(String(body.attemptId ?? ''))
         if (!attempt || attempt.studentUserId !== session.user.id || attempt.classTestId !== test.id) {
           return NextResponse.json({ error: 'Class test attempt not found' }, { status: 404 })
         }
-        const submitted = await finalizeClassTestAttempt(attempt.id, false)
+        if (action === 'auto_submit' && getClassTestRemainingSeconds(attempt, test) > 0) {
+          return NextResponse.json({ error: 'Automatic submission is only allowed when the class-test timer has ended' }, { status: 409 })
+        }
+        const submitted = await finalizeClassTestAttempt(attempt.id, action === 'auto_submit')
         return NextResponse.json({ attempt: studentAttemptPayload(submitted, test) })
       }
       return NextResponse.json({ error: 'Unsupported student action' }, { status: 400 })
