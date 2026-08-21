@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { UserRole } from '@prisma/client'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
+import { listClassTestMakeups } from '@/lib/class-test-makeup-store'
 import {
   cancelClassTest,
   getClassTest,
@@ -11,9 +12,12 @@ import {
 import {
   CLASS_TEST_MAX_WARNINGS,
   assertStudentCanAccessClassTest,
+  assignMissedClassTest,
   finalizeClassTestAttempt,
+  findMissedClassTestStudentByEmail,
   getClassTestLifecycle,
   getClassTestRemainingSeconds,
+  getEffectiveClassTestWindow,
   publishClassTestResult,
   reportClassTestSecurityViolation,
   reviewClassTestAnswer,
@@ -24,7 +28,10 @@ import {
 
 type RouteContext = { params: Promise<{ id: string }> }
 
-function studentAttemptPayload(attempt: NonNullable<Awaited<ReturnType<typeof getClassTestAttemptById>>>, test: NonNullable<Awaited<ReturnType<typeof getClassTest>>>) {
+function studentAttemptPayload(
+  attempt: NonNullable<Awaited<ReturnType<typeof getClassTestAttemptById>>>,
+  test: NonNullable<Awaited<ReturnType<typeof getClassTest>>>
+) {
   const safe = sanitizeClassTestAttemptForStudent(attempt)
   return {
     ...safe,
@@ -43,15 +50,31 @@ export async function GET(_req: NextRequest, { params }: RouteContext) {
   const test = await getClassTest(id)
   if (!test) return NextResponse.json({ error: 'Class test not found' }, { status: 404 })
 
-  const subject = await prisma.subject.findUnique({ where: { id: test.subjectId }, select: { name: true, code: true } })
+  const subject = await prisma.subject.findUnique({
+    where: { id: test.subjectId },
+    select: { name: true, code: true },
+  })
 
   if (session.user.role === UserRole.TEACHER) {
-    if (test.teacherUserId !== session.user.id) return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
-    const attempts = await listClassTestAttempts(test.id)
-    const students = await prisma.studentProfile.findMany({
-      where: { id: { in: attempts.map((attempt) => attempt.studentId) } },
-      select: { id: true, user: { select: { name: true, email: true } } },
-    })
+    if (test.teacherUserId !== session.user.id) {
+      return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
+    }
+    const [attempts, makeups] = await Promise.all([
+      listClassTestAttempts(test.id),
+      listClassTestMakeups(test.id),
+    ])
+    const studentIds = [
+      ...new Set([
+        ...attempts.map((attempt) => attempt.studentId),
+        ...makeups.map((makeup) => makeup.studentId),
+      ]),
+    ]
+    const students = studentIds.length
+      ? await prisma.studentProfile.findMany({
+          where: { id: { in: studentIds } },
+          select: { id: true, user: { select: { name: true, email: true } } },
+        })
+      : []
     const studentMap = new Map(students.map((student) => [student.id, student.user]))
     return NextResponse.json({
       test: { ...test, lifecycle: getClassTestLifecycle(test), subject },
@@ -59,15 +82,28 @@ export async function GET(_req: NextRequest, { params }: RouteContext) {
         ...attempt,
         student: studentMap.get(attempt.studentId) ?? { name: 'Student', email: '' },
       })),
+      makeups: makeups.map((makeup) => ({
+        ...makeup,
+        student: studentMap.get(makeup.studentId) ?? {
+          name: 'Student',
+          email: makeup.studentEmail,
+        },
+      })),
       maxWarnings: CLASS_TEST_MAX_WARNINGS,
     })
   }
 
-  if (session.user.role !== UserRole.STUDENT) return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
+  if (session.user.role !== UserRole.STUDENT) {
+    return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
+  }
   try {
     const access = await assertStudentCanAccessClassTest(test, session.user.id)
+    const effectiveWindow = getEffectiveClassTestWindow(test, access.makeup)
     let attempt = access.attempt
-    if (attempt?.status === 'IN_PROGRESS' && getClassTestRemainingSeconds(attempt, test) <= 0) {
+    if (
+      attempt?.status === 'IN_PROGRESS' &&
+      getClassTestRemainingSeconds(attempt, test) <= 0
+    ) {
       attempt = await finalizeClassTestAttempt(attempt.id, true)
     }
     return NextResponse.json({
@@ -79,16 +115,22 @@ export async function GET(_req: NextRequest, { params }: RouteContext) {
         duration: test.duration,
         totalMarks: test.totalMarks,
         passingMarks: test.passingMarks,
-        startTime: test.startTime,
-        endTime: test.endTime,
+        startTime: effectiveWindow.startTime,
+        endTime: effectiveWindow.endTime,
+        originalStartTime: test.startTime,
+        originalEndTime: test.endTime,
+        isMakeup: effectiveWindow.isMakeup,
         questionsPerStudent: test.questionsPerStudent,
-        lifecycle: getClassTestLifecycle(test),
+        lifecycle: getClassTestLifecycle(test, new Date(), effectiveWindow),
         subject,
       },
       attempt: attempt ? studentAttemptPayload(attempt, test) : null,
     })
   } catch (error) {
-    return NextResponse.json({ error: error instanceof Error ? error.message : 'Forbidden' }, { status: 403 })
+    return NextResponse.json(
+      { error: error instanceof Error ? error.message : 'Forbidden' },
+      { status: 403 }
+    )
   }
 }
 
@@ -119,7 +161,11 @@ export async function PATCH(req: NextRequest, { params }: RouteContext) {
         return NextResponse.json({ attempt: studentAttemptPayload(attempt, test) })
       }
       if (action === 'warning') {
-        const type = String(body.type ?? '') as 'TAB_SWITCH' | 'COPY' | 'SCREENSHOT' | 'DEVTOOLS'
+        const type = String(body.type ?? '') as
+          | 'TAB_SWITCH'
+          | 'COPY'
+          | 'SCREENSHOT'
+          | 'DEVTOOLS'
         if (!['TAB_SWITCH', 'COPY', 'SCREENSHOT', 'DEVTOOLS'].includes(type)) {
           return NextResponse.json({ error: 'Invalid warning type' }, { status: 400 })
         }
@@ -132,20 +178,53 @@ export async function PATCH(req: NextRequest, { params }: RouteContext) {
       }
       if (action === 'submit' || action === 'auto_submit') {
         const attempt = await getClassTestAttemptById(String(body.attemptId ?? ''))
-        if (!attempt || attempt.studentUserId !== session.user.id || attempt.classTestId !== test.id) {
+        if (
+          !attempt ||
+          attempt.studentUserId !== session.user.id ||
+          attempt.classTestId !== test.id
+        ) {
           return NextResponse.json({ error: 'Class test attempt not found' }, { status: 404 })
         }
-        if (action === 'auto_submit' && getClassTestRemainingSeconds(attempt, test) > 0) {
-          return NextResponse.json({ error: 'Automatic submission is only allowed when the class-test timer has ended' }, { status: 409 })
+        if (
+          action === 'auto_submit' &&
+          getClassTestRemainingSeconds(attempt, test) > 0
+        ) {
+          return NextResponse.json(
+            { error: 'Automatic submission is only allowed when the class-test timer has ended' },
+            { status: 409 }
+          )
         }
-        const submitted = await finalizeClassTestAttempt(attempt.id, action === 'auto_submit')
+        const submitted = await finalizeClassTestAttempt(
+          attempt.id,
+          action === 'auto_submit'
+        )
         return NextResponse.json({ attempt: studentAttemptPayload(submitted, test) })
       }
       return NextResponse.json({ error: 'Unsupported student action' }, { status: 400 })
     }
 
     if (session.user.role === UserRole.TEACHER) {
-      if (test.teacherUserId !== session.user.id) return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
+      if (test.teacherUserId !== session.user.id) {
+        return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
+      }
+      if (action === 'search_missed_student') {
+        const result = await findMissedClassTestStudentByEmail({
+          classTestId: test.id,
+          teacherUserId: session.user.id,
+          email: String(body.email ?? ''),
+        })
+        return NextResponse.json(result)
+      }
+      if (action === 'assign_missed_student') {
+        const result = await assignMissedClassTest({
+          classTestId: test.id,
+          teacherUserId: session.user.id,
+          email: String(body.email ?? ''),
+          startTime: String(body.startTime ?? ''),
+          endTime: String(body.endTime ?? ''),
+        })
+        return NextResponse.json(result)
+      }
       if (action === 'review_answer') {
         const attempt = await reviewClassTestAnswer({
           classTestId: test.id,
@@ -167,7 +246,10 @@ export async function PATCH(req: NextRequest, { params }: RouteContext) {
       }
       if (action === 'cancel') {
         if (new Date(test.startTime).getTime() <= Date.now()) {
-          return NextResponse.json({ error: 'A class test cannot be cancelled after its start time' }, { status: 409 })
+          return NextResponse.json(
+            { error: 'A class test cannot be cancelled after its start time' },
+            { status: 409 }
+          )
         }
         return NextResponse.json({ test: await cancelClassTest(test.id) })
       }
@@ -177,7 +259,11 @@ export async function PATCH(req: NextRequest, { params }: RouteContext) {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Class test action failed'
-    const status = /not found/i.test(message) ? 404 : /not assigned|forbidden/i.test(message) ? 403 : 409
+    const status = /not found/i.test(message)
+      ? 404
+      : /not assigned|forbidden/i.test(message)
+        ? 403
+        : 409
     return NextResponse.json({ error: message }, { status })
   }
 }
