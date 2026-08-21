@@ -104,6 +104,10 @@ export function parseQuestionCodeMetadata(text: string) {
 
   return {
     text: stripQuestionCodeMetadata(text),
-    metadata,
+    metadata: {
+      ...metadata,
+      // Compatibility alias for consumers that use the shorter name.
+      starterCode: metadata.answerStarterCode,
+    },
   }
 }
