@@ -39,7 +39,7 @@ export default async function StudentClassTestsPage() {
         </div>
       ) : (
         <div className="space-y-4">
-          {entries.map(({ test, attempt, lifecycle }) => {
+          {entries.map(({ test, attempt, lifecycle, isMakeup, effectiveStartTime, effectiveEndTime }) => {
             const subject = subjectMap.get(test.subjectId)
             const resultPublished = attempt?.resultStatus === 'PUBLISHED'
             const pendingReview = attempt?.resultStatus === 'PENDING_REVIEW'
@@ -49,11 +49,12 @@ export default async function StudentClassTestsPage() {
                 <div className="flex flex-wrap items-start justify-between gap-3">
                   <div>
                     <p className="text-xs font-semibold uppercase tracking-[0.18em] text-violet-700">{subject?.code ?? 'CLASS TEST'}</p>
-                    <h2 className="mt-1 text-lg font-bold text-gray-900">Test {test.testNumber} — {formatDate(test.startTime)}</h2>
+                    <h2 className="mt-1 text-lg font-bold text-gray-900">Test {test.testNumber} — {formatDate(effectiveStartTime)}</h2>
                     {test.title !== `Test ${test.testNumber}` && <p className="mt-1 text-sm text-gray-600">{test.title}</p>}
                     <p className="mt-1 text-sm text-gray-500">{subject?.name} · {test.duration} min · {test.questionsPerStudent} questions · {test.totalMarks} marks</p>
                   </div>
                   <div className="flex flex-wrap items-center gap-2">
+                    {isMakeup && <span className="rounded-full bg-sky-100 px-2.5 py-1 text-xs font-semibold text-sky-700">REASSIGNED</span>}
                     <span className={`rounded-full px-2.5 py-1 text-xs font-semibold ${statusStyle(lifecycle)}`}>{lifecycle}</span>
                     {attempt?.status === 'IN_PROGRESS' && <span className="rounded-full bg-amber-100 px-2.5 py-1 text-xs font-semibold text-amber-700">RESUME</span>}
                     {resultPublished && <span className="rounded-full bg-green-100 px-2.5 py-1 text-xs font-semibold text-green-700">RESULT READY</span>}
@@ -62,9 +63,15 @@ export default async function StudentClassTestsPage() {
                   </div>
                 </div>
 
+                {isMakeup && (
+                  <div className="mt-4 rounded-xl border border-sky-100 bg-sky-50 px-4 py-3 text-sm text-sky-800">
+                    Your teacher reopened this missed class test only for your account. You can start it only during the reassigned window below.
+                  </div>
+                )}
+
                 <div className="mt-4 grid gap-2 sm:grid-cols-4">
-                  <div className="rounded-xl bg-gray-50 p-3"><p className="text-xs text-gray-500">Available Until</p><p className="mt-1 text-sm font-semibold text-gray-900">{formatDate(test.endTime)}</p></div>
-                  <div className="rounded-xl bg-gray-50 p-3"><p className="text-xs text-gray-500">Pass Marks</p><p className="mt-1 text-sm font-semibold text-gray-900">{test.passingMarks}/{test.totalMarks}</p></div>
+                  <div className="rounded-xl bg-gray-50 p-3"><p className="text-xs text-gray-500">{isMakeup ? 'Reassigned Start' : 'Starts'}</p><p className="mt-1 text-sm font-semibold text-gray-900">{formatDate(effectiveStartTime)}</p></div>
+                  <div className="rounded-xl bg-gray-50 p-3"><p className="text-xs text-gray-500">Available Until</p><p className="mt-1 text-sm font-semibold text-gray-900">{formatDate(effectiveEndTime)}</p></div>
                   <div className="rounded-xl bg-gray-50 p-3"><p className="text-xs text-gray-500">Attempt</p><p className="mt-1 text-sm font-semibold text-gray-900">{attempt ? attempt.status.replaceAll('_', ' ') : 'Not started'}</p></div>
                   <div className={`rounded-xl p-3 ${resultPublished ? 'bg-green-50' : 'bg-gray-50'}`}><p className="text-xs text-gray-500">Result</p><p className={`mt-1 text-sm font-semibold ${resultPublished ? 'text-green-700' : 'text-gray-900'}`}>{resultPublished ? `${attempt?.marksObtained ?? 0}/${test.totalMarks} · ${attempt?.isPassed ? 'Pass' : 'Fail'}` : pendingReview ? 'Teacher review' : '—'}</p></div>
                 </div>
